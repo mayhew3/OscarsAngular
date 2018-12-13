@@ -14,7 +14,7 @@ const httpOptions = {
 })
 
 export class NomineesService {
-  nomineesUrl = 'api/nominees';
+  nomineesUrl = 'api/categories';
 
   constructor(private http: HttpClient) { }
 
