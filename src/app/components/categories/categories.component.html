@@ -4,20 +4,21 @@
     Categories
   </h1>
 
-  <div class="card categoryCard"
-       *ngFor="let category of categories">
-    <div class="card-body"
-         (click)="goToDetail(category)">
-      <div class="row">
-        <div class="col-10">
-          <span>{{category.name}}</span>
-        </div>
-        <div class="col-2 categoryPoints">
-          <span>{{category.points}}</span>
+  <div class="row">
+    <div class="card categoryCard col-12 col-sm-6"
+         *ngFor="let category of categories">
+      <div class="card-body"
+           (click)="goToDetail(category)">
+        <div class="row">
+          <div class="col-10">
+            <span>{{category.name}}</span>
+          </div>
+          <div class="col-2 categoryPoints">
+            <span>{{category.points}}</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 
 </div>
