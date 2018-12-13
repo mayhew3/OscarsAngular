@@ -10,17 +10,12 @@ import {Router} from '@angular/router';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[];
-  selectedCategory: Category;
 
   constructor(private nomineeService: NomineesService,
               private router: Router) { }
 
   ngOnInit() {
     this.getCategories();
-  }
-
-  selectCategory(category: Category) {
-    this.selectedCategory = category;
   }
 
   goToDetail(category: Category) {
