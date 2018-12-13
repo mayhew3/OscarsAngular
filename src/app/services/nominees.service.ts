@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError} from 'rxjs/operators';
@@ -14,12 +14,22 @@ const httpOptions = {
 })
 
 export class NomineesService {
-  nomineesUrl = 'api/categories';
+  categoriesUrl = 'api/categories';
+  nomineesUrl = 'api/nominees';
 
   constructor(private http: HttpClient) { }
 
-  getNominees(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.nomineesUrl)
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.categoriesUrl)
+      .pipe(
+        catchError(this.handleError('getCategories', []))
+      );
+  }
+
+  getNominees(category_id: number): Observable<Nominee[]> {
+    const options = { params: new HttpParams().set('category_id', `${category_id}`)};
+
+    return this.http.get<Nominee[]>(this.nomineesUrl, options)
       .pipe(
         catchError(this.handleError('getNominees', []))
       );

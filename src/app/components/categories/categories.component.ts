@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {NomineesService} from '../../services/nominees.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -11,18 +12,24 @@ export class CategoriesComponent implements OnInit {
   categories: Category[];
   selectedCategory: Category;
 
-  constructor(private nomineeService: NomineesService) { }
+  constructor(private nomineeService: NomineesService,
+              private router: Router) { }
 
   ngOnInit() {
-    this.getNominees();
+    this.getCategories();
   }
 
   selectCategory(category: Category) {
     this.selectedCategory = category;
   }
 
-  getNominees(): void {
-    this.nomineeService.getNominees()
+  goToDetail(category: Category) {
+    this.router.navigate(['/', 'nominees', category.id])
+      .then(() => {});
+  }
+
+  getCategories(): void {
+    this.nomineeService.getCategories()
       .subscribe(categories => this.categories = categories);
   }
 
