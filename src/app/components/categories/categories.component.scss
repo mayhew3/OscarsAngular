@@ -1,9 +1,12 @@
+@import "../../../variables";
+
 .categoryCard {
   font-size: 24pt;
   margin-bottom: 10px;
+  border-color: $highlight;
 }
 
 .categoryPoints {
   font-weight: bold;
-  color: #66BB66;
+  color: $highlight;
 }
