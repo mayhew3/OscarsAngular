@@ -1,18 +1,23 @@
-<h1>
-  Categories
-</h1>
+<div class="container">
 
-<table class="table">
-  <thead>
-  <tr class="table-primary">
-    <th scope="col">Category</th>
-    <th scope="col">Pts</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let category of categories" (click)="goToDetail(category)">
-    <td>{{category.name}}</td>
-    <td>{{category.points}}</td>
-  </tr>
-  </tbody>
-</table>
+  <h1>
+    Categories
+  </h1>
+
+  <div class="card categoryCard"
+       *ngFor="let category of categories">
+    <div class="card-body"
+         (click)="goToDetail(category)">
+      <div class="row">
+        <div class="col-10">
+          <span>{{category.name}}</span>
+        </div>
+        <div class="col-2 categoryPoints">
+          <span>{{category.points}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
