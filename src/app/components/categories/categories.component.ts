@@ -9,6 +9,7 @@ import {NomineesService} from '../../services/nominees.service';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[];
+  selectedCategory: Category;
 
   constructor(private nomineeService: NomineesService) { }
 
@@ -16,8 +17,13 @@ export class CategoriesComponent implements OnInit {
     this.getNominees();
   }
 
+  selectCategory(category: Category) {
+    this.selectedCategory = category;
+  }
+
   getNominees(): void {
     this.nomineeService.getNominees()
       .subscribe(categories => this.categories = categories);
   }
+
 }

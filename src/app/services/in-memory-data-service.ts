@@ -14,47 +14,47 @@ export class InMemoryDataService implements InMemoryDbService {
         points: 5,
         nominees: [
           {
-            nominee: 'The Post',
+            name: 'The Post',
             subtitle: null,
             odds: null
           },
           {
-            nominee: 'Darkest Hour',
+            name: 'Darkest Hour',
             subtitle: null,
             odds: null
           },
           {
-            nominee: 'Dunkirk',
+            name: 'Dunkirk',
             subtitle: null,
             odds: null
           },
           {
-            nominee: 'Get Out',
+            name: 'Get Out',
             subtitle: null,
             odds: null
           },
           {
-            nominee: 'Lady Bird',
+            name: 'Lady Bird',
             subtitle: null,
             odds: null
           },
           {
-            nominee: 'Phantom Thread',
+            name: 'Phantom Thread',
             subtitle: null,
             odds: null
           },
           {
-            nominee: 'The Shape of Water',
+            name: 'The Shape of Water',
             subtitle: null,
             odds: null
           },
           {
-            nominee: 'Three Billboards Outside Ebbing, Missouri',
+            name: 'Three Billboards Outside Ebbing, Missouri',
             subtitle: null,
             odds: null
           },
           {
-            nominee: 'Call Me By Your Name',
+            name: 'Call Me By Your Name',
             subtitle: null,
             odds: null
           }
@@ -66,27 +66,27 @@ export class InMemoryDataService implements InMemoryDbService {
         points: 4,
         nominees: [
           {
-            nominee: 'Gary Oldman',
+            name: 'Gary Oldman',
             subtitle: 'Darkest Hour',
             odds: null
           },
           {
-            nominee: 'Daniel Kaluuya',
+            name: 'Daniel Kaluuya',
             subtitle: 'Get Out',
             odds: null
           },
           {
-            nominee: 'Daniel Day-Lewis',
+            name: 'Daniel Day-Lewis',
             subtitle: 'Phantom Thread',
             odds: null
           },
           {
-            nominee: 'Timothee Chalamet',
+            name: 'Timothee Chalamet',
             subtitle: 'Call Me By Your Name',
             odds: null
           },
           {
-            nominee: 'Denzel Washington',
+            name: 'Denzel Washington',
             subtitle: 'Roman J. Isreal, Esquire',
             odds: null
           }

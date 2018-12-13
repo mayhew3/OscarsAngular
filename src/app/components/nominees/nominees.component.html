@@ -1,0 +1,14 @@
+<table class="table">
+  <thead>
+  <tr class="table-primary">
+    <th scope="col">Name</th>
+    <th scope="col">Subtitle</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let nominee of nominees">
+    <td>{{nominee.name}}</td>
+    <td>{{nominee.subtitle}}</td>
+  </tr>
+  </tbody>
+</table>

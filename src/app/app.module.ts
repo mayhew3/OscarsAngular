@@ -8,11 +8,13 @@ import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {HttpClientModule} from '@angular/common/http';
 import {NomineesService} from './services/nominees.service';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { NomineesComponent } from './components/nominees/nominees.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    NomineesComponent
   ],
   imports: [
     BrowserModule,

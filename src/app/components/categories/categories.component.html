@@ -6,9 +6,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let category of categories">
+  <tr *ngFor="let category of categories" (click)="selectCategory(category)">
     <td>{{category.name}}</td>
     <td>{{category.points}}</td>
   </tr>
   </tbody>
 </table>
+
+<app-nominees *ngIf="selectedCategory"
+              [nominees]="selectedCategory.nominees"></app-nominees>
