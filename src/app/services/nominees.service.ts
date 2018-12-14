@@ -14,25 +14,9 @@ const httpOptions = {
 })
 
 export class NomineesService {
-  categoriesUrl = 'api/categories';
   nomineesUrl = 'api/nominees';
 
   constructor(private http: HttpClient) { }
-
-  getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.categoriesUrl)
-      .pipe(
-        catchError(this.handleError('getCategories', []))
-      );
-  }
-
-  getCategory(id: number): Observable<Category> {
-    const url = `${this.categoriesUrl}/${id}`;
-    return this.http.get<Category>(url)
-      .pipe(
-        catchError(this.handleError<Category>(`getCategory id=${id}`))
-      );
-  }
 
   getNominees(category_id: number): Observable<Nominee[]> {
     const options = { params: new HttpParams().set('category_id', `${category_id}`)};

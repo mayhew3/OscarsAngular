@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Category} from '../../interfaces/Category';
-import {NomineesService} from '../../services/nominees.service';
 import {Router} from '@angular/router';
+import {CategoryService} from '../../services/category.service';
 
 @Component({
   selector: 'app-categories',
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class CategoriesComponent implements OnInit {
   categories: Category[];
 
-  constructor(private nomineeService: NomineesService,
+  constructor(private categoryService: CategoryService,
               private router: Router) { }
 
   ngOnInit() {
@@ -24,7 +24,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   getCategories(): void {
-    this.nomineeService.getCategories()
+    this.categoryService.getCategories()
       .subscribe(categories => this.categories = categories);
   }
 
