@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {Category} from '../../interfaces/Category';
-import {Router} from '@angular/router';
 import {CategoryService} from '../../services/category.service';
 
 @Component({
@@ -11,16 +10,10 @@ import {CategoryService} from '../../services/category.service';
 export class CategoriesComponent implements OnInit {
   categories: Category[];
 
-  constructor(private categoryService: CategoryService,
-              private router: Router) { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.getCategories();
-  }
-
-  goToDetail(category: Category) {
-    this.router.navigate(['/', 'nominees', category.id])
-      .then(() => {});
   }
 
   getCategories(): void {

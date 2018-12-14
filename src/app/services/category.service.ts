@@ -44,6 +44,17 @@ export class CategoryService {
     return this.cache[foundIndex + 1];
   }
 
+  getPreviousCategory(id: number): Category {
+    if (this.cache.length === 0) {
+      return null;
+    }
+    const foundIndex = _.findIndex(this.cache, {id: id});
+    if (0 > (foundIndex - 1)) {
+      return null;
+    }
+    return this.cache[foundIndex - 1];
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

@@ -17,8 +17,17 @@
   </tbody>
 </table>
 
+<button class="btn btn-success"
+        *ngIf="previousCategory"
+        [routerLink]="['/', 'nominees', previousCategory.id]">
+  < {{previousCategory.name}}
+</button>
+
 <button class="btn btn-primary"
-        (click)="goBack()">Back</button>
+        routerLink="/categories">Up</button>
+
 <button class="btn btn-success"
         *ngIf="nextCategory"
-        (click)="goToNext()">{{nextCategory.name}}</button>
+        [routerLink]="['/', 'nominees', nextCategory.id]">
+  {{nextCategory.name}} >
+</button>
