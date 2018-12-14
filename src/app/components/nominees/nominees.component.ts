@@ -23,7 +23,7 @@ export class NomineesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       const category_id = +params['category_id'];
-      this.nomineesService.getNominees(category_id)
+      this.categoryService.getNominees(category_id)
         .subscribe(nominees => this.nominees = nominees);
       this.categoryService.getCategory(category_id)
         .subscribe(category => this.category = category);

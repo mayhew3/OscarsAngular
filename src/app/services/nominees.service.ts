@@ -18,15 +18,7 @@ export class NomineesService {
 
   constructor(private http: HttpClient) { }
 
-  getNominees(category_id: number): Observable<Nominee[]> {
-    const options = { params: new HttpParams().set('category_id', `${category_id}`)};
-
-    return this.http.get<Nominee[]>(this.nomineesUrl, options)
-      .pipe(
-        catchError(this.handleError('getNominees', []))
-      );
-  }
-
+  // todo: Add override to in-memory-data to update category nominees.
   updateNominee(nominee: Nominee): Observable<any> {
     return this.http.put(this.nomineesUrl, nominee, httpOptions)
       .pipe(

@@ -4,22 +4,38 @@ import {Observable, of} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError, tap} from 'rxjs/operators';
 import {_} from 'underscore';
+import {Nominee} from '../interfaces/Nominee';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  categoriesUrl = 'api/categories';
-  cache = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.cache = [];
+  }
+  categoriesUrl = 'api/categories';
+  cache: Category[];
+
+  private static addToArray<T>(existingArray: T[], newArray: T[]) {
+    existingArray.push.apply(existingArray, newArray);
+  }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.categoriesUrl)
-      .pipe(
-        tap((categories => this.cache = categories)),
-        catchError(this.handleError('getCategories', []))
-      );
+    if (this.cache.length > 0) {
+      return of(this.cache);
+    } else {
+      return new Observable<Category[]>((observer) => {
+        this.http.get<Category[]>(this.categoriesUrl)
+          .subscribe(
+            (categories: Category[]) => {
+              CategoryService.addToArray(this.cache, categories);
+              observer.next(categories);
+            },
+            (err: Error) => observer.error(err)
+          );
+      });
+    }
   }
 
   getCategory(id: number): Observable<Category> {
@@ -53,6 +69,16 @@ export class CategoryService {
       return null;
     }
     return this.cache[foundIndex - 1];
+  }
+
+  getNominees(category_id: number): Observable<Nominee[]> {
+    return new Observable<Nominee[]>((observer) => {
+      this.getCategory(category_id)
+        .subscribe(
+          (category: Category) => observer.next(category.nominees),
+          (err: Error) => observer.error(err)
+        );
+    });
   }
 
   /**
