@@ -9,7 +9,7 @@
          *ngFor="let category of categories">
       <div class="card categoryCard">
         <div class="card-body"
-             [routerLink]="['/', 'nominees', category.id]">
+             [routerLink]="[category.id]">
           <div class="row">
             <div class="col-10">
               <span>{{category.name}}</span>

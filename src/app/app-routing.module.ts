@@ -6,7 +6,7 @@ import {NomineesComponent} from './components/nominees/nominees.component';
 const routes: Routes = [
   { path: 'categories', component: CategoriesComponent },
   { path: '', redirectTo: '/categories', pathMatch: 'full'},
-  { path: 'nominees/:category_id', component: NomineesComponent }
+  { path: 'categories/:category_id', component: NomineesComponent }
 ];
 
 @NgModule({

@@ -19,7 +19,7 @@
 
 <button class="btn btn-success"
         *ngIf="previousCategory"
-        [routerLink]="['/', 'nominees', previousCategory.id]">
+        [routerLink]="['/', 'categories', previousCategory.id]">
   < {{previousCategory.name}}
 </button>
 
@@ -28,6 +28,6 @@
 
 <button class="btn btn-success"
         *ngIf="nextCategory"
-        [routerLink]="['/', 'nominees', nextCategory.id]">
+        [routerLink]="['/', 'categories', nextCategory.id]">
   {{nextCategory.name}} >
 </button>
