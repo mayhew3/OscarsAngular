@@ -1,6 +1,16 @@
-<h1>
-  {{category.name}}
-</h1>
+<nav class="navbar navbar-expand fixed-top navbar-light bg-light">
+  <div class="navbar-text">
+    <h1>
+      {{category.name}}
+    </h1>
+  </div>
+</nav>
+
+<div class="nom-body">
+
+<app-category-hopper [next]="nextCategory"
+                     [prev]="previousCategory">
+</app-category-hopper>
 
 <table class="table">
   <thead>
@@ -17,17 +27,4 @@
   </tbody>
 </table>
 
-<button class="btn btn-success"
-        *ngIf="previousCategory"
-        [routerLink]="['/', 'categories', previousCategory.id]">
-  < {{previousCategory.name}}
-</button>
-
-<button class="btn btn-primary"
-        routerLink="/categories">Up</button>
-
-<button class="btn btn-success"
-        *ngIf="nextCategory"
-        [routerLink]="['/', 'categories', nextCategory.id]">
-  {{nextCategory.name}} >
-</button>
+</div>

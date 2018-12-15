@@ -9,12 +9,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {NomineesService} from './services/nominees.service';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { NomineesComponent } from './components/nominees/nominees.component';
+import { CategoryHopperComponent } from './components/category-hopper/category-hopper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoriesComponent,
-    NomineesComponent
+    NomineesComponent,
+    CategoryHopperComponent
   ],
   imports: [
     BrowserModule,

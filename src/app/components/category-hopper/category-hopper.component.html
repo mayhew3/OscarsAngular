@@ -1,0 +1,15 @@
+
+<button class="btn btn-success"
+        *ngIf="prev"
+        [routerLink]="['/', 'categories', prev.id]">
+  < {{prev.name}}
+</button>
+
+<button class="btn btn-primary"
+        routerLink="/categories">Up</button>
+
+<button class="btn btn-success"
+        *ngIf="next"
+        [routerLink]="['/', 'categories', next.id]">
+  {{next.name}} >
+</button>
