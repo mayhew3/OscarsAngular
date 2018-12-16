@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 
 @Component({
-  selector: 'app-category-hopper',
+  selector: 'osc-category-hopper',
   templateUrl: './category-hopper.component.html',
   styleUrls: ['./category-hopper.component.scss']
 })

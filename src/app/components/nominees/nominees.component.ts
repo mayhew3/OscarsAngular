@@ -6,7 +6,7 @@ import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
 
 @Component({
-  selector: 'app-nominees',
+  selector: 'osc-nominees',
   templateUrl: './nominees.component.html',
   styleUrls: ['./nominees.component.scss']
 })

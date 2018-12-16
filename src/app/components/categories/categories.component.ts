@@ -3,7 +3,7 @@ import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
 
 @Component({
-  selector: 'app-categories',
+  selector: 'osc-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
