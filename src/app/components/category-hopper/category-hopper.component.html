@@ -1,8 +1,7 @@
-
 <button class="btn btn-success"
         *ngIf="prev"
         [routerLink]="['/', 'categories', prev.id]">
-  < {{prev.name}}
+  Prev
 </button>
 
 <button class="btn btn-primary"
@@ -11,5 +10,5 @@
 <button class="btn btn-success"
         *ngIf="next"
         [routerLink]="['/', 'categories', next.id]">
-  {{next.name}} >
+  Next
 </button>

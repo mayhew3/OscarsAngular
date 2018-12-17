@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand fixed-top navbar-light bg-light">
+<nav class="navbar navbar-expand navbar-light bg-light">
   <div class="navbar-text">
     <h1>
       {{category.name}}
@@ -6,11 +6,13 @@
   </div>
 </nav>
 
-<div class="nom-body">
+<nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom justify-content-center">
+  <osc-category-hopper [next]="nextCategory"
+                       [prev]="previousCategory">
+  </osc-category-hopper>
+</nav>
 
-<osc-category-hopper [next]="nextCategory"
-                     [prev]="previousCategory">
-</osc-category-hopper>
+<div class="nom-body">
 
 <table class="table">
   <thead>
