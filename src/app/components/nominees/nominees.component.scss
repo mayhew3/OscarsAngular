@@ -1,3 +1,19 @@
+@import "../../../variables";
+
 .nom-body {
   padding-bottom: 120px;
+}
+
+.nomineeCard {
+  margin-bottom: 10px;
+  border-color: $highlight;
+}
+
+.nomineeName {
+  font-size: 16pt;
+}
+
+.nomineeSubtitle {
+  font-size: 12pt;
+  color: $muted;
 }

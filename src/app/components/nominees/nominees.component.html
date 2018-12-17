@@ -14,19 +14,28 @@
 
 <div class="nom-body">
 
-<table class="table">
-  <thead>
-  <tr class="table-primary">
-    <th scope="col">Name</th>
-    <th scope="col">Subtitle</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let nominee of nominees">
-    <td>{{nominee.name}}</td>
-    <td>{{nominee.subtitle}}</td>
-  </tr>
-  </tbody>
-</table>
+  <div class="container" style="padding-top: 10px">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-4"
+      *ngFor="let nominee of nominees">
+
+        <div class="card nomineeCard">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 nomineeName">
+                {{nominee.name}}
+              </div>
+            </div>
+            <div class="row" *ngIf="nominee.subtitle">
+              <div class="col-12 nomineeSubtitle">
+                {{nominee.subtitle}}
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 </div>
