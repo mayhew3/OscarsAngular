@@ -21,16 +21,33 @@
 
         <div class="card nomineeCard">
           <div class="card-body">
-            <div class="row">
-              <div class="col-12 nomineeName">
-                {{nominee.name}}
+
+            <div class="row align-items-center">
+
+              <div class="col-9">
+                <div class="row">
+                  <div class="col-12 nomineeName">
+                    {{nominee.name}}
+                  </div>
+                </div>
+                <div class="row" *ngIf="nominee.subtitle">
+                  <div class="col-12 nomineeSubtitle">
+                    {{nominee.subtitle}}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="row" *ngIf="nominee.subtitle">
-              <div class="col-12 nomineeSubtitle">
-                {{nominee.subtitle}}
+
+              <div class="col-3">
+                <label class="col-form-label col-form-label-sm cardLabel"
+                       for="oddsInput">Odds</label>
+                <input type="number"
+                       class="form-control cardInput"
+                       style="text-align: center"
+                       id="oddsInput"/>
               </div>
+
             </div>
+
           </div>
         </div>
 
