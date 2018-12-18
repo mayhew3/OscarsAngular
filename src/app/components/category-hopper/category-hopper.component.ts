@@ -27,7 +27,7 @@ export class CategoryHopperComponent implements OnInit {
   }
 
   hasChanges() {
-    const filtered = _.filter(this.nominees, (nominee) => nominee.original_odds !== nominee.odds_expert);
+    const filtered = _.filter(this.nominees, (nominee) => nominee.original_odds_expert !== nominee.odds_expert);
     return filtered.length > 0;
   }
 
