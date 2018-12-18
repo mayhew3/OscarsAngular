@@ -8,7 +8,8 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom justify-content-center">
   <osc-category-hopper [next]="nextCategory"
-                       [prev]="previousCategory">
+                       [prev]="previousCategory"
+                       [nominees]="nominees">
   </osc-category-hopper>
 </nav>
 
@@ -48,9 +49,6 @@
                        id="oddsInput"/>
                 </div>
 
-                <div class="row">
-                  <button (click)="submitOdds(nominee)">Submit</button>
-                </div>
               </div>
 
             </div>

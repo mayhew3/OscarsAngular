@@ -3,6 +3,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
+import {_} from 'underscore';
 
 @Component({
   selector: 'osc-nominees',
@@ -22,7 +23,12 @@ export class NomineesComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const category_id = +params['category_id'];
       this.categoryService.getNominees(category_id)
-        .subscribe(nominees => this.nominees = nominees);
+        .subscribe(nominees => {
+          this.nominees = nominees;
+          _.forEach(this.nominees, (nominee) => {
+            nominee.original_odds = nominee.odds;
+          });
+        });
       this.categoryService.getCategory(category_id)
         .subscribe(category => this.category = category);
       this.categoryService.getNextCategory(category_id)
@@ -30,6 +36,11 @@ export class NomineesComponent implements OnInit {
       this.categoryService.getPreviousCategory(category_id)
         .subscribe(category => this.previousCategory = category);
     });
+  }
+
+  hasChanges() {
+    const filtered = _.filter(this.nominees, (nominee) => nominee.original_odds !== nominee.odds);
+    return filtered.length > 0;
   }
 
   submitOdds(nominee: Nominee) {
