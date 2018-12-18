@@ -84,9 +84,10 @@ export class CategoryService {
 
   getDataWithCacheUpdate<T>(getCallback): Observable<T> {
     return new Observable(observer => {
-      this.maybeUpdateCache().subscribe(() => {
-        observer.next(getCallback());
-      });
+      this.maybeUpdateCache().subscribe(
+        () => observer.next(getCallback()),
+        (err: Error) => observer.error(err)
+      );
     });
   }
 
