@@ -1,10 +1,17 @@
 <div class="row align-items-center">
-  <div class="col-6 align-items-center totalOdds">
-    {{totalOdds()}}%
+  <div class="col-3 align-items-center totalOdds">
+    {{totalOddsVegas() | number: '1.0-0'}}%
   </div>
-  <div class="col-6">
+  <div class="col-3 align-items-center totalOdds">
+    {{totalOdds('expert')}}%
+  </div>
+  <div class="col-3 align-items-center totalOdds">
+    {{totalOdds('user')}}%
+  </div>
+  <div class="col-3">
     <button class="btn btn-info"
-            [disabled]="!hasChanges()">
+            [disabled]="!hasChanges()"
+            (click)="submitOdds()">
       Submit
     </button>
   </div>

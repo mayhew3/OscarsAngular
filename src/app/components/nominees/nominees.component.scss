@@ -9,6 +9,10 @@
   border-color: $highlight;
 }
 
+.nomineeCardBody {
+  padding: 0.8rem;
+}
+
 .nomineeName {
   font-size: 16pt;
 }
@@ -24,9 +28,13 @@
 }
 
 .cardInput {
-  padding: 0.40rem 0.50rem;
-  font-size: 1.40rem;
+  padding: 0.20rem 0.30rem;
+  font-size: 1.10rem;
   font-weight: bold;
   background-color: #3A3F44;
   color: white;
+}
+
+.inputRow {
+  padding: 0 0.8rem;
 }

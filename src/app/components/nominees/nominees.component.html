@@ -18,14 +18,14 @@
   <div class="container" style="padding-top: 10px">
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-4"
-      *ngFor="let nominee of nominees">
+           *ngFor="let nominee of nominees">
 
         <div class="card nomineeCard">
-          <div class="card-body">
+          <div class="card-body nomineeCardBody">
 
             <div class="row align-items-center">
 
-              <div class="col-9">
+              <div class="col-12">
                 <div class="row">
                   <div class="col-12 nomineeName">
                     {{nominee.nominee}}
@@ -37,27 +37,65 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="row align-items-center inputRow">
 
               <div class="col-3">
                 <div class="row">
-                <label class="col-form-label col-form-label-sm cardLabel"
-                       for="oddsInput">Odds</label>
-                <input type="number"
-                       class="form-control cardInput"
-                       style="text-align: center"
-                       [(ngModel)]="nominee.odds_expert"
-                       id="oddsInput"/>
+                  <label class="col-form-label col-form-label-sm cardLabel"
+                         for="numeratorInput">Vegas</label>
+                  <input type="number"
+                         class="form-control cardInput"
+                         style="text-align: center"
+                         [(ngModel)]="nominee.odds_numerator"
+                         id="numeratorInput"/>
                 </div>
-
               </div>
 
+              <div class="col-3">
+                <div class="row" style="padding: 0.4rem 0.4rem">
+                  <label class="col-form-label col-form-label-sm cardLabel"
+                         for="denominatorInput">V2</label>
+                  <input type="number"
+                         class="form-control cardInput"
+                         style="text-align: center"
+                         [(ngModel)]="nominee.odds_denominator"
+                         id="denominatorInput"/>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="row">
+                  <label class="col-form-label col-form-label-sm cardLabel"
+                         for="expertInput">Experts</label>
+                  <input type="number"
+                         class="form-control cardInput"
+                         style="text-align: center"
+                         [(ngModel)]="nominee.odds_expert"
+                         id="expertInput"/>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="row" style="padding: 0.4rem 0.4rem">
+                  <label class="col-form-label col-form-label-sm cardLabel"
+                         for="userInput">Users</label>
+                  <input type="number"
+                         class="form-control cardInput"
+                         style="text-align: center"
+                         [(ngModel)]="nominee.odds_user"
+                         id="userInput"/>
+                </div>
+              </div>
             </div>
 
           </div>
-        </div>
 
+        </div>
       </div>
+
     </div>
   </div>
-
 </div>
+

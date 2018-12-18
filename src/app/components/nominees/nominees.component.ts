@@ -27,6 +27,9 @@ export class NomineesComponent implements OnInit {
           this.nominees = nominees;
           _.forEach(this.nominees, (nominee) => {
             nominee.original_odds_expert = nominee.odds_expert;
+            nominee.original_odds_user = nominee.odds_user;
+            nominee.original_odds_numerator = nominee.odds_numerator;
+            nominee.original_odds_denominator = nominee.odds_denominator;
           });
         });
       this.categoryService.getCategory(category_id)
@@ -38,12 +41,4 @@ export class NomineesComponent implements OnInit {
     });
   }
 
-  hasChanges() {
-    const filtered = _.filter(this.nominees, (nominee) => nominee.original_odds_expert !== nominee.odds_expert);
-    return filtered.length > 0;
-  }
-
-  submitOdds(nominee: Nominee) {
-    this.categoryService.updateNominee(nominee).subscribe(() => {});
-  }
 }
