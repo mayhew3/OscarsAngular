@@ -21,7 +21,8 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   createDb(): {} {
-    return {categories: this.categories};
+    // Need an empty nominees list so the service knows the collection exists.
+    return {categories: this.categories, nominees: []};
   }
 
   // noinspection JSUnusedGlobalSymbols
@@ -35,22 +36,21 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   private updateNomination(requestInfo: RequestInfo) {
-    return requestInfo.utils.createResponse$(() => {
-      console.log('HTTP PUT override');
-      const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
-      this.updateObject(jsonBody);
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+    this.updateObject(jsonBody);
 
-      const options: ResponseOptions = {
-        body: {msg: 'Success!'},
-        status: STATUS.OK
-      };
+    const options: ResponseOptions = {
+      body: {msg: 'Success!'},
+      status: STATUS.OK
+    };
 
-      return InMemoryDataService.finishOptions(options, requestInfo);
-    });
+    const finishedOptions = InMemoryDataService.finishOptions(options, requestInfo);
+
+    return requestInfo.utils.createResponse$(() => finishedOptions);
   }
 
   private updateObject(jsonBody: any) {
-    const id = jsonBody.nomination_id;
+    const id = jsonBody.id;
     const odds = jsonBody.odds;
 
     _.forEach(this.categories, function(category) {
