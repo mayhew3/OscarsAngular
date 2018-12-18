@@ -8,6 +8,9 @@ module.exports = function(app) {
   router.route('/categories')
     .get(nominees.getCategories);
 
+  router.route('/nominees')
+    .put(nominees.updateNomination);
+
   app.use('/api', router);
 
   // error handlers

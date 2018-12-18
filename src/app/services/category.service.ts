@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError, tap} from 'rxjs/operators';
@@ -32,6 +32,9 @@ export class CategoryService {
     } else {
       return new Observable<Category[]>((observer) => {
         this.http.get<Category[]>(this.categoriesUrl)
+          .pipe(
+            catchError(this.handleError<Category[]>('getCategories', []))
+          )
           .subscribe(
             (categories: Category[]) => {
               CategoryService.addToArray(this.cache, categories);
@@ -93,6 +96,7 @@ export class CategoryService {
       'options: ' + JSON.stringify(httpOptions));
     return this.http.put(this.nomineesUrl, nominee, httpOptions)
       .pipe(
+        tap(() => console.log('did some tapping')),
         catchError(this.handleError<any>('updateCategories', nominee))
       );
   }

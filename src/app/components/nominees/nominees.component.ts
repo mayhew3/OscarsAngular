@@ -31,6 +31,6 @@ export class NomineesComponent implements OnInit {
   }
 
   submitOdds(nominee: Nominee) {
-    this.categoryService.updateNominee(nominee);
+    this.categoryService.updateNominee(nominee).subscribe(() => console.log('FUCK YOU'));
   }
 }
