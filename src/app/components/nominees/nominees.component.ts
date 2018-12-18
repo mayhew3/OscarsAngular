@@ -26,7 +26,7 @@ export class NomineesComponent implements OnInit {
         .subscribe(nominees => {
           this.nominees = nominees;
           _.forEach(this.nominees, (nominee) => {
-            nominee.original_odds = nominee.odds;
+            nominee.original_odds = nominee.odds_expert;
           });
         });
       this.categoryService.getCategory(category_id)
@@ -39,7 +39,7 @@ export class NomineesComponent implements OnInit {
   }
 
   hasChanges() {
-    const filtered = _.filter(this.nominees, (nominee) => nominee.original_odds !== nominee.odds);
+    const filtered = _.filter(this.nominees, (nominee) => nominee.original_odds !== nominee.odds_expert);
     return filtered.length > 0;
   }
 

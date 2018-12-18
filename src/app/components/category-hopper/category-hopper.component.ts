@@ -20,14 +20,14 @@ export class CategoryHopperComponent implements OnInit {
   }
 
   totalOdds(): number {
-    const odds_nums = _.map(this.nominees, (nominee) => nominee.odds);
+    const odds_nums = _.map(this.nominees, (nominee) => nominee.odds_expert);
     const compacted = _.compact(odds_nums);
     const total_num = _.reduce(compacted, (memo, later) => memo + later);
     return total_num ? total_num : 0;
   }
 
   hasChanges() {
-    const filtered = _.filter(this.nominees, (nominee) => nominee.original_odds !== nominee.odds);
+    const filtered = _.filter(this.nominees, (nominee) => nominee.original_odds !== nominee.odds_expert);
     return filtered.length > 0;
   }
 
