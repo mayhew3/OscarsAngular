@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import {InMemoryDataService} from './services/in-memory-data-service';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {HttpClientModule} from '@angular/common/http';
-import {NomineesService} from './services/nominees.service';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { NomineesComponent } from './components/nominees/nominees.component';
 import { CategoryHopperComponent } from './components/category-hopper/category-hopper.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,7 @@ import { CategoryHopperComponent } from './components/category-hopper/category-h
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
 
@@ -30,9 +31,7 @@ import { CategoryHopperComponent } from './components/category-hopper/category-h
       InMemoryDataService, { dataEncapsulation: false, delay: 0 }
     )
   ],
-  providers: [
-    NomineesService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Nominee} from '../../interfaces/Nominee';
-import {NomineesService} from '../../services/nominees.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
@@ -16,8 +15,7 @@ export class NomineesComponent implements OnInit {
   public previousCategory: Category;
   public nominees: Nominee[];
 
-  constructor(private nomineesService: NomineesService,
-              private categoryService: CategoryService,
+  constructor(private categoryService: CategoryService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -32,4 +30,7 @@ export class NomineesComponent implements OnInit {
     });
   }
 
+  submitOdds(nominee: Nominee) {
+    this.categoryService.updateNominee(nominee);
+  }
 }

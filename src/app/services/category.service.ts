@@ -1,21 +1,26 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError, tap} from 'rxjs/operators';
 import {_} from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
+  nomineesUrl = 'api/nominees';
+  categoriesUrl = 'api/categories';
+  cache: Category[];
 
   constructor(private http: HttpClient) {
     this.cache = [];
   }
-  categoriesUrl = 'api/categories';
-  cache: Category[];
 
   private static addToArray<T>(existingArray: T[], newArray: T[]) {
     existingArray.push.apply(existingArray, newArray);
@@ -72,13 +77,18 @@ export class CategoryService {
   }
 
   getNominees(category_id: number): Observable<Nominee[]> {
-    return new Observable<Nominee[]>((observer) => {
-      this.getCategory(category_id)
-        .subscribe(
-          (category: Category) => observer.next(category.nominees),
-          (err: Error) => observer.error(err)
-        );
-    });
+    const options = { params: new HttpParams().set('category_id', `${category_id}`)};
+    return this.http.get<Nominee[]>(this.nomineesUrl, options)
+      .pipe(
+        catchError(this.handleError<Nominee[]>('getNominees'))
+      );
+  }
+
+  updateNominee(nominee: Nominee): Observable<any> {
+    return this.http.put<Nominee>(this.nomineesUrl, nominee, httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('updateCategories', nominee))
+      );
   }
 
   /**

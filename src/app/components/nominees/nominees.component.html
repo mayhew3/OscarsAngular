@@ -38,12 +38,19 @@
               </div>
 
               <div class="col-3">
+                <div class="row">
                 <label class="col-form-label col-form-label-sm cardLabel"
                        for="oddsInput">Odds</label>
                 <input type="number"
                        class="form-control cardInput"
                        style="text-align: center"
+                       [(ngModel)]="nominee.odds"
                        id="oddsInput"/>
+                </div>
+
+                <div class="row">
+                  <button (click)="submitOdds(nominee)">Submit</button>
+                </div>
               </div>
 
             </div>
