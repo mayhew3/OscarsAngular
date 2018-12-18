@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand navbar-light bg-light">
   <div class="navbar-text">
     <h1>
-      {{category.name}}
+      Nominees
     </h1>
   </div>
 </nav>
@@ -27,12 +27,12 @@
               <div class="col-9">
                 <div class="row">
                   <div class="col-12 nomineeName">
-                    {{nominee.name}}
+                    {{nominee.nominee}}
                   </div>
                 </div>
-                <div class="row" *ngIf="nominee.subtitle">
+                <div class="row" *ngIf="nominee.context">
                   <div class="col-12 nomineeSubtitle">
-                    {{nominee.subtitle}}
+                    {{nominee.context}}
                   </div>
                 </div>
               </div>

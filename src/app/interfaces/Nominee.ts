@@ -1,6 +1,6 @@
 export class Nominee {
   id: number;
-  name: string;
-  subtitle: string;
+  nominee: string;
+  context: string;
   odds: number;
 }
