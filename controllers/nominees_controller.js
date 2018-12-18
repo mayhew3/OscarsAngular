@@ -1,20 +1,24 @@
 const model = require('./model');
+const _ = require('underscore');
 
 exports.getCategories = function(request, response) {
-  model.Category.findAll().then(categories => {
-    response.json(categories);
-  });
-};
+  model.Category.findAll().then(function(categories) {
+    model.Nomination.findAll({
+      where: {
+        year: 2017
+      }
+    }).then(function(nominations) {
+      let outputObject = [];
 
-exports.getNominations = function(request, response) {
-  console.log("Getting nominations for category id: " + request.query.category_id);
-  model.Nomination.findAll({
-    where: {
-      category_id: request.query.category_id,
-      year: 2017
-    }
-  }).then(function(nominations) {
-    console.log("Found results: " + JSON.stringify(nominations));
-    response.json(nominations);
+      _.forEach(categories, function(category) {
+        let cat_noms = _.where(nominations, {category_id: category.id});
+        let category_object = category.dataValues;
+        category_object.nominees = cat_noms;
+
+        outputObject.push(category_object);
+      });
+
+      response.json(outputObject);
+    });
   });
 };

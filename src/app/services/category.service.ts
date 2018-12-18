@@ -77,11 +77,13 @@ export class CategoryService {
   }
 
   getNominees(category_id: number): Observable<Nominee[]> {
-    const options = { params: new HttpParams().set('category_id', `${category_id}`)};
-    return this.http.get<Nominee[]>(this.nomineesUrl, options)
-      .pipe(
-        catchError(this.handleError<Nominee[]>('getNominees'))
-      );
+    return new Observable<Nominee[]>((observer) => {
+      this.getCategory(category_id)
+        .subscribe(
+          (category: Category) => observer.next(category.nominees),
+          (err: Error) => observer.error(err)
+        );
+    });
   }
 
   updateNominee(nominee: Nominee): Observable<any> {

@@ -15,7 +15,8 @@ exports.Nomination = sequelize.sequelize.define("nomination", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   nominee: Sequelize.TEXT,
   context: Sequelize.TEXT,
-  odds: Sequelize.DECIMAL
+  odds: Sequelize.DECIMAL,
+  category_id: Sequelize.INTEGER
 }, {
   freezeTableName: true,
   createdAt: false,

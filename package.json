@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "server": "ng build && node ./bin/www",
+    "debug": "ng build && node ./bin/www dev $NODE_DEBUG_OPTION",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
