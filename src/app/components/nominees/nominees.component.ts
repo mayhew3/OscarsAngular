@@ -25,8 +25,10 @@ export class NomineesComponent implements OnInit {
         .subscribe(nominees => this.nominees = nominees);
       this.categoryService.getCategory(category_id)
         .subscribe(category => this.category = category);
-      this.nextCategory = this.categoryService.getNextCategory(category_id);
-      this.previousCategory = this.categoryService.getPreviousCategory(category_id);
+      this.categoryService.getNextCategory(category_id)
+        .subscribe(category => this.nextCategory = category);
+      this.categoryService.getPreviousCategory(category_id)
+        .subscribe(category => this.previousCategory = category);
     });
   }
 
