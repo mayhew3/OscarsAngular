@@ -85,7 +85,7 @@ export class CategoryService {
   }
 
   updateNominee(nominee: Nominee): Observable<any> {
-    return this.http.put<Nominee>(this.nomineesUrl, nominee, httpOptions)
+    return this.http.put(this.nomineesUrl, nominee, httpOptions)
       .pipe(
         catchError(this.handleError<any>('updateCategories', nominee))
       );

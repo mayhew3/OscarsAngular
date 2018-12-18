@@ -117,6 +117,11 @@ export class InMemoryDataService implements InMemoryDbService {
     return {categories, nominees};
   }
 
+  get(reqInfo: RequestInfo) {
+    console.log('HTTP override: GET');
+    return undefined;
+  }
+
   put(reqInfo: RequestInfo) {
     console.log('HTTP override: PUT');
     return undefined;
