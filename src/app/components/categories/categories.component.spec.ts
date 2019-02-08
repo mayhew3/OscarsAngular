@@ -1,4 +1,4 @@
-import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import { CategoriesComponent } from './categories.component';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -42,4 +42,10 @@ describe('CategoriesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should navigate back with empty path', fakeAsync(() => {
+    router.navigate(['']);
+    tick();
+    expect(location.path()).toBe('/categories');
+  }));
 });
