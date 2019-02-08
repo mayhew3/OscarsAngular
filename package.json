@@ -7,6 +7,8 @@
     "server": "ng build && node ./bin/www",
     "debug": "ng build && node ./bin/www dev $NODE_DEBUG_OPTION",
     "build": "ng build",
+    "build-prod": "ng build --prod",
+    "build-node": "ng build --configuration=node-server",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
