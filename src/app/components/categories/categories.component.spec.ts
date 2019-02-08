@@ -1,16 +1,36 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
 import { CategoriesComponent } from './categories.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {routes} from '../../app-routing.module';
+import {Router} from '@angular/router';
+import {NomineesComponent} from '../nominees/nominees.component';
+import {CategoryHopperComponent} from '../category-hopper/category-hopper.component';
+import {FormsModule} from '@angular/forms';
+import {Location} from '@angular/common';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('CategoriesComponent', () => {
   let component: CategoriesComponent;
   let fixture: ComponentFixture<CategoriesComponent>;
+  let router: Router;
+  let location: Location;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoriesComponent ]
-    })
-    .compileComponents();
+      imports: [
+        RouterTestingModule.withRoutes(routes),
+        FormsModule,
+        HttpClientTestingModule],
+      declarations: [
+        CategoriesComponent,
+        NomineesComponent,
+        CategoryHopperComponent ]
+    });
+
+    router = TestBed.get(Router);
+    location = TestBed.get(Location);
+    router.initialNavigation();
   }));
 
   beforeEach(() => {
