@@ -9,12 +9,14 @@ import {CategoryHopperComponent} from '../category-hopper/category-hopper.compon
 import {FormsModule} from '@angular/forms';
 import {Location} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {DebugElement} from '@angular/core';
 
 describe('CategoriesComponent', () => {
   let component: CategoriesComponent;
   let fixture: ComponentFixture<CategoriesComponent>;
   let router: Router;
   let location: Location;
+  let element: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -36,6 +38,7 @@ describe('CategoriesComponent', () => {
 
     fixture = TestBed.createComponent(CategoriesComponent);
     component = fixture.componentInstance;
+    element = fixture.debugElement;
     fixture.detectChanges();
   });
 
@@ -48,4 +51,9 @@ describe('CategoriesComponent', () => {
     tick();
     expect(location.path()).toBe('/categories');
   }));
+
+  it('header should say Categories', () => {
+    const headerText = element.nativeElement.querySelector('h1').textContent;
+    expect(headerText).toContain('Categories');
+  });
 });
