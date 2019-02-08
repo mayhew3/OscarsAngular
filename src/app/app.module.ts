@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { NomineesComponent } from './components/nominees/nominees.component';
 import { CategoryHopperComponent } from './components/category-hopper/category-hopper.component';
-import {FormsModule} from '@angular/forms';
-import {environment} from '../environments/environment';
+import { FormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import {environment} from '../environments/environment';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    environment.httpModules
+    environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
   ],
   providers: [],
   bootstrap: [AppComponent]
