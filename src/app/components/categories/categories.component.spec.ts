@@ -27,13 +27,13 @@ describe('CategoriesComponent', () => {
         NomineesComponent,
         CategoryHopperComponent ]
     });
-
-    router = TestBed.get(Router);
-    location = TestBed.get(Location);
-    router.initialNavigation();
   }));
 
   beforeEach(() => {
+    router = TestBed.get(Router);
+    location = TestBed.get(Location);
+    router.initialNavigation();
+
     fixture = TestBed.createComponent(CategoriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
