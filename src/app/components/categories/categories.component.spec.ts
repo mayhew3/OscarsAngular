@@ -10,6 +10,9 @@ import {FormsModule} from '@angular/forms';
 import {Location} from '@angular/common';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDataService} from '../../services/in-memory-data-service';
 
 describe('CategoriesComponent', () => {
   let component: CategoriesComponent;
@@ -23,7 +26,10 @@ describe('CategoriesComponent', () => {
       imports: [
         RouterTestingModule.withRoutes(routes),
         FormsModule,
-        HttpClientTestingModule],
+        HttpClientTestingModule,
+        HttpClientInMemoryWebApiModule.forRoot(
+          InMemoryDataService, { dataEncapsulation: false, delay: 0 }
+        )],
       declarations: [
         CategoriesComponent,
         NomineesComponent,
@@ -47,6 +53,7 @@ describe('CategoriesComponent', () => {
   });
 
   it('should navigate back with empty path', fakeAsync(() => {
+    // noinspection JSIgnoredPromiseFromCall
     router.navigate(['']);
     tick();
     expect(location.path()).toBe('/categories');
@@ -55,5 +62,13 @@ describe('CategoriesComponent', () => {
   it('header should say Categories', () => {
     const headerText = element.nativeElement.querySelector('h1').textContent;
     expect(headerText).toContain('Categories');
+  });
+
+  it ('expect same number of cards as categories', () => {
+    const items = element.queryAll(By.css('.card'));
+    expect(items.length)
+      .toBeGreaterThan(0);
+    expect(items.length)
+      .toBe(component.categories.length);
   });
 });
