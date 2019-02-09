@@ -80,7 +80,7 @@ describe('CategoriesComponent', () => {
     expect(items.length)
       .toBe(component.categories.length);
     expect(items.length)
-      .toBe(2);
+      .toBe(3);
   });
 
   it ('expect category names and points displayed', () => {

@@ -67,5 +67,54 @@ export const TestCategoryList: Category[] = [
     "name": "Actress",
     "id": 2,
     "points": 4
+  },
+  {
+    "nominees": [
+      {
+        "odds_expert": 79,
+        "odds_denominator": 11,
+        "category_id": 17,
+        "context": "",
+        "nominee": "Dekalb Elementary",
+        "odds_user": 17,
+        "id": 2363,
+        "odds_numerator": 4
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 17,
+        "context": "",
+        "nominee": "The Eleven O'Clock",
+        "odds_user": 22,
+        "id": 2364,
+        "odds_numerator": 6
+      },
+      {
+        "odds_expert": 8,
+        "category_id": 17,
+        "context": "",
+        "nominee": "My Nephew Emmett",
+        "id": 2365
+      },
+      {
+        "odds_expert": 8,
+        "odds_denominator": 2,
+        "category_id": 17,
+        "context": "",
+        "nominee": "The Silent Child",
+        "odds_user": 34,
+        "id": 2366,
+        "odds_numerator": 7
+      },
+      {
+        "category_id": 17,
+        "context": "",
+        "nominee": "Watu Wote: All of Us",
+        "id": 2367
+      }
+    ],
+    "name": "Short Film (Live Action)",
+    "id": 17,
+    "points": 1
   }
 ];
