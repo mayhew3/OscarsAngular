@@ -67,7 +67,7 @@ export class CategoryService {
   getNominees(category_id: number): Observable<Nominee[]> {
     return this.getDataWithCacheUpdate<Nominee[]>(() => {
       const category = this.getCategoryFromCache(category_id);
-      return category.nominees;
+      return category ? category.nominees : [];
     });
   }
 
