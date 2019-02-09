@@ -47,7 +47,7 @@ export class CategoryService {
   getNextCategory(id: number): Observable<Category> {
     return this.getDataWithCacheUpdate<Category>(() => {
       const foundIndex = _.findIndex(this.cache, {id: id});
-      if (this.cache.length < (foundIndex + 1)) {
+      if (foundIndex === -1 || this.cache.length < (foundIndex + 1)) {
         return null;
       }
       return this.cache[foundIndex + 1];
