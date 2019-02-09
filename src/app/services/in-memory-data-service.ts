@@ -1,7 +1,7 @@
 import {getStatusText, InMemoryDbService, RequestInfo, ResponseOptions, STATUS} from 'angular-in-memory-web-api';
 import {Injectable} from '@angular/core';
 import {_} from 'underscore';
-import {MockCategoryList} from './categories.mock';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import {MockCategoryList} from './categories.mock';
 
 export class InMemoryDataService implements InMemoryDbService {
   // tslint:disable-next-line
-  categories = MockCategoryList;
+  categories = environment.categoryData;
 
   /////////// helpers ///////////////
 

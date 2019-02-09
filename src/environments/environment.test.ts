@@ -5,7 +5,7 @@
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from '../app/services/in-memory-data-service';
-import {MockCategoryList} from '../app/services/categories.mock';
+import {TestCategoryList} from '../app/services/categories.test.mock';
 
 export const environment = {
   production: false,
@@ -13,7 +13,7 @@ export const environment = {
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false, delay: 0 }
     )],
-  categoryData: MockCategoryList
+  categoryData: TestCategoryList
 };
 
 /*

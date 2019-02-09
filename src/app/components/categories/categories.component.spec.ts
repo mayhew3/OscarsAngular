@@ -79,6 +79,8 @@ describe('CategoriesComponent', () => {
       .toBeGreaterThan(0);
     expect(items.length)
       .toBe(component.categories.length);
+    expect(items.length)
+      .toBe(2);
   });
 
   it ('expect category names and points displayed', () => {
