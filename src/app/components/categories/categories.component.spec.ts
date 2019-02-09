@@ -1,6 +1,6 @@
 import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import { CategoriesComponent } from './categories.component';
+import {CategoriesComponent} from './categories.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {routes} from '../../app-routing.module';
 import {Router} from '@angular/router';
@@ -13,6 +13,15 @@ import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from '../../services/in-memory-data-service';
+
+function getHTML(element: DebugElement): Element {
+  return element.nativeElement.innerHTML;
+}
+
+function getHTMLFromCSSSelector(element: DebugElement, cssSelector: String): Element {
+  const debugElement = element.query(By.css('.' + cssSelector));
+  return getHTML(debugElement);
+}
 
 describe('CategoriesComponent', () => {
   let component: CategoriesComponent;
@@ -70,5 +79,17 @@ describe('CategoriesComponent', () => {
       .toBeGreaterThan(0);
     expect(items.length)
       .toBe(component.categories.length);
+  });
+
+  it ('expect category names and points displayed', () => {
+    const items = element.queryAll(By.css('.card-body'));
+
+    for (let i = 0; i < items.length; i++) {
+      const categoryTitle = getHTMLFromCSSSelector(items[i], 'categoryTitle');
+      const categoryPoints = getHTMLFromCSSSelector(items[i], 'categoryPoints');
+
+      expect(categoryTitle).toContain(component.categories[i].name);
+      expect(categoryPoints).toContain(component.categories[i].points);
+    }
   });
 });
