@@ -8,11 +8,10 @@ import {NomineesComponent} from '../nominees/nominees.component';
 import {CategoryHopperComponent} from '../category-hopper/category-hopper.component';
 import {FormsModule} from '@angular/forms';
 import {Location} from '@angular/common';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from '../../services/in-memory-data-service';
+import {CategoryService} from '../../services/category.service';
+import {CategoryServiceStub} from '../../services/category.service.stub';
 
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
@@ -34,15 +33,14 @@ describe('CategoriesComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
-        FormsModule,
-        HttpClientTestingModule,
-        HttpClientInMemoryWebApiModule.forRoot(
-          InMemoryDataService, { dataEncapsulation: false, delay: 0 }
-        )],
+        FormsModule],
       declarations: [
         CategoriesComponent,
         NomineesComponent,
-        CategoryHopperComponent ]
+        CategoryHopperComponent ],
+      providers: [
+        {provide: CategoryService, useClass: CategoryServiceStub}
+      ]
     });
   }));
 

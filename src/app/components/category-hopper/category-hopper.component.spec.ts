@@ -6,9 +6,8 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {routes} from '../../app-routing.module';
 import {CategoriesComponent} from '../categories/categories.component';
 import {NomineesComponent} from '../nominees/nominees.component';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from '../../services/in-memory-data-service';
+import {CategoryService} from '../../services/category.service';
+import {CategoryServiceStub} from '../../services/category.service.stub';
 
 describe('CategoryHopperComponent', () => {
   let component: CategoryHopperComponent;
@@ -18,15 +17,14 @@ describe('CategoryHopperComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
-        FormsModule,
-        HttpClientTestingModule,
-        HttpClientInMemoryWebApiModule.forRoot(
-          InMemoryDataService, { dataEncapsulation: false, delay: 0 }
-        )],
+        FormsModule],
       declarations: [
         CategoriesComponent,
         NomineesComponent,
-        CategoryHopperComponent ]
+        CategoryHopperComponent ],
+      providers: [
+        {provide: CategoryService, useClass: CategoryServiceStub}
+      ]
     });
   }));
 
