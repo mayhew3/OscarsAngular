@@ -90,23 +90,6 @@ export const TestCategoryList: Category[] = [
         "odds_numerator": 6
       },
       {
-        "odds_expert": 8,
-        "category_id": 17,
-        "context": "",
-        "nominee": "My Nephew Emmett",
-        "id": 2365
-      },
-      {
-        "odds_expert": 8,
-        "odds_denominator": 2,
-        "category_id": 17,
-        "context": "",
-        "nominee": "The Silent Child",
-        "odds_user": 34,
-        "id": 2366,
-        "odds_numerator": 7
-      },
-      {
         "category_id": 17,
         "context": "",
         "nominee": "Watu Wote: All of Us",
