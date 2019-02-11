@@ -13,12 +13,12 @@ import {Category} from '../../interfaces/Category';
 import {_} from 'underscore';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {HttpTestingController} from '@angular/common/http/testing';
 
 describe('CategoryHopperComponent', () => {
   let component: CategoryHopperComponent;
   let fixture: ComponentFixture<CategoryHopperComponent>;
   let element: DebugElement;
+  let service: CategoryService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,6 +40,7 @@ describe('CategoryHopperComponent', () => {
     fixture = TestBed.createComponent(CategoryHopperComponent);
     component = fixture.componentInstance;
     element = fixture.debugElement;
+    service = TestBed.get(CategoryService);
   });
 
   function populateInputs(categoryIndex: number) {
@@ -144,6 +145,7 @@ describe('CategoryHopperComponent', () => {
 
   it('submit button disabled on init', () => {
     populateInputs(1);
+    // tslint:disable-next-line:whitespace
     expect(findButtonWithText(element,'Submit').nativeElement.disabled)
       .toBeTruthy('submit button is enabled');
   });
@@ -181,6 +183,77 @@ describe('CategoryHopperComponent', () => {
     component.nominees[0].odds_expert = originalValue;
 
     expect(component.hasChanges()).toBe(false);
+  });
+
+  it('submitOdds calls updateNominee for one change', () => {
+    populateInputs(1);
+    const originalFirst = component.nominees[0].odds_expert;
+
+    component.nominees[0].odds_expert = 23;
+
+    const updateSpy = spyOn(service, 'updateNominee').and.callThrough();
+
+    component.submitOdds();
+
+    expect(updateSpy).toHaveBeenCalledTimes(1);
+
+    // reset to initial values for later test runs
+    component.nominees[0].odds_expert = originalFirst;
+  });
+
+  it('submitOdds calls updateNominee twice for two changes', () => {
+    populateInputs(1);
+    const originalFirst = component.nominees[0].odds_expert;
+    const originalSecond = component.nominees[1].odds_expert;
+
+    component.nominees[0].odds_expert = 23;
+    component.nominees[1].odds_expert = 3;
+
+    const updateSpy = spyOn(service, 'updateNominee').and.callThrough();
+
+    component.submitOdds();
+
+    expect(updateSpy).toHaveBeenCalledTimes(2);
+
+    // reset to initial values for later test runs
+    component.nominees[0].odds_expert = originalFirst;
+    component.nominees[1].odds_expert = originalSecond;
+  });
+
+  it('submitOdds calls updateNominee once for two changes on one nominee', () => {
+    populateInputs(1);
+    const originalFirst = component.nominees[0].odds_expert;
+    const originalSecond = component.nominees[0].odds_user;
+
+    component.nominees[0].odds_expert = 23;
+    component.nominees[0].odds_user = 3;
+
+    const updateSpy = spyOn(service, 'updateNominee').and.callThrough();
+
+    component.submitOdds();
+
+    expect(updateSpy).toHaveBeenCalledTimes(1);
+
+    // reset to initial values for later test runs
+    component.nominees[0].odds_expert = originalFirst;
+    component.nominees[0].odds_user = originalSecond;
+  });
+
+  it('hasChanges is false after submitOdds is called', () => {
+    populateInputs(1);
+    const originalFirst = component.nominees[0].odds_expert;
+    const originalSecond = component.nominees[1].odds_expert;
+
+    component.nominees[0].odds_expert = 23;
+    component.nominees[1].odds_expert = 3;
+
+    component.submitOdds();
+
+    expect(component.hasChanges()).toBe(false);
+
+    // reset to initial values for later test runs
+    component.nominees[0].odds_expert = originalFirst;
+    component.nominees[1].odds_expert = originalSecond;
   });
 
 });

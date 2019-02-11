@@ -72,7 +72,7 @@ export class CategoryHopperComponent implements OnInit {
     });
   }
 
-  clearOriginals() {
+  private clearOriginals() {
     _.forEach(this.nominees, (nominee) => {
       nominee.original_odds_expert = nominee.odds_expert;
       nominee.original_odds_user = nominee.odds_user;

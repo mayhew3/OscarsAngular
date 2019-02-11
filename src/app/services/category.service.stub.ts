@@ -59,10 +59,6 @@ export class CategoryServiceStub {
   }
 
   updateNominee(nominee: Nominee): Observable<any> {
-    const category = this.getCategoryFromCache(nominee.category_id);
-    const existing =  _.findWhere(category.nominees, {id: nominee.id});
-    const existingIndex = _.indexOf(category.nominees, existing);
-    category.nominees[existingIndex] = nominee;
     return of(null);
   }
 
