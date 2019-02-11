@@ -36,10 +36,6 @@ describe('CategoryService', () => {
     expect(service.cache.length).toBe(0);
   });
 
-  it('getCategoryFromCache returns nothing initially', () => {
-    expect(service.getCategoryFromCache(1)).toBeFalsy();
-  });
-
   it('updateNominee calls http put', () => {
     const mockNominee = {
       "odds_expert": 11,
@@ -57,14 +53,14 @@ describe('CategoryService', () => {
     httpMock.verify();
   });
 
-  it('maybeUpdateCache doesn\'t call http get if there is a cache already', () => {
+  it('getCategories doesn\'t call http get if there is a cache already', () => {
     // do an initial call to fill the cache
-    service.maybeUpdateCache().subscribe();
+    service.getCategories().subscribe();
 
     doFirstCategoriesRequest();
 
-    // subsequent calls to maybeUpdateCache should just use the cache and do no HTTP request
-    service.maybeUpdateCache().subscribe((categories) => {
+    // subsequent calls to getCategories should just use the cache and do no HTTP request
+    service.getCategories().subscribe((categories) => {
       expect(categories).toBeTruthy();
       expect(categories.length).toBe(3);
     });
@@ -82,8 +78,8 @@ describe('CategoryService', () => {
       doFirstCategoriesRequest();
     });
 
-    it('maybeUpdateCache calls http get if cache is empty', () => {
-      service.maybeUpdateCache().subscribe((categories) => {
+    it('getCategories calls http get if cache is empty', () => {
+      service.getCategories().subscribe((categories) => {
         expect(categories).toBeTruthy();
         expect(categories.length).toBe(3);
       });
@@ -107,21 +103,6 @@ describe('CategoryService', () => {
     it('getCategory returns nothing if id doesn\'t exist', () => {
       service.getCategory(5).subscribe((category) => {
         expect(category).toBeFalsy();
-      });
-    });
-
-    it('getCategoryFromCache returns element after cache populated', () => {
-      service.maybeUpdateCache().subscribe(() => {
-        const categoryFromCache = service.getCategoryFromCache(1);
-        expect(categoryFromCache).toBeTruthy();
-        expect(categoryFromCache.id).toBe(1);
-      });
-    });
-
-    it('getCategoryFromCache returns nothing if id doesn\'t exist', () => {
-      service.maybeUpdateCache().subscribe(() => {
-        const categoryFromCache = service.getCategoryFromCache(5);
-        expect(categoryFromCache).toBeFalsy();
       });
     });
 

@@ -148,7 +148,11 @@ describe('CategoryHopperComponent', () => {
 
   it('hasChanges is true after one change', () => {
     populateInputs(1);
+    const originalValue = component.nominees[0].odds_expert;
+
     component.nominees[0].odds_expert = 23;
     expect(component.hasChanges()).toBe(true);
+    // reset to initial values for later test runs
+    component.nominees[0].odds_expert = originalValue;
   });
 });

@@ -40,7 +40,7 @@ export class CategoryService {
     });
   }
 
-  getCategoryFromCache(id: number): Category {
+  private getCategoryFromCache(id: number): Category {
     return _.findWhere(this.cache, {id: id});
   }
 
@@ -82,7 +82,7 @@ export class CategoryService {
 
   // DATA HELPERS
 
-  getDataWithCacheUpdate<T>(getCallback): Observable<T> {
+  private getDataWithCacheUpdate<T>(getCallback): Observable<T> {
     return new Observable(observer => {
       this.maybeUpdateCache().subscribe(
         () => observer.next(getCallback()),
@@ -91,7 +91,7 @@ export class CategoryService {
     });
   }
 
-  maybeUpdateCache(): Observable<Category[]> {
+  private maybeUpdateCache(): Observable<Category[]> {
     if (this.cache.length === 0) {
       return new Observable<Category[]>((observer) => {
         this.http.get<Category[]>(this.categoriesUrl)
