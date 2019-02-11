@@ -13,6 +13,7 @@ import {Category} from '../../interfaces/Category';
 import {_} from 'underscore';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
+import {HttpTestingController} from '@angular/common/http/testing';
 
 describe('CategoryHopperComponent', () => {
   let component: CategoryHopperComponent;
@@ -23,7 +24,8 @@ describe('CategoryHopperComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
-        FormsModule],
+        FormsModule
+      ],
       declarations: [
         CategoriesComponent,
         NomineesComponent,
@@ -152,7 +154,33 @@ describe('CategoryHopperComponent', () => {
 
     component.nominees[0].odds_expert = 23;
     expect(component.hasChanges()).toBe(true);
+
     // reset to initial values for later test runs
     component.nominees[0].odds_expert = originalValue;
   });
+
+  it('hasChanges is true after two different changes', () => {
+    populateInputs(1);
+    const originalFirst = component.nominees[0].odds_expert;
+    const originalSecond = component.nominees[1].odds_expert;
+
+    component.nominees[0].odds_expert = 23;
+    component.nominees[1].odds_expert = 3;
+    expect(component.hasChanges()).toBe(true);
+
+    // reset to initial values for later test runs
+    component.nominees[0].odds_expert = originalFirst;
+    component.nominees[1].odds_expert = originalSecond;
+  });
+
+  it('hasChanges is false after reverting change', () => {
+    populateInputs(1);
+    const originalValue = component.nominees[0].odds_expert;
+
+    component.nominees[0].odds_expert = 23;
+    component.nominees[0].odds_expert = originalValue;
+
+    expect(component.hasChanges()).toBe(false);
+  });
+
 });

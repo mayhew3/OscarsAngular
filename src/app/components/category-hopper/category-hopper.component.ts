@@ -46,7 +46,7 @@ export class CategoryHopperComponent implements OnInit {
     return total_num ? total_num : 0;
   }
 
-  getChanges() {
+  private getChanges() {
     return _.filter(this.nominees, (nominee) =>
       nominee.original_odds_expert !== nominee.odds_expert ||
       nominee.original_odds_user !== nominee.odds_user ||
