@@ -19,6 +19,7 @@ export class CategoryHopperComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.clearOriginals();
   }
 
   totalOdds(subtitle: string): number {

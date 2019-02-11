@@ -38,7 +38,6 @@ describe('CategoryHopperComponent', () => {
     fixture = TestBed.createComponent(CategoryHopperComponent);
     component = fixture.componentInstance;
     element = fixture.debugElement;
-    fixture.detectChanges();
   });
 
   function populateInputs(categoryIndex: number) {
@@ -116,4 +115,40 @@ describe('CategoryHopperComponent', () => {
     expect(findButtonWithText(element, 'Up')).toBeTruthy();
   });
 
+  it('totalOdds expert', () => {
+    populateInputs(1);
+    expect(component.totalOdds('expert')).toBe(98);
+  });
+
+  it('totalOdds user', () => {
+    populateInputs(1);
+    expect(component.totalOdds('user')).toBe(81);
+  });
+
+  it('totalOddsVegas', () => {
+    populateInputs(1);
+    expect(component.totalOddsVegas()).toBe(97.06959706959707);
+  });
+
+  it('totalOdds unrecognized', () => {
+    populateInputs(1);
+    expect(component.totalOdds('unrecognized')).toBe(0);
+  });
+
+  it('hasChanges is false after inputs', () => {
+    populateInputs(1);
+    expect(component.hasChanges()).toBe(false);
+  });
+
+  it('submit button disabled on init', () => {
+    populateInputs(1);
+    expect(findButtonWithText(element,'Submit').nativeElement.disabled)
+      .toBeTruthy('submit button is enabled');
+  });
+
+  it('hasChanges is true after one change', () => {
+    populateInputs(1);
+    component.nominees[0].odds_expert = 23;
+    expect(component.hasChanges()).toBe(true);
+  });
 });
