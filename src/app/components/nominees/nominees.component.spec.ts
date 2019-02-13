@@ -10,6 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ActivatedRouteStub} from '../../../testing/activated-route-stub';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
+import {CallbackComponent} from '../callback/callback.component';
 
 describe('NomineesComponent', () => {
   let component: NomineesComponent;
@@ -23,7 +24,8 @@ describe('NomineesComponent', () => {
       declarations: [
         CategoriesComponent,
         NomineesComponent,
-        CategoryHopperComponent ],
+        CategoryHopperComponent,
+        CallbackComponent],
       providers: [
         {provide: ActivatedRoute, useValue: new ActivatedRouteStub({category_id: 2})},
         {provide: CategoryService, useClass: CategoryServiceStub}

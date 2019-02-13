@@ -12,6 +12,7 @@ import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
+import {CallbackComponent} from '../callback/callback.component';
 
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
@@ -37,7 +38,8 @@ describe('CategoriesComponent', () => {
       declarations: [
         CategoriesComponent,
         NomineesComponent,
-        CategoryHopperComponent ],
+        CategoryHopperComponent,
+        CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}
       ]
@@ -63,13 +65,8 @@ describe('CategoriesComponent', () => {
     // noinspection JSIgnoredPromiseFromCall
     router.navigate(['']);
     tick();
-    expect(location.path()).toBe('/categories');
+    expect(location.path()).toBe('/');
   }));
-
-  it('header should say Categories', () => {
-    const headerText = element.nativeElement.querySelector('h1').textContent;
-    expect(headerText).toContain('Categories');
-  });
 
   it ('expect same number of cards as categories', () => {
     const items = element.queryAll(By.css('.card'));

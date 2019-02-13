@@ -13,6 +13,7 @@ import {Category} from '../../interfaces/Category';
 import {_} from 'underscore';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
+import {CallbackComponent} from '../callback/callback.component';
 
 describe('CategoryHopperComponent', () => {
   let component: CategoryHopperComponent;
@@ -29,7 +30,8 @@ describe('CategoryHopperComponent', () => {
       declarations: [
         CategoriesComponent,
         NomineesComponent,
-        CategoryHopperComponent ],
+        CategoryHopperComponent,
+        CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}
       ]
