@@ -9,13 +9,15 @@ import { CategoryHopperComponent } from './components/category-hopper/category-h
 import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import {AuthService} from './services/auth/auth.service';
+import {CallbackComponent} from './components/callback/callback.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CategoriesComponent,
     NomineesComponent,
-    CategoryHopperComponent
+    CategoryHopperComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,

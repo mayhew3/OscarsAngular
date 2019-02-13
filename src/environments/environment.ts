@@ -5,15 +5,17 @@
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from '../app/services/in-memory-data-service';
-import {MockCategoryList} from '../app/services/categories.mock';
+import {EnvironmentConfig} from './environment.interface';
 
-export const environment = {
+export const environment: EnvironmentConfig = {
   production: false,
   httpModules: [HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false, delay: 0 }
     )],
-  categoryData: MockCategoryList
+  authCallbackUrl: 'http://localhost:4200/callback',
+  clientID: 'Re282m5GM0575vOJjhpguBptT8slmIb0',
+  domain: 'mayhew3.auth0.com'
 };
 
 /*
