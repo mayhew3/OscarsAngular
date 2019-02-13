@@ -8,6 +8,7 @@ import { NomineesComponent } from './components/nominees/nominees.component';
 import { CategoryHopperComponent } from './components/category-hopper/category-hopper.component';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
+import {AuthService} from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
