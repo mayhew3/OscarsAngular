@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import {AuthService} from './services/auth/auth.service';
 import {CallbackComponent} from './components/callback/callback.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {CallbackComponent} from './components/callback/callback.component';
     CategoriesComponent,
     NomineesComponent,
     CategoryHopperComponent,
-    CallbackComponent
+    CallbackComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

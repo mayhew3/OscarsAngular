@@ -1,0 +1,24 @@
+<div class="container" style="padding: 10px">
+
+  <p>Welcome to the Oscars 2019!</p>
+
+  <div class="row">
+
+    <div class="col-12 col-sm-6 col-lg-4"
+         *ngIf="auth.isAdmin()">
+      <div class="card navCard">
+        <div class="card-body"
+             routerLink="categories">
+          <div class="row">
+            <div class="col-10 navTitle">
+              <span>Input Odds</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

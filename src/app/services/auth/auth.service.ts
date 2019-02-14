@@ -1,7 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import * as auth0 from 'auth0-js';
+import {_} from 'underscore';
 import {environment} from '../../../environments/environment';
+
+enum UserRole {
+  Guest = 'guest',
+  User = 'user',
+  Admin = 'admin'
+}
 
 @Injectable()
 export class AuthService {
@@ -10,17 +17,23 @@ export class AuthService {
   private _accessToken: string;
   private _expiresAt: number;
 
+  private _profile: any;
+  private _userRole: UserRole;
+
   auth0 = new auth0.WebAuth({
     clientID: environment.clientID,
     domain: environment.domain,
     responseType: 'token id_token',
-    redirectUri: environment.authCallbackUrl
+    redirectUri: environment.authCallbackUrl,
+    scope: 'openid profile email'
   });
+
 
   constructor(public router: Router) {
     this._idToken = '';
     this._accessToken = '';
     this._expiresAt = 0;
+    this._userRole = UserRole.Guest;
   }
 
   get accessToken(): string {
@@ -39,7 +52,7 @@ export class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.localLogin(authResult);
-        this.router.navigate(['/categories']);
+        this.router.navigate(['/']);
       } else if (err) {
         this.router.navigate(['/']);
         console.log(err);
@@ -48,14 +61,32 @@ export class AuthService {
     });
   }
 
+  public isAdmin(): boolean {
+    return this.isAuthenticated() && 'scorpy@gmail.com' === this._profile.email;
+  }
+
+  public isUser(): boolean {
+    return this.isAuthenticated();
+  }
+
   private localLogin(authResult): void {
     // Set isLoggedIn flag in localStorage
     localStorage.setItem('isLoggedIn', 'true');
     // Set the time that the access token will expire at
     const expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
+
     this._accessToken = authResult.accessToken;
     this._idToken = authResult.idToken;
     this._expiresAt = expiresAt;
+
+    const self = this;
+
+    // on first login, profile is in payload, but on renewal, need to request it again.
+    if (authResult.idTokenPayload.email) {
+      this._profile = authResult.idTokenPayload;
+    } else {
+      throw new Error('No email found in payload.');
+    }
   }
 
   public renewTokens(): void {
@@ -74,6 +105,8 @@ export class AuthService {
     this._accessToken = '';
     this._idToken = '';
     this._expiresAt = 0;
+    this._profile = null;
+    this._userRole = UserRole.Guest;
     // Remove isLoggedIn flag from localStorage
     localStorage.removeItem('isLoggedIn');
     // Go back to the home route
