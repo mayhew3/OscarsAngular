@@ -3,6 +3,9 @@ import {Router} from '@angular/router';
 import * as auth0 from 'auth0-js';
 import {_} from 'underscore';
 import {environment} from '../../../environments/environment';
+import {of, timer} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
+import {debug} from 'util';
 
 enum UserRole {
   Guest = 'guest',
@@ -19,6 +22,7 @@ export class AuthService {
 
   private _profile: any;
   private _userRole: UserRole;
+  refreshSubscription: any;
 
   auth0 = new auth0.WebAuth({
     clientID: environment.clientID,
@@ -79,7 +83,7 @@ export class AuthService {
     this._idToken = authResult.idToken;
     this._expiresAt = expiresAt;
 
-    const self = this;
+    this.scheduleRenewal();
 
     // on first login, profile is in payload, but on renewal, need to request it again.
     if (authResult.idTokenPayload.email) {
@@ -109,6 +113,7 @@ export class AuthService {
     this._userRole = UserRole.Guest;
     // Remove isLoggedIn flag from localStorage
     localStorage.removeItem('isLoggedIn');
+    this.unscheduleRenewal();
     // Go back to the home route
     this.router.navigate(['/']);
   }
@@ -117,6 +122,40 @@ export class AuthService {
     // Check whether the current time is past the
     // access token's expiry time
     return new Date().getTime() < this._expiresAt;
+  }
+
+  public scheduleRenewal() {
+    if (!this.isAuthenticated()) {
+      return;
+    }
+    this.unscheduleRenewal();
+
+    const expiresAt = this._expiresAt;
+
+    const source = of(expiresAt).pipe(mergeMap(inputDate => {
+      const now = Date.now();
+
+      // Use the delay in a timer to
+      // run the refresh at the proper time
+      return timer(Math.max(1, inputDate - now));
+    }));
+
+    // Once the delay time from above is
+    // reached, get a new JWT and schedule
+    // additional refreshes
+    this.refreshSubscription = source.subscribe(() => {
+      console.log('Token expired. Renewing!');
+      this.renewTokens();
+      this.scheduleRenewal();
+    });
+  }
+
+  public unscheduleRenewal() {
+    if (!this.refreshSubscription) {
+      return;
+    }
+    console.log('Unscheduling renewal.');
+    this.refreshSubscription.unsubscribe();
   }
 
 }
