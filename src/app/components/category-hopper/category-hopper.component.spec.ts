@@ -8,12 +8,13 @@ import {CategoriesComponent} from '../categories/categories.component';
 import {NomineesComponent} from '../nominees/nominees.component';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
-import {TestCategoryList} from '../../services/categories.test.mock';
+import {TestCategoryList} from '../../services/data/categories.test.mock';
 import {Category} from '../../interfaces/Category';
 import {_} from 'underscore';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {CallbackComponent} from '../callback/callback.component';
+import {HomeComponent} from '../home/home.component';
 
 describe('CategoryHopperComponent', () => {
   let component: CategoryHopperComponent;
@@ -31,6 +32,7 @@ describe('CategoryHopperComponent', () => {
         CategoriesComponent,
         NomineesComponent,
         CategoryHopperComponent,
+        HomeComponent,
         CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}

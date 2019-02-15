@@ -1,4 +1,4 @@
-import {Category} from '../interfaces/Category';
+import {Category} from '../../interfaces/Category';
 /* tslint:disable quotemark */
 export const MockCategoryList: Category[] = [
   {

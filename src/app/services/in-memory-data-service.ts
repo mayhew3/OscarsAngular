@@ -1,7 +1,8 @@
 import {getStatusText, InMemoryDbService, RequestInfo, ResponseOptions, STATUS} from 'angular-in-memory-web-api';
 import {Injectable} from '@angular/core';
 import {_} from 'underscore';
-import {MockCategoryList} from './categories.mock';
+import {MockCategoryList} from './data/categories.mock';
+import {MockPersonList} from './data/persons.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ import {MockCategoryList} from './categories.mock';
 export class InMemoryDataService implements InMemoryDbService {
   // tslint:disable-next-line
   categories = MockCategoryList;
+  persons = MockPersonList;
 
   /////////// helpers ///////////////
 
@@ -22,7 +24,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   createDb(): {} {
     // Need an empty nominees list so the service knows the collection exists.
-    return {categories: this.categories, nominees: []};
+    return {categories: this.categories, nominees: [], persons: this.persons};
   }
 
   // noinspection JSUnusedGlobalSymbols

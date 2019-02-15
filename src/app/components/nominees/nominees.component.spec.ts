@@ -11,6 +11,7 @@ import {ActivatedRouteStub} from '../../../testing/activated-route-stub';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
 import {CallbackComponent} from '../callback/callback.component';
+import {HomeComponent} from '../home/home.component';
 
 describe('NomineesComponent', () => {
   let component: NomineesComponent;
@@ -25,6 +26,7 @@ describe('NomineesComponent', () => {
         CategoriesComponent,
         NomineesComponent,
         CategoryHopperComponent,
+        HomeComponent,
         CallbackComponent],
       providers: [
         {provide: ActivatedRoute, useValue: new ActivatedRouteStub({category_id: 2})},

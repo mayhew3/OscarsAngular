@@ -30,8 +30,16 @@ export class AuthServiceStub {
 
   }
 
+  public isAdmin(): boolean {
+    return true;
+  }
+
   public isAuthenticated(): boolean {
     return true;
+  }
+
+  public scheduleRenewal(): void {
+
   }
 
 }

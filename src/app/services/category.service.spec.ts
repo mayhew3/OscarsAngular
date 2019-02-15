@@ -2,7 +2,7 @@ import {TestBed} from '@angular/core/testing';
 /* tslint:disable quotemark */
 import {CategoryService} from './category.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {TestCategoryList} from './categories.test.mock';
+import {TestCategoryList} from './data/categories.test.mock';
 
 describe('CategoryService', () => {
   let service: CategoryService;

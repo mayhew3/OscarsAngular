@@ -13,6 +13,7 @@ import {By} from '@angular/platform-browser';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
 import {CallbackComponent} from '../callback/callback.component';
+import {HomeComponent} from '../home/home.component';
 
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
@@ -39,6 +40,7 @@ describe('CategoriesComponent', () => {
         CategoriesComponent,
         NomineesComponent,
         CategoryHopperComponent,
+        HomeComponent,
         CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}

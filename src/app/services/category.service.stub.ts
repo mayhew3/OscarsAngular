@@ -3,7 +3,7 @@ import {Observable, of} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {_} from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
-import {TestCategoryList} from './categories.test.mock';
+import {TestCategoryList} from './data/categories.test.mock';
 
 @Injectable({
   providedIn: 'root'
