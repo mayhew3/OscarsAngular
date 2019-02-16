@@ -101,12 +101,20 @@ export const MockPersonList: Person[] = [
     "email": "jgaddis00@gmail.com"
   },
   {
+    "role": "admin",
+    "last_name": "Seavey",
+    "groups": [1],
+    "id": 108,
+    "first_name": "Mayhew",
+    "email": "scorpy@gmail.com"
+  },
+  {
     "role": "user",
     "last_name": "LastName",
     "groups": [1],
     "id": 18,
     "first_name": "Jim",
-    "email": "scorpy@gmail.com"
+    "email": "commander.boffo@gmail.com"
   },
   {
     "role": "user",

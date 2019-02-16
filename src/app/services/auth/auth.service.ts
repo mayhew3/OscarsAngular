@@ -5,7 +5,8 @@ import {_} from 'underscore';
 import {environment} from '../../../environments/environment';
 import {of, timer} from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
-import {debug} from 'util';
+import {Person} from '../../interfaces/Person';
+import {PersonService} from '../person.service';
 
 enum UserRole {
   Guest = 'guest',
@@ -22,6 +23,7 @@ export class AuthService {
 
   private _profile: any;
   private _userRole: UserRole;
+  private _person: Person;
   refreshSubscription: any;
 
   auth0 = new auth0.WebAuth({
@@ -33,7 +35,8 @@ export class AuthService {
   });
 
 
-  constructor(public router: Router) {
+  constructor(public router: Router,
+              private personService: PersonService) {
     this._idToken = '';
     this._accessToken = '';
     this._expiresAt = 0;
@@ -66,11 +69,15 @@ export class AuthService {
   }
 
   public isAdmin(): boolean {
-    return this.isAuthenticated() && 'scorpy@gmail.com' === this._profile.email;
+    return this.isUser() && 'admin' === this._person.role;
   }
 
   public isUser(): boolean {
-    return this.isAuthenticated();
+    return this.isAuthenticated() && (this._person !== undefined);
+  }
+
+  public getFirstName(): string {
+    return this._person ? this._person.first_name : undefined;
   }
 
   private localLogin(authResult): void {
@@ -88,6 +95,9 @@ export class AuthService {
     // on first login, profile is in payload, but on renewal, need to request it again.
     if (authResult.idTokenPayload.email) {
       this._profile = authResult.idTokenPayload;
+      this.personService.getPersonWithEmail(authResult.idTokenPayload.email).subscribe((person) => {
+        this._person = person;
+      });
     } else {
       throw new Error('No email found in payload.');
     }

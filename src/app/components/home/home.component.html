@@ -1,6 +1,7 @@
 <div class="container" style="padding: 10px">
 
-  <p>Welcome to the Oscars 2019!</p>
+  <p *ngIf="!auth.isUser() && auth.isAuthenticated()">No user account found for this google user. Could your invite be for a different gmail address?</p>
+  <p *ngIf="auth.isUser()">Welcome to the Oscars 2019, {{auth.getFirstName()}}!</p>
 
   <div class="row">
 

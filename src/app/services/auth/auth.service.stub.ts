@@ -1,7 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import * as auth0 from 'auth0-js';
-import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class AuthServiceStub {
@@ -28,6 +25,10 @@ export class AuthServiceStub {
 
   public logout(): void {
 
+  }
+
+  public getFirstName(): string {
+    return undefined;
   }
 
   public isAdmin(): boolean {

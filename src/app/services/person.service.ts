@@ -36,8 +36,18 @@ export class PersonService {
     });
   }
 
+  getPersonWithEmail(email: string): Observable<Person> {
+    return this.getDataWithCacheUpdate<Person>(() => {
+      return this.getPersonWithEmailFromCache(email);
+    });
+  }
+
   private getPersonFromCache(id: number): Person {
     return _.findWhere(this.cache, {id: id});
+  }
+
+  private getPersonWithEmailFromCache(email: string): Person {
+    return _.findWhere(this.cache, {email: email});
   }
 
 

@@ -77,7 +77,7 @@ describe('PersonService', () => {
       });
     });
 
-    it('getPerson puts things in cache', () => {
+    it('getPerson', () => {
       service.getPerson(41).subscribe((person) => {
         expect(person.id).toBe(41);
       });
@@ -85,6 +85,19 @@ describe('PersonService', () => {
 
     it('getPerson returns nothing if id doesn\'t exist', () => {
       service.getPerson(5).subscribe((person) => {
+        expect(person).toBeFalsy();
+      });
+    });
+
+    it('getPersonWithEmail', () => {
+      service.getPersonWithEmail('smp2as@gmail.com').subscribe((person) => {
+        expect(person.id).toBe(41);
+        expect(person.groups).toEqual([1]);
+      });
+    });
+
+    it('getPersonWithEmail returns nothing if email doesn\'t exist', () => {
+      service.getPersonWithEmail('fakeemail@gmail.com').subscribe((person) => {
         expect(person).toBeFalsy();
       });
     });
