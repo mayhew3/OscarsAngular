@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node ./bin/www",
     "server": "ng build && node ./bin/www",
     "debug": "ng build && node ./bin/www dev $NODE_DEBUG_OPTION",
     "build": "ng build",
@@ -11,7 +11,8 @@
     "build-node": "ng build --configuration=node-server",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -37,7 +38,9 @@
     "body-parser": "latest",
     "morgan": "^1.9.1",
     "pg": "^7.6.0",
-    "sequelize": "^4.41.0"
+    "sequelize": "^4.41.0",
+    "typescript": "~3.1.6",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.10.0",
@@ -58,7 +61,8 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "enhanced-resolve": "^4.1.0"
   },
   "engines": {
     "node": "8.11.2",
