@@ -31,6 +31,10 @@ export class AuthServiceStub {
     return undefined;
   }
 
+  public isUser(): boolean {
+    return true;
+  }
+
   public isAdmin(): boolean {
     return true;
   }
