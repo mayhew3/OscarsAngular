@@ -25,3 +25,25 @@ exports.Nomination = sequelize.sequelize.define("nomination", {
   createdAt: false,
   updatedAt: false
 });
+
+exports.Person = sequelize.sequelize.define("person", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  first_name: Sequelize.TEXT,
+  last_name: Sequelize.TEXT,
+  role: Sequelize.TEXT,
+  email: Sequelize.TEXT
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});
+
+exports.PersonGroupRole = sequelize.sequelize.define("person_group_role", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  person_group_id: Sequelize.INTEGER,
+  person_id: Sequelize.INTEGER
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});

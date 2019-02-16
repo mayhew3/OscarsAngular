@@ -2,6 +2,7 @@ let express = require('express');
 
 module.exports = function(app) {
   let nominees = require('../controllers/nominees_controller');
+  let persons = require('../controllers/persons_controller');
 
   let router = express.Router();
 
@@ -10,6 +11,9 @@ module.exports = function(app) {
 
   router.route('/nominees')
     .put(nominees.updateNomination);
+
+  router.route('/persons')
+    .get(persons.getPersons);
 
   app.use('/api', router);
 

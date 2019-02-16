@@ -1,21 +1,25 @@
 const model = require('./model');
 const _ = require('underscore');
+const Sequelize = require('sequelize');
 
-exports.getCategories = function(request, response) {
-  model.Category.findAll().then(categories => {
-    model.Nomination.findAll({
-      where: {
-        year: 2017
+exports.getPersons = function(request, response) {
+  model.Person.findAll({
+    where: {
+      email: {
+        [Sequelize.Op.like]: '%@gmail.com'
       }
-    }).then(nominations => {
+    }
+  }).then(persons => {
+    model.PersonGroupRole.findAll().then(personGroupRoles => {
       let outputObject = [];
 
-      _.forEach(categories, function(category) {
-        let cat_noms = _.where(nominations, {category_id: category.id});
-        let category_object = category.dataValues;
-        category_object.nominees = cat_noms;
+      _.forEach(persons, function(person) {
+        let person_groups = _.where(personGroupRoles, {person_id: person.id});
+        let person_group_ids = _.pluck(person_groups, 'person_group_id');
+        let person_object = person.dataValues;
+        person_object.groups = person_group_ids;
 
-        outputObject.push(category_object);
+        outputObject.push(person_object);
       });
 
       response.json(outputObject);
