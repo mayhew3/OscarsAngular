@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {_} from 'underscore';
 import {MockCategoryList} from './data/categories.mock';
 import {MockPersonList} from './data/persons.mock';
+import {MockVoteList} from './data/votes.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
   // tslint:disable-next-line
   categories = MockCategoryList;
   persons = MockPersonList;
+  votes = MockVoteList;
 
   /////////// helpers ///////////////
 
@@ -24,7 +26,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   createDb(): {} {
     // Need an empty nominees list so the service knows the collection exists.
-    return {categories: this.categories, nominees: [], persons: this.persons};
+    return {categories: this.categories, nominees: [], persons: this.persons, votes: this.votes};
   }
 
   // noinspection JSUnusedGlobalSymbols

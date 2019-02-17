@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {Category} from '../interfaces/Category';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import {_} from 'underscore';
-import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 
 @Injectable({
