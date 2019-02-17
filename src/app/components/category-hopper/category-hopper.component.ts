@@ -25,8 +25,8 @@ export class CategoryHopperComponent implements OnInit {
     this.clearOriginals();
   }
 
-  uplink(): string {
-    return ActiveContext.Vote === this.activeContext ? '/vote' : '/odds';
+  baseLink(): string {
+    return ActiveContext.Vote === this.activeContext ? 'vote' : 'odds';
   }
 
   showOdds(): boolean {

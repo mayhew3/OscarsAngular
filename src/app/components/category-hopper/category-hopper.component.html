@@ -21,16 +21,16 @@
   <div class="col-12">
     <button class="btn btn-success"
             *ngIf="prev"
-            [routerLink]="['/', 'categories', prev.id]">
+            [routerLink]="['/', baseLink(), prev.id]">
       Prev
     </button>
 
     <button class="btn btn-primary"
-            [routerLink]="uplink()">Up</button>
+            [routerLink]="['/', baseLink()]">Up</button>
 
     <button class="btn btn-success"
             *ngIf="next"
-            [routerLink]="['/', 'categories', next.id]">
+            [routerLink]="['/', baseLink(), next.id]">
       Next
     </button>
   </div>
