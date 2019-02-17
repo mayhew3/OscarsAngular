@@ -11,6 +11,10 @@ import { environment } from '../environments/environment';
 import {AuthService} from './services/auth/auth.service';
 import {CallbackComponent} from './components/callback/callback.component';
 import { HomeComponent } from './components/home/home.component';
+import { OddsMainComponent } from './components/odds-main/odds-main.component';
+import { VoteMainComponent } from './components/vote-main/vote-main.component';
+import { VoteDetailComponent } from './components/vote-detail/vote-detail.component';
+import { OddsDetailComponent } from './components/odds-detail/odds-detail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { HomeComponent } from './components/home/home.component';
     NomineesComponent,
     CategoryHopperComponent,
     CallbackComponent,
-    HomeComponent
+    HomeComponent,
+    OddsMainComponent,
+    VoteMainComponent,
+    VoteDetailComponent,
+    OddsDetailComponent
   ],
   imports: [
     BrowserModule,

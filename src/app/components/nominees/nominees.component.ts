@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Nominee} from '../../interfaces/Nominee';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
 import {_} from 'underscore';
+import {ActiveContext} from '../categories.context';
 
 @Component({
   selector: 'osc-nominees',
@@ -15,6 +16,7 @@ export class NomineesComponent implements OnInit {
   public nextCategory: Category;
   public previousCategory: Category;
   public nominees: Nominee[];
+  @Input() activeContext: ActiveContext;
 
   constructor(private categoryService: CategoryService,
               private route: ActivatedRoute) { }
@@ -33,6 +35,10 @@ export class NomineesComponent implements OnInit {
       this.categoryService.getPreviousCategory(category_id)
         .subscribe(category => this.previousCategory = category);
     });
+  }
+
+  showOdds(): boolean {
+    return ActiveContext.OddsAssignment === this.activeContext;
   }
 
 }

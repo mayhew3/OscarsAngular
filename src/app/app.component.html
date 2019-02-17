@@ -7,8 +7,15 @@
 
       <button
         class="btn btn-primary btn-margin"
-        *ngIf="auth.isAuthenticated() && auth.isAdmin()"
-        routerLink="/categories">
+        *ngIf="auth.isUser()"
+        routerLink="/vote">
+        Vote
+      </button>
+
+      <button
+        class="btn btn-primary btn-margin"
+        *ngIf="auth.isAdmin()"
+        routerLink="/odds">
         Odds
       </button>
 

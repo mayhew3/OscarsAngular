@@ -4,6 +4,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {_} from 'underscore';
 import {forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
+import {ActiveContext} from '../categories.context';
 
 @Component({
   selector: 'osc-category-hopper',
@@ -15,11 +16,21 @@ export class CategoryHopperComponent implements OnInit {
   @Input() next: Category;
   @Input() prev: Category;
   @Input() nominees: Nominee[];
+  @Input() activeContext: ActiveContext;
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService) {
+  }
 
   ngOnInit() {
     this.clearOriginals();
+  }
+
+  uplink(): string {
+    return ActiveContext.Vote === this.activeContext ? '/vote' : '/odds';
+  }
+
+  showOdds(): boolean {
+    return ActiveContext.OddsAssignment === this.activeContext;
   }
 
   totalOdds(subtitle: string): number {

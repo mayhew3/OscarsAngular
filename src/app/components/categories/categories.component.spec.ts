@@ -14,6 +14,10 @@ import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
 import {CallbackComponent} from '../callback/callback.component';
 import {HomeComponent} from '../home/home.component';
+import {VoteMainComponent} from '../vote-main/vote-main.component';
+import {OddsMainComponent} from '../odds-main/odds-main.component';
+import {VoteDetailComponent} from '../vote-detail/vote-detail.component';
+import {OddsDetailComponent} from '../odds-detail/odds-detail.component';
 
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
@@ -41,6 +45,10 @@ describe('CategoriesComponent', () => {
         NomineesComponent,
         CategoryHopperComponent,
         HomeComponent,
+        VoteMainComponent,
+        OddsMainComponent,
+        VoteDetailComponent,
+        OddsDetailComponent,
         CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}

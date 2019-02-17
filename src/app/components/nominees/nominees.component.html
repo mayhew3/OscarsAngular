@@ -9,13 +9,19 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom justify-content-center">
   <osc-category-hopper [next]="nextCategory"
                        [prev]="previousCategory"
-                       [nominees]="nominees">
+                       [nominees]="nominees"
+                       [activeContext]="activeContext">
   </osc-category-hopper>
 </nav>
 
 <div class="nom-body">
 
   <div class="container" style="padding-top: 10px">
+
+    <div class="row">
+      <h3>{{activeContext}}</h3>
+    </div>
+
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-4"
            *ngFor="let nominee of nominees">
@@ -39,7 +45,7 @@
               </div>
             </div>
 
-            <div class="row align-items-center inputRow">
+            <div class="row align-items-center inputRow" *ngIf="showOdds()">
 
               <div class="col-3">
                 <div class="row">

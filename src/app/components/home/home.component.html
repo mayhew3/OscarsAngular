@@ -6,10 +6,24 @@
   <div class="row">
 
     <div class="col-12 col-sm-6 col-lg-4"
+         *ngIf="auth.isUser()">
+      <div class="card navCard">
+        <div class="card-body"
+             routerLink="vote">
+          <div class="row">
+            <div class="col-10 navTitle">
+              <span>Submit Votes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="auth.isAdmin()">
       <div class="card navCard">
         <div class="card-body"
-             routerLink="categories">
+             routerLink="odds">
           <div class="row">
             <div class="col-10 navTitle">
               <span>Input Odds</span>

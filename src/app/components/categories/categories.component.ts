@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
+import {ActiveContext} from '../categories.context';
 
 @Component({
   selector: 'osc-categories',
@@ -9,6 +10,7 @@ import {CategoryService} from '../../services/category.service';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[];
+  @Input() activeContext: ActiveContext;
 
   constructor(private categoryService: CategoryService) { }
 
