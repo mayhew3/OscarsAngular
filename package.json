@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node ./bin/www",
+    "start-local": "ng serve",
     "server": "ng build && node ./bin/www",
     "debug": "ng build && node ./bin/www dev $NODE_DEBUG_OPTION",
     "build": "ng build",
