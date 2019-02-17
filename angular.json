@@ -40,6 +40,14 @@
                 }
               ]
             },
+            "heroku-dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.heroku-dev.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
