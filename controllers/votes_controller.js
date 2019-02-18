@@ -29,8 +29,7 @@ exports.addOrUpdateVote = function(request, response) {
       response.error("Multiple votes found!")
     } else if (votes.length === 1) {
       let vote = votes[0];
-      vote.nomination_id = request.body.nomination_id;
-      vote.update()
+      vote.update({nomination_id: request.body.nomination_id})
         .then(result => {
           return response.json(result);
         })
