@@ -26,7 +26,9 @@
       <div class="col-12 col-sm-6 col-lg-4"
            *ngFor="let nominee of nominees">
 
-        <div class="card nomineeCard" [ngClass]="getVotedClass(nominee)">
+        <div class="card nomineeCard"
+             [ngClass]="getVotedClass(nominee)"
+             (click)="submitVote(nominee)" >
           <div class="card-body nomineeCardBody">
 
             <div class="row align-items-center">

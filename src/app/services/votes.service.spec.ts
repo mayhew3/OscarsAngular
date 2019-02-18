@@ -3,6 +3,8 @@ import {TestBed} from '@angular/core/testing';
 import {VotesService} from './votes.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestVoteList} from './data/votes.test.mock';
+import {TestCategoryList} from './data/categories.test.mock';
+import {TestPersonList} from './data/persons.test.mock';
 
 describe('VotesService', () => {
   let service: VotesService;
@@ -27,17 +29,16 @@ describe('VotesService', () => {
 
   it('addOrUpdateVote calls http put', () => {
     const mockVote = {
-      id: 1,
-      category_id: 17,
-      nominee_id: 35,
-      year: 2017,
-      person_id: 1
+      category_id: 2,
+      nominee_id: 2287,
+      person_id: 18,
+      year: 2017
     };
 
-    service.addOrUpdateVote(mockVote).subscribe();
+    service.addOrUpdateVote(TestCategoryList[1].nominees[1], TestPersonList[0]).subscribe();
     const mockReq = httpMock.expectOne(service.votesUrl);
     expect(mockReq.request.method).toBe('PUT');
-    expect(mockReq.request.body).toBe(mockVote);
+    expect(mockReq.request.body).toEqual(mockVote);
 
     httpMock.verify();
   });

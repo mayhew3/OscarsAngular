@@ -3,6 +3,8 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {Nominee} from '../interfaces/Nominee';
+import {Person} from '../interfaces/Person';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,10 +29,16 @@ export class VotesService {
       );
   }
 
-  addOrUpdateVote(vote: Vote): Observable<any> {
-    return this.http.put(this.votesUrl, vote, httpOptions)
+  addOrUpdateVote(nominee: Nominee, person: Person): Observable<Vote> {
+    const data = {
+      category_id: nominee.category_id,
+      year: 2017,
+      person_id: person.id,
+      nominee_id: nominee.id
+    };
+    return this.http.put(this.votesUrl, data, httpOptions)
       .pipe(
-        catchError(this.handleError<any>('addOrUpdateVote', vote))
+        catchError(this.handleError<any>('addOrUpdateVote', data))
       );
   }
 

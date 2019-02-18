@@ -7,6 +7,7 @@ import {_} from 'underscore';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
 import {AuthService} from '../../services/auth/auth.service';
+import {Vote} from '../../interfaces/Vote';
 
 @Component({
   selector: 'osc-nominees',
@@ -29,6 +30,7 @@ export class NomineesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       const category_id = +params['category_id'];
+      const person = this.auth.getPerson();
       this.categoryService.getNominees(category_id)
         .subscribe(nominees => {
           this.nominees = nominees;
@@ -39,11 +41,22 @@ export class NomineesComponent implements OnInit {
         .subscribe(category => this.nextCategory = category);
       this.categoryService.getPreviousCategory(category_id)
         .subscribe(category => this.previousCategory = category);
-      this.votesService.getVoteForCategory(category_id, 2017, this.auth.getPerson().id).subscribe(vote => {
-        if (vote) {
-          this.votedNominee = this.getNomineeWithID(vote.nominee_id);
-        }
-      });
+      if (person) {
+        this.votesService.getVoteForCategory(category_id, 2017, this.auth.getPerson().id).subscribe(vote => {
+          if (vote) {
+            this.votedNominee = this.getNomineeWithID(vote.nominee_id);
+          }
+        });
+      }
+    });
+  }
+
+  submitVote(nominee: Nominee): void {
+    this.votesService.addOrUpdateVote(nominee, this.auth.getPerson()).subscribe((vote: Vote) => {
+      // todo: MA-40 - this sucks, better way to check for error response.
+      if (vote && vote.id) {
+        this.votedNominee = nominee;
+      }
     });
   }
 
