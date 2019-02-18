@@ -11,8 +11,10 @@ exports.getVote = function(request, response) {
   }).then(votes => {
     if (votes.length > 1) {
       return response.error("Multiple votes found!")
-    } else {
+    } else if (votes.length === 1) {
       return response.json(votes[0].dataValues);
+    } else {
+      return response.json({});
     }
   });
 };
@@ -26,7 +28,8 @@ exports.addOrUpdateVote = function(request, response) {
     }
   }).then(votes => {
     if (votes.length > 1) {
-      response.error("Multiple votes found!")
+      response.send(500, "Multiple votes found!");
+      throw new Error("Multiple votes found!");
     } else if (votes.length === 1) {
       let vote = votes[0];
       vote.update({nomination_id: request.body.nomination_id})
@@ -34,7 +37,8 @@ exports.addOrUpdateVote = function(request, response) {
           return response.json(result);
         })
         .catch(err => {
-          return response.error(err);
+          response.send(500, "Error updating existing vote!");
+          throw new Error(err);
         });
     } else {
       model.Vote
@@ -43,7 +47,8 @@ exports.addOrUpdateVote = function(request, response) {
           return response.json(result);
         })
         .catch(err => {
-          return response.error(err);
+          response.send(500, "Error submitting vote!");
+          throw new Error(err);
         });
     }
   });
