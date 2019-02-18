@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {Person} from '../../interfaces/Person';
+import {TestPersonList} from '../data/persons.test.mock';
 
 @Injectable()
 export class AuthServiceStub {
@@ -29,6 +31,10 @@ export class AuthServiceStub {
 
   public getFirstName(): string {
     return undefined;
+  }
+
+  public getPerson(): Person {
+    return TestPersonList[0];
   }
 
   public isUser(): boolean {

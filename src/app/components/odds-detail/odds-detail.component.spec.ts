@@ -16,6 +16,9 @@ import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
 import {ActivatedRoute} from '@angular/router';
 import {ActivatedRouteStub} from '../../../testing/activated-route-stub';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {AuthService} from '../../services/auth/auth.service';
+import {AuthServiceStub} from '../../services/auth/auth.service.stub';
 
 describe('OddsDetailComponent', () => {
   let component: OddsDetailComponent;
@@ -25,6 +28,7 @@ describe('OddsDetailComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
+        HttpClientTestingModule,
         FormsModule],
       declarations: [
         CategoriesComponent,
@@ -38,7 +42,8 @@ describe('OddsDetailComponent', () => {
         CallbackComponent],
       providers: [
         {provide: ActivatedRoute, useValue: new ActivatedRouteStub({category_id: 2})},
-        {provide: CategoryService, useClass: CategoryServiceStub}
+        {provide: CategoryService, useClass: CategoryServiceStub},
+        {provide: AuthService, useClass: AuthServiceStub}
       ]
     })
     .compileComponents();

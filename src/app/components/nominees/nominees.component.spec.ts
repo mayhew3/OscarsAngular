@@ -16,6 +16,9 @@ import {VoteMainComponent} from '../vote-main/vote-main.component';
 import {OddsMainComponent} from '../odds-main/odds-main.component';
 import {VoteDetailComponent} from '../vote-detail/vote-detail.component';
 import {OddsDetailComponent} from '../odds-detail/odds-detail.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {AuthService} from '../../services/auth/auth.service';
+import {AuthServiceStub} from '../../services/auth/auth.service.stub';
 
 describe('NomineesComponent', () => {
   let component: NomineesComponent;
@@ -25,6 +28,7 @@ describe('NomineesComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
+        HttpClientTestingModule,
         FormsModule],
       declarations: [
         CategoriesComponent,
@@ -38,7 +42,8 @@ describe('NomineesComponent', () => {
         CallbackComponent],
       providers: [
         {provide: ActivatedRoute, useValue: new ActivatedRouteStub({category_id: 2})},
-        {provide: CategoryService, useClass: CategoryServiceStub}
+        {provide: CategoryService, useClass: CategoryServiceStub},
+        {provide: AuthService, useClass: AuthServiceStub}
       ]
     });
   }));
