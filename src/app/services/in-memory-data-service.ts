@@ -26,7 +26,18 @@ export class InMemoryDataService implements InMemoryDbService {
 
   createDb(): {} {
     // Need an empty nominees list so the service knows the collection exists.
-    return {categories: this.categories, nominees: [], persons: this.persons, votes: this.votes};
+    return {
+      categories: this.categories,
+      nominees: [],
+      persons: this.persons,
+      votes: this.votes};
+  }
+
+  get(requestInfo: RequestInfo) {
+    const collectionName = requestInfo.collectionName;
+    if (collectionName === 'votes') {
+      return this.getVote(requestInfo);
+    }
   }
 
   // noinspection JSUnusedGlobalSymbols
@@ -38,6 +49,38 @@ export class InMemoryDataService implements InMemoryDbService {
     }
     return undefined;
   }
+
+  private getVote(requestInfo: RequestInfo) {
+    return requestInfo.utils.createResponse$(() => {
+      console.log('HTTP GET override');
+
+      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
+
+      const entries = requestInfo.query.entries();
+      const category_id = entries.next().value[1][0];
+      const person_id = entries.next().value[1][0];
+      const year = entries.next().value[1][0];
+
+      // tslint:disable-next-line:triple-equals
+      const data = _.findWhere(requestInfo.collection, {
+        category_id: +category_id,
+        person_id: +person_id,
+        year: +year
+      });
+
+      const options: ResponseOptions = data ?
+        {
+          body: dataEncapsulation ? { data } : data,
+          status: STATUS.OK
+        } :
+        {
+          body: dataEncapsulation ? { } : data,
+          status: STATUS.OK
+        };
+      return InMemoryDataService.finishOptions(options, requestInfo);
+    });
+  }
+
 
   private updateNomination(requestInfo: RequestInfo) {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);

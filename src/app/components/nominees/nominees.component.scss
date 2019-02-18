@@ -22,6 +22,10 @@
   color: $muted;
 }
 
+.votedOn {
+  background-color: darkgreen;
+}
+
 /* For Firefox */
 input[type='number'] {
   -moz-appearance:textfield;
