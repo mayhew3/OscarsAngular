@@ -30,7 +30,7 @@ describe('VotesService', () => {
   it('addOrUpdateVote calls http put', () => {
     const mockVote = {
       category_id: 2,
-      nominee_id: 2287,
+      nomination_id: 2287,
       person_id: 18,
       year: 2017
     };
@@ -45,7 +45,7 @@ describe('VotesService', () => {
 
   it('getVoteForCategory', () => {
     service.getVoteForCategory(2, 2017, 1).subscribe((vote) => {
-      expect(vote.nominee_id).toBe(4);
+      expect(vote.nomination_id).toBe(4);
     });
 
     const testRequest = httpMock.expectOne(req => req.url === service.votesUrl);

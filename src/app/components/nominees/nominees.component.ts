@@ -46,7 +46,7 @@ export class NomineesComponent implements OnInit {
       if (person && this.voting()) {
         this.votesService.getVoteForCategory(category_id, 2017, this.auth.getPerson().id).subscribe(vote => {
           if (vote) {
-            this.votedNominee = this.getNomineeWithID(vote.nominee_id);
+            this.votedNominee = this.getNomineeWithID(vote.nomination_id);
           }
         });
       }
@@ -62,8 +62,8 @@ export class NomineesComponent implements OnInit {
     });
   }
 
-  getNomineeWithID(nominee_id: number): Nominee {
-    return _.findWhere(this.nominees, {id: nominee_id});
+  getNomineeWithID(nomination_id: number): Nominee {
+    return _.findWhere(this.nominees, {id: nomination_id});
   }
 
   isVoted(nominee: Nominee): boolean {

@@ -34,7 +34,7 @@ export class VotesService {
       category_id: nominee.category_id,
       year: nominee.year,
       person_id: person.id,
-      nominee_id: nominee.id
+      nomination_id: nominee.id
     };
     return this.http.post(this.votesUrl, data, httpOptions)
       .pipe(

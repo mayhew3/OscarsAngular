@@ -4,7 +4,7 @@ export const TestVoteList: Vote[] = [
   {
     "id": 1,
     "category_id": 2,
-    "nominee_id": 4,
+    "nomination_id": 4,
     "year": 2017,
     "person_id": 1
   }

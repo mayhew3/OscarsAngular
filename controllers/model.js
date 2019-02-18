@@ -15,6 +15,7 @@ exports.Nomination = sequelize.sequelize.define("nomination", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   nominee: Sequelize.TEXT,
   context: Sequelize.TEXT,
+  year: Sequelize.INTEGER,
   odds_expert: Sequelize.DECIMAL,
   odds_user: Sequelize.DECIMAL,
   odds_numerator: Sequelize.INTEGER,
@@ -42,6 +43,18 @@ exports.PersonGroupRole = sequelize.sequelize.define("person_group_role", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   person_group_id: Sequelize.INTEGER,
   person_id: Sequelize.INTEGER
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});
+
+exports.Vote = sequelize.sequelize.define("vote", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  category_id: Sequelize.INTEGER,
+  nomination_id: Sequelize.INTEGER,
+  person_id: Sequelize.INTEGER,
+  year: Sequelize.INTEGER
 }, {
   freezeTableName: true,
   createdAt: false,

@@ -119,7 +119,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private updateVote(requestInfo: RequestInfo, existingVote: Vote) {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
-    existingVote.nominee_id = jsonBody.nominee_id;
+    existingVote.nomination_id = jsonBody.nomination_id;
 
     const options: ResponseOptions = {
       body: existingVote,
