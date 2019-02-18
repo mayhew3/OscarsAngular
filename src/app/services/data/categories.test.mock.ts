@@ -7,6 +7,7 @@ export const TestCategoryList: Category[] = [
         "odds_expert": 1,
         "odds_denominator": 1,
         "category_id": 1,
+        "year": 2017,
         "context": "Call Me By Your Name",
         "nominee": "Timothee Chalamet",
         "odds_user": 10,
@@ -16,6 +17,7 @@ export const TestCategoryList: Category[] = [
       {
         "odds_expert": 1,
         "category_id": 1,
+        "year": 2017,
         "context": "Phantom Thread",
         "nominee": "Daniel Day-Lewis",
         "odds_user": 13,
@@ -25,6 +27,7 @@ export const TestCategoryList: Category[] = [
         "odds_expert": 1,
         "odds_denominator": 1,
         "category_id": 1,
+        "year": 2017,
         "context": "Get Out",
         "nominee": "Daniel Kaluuya",
         "id": 2282,
@@ -41,6 +44,7 @@ export const TestCategoryList: Category[] = [
         "odds_expert": 96,
         "odds_denominator": 12,
         "category_id": 2,
+        "year": 2017,
         "context": "Three Billboards Outside Ebbing, Missouri",
         "nominee": "Frances McDormand",
         "odds_user": 71,
@@ -49,6 +53,7 @@ export const TestCategoryList: Category[] = [
       },
       {
         "category_id": 2,
+        "year": 2017,
         "context": "I, Tonya",
         "nominee": "Margot Robbie",
         "id": 2287
@@ -57,6 +62,7 @@ export const TestCategoryList: Category[] = [
         "odds_expert": 2,
         "odds_denominator": 1,
         "category_id": 2,
+        "year": 2017,
         "context": "The Shape of Water",
         "nominee": "Sally Hawkins",
         "odds_user": 10,
@@ -74,6 +80,7 @@ export const TestCategoryList: Category[] = [
         "odds_expert": 79,
         "odds_denominator": 11,
         "category_id": 17,
+        "year": 2017,
         "context": "",
         "nominee": "Dekalb Elementary",
         "odds_user": 17,
@@ -83,6 +90,7 @@ export const TestCategoryList: Category[] = [
       {
         "odds_denominator": 1,
         "category_id": 17,
+        "year": 2017,
         "context": "",
         "nominee": "The Eleven O'Clock",
         "odds_user": 22,
@@ -91,6 +99,7 @@ export const TestCategoryList: Category[] = [
       },
       {
         "category_id": 17,
+        "year": 2017,
         "context": "",
         "nominee": "Watu Wote: All of Us",
         "id": 2367

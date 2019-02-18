@@ -32,11 +32,11 @@ export class VotesService {
   addOrUpdateVote(nominee: Nominee, person: Person): Observable<Vote> {
     const data = {
       category_id: nominee.category_id,
-      year: 2017,
+      year: nominee.year,
       person_id: person.id,
       nominee_id: nominee.id
     };
-    return this.http.put(this.votesUrl, data, httpOptions)
+    return this.http.post(this.votesUrl, data, httpOptions)
       .pipe(
         catchError(this.handleError<any>('addOrUpdateVote', data))
       );

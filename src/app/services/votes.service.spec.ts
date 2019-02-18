@@ -37,7 +37,7 @@ describe('VotesService', () => {
 
     service.addOrUpdateVote(TestCategoryList[1].nominees[1], TestPersonList[0]).subscribe();
     const mockReq = httpMock.expectOne(service.votesUrl);
-    expect(mockReq.request.method).toBe('PUT');
+    expect(mockReq.request.method).toBe('POST');
     expect(mockReq.request.body).toEqual(mockVote);
 
     httpMock.verify();

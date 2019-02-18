@@ -3,6 +3,7 @@ export class Nominee {
   nominee: string;
   context: string;
   category_id: number;
+  year: number;
   odds_expert?: number;
   odds_user?: number;
   odds_numerator?: number;

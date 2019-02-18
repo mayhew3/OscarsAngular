@@ -31,6 +31,7 @@ export class NomineesComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const category_id = +params['category_id'];
       const person = this.auth.getPerson();
+
       this.categoryService.getNominees(category_id)
         .subscribe(nominees => {
           this.nominees = nominees;
@@ -41,7 +42,8 @@ export class NomineesComponent implements OnInit {
         .subscribe(category => this.nextCategory = category);
       this.categoryService.getPreviousCategory(category_id)
         .subscribe(category => this.previousCategory = category);
-      if (person) {
+
+      if (person && this.voting()) {
         this.votesService.getVoteForCategory(category_id, 2017, this.auth.getPerson().id).subscribe(vote => {
           if (vote) {
             this.votedNominee = this.getNomineeWithID(vote.nominee_id);

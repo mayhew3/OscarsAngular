@@ -4,6 +4,7 @@ import {_} from 'underscore';
 import {MockCategoryList} from './data/categories.mock';
 import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';
+import {Vote} from '../interfaces/Vote';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,16 @@ export class InMemoryDataService implements InMemoryDbService {
     return undefined;
   }
 
+  post(requestInfo: RequestInfo) {
+    if (requestInfo.collectionName === 'votes') {
+      const existingVote = this.existingVote(requestInfo);
+      if (existingVote) {
+        return this.updateVote(requestInfo, existingVote);
+      }
+    }
+    return undefined;
+  }
+
   private getVote(requestInfo: RequestInfo) {
     return requestInfo.utils.createResponse$(() => {
       console.log('HTTP GET override');
@@ -88,6 +99,30 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const options: ResponseOptions = {
       body: {msg: 'Success!'},
+      status: STATUS.OK
+    };
+
+    const finishedOptions = InMemoryDataService.finishOptions(options, requestInfo);
+
+    return requestInfo.utils.createResponse$(() => finishedOptions);
+  }
+
+  private existingVote(requestInfo: RequestInfo): Vote {
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+
+    return _.findWhere(this.votes, {
+      category_id: jsonBody.category_id,
+      person_id: jsonBody.person_id,
+      year: jsonBody.year
+    });
+  }
+
+  private updateVote(requestInfo: RequestInfo, existingVote: Vote) {
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+    existingVote.nominee_id = jsonBody.nominee_id;
+
+    const options: ResponseOptions = {
+      body: existingVote,
       status: STATUS.OK
     };
 
