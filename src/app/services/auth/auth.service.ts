@@ -45,8 +45,8 @@ export class AuthService {
   static getCallbackUrl(): string {
     const protocol = window.location.protocol;
     const path = window.location.hostname;
-    const port = +window.location.port;
-    const portDisplay = port === 80 ? '' : ':' + port;
+    const port = window.location.port;
+    const portDisplay = port === '' ? '' : ':' + port;
     // noinspection UnnecessaryLocalVariableJS
     const fullPath = protocol + '//' + path + portDisplay + '/callback';
     return fullPath;
