@@ -13,7 +13,6 @@ export const environment: EnvironmentConfig = {
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false, delay: 0 }
     )],
-  authCallbackUrl: 'http://localhost:4200/callback',
   clientID: 'Re282m5GM0575vOJjhpguBptT8slmIb0',
   domain: 'mayhew3.auth0.com'
 };
