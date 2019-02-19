@@ -30,10 +30,9 @@ export class AuthService {
     clientID: environment.clientID,
     domain: environment.domain,
     responseType: 'token id_token',
-    redirectUri: environment.authCallbackUrl,
+    redirectUri: AuthService.getCallbackUrl(),
     scope: 'openid profile email'
   });
-
 
   constructor(public router: Router,
               private personService: PersonService) {
@@ -41,6 +40,16 @@ export class AuthService {
     this._accessToken = '';
     this._expiresAt = 0;
     this._userRole = UserRole.Guest;
+  }
+
+  static getCallbackUrl(): string {
+    const protocol = window.location.protocol;
+    const path = window.location.hostname;
+    const port = +window.location.port;
+    const portDisplay = port === 80 ? '' : ':' + port;
+    // noinspection UnnecessaryLocalVariableJS
+    const fullPath = protocol + '//' + path + portDisplay + '/callback';
+    return fullPath;
   }
 
   get accessToken(): string {

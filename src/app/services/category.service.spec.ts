@@ -40,6 +40,7 @@ describe('CategoryService', () => {
     const mockNominee = {
       "odds_expert": 11,
       "category_id": 17,
+      "year": 2017,
       "context": "",
       "nominee": "My Nephew Emmett",
       "id": 2365
