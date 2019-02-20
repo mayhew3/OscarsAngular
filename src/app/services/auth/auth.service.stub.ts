@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Person} from '../../interfaces/Person';
 import {TestPersonList} from '../data/persons.test.mock';
+import {Observable, of} from 'rxjs';
 
 @Injectable()
 export class AuthServiceStub {
@@ -33,8 +34,8 @@ export class AuthServiceStub {
     return undefined;
   }
 
-  public getPerson(): Person {
-    return TestPersonList[0];
+  public getPerson(): Observable<Person> {
+    return of(TestPersonList[0]);
   }
 
   public isUser(): boolean {

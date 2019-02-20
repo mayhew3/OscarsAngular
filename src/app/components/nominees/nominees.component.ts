@@ -8,6 +8,7 @@ import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
 import {AuthService} from '../../services/auth/auth.service';
 import {Vote} from '../../interfaces/Vote';
+import {Person} from '../../interfaces/Person';
 
 @Component({
   selector: 'osc-nominees',
@@ -20,6 +21,7 @@ export class NomineesComponent implements OnInit {
   public previousCategory: Category;
   public nominees: Nominee[];
   public votedNominee: Nominee;
+  private person: Person;
   @Input() activeContext: ActiveContext;
 
   constructor(private categoryService: CategoryService,
@@ -30,29 +32,30 @@ export class NomineesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       const category_id = +params['category_id'];
-      const person = this.auth.getPerson();
+      this.auth.getPerson().subscribe(person => {
+        this.person = person;
+        this.categoryService.getNominees(category_id)
+          .subscribe(nominees => {
+            this.nominees = nominees;
+          });
+        this.categoryService.getCategory(category_id)
+          .subscribe(category => this.category = category);
+        this.categoryService.getNextCategory(category_id)
+          .subscribe(category => this.nextCategory = category);
+        this.categoryService.getPreviousCategory(category_id)
+          .subscribe(category => this.previousCategory = category);
 
-      this.categoryService.getNominees(category_id)
-        .subscribe(nominees => {
-          this.nominees = nominees;
-        });
-      this.categoryService.getCategory(category_id)
-        .subscribe(category => this.category = category);
-      this.categoryService.getNextCategory(category_id)
-        .subscribe(category => this.nextCategory = category);
-      this.categoryService.getPreviousCategory(category_id)
-        .subscribe(category => this.previousCategory = category);
-
-      if (this.voting()) {
-        this.votedNominee = _.findWhere(this.nominees, {
-          id: this.category.voted_on
-        });
-      }
+        if (this.voting()) {
+          this.votedNominee = _.findWhere(this.nominees, {
+            id: this.category.voted_on
+          });
+        }
+      });
     });
   }
 
   submitVote(nominee: Nominee): void {
-    this.votesService.addOrUpdateVote(nominee, this.auth.getPerson()).subscribe((vote: Vote) => {
+    this.votesService.addOrUpdateVote(nominee, this.person).subscribe((vote: Vote) => {
       // todo: MA-40 - this sucks, better way to check for error response.
       if (vote && vote.id) {
         this.votedNominee = nominee;

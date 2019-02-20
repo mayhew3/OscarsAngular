@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import * as auth0 from 'auth0-js';
 import {_} from 'underscore';
 import {environment} from '../../../environments/environment';
-import {of, timer} from 'rxjs';
+import {Observable, of, Subscriber, timer} from 'rxjs';
 import {mergeMap} from 'rxjs/operators';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../person.service';
@@ -25,6 +25,8 @@ export class AuthService {
   private _userRole: UserRole;
   private _person: Person;
   refreshSubscription: any;
+
+  private personObserver: Subscriber<Person>;
 
   auth0 = new auth0.WebAuth({
     clientID: environment.clientID,
@@ -89,8 +91,16 @@ export class AuthService {
     return this._person ? this._person.first_name : undefined;
   }
 
-  public getPerson(): Person {
-    return this._person;
+  public getPerson(): Observable<Person> {
+    if (this._person) {
+      return of(this._person);
+    } else if (localStorage.getItem('isLoggedIn') === 'true') {
+      return new Observable<Person>(observer => {
+        this.personObserver = observer;
+      });
+    } else {
+      return of(undefined);
+    }
   }
 
   private localLogin(authResult): void {
@@ -110,6 +120,10 @@ export class AuthService {
       this._profile = authResult.idTokenPayload;
       this.personService.getPersonWithEmail(authResult.idTokenPayload.email).subscribe((person) => {
         this._person = person;
+        if (this.personObserver) {
+          this.personObserver.next(person);
+          this.personObserver = undefined;
+        }
       });
     } else {
       throw new Error('No email found in payload.');

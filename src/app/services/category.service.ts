@@ -98,29 +98,36 @@ export class CategoryService {
   private maybeUpdateCache(): Observable<Category[]> {
     if (this.cache.length === 0) {
       return new Observable<Category[]>((observer) => {
-        this.systemVarsService.getSystemVars().subscribe(systemVars => {
-          const options = {
-            params: {
-              person_id: this.auth.getPerson().id.toString(),
-              year: systemVars.curr_year.toString()
-            }};
-          this.http.get<Category[]>(this.categoriesUrl, options)
-            .pipe(
-              catchError(this.handleError<Category[]>('getCategories', []))
-            )
-            .subscribe(
-              (categories: Category[]) => {
-                CategoryService.addToArray(this.cache, categories);
-                observer.next(categories);
-              },
-              (err: Error) => observer.error(err)
-            );
+        this.auth.getPerson().subscribe(person => {
+          if (!person) {
+            this.auth.logout();
+          }
+          this.systemVarsService.getSystemVars().subscribe(systemVars => {
+            const options = {
+              params: {
+                person_id: person.id.toString(),
+                year: systemVars.curr_year.toString()
+              }};
+            this.http.get<Category[]>(this.categoriesUrl, options)
+              .pipe(
+                catchError(this.handleError<Category[]>('getCategories', []))
+              )
+              .subscribe(
+                (categories: Category[]) => {
+                  CategoryService.addToArray(this.cache, categories);
+                  observer.next(categories);
+                },
+                (err: Error) => observer.error(err)
+              );
+          });
         });
       });
     } else {
       return of(this.cache);
     }
   }
+
+
 
   /**
    * Handle Http operation that failed.
