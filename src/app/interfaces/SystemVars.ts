@@ -1,4 +1,4 @@
 export class SystemVars {
   curr_year: number;
-  votingOpen: boolean;
+  voting_open: boolean;
 }

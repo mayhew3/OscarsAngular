@@ -5,6 +5,8 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {TestCategoryList} from './data/categories.test.mock';
 import {AuthService} from './auth/auth.service';
 import {AuthServiceStub} from './auth/auth.service.stub';
+import {SystemVarsService} from './system.vars.service';
+import {SystemVarsServiceStub} from './system.vars.service.stub';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -13,7 +15,10 @@ describe('CategoryService', () => {
 
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
-    providers: [{provide: AuthService, useClass: AuthServiceStub}]
+    providers: [
+      {provide: AuthService, useClass: AuthServiceStub},
+      {provide: SystemVarsService, useClass: SystemVarsServiceStub}
+    ]
   }));
 
   beforeEach(() => {

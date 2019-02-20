@@ -39,7 +39,7 @@ describe('System.VarsService', () => {
     service.getSystemVars().subscribe(systemVars => {
       expect(systemVars).toBeTruthy();
       expect(systemVars.curr_year).toEqual(2018);
-      expect(systemVars.votingOpen).toEqual(true);
+      expect(systemVars.voting_open).toEqual(true);
     });
 
     httpMock.expectNone(service.systemVarsUrl);
@@ -57,7 +57,7 @@ describe('System.VarsService', () => {
       service.getSystemVars().subscribe(systemVars => {
         expect(systemVars).toBeTruthy();
         expect(systemVars.curr_year).toEqual(2018);
-        expect(systemVars.votingOpen).toEqual(true);
+        expect(systemVars.voting_open).toEqual(true);
       });
     });
   });
