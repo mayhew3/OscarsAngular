@@ -44,7 +44,7 @@ export class NomineesComponent implements OnInit {
         .subscribe(category => this.previousCategory = category);
 
       if (person && this.voting()) {
-        this.votesService.getVoteForCategory(category_id, 2017, this.auth.getPerson().id).subscribe(vote => {
+        this.votesService.getVoteForCategory(category_id, 2018, this.auth.getPerson().id).subscribe(vote => {
           if (vote) {
             this.votedNominee = this.getNomineeWithID(vote.nomination_id);
           }

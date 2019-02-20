@@ -5,7 +5,7 @@ exports.getCategories = function(request, response) {
   model.Category.findAll().then(categories => {
     model.Nomination.findAll({
       where: {
-        year: 2017
+        year: 2018
       }
     }).then(nominations => {
       let outputObject = [];
