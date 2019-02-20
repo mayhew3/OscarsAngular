@@ -5,51 +5,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 1,
-        "year": 2017,
-        "context": "Roman J. Israel, Esquire",
-        "nominee": "Denzel Washington",
-        "id": 2284
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Christian Bale",
+        "id": 2574,
+        "detail": "Vice"
       },
       {
-        "odds_expert": 1,
-        "odds_denominator": 1,
         "category_id": 1,
-        "year": 2017,
-        "context": "Call Me By Your Name",
-        "nominee": "TimothÃ©e Chalamet",
-        "odds_user": 10,
-        "id": 2280,
-        "odds_numerator": 16
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "Bradley Cooper",
+        "id": 2575,
+        "detail": "A Star Is Born"
       },
       {
-        "odds_expert": 97,
-        "odds_denominator": 25,
         "category_id": 1,
-        "year": 2017,
-        "context": "Darkest Hour",
-        "nominee": "Gary Oldman",
-        "odds_user": 68,
-        "id": 2283,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "At Eternity's Gate",
+        "nominee": "Willem Dafoe",
+        "id": 2576,
+        "detail": "At Eternity's Gate"
       },
       {
-        "odds_expert": 1,
         "category_id": 1,
-        "year": 2017,
-        "context": "Phantom Thread",
-        "nominee": "Daniel Day-Lewis",
-        "odds_user": 13,
-        "id": 2281
+        "year": 2018,
+        "context": "Bohemian Rhapsody",
+        "nominee": "Rami Malek",
+        "id": 2577,
+        "detail": "Bohemian Rhapsody"
       },
       {
-        "odds_expert": 1,
-        "odds_denominator": 1,
         "category_id": 1,
-        "year": 2017,
-        "context": "Get Out",
-        "nominee": "Daniel Kaluuya",
-        "id": 2282,
-        "odds_numerator": 16
+        "year": 2018,
+        "context": "Green Book",
+        "nominee": "Viggo Mortensen",
+        "id": 2578,
+        "detail": "Green Book"
       }
     ],
     "name": "Actor",
@@ -60,49 +52,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 2,
-        "year": 2017,
-        "context": "I, Tonya",
-        "nominee": "Margot Robbie",
-        "id": 2287
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Yalitza Aparicio",
+        "id": 2584,
+        "detail": "Roma"
       },
       {
         "category_id": 2,
-        "year": 2017,
-        "context": "The Post",
-        "nominee": "Meryl Streep",
-        "id": 2289
+        "year": 2018,
+        "context": "The Wife",
+        "nominee": "Glenn Close",
+        "id": 2585,
+        "detail": "The Wife"
       },
       {
-        "odds_expert": 96,
-        "odds_denominator": 12,
         "category_id": 2,
-        "year": 2017,
-        "context": "Three Billboards Outside Ebbing, Missouri",
-        "nominee": "Frances McDormand",
-        "odds_user": 71,
-        "id": 2286,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "Olivia Colman",
+        "id": 2586,
+        "detail": "The Favourite"
       },
       {
-        "odds_denominator": 1,
         "category_id": 2,
-        "year": 2017,
-        "context": "Lady Bird",
-        "nominee": "Saorise Ronan",
-        "odds_user": 11,
-        "id": 2288,
-        "odds_numerator": 10
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "Lady Gaga",
+        "id": 2587,
+        "detail": "A Star Is Born"
       },
       {
-        "odds_expert": 2,
-        "odds_denominator": 1,
         "category_id": 2,
-        "year": 2017,
-        "context": "The Shape of Water",
-        "nominee": "Sally Hawkins",
-        "odds_user": 10,
-        "id": 2285,
-        "odds_numerator": 20
+        "year": 2018,
+        "context": "Can You Ever Forgive Me?",
+        "nominee": "Melissa Mccarthy",
+        "id": 2588,
+        "detail": "Can You Ever Forgive Me?"
       }
     ],
     "name": "Actress",
@@ -113,45 +99,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 3,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Boss Baby",
-        "id": 2300
+        "year": 2018,
+        "context": "Incredibles 2",
+        "nominee": "Incredibles 2",
+        "id": 2594,
+        "detail": "Brad Bird, John Walker and Nicole Paradis Grindle"
       },
       {
         "category_id": 3,
-        "year": 2017,
-        "context": "",
-        "nominee": "Ferdinand",
-        "id": 2303
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 3,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Breadwinner",
-        "id": 2301,
-        "odds_numerator": 14
-      },
-      {
-        "odds_expert": 100,
-        "odds_denominator": 25,
-        "category_id": 3,
-        "year": 2017,
-        "context": "",
-        "nominee": "Coco",
-        "odds_user": 89,
-        "id": 2302,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "Isle Of Dogs",
+        "nominee": "Isle Of Dogs",
+        "id": 2595,
+        "detail": "Wes Anderson, Scott Rudin, Steven Rales and Jeremy Dawson"
       },
       {
         "category_id": 3,
-        "year": 2017,
-        "context": "",
-        "nominee": "Loving Vincent",
-        "odds_user": 6,
-        "id": 2304
+        "year": 2018,
+        "context": "Mirai",
+        "nominee": "Mirai",
+        "id": 2596,
+        "detail": "Mamoru Hosoda and Yuichiro Saito"
+      },
+      {
+        "category_id": 3,
+        "year": 2018,
+        "context": "Ralph Breaks The Internet",
+        "nominee": "Ralph Breaks The Internet",
+        "id": 2597,
+        "detail": "Rich Moore, Phil Johnston and Clark Spencer"
+      },
+      {
+        "category_id": 3,
+        "year": 2018,
+        "context": "Spider-Man: Into The Spider-Verse",
+        "nominee": "Spider-Man: Into The Spider-Verse",
+        "id": 2598,
+        "detail": "Bob Persichetti, Peter Ramsey, Rodney Rothman, Phil Lord and Christopher Miller"
       }
     ],
     "name": "Animated Feature",
@@ -161,129 +145,68 @@ export const MockCategoryList: Category[] = [
   {
     "nominees": [
       {
-        "category_id": 4,
-        "year": 2017,
-        "context": "",
-        "nominee": "Beauty and the Beast",
-        "id": 2353
-      },
-      {
-        "category_id": 4,
-        "year": 2017,
-        "context": "",
-        "nominee": "Darkest Hour",
-        "id": 2355
-      },
-      {
-        "category_id": 4,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dunkirk",
-        "id": 2356
-      },
-      {
-        "odds_expert": 9,
-        "odds_denominator": 1,
-        "category_id": 4,
-        "year": 2017,
-        "context": "",
-        "nominee": "Blade Runner 2049",
-        "odds_user": 45,
-        "id": 2354,
-        "odds_numerator": 3
-      },
-      {
-        "odds_expert": 90,
-        "odds_denominator": 4,
-        "category_id": 4,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Shape of Water",
-        "odds_user": 36,
-        "id": 2357,
-        "odds_numerator": 1
-      }
-    ],
-    "name": "Art Direction",
-    "id": 4,
-    "points": 2
-  },
-  {
-    "nominees": [
-      {
         "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "Call Me By Your Name",
-        "id": 2271
+        "year": 2018,
+        "context": "Black Panther",
+        "nominee": "Black Panther",
+        "id": 2647,
+        "detail": "Kevin Feige, Producer"
       },
       {
         "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "Darkest Hour",
-        "id": 2272
+        "year": 2018,
+        "context": "Blackkklansman",
+        "nominee": "Blackkklansman",
+        "id": 2648,
+        "detail": "Sean McKittrick, Jason Blum, Raymond Mansfield, Jordan Peele and Spike Lee, Producers"
       },
       {
         "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "Lady Bird",
-        "id": 2275
+        "year": 2018,
+        "context": "Bohemian Rhapsody",
+        "nominee": "Bohemian Rhapsody",
+        "id": 2649,
+        "detail": "Graham King, Producer"
       },
       {
         "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "Phantom Thread",
-        "id": 2276
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "The Favourite",
+        "id": 2650,
+        "detail": "Ceci Dempsey, Ed Guiney, Lee Magiday and Yorgos Lanthimos, Producers"
       },
       {
         "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Post",
-        "id": 2277
-      },
-      {
-        "odds_expert": 25,
-        "odds_denominator": 1,
-        "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "Get Out",
-        "id": 2274,
-        "odds_numerator": 10
+        "year": 2018,
+        "context": "Green Book",
+        "nominee": "Green Book",
+        "id": 2651,
+        "detail": "Jim Burke, Charles B. Wessler, Brian Currie, Peter Farrelly and Nick Vallelonga, Producers"
       },
       {
         "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dunkirk",
-        "odds_user": 9,
-        "id": 2273
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2652,
+        "detail": "Gabriela Rodríguez and Alfonso Cuarón, Producers"
       },
       {
-        "odds_expert": 36,
-        "odds_denominator": 4,
         "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Shape of Water",
-        "odds_user": 33,
-        "id": 2278,
-        "odds_numerator": 6
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "A Star Is Born",
+        "id": 2653,
+        "detail": "Bill Gerber, Bradley Cooper and Lynette Howell Taylor, Producers"
       },
       {
-        "odds_expert": 36,
-        "odds_denominator": 10,
         "category_id": 5,
-        "year": 2017,
-        "context": "",
-        "nominee": "Three Billboards Outside Ebbing, Missouri",
-        "odds_user": 35,
-        "id": 2279,
-        "odds_numerator": 11
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Vice",
+        "id": 2654,
+        "detail": "Dede Gardner, Jeremy Kleiner, Adam McKay and Kevin Messick, Producers"
       }
     ],
     "name": "Best Picture",
@@ -294,50 +217,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 6,
-        "year": 2017,
-        "context": "",
-        "nominee": "Darkest Hour",
-        "id": 2306
+        "year": 2018,
+        "context": "Cold War",
+        "nominee": "Cold War",
+        "id": 2599,
+        "detail": "Łukasz Żal"
       },
       {
         "category_id": 6,
-        "year": 2017,
-        "context": "",
-        "nominee": "Mudbound",
-        "id": 2308
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "The Favourite",
+        "id": 2600,
+        "detail": "Robbie Ryan"
       },
       {
-        "odds_expert": 69,
-        "odds_denominator": 8,
         "category_id": 6,
-        "year": 2017,
-        "context": "",
-        "nominee": "Blade Runner 2049",
-        "odds_user": 66,
-        "id": 2305,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "Never Look Away",
+        "nominee": "Never Look Away",
+        "id": 2601,
+        "detail": "Caleb Deschanel"
       },
       {
-        "odds_expert": 12,
-        "odds_denominator": 1,
         "category_id": 6,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dunkirk",
-        "odds_user": 19,
-        "id": 2307,
-        "odds_numerator": 6
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2602,
+        "detail": "Alfonso Cuarón"
       },
       {
-        "odds_expert": 15,
-        "odds_denominator": 1,
         "category_id": 6,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Shape of Water",
-        "odds_user": 12,
-        "id": 2309,
-        "odds_numerator": 12
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "A Star Is Born",
+        "id": 2603,
+        "detail": "Matthew Libatique"
       }
     ],
     "name": "Cinematography",
@@ -348,47 +264,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 7,
-        "year": 2017,
-        "context": "",
-        "nominee": "Darkest Hour",
-        "id": 2311
+        "year": 2018,
+        "context": "The Ballad Of Buster Scruggs",
+        "nominee": "The Ballad Of Buster Scruggs",
+        "id": 2604,
+        "detail": "Mary Zophres"
       },
       {
         "category_id": 7,
-        "year": 2017,
-        "context": "",
-        "nominee": "Victoria & Abdul",
-        "id": 2314
+        "year": 2018,
+        "context": "Black Panther",
+        "nominee": "Black Panther",
+        "id": 2605,
+        "detail": "Ruth Carter"
       },
       {
-        "odds_denominator": 1,
         "category_id": 7,
-        "year": 2017,
-        "context": "",
-        "nominee": "Beauty and the Beast",
-        "odds_user": 15,
-        "id": 2310,
-        "odds_numerator": 5
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "The Favourite",
+        "id": 2606,
+        "detail": "Sandy Powell"
       },
       {
-        "odds_expert": 94,
-        "odds_denominator": 7,
         "category_id": 7,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Phantom Thread",
-        "odds_user": 52,
-        "id": 2312,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "Mary Poppins Returns",
+        "nominee": "Mary Poppins Returns",
+        "id": 2607,
+        "detail": "Sandy Powell"
       },
       {
-        "odds_expert": 3,
         "category_id": 7,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Shape of Water",
-        "odds_user": 24,
-        "id": 2313
+        "year": 2018,
+        "context": "Mary Queen Of Scots",
+        "nominee": "Mary Queen Of Scots",
+        "id": 2608,
+        "detail": "Alexandra Byrne"
       }
     ],
     "name": "Costume Design",
@@ -399,50 +311,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 8,
-        "year": 2017,
-        "context": "Get Out",
-        "nominee": "Jordan Peele",
-        "id": 2316
+        "year": 2018,
+        "context": "Blackkklansman",
+        "nominee": "Blackkklansman",
+        "id": 2609,
+        "detail": "Spike Lee"
       },
       {
         "category_id": 8,
-        "year": 2017,
-        "context": "Phantom Thread",
-        "nominee": "Paul Thomas Anderson",
-        "id": 2318
+        "year": 2018,
+        "context": "Cold War",
+        "nominee": "Cold War",
+        "id": 2610,
+        "detail": "Paweł Pawlikowski"
       },
       {
-        "odds_expert": 3,
-        "odds_denominator": 1,
         "category_id": 8,
-        "year": 2017,
-        "context": "Dunkirk",
-        "nominee": "Christopher Nolan",
-        "odds_user": 20,
-        "id": 2315,
-        "odds_numerator": 6
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "The Favourite",
+        "id": 2611,
+        "detail": "Yorgos Lanthimos"
       },
       {
-        "odds_expert": 1,
-        "odds_denominator": 1,
         "category_id": 8,
-        "year": 2017,
-        "context": "Lady Bird",
-        "nominee": "Greta Gerwig",
-        "odds_user": 8,
-        "id": 2317,
-        "odds_numerator": 10
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2612,
+        "detail": "Alfonso Cuarón"
       },
       {
-        "odds_expert": 96,
-        "odds_denominator": 10,
         "category_id": 8,
-        "year": 2017,
-        "context": "The Shape of Water",
-        "nominee": "Guillermo del Toro",
-        "odds_user": 62,
-        "id": 2319,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Vice",
+        "id": 2613,
+        "detail": "Adam McKay"
       }
     ],
     "name": "Directing",
@@ -453,50 +358,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 9,
-        "year": 2017,
-        "context": "",
-        "nominee": "Abacus: Small Enough to Jail",
-        "id": 2320
+        "year": 2018,
+        "context": "Free Solo",
+        "nominee": "Free Solo",
+        "id": 2614,
+        "detail": "Elizabeth Chai Vasarhelyi, Jimmy Chin, Evan Hayes and Shannon Dill"
       },
       {
         "category_id": 9,
-        "year": 2017,
-        "context": "",
-        "nominee": "Strong Island",
-        "id": 2324
+        "year": 2018,
+        "context": "Hale County This Morning, This Evening",
+        "nominee": "Hale County This Morning, This Evening",
+        "id": 2615,
+        "detail": "RaMell Ross, Joslyn Barnes and Su Kim"
       },
       {
-        "odds_expert": 51,
-        "odds_denominator": 7,
         "category_id": 9,
-        "year": 2017,
-        "context": "",
-        "nominee": "Faces Places",
-        "odds_user": 36,
-        "id": 2321,
-        "odds_numerator": 2
+        "year": 2018,
+        "context": "Minding The Gap",
+        "nominee": "Minding The Gap",
+        "id": 2616,
+        "detail": "Bing Liu and Diane Quon"
       },
       {
-        "odds_expert": 34,
-        "odds_denominator": 1,
         "category_id": 9,
-        "year": 2017,
-        "context": "",
-        "nominee": "Icarus",
-        "odds_user": 24,
-        "id": 2322,
-        "odds_numerator": 4
+        "year": 2018,
+        "context": "Of Fathers And Sons",
+        "nominee": "Of Fathers And Sons",
+        "id": 2617,
+        "detail": "Talal Derki, Ansgar Frerich, Eva Kemme and Tobias N. Siebert"
       },
       {
-        "odds_expert": 11,
-        "odds_denominator": 1,
         "category_id": 9,
-        "year": 2017,
-        "context": "",
-        "nominee": "Last Men in Aleppo",
-        "odds_user": 26,
-        "id": 2323,
-        "odds_numerator": 10
+        "year": 2018,
+        "context": "Rbg",
+        "nominee": "Rbg",
+        "id": 2618,
+        "detail": "Betsy West and Julie Cohen"
       }
     ],
     "name": "Documentary Feature",
@@ -507,51 +405,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 10,
-        "year": 2017,
-        "context": "",
-        "nominee": "Knife Skills",
-        "id": 2328
-      },
-      {
-        "odds_expert": 38,
-        "odds_denominator": 5,
-        "category_id": 10,
-        "year": 2017,
-        "context": "",
-        "nominee": "Edith + Eddie",
-        "odds_user": 18,
-        "id": 2325,
-        "odds_numerator": 2
-      },
-      {
-        "odds_expert": 25,
-        "odds_denominator": 1,
-        "category_id": 10,
-        "year": 2017,
-        "context": "",
-        "nominee": "Heaven is a Traffic Jam on the 405",
-        "odds_user": 18,
-        "id": 2326,
-        "odds_numerator": 8
-      },
-      {
-        "odds_expert": 31,
-        "odds_denominator": 2,
-        "category_id": 10,
-        "year": 2017,
-        "context": "",
-        "nominee": "Heroin(e)",
-        "odds_user": 34,
-        "id": 2327,
-        "odds_numerator": 5
+        "year": 2018,
+        "context": "Black Sheep",
+        "nominee": "Black Sheep",
+        "id": 2619,
+        "detail": "Ed Perkins and Jonathan Chinn"
       },
       {
         "category_id": 10,
-        "year": 2017,
-        "context": "",
-        "nominee": "Traffic Stop",
-        "odds_user": 18,
-        "id": 2329
+        "year": 2018,
+        "context": "End Game",
+        "nominee": "End Game",
+        "id": 2620,
+        "detail": "Rob Epstein and Jeffrey Friedman"
+      },
+      {
+        "category_id": 10,
+        "year": 2018,
+        "context": "Lifeboat",
+        "nominee": "Lifeboat",
+        "id": 2621,
+        "detail": "Skye Fitzgerald and Bryn Mooser"
+      },
+      {
+        "category_id": 10,
+        "year": 2018,
+        "context": "A Night At The Garden",
+        "nominee": "A Night At The Garden",
+        "id": 2622,
+        "detail": "Marshall Curry"
+      },
+      {
+        "category_id": 10,
+        "year": 2018,
+        "context": "Period. End Of Sentence.",
+        "nominee": "Period. End Of Sentence.",
+        "id": 2623,
+        "detail": "Rayka Zehtabchi and Melissa Berton"
       }
     ],
     "name": "Documentary Short",
@@ -562,49 +452,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 11,
-        "year": 2017,
-        "context": "",
-        "nominee": "I, Tonya",
-        "id": 2332
+        "year": 2018,
+        "context": "Blackkklansman",
+        "nominee": "Blackkklansman",
+        "id": 2624,
+        "detail": "Barry Alexander Brown"
       },
       {
         "category_id": 11,
-        "year": 2017,
-        "context": "",
-        "nominee": "Three Billboards Outside Ebbing, Missouri",
-        "id": 2334
+        "year": 2018,
+        "context": "Bohemian Rhapsody",
+        "nominee": "Bohemian Rhapsody",
+        "id": 2625,
+        "detail": "John Ottman"
       },
       {
-        "odds_expert": 23,
-        "odds_denominator": 4,
         "category_id": 11,
-        "year": 2017,
-        "context": "",
-        "nominee": "Baby Driver",
-        "odds_user": 31,
-        "id": 2330,
-        "odds_numerator": 6
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "The Favourite",
+        "id": 2626,
+        "detail": "Yorgos Mavropsaridis"
       },
       {
-        "odds_expert": 76,
-        "odds_denominator": 9,
         "category_id": 11,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dunkirk",
-        "odds_user": 50,
-        "id": 2331,
-        "odds_numerator": 4
+        "year": 2018,
+        "context": "Green Book",
+        "nominee": "Green Book",
+        "id": 2627,
+        "detail": "Patrick J. Don Vito"
       },
       {
-        "odds_denominator": 1,
         "category_id": 11,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Shape of Water",
-        "odds_user": 10,
-        "id": 2333,
-        "odds_numerator": 20
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Vice",
+        "id": 2628,
+        "detail": "Hank Corwin"
       }
     ],
     "name": "Film Editing",
@@ -615,50 +499,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 12,
-        "year": 2017,
-        "context": "Hungary",
-        "nominee": "On Body and Soul",
-        "id": 2338
+        "year": 2018,
+        "context": "Capernaum",
+        "nominee": "Capernaum",
+        "id": 2629,
+        "detail": "Lebanon"
       },
       {
-        "odds_expert": 65,
-        "odds_denominator": 7,
         "category_id": 12,
-        "year": 2017,
-        "context": "Chile",
-        "nominee": "A Fantastic Woman",
-        "odds_user": 42,
-        "id": 2335,
-        "odds_numerator": 4
+        "year": 2018,
+        "context": "Cold War",
+        "nominee": "Cold War",
+        "id": 2630,
+        "detail": "Poland"
       },
       {
-        "odds_denominator": 1,
         "category_id": 12,
-        "year": 2017,
-        "context": "Russia",
-        "nominee": "Loveless",
-        "odds_user": 19,
-        "id": 2337,
-        "odds_numerator": 7
+        "year": 2018,
+        "context": "Never Look Away",
+        "nominee": "Never Look Away",
+        "id": 2631,
+        "detail": "Germany"
       },
       {
-        "odds_expert": 15,
-        "odds_denominator": 8,
         "category_id": 12,
-        "year": 2017,
-        "context": "Sweden",
-        "nominee": "The Square",
-        "odds_user": 27,
-        "id": 2339,
-        "odds_numerator": 13
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2632,
+        "detail": "Mexico"
       },
       {
-        "odds_expert": 16,
         "category_id": 12,
-        "year": 2017,
-        "context": "Lebanon",
-        "nominee": "The Insult",
-        "id": 2336
+        "year": 2018,
+        "context": "Shoplifters",
+        "nominee": "Shoplifters",
+        "id": 2633,
+        "detail": "Japan"
       }
     ],
     "name": "Foreign Language Film",
@@ -668,194 +545,44 @@ export const MockCategoryList: Category[] = [
   {
     "nominees": [
       {
-        "odds_expert": 99,
-        "odds_denominator": 16,
-        "category_id": 13,
-        "year": 2017,
-        "context": "",
-        "nominee": "Darkest Hour",
-        "odds_user": 80,
-        "id": 2340,
-        "odds_numerator": 1
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 13,
-        "year": 2017,
-        "context": "",
-        "nominee": "Victoria & Abdul",
-        "id": 2341,
-        "odds_numerator": 8
-      },
-      {
-        "odds_expert": 1,
-        "category_id": 13,
-        "year": 2017,
-        "context": "",
-        "nominee": "Wonder",
-        "odds_user": 12,
-        "id": 2342
-      }
-    ],
-    "name": "Makeup",
-    "id": 13,
-    "points": 2
-  },
-  {
-    "nominees": [
-      {
-        "category_id": 14,
-        "year": 2017,
-        "context": "",
-        "nominee": "Star Wars: The Last Jedi",
-        "id": 2346
-      },
-      {
-        "category_id": 14,
-        "year": 2017,
-        "context": "",
-        "nominee": "Three Bilboards Outside Ebbing, Missouri",
-        "id": 2347
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 14,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dunkirk",
-        "odds_user": 32,
-        "id": 2343,
-        "odds_numerator": 5
-      },
-      {
-        "odds_expert": 11,
-        "odds_denominator": 1,
-        "category_id": 14,
-        "year": 2017,
-        "context": "",
-        "nominee": "Phantom Thread",
-        "odds_user": 14,
-        "id": 2344,
-        "odds_numerator": 10
-      },
-      {
-        "odds_expert": 86,
-        "odds_denominator": 9,
-        "category_id": 14,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Shape of Water",
-        "odds_user": 43,
-        "id": 2345,
-        "odds_numerator": 2
-      }
-    ],
-    "name": "Music (Score)",
-    "id": 14,
-    "points": 2
-  },
-  {
-    "nominees": [
-      {
-        "category_id": 15,
-        "year": 2017,
-        "context": "Marshall",
-        "nominee": "Stand Up For Something (Music by Diane Warren; Lyric by Lonnie R. Lynn and Diane Warren)",
-        "id": 2351
-      },
-      {
-        "odds_expert": 36,
-        "odds_denominator": 8,
-        "category_id": 15,
-        "year": 2017,
-        "context": "The Greatest Showman",
-        "nominee": "This Is Me (Music and Lyric by Benj Pasek and Justin Paul)",
-        "odds_user": 25,
-        "id": 2352,
-        "odds_numerator": 11
-      },
-      {
-        "odds_expert": 3,
-        "category_id": 15,
-        "year": 2017,
-        "context": "Mudbound",
-        "nominee": "Mighty River (Music and lyric by Mary J. Blige, Raphael Saadiq and Taura Stinson)",
-        "id": 2348
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 15,
-        "year": 2017,
-        "context": "Call Me by Your Name",
-        "nominee": "Mystery of Love (Music and lyric by Sufjan Stevens)",
-        "odds_user": 26,
-        "id": 2349,
-        "odds_numerator": 10
-      },
-      {
-        "odds_expert": 60,
-        "odds_denominator": 11,
-        "category_id": 15,
-        "year": 2017,
-        "context": "Coco",
-        "nominee": "Remember Me (Music and lyric by Kristen Anderson-Lopez and Robert Lopez)",
-        "odds_user": 42,
-        "id": 2350,
-        "odds_numerator": 8
-      }
-    ],
-    "name": "Music (Song)",
-    "id": 15,
-    "points": 2
-  },
-  {
-    "nominees": [
-      {
-        "odds_expert": 71,
-        "odds_denominator": 11,
         "category_id": 16,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dear Basketball",
-        "odds_user": 28,
-        "id": 2358,
-        "odds_numerator": 4
-      },
-      {
-        "odds_expert": 11,
-        "odds_denominator": 1,
-        "category_id": 16,
-        "year": 2017,
-        "context": "",
-        "nominee": "Garden Party",
-        "id": 2359,
-        "odds_numerator": 8
+        "year": 2018,
+        "context": "Animal Behaviour",
+        "nominee": "Animal Behaviour",
+        "id": 2660,
+        "detail": "Alison Snowden and David Fine"
       },
       {
         "category_id": 16,
-        "year": 2017,
-        "context": "",
-        "nominee": "Revolting Rhymes",
-        "id": 2362
-      },
-      {
-        "odds_expert": 11,
-        "odds_denominator": 1,
-        "category_id": 16,
-        "year": 2017,
-        "context": "",
-        "nominee": "Lou",
-        "odds_user": 28,
-        "id": 2360,
-        "odds_numerator": 3
+        "year": 2018,
+        "context": "Bao",
+        "nominee": "Bao",
+        "id": 2661,
+        "detail": "Domee Shi and Becky Neiman-Cobb"
       },
       {
         "category_id": 16,
-        "year": 2017,
-        "context": "",
-        "nominee": "Negative Space",
-        "odds_user": 18,
-        "id": 2361
+        "year": 2018,
+        "context": "Late Afternoon",
+        "nominee": "Late Afternoon",
+        "id": 2662,
+        "detail": "Louise Bagnall and Nuria González Blanco"
+      },
+      {
+        "category_id": 16,
+        "year": 2018,
+        "context": "One Small Step",
+        "nominee": "One Small Step",
+        "id": 2663,
+        "detail": "Andrew Chesworth and Bobby Pontillas"
+      },
+      {
+        "category_id": 16,
+        "year": 2018,
+        "context": "Weekends",
+        "nominee": "Weekends",
+        "id": 2664,
+        "detail": "Trevor Jimenez"
       }
     ],
     "name": "Short Film (Animated)",
@@ -866,50 +593,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 17,
-        "year": 2017,
-        "context": "",
-        "nominee": "Watu Wote: All of Us",
-        "id": 2367
+        "year": 2018,
+        "context": "Detainment",
+        "nominee": "Detainment",
+        "id": 2665,
+        "detail": "Vincent Lambe and Darren Mahon"
       },
       {
-        "odds_expert": 79,
-        "odds_denominator": 11,
         "category_id": 17,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dekalb Elementary",
-        "odds_user": 17,
-        "id": 2363,
-        "odds_numerator": 4
+        "year": 2018,
+        "context": "Fauve",
+        "nominee": "Fauve",
+        "id": 2666,
+        "detail": "Jeremy Comte and Maria Gracia Turgeon"
       },
       {
-        "odds_denominator": 1,
         "category_id": 17,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Eleven O'Clock",
-        "odds_user": 22,
-        "id": 2364,
-        "odds_numerator": 6
+        "year": 2018,
+        "context": "Marguerite",
+        "nominee": "Marguerite",
+        "id": 2667,
+        "detail": "Marianne Farley and Marie-Hélène Panisset"
       },
       {
-        "odds_expert": 8,
         "category_id": 17,
-        "year": 2017,
-        "context": "",
-        "nominee": "My Nephew Emmett",
-        "id": 2365
+        "year": 2018,
+        "context": "Mother",
+        "nominee": "Mother",
+        "id": 2668,
+        "detail": "Rodrigo Sorogoyen and María del Puy Alvarado"
       },
       {
-        "odds_expert": 8,
-        "odds_denominator": 2,
         "category_id": 17,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Silent Child",
-        "odds_user": 34,
-        "id": 2366,
-        "odds_numerator": 7
+        "year": 2018,
+        "context": "Skin",
+        "nominee": "Skin",
+        "id": 2669,
+        "detail": "Guy Nattiv and Jaime Ray Newman"
       }
     ],
     "name": "Short Film (Live Action)",
@@ -920,50 +640,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 18,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Shape of Water",
-        "id": 2371
+        "year": 2018,
+        "context": "Black Panther",
+        "nominee": "Black Panther",
+        "id": 2670,
+        "detail": "Benjamin A. Burtt and Steve Boeddeker"
       },
       {
         "category_id": 18,
-        "year": 2017,
-        "context": "",
-        "nominee": "Star Wars: The Last Jedi",
-        "id": 2372
+        "year": 2018,
+        "context": "Bohemian Rhapsody",
+        "nominee": "Bohemian Rhapsody",
+        "id": 2671,
+        "detail": "John Warhurst and Nina Hartstone"
       },
       {
-        "odds_expert": 6,
-        "odds_denominator": 1,
         "category_id": 18,
-        "year": 2017,
-        "context": "",
-        "nominee": "Baby Driver",
-        "odds_user": 22,
-        "id": 2368,
-        "odds_numerator": 7
+        "year": 2018,
+        "context": "First Man",
+        "nominee": "First Man",
+        "id": 2672,
+        "detail": "Ai-Ling Lee and Mildred Iatrou Morgan"
       },
       {
-        "odds_expert": 3,
-        "odds_denominator": 1,
         "category_id": 18,
-        "year": 2017,
-        "context": "",
-        "nominee": "Blade Runner 2049",
-        "odds_user": 18,
-        "id": 2369,
-        "odds_numerator": 14
+        "year": 2018,
+        "context": "A Quiet Place",
+        "nominee": "A Quiet Place",
+        "id": 2673,
+        "detail": "Ethan Van der Ryn and Erik Aadahl"
       },
       {
-        "odds_expert": 89,
-        "odds_denominator": 10,
         "category_id": 18,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dunkirk",
-        "odds_user": 48,
-        "id": 2370,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2674,
+        "detail": "Sergio Díaz and Skip Lievsay"
       }
     ],
     "name": "Sound Editing",
@@ -974,49 +687,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 19,
-        "year": 2017,
-        "context": "",
-        "nominee": "The Shape of Water",
-        "id": 2376
+        "year": 2018,
+        "context": "Black Panther",
+        "nominee": "Black Panther",
+        "id": 2675,
+        "detail": "Steve Boeddeker, Brandon Proctor and Peter Devlin"
       },
       {
         "category_id": 19,
-        "year": 2017,
-        "context": "",
-        "nominee": "Star Wars: The Last Jedi",
-        "id": 2377
+        "year": 2018,
+        "context": "Bohemian Rhapsody",
+        "nominee": "Bohemian Rhapsody",
+        "id": 2676,
+        "detail": "Paul Massey, Tim Cavagin and John Casali"
       },
       {
-        "odds_expert": 9,
-        "odds_denominator": 1,
         "category_id": 19,
-        "year": 2017,
-        "context": "",
-        "nominee": "Baby Driver",
-        "odds_user": 24,
-        "id": 2373,
-        "odds_numerator": 5
+        "year": 2018,
+        "context": "First Man",
+        "nominee": "First Man",
+        "id": 2677,
+        "detail": "Jon Taylor, Frank A. Montaño, Ai-Ling Lee and Mary H. Ellis"
       },
       {
-        "odds_denominator": 1,
         "category_id": 19,
-        "year": 2017,
-        "context": "",
-        "nominee": "Blade Runner 2049",
-        "odds_user": 18,
-        "id": 2374,
-        "odds_numerator": 12
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2678,
+        "detail": "Skip Lievsay, Craig Henighan and José Antonio García"
       },
       {
-        "odds_expert": 91,
-        "odds_denominator": 6,
         "category_id": 19,
-        "year": 2017,
-        "context": "",
-        "nominee": "Dunkirk",
-        "odds_user": 45,
-        "id": 2375,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "A Star Is Born",
+        "id": 2679,
+        "detail": "Tom Ozanich, Dean Zupancic, Jason Ruder and Steve Morrow"
       }
     ],
     "name": "Sound Mixing",
@@ -1027,50 +734,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 20,
-        "year": 2017,
-        "context": "The Shape of Water",
-        "nominee": "Richard Jenkins",
-        "id": 2292
-      },
-      {
-        "odds_expert": 8,
-        "odds_denominator": 1,
-        "category_id": 20,
-        "year": 2017,
-        "context": "The Florida Project",
-        "nominee": "Willem Dafoe",
-        "odds_user": 17,
-        "id": 2290,
-        "odds_numerator": 5
+        "year": 2018,
+        "context": "Green Book",
+        "nominee": "Mahershala Ali",
+        "id": 2579,
+        "detail": "Green Book"
       },
       {
         "category_id": 20,
-        "year": 2017,
-        "context": "Three Billboards Outside Ebbing, Missouri",
-        "nominee": "Woody Harrelson",
-        "odds_user": 8,
-        "id": 2291
+        "year": 2018,
+        "context": "Blackkklansman",
+        "nominee": "Adam Driver",
+        "id": 2580,
+        "detail": "BlacKkKlansman"
       },
       {
-        "odds_expert": 1,
-        "odds_denominator": 1,
         "category_id": 20,
-        "year": 2017,
-        "context": "All the Money in the World",
-        "nominee": "Christopher Plummer",
-        "id": 2293,
-        "odds_numerator": 25
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "Sam Elliott",
+        "id": 2581,
+        "detail": "A Star Is Born"
       },
       {
-        "odds_expert": 91,
-        "odds_denominator": 9,
         "category_id": 20,
-        "year": 2017,
-        "context": "Three Billboards Outside Ebbing, Missouri",
+        "year": 2018,
+        "context": "Can You Ever Forgive Me?",
+        "nominee": "Richard E. Grant",
+        "id": 2582,
+        "detail": "Can You Ever Forgive Me?"
+      },
+      {
+        "category_id": 20,
+        "year": 2018,
+        "context": "Vice",
         "nominee": "Sam Rockwell",
-        "odds_user": 65,
-        "id": 2294,
-        "odds_numerator": 1
+        "id": 2583,
+        "detail": "Vice"
       }
     ],
     "name": "Supporting Actor",
@@ -1080,56 +780,44 @@ export const MockCategoryList: Category[] = [
   {
     "nominees": [
       {
-        "odds_expert": 1,
-        "odds_denominator": 1,
         "category_id": 21,
-        "year": 2017,
-        "context": "Mudbound",
-        "nominee": "Mary J. Blige",
-        "odds_user": 14,
-        "id": 2295,
-        "odds_numerator": 25
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Amy Adams",
+        "id": 2589,
+        "detail": "Vice"
       },
       {
-        "odds_expert": 84,
-        "odds_denominator": 8,
         "category_id": 21,
-        "year": 2017,
-        "context": "I, Tonya",
-        "nominee": "Allison Janney",
-        "odds_user": 56,
-        "id": 2296,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Marina De Tavira",
+        "id": 2590,
+        "detail": "Roma"
       },
       {
-        "odds_denominator": 1,
         "category_id": 21,
-        "year": 2017,
-        "context": "Phantom Thread",
-        "nominee": "Lesley Manville",
-        "id": 2297,
-        "odds_numerator": 25
+        "year": 2018,
+        "context": "If Beale Street Could Talk",
+        "nominee": "Regina King",
+        "id": 2591,
+        "detail": "If Beale Street Could Talk"
       },
       {
-        "odds_expert": 14,
-        "odds_denominator": 2,
         "category_id": 21,
-        "year": 2017,
-        "context": "Lady Bird",
-        "nominee": "Laurie Metcalf",
-        "odds_user": 21,
-        "id": 2298,
-        "odds_numerator": 9
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "Emma Stone",
+        "id": 2592,
+        "detail": "The Favourite"
       },
       {
-        "odds_expert": 1,
-        "odds_denominator": 1,
         "category_id": 21,
-        "year": 2017,
-        "context": "The Shape of Water",
-        "nominee": "Octavia Spencer",
-        "id": 2299,
-        "odds_numerator": 25
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "Rachel Weisz",
+        "id": 2593,
+        "detail": "The Favourite"
       }
     ],
     "name": "Supporting Actress",
@@ -1140,50 +828,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 22,
-        "year": 2017,
-        "context": "",
-        "nominee": "Guardians of the Galaxy Vol. 2",
-        "id": 2379
+        "year": 2018,
+        "context": "Avengers: Infinity War",
+        "nominee": "Avengers: Infinity War",
+        "id": 2680,
+        "detail": "Dan DeLeeuw, Kelly Port, Russell Earl and Dan Sudick"
       },
       {
         "category_id": 22,
-        "year": 2017,
-        "context": "",
-        "nominee": "Kong: Skull Island",
-        "id": 2380
+        "year": 2018,
+        "context": "Christopher Robin",
+        "nominee": "Christopher Robin",
+        "id": 2681,
+        "detail": "Christopher Lawrence, Michael Eames, Theo Jones and Chris Corbould"
       },
       {
-        "odds_expert": 23,
-        "odds_denominator": 6,
         "category_id": 22,
-        "year": 2017,
-        "context": "",
-        "nominee": "Blade Runner 2049",
-        "odds_user": 54,
-        "id": 2378,
-        "odds_numerator": 4
+        "year": 2018,
+        "context": "First Man",
+        "nominee": "First Man",
+        "id": 2682,
+        "detail": "Paul Lambert, Ian Hunter, Tristan Myles and J.D. Schwalm"
       },
       {
-        "odds_expert": 3,
-        "odds_denominator": 1,
         "category_id": 22,
-        "year": 2017,
-        "context": "",
-        "nominee": "Star Wars: The Last Jedi",
-        "odds_user": 13,
-        "id": 2381,
-        "odds_numerator": 14
+        "year": 2018,
+        "context": "Ready Player One",
+        "nominee": "Ready Player One",
+        "id": 2683,
+        "detail": "Roger Guyett, Grady Cofer, Matthew E. Butler and David Shirk"
       },
       {
-        "odds_expert": 73,
-        "odds_denominator": 5,
         "category_id": 22,
-        "year": 2017,
-        "context": "",
-        "nominee": "War for the Planet of the Apes",
-        "odds_user": 27,
-        "id": 2382,
-        "odds_numerator": 6
+        "year": 2018,
+        "context": "Solo: A Star Wars Story",
+        "nominee": "Solo: A Star Wars Story",
+        "id": 2684,
+        "detail": "Rob Bredow, Patrick Tubach, Neal Scanlan and Dominic Tuohy"
       }
     ],
     "name": "Visual Effects",
@@ -1194,46 +875,43 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 23,
-        "year": 2017,
-        "context": "The Disaster Artist",
-        "nominee": "Scott Neustadter & Michael H. Weber",
-        "id": 2384
+        "year": 2018,
+        "context": "The Ballad Of Buster Scruggs",
+        "nominee": "The Ballad Of Buster Scruggs",
+        "id": 2685,
+        "detail": "Written by Joel Coen & Ethan Coen"
       },
       {
         "category_id": 23,
-        "year": 2017,
-        "context": "Molly's Game",
-        "nominee": "Aaron Sorkin",
-        "id": 2386
-      },
-      {
-        "odds_expert": 96,
-        "odds_denominator": 10,
-        "category_id": 23,
-        "year": 2017,
-        "context": "Call Me By Your Name",
-        "nominee": "James Ivory",
-        "odds_user": 66,
-        "id": 2383,
-        "odds_numerator": 1
+        "year": 2018,
+        "context": "Blackkklansman",
+        "nominee": "Blackkklansman",
+        "id": 2686,
+        "detail": "Written by Charlie Wachtel & David Rabinowitz and Kevin Willmott & Spike Lee"
       },
       {
         "category_id": 23,
-        "year": 2017,
-        "context": "Logan",
-        "nominee": "Scott Frank & James Mangold (screenplay) and Michael Green; James Mangold (story)",
-        "odds_user": 14,
-        "id": 2385
+        "year": 2018,
+        "context": "Can You Ever Forgive Me?",
+        "nominee": "Can You Ever Forgive Me?",
+        "id": 2687,
+        "detail": "Screenplay by Nicole Holofcener and Jeff Whitty"
       },
       {
-        "odds_expert": 3,
-        "odds_denominator": 1,
         "category_id": 23,
-        "year": 2017,
-        "context": "Mudbound",
-        "nominee": "Virgil Williams and Dee Rees",
-        "id": 2387,
-        "odds_numerator": 10
+        "year": 2018,
+        "context": "If Beale Street Could Talk",
+        "nominee": "If Beale Street Could Talk",
+        "id": 2688,
+        "detail": "Written for the screen by Barry Jenkins"
+      },
+      {
+        "category_id": 23,
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "A Star Is Born",
+        "id": 2689,
+        "detail": "Screenplay by Eric Roth and Bradley Cooper & Will Fetters"
       }
     ],
     "name": "Writing (Adapted Screenplay)",
@@ -1244,54 +922,219 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "category_id": 24,
-        "year": 2017,
-        "context": "The Big Sick",
-        "nominee": "Emily V. Gordon & Kumail Nanjiani",
-        "id": 2388
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "The Favourite",
+        "id": 2690,
+        "detail": "Written by Deborah Davis and Tony McNamara"
       },
       {
-        "odds_expert": 64,
-        "odds_denominator": 4,
         "category_id": 24,
-        "year": 2017,
-        "context": "Get Out",
-        "nominee": "Jordan Peele",
-        "odds_user": 31,
-        "id": 2389,
-        "odds_numerator": 5
+        "year": 2018,
+        "context": "First Reformed",
+        "nominee": "First Reformed",
+        "id": 2691,
+        "detail": "Written by Paul Schrader"
       },
       {
-        "odds_denominator": 4,
         "category_id": 24,
-        "year": 2017,
-        "context": "Lady Bird",
-        "nominee": "Greta Gerwig",
-        "odds_user": 16,
-        "id": 2390,
-        "odds_numerator": 9
+        "year": 2018,
+        "context": "Green Book",
+        "nominee": "Green Book",
+        "id": 2692,
+        "detail": "Written by Nick Vallelonga, Brian Currie, Peter Farrelly"
       },
       {
-        "odds_expert": 3,
         "category_id": 24,
-        "year": 2017,
-        "context": "The Shape of Water",
-        "nominee": "Guillermo del Toro & Vanessa Taylor (screenplay); Guillermo del Toro (story)",
-        "id": 2391
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2693,
+        "detail": "Written by Alfonso Cuarón"
       },
       {
-        "odds_expert": 30,
-        "odds_denominator": 4,
         "category_id": 24,
-        "year": 2017,
-        "context": "Three Billboards Outside Ebbing, Missouri",
-        "nominee": "Martin McDonagh",
-        "odds_user": 37,
-        "id": 2392,
-        "odds_numerator": 6
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Vice",
+        "id": 2694,
+        "detail": "Written by Adam McKay"
       }
     ],
     "name": "Writing (Original Screenplay)",
     "id": 24,
     "points": 3
+  },
+  {
+    "nominees": [
+      {
+        "category_id": 4,
+        "year": 2018,
+        "context": "Black Panther",
+        "nominee": "Black Panther",
+        "id": 2655,
+        "detail": "Production Design: Hannah Beachler; Set Decoration: Jay Hart"
+      },
+      {
+        "category_id": 4,
+        "year": 2018,
+        "context": "The Favourite",
+        "nominee": "The Favourite",
+        "id": 2656,
+        "detail": "Production Design: Fiona Crombie; Set Decoration: Alice Felton"
+      },
+      {
+        "category_id": 4,
+        "year": 2018,
+        "context": "First Man",
+        "nominee": "First Man",
+        "id": 2657,
+        "detail": "Production Design: Nathan Crowley; Set Decoration: Kathy Lucas"
+      },
+      {
+        "category_id": 4,
+        "year": 2018,
+        "context": "Mary Poppins Returns",
+        "nominee": "Mary Poppins Returns",
+        "id": 2658,
+        "detail": "Production Design: John Myhre; Set Decoration: Gordon Sim"
+      },
+      {
+        "category_id": 4,
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2659,
+        "detail": "Production Design: Eugenio Caballero; Set Decoration: Bárbara Enríquez"
+      }
+    ],
+    "name": "Production Design",
+    "id": 4,
+    "points": 2
+  },
+  {
+    "nominees": [
+      {
+        "category_id": 13,
+        "year": 2018,
+        "context": "Border",
+        "nominee": "Border",
+        "id": 2634,
+        "detail": "Göran Lundström and Pamela Goldammer"
+      },
+      {
+        "category_id": 13,
+        "year": 2018,
+        "context": "Mary Queen Of Scots",
+        "nominee": "Mary Queen Of Scots",
+        "id": 2635,
+        "detail": "Jenny Shircore, Marc Pilcher and Jessica Brooks"
+      },
+      {
+        "category_id": 13,
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Vice",
+        "id": 2636,
+        "detail": "Greg Cannom, Kate Biscoe and Patricia DeHaney"
+      }
+    ],
+    "name": "Makeup and Hairstyling",
+    "id": 13,
+    "points": 2
+  },
+  {
+    "nominees": [
+      {
+        "category_id": 14,
+        "year": 2018,
+        "context": "Black Panther",
+        "nominee": "Black Panther",
+        "id": 2637,
+        "detail": "Ludwig Goransson"
+      },
+      {
+        "category_id": 14,
+        "year": 2018,
+        "context": "Blackkklansman",
+        "nominee": "Blackkklansman",
+        "id": 2638,
+        "detail": "Terence Blanchard"
+      },
+      {
+        "category_id": 14,
+        "year": 2018,
+        "context": "If Beale Street Could Talk",
+        "nominee": "If Beale Street Could Talk",
+        "id": 2639,
+        "detail": "Nicholas Britell"
+      },
+      {
+        "category_id": 14,
+        "year": 2018,
+        "context": "Isle Of Dogs",
+        "nominee": "Isle Of Dogs",
+        "id": 2640,
+        "detail": "Alexandre Desplat"
+      },
+      {
+        "category_id": 14,
+        "year": 2018,
+        "context": "Mary Poppins Returns",
+        "nominee": "Mary Poppins Returns",
+        "id": 2641,
+        "detail": "Marc Shaiman"
+      }
+    ],
+    "name": "Music (Original Score)",
+    "id": 14,
+    "points": 2
+  },
+  {
+    "nominees": [
+      {
+        "category_id": 15,
+        "year": 2018,
+        "context": "Black Panther",
+        "nominee": "All The Stars",
+        "id": 2642,
+        "detail": "from Black Panther; Music by Mark Spears, Kendrick Lamar Duckworth and Anthony Tiffith; Lyric by Kendrick Lamar Duckworth, Anthony Tiffith and Solana Rowe"
+      },
+      {
+        "category_id": 15,
+        "year": 2018,
+        "context": "Rbg",
+        "nominee": "I'Ll Fight",
+        "id": 2643,
+        "detail": "from RBG; Music and Lyric by Diane Warren"
+      },
+      {
+        "category_id": 15,
+        "year": 2018,
+        "context": "Mary Poppins Returns",
+        "nominee": "The Place Where Lost Things Go",
+        "id": 2644,
+        "detail": "from Mary Poppins Returns; Music by Marc Shaiman; Lyric by Scott Wittman and Marc Shaiman"
+      },
+      {
+        "category_id": 15,
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "Shallow",
+        "id": 2645,
+        "detail": "from A Star Is Born; Music and Lyric by Lady Gaga, Mark Ronson, Anthony Rossomando and Andrew Wyatt"
+      },
+      {
+        "category_id": 15,
+        "year": 2018,
+        "context": "The Ballad Of Buster Scruggs",
+        "nominee": "When A Cowboy Trades His Spurs For Wings",
+        "id": 2646,
+        "detail": "from The Ballad of Buster Scruggs; Music and Lyric by David Rawlings and Gillian Welch"
+      }
+    ],
+    "name": "Music (Original Song)",
+    "id": 15,
+    "points": 2
   }
 ];

@@ -42,6 +42,7 @@ describe('CategoryService', () => {
       "category_id": 17,
       "year": 2017,
       "context": "",
+      "detail": "",
       "nominee": "My Nephew Emmett",
       "id": 2365
     };
