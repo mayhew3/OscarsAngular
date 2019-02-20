@@ -6,6 +6,7 @@ import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';
 import {Vote} from '../interfaces/Vote';
 import {Observable} from 'rxjs';
+import {MockSystemVars} from './data/system.vars.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class InMemoryDataService implements InMemoryDbService {
   categories = MockCategoryList;
   persons = MockPersonList;
   votes = MockVoteList;
+  systemVars = MockSystemVars;
 
   /////////// helpers ///////////////
 
@@ -32,7 +34,8 @@ export class InMemoryDataService implements InMemoryDbService {
       categories: this.categories,
       nominees: [],
       persons: this.persons,
-      votes: this.votes};
+      votes: this.votes,
+      systemVars: this.systemVars};
   }
 
   get(requestInfo: RequestInfo) {
@@ -103,9 +106,11 @@ export class InMemoryDataService implements InMemoryDbService {
 
       const entries = requestInfo.query.entries();
       const person_id = entries.next().value[1][0];
+      const year = entries.next().value[1][0];
 
       _.forEach(requestInfo.collection, category => {
-        category.voted_on = this.getVoteForCategory(category.id, +person_id, 2018);
+        category.nominees = _.where(category.nominees, {year: +year});
+        category.voted_on = this.getVoteForCategory(category.id, +person_id, +year);
       });
 
       const data = requestInfo.collection;
@@ -129,7 +134,7 @@ export class InMemoryDataService implements InMemoryDbService {
       person_id: person_id,
       year: year
     });
-    return existingVote ? existingVote.nominee_id : undefined;
+    return existingVote ? existingVote.nomination_id : undefined;
   }
 
 

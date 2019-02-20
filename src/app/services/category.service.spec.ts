@@ -25,7 +25,7 @@ describe('CategoryService', () => {
   function doFirstCategoriesRequest() {
     const testRequest = httpMock.expectOne(req => req.url === service.categoriesUrl);
     expect(testRequest.request.method).toBe('GET');
-    expect(testRequest.request.params).toMatch('person_id=18');
+    expect(testRequest.request.params).toMatch('person_id=18&year=2018');
     testRequest.flush(TestCategoryList);
 
     httpMock.verify();
@@ -71,7 +71,7 @@ describe('CategoryService', () => {
       expect(categories.length).toBe(3);
     });
 
-    httpMock.expectNone(service.categoriesUrl);
+    httpMock.expectNone(req => req.url === service.categoriesUrl);
 
     httpMock.verify();
   });

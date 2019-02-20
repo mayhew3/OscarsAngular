@@ -15,6 +15,7 @@ import { OddsMainComponent } from './components/odds-main/odds-main.component';
 import { VoteMainComponent } from './components/vote-main/vote-main.component';
 import { VoteDetailComponent } from './components/vote-detail/vote-detail.component';
 import { OddsDetailComponent } from './components/odds-detail/odds-detail.component';
+import {SystemVarsService} from './services/system.vars.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { OddsDetailComponent } from './components/odds-detail/odds-detail.compon
     AppRoutingModule,
     environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
   ],
-  providers: [AuthService],
+  providers: [AuthService, SystemVarsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

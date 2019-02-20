@@ -42,6 +42,39 @@ export const MockCategoryList: Category[] = [
         "nominee": "Viggo Mortensen",
         "id": 2699,
         "detail": "Green Book"
+      },
+      {
+        "odds_expert": 1,
+        "odds_denominator": 1,
+        "category_id": 1,
+        "year": 2017,
+        "context": "Call Me By Your Name",
+        "nominee": "Timothee Chalamet",
+        "detail": "",
+        "odds_user": 10,
+        "id": 2280,
+        "odds_numerator": 16
+      },
+      {
+        "odds_expert": 1,
+        "category_id": 1,
+        "year": 2017,
+        "context": "Phantom Thread",
+        "detail": "",
+        "nominee": "Daniel Day-Lewis",
+        "odds_user": 13,
+        "id": 2281
+      },
+      {
+        "odds_expert": 1,
+        "odds_denominator": 1,
+        "category_id": 1,
+        "year": 2017,
+        "context": "Get Out",
+        "detail": "",
+        "nominee": "Daniel Kaluuya",
+        "id": 2282,
+        "odds_numerator": 16
       }
     ],
     "name": "Actor",

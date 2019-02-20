@@ -1,22 +1,11 @@
 const model = require('./model');
 const _ = require('underscore');
 
-const oscarsYear = 2018;
-
-function getMyVotes(person_id, year) {
-  return model.Vote.findAll({
-    where: {
-      person_id: person_id,
-      year: year
-    }
-  });
-}
-
 exports.getCategories = function(request, response) {
   model.Category.findAll().then(categories => {
     model.Nomination.findAll({
       where: {
-        year: oscarsYear
+        year: request.query.year
       }
     }).then(nominations => {
       let outputObject = [];
@@ -24,7 +13,7 @@ exports.getCategories = function(request, response) {
       model.Vote.findAll({
         where: {
           person_id: request.query.person_id,
-          year: oscarsYear
+          year: request.query.year
         }
       }).then(votes => {
 
