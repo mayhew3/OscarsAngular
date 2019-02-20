@@ -5,5 +5,5 @@ export class Category {
   name: string;
   points: number;
   nominees: Nominee[];
-  voted_on?: boolean;
+  voted_on?: number;
 }

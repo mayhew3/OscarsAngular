@@ -5,7 +5,6 @@ export class Nominee {
   detail: string;
   category_id: number;
   year: number;
-  voted_on?: boolean;
   odds_expert?: number;
   odds_user?: number;
   odds_numerator?: number;

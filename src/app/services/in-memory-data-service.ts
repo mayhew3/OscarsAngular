@@ -105,14 +105,7 @@ export class InMemoryDataService implements InMemoryDbService {
       const person_id = entries.next().value[1][0];
 
       _.forEach(requestInfo.collection, category => {
-        category.voted_on = false;
-        _.forEach(category.nominees, nominee => {
-          const hasVote = this.hasVote(nominee.id, category.id, +person_id, 2018);
-          if (!category.voted_on) {
-            category.voted_on = hasVote;
-          }
-          nominee.voted_on = hasVote;
-        });
+        category.voted_on = this.getVoteForCategory(category.id, +person_id, 2018);
       });
 
       const data = requestInfo.collection;
@@ -130,14 +123,13 @@ export class InMemoryDataService implements InMemoryDbService {
     });
   }
 
-  private hasVote(nominee_id: number, category_id: number, person_id: number, year: number): boolean {
+  private getVoteForCategory(category_id: number, person_id: number, year: number): number {
     const existingVote = _.findWhere(this.votes, {
       category_id: category_id,
       person_id: person_id,
-      year: year,
-      nomination_id: nominee_id
+      year: year
     });
-    return !_.isUndefined(existingVote);
+    return existingVote ? existingVote.nominee_id : undefined;
   }
 
 

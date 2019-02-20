@@ -39,10 +39,7 @@ exports.getCategories = function(request, response) {
           let category_object = category.dataValues;
 
           if (cat_votes.length > 0) {
-            category_object.voted_on = true;
-            const nominationId = cat_votes[0].dataValues.nomination_id;
-            const votedNomination = _.find(cat_noms, nom => nom.dataValues.id === nominationId);
-            votedNomination.dataValues.voted_on = true;
+            category_object.voted_on = cat_votes[0].dataValues.nomination_id;
           }
 
           category_object.nominees = cat_noms;
