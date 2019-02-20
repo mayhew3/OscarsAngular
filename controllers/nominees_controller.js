@@ -1,24 +1,57 @@
 const model = require('./model');
 const _ = require('underscore');
 
+const oscarsYear = 2018;
+
+function getMyVotes(person_id, year) {
+  return model.Vote.findAll({
+    where: {
+      person_id: person_id,
+      year: year
+    }
+  });
+}
+
 exports.getCategories = function(request, response) {
   model.Category.findAll().then(categories => {
     model.Nomination.findAll({
       where: {
-        year: 2018
+        year: oscarsYear
       }
     }).then(nominations => {
       let outputObject = [];
 
-      _.forEach(categories, function(category) {
-        let cat_noms = _.where(nominations, {category_id: category.id});
-        let category_object = category.dataValues;
-        category_object.nominees = cat_noms;
+      model.Vote.findAll({
+        where: {
+          person_id: request.query.person_id,
+          year: oscarsYear
+        }
+      }).then(votes => {
 
-        outputObject.push(category_object);
+        _.forEach(categories, function(category) {
+          let cat_noms = _.where(nominations, {category_id: category.id});
+          let cat_votes = _.where(votes, {category_id: category.id});
+
+          if (cat_votes.length > 1) {
+            throw new Error("Multiple votes found for category " + category.id);
+          }
+
+          let category_object = category.dataValues;
+
+          if (cat_votes.length > 0) {
+            category_object.voted_on = true;
+            const nominationId = cat_votes[0].dataValues.nomination_id;
+            const votedNomination = _.find(cat_noms, nom => nom.dataValues.id === nominationId);
+            votedNomination.dataValues.voted_on = true;
+          }
+
+          category_object.nominees = cat_noms;
+
+          outputObject.push(category_object);
+        });
+
+        response.json(outputObject);
       });
-
-      response.json(outputObject);
     });
   });
 };
