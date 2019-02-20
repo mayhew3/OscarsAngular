@@ -15,6 +15,7 @@ exports.Nomination = sequelize.sequelize.define("nomination", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   nominee: Sequelize.TEXT,
   context: Sequelize.TEXT,
+  detail: Sequelize.TEXT,
   year: Sequelize.INTEGER,
   odds_expert: Sequelize.DECIMAL,
   odds_user: Sequelize.DECIMAL,
