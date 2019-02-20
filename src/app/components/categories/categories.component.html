@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-12 col-sm-6 col-lg-4"
          *ngFor="let category of categories">
-      <div class="card categoryCard">
+      <div class="card categoryCard" [ngClass]="getVotedClass(category)">
         <div class="card-body"
              [routerLink]="[category.id]">
           <div class="row">

@@ -3,6 +3,8 @@ import {TestBed} from '@angular/core/testing';
 import {CategoryService} from './category.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestCategoryList} from './data/categories.test.mock';
+import {AuthService} from './auth/auth.service';
+import {AuthServiceStub} from './auth/auth.service.stub';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -10,7 +12,8 @@ describe('CategoryService', () => {
   let httpMock: HttpTestingController;
 
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule]
+    imports: [HttpClientTestingModule],
+    providers: [{provide: AuthService, useClass: AuthServiceStub}]
   }));
 
   beforeEach(() => {
@@ -20,8 +23,9 @@ describe('CategoryService', () => {
   });
 
   function doFirstCategoriesRequest() {
-    const testRequest = httpMock.expectOne(service.categoriesUrl);
+    const testRequest = httpMock.expectOne(req => req.url === service.categoriesUrl);
     expect(testRequest.request.method).toBe('GET');
+    expect(testRequest.request.params).toMatch('person_id=18');
     testRequest.flush(TestCategoryList);
 
     httpMock.verify();

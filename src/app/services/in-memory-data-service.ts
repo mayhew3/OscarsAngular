@@ -5,6 +5,7 @@ import {MockCategoryList} from './data/categories.mock';
 import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';
 import {Vote} from '../interfaces/Vote';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,8 @@ export class InMemoryDataService implements InMemoryDbService {
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'votes') {
       return this.getVote(requestInfo);
+    } else if (collectionName === 'categories') {
+      return this.getCategoriesWithVotes(requestInfo);
     }
   }
 
@@ -61,7 +64,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return undefined;
   }
 
-  private getVote(requestInfo: RequestInfo) {
+  private getVote(requestInfo: RequestInfo): Observable<any> {
     return requestInfo.utils.createResponse$(() => {
       console.log('HTTP GET override');
 
@@ -90,6 +93,51 @@ export class InMemoryDataService implements InMemoryDbService {
         };
       return InMemoryDataService.finishOptions(options, requestInfo);
     });
+  }
+
+  private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<any> {
+    return requestInfo.utils.createResponse$(() => {
+      console.log('HTTP GET override');
+
+      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
+
+      const entries = requestInfo.query.entries();
+      const person_id = entries.next().value[1][0];
+
+      _.forEach(requestInfo.collection, category => {
+        category.voted_on = false;
+        _.forEach(category.nominees, nominee => {
+          const hasVote = this.hasVote(nominee.id, category.id, +person_id, 2018);
+          if (!category.voted_on) {
+            category.voted_on = hasVote;
+          }
+          nominee.voted_on = hasVote;
+        });
+      });
+
+      const data = requestInfo.collection;
+
+      const options: ResponseOptions = data ?
+        {
+          body: dataEncapsulation ? { data } : data,
+          status: STATUS.OK
+        } :
+        {
+          body: dataEncapsulation ? { } : data,
+          status: STATUS.OK
+        };
+      return InMemoryDataService.finishOptions(options, requestInfo);
+    });
+  }
+
+  private hasVote(nominee_id: number, category_id: number, person_id: number, year: number): boolean {
+    const existingVote = _.findWhere(this.votes, {
+      category_id: category_id,
+      person_id: person_id,
+      year: year,
+      nomination_id: nominee_id
+    });
+    return !_.isUndefined(existingVote);
   }
 
 

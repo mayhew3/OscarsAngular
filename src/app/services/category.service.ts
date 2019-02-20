@@ -5,6 +5,7 @@ import {Category} from '../interfaces/Category';
 import {catchError, tap} from 'rxjs/operators';
 import {_} from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
+import {AuthService} from './auth/auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,7 +19,8 @@ export class CategoryService {
   categoriesUrl = 'api/categories';
   cache: Category[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private auth: AuthService) {
     this.cache = [];
   }
 
@@ -94,7 +96,7 @@ export class CategoryService {
   private maybeUpdateCache(): Observable<Category[]> {
     if (this.cache.length === 0) {
       return new Observable<Category[]>((observer) => {
-        this.http.get<Category[]>(this.categoriesUrl)
+        this.http.get<Category[]>(this.categoriesUrl, {params: {person_id: this.auth.getPerson().id.toString()}})
           .pipe(
             catchError(this.handleError<Category[]>('getCategories', []))
           )

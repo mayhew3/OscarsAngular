@@ -30,7 +30,6 @@ export class NomineesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       const category_id = +params['category_id'];
-      const person = this.auth.getPerson();
 
       this.categoryService.getNominees(category_id)
         .subscribe(nominees => {
@@ -42,14 +41,9 @@ export class NomineesComponent implements OnInit {
         .subscribe(category => this.nextCategory = category);
       this.categoryService.getPreviousCategory(category_id)
         .subscribe(category => this.previousCategory = category);
-
-      if (person && this.voting()) {
-        this.votesService.getVoteForCategory(category_id, 2018, this.auth.getPerson().id).subscribe(vote => {
-          if (vote) {
-            this.votedNominee = this.getNomineeWithID(vote.nomination_id);
-          }
-        });
-      }
+      this.votedNominee = _.findWhere(this.nominees, {
+        voted_on: true
+      });
     });
   }
 
@@ -57,7 +51,12 @@ export class NomineesComponent implements OnInit {
     this.votesService.addOrUpdateVote(nominee, this.auth.getPerson()).subscribe((vote: Vote) => {
       // todo: MA-40 - this sucks, better way to check for error response.
       if (vote && vote.id) {
+        if (this.votedNominee) {
+          this.votedNominee.voted_on = false;
+        }
+        nominee.voted_on = true;
         this.votedNominee = nominee;
+        this.category.voted_on = true;
       }
     });
   }
@@ -78,12 +77,8 @@ export class NomineesComponent implements OnInit {
     }
   }
 
-  getNomineeWithID(nomination_id: number): Nominee {
-    return _.findWhere(this.nominees, {id: nomination_id});
-  }
-
   isVoted(nominee: Nominee): boolean {
-    return this.votedNominee && this.votedNominee.id === nominee.id;
+    return nominee.voted_on === true;
   }
 
   getVotedClass(nominee: Nominee): string {
