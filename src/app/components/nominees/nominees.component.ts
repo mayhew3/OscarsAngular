@@ -62,6 +62,22 @@ export class NomineesComponent implements OnInit {
     });
   }
 
+  getMainLineText(nominee: Nominee): string {
+    return nominee.nominee;
+  }
+
+  getSubtitleText(nominee: Nominee): string {
+    const singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
+
+    if (singleLineCategories.includes(this.category.name)) {
+      return undefined;
+    } else if (nominee.nominee === nominee.context) {
+      return nominee.detail;
+    } else {
+      return nominee.context;
+    }
+  }
+
   getNomineeWithID(nomination_id: number): Nominee {
     return _.findWhere(this.nominees, {id: nomination_id});
   }

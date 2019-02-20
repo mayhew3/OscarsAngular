@@ -8,7 +8,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Vice",
         "nominee": "Christian Bale",
-        "id": 2574,
+        "id": 2695,
         "detail": "Vice"
       },
       {
@@ -16,7 +16,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Star Is Born",
         "nominee": "Bradley Cooper",
-        "id": 2575,
+        "id": 2696,
         "detail": "A Star Is Born"
       },
       {
@@ -24,7 +24,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "At Eternity's Gate",
         "nominee": "Willem Dafoe",
-        "id": 2576,
+        "id": 2697,
         "detail": "At Eternity's Gate"
       },
       {
@@ -32,7 +32,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Bohemian Rhapsody",
         "nominee": "Rami Malek",
-        "id": 2577,
+        "id": 2698,
         "detail": "Bohemian Rhapsody"
       },
       {
@@ -40,7 +40,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Green Book",
         "nominee": "Viggo Mortensen",
-        "id": 2578,
+        "id": 2699,
         "detail": "Green Book"
       }
     ],
@@ -55,7 +55,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Yalitza Aparicio",
-        "id": 2584,
+        "id": 2705,
         "detail": "Roma"
       },
       {
@@ -63,7 +63,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Wife",
         "nominee": "Glenn Close",
-        "id": 2585,
+        "id": 2706,
         "detail": "The Wife"
       },
       {
@@ -71,7 +71,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "Olivia Colman",
-        "id": 2586,
+        "id": 2707,
         "detail": "The Favourite"
       },
       {
@@ -79,7 +79,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Star Is Born",
         "nominee": "Lady Gaga",
-        "id": 2587,
+        "id": 2708,
         "detail": "A Star Is Born"
       },
       {
@@ -87,7 +87,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Can You Ever Forgive Me?",
         "nominee": "Melissa Mccarthy",
-        "id": 2588,
+        "id": 2709,
         "detail": "Can You Ever Forgive Me?"
       }
     ],
@@ -102,15 +102,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Incredibles 2",
         "nominee": "Incredibles 2",
-        "id": 2594,
+        "id": 2715,
         "detail": "Brad Bird, John Walker and Nicole Paradis Grindle"
       },
       {
         "category_id": 3,
         "year": 2018,
-        "context": "Isle Of Dogs",
-        "nominee": "Isle Of Dogs",
-        "id": 2595,
+        "context": "Isle of Dogs",
+        "nominee": "Isle of Dogs",
+        "id": 2716,
         "detail": "Wes Anderson, Scott Rudin, Steven Rales and Jeremy Dawson"
       },
       {
@@ -118,23 +118,23 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Mirai",
         "nominee": "Mirai",
-        "id": 2596,
+        "id": 2717,
         "detail": "Mamoru Hosoda and Yuichiro Saito"
       },
       {
         "category_id": 3,
         "year": 2018,
-        "context": "Ralph Breaks The Internet",
-        "nominee": "Ralph Breaks The Internet",
-        "id": 2597,
+        "context": "Ralph Breaks the Internet",
+        "nominee": "Ralph Breaks the Internet",
+        "id": 2718,
         "detail": "Rich Moore, Phil Johnston and Clark Spencer"
       },
       {
         "category_id": 3,
         "year": 2018,
-        "context": "Spider-Man: Into The Spider-Verse",
-        "nominee": "Spider-Man: Into The Spider-Verse",
-        "id": 2598,
+        "context": "Spider-Man: Into the Spider-Verse",
+        "nominee": "Spider-Man: Into the Spider-Verse",
+        "id": 2719,
         "detail": "Bob Persichetti, Peter Ramsey, Rodney Rothman, Phil Lord and Christopher Miller"
       }
     ],
@@ -149,15 +149,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Black Panther",
         "nominee": "Black Panther",
-        "id": 2647,
+        "id": 2768,
         "detail": "Kevin Feige, Producer"
       },
       {
         "category_id": 5,
         "year": 2018,
-        "context": "Blackkklansman",
-        "nominee": "Blackkklansman",
-        "id": 2648,
+        "context": "BlacKkKlansman",
+        "nominee": "BlacKkKlansman",
+        "id": 2769,
         "detail": "Sean McKittrick, Jason Blum, Raymond Mansfield, Jordan Peele and Spike Lee, Producers"
       },
       {
@@ -165,7 +165,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Bohemian Rhapsody",
         "nominee": "Bohemian Rhapsody",
-        "id": 2649,
+        "id": 2770,
         "detail": "Graham King, Producer"
       },
       {
@@ -173,7 +173,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "The Favourite",
-        "id": 2650,
+        "id": 2771,
         "detail": "Ceci Dempsey, Ed Guiney, Lee Magiday and Yorgos Lanthimos, Producers"
       },
       {
@@ -181,7 +181,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Green Book",
         "nominee": "Green Book",
-        "id": 2651,
+        "id": 2772,
         "detail": "Jim Burke, Charles B. Wessler, Brian Currie, Peter Farrelly and Nick Vallelonga, Producers"
       },
       {
@@ -189,7 +189,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Roma",
-        "id": 2652,
+        "id": 2773,
         "detail": "Gabriela Rodríguez and Alfonso Cuarón, Producers"
       },
       {
@@ -197,7 +197,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Star Is Born",
         "nominee": "A Star Is Born",
-        "id": 2653,
+        "id": 2774,
         "detail": "Bill Gerber, Bradley Cooper and Lynette Howell Taylor, Producers"
       },
       {
@@ -205,7 +205,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Vice",
         "nominee": "Vice",
-        "id": 2654,
+        "id": 2775,
         "detail": "Dede Gardner, Jeremy Kleiner, Adam McKay and Kevin Messick, Producers"
       }
     ],
@@ -220,7 +220,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Cold War",
         "nominee": "Cold War",
-        "id": 2599,
+        "id": 2720,
         "detail": "Łukasz Żal"
       },
       {
@@ -228,7 +228,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "The Favourite",
-        "id": 2600,
+        "id": 2721,
         "detail": "Robbie Ryan"
       },
       {
@@ -236,7 +236,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Never Look Away",
         "nominee": "Never Look Away",
-        "id": 2601,
+        "id": 2722,
         "detail": "Caleb Deschanel"
       },
       {
@@ -244,7 +244,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Roma",
-        "id": 2602,
+        "id": 2723,
         "detail": "Alfonso Cuarón"
       },
       {
@@ -252,7 +252,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Star Is Born",
         "nominee": "A Star Is Born",
-        "id": 2603,
+        "id": 2724,
         "detail": "Matthew Libatique"
       }
     ],
@@ -265,9 +265,9 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 7,
         "year": 2018,
-        "context": "The Ballad Of Buster Scruggs",
-        "nominee": "The Ballad Of Buster Scruggs",
-        "id": 2604,
+        "context": "The Ballad of Buster Scruggs",
+        "nominee": "The Ballad of Buster Scruggs",
+        "id": 2725,
         "detail": "Mary Zophres"
       },
       {
@@ -275,7 +275,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Black Panther",
         "nominee": "Black Panther",
-        "id": 2605,
+        "id": 2726,
         "detail": "Ruth Carter"
       },
       {
@@ -283,7 +283,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "The Favourite",
-        "id": 2606,
+        "id": 2727,
         "detail": "Sandy Powell"
       },
       {
@@ -291,15 +291,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Mary Poppins Returns",
         "nominee": "Mary Poppins Returns",
-        "id": 2607,
+        "id": 2728,
         "detail": "Sandy Powell"
       },
       {
         "category_id": 7,
         "year": 2018,
-        "context": "Mary Queen Of Scots",
-        "nominee": "Mary Queen Of Scots",
-        "id": 2608,
+        "context": "Mary Queen of Scots",
+        "nominee": "Mary Queen of Scots",
+        "id": 2729,
         "detail": "Alexandra Byrne"
       }
     ],
@@ -312,9 +312,9 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 8,
         "year": 2018,
-        "context": "Blackkklansman",
-        "nominee": "Blackkklansman",
-        "id": 2609,
+        "context": "BlacKkKlansman",
+        "nominee": "BlacKkKlansman",
+        "id": 2730,
         "detail": "Spike Lee"
       },
       {
@@ -322,7 +322,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Cold War",
         "nominee": "Cold War",
-        "id": 2610,
+        "id": 2731,
         "detail": "Paweł Pawlikowski"
       },
       {
@@ -330,7 +330,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "The Favourite",
-        "id": 2611,
+        "id": 2732,
         "detail": "Yorgos Lanthimos"
       },
       {
@@ -338,7 +338,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Roma",
-        "id": 2612,
+        "id": 2733,
         "detail": "Alfonso Cuarón"
       },
       {
@@ -346,7 +346,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Vice",
         "nominee": "Vice",
-        "id": 2613,
+        "id": 2734,
         "detail": "Adam McKay"
       }
     ],
@@ -361,7 +361,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Free Solo",
         "nominee": "Free Solo",
-        "id": 2614,
+        "id": 2735,
         "detail": "Elizabeth Chai Vasarhelyi, Jimmy Chin, Evan Hayes and Shannon Dill"
       },
       {
@@ -369,15 +369,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Hale County This Morning, This Evening",
         "nominee": "Hale County This Morning, This Evening",
-        "id": 2615,
+        "id": 2736,
         "detail": "RaMell Ross, Joslyn Barnes and Su Kim"
       },
       {
         "category_id": 9,
         "year": 2018,
-        "context": "Minding The Gap",
-        "nominee": "Minding The Gap",
-        "id": 2616,
+        "context": "Minding the Gap",
+        "nominee": "Minding the Gap",
+        "id": 2737,
         "detail": "Bing Liu and Diane Quon"
       },
       {
@@ -385,15 +385,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Of Fathers And Sons",
         "nominee": "Of Fathers And Sons",
-        "id": 2617,
+        "id": 2738,
         "detail": "Talal Derki, Ansgar Frerich, Eva Kemme and Tobias N. Siebert"
       },
       {
         "category_id": 9,
         "year": 2018,
-        "context": "Rbg",
-        "nominee": "Rbg",
-        "id": 2618,
+        "context": "RBG",
+        "nominee": "RBG",
+        "id": 2739,
         "detail": "Betsy West and Julie Cohen"
       }
     ],
@@ -408,7 +408,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Black Sheep",
         "nominee": "Black Sheep",
-        "id": 2619,
+        "id": 2740,
         "detail": "Ed Perkins and Jonathan Chinn"
       },
       {
@@ -416,7 +416,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "End Game",
         "nominee": "End Game",
-        "id": 2620,
+        "id": 2741,
         "detail": "Rob Epstein and Jeffrey Friedman"
       },
       {
@@ -424,23 +424,23 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Lifeboat",
         "nominee": "Lifeboat",
-        "id": 2621,
+        "id": 2742,
         "detail": "Skye Fitzgerald and Bryn Mooser"
       },
       {
         "category_id": 10,
         "year": 2018,
-        "context": "A Night At The Garden",
-        "nominee": "A Night At The Garden",
-        "id": 2622,
+        "context": "A Night at the Garden",
+        "nominee": "A Night at the Garden",
+        "id": 2743,
         "detail": "Marshall Curry"
       },
       {
         "category_id": 10,
         "year": 2018,
-        "context": "Period. End Of Sentence.",
-        "nominee": "Period. End Of Sentence.",
-        "id": 2623,
+        "context": "Period. End of Sentence.",
+        "nominee": "Period. End of Sentence.",
+        "id": 2744,
         "detail": "Rayka Zehtabchi and Melissa Berton"
       }
     ],
@@ -453,9 +453,9 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 11,
         "year": 2018,
-        "context": "Blackkklansman",
-        "nominee": "Blackkklansman",
-        "id": 2624,
+        "context": "BlacKkKlansman",
+        "nominee": "BlacKkKlansman",
+        "id": 2745,
         "detail": "Barry Alexander Brown"
       },
       {
@@ -463,7 +463,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Bohemian Rhapsody",
         "nominee": "Bohemian Rhapsody",
-        "id": 2625,
+        "id": 2746,
         "detail": "John Ottman"
       },
       {
@@ -471,7 +471,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "The Favourite",
-        "id": 2626,
+        "id": 2747,
         "detail": "Yorgos Mavropsaridis"
       },
       {
@@ -479,7 +479,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Green Book",
         "nominee": "Green Book",
-        "id": 2627,
+        "id": 2748,
         "detail": "Patrick J. Don Vito"
       },
       {
@@ -487,7 +487,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Vice",
         "nominee": "Vice",
-        "id": 2628,
+        "id": 2749,
         "detail": "Hank Corwin"
       }
     ],
@@ -502,7 +502,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Capernaum",
         "nominee": "Capernaum",
-        "id": 2629,
+        "id": 2750,
         "detail": "Lebanon"
       },
       {
@@ -510,7 +510,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Cold War",
         "nominee": "Cold War",
-        "id": 2630,
+        "id": 2751,
         "detail": "Poland"
       },
       {
@@ -518,7 +518,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Never Look Away",
         "nominee": "Never Look Away",
-        "id": 2631,
+        "id": 2752,
         "detail": "Germany"
       },
       {
@@ -526,7 +526,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Roma",
-        "id": 2632,
+        "id": 2753,
         "detail": "Mexico"
       },
       {
@@ -534,7 +534,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Shoplifters",
         "nominee": "Shoplifters",
-        "id": 2633,
+        "id": 2754,
         "detail": "Japan"
       }
     ],
@@ -549,7 +549,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Animal Behaviour",
         "nominee": "Animal Behaviour",
-        "id": 2660,
+        "id": 2781,
         "detail": "Alison Snowden and David Fine"
       },
       {
@@ -557,7 +557,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Bao",
         "nominee": "Bao",
-        "id": 2661,
+        "id": 2782,
         "detail": "Domee Shi and Becky Neiman-Cobb"
       },
       {
@@ -565,7 +565,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Late Afternoon",
         "nominee": "Late Afternoon",
-        "id": 2662,
+        "id": 2783,
         "detail": "Louise Bagnall and Nuria González Blanco"
       },
       {
@@ -573,7 +573,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "One Small Step",
         "nominee": "One Small Step",
-        "id": 2663,
+        "id": 2784,
         "detail": "Andrew Chesworth and Bobby Pontillas"
       },
       {
@@ -581,7 +581,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Weekends",
         "nominee": "Weekends",
-        "id": 2664,
+        "id": 2785,
         "detail": "Trevor Jimenez"
       }
     ],
@@ -596,7 +596,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Detainment",
         "nominee": "Detainment",
-        "id": 2665,
+        "id": 2786,
         "detail": "Vincent Lambe and Darren Mahon"
       },
       {
@@ -604,7 +604,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Fauve",
         "nominee": "Fauve",
-        "id": 2666,
+        "id": 2787,
         "detail": "Jeremy Comte and Maria Gracia Turgeon"
       },
       {
@@ -612,7 +612,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Marguerite",
         "nominee": "Marguerite",
-        "id": 2667,
+        "id": 2788,
         "detail": "Marianne Farley and Marie-Hélène Panisset"
       },
       {
@@ -620,7 +620,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Mother",
         "nominee": "Mother",
-        "id": 2668,
+        "id": 2789,
         "detail": "Rodrigo Sorogoyen and María del Puy Alvarado"
       },
       {
@@ -628,7 +628,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Skin",
         "nominee": "Skin",
-        "id": 2669,
+        "id": 2790,
         "detail": "Guy Nattiv and Jaime Ray Newman"
       }
     ],
@@ -643,7 +643,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Black Panther",
         "nominee": "Black Panther",
-        "id": 2670,
+        "id": 2791,
         "detail": "Benjamin A. Burtt and Steve Boeddeker"
       },
       {
@@ -651,7 +651,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Bohemian Rhapsody",
         "nominee": "Bohemian Rhapsody",
-        "id": 2671,
+        "id": 2792,
         "detail": "John Warhurst and Nina Hartstone"
       },
       {
@@ -659,7 +659,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "First Man",
         "nominee": "First Man",
-        "id": 2672,
+        "id": 2793,
         "detail": "Ai-Ling Lee and Mildred Iatrou Morgan"
       },
       {
@@ -667,7 +667,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Quiet Place",
         "nominee": "A Quiet Place",
-        "id": 2673,
+        "id": 2794,
         "detail": "Ethan Van der Ryn and Erik Aadahl"
       },
       {
@@ -675,7 +675,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Roma",
-        "id": 2674,
+        "id": 2795,
         "detail": "Sergio Díaz and Skip Lievsay"
       }
     ],
@@ -690,7 +690,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Black Panther",
         "nominee": "Black Panther",
-        "id": 2675,
+        "id": 2796,
         "detail": "Steve Boeddeker, Brandon Proctor and Peter Devlin"
       },
       {
@@ -698,7 +698,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Bohemian Rhapsody",
         "nominee": "Bohemian Rhapsody",
-        "id": 2676,
+        "id": 2797,
         "detail": "Paul Massey, Tim Cavagin and John Casali"
       },
       {
@@ -706,7 +706,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "First Man",
         "nominee": "First Man",
-        "id": 2677,
+        "id": 2798,
         "detail": "Jon Taylor, Frank A. Montaño, Ai-Ling Lee and Mary H. Ellis"
       },
       {
@@ -714,7 +714,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Roma",
-        "id": 2678,
+        "id": 2799,
         "detail": "Skip Lievsay, Craig Henighan and José Antonio García"
       },
       {
@@ -722,7 +722,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Star Is Born",
         "nominee": "A Star Is Born",
-        "id": 2679,
+        "id": 2800,
         "detail": "Tom Ozanich, Dean Zupancic, Jason Ruder and Steve Morrow"
       }
     ],
@@ -737,15 +737,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Green Book",
         "nominee": "Mahershala Ali",
-        "id": 2579,
+        "id": 2700,
         "detail": "Green Book"
       },
       {
         "category_id": 20,
         "year": 2018,
-        "context": "Blackkklansman",
+        "context": "BlacKkKlansman",
         "nominee": "Adam Driver",
-        "id": 2580,
+        "id": 2701,
         "detail": "BlacKkKlansman"
       },
       {
@@ -753,7 +753,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Star Is Born",
         "nominee": "Sam Elliott",
-        "id": 2581,
+        "id": 2702,
         "detail": "A Star Is Born"
       },
       {
@@ -761,7 +761,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Can You Ever Forgive Me?",
         "nominee": "Richard E. Grant",
-        "id": 2582,
+        "id": 2703,
         "detail": "Can You Ever Forgive Me?"
       },
       {
@@ -769,7 +769,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Vice",
         "nominee": "Sam Rockwell",
-        "id": 2583,
+        "id": 2704,
         "detail": "Vice"
       }
     ],
@@ -784,15 +784,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Vice",
         "nominee": "Amy Adams",
-        "id": 2589,
+        "id": 2710,
         "detail": "Vice"
       },
       {
         "category_id": 21,
         "year": 2018,
         "context": "Roma",
-        "nominee": "Marina De Tavira",
-        "id": 2590,
+        "nominee": "Marina de Tavira",
+        "id": 2711,
         "detail": "Roma"
       },
       {
@@ -800,7 +800,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "If Beale Street Could Talk",
         "nominee": "Regina King",
-        "id": 2591,
+        "id": 2712,
         "detail": "If Beale Street Could Talk"
       },
       {
@@ -808,7 +808,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "Emma Stone",
-        "id": 2592,
+        "id": 2713,
         "detail": "The Favourite"
       },
       {
@@ -816,7 +816,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "Rachel Weisz",
-        "id": 2593,
+        "id": 2714,
         "detail": "The Favourite"
       }
     ],
@@ -831,7 +831,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Avengers: Infinity War",
         "nominee": "Avengers: Infinity War",
-        "id": 2680,
+        "id": 2801,
         "detail": "Dan DeLeeuw, Kelly Port, Russell Earl and Dan Sudick"
       },
       {
@@ -839,7 +839,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Christopher Robin",
         "nominee": "Christopher Robin",
-        "id": 2681,
+        "id": 2802,
         "detail": "Christopher Lawrence, Michael Eames, Theo Jones and Chris Corbould"
       },
       {
@@ -847,7 +847,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "First Man",
         "nominee": "First Man",
-        "id": 2682,
+        "id": 2803,
         "detail": "Paul Lambert, Ian Hunter, Tristan Myles and J.D. Schwalm"
       },
       {
@@ -855,7 +855,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Ready Player One",
         "nominee": "Ready Player One",
-        "id": 2683,
+        "id": 2804,
         "detail": "Roger Guyett, Grady Cofer, Matthew E. Butler and David Shirk"
       },
       {
@@ -863,7 +863,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Solo: A Star Wars Story",
         "nominee": "Solo: A Star Wars Story",
-        "id": 2684,
+        "id": 2805,
         "detail": "Rob Bredow, Patrick Tubach, Neal Scanlan and Dominic Tuohy"
       }
     ],
@@ -876,17 +876,17 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 23,
         "year": 2018,
-        "context": "The Ballad Of Buster Scruggs",
-        "nominee": "The Ballad Of Buster Scruggs",
-        "id": 2685,
+        "context": "The Ballad of Buster Scruggs",
+        "nominee": "The Ballad of Buster Scruggs",
+        "id": 2806,
         "detail": "Written by Joel Coen & Ethan Coen"
       },
       {
         "category_id": 23,
         "year": 2018,
-        "context": "Blackkklansman",
-        "nominee": "Blackkklansman",
-        "id": 2686,
+        "context": "BlacKkKlansman",
+        "nominee": "BlacKkKlansman",
+        "id": 2807,
         "detail": "Written by Charlie Wachtel & David Rabinowitz and Kevin Willmott & Spike Lee"
       },
       {
@@ -894,7 +894,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Can You Ever Forgive Me?",
         "nominee": "Can You Ever Forgive Me?",
-        "id": 2687,
+        "id": 2808,
         "detail": "Screenplay by Nicole Holofcener and Jeff Whitty"
       },
       {
@@ -902,7 +902,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "If Beale Street Could Talk",
         "nominee": "If Beale Street Could Talk",
-        "id": 2688,
+        "id": 2809,
         "detail": "Written for the screen by Barry Jenkins"
       },
       {
@@ -910,7 +910,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Star Is Born",
         "nominee": "A Star Is Born",
-        "id": 2689,
+        "id": 2810,
         "detail": "Screenplay by Eric Roth and Bradley Cooper & Will Fetters"
       }
     ],
@@ -925,7 +925,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "The Favourite",
-        "id": 2690,
+        "id": 2811,
         "detail": "Written by Deborah Davis and Tony McNamara"
       },
       {
@@ -933,7 +933,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "First Reformed",
         "nominee": "First Reformed",
-        "id": 2691,
+        "id": 2812,
         "detail": "Written by Paul Schrader"
       },
       {
@@ -941,7 +941,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Green Book",
         "nominee": "Green Book",
-        "id": 2692,
+        "id": 2813,
         "detail": "Written by Nick Vallelonga, Brian Currie, Peter Farrelly"
       },
       {
@@ -949,7 +949,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Roma",
-        "id": 2693,
+        "id": 2814,
         "detail": "Written by Alfonso Cuarón"
       },
       {
@@ -957,7 +957,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Vice",
         "nominee": "Vice",
-        "id": 2694,
+        "id": 2815,
         "detail": "Written by Adam McKay"
       }
     ],
@@ -972,7 +972,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Black Panther",
         "nominee": "Black Panther",
-        "id": 2655,
+        "id": 2776,
         "detail": "Production Design: Hannah Beachler; Set Decoration: Jay Hart"
       },
       {
@@ -980,7 +980,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "The Favourite",
         "nominee": "The Favourite",
-        "id": 2656,
+        "id": 2777,
         "detail": "Production Design: Fiona Crombie; Set Decoration: Alice Felton"
       },
       {
@@ -988,7 +988,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "First Man",
         "nominee": "First Man",
-        "id": 2657,
+        "id": 2778,
         "detail": "Production Design: Nathan Crowley; Set Decoration: Kathy Lucas"
       },
       {
@@ -996,7 +996,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Mary Poppins Returns",
         "nominee": "Mary Poppins Returns",
-        "id": 2658,
+        "id": 2779,
         "detail": "Production Design: John Myhre; Set Decoration: Gordon Sim"
       },
       {
@@ -1004,7 +1004,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Roma",
         "nominee": "Roma",
-        "id": 2659,
+        "id": 2780,
         "detail": "Production Design: Eugenio Caballero; Set Decoration: Bárbara Enríquez"
       }
     ],
@@ -1019,15 +1019,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Border",
         "nominee": "Border",
-        "id": 2634,
+        "id": 2755,
         "detail": "Göran Lundström and Pamela Goldammer"
       },
       {
         "category_id": 13,
         "year": 2018,
-        "context": "Mary Queen Of Scots",
-        "nominee": "Mary Queen Of Scots",
-        "id": 2635,
+        "context": "Mary Queen of Scots",
+        "nominee": "Mary Queen of Scots",
+        "id": 2756,
         "detail": "Jenny Shircore, Marc Pilcher and Jessica Brooks"
       },
       {
@@ -1035,7 +1035,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Vice",
         "nominee": "Vice",
-        "id": 2636,
+        "id": 2757,
         "detail": "Greg Cannom, Kate Biscoe and Patricia DeHaney"
       }
     ],
@@ -1050,15 +1050,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Black Panther",
         "nominee": "Black Panther",
-        "id": 2637,
+        "id": 2758,
         "detail": "Ludwig Goransson"
       },
       {
         "category_id": 14,
         "year": 2018,
-        "context": "Blackkklansman",
-        "nominee": "Blackkklansman",
-        "id": 2638,
+        "context": "BlacKkKlansman",
+        "nominee": "BlacKkKlansman",
+        "id": 2759,
         "detail": "Terence Blanchard"
       },
       {
@@ -1066,15 +1066,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "If Beale Street Could Talk",
         "nominee": "If Beale Street Could Talk",
-        "id": 2639,
+        "id": 2760,
         "detail": "Nicholas Britell"
       },
       {
         "category_id": 14,
         "year": 2018,
-        "context": "Isle Of Dogs",
-        "nominee": "Isle Of Dogs",
-        "id": 2640,
+        "context": "Isle of Dogs",
+        "nominee": "Isle of Dogs",
+        "id": 2761,
         "detail": "Alexandre Desplat"
       },
       {
@@ -1082,7 +1082,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Mary Poppins Returns",
         "nominee": "Mary Poppins Returns",
-        "id": 2641,
+        "id": 2762,
         "detail": "Marc Shaiman"
       }
     ],
@@ -1096,16 +1096,16 @@ export const MockCategoryList: Category[] = [
         "category_id": 15,
         "year": 2018,
         "context": "Black Panther",
-        "nominee": "All The Stars",
-        "id": 2642,
+        "nominee": "All the Stars",
+        "id": 2763,
         "detail": "from Black Panther; Music by Mark Spears, Kendrick Lamar Duckworth and Anthony Tiffith; Lyric by Kendrick Lamar Duckworth, Anthony Tiffith and Solana Rowe"
       },
       {
         "category_id": 15,
         "year": 2018,
-        "context": "Rbg",
-        "nominee": "I'Ll Fight",
-        "id": 2643,
+        "context": "RBG",
+        "nominee": "I'll Fight",
+        "id": 2764,
         "detail": "from RBG; Music and Lyric by Diane Warren"
       },
       {
@@ -1113,7 +1113,7 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "Mary Poppins Returns",
         "nominee": "The Place Where Lost Things Go",
-        "id": 2644,
+        "id": 2765,
         "detail": "from Mary Poppins Returns; Music by Marc Shaiman; Lyric by Scott Wittman and Marc Shaiman"
       },
       {
@@ -1121,15 +1121,15 @@ export const MockCategoryList: Category[] = [
         "year": 2018,
         "context": "A Star Is Born",
         "nominee": "Shallow",
-        "id": 2645,
+        "id": 2766,
         "detail": "from A Star Is Born; Music and Lyric by Lady Gaga, Mark Ronson, Anthony Rossomando and Andrew Wyatt"
       },
       {
         "category_id": 15,
         "year": 2018,
-        "context": "The Ballad Of Buster Scruggs",
-        "nominee": "When A Cowboy Trades His Spurs For Wings",
-        "id": 2646,
+        "context": "The Ballad of Buster Scruggs",
+        "nominee": "When a Cowboy Trades His Spurs For Wings",
+        "id": 2767,
         "detail": "from The Ballad of Buster Scruggs; Music and Lyric by David Rawlings and Gillian Welch"
       }
     ],

@@ -19,10 +19,6 @@
   <div class="container" style="padding-top: 10px">
 
     <div class="row">
-      <h3>{{activeContext}}</h3>
-    </div>
-
-    <div class="row">
       <div class="col-12 col-sm-6 col-lg-4"
            *ngFor="let nominee of nominees">
 
@@ -36,12 +32,12 @@
               <div class="col-12">
                 <div class="row">
                   <div class="col-12 nomineeName">
-                    {{nominee.nominee}}
+                    {{getMainLineText(nominee)}}
                   </div>
                 </div>
                 <div class="row" *ngIf="nominee.context">
                   <div class="col-12 nomineeSubtitle">
-                    {{nominee.context}}
+                    {{getSubtitleText(nominee)}}
                   </div>
                 </div>
               </div>
