@@ -54,10 +54,9 @@ export class NomineesComponent implements OnInit {
             id: this.category.voted_on
           });
         }
-        if (this.winnersMode() || this.votingMode()) {
-          this.categoryService.waitForWinnersForCurrentYear(this.category).subscribe(nominee_ids => {
-            this.winningNominees = _.filter(this.nominees, nominee => nominee_ids.includes(nominee.id));
-          });
+        if (this.winnersMode()) {
+          const winners = this.category.winners;
+          this.winningNominees = _.filter(this.nominees, nominee => winners.includes(nominee.id));
         }
       });
     });
@@ -77,10 +76,10 @@ export class NomineesComponent implements OnInit {
       this.winnersService.addOrDeleteWinner(nominee).subscribe((winner: Winner) => {
         if (deleting) {
           this.winningNominees = _.without(this.winningNominees, nominee);
-          this.categoryService.deleteWinnerForCurrentYear(this.category, nominee);
+          this.category.winners = _.without(this.category.winners, nominee.id);
         } else if (winner && winner.id) {
           this.winningNominees.push(nominee);
-          this.categoryService.addWinnerForCurrentYear(this.category, nominee);
+          this.category.winners.push(nominee.id);
         }
       });
     }

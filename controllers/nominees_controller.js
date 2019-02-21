@@ -45,10 +45,7 @@ exports.getCategories = function(request, response) {
               category_object.voted_on = cat_votes[0].dataValues.nomination_id;
             }
 
-            if (cat_winners.length > 0) {
-              category_object.winners = {};
-              category_object.winners[currentYear.toString()] = _.pluck(cat_winners, 'nomination_id');
-            }
+            category_object.winners = _.pluck(cat_winners, 'nomination_id');
 
             category_object.nominees = cat_noms;
 

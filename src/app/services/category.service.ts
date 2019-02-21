@@ -87,38 +87,6 @@ export class CategoryService {
       );
   }
 
-
-  // WINNERS
-
-  getWinnersForCurrentYear(category: Category): number[] {
-    if (this.systemVarsService.stillLoading()) {
-      return [];
-    } else {
-      return this.extractWinnersFromCategory(category, this.systemVarsService.getCurrentYear().toString());
-    }
-  }
-
-  waitForWinnersForCurrentYear(category: Category): Observable<number[]> {
-    return new Observable<number[]>(observer => {
-      this.systemVarsService.getSystemVars().subscribe(systemVars => {
-        observer.next(this.extractWinnersFromCategory(category, systemVars.curr_year.toString()));
-      });
-    });
-  }
-
-  addWinnerForCurrentYear(category: Category, nominee: Nominee) {
-    this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      this.addToWinnersArray(category, systemVars.curr_year.toString(), nominee.id);
-    });
-  }
-
-  deleteWinnerForCurrentYear(category: Category, nominee: Nominee) {
-    this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      const winnersForYear = category.winners[systemVars.curr_year.toString()];
-      category.winners[systemVars.curr_year.toString()] = _.without(winnersForYear, nominee.id);
-    });
-  }
-
   // SCOREBOARD
 
   populatePersonScores(persons: Person[]) {
@@ -127,7 +95,7 @@ export class CategoryService {
         _.forEach(persons, person => {
           let score = 0;
           _.forEach(categories, category => {
-            const winners = this.getWinnersForCurrentYear(category);
+            const winners = category.winners;
             const personVote = _.findWhere(votes, {
               person_id: person.id,
               category_id: category.id
@@ -205,12 +173,7 @@ export class CategoryService {
     if (!category.winners) {
       return [];
     } else {
-      const winnersForYear = category.winners[year];
-      if (!winnersForYear) {
-        return [];
-      } else {
-        return winnersForYear;
-      }
+      return category.winners;
     }
   }
 

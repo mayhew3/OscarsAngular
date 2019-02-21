@@ -6,5 +6,5 @@ export class Category {
   points: number;
   nominees: Nominee[];
   voted_on?: number;
-  winners?: number[][];
+  winners: number[];
 }

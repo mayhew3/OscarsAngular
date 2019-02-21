@@ -29,7 +29,7 @@ export class CategoriesComponent implements OnInit {
     if (this.votingMode() && category.voted_on) {
       return 'votedOn';
     } else {
-      const winnersForCurrentYear = this.categoryService.getWinnersForCurrentYear(category);
+      const winnersForCurrentYear = category.winners;
       if (this.winnersMode() && winnersForCurrentYear && winnersForCurrentYear.length > 0) {
         return 'winner';
       }

@@ -81,12 +81,6 @@ export class InMemoryDataService implements InMemoryDbService {
       _.forEach(requestInfo.collection, category => {
         category.nominees = _.where(category.nominees, {year: +year});
         category.voted_on = this.getVoteForCategory(category.id, +person_id, +year);
-
-        const winners = this.getWinnerIDsForCategory(category.id, +year);
-        if (winners.length > 0) {
-          category.winners = [];
-          category.winners[year] = winners;
-        }
       });
 
       const data = requestInfo.collection;
@@ -112,14 +106,6 @@ export class InMemoryDataService implements InMemoryDbService {
     });
     return existingVote ? existingVote.nomination_id : undefined;
   }
-
-  private getWinnerIDsForCategory(category_id: number, year: number): number[] {
-    return _.pluck(_.where(this.winners, {
-      category_id: category_id,
-      year: year
-    }), 'nomination_id');
-  }
-
 
   private updateNomination(requestInfo: RequestInfo) {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);

@@ -39,7 +39,8 @@ export const TestCategoryList: Category[] = [
     ],
     "name": "Actor",
     "id": 1,
-    "points": 4
+    "points": 4,
+    "winners": []
   },
   {
     "nominees": [
@@ -78,7 +79,8 @@ export const TestCategoryList: Category[] = [
     ],
     "name": "Actress",
     "id": 2,
-    "points": 4
+    "points": 4,
+    "winners": []
   },
   {
     "nominees": [
@@ -116,6 +118,7 @@ export const TestCategoryList: Category[] = [
     ],
     "name": "Short Film (Live Action)",
     "id": 17,
-    "points": 1
+    "points": 1,
+    "winners": []
   }
 ];
