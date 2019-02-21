@@ -2,7 +2,13 @@ const model = require('./model');
 const _ = require('underscore');
 
 exports.getCategories = function(request, response) {
-  model.Category.findAll().then(categories => {
+  model.Category.findAll({
+    order:
+      [
+        ['points', 'DESC'],
+        ['name', 'ASC']
+      ]
+  }).then(categories => {
     model.Nomination.findAll({
       where: {
         year: request.query.year
