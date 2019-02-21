@@ -6,4 +6,5 @@ export class Person {
   email: string;
   groups: number[];
   score?: number;
+  num_votes?: number;
 }

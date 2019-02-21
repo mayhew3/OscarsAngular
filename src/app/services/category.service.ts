@@ -8,7 +8,6 @@ import {Nominee} from '../interfaces/Nominee';
 import {AuthService} from './auth/auth.service';
 import {SystemVarsService} from './system.vars.service';
 import {Person} from '../interfaces/Person';
-import {Vote} from '../interfaces/Vote';
 import {VotesService} from './votes.service';
 
 const httpOptions = {
@@ -94,17 +93,22 @@ export class CategoryService {
       this.maybeUpdateCache().subscribe(categories => {
         _.forEach(persons, person => {
           let score = 0;
+          let numVotes = 0;
           _.forEach(categories, category => {
             const winners = category.winners;
             const personVote = _.findWhere(votes, {
               person_id: person.id,
               category_id: category.id
             });
-            if (personVote && winners.includes(personVote.nomination_id)) {
-              score += category.points;
+            if (personVote) {
+              numVotes++;
+              if (winners.includes(personVote.nomination_id)) {
+                score += category.points;
+              }
             }
           });
           person.score = score;
+          person.num_votes = numVotes;
         });
       });
     });
