@@ -19,6 +19,7 @@ module.exports = function(app) {
     .get(persons.getPersons);
 
   router.route('/votes')
+    .get(votes.getVotes)
     .post(votes.addOrUpdateVote);
 
   router.route('/winners')

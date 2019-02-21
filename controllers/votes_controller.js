@@ -1,21 +1,13 @@
 const model = require('./model');
 const _ = require('underscore');
 
-exports.getVote = function(request, response) {
+exports.getVotes = function(request, response) {
   model.Vote.findAll({
     where: {
-      category_id: request.query.category_id,
-      person_id: request.query.person_id,
       year: request.query.year
     }
   }).then(votes => {
-    if (votes.length > 1) {
-      return response.error("Multiple votes found!")
-    } else if (votes.length === 1) {
-      return response.json(votes[0].dataValues);
-    } else {
-      return response.json({});
-    }
+    return response.json(votes);
   });
 };
 
