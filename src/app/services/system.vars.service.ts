@@ -20,6 +20,10 @@ export class SystemVarsService {
     return this.systemVars && this.systemVars.voting_open;
   }
 
+  public getCurrentYear(): number {
+    return this.systemVars ? this.systemVars.curr_year : undefined;
+  }
+
   public stillLoading(): boolean {
     return _.isUndefined(this.systemVars);
   }

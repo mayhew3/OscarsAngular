@@ -26,15 +26,24 @@ export class CategoriesComponent implements OnInit {
   }
 
   getVotedClass(category: Category): string {
-    return category.voted_on && this.voting() ? 'votedOn' : '';
+    if (this.votingMode() && category.voted_on) {
+      return 'votedOn';
+    } else if (this.winnersMode() && this.categoryService.getWinnerForCurrentYear(category)) {
+      return 'winner';
+    }
+    return '';
   }
 
-  voting(): boolean {
+  votingMode(): boolean {
     return ActiveContext.Vote === this.activeContext;
   }
 
-  odds(): boolean {
+  oddsMode(): boolean {
     return ActiveContext.OddsAssignment === this.activeContext;
+  }
+
+  winnersMode(): boolean {
+    return ActiveContext.Winner === this.activeContext;
   }
 
   stillLoading(): boolean {

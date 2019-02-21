@@ -9,6 +9,8 @@ import {VotesService} from '../../services/votes.service';
 import {AuthService} from '../../services/auth/auth.service';
 import {Vote} from '../../interfaces/Vote';
 import {Person} from '../../interfaces/Person';
+import {WinnersService} from '../../services/winners.service';
+import {Winner} from '../../interfaces/Winner';
 
 @Component({
   selector: 'osc-nominees',
@@ -21,13 +23,15 @@ export class NomineesComponent implements OnInit {
   public previousCategory: Category;
   public nominees: Nominee[];
   public votedNominee: Nominee;
+  public winningNominee: Nominee;
   private person: Person;
   @Input() activeContext: ActiveContext;
 
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
               private route: ActivatedRoute,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private winnersService: WinnersService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -45,9 +49,16 @@ export class NomineesComponent implements OnInit {
         this.categoryService.getPreviousCategory(category_id)
           .subscribe(category => this.previousCategory = category);
 
-        if (this.voting()) {
+        if (this.votingMode()) {
           this.votedNominee = _.findWhere(this.nominees, {
             id: this.category.voted_on
+          });
+        }
+        if (this.winnersMode() || this.votingMode()) {
+          this.categoryService.waitForWinnerForCurrentYear(this.category).subscribe(nominee_id => {
+            this.winningNominee = _.findWhere(this.nominees, {
+              id: nominee_id
+            });
           });
         }
       });
@@ -55,13 +66,22 @@ export class NomineesComponent implements OnInit {
   }
 
   submitVote(nominee: Nominee): void {
-    this.votesService.addOrUpdateVote(nominee, this.person).subscribe((vote: Vote) => {
-      // todo: MA-40 - this sucks, better way to check for error response.
-      if (vote && vote.id) {
-        this.votedNominee = nominee;
-        this.category.voted_on = nominee.id;
-      }
-    });
+    if (this.votingMode()) {
+      this.votesService.addOrUpdateVote(nominee, this.person).subscribe((vote: Vote) => {
+        // todo: MA-40 - this sucks, better way to check for error response.
+        if (vote && vote.id) {
+          this.votedNominee = nominee;
+          this.category.voted_on = nominee.id;
+        }
+      });
+    } else if (this.winnersMode()) {
+      this.winnersService.addOrUpdateWinner(nominee).subscribe((winner: Winner) => {
+        if (winner && winner.id) {
+          this.winningNominee = nominee;
+          this.categoryService.setWinnerForCurrentYear(this.category, this.winningNominee);
+        }
+      });
+    }
   }
 
   getMainLineText(nominee: Nominee): string {
@@ -85,14 +105,27 @@ export class NomineesComponent implements OnInit {
   }
 
   getVotedClass(nominee: Nominee): string {
-    return this.isVoted(nominee) && this.voting() ? 'votedOn' : '';
+    if (this.votingMode() && this.isVoted(nominee)) {
+      return 'votedOn';
+    } else if (this.winnersMode() && this.isWinner(nominee)) {
+      return 'winner';
+    }
+    return '';
   }
 
-  voting(): boolean {
+  isWinner(nominee: Nominee): boolean {
+    return this.winningNominee && this.winningNominee.id === nominee.id;
+  }
+
+  votingMode(): boolean {
     return ActiveContext.Vote === this.activeContext;
   }
 
-  showOdds(): boolean {
+  winnersMode(): boolean {
+    return ActiveContext.Winner === this.activeContext;
+  }
+
+  oddsMode(): boolean {
     return ActiveContext.OddsAssignment === this.activeContext;
   }
 

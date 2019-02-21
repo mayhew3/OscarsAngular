@@ -83,6 +83,32 @@ export class CategoryService {
       );
   }
 
+  getWinnerForCurrentYear(category: Category): number {
+    if (!category.winners || this.systemVarsService.stillLoading()) {
+      return undefined;
+    } else {
+      return category.winners[this.systemVarsService.getCurrentYear()];
+    }
+  }
+
+  waitForWinnerForCurrentYear(category: Category): Observable<number> {
+    return new Observable<number>(observer => {
+      this.systemVarsService.getSystemVars().subscribe(systemVars => {
+        const winner = category.winners ? category.winners[systemVars.curr_year] : undefined;
+        observer.next(winner);
+      });
+    });
+  }
+
+  setWinnerForCurrentYear(category: Category, nominee: Nominee) {
+    this.systemVarsService.getSystemVars().subscribe(systemVars => {
+      if (!category.winners) {
+        category.winners = [];
+      }
+      category.winners[systemVars.curr_year] = nominee.id;
+    });
+  }
+
   stillLoading(): boolean {
     return this.cache.length === 0;
   }

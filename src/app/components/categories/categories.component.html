@@ -6,9 +6,9 @@
   </div>
 
   <p *ngIf="stillLoading()">Loading...</p>
-  <p *ngIf="!stillLoading() && voting() && !systemVarsService.canVote()">Voting is currently closed!</p>
+  <p *ngIf="!stillLoading() && votingMode() && !systemVarsService.canVote()">Voting is currently closed!</p>
 
-  <div class="row" *ngIf="!stillLoading() && (systemVarsService.canVote() || !voting())">
+  <div class="row" *ngIf="!stillLoading() && (systemVarsService.canVote() || !votingMode())">
     <div class="col-12 col-sm-6 col-lg-4"
          *ngFor="let category of categories">
       <div class="card categoryCard" [ngClass]="getVotedClass(category)">
