@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Vote} from '../interfaces/Vote';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
-import {Person} from '../interfaces/Person';
+import {Winner} from '../interfaces/Winner';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,21 +12,21 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class VotesService {
-  votesUrl = 'api/votes';
+export class WinnersService {
+  winnersUrl = 'api/winners';
 
   constructor(private http: HttpClient) { }
 
-  addOrUpdateVote(nominee: Nominee, person: Person): Observable<Vote> {
+  addOrUpdateWinner(nominee: Nominee): Observable<Winner> {
     const data = {
       category_id: nominee.category_id,
       year: nominee.year,
-      person_id: person.id,
-      nomination_id: nominee.id
+      nomination_id: nominee.id,
+      declared: new Date()
     };
-    return this.http.post(this.votesUrl, data, httpOptions)
+    return this.http.post<Winner>(this.winnersUrl, data, httpOptions)
       .pipe(
-        catchError(this.handleError<any>('addOrUpdateVote', data))
+        catchError(this.handleError<any>('addOrUpdateWinner', data))
       );
   }
 

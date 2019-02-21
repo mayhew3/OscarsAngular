@@ -7,6 +7,7 @@ import {MockVoteList} from './data/votes.mock';
 import {Vote} from '../interfaces/Vote';
 import {Observable} from 'rxjs';
 import {MockSystemVars} from './data/system.vars.mock';
+import {MockWinnerList} from './data/winners.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class InMemoryDataService implements InMemoryDbService {
   persons = MockPersonList;
   votes = MockVoteList;
   systemVars = MockSystemVars;
+  winners = MockWinnerList;
 
   /////////// helpers ///////////////
 
@@ -35,14 +37,13 @@ export class InMemoryDataService implements InMemoryDbService {
       nominees: [],
       persons: this.persons,
       votes: this.votes,
-      systemVars: this.systemVars};
+      systemVars: this.systemVars,
+      winners: this.winners};
   }
 
   get(requestInfo: RequestInfo) {
     const collectionName = requestInfo.collectionName;
-    if (collectionName === 'votes') {
-      return this.getVote(requestInfo);
-    } else if (collectionName === 'categories') {
+    if (collectionName === 'categories') {
       return this.getCategoriesWithVotes(requestInfo);
     }
   }
@@ -65,37 +66,6 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     }
     return undefined;
-  }
-
-  private getVote(requestInfo: RequestInfo): Observable<any> {
-    return requestInfo.utils.createResponse$(() => {
-      console.log('HTTP GET override');
-
-      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
-
-      const entries = requestInfo.query.entries();
-      const category_id = entries.next().value[1][0];
-      const person_id = entries.next().value[1][0];
-      const year = entries.next().value[1][0];
-
-      // tslint:disable-next-line:triple-equals
-      const data = _.findWhere(requestInfo.collection, {
-        category_id: +category_id,
-        person_id: +person_id,
-        year: +year
-      });
-
-      const options: ResponseOptions = data ?
-        {
-          body: dataEncapsulation ? { data } : data,
-          status: STATUS.OK
-        } :
-        {
-          body: dataEncapsulation ? { } : data,
-          status: STATUS.OK
-        };
-      return InMemoryDataService.finishOptions(options, requestInfo);
-    });
   }
 
   private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<any> {

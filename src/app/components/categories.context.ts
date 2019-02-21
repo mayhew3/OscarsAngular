@@ -1,4 +1,5 @@
 export enum ActiveContext {
   Vote = 'Voting',
-  OddsAssignment = 'Odds'
+  OddsAssignment = 'Odds',
+  Winner = 'Winner'
 }

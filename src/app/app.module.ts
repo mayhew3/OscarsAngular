@@ -16,6 +16,8 @@ import { VoteMainComponent } from './components/vote-main/vote-main.component';
 import { VoteDetailComponent } from './components/vote-detail/vote-detail.component';
 import { OddsDetailComponent } from './components/odds-detail/odds-detail.component';
 import {SystemVarsService} from './services/system.vars.service';
+import { WinnerMainComponent } from './components/winner-main/winner-main.component';
+import { WinnerDetailComponent } from './components/winner-detail/winner-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {SystemVarsService} from './services/system.vars.service';
     OddsMainComponent,
     VoteMainComponent,
     VoteDetailComponent,
-    OddsDetailComponent
+    OddsDetailComponent,
+    WinnerMainComponent,
+    WinnerDetailComponent
   ],
   imports: [
     BrowserModule,

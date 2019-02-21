@@ -21,6 +21,13 @@
 
       <button
         class="btn btn-primary btn-margin"
+        *ngIf="!stillLoading() && auth.isAdmin()"
+        routerLink="/winners">
+        Winners
+      </button>
+
+      <button
+        class="btn btn-primary btn-margin"
         *ngIf="!auth.isAuthenticated()"
         (click)="auth.login()">
         Log In

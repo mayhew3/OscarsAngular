@@ -26,7 +26,10 @@ export class CategoryHopperComponent implements OnInit {
   }
 
   baseLink(): string {
-    return ActiveContext.Vote === this.activeContext ? 'vote' : 'odds';
+    return switch (this.activeContext) {
+      case ActiveContext.Vote: 'vote'
+
+    } ActiveContext.Vote === this.activeContext ? 'vote' : 'odds';
   }
 
   showOdds(): boolean {

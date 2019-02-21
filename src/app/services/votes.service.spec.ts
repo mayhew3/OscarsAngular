@@ -43,19 +43,4 @@ describe('VotesService', () => {
     httpMock.verify();
   });
 
-  it('getVoteForCategory', () => {
-    service.getVoteForCategory(2, 2017, 1).subscribe((vote) => {
-      expect(vote.nomination_id).toBe(4);
-    });
-
-    const testRequest = httpMock.expectOne(req => req.url === service.votesUrl);
-    expect(testRequest.request.method).toBe('GET');
-    expect(testRequest.request.params).toMatch('category_id=2');
-    expect(testRequest.request.params).toMatch('year=2017');
-    expect(testRequest.request.params).toMatch('person_id=1');
-    testRequest.flush(TestVoteList[0]);
-
-    httpMock.verify();
-  });
-
 });
