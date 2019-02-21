@@ -62,6 +62,18 @@ exports.Vote = sequelize.sequelize.define("vote", {
   updatedAt: false
 });
 
+exports.Winner = sequelize.sequelize.define("winner", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  category_id: Sequelize.INTEGER,
+  nomination_id: Sequelize.INTEGER,
+  declared: Sequelize.DATE,
+  year: Sequelize.INTEGER
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});
+
 exports.SystemVars = sequelize.sequelize.define("system_vars", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   curr_year: Sequelize.INTEGER,
