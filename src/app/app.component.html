@@ -7,14 +7,14 @@
 
       <button
         class="btn btn-primary btn-margin"
-        *ngIf="!stillLoading() && auth.isUser() && systemVarsService.canVote()"
+        *ngIf="!stillLoading() && auth.isUser() && (systemVarsService.canVote() || auth.isAdmin())"
         routerLink="/vote">
         Vote
       </button>
 
       <button
         class="btn btn-primary btn-margin"
-        *ngIf="!stillLoading() && auth.isUser() && !systemVarsService.canVote()"
+        *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())"
         routerLink="/scores">
         Scores
       </button>
