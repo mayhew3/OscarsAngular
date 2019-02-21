@@ -57,4 +57,5 @@ describe('NomineesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

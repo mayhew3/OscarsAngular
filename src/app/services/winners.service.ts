@@ -17,7 +17,7 @@ export class WinnersService {
 
   constructor(private http: HttpClient) { }
 
-  addOrUpdateWinner(nominee: Nominee): Observable<Winner> {
+  addOrDeleteWinner(nominee: Nominee): Observable<Winner> {
     const data = {
       category_id: nominee.category_id,
       year: nominee.year,
@@ -26,7 +26,7 @@ export class WinnersService {
     };
     return this.http.post<Winner>(this.winnersUrl, data, httpOptions)
       .pipe(
-        catchError(this.handleError<any>('addOrUpdateWinner', data))
+        catchError(this.handleError<any>('addOrDeleteWinner', data))
       );
   }
 

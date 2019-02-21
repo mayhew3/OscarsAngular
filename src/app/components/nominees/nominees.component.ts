@@ -23,7 +23,7 @@ export class NomineesComponent implements OnInit {
   public previousCategory: Category;
   public nominees: Nominee[];
   public votedNominee: Nominee;
-  public winningNominee: Nominee;
+  public winningNominees: Nominee[] = [];
   private person: Person;
   @Input() activeContext: ActiveContext;
 
@@ -55,10 +55,8 @@ export class NomineesComponent implements OnInit {
           });
         }
         if (this.winnersMode() || this.votingMode()) {
-          this.categoryService.waitForWinnerForCurrentYear(this.category).subscribe(nominee_id => {
-            this.winningNominee = _.findWhere(this.nominees, {
-              id: nominee_id
-            });
+          this.categoryService.waitForWinnersForCurrentYear(this.category).subscribe(nominee_ids => {
+            this.winningNominees = _.filter(this.nominees, nominee => nominee_ids.includes(nominee.id));
           });
         }
       });
@@ -75,10 +73,14 @@ export class NomineesComponent implements OnInit {
         }
       });
     } else if (this.winnersMode()) {
-      this.winnersService.addOrUpdateWinner(nominee).subscribe((winner: Winner) => {
-        if (winner && winner.id) {
-          this.winningNominee = nominee;
-          this.categoryService.setWinnerForCurrentYear(this.category, this.winningNominee);
+      const deleting = this.isWinner(nominee);
+      this.winnersService.addOrDeleteWinner(nominee).subscribe((winner: Winner) => {
+        if (deleting) {
+          this.winningNominees = _.without(this.winningNominees, nominee);
+          this.categoryService.deleteWinnerForCurrentYear(this.category, nominee);
+        } else if (winner && winner.id) {
+          this.winningNominees.push(nominee);
+          this.categoryService.addWinnerForCurrentYear(this.category, nominee);
         }
       });
     }
@@ -114,7 +116,7 @@ export class NomineesComponent implements OnInit {
   }
 
   isWinner(nominee: Nominee): boolean {
-    return this.winningNominee && this.winningNominee.id === nominee.id;
+    return this.winningNominees && this.winningNominees.includes(nominee);
   }
 
   votingMode(): boolean {

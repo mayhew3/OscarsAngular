@@ -9,9 +9,10 @@ exports.getCategories = function(request, response) {
         ['name', 'ASC']
       ]
   }).then(categories => {
+    const currentYear = request.query.year;
     model.Nomination.findAll({
       where: {
-        year: request.query.year
+        year: currentYear
       }
     }).then(nominations => {
       let outputObject = [];
@@ -19,30 +20,43 @@ exports.getCategories = function(request, response) {
       model.Vote.findAll({
         where: {
           person_id: request.query.person_id,
-          year: request.query.year
+          year: currentYear
         }
       }).then(votes => {
 
-        _.forEach(categories, function(category) {
-          let cat_noms = _.where(nominations, {category_id: category.id});
-          let cat_votes = _.where(votes, {category_id: category.id});
-
-          if (cat_votes.length > 1) {
-            throw new Error("Multiple votes found for category " + category.id);
+        model.Winner.findAll({
+          where: {
+            year: currentYear
           }
+        }).then(winners => {
 
-          let category_object = category.dataValues;
+          _.forEach(categories, function (category) {
+            let cat_noms = _.where(nominations, {category_id: category.id});
+            let cat_votes = _.where(votes, {category_id: category.id});
+            let cat_winners = _.where(winners, {category_id: category.id});
 
-          if (cat_votes.length > 0) {
-            category_object.voted_on = cat_votes[0].dataValues.nomination_id;
-          }
+            if (cat_votes.length > 1) {
+              throw new Error("Multiple votes found for category " + category.id);
+            }
 
-          category_object.nominees = cat_noms;
+            let category_object = category.dataValues;
 
-          outputObject.push(category_object);
+            if (cat_votes.length > 0) {
+              category_object.voted_on = cat_votes[0].dataValues.nomination_id;
+            }
+
+            if (cat_winners.length > 0) {
+              category_object.winners = {};
+              category_object.winners[currentYear.toString()] = _.pluck(cat_winners, 'nomination_id');
+            }
+
+            category_object.nominees = cat_noms;
+
+            outputObject.push(category_object);
+          });
+
+          response.json(outputObject);
         });
-
-        response.json(outputObject);
       });
     });
   });

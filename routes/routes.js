@@ -19,11 +19,10 @@ module.exports = function(app) {
     .get(persons.getPersons);
 
   router.route('/votes')
-    .get(votes.getVote)
     .post(votes.addOrUpdateVote);
 
   router.route('/winners')
-    .post(winners.addOrUpdateWinner);
+    .post(winners.addOrDeleteWinner);
 
   router.route('/systemVars')
     .get(systemVars.getSystemVars);

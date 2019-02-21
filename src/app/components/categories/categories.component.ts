@@ -28,8 +28,11 @@ export class CategoriesComponent implements OnInit {
   getVotedClass(category: Category): string {
     if (this.votingMode() && category.voted_on) {
       return 'votedOn';
-    } else if (this.winnersMode() && this.categoryService.getWinnerForCurrentYear(category)) {
-      return 'winner';
+    } else {
+      const winnersForCurrentYear = this.categoryService.getWinnersForCurrentYear(category);
+      if (this.winnersMode() && winnersForCurrentYear && winnersForCurrentYear.length > 0) {
+        return 'winner';
+      }
     }
     return '';
   }

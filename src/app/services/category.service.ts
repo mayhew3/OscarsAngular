@@ -83,30 +83,56 @@ export class CategoryService {
       );
   }
 
-  getWinnerForCurrentYear(category: Category): number {
-    if (!category.winners || this.systemVarsService.stillLoading()) {
-      return undefined;
+  getWinnersForCurrentYear(category: Category): number[] {
+    if (this.systemVarsService.stillLoading()) {
+      return [];
     } else {
-      return category.winners[this.systemVarsService.getCurrentYear()];
+      return this.extractWinnersFromCategory(category, this.systemVarsService.getCurrentYear().toString());
     }
   }
 
-  waitForWinnerForCurrentYear(category: Category): Observable<number> {
-    return new Observable<number>(observer => {
+  waitForWinnersForCurrentYear(category: Category): Observable<number[]> {
+    return new Observable<number[]>(observer => {
       this.systemVarsService.getSystemVars().subscribe(systemVars => {
-        const winner = category.winners ? category.winners[systemVars.curr_year] : undefined;
-        observer.next(winner);
+        observer.next(this.extractWinnersFromCategory(category, systemVars.curr_year.toString()));
       });
     });
   }
 
-  setWinnerForCurrentYear(category: Category, nominee: Nominee) {
+  addWinnerForCurrentYear(category: Category, nominee: Nominee) {
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      if (!category.winners) {
-        category.winners = [];
-      }
-      category.winners[systemVars.curr_year] = nominee.id;
+      this.addToWinnersArray(category, systemVars.curr_year.toString(), nominee.id);
     });
+  }
+
+  extractWinnersFromCategory(category: Category, year: string): number[] {
+    if (!category.winners) {
+      return [];
+    } else {
+      const winnersForYear = category.winners[year];
+      if (!winnersForYear) {
+        return [];
+      } else {
+        return winnersForYear;
+      }
+    }
+  }
+
+  deleteWinnerForCurrentYear(category: Category, nominee: Nominee) {
+    this.systemVarsService.getSystemVars().subscribe(systemVars => {
+      const winnersForYear = category.winners[systemVars.curr_year.toString()];
+      category.winners[systemVars.curr_year.toString()] = _.without(winnersForYear, nominee.id);
+    });
+  }
+
+  addToWinnersArray(category: Category, index: string, nomination_id: number) {
+    if (!category.winners) {
+      category.winners = [];
+    }
+    if (!category.winners[index]) {
+      category.winners[index] = [];
+    }
+    category.winners[index].push(nomination_id);
   }
 
   stillLoading(): boolean {

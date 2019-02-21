@@ -1,24 +1,19 @@
 const model = require('./model');
 const _ = require('underscore');
 
-exports.addOrUpdateWinner = function(request, response) {
-  model.Winner.findAll({
+exports.addOrDeleteWinner = function(request, response) {
+  model.Winner.findOne({
     where: {
-      category_id: request.body.category_id,
-      year: request.body.year
+      nomination_id: request.body.nomination_id
     }
-  }).then(winners => {
-    if (winners.length > 1) {
-      response.send(500, "Multiple winners found!");
-      throw new Error("Multiple winners found!");
-    } else if (winners.length === 1) {
-      let winner = winners[0];
-      winner.update({nomination_id: request.body.nomination_id})
+  }).then(winner => {
+    if (winner) {
+      winner.destroy()
         .then(result => {
           return response.json(result);
         })
         .catch(err => {
-          response.send(500, "Error updating existing winner!");
+          response.send(500, "Error deleting existing winner!");
           throw new Error(err);
         });
     } else {
