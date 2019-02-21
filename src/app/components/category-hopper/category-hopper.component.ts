@@ -17,8 +17,13 @@ export class CategoryHopperComponent implements OnInit {
   @Input() prev: Category;
   @Input() nominees: Nominee[];
   @Input() activeContext: ActiveContext;
+  private readonly contextUrls: string[];
 
   constructor(private categoryService: CategoryService) {
+    this.contextUrls = [];
+    this.contextUrls[ActiveContext.Vote] = 'vote';
+    this.contextUrls[ActiveContext.OddsAssignment] = 'odds';
+    this.contextUrls[ActiveContext.Winner] = 'winners';
   }
 
   ngOnInit() {
@@ -26,10 +31,7 @@ export class CategoryHopperComponent implements OnInit {
   }
 
   baseLink(): string {
-    return switch (this.activeContext) {
-      case ActiveContext.Vote: 'vote'
-
-    } ActiveContext.Vote === this.activeContext ? 'vote' : 'odds';
+    return this.contextUrls[this.activeContext];
   }
 
   showOdds(): boolean {
