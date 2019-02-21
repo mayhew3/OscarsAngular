@@ -14,6 +14,7 @@ import {OddsDetailComponent} from '../odds-detail/odds-detail.component';
 import {CallbackComponent} from '../callback/callback.component';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('OddsMainComponent', () => {
   let component: OddsMainComponent;
@@ -23,6 +24,7 @@ describe('OddsMainComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
+        HttpClientTestingModule,
         FormsModule],
       declarations: [
         CategoriesComponent,

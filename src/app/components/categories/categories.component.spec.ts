@@ -18,6 +18,9 @@ import {VoteMainComponent} from '../vote-main/vote-main.component';
 import {OddsMainComponent} from '../odds-main/odds-main.component';
 import {VoteDetailComponent} from '../vote-detail/vote-detail.component';
 import {OddsDetailComponent} from '../odds-detail/odds-detail.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {SystemVarsService} from '../../services/system.vars.service';
+import {SystemVarsServiceStub} from '../../services/system.vars.service.stub';
 
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
@@ -34,11 +37,13 @@ describe('CategoriesComponent', () => {
   let router: Router;
   let location: Location;
   let element: DebugElement;
+  let systemVarsService: SystemVarsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
+        HttpClientTestingModule,
         FormsModule],
       declarations: [
         CategoriesComponent,
@@ -51,6 +56,7 @@ describe('CategoriesComponent', () => {
         OddsDetailComponent,
         CallbackComponent],
       providers: [
+        {provide: SystemVarsService, useClass: SystemVarsServiceStub},
         {provide: CategoryService, useClass: CategoryServiceStub}
       ]
     });
@@ -59,6 +65,7 @@ describe('CategoriesComponent', () => {
   beforeEach(() => {
     router = TestBed.get(Router);
     location = TestBed.get(Location);
+    systemVarsService = TestBed.get(SystemVarsService);
     router.initialNavigation();
 
     fixture = TestBed.createComponent(CategoriesComponent);

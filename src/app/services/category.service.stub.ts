@@ -62,6 +62,9 @@ export class CategoryServiceStub {
     return of(null);
   }
 
+  stillLoading(): boolean {
+    return false;
+  }
 
   // DATA HELPERS
 

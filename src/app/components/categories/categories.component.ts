@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
-import {Nominee} from '../../interfaces/Nominee';
+import {SystemVarsService} from '../../services/system.vars.service';
 
 @Component({
   selector: 'osc-categories',
@@ -13,7 +13,8 @@ export class CategoriesComponent implements OnInit {
   categories: Category[];
   @Input() activeContext: ActiveContext;
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService,
+              public systemVarsService: SystemVarsService) { }
 
   ngOnInit() {
     this.getCategories();
@@ -30,6 +31,14 @@ export class CategoriesComponent implements OnInit {
 
   voting(): boolean {
     return ActiveContext.Vote === this.activeContext;
+  }
+
+  odds(): boolean {
+    return ActiveContext.OddsAssignment === this.activeContext;
+  }
+
+  stillLoading(): boolean {
+    return this.systemVarsService.stillLoading() || this.categoryService.stillLoading();
   }
 
 }

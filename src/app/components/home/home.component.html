@@ -1,12 +1,14 @@
 <div class="container" style="padding: 10px">
 
-  <p *ngIf="!auth.isUser() && auth.isAuthenticated()">No user account found for this google user. Could your invite be for a different gmail address?</p>
-  <p *ngIf="auth.isUser()">Welcome to the Oscars 2019, {{auth.getFirstName()}}!</p>
+  <p *ngIf="stillLoading()">Loading...</p>
+  <p *ngIf="!stillLoading() && !auth.isUser() && auth.isAuthenticated()">No user account found for this google user. Could your invite be for a different gmail address?</p>
+  <p *ngIf="!stillLoading() && auth.isUser()">Welcome to the Oscars 2019, {{auth.getFirstName()}}!</p>
+  <p *ngIf="!stillLoading() && !systemVarsService.canVote()">Voting is currently closed, but you can head over to Live Scoring to see how the scores are progressing, or see the final scores.</p>
 
   <div class="row">
 
     <div class="col-12 col-sm-6 col-lg-4"
-         *ngIf="auth.isUser()">
+         *ngIf="!stillLoading() && auth.isUser() && systemVarsService.canVote()">
       <div class="card navCard">
         <div class="card-body"
              routerLink="vote">
@@ -20,7 +22,7 @@
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4"
-         *ngIf="auth.isAdmin()">
+         *ngIf="!stillLoading() && auth.isAdmin()">
       <div class="card navCard">
         <div class="card-body"
              routerLink="odds">

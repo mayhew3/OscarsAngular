@@ -83,6 +83,9 @@ export class CategoryService {
       );
   }
 
+  stillLoading(): boolean {
+    return this.cache.length === 0;
+  }
 
   // DATA HELPERS
 

@@ -12,4 +12,13 @@ export class SystemVarsServiceStub {
       voting_open: true
     });
   }
+
+  public canVote(): boolean {
+    return true;
+  }
+
+  public stillLoading(): boolean {
+    return false;
+  }
+
 }

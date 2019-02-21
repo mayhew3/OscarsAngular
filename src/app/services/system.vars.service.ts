@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
 import {catchError} from 'rxjs/operators';
+import {_} from 'underscore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,17 @@ export class SystemVarsService {
   systemVarsUrl = 'api/systemVars';
   private systemVars: SystemVars;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getSystemVars().subscribe();
+  }
+
+  public canVote(): boolean {
+    return this.systemVars && this.systemVars.voting_open;
+  }
+
+  public stillLoading(): boolean {
+    return _.isUndefined(this.systemVars);
+  }
 
   public getSystemVars(): Observable<SystemVars> {
     if (this.systemVars) {

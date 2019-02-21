@@ -16,6 +16,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ActivatedRouteStub} from '../../../testing/activated-route-stub';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('VoteMainComponent', () => {
   let component: VoteMainComponent;
@@ -25,6 +26,7 @@ describe('VoteMainComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule.withRoutes(routes),
+        HttpClientTestingModule,
         FormsModule],
       declarations: [
         CategoriesComponent,

@@ -14,27 +14,22 @@ describe('System.VarsService', () => {
   }));
 
   beforeEach(() => {
-    service = TestBed.get(SystemVarsService);
     httpModule = TestBed.get(HttpClientTestingModule);
     httpMock = TestBed.get(HttpTestingController);
-  });
+    service = TestBed.get(SystemVarsService);
 
-  function doFirstRequest() {
     const testRequest = httpMock.expectOne(service.systemVarsUrl);
     expect(testRequest.request.method).toBe('GET');
     testRequest.flush(MockSystemVars);
 
     httpMock.verify();
-  }
+  });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
   it('getSystemVars doesnt call http get if there is a cache already', () => {
-    service.getSystemVars().subscribe();
-
-    doFirstRequest();
 
     service.getSystemVars().subscribe(systemVars => {
       expect(systemVars).toBeTruthy();
@@ -47,18 +42,4 @@ describe('System.VarsService', () => {
     httpMock.verify();
   });
 
-  describe('SystemVarsService tests that require single http get', () => {
-
-    afterEach(() => {
-      doFirstRequest();
-    });
-
-    it('getSystemVars calls http get', () => {
-      service.getSystemVars().subscribe(systemVars => {
-        expect(systemVars).toBeTruthy();
-        expect(systemVars.curr_year).toEqual(2018);
-        expect(systemVars.voting_open).toEqual(true);
-      });
-    });
-  });
 });

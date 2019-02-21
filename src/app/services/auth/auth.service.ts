@@ -83,6 +83,10 @@ export class AuthService {
     return this.isUser() && 'admin' === this._person.role;
   }
 
+  public stillLoading(): boolean {
+    return _.isUndefined(this._person);
+  }
+
   public isUser(): boolean {
     return this.isAuthenticated() && (this._person !== undefined);
   }
