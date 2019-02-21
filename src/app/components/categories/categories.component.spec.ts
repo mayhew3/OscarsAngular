@@ -23,6 +23,7 @@ import {SystemVarsService} from '../../services/system.vars.service';
 import {SystemVarsServiceStub} from '../../services/system.vars.service.stub';
 import {WinnerMainComponent} from '../winner-main/winner-main.component';
 import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
+import {ScoreboardComponent} from '../scoreboard/scoreboard.component';
 
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
@@ -58,6 +59,7 @@ describe('CategoriesComponent', () => {
         OddsDetailComponent,
         WinnerMainComponent,
         WinnerDetailComponent,
+        ScoreboardComponent,
         CallbackComponent],
       providers: [
         {provide: SystemVarsService, useClass: SystemVarsServiceStub},

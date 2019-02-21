@@ -19,6 +19,7 @@ import {CategoryServiceStub} from '../../services/category.service.stub';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {WinnerMainComponent} from '../winner-main/winner-main.component';
 import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
+import {ScoreboardComponent} from '../scoreboard/scoreboard.component';
 
 describe('VoteMainComponent', () => {
   let component: VoteMainComponent;
@@ -41,12 +42,12 @@ describe('VoteMainComponent', () => {
         OddsDetailComponent,
         WinnerMainComponent,
         WinnerDetailComponent,
+        ScoreboardComponent,
         CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}
       ]
-    })
-    .compileComponents();
+    });
   }));
 
   beforeEach(() => {

@@ -21,6 +21,7 @@ import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
 import {AuthService} from '../../services/auth/auth.service';
 import {AuthServiceStub} from '../../services/auth/auth.service.stub';
+import {ScoreboardComponent} from '../scoreboard/scoreboard.component';
 
 describe('WinnerDetailComponent', () => {
   let component: WinnerDetailComponent;
@@ -43,6 +44,7 @@ describe('WinnerDetailComponent', () => {
         OddsDetailComponent,
         WinnerMainComponent,
         WinnerDetailComponent,
+        ScoreboardComponent,
         CallbackComponent],
       providers: [
         {provide: ActivatedRoute, useValue: new ActivatedRouteStub({category_id: 2})},

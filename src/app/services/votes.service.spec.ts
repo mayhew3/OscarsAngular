@@ -5,6 +5,10 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {TestVoteList} from './data/votes.test.mock';
 import {TestCategoryList} from './data/categories.test.mock';
 import {TestPersonList} from './data/persons.test.mock';
+import {SystemVarsService} from './system.vars.service';
+import {SystemVarsServiceStub} from './system.vars.service.stub';
+import {CategoryService} from './category.service';
+import {CategoryServiceStub} from './category.service.stub';
 
 describe('VotesService', () => {
   let service: VotesService;
@@ -13,7 +17,10 @@ describe('VotesService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
+      providers: [
+        {provide: SystemVarsService, useClass: SystemVarsServiceStub}
+      ]
     });
   });
 

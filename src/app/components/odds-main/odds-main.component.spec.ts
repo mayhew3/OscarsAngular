@@ -17,6 +17,7 @@ import {CategoryServiceStub} from '../../services/category.service.stub';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {WinnerMainComponent} from '../winner-main/winner-main.component';
 import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
+import {ScoreboardComponent} from '../scoreboard/scoreboard.component';
 
 describe('OddsMainComponent', () => {
   let component: OddsMainComponent;
@@ -39,6 +40,7 @@ describe('OddsMainComponent', () => {
         OddsDetailComponent,
         WinnerMainComponent,
         WinnerDetailComponent,
+        ScoreboardComponent,
         CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}
