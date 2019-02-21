@@ -7,6 +7,9 @@ import {_} from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {AuthService} from './auth/auth.service';
 import {SystemVarsService} from './system.vars.service';
+import {Person} from '../interfaces/Person';
+import {Vote} from '../interfaces/Vote';
+import {VotesService} from './votes.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,7 +25,8 @@ export class CategoryService {
 
   constructor(private http: HttpClient,
               private auth: AuthService,
-              private systemVarsService: SystemVarsService) {
+              private systemVarsService: SystemVarsService,
+              private votesService: VotesService) {
     this.cache = [];
   }
 
@@ -83,6 +87,9 @@ export class CategoryService {
       );
   }
 
+
+  // WINNERS
+
   getWinnersForCurrentYear(category: Category): number[] {
     if (this.systemVarsService.stillLoading()) {
       return [];
@@ -112,28 +119,30 @@ export class CategoryService {
     });
   }
 
-  private addToWinnersArray(category: Category, index: string, nomination_id: number) {
-    if (!category.winners) {
-      category.winners = [];
-    }
-    if (!category.winners[index]) {
-      category.winners[index] = [];
-    }
-    category.winners[index].push(nomination_id);
+  // SCOREBOARD
+
+  populatePersonScores(persons: Person[]) {
+    this.votesService.getVotesForCurrentYear().subscribe(votes => {
+      this.maybeUpdateCache().subscribe(categories => {
+        _.forEach(persons, person => {
+          let score = 0;
+          _.forEach(categories, category => {
+            const winners = this.getWinnersForCurrentYear(category);
+            const personVote = _.findWhere(votes, {
+              person_id: person.id,
+              category_id: category.id
+            });
+            if (personVote && winners.includes(personVote.nomination_id)) {
+              score += category.points;
+            }
+          });
+          person.score = score;
+        });
+      });
+    });
   }
 
-  private extractWinnersFromCategory(category: Category, year: string): number[] {
-    if (!category.winners) {
-      return [];
-    } else {
-      const winnersForYear = category.winners[year];
-      if (!winnersForYear) {
-        return [];
-      } else {
-        return winnersForYear;
-      }
-    }
-  }
+  // LOADING
 
   stillLoading(): boolean {
     return this.cache.length === 0;
@@ -179,6 +188,29 @@ export class CategoryService {
       });
     } else {
       return of(this.cache);
+    }
+  }
+
+  private addToWinnersArray(category: Category, index: string, nomination_id: number) {
+    if (!category.winners) {
+      category.winners = [];
+    }
+    if (!category.winners[index]) {
+      category.winners[index] = [];
+    }
+    category.winners[index].push(nomination_id);
+  }
+
+  private extractWinnersFromCategory(category: Category, year: string): number[] {
+    if (!category.winners) {
+      return [];
+    } else {
+      const winnersForYear = category.winners[year];
+      if (!winnersForYear) {
+        return [];
+      } else {
+        return winnersForYear;
+      }
     }
   }
 

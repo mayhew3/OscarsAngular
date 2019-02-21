@@ -28,6 +28,12 @@ export class PersonService {
     return this.maybeUpdateCache();
   }
 
+  getPersonsForGroup(group_id: number): Observable<Person[]> {
+    return this.getDataWithCacheUpdate<Person[]>(() => {
+      return _.filter(this.cache, person => person.groups.includes(group_id));
+    });
+  }
+
   getPerson(id: number): Observable<Person> {
     return this.getDataWithCacheUpdate<Person>(() => {
       return this.getPersonFromCache(id);
@@ -39,6 +45,11 @@ export class PersonService {
       return this.getPersonWithEmailFromCache(email);
     });
   }
+
+  stillLoading(): boolean {
+    return this.cache.length === 0;
+  }
+
 
   private getPersonFromCache(id: number): Person {
     return _.findWhere(this.cache, {id: id});
@@ -68,9 +79,9 @@ export class PersonService {
             catchError(this.handleError<Person[]>('getPersons', []))
           )
           .subscribe(
-            (categories: Person[]) => {
-              PersonService.addToArray(this.cache, categories);
-              observer.next(categories);
+            (persons: Person[]) => {
+              PersonService.addToArray(this.cache, persons);
+              observer.next(persons);
             },
             (err: Error) => observer.error(err)
           );

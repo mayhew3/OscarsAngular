@@ -5,6 +5,7 @@ import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
+import {SystemVarsService} from './system.vars.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,8 +16,54 @@ const httpOptions = {
 })
 export class VotesService {
   votesUrl = 'api/votes';
+  private readonly cache: Vote[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private systemVarsService: SystemVarsService) {
+    this.cache = [];
+    this.systemVarsService.getSystemVars().subscribe();
+  }
+
+  // HELPERS
+
+  private static addToArray<T>(existingArray: T[], newArray: T[]) {
+    existingArray.push.apply(existingArray, newArray);
+  }
+
+  getVotesForCurrentYear(): Observable<Vote[]> {
+    return new Observable<Vote[]>(observer => {
+      this.systemVarsService.getSystemVars().subscribe(systemVars => {
+        this.maybeUpdateCache(systemVars.curr_year).subscribe(votes => {
+          observer.next(votes);
+        });
+      });
+    });
+  }
+
+
+  private maybeUpdateCache(year: number): Observable<Vote[]> {
+    const params = new HttpParams()
+      .set('year', year.toString());
+    if (this.cache.length === 0) {
+      return new Observable<Vote[]>((observer) => {
+        this.http.get<Vote[]>(this.votesUrl, {params: params})
+          .pipe(
+            catchError(this.handleError<Vote[]>('getVotes', []))
+          )
+          .subscribe(
+            (votes: Vote[]) => {
+              this.cache.length = 0;
+              VotesService.addToArray(this.cache, votes);
+              observer.next(votes);
+            },
+            (err: Error) => observer.error(err)
+          );
+      });
+    } else {
+      return of(this.cache);
+    }
+  }
+
 
   addOrUpdateVote(nominee: Nominee, person: Person): Observable<Vote> {
     const data = {

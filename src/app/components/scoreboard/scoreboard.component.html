@@ -1,0 +1,28 @@
+
+<div class="container" style="padding: 10px">
+
+  <div class="row">
+    <h1>Live Scoring</h1>
+  </div>
+
+  <p *ngIf="stillLoading()">Loading...</p>
+
+  <div class="row" *ngIf="!stillLoading()">
+    <div class="col-12 col-sm-6 col-lg-4"
+         *ngFor="let person of persons">
+      <div class="card scoreCard">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-10 scoreTitle">
+              <span>{{person.first_name}}</span>
+            </div>
+            <div class="col-2 scorePoints">
+              <span>{{person.score}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

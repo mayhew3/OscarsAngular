@@ -5,4 +5,5 @@ export class Person {
   role: string;
   email: string;
   groups: number[];
+  score?: number;
 }
