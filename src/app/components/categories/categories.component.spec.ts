@@ -21,6 +21,8 @@ import {OddsDetailComponent} from '../odds-detail/odds-detail.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {SystemVarsServiceStub} from '../../services/system.vars.service.stub';
+import {WinnerMainComponent} from '../winner-main/winner-main.component';
+import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
 
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
@@ -54,6 +56,8 @@ describe('CategoriesComponent', () => {
         OddsMainComponent,
         VoteDetailComponent,
         OddsDetailComponent,
+        WinnerMainComponent,
+        WinnerDetailComponent,
         CallbackComponent],
       providers: [
         {provide: SystemVarsService, useClass: SystemVarsServiceStub},

@@ -105,7 +105,24 @@ export class CategoryService {
     });
   }
 
-  extractWinnersFromCategory(category: Category, year: string): number[] {
+  deleteWinnerForCurrentYear(category: Category, nominee: Nominee) {
+    this.systemVarsService.getSystemVars().subscribe(systemVars => {
+      const winnersForYear = category.winners[systemVars.curr_year.toString()];
+      category.winners[systemVars.curr_year.toString()] = _.without(winnersForYear, nominee.id);
+    });
+  }
+
+  private addToWinnersArray(category: Category, index: string, nomination_id: number) {
+    if (!category.winners) {
+      category.winners = [];
+    }
+    if (!category.winners[index]) {
+      category.winners[index] = [];
+    }
+    category.winners[index].push(nomination_id);
+  }
+
+  private extractWinnersFromCategory(category: Category, year: string): number[] {
     if (!category.winners) {
       return [];
     } else {
@@ -116,23 +133,6 @@ export class CategoryService {
         return winnersForYear;
       }
     }
-  }
-
-  deleteWinnerForCurrentYear(category: Category, nominee: Nominee) {
-    this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      const winnersForYear = category.winners[systemVars.curr_year.toString()];
-      category.winners[systemVars.curr_year.toString()] = _.without(winnersForYear, nominee.id);
-    });
-  }
-
-  addToWinnersArray(category: Category, index: string, nomination_id: number) {
-    if (!category.winners) {
-      category.winners = [];
-    }
-    if (!category.winners[index]) {
-      category.winners[index] = [];
-    }
-    category.winners[index].push(nomination_id);
   }
 
   stillLoading(): boolean {

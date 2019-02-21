@@ -20,6 +20,8 @@ import {OddsMainComponent} from '../odds-main/odds-main.component';
 import {VoteDetailComponent} from '../vote-detail/vote-detail.component';
 import {OddsDetailComponent} from '../odds-detail/odds-detail.component';
 import {ActiveContext} from '../categories.context';
+import {WinnerMainComponent} from '../winner-main/winner-main.component';
+import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
 
 describe('CategoryHopperComponent', () => {
   let component: CategoryHopperComponent;
@@ -42,6 +44,8 @@ describe('CategoryHopperComponent', () => {
         OddsMainComponent,
         VoteDetailComponent,
         OddsDetailComponent,
+        WinnerMainComponent,
+        WinnerDetailComponent,
         CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}

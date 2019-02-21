@@ -62,6 +62,20 @@ export class CategoryServiceStub {
     return of(null);
   }
 
+  getWinnersForCurrentYear(category: Category): number[] {
+    return [];
+  }
+
+  waitForWinnersForCurrentYear(category: Category): Observable<number[]> {
+    return of([]);
+  }
+
+  addWinnerForCurrentYear(category: Category, nominee: Nominee) {
+  }
+
+  deleteWinnerForCurrentYear(category: Category, nominee: Nominee) {
+  }
+
   stillLoading(): boolean {
     return false;
   }

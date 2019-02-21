@@ -17,6 +17,8 @@ import {ActivatedRouteStub} from '../../../testing/activated-route-stub';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {WinnerMainComponent} from '../winner-main/winner-main.component';
+import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
 
 describe('VoteMainComponent', () => {
   let component: VoteMainComponent;
@@ -37,6 +39,8 @@ describe('VoteMainComponent', () => {
         OddsMainComponent,
         VoteDetailComponent,
         OddsDetailComponent,
+        WinnerMainComponent,
+        WinnerDetailComponent,
         CallbackComponent],
       providers: [
         {provide: CategoryService, useClass: CategoryServiceStub}
