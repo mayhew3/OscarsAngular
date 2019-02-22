@@ -24,6 +24,7 @@ export class NomineesComponent implements OnInit {
   public nominees: Nominee[];
   public votedNominee: Nominee;
   public winningNominees: Nominee[] = [];
+  private processingPick: Nominee;
   private person: Person;
   @Input() activeContext: ActiveContext;
 
@@ -64,15 +65,18 @@ export class NomineesComponent implements OnInit {
 
   submitVote(nominee: Nominee): void {
     if (this.votingMode()) {
+      this.processingPick = nominee;
       this.votesService.addOrUpdateVote(nominee, this.person).subscribe((vote: Vote) => {
         // todo: MA-40 - this sucks, better way to check for error response.
         if (vote && vote.id) {
           this.votedNominee = nominee;
           this.category.voted_on = nominee.id;
         }
+        this.processingPick = undefined;
       });
     } else if (this.winnersMode()) {
       const deleting = this.isWinner(nominee);
+      this.processingPick = nominee;
       this.winnersService.addOrDeleteWinner(nominee).subscribe((winner: Winner) => {
         if (deleting) {
           this.winningNominees = _.without(this.winningNominees, nominee);
@@ -81,6 +85,7 @@ export class NomineesComponent implements OnInit {
           this.winningNominees.push(nominee);
           this.category.winners.push(nominee.id);
         }
+        this.processingPick = undefined;
       });
     }
   }
@@ -110,7 +115,9 @@ export class NomineesComponent implements OnInit {
   }
 
   getVotedClass(nominee: Nominee): string {
-    if (this.votingMode() && this.isVoted(nominee)) {
+    if (this.processingPick && this.processingPick.id === nominee.id) {
+      return 'processing';
+    } else if (this.votingMode() && this.isVoted(nominee)) {
       return 'votedOn';
     } else if (this.winnersMode() && this.isWinner(nominee)) {
       return 'winner';
