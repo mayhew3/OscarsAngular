@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand navbar-light bg-light">
   <div class="navbar-text">
     <h1>
-      {{category.name}}
+      {{getHeaderText()}}
     </h1>
   </div>
 </nav>
@@ -90,6 +90,39 @@
                          style="text-align: center"
                          [(ngModel)]="nominee.odds_user"
                          id="userInput"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="row align-items-center inputRow oddsContainer" *ngIf="votingMode()">
+
+              <div class="col-4">
+                <div class="row" *ngIf="nominee.odds_numerator">
+                  <label class="col-form-label col-form-label-sm cardLabel"
+                         for="numeratorInput">Odds</label>
+                  <div class="oddsBox">
+                    <span>{{nominee.odds_numerator + ':' + nominee.odds_denominator}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="row" *ngIf="nominee.odds_expert">
+                  <label class="col-form-label col-form-label-sm cardLabel"
+                         for="expertInput">Experts</label>
+                  <div class="oddsBox">
+                    <span>{{nominee.odds_expert + '%'}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <div class="row" *ngIf="nominee.odds_user">
+                  <label class="col-form-label col-form-label-sm cardLabel"
+                         for="userInput">Users</label>
+                  <div class="oddsBox">
+                    <span>{{nominee.odds_user + '%'}}</span>
+                  </div>
                 </div>
               </div>
             </div>

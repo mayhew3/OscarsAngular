@@ -85,6 +85,10 @@ export class NomineesComponent implements OnInit {
     }
   }
 
+  getHeaderText(): string {
+    return this.category ? this.category.name : '';
+  }
+
   getMainLineText(nominee: Nominee): string {
     return nominee.nominee;
   }
