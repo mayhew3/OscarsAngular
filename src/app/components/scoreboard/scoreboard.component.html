@@ -7,6 +7,10 @@
 
   <p *ngIf="stillLoading()">Loading...</p>
 
+  <p *ngIf="getVoters().length === 0">
+    No players have voted yet!
+  </p>
+
   <div class="row" *ngIf="!stillLoading()">
     <div class="col-12 col-sm-6 col-lg-4"
          *ngFor="let person of getVoters()">
