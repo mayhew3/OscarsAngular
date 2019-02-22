@@ -24,6 +24,7 @@ export class AuthService {
   private _profile: any;
   private _userRole: UserRole;
   private _person: Person;
+  private _loginFailed = false;
   refreshSubscription: any;
 
   private personObserver: Subscriber<Person>;
@@ -84,7 +85,7 @@ export class AuthService {
   }
 
   public stillLoading(): boolean {
-    return _.isUndefined(this._person);
+    return _.isUndefined(this._person) && !this._loginFailed;
   }
 
   public isUser(): boolean {
@@ -123,7 +124,12 @@ export class AuthService {
     if (authResult.idTokenPayload.email) {
       this._profile = authResult.idTokenPayload;
       this.personService.getPersonWithEmail(authResult.idTokenPayload.email).subscribe((person) => {
-        this._person = person;
+        if (!person) {
+          this._loginFailed = true;
+        } else {
+          this._person = person;
+          this._loginFailed = false;
+        }
         if (this.personObserver) {
           this.personObserver.next(person);
           this.personObserver = undefined;
