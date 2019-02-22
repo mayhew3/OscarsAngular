@@ -26,7 +26,8 @@ module.exports = function(app) {
     .post(winners.addOrDeleteWinner);
 
   router.route('/systemVars')
-    .get(systemVars.getSystemVars);
+    .get(systemVars.getSystemVars)
+    .put(systemVars.updateSystemVars);
 
   app.use('/api', router);
 

@@ -1,9 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {_} from 'underscore';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +26,25 @@ export class SystemVarsService {
 
   public getCurrentYear(): number {
     return this.systemVars ? this.systemVars.curr_year : undefined;
+  }
+
+  public toggleVotingLock(): void {
+    if (!this.systemVars) {
+      throw new Error('No system vars found.');
+    }
+    const targetVars = {
+      id: this.systemVars.id,
+      curr_year: this.systemVars.curr_year,
+      voting_open: !this.systemVars.voting_open
+    };
+
+    this.http.put(this.systemVarsUrl, targetVars, httpOptions)
+      .pipe(
+        tap(() => {
+          this.systemVars.voting_open = !this.systemVars.voting_open;
+        }),
+        catchError(this.handleError<any>('toggleVotingLock'))
+      ).subscribe();
   }
 
   public stillLoading(): boolean {

@@ -65,6 +65,20 @@
       </div>
     </div>
 
+    <div class="col-12 col-sm-6 col-lg-4"
+         *ngIf="!stillLoading() && auth.isAdmin()">
+      <div class="card navCard" (click)="toggleVotingLock()">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-10 navTitle">
+              <span>{{getVotingHeader()}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
   </div>
 
