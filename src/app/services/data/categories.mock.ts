@@ -2,7 +2,7 @@ import {Category} from '../../interfaces/Category';
 /* tslint:disable quotemark */
 export const MockCategoryList: Category[] = [
   {
-    "winners": [],
+    "winners": [2773],
     "nominees": [
       {
         "category_id": 5,
@@ -90,7 +90,7 @@ export const MockCategoryList: Category[] = [
     "points": 5
   },
   {
-    "winners": [],
+    "winners": [2698],
     "nominees": [
       {
         "odds_expert": 3,
@@ -150,7 +150,7 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [2706],
     "nominees": [
       {
         "category_id": 2,
@@ -209,7 +209,7 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [2733],
     "nominees": [
       {
         "odds_expert": 12,
@@ -268,7 +268,7 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [2719],
     "nominees": [
       {
         "odds_denominator": 1,
@@ -326,7 +326,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [2700],
     "nominees": [
       {
         "odds_expert": 92,
@@ -386,7 +386,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [2712],
     "nominees": [
       {
         "odds_denominator": 1,
@@ -447,7 +447,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [2807],
     "nominees": [
       {
         "category_id": 23,
@@ -508,7 +508,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [2813],
     "nominees": [
       {
         "odds_expert": 78,
@@ -568,7 +568,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [2723],
     "nominees": [
       {
         "odds_expert": 2,
@@ -627,7 +627,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2727],
     "nominees": [
       {
         "category_id": 7,
@@ -683,7 +683,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2747],
     "nominees": [
       {
         "odds_expert": 13,
@@ -743,7 +743,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2757],
     "nominees": [
       {
         "category_id": 13,
@@ -783,7 +783,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2760],
     "nominees": [
       {
         "odds_expert": 27,
@@ -843,7 +843,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2766],
     "nominees": [
       {
         "odds_expert": 4,
@@ -899,7 +899,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2776],
     "nominees": [
       {
         "odds_expert": 42,
@@ -958,7 +958,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2793],
     "nominees": [
       {
         "category_id": 18,
@@ -1018,7 +1018,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2800],
     "nominees": [
       {
         "category_id": 19,
@@ -1078,7 +1078,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2801],
     "nominees": [
       {
         "odds_expert": 67,
@@ -1138,7 +1138,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [2739],
     "nominees": [
       {
         "odds_expert": 62,
@@ -1198,7 +1198,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [],
+    "winners": [2744],
     "nominees": [
       {
         "odds_expert": 39,
@@ -1258,7 +1258,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [],
+    "winners": [2753],
     "nominees": [
       {
         "category_id": 12,
@@ -1317,7 +1317,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [],
+    "winners": [2782],
     "nominees": [
       {
         "odds_expert": 5,
@@ -1376,7 +1376,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [],
+    "winners": [2788],
     "nominees": [
       {
         "odds_expert": 10,
