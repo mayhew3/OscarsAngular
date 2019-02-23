@@ -1,6 +1,7 @@
 let express = require('express');
 
 module.exports = function(app) {
+  let events = require('../controllers/events_controller');
   let nominees = require('../controllers/nominees_controller');
   let persons = require('../controllers/persons_controller');
   let votes = require('../controllers/votes_controller');
@@ -11,6 +12,9 @@ module.exports = function(app) {
 
   router.route('/categories')
     .get(nominees.getCategories);
+
+  router.route('/events')
+    .get(events.getRecentEvents);
 
   router.route('/nominees')
     .put(nominees.updateNomination);

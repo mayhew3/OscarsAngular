@@ -5,9 +5,11 @@ import {MockCategoryList} from './data/categories.mock';
 import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';
 import {Vote} from '../interfaces/Vote';
-import {Observable} from 'rxjs';
+import {Event} from '../interfaces/Event';
+import {Observable, of} from 'rxjs';
 import {MockSystemVars} from './data/system.vars.mock';
 import {MockWinnerList} from './data/winners.mock';
+import {MockEvents} from './data/event.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +22,7 @@ export class InMemoryDataService implements InMemoryDbService {
   votes = MockVoteList;
   systemVars = MockSystemVars;
   winners = MockWinnerList;
+  events = MockEvents;
 
   /////////// helpers ///////////////
 
@@ -38,13 +41,16 @@ export class InMemoryDataService implements InMemoryDbService {
       persons: this.persons,
       votes: this.votes,
       systemVars: this.systemVars,
-      winners: this.winners};
+      winners: this.winners,
+      events: this.events};
   }
 
   get(requestInfo: RequestInfo) {
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'categories') {
       return this.getCategoriesWithVotes(requestInfo);
+    } else if (collectionName === 'events') {
+      return this.getEventsSinceDate(requestInfo);
     }
   }
 
@@ -84,6 +90,31 @@ export class InMemoryDataService implements InMemoryDbService {
       });
 
       const data = requestInfo.collection;
+
+      const options: ResponseOptions = data ?
+        {
+          body: dataEncapsulation ? { data } : data,
+          status: STATUS.OK
+        } :
+        {
+          body: dataEncapsulation ? { } : data,
+          status: STATUS.OK
+        };
+      return InMemoryDataService.finishOptions(options, requestInfo);
+    });
+  }
+
+  private getEventsSinceDate(requestInfo: RequestInfo): Observable<Event[]> {
+    return requestInfo.utils.createResponse$(() => {
+      console.log('HTTP GET override');
+
+      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
+
+      const entries = requestInfo.query.entries();
+      const since_date = entries.next().value[1][0];
+
+      const data = requestInfo.collection;
+      // const data = _.filter(requestInfo.collection, event => event.event_time > since_date);
 
       const options: ResponseOptions = data ?
         {

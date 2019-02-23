@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subscription, timer} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError, tap} from 'rxjs/operators';
 import {_} from 'underscore';
@@ -9,6 +9,7 @@ import {AuthService} from './auth/auth.service';
 import {SystemVarsService} from './system.vars.service';
 import {Person} from '../interfaces/Person';
 import {VotesService} from './votes.service';
+import {EventsService} from './events.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,11 +22,14 @@ export class CategoryService {
   nomineesUrl = 'api/nominees';
   categoriesUrl = 'api/categories';
   cache: Category[];
+  private winnersLastUpdate: Date;
+  private eventSubscription: Subscription;
 
   constructor(private http: HttpClient,
               private auth: AuthService,
               private systemVarsService: SystemVarsService,
-              private votesService: VotesService) {
+              private votesService: VotesService,
+              private eventsService: EventsService) {
     this.cache = [];
   }
 
@@ -86,6 +90,40 @@ export class CategoryService {
       );
   }
 
+  doEventsUpdate(): void {
+    if (this.cache.length > 0) {
+      const updateTime = new Date();
+      this.eventsService.getEvents(this.winnersLastUpdate).subscribe(events => {
+        _.forEach(events, event => {
+          if (event.type === 'winner') {
+            if (event.detail === 'add') {
+              this.addWinnerToCache(event.nomination_id);
+            } else if (event.detail === 'delete') {
+              this.removeWinnerFromCache(event.nomination_id);
+            }
+          }
+          this.winnersLastUpdate = updateTime;
+        });
+      });
+    }
+  }
+
+  private addWinnerToCache(nomination_id: number): void {
+    const category = this.getCategoryForNomination(nomination_id);
+    if (!category.winners.includes(nomination_id)) {
+      category.winners.push(nomination_id);
+    }
+  }
+
+  private removeWinnerFromCache(nomination_id: number): void {
+    const category = this.getCategoryForNomination(nomination_id);
+    category.winners = _.without(category.winners, nomination_id);
+  }
+
+  private getCategoryForNomination(nomination_id: number): Category {
+    return _.find(this.cache, category => _.findWhere(category.nominees, {id: nomination_id}));
+  }
+
   // SCOREBOARD
 
   populatePersonScores(persons: Person[]) {
@@ -138,6 +176,7 @@ export class CategoryService {
           if (!person) {
             this.auth.logout();
           }
+          const updateStart = new Date();
           this.systemVarsService.getSystemVars().subscribe(systemVars => {
             const options = {
               params: {
@@ -151,6 +190,9 @@ export class CategoryService {
               .subscribe(
                 (categories: Category[]) => {
                   CategoryService.addToArray(this.cache, categories);
+                  this.winnersLastUpdate = updateStart;
+                  const source = timer(5000, 5000);
+                  this.eventSubscription = source.subscribe(() => this.doEventsUpdate());
                   observer.next(categories);
                 },
                 (err: Error) => observer.error(err)

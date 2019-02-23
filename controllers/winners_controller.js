@@ -1,4 +1,5 @@
 const model = require('./model');
+const events = require('./events_controller');
 const _ = require('underscore');
 
 exports.addOrDeleteWinner = function(request, response) {
@@ -10,7 +11,7 @@ exports.addOrDeleteWinner = function(request, response) {
     if (winner) {
       winner.destroy()
         .then(result => {
-          return response.json(result);
+          events.addEvent('winner', 'delete', request.body.nomination_id, result, response);
         })
         .catch(err => {
           response.send(500, "Error deleting existing winner!");
@@ -20,7 +21,7 @@ exports.addOrDeleteWinner = function(request, response) {
       model.Winner
         .create(request.body)
         .then(result => {
-          return response.json(result);
+          events.addEvent('winner', 'add', request.body.nomination_id, result, response);
         })
         .catch(err => {
           response.send(500, "Error submitting winner!");

@@ -11,6 +11,18 @@ exports.Category = sequelize.sequelize.define("category", {
   updatedAt: false
 });
 
+exports.Event = sequelize.sequelize.define("event", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  type: Sequelize.TEXT,
+  detail: Sequelize.TEXT,
+  nomination_id: Sequelize.INTEGER,
+  event_time: Sequelize.DATE
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});
+
 exports.Nomination = sequelize.sequelize.define("nomination", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   nominee: Sequelize.TEXT,
