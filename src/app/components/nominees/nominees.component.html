@@ -29,7 +29,7 @@
 
             <div class="row align-items-center">
 
-              <div class="col-12">
+              <div class="col-9">
                 <div class="row">
                   <div class="col-12 nomineeName">
                     {{getMainLineText(nominee)}}
@@ -39,6 +39,14 @@
                   <div class="col-12 nomineeSubtitle">
                     {{getSubtitleText(nominee)}}
                   </div>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="voterName"
+                     *ngFor="let voter of personsForNominee(nominee)"
+                     [ngClass]="getVoterClass(voter)">
+                  {{voter.first_name}}
                 </div>
               </div>
             </div>

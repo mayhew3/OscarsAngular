@@ -9,6 +9,8 @@ import {SystemVarsService} from './system.vars.service';
 import {SystemVarsServiceStub} from './system.vars.service.stub';
 import {CategoryService} from './category.service';
 import {CategoryServiceStub} from './category.service.stub';
+import {MockSystemVars} from './data/system.vars.mock';
+import {MockVoteList} from './data/votes.mock';
 
 describe('VotesService', () => {
   let service: VotesService;
@@ -28,6 +30,13 @@ describe('VotesService', () => {
     service = TestBed.get(VotesService);
     httpModule = TestBed.get(HttpClientTestingModule);
     httpMock = TestBed.get(HttpTestingController);
+
+    const testRequest = httpMock.expectOne(req => req.url === service.votesUrl);
+    expect(testRequest.request.method).toBe('GET');
+    expect(testRequest.request.params).toMatch('year=2018');
+    testRequest.flush(TestVoteList);
+
+    httpMock.verify();
   });
 
   it('should be created', () => {

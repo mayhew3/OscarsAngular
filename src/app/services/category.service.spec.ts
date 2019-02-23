@@ -7,6 +7,8 @@ import {AuthService} from './auth/auth.service';
 import {AuthServiceStub} from './auth/auth.service.stub';
 import {SystemVarsService} from './system.vars.service';
 import {SystemVarsServiceStub} from './system.vars.service.stub';
+import {VotesService} from './votes.service';
+import {VotesServiceStub} from './votes.service.stub';
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -17,7 +19,8 @@ describe('CategoryService', () => {
     imports: [HttpClientTestingModule],
     providers: [
       {provide: AuthService, useClass: AuthServiceStub},
-      {provide: SystemVarsService, useClass: SystemVarsServiceStub}
+      {provide: SystemVarsService, useClass: SystemVarsServiceStub},
+      {provide: VotesService, useClass: VotesServiceStub}
     ]
   }));
 

@@ -34,6 +34,16 @@
   background-color: darkblue;
 }
 
+.voterName {
+  font-size: 8pt;
+  text-align: right;
+}
+
+.itsMe {
+  color: lightpink;
+  font-weight: 600;
+}
+
 /* For Firefox */
 input[type='number'] {
   -moz-appearance:textfield;

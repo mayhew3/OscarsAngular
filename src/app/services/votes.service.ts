@@ -6,6 +6,8 @@ import {catchError} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
+import {Category} from '../interfaces/Category';
+import {_} from 'underscore';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,7 +23,9 @@ export class VotesService {
   constructor(private http: HttpClient,
               private systemVarsService: SystemVarsService) {
     this.cache = [];
-    this.systemVarsService.getSystemVars().subscribe();
+    this.systemVarsService.getSystemVars().subscribe(systemVars => {
+      this.maybeUpdateCache(systemVars.curr_year).subscribe();
+    });
   }
 
   // HELPERS
@@ -38,6 +42,10 @@ export class VotesService {
         });
       });
     });
+  }
+
+  getVotesForCurrentYearAndCategory(category: Category): Vote[] {
+    return _.where(this.cache, {category_id: category.id});
   }
 
 

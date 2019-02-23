@@ -11,6 +11,7 @@ import {Vote} from '../../interfaces/Vote';
 import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
 import {Winner} from '../../interfaces/Winner';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'osc-nominees',
@@ -26,13 +27,15 @@ export class NomineesComponent implements OnInit {
   public winningNominees: Nominee[] = [];
   private processingPick: Nominee;
   private person: Person;
+  private persons: Person[];
   @Input() activeContext: ActiveContext;
 
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
               private route: ActivatedRoute,
               private auth: AuthService,
-              private winnersService: WinnersService) { }
+              private winnersService: WinnersService,
+              private personService: PersonService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -56,11 +59,31 @@ export class NomineesComponent implements OnInit {
           });
         }
         if (this.winnersMode()) {
-          const winners = this.category.winners;
-          this.winningNominees = _.filter(this.nominees, nominee => winners.includes(nominee.id));
+          this.updateLocalWinningNominees();
+          this.personService.getPersonsForGroup(1).subscribe(persons => {
+            this.persons = persons;
+            this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+              this.updateLocalWinningNominees();
+            });
+          });
         }
       });
     });
+  }
+
+  personsForNominee(nominee: Nominee): Person[] {
+    const votes = this.votesService.getVotesForCurrentYearAndCategory(this.category);
+    const votesForNominee = _.where(votes, {nomination_id: nominee.id});
+    return _.map(votesForNominee, vote => _.findWhere(this.persons, {id: vote.person_id}));
+  }
+
+  private updateLocalWinningNominees(): void {
+    const winners = this.category.winners;
+    this.winningNominees = _.filter(this.nominees, nominee => winners.includes(nominee.id));
+  }
+
+  getVoterClass(person: Person): string {
+    return this.auth.isMe(person) ? 'itsMe' : '';
   }
 
   submitVote(nominee: Nominee): void {
@@ -74,7 +97,7 @@ export class NomineesComponent implements OnInit {
         }
         this.processingPick = undefined;
       });
-    } else if (this.winnersMode()) {
+    } else if (this.winnersMode() && this.auth.isAdmin()) {
       const deleting = this.isWinner(nominee);
       this.processingPick = nominee;
       this.winnersService.addOrDeleteWinner(nominee).subscribe((winner: Winner) => {

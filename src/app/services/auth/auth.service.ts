@@ -80,6 +80,10 @@ export class AuthService {
     });
   }
 
+  public isMe(person: Person): boolean {
+    return this._person && this._person.id === person.id;
+  }
+
   public isAdmin(): boolean {
     return this.isUser() && 'admin' === this._person.role;
   }

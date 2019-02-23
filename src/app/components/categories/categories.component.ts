@@ -37,6 +37,16 @@ export class CategoriesComponent implements OnInit {
     return '';
   }
 
+  showCategories(): boolean {
+    return !this.stillLoading() &&
+      (this.systemVarsService.canVote() || !this.votingMode());
+  }
+
+  showVotingClosedMessage(): boolean {
+    return !this.stillLoading() &&
+      this.votingMode() && !this.systemVarsService.canVote();
+  }
+
   votingMode(): boolean {
     return ActiveContext.Vote === this.activeContext;
   }
