@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of, Subscription, timer} from 'rxjs';
+import {Observable, of, Subscriber, Subscription, timer} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError, tap} from 'rxjs/operators';
 import {_} from 'underscore';
@@ -24,6 +24,7 @@ export class CategoryService {
   cache: Category[];
   private winnersLastUpdate: Date;
   private eventSubscription: Subscription;
+  private readonly winnerListeners: Subscriber<any>[];
 
   constructor(private http: HttpClient,
               private auth: AuthService,
@@ -31,6 +32,7 @@ export class CategoryService {
               private votesService: VotesService,
               private eventsService: EventsService) {
     this.cache = [];
+    this.winnerListeners = [];
   }
 
   // HELPERS
@@ -94,22 +96,38 @@ export class CategoryService {
     if (this.cache.length > 0) {
       const updateTime = new Date();
       this.eventsService.getEvents(this.winnersLastUpdate).subscribe(events => {
+        const categories: Category[] = [];
         _.forEach(events, event => {
           if (event.type === 'winner') {
+            const category = this.getCategoryForNomination(event.nomination_id);
             if (event.detail === 'add') {
-              this.addWinnerToCache(event.nomination_id);
+              this.addWinnerToCache(event.nomination_id, category);
             } else if (event.detail === 'delete') {
               this.removeWinnerFromCache(event.nomination_id);
             }
+
+            if (!categories.includes(category)) {
+              categories.push(category);
+            }
           }
-          this.winnersLastUpdate = updateTime;
         });
+        if (categories.length > 0) {
+          _.forEach(this.winnerListeners, listener => listener.next(categories));
+        }
+        this.winnersLastUpdate = updateTime;
       });
     }
   }
 
-  private addWinnerToCache(nomination_id: number): void {
-    const category = this.getCategoryForNomination(nomination_id);
+  subscribeToWinnerEvents(): Observable<any> {
+    return new Observable<any>(observer => this.addWinnerSubscriber(observer));
+  }
+
+  addWinnerSubscriber(subscriber: Subscriber<Category[]>): void {
+    this.winnerListeners.push(subscriber);
+  }
+
+  private addWinnerToCache(nomination_id: number, category: Category): void {
     if (!category.winners.includes(nomination_id)) {
       category.winners.push(nomination_id);
     }
@@ -127,27 +145,31 @@ export class CategoryService {
   // SCOREBOARD
 
   populatePersonScores(persons: Person[]) {
+    this.maybeUpdateCache().subscribe(categories => {
+      this.populatePersonScoresForCategories(persons, categories);
+    });
+  }
+
+  populatePersonScoresForCategories(persons: Person[], categories: Category[]) {
     this.votesService.getVotesForCurrentYear().subscribe(votes => {
-      this.maybeUpdateCache().subscribe(categories => {
-        _.forEach(persons, person => {
-          let score = 0;
-          let numVotes = 0;
-          _.forEach(categories, category => {
-            const winners = category.winners;
-            const personVote = _.findWhere(votes, {
-              person_id: person.id,
-              category_id: category.id
-            });
-            if (personVote) {
-              numVotes++;
-              if (winners.includes(personVote.nomination_id)) {
-                score += category.points;
-              }
-            }
+      _.forEach(persons, person => {
+        let score = 0;
+        let numVotes = 0;
+        _.forEach(categories, category => {
+          const winners = category.winners;
+          const personVote = _.findWhere(votes, {
+            person_id: person.id,
+            category_id: category.id
           });
-          person.score = score;
-          person.num_votes = numVotes;
+          if (personVote) {
+            numVotes++;
+            if (winners.includes(personVote.nomination_id)) {
+              score += category.points;
+            }
+          }
         });
+        person.score = score;
+        person.num_votes = numVotes;
       });
     });
   }
