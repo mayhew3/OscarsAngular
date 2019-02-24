@@ -3,6 +3,9 @@ import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
 import {CategoryService} from '../../services/category.service';
 import {_} from 'underscore';
+import {OddsService} from '../../services/odds.service';
+import {Odds} from '../../interfaces/Odds';
+import {OddsBundle} from '../../interfaces/OddsBundle';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -13,7 +16,8 @@ export class ScoreboardComponent implements OnInit {
   public persons: Person[];
 
   constructor(private personService: PersonService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private oddsService: OddsService) {
     this.persons = [];
   }
 
@@ -25,6 +29,27 @@ export class ScoreboardComponent implements OnInit {
         this.updateScoreboard();
       });
     });
+  }
+
+  getOdds(): OddsBundle {
+    return this.oddsService.getOdds();
+  }
+
+  getOddsForPerson(person: Person): string {
+    const odds = this.getOdds();
+    if (odds) {
+      const oddsForPerson = _.findWhere(odds.odds, {person_id: person.id});
+      const oddsValue = parseFloat(oddsForPerson.odds) * 100;
+      if (oddsValue < 0.1) {
+        return '<0.1%';
+      } else if (oddsValue > 10) {
+        return oddsValue.toFixed(0) + '%';
+      } else {
+        return oddsValue.toFixed(1) + '%';
+      }
+    } else {
+      return '--';
+    }
   }
 
   updateScoreboard(): void {

@@ -95,3 +95,24 @@ exports.SystemVars = sequelize.sequelize.define("system_vars", {
   createdAt: false,
   updatedAt: false
 });
+
+
+exports.OddsResult = sequelize.sequelize.define("odds_result", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  odds: Sequelize.INTEGER,
+  person_id: Sequelize.INTEGER,
+  odds_execution_id: Sequelize.INTEGER
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});
+
+exports.OddsExecution = sequelize.sequelize.define("odds_execution", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  event_id: Sequelize.INTEGER
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});

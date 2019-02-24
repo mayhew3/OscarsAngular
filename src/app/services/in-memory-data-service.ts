@@ -10,6 +10,7 @@ import {Observable, of} from 'rxjs';
 import {MockSystemVars} from './data/system.vars.mock';
 import {MockWinnerList} from './data/winners.mock';
 import {MockEvents} from './data/event.mock';
+import {MockOdds} from './data/odds.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class InMemoryDataService implements InMemoryDbService {
   systemVars = MockSystemVars;
   winners = MockWinnerList;
   events = MockEvents;
+  odds = MockOdds;
 
   /////////// helpers ///////////////
 
@@ -42,7 +44,8 @@ export class InMemoryDataService implements InMemoryDbService {
       votes: this.votes,
       systemVars: this.systemVars,
       winners: this.winners,
-      events: this.events};
+      events: this.events,
+      odds: this.odds};
   }
 
   get(requestInfo: RequestInfo) {

@@ -3,6 +3,7 @@ let express = require('express');
 module.exports = function(app) {
   let events = require('../controllers/events_controller');
   let nominees = require('../controllers/nominees_controller');
+  let odds = require('../controllers/odds_controller');
   let persons = require('../controllers/persons_controller');
   let votes = require('../controllers/votes_controller');
   let winners = require('../controllers/winners_controller');
@@ -18,6 +19,9 @@ module.exports = function(app) {
 
   router.route('/nominees')
     .put(nominees.updateNomination);
+
+  router.route('/odds')
+    .get(odds.getMostRecentOddsBundle);
 
   router.route('/persons')
     .get(persons.getPersons);
