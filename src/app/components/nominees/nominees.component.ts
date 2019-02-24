@@ -12,6 +12,7 @@ import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
 import {Winner} from '../../interfaces/Winner';
 import {PersonService} from '../../services/person.service';
+import {SystemVarsService} from '../../services/system.vars.service';
 
 @Component({
   selector: 'osc-nominees',
@@ -35,7 +36,8 @@ export class NomineesComponent implements OnInit {
               private route: ActivatedRoute,
               private auth: AuthService,
               private winnersService: WinnersService,
-              private personService: PersonService) { }
+              private personService: PersonService,
+              private systemVarsService: SystemVarsService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -125,6 +127,20 @@ export class NomineesComponent implements OnInit {
 
   getHeaderPts(): string {
     return this.category ? this.category.points.toString() : '';
+  }
+
+  showNominees(): boolean {
+    return !this.stillLoading() &&
+      (this.systemVarsService.canVote() || !this.votingMode());
+  }
+
+  showVotingClosedMessage(): boolean {
+    return !this.stillLoading() &&
+      this.votingMode() && !this.systemVarsService.canVote();
+  }
+
+  stillLoading(): boolean {
+    return this.categoryService.stillLoading() || this.personService.stillLoading() || this.systemVarsService.stillLoading();
   }
 
   getMainLineText(nominee: Nominee): string {

@@ -23,7 +23,10 @@
 
   <div class="container" style="padding-top: 10px">
 
-    <div class="row">
+    <p *ngIf="stillLoading()">Loading...</p>
+    <p *ngIf="showVotingClosedMessage()">Voting is currently closed!</p>
+
+    <div class="row" *ngIf="showNominees()">
       <div class="col-12 col-sm-6 col-lg-4"
            *ngFor="let nominee of getNominees()">
 
