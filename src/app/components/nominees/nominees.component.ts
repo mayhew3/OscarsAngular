@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Nominee} from '../../interfaces/Nominee';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
 import {_} from 'underscore';
@@ -12,6 +12,7 @@ import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
 import {Winner} from '../../interfaces/Winner';
 import {PersonService} from '../../services/person.service';
+import {timer} from 'rxjs';
 
 @Component({
   selector: 'osc-nominees',
@@ -33,6 +34,7 @@ export class NomineesComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
               private route: ActivatedRoute,
+              private router: Router,
               private auth: AuthService,
               private winnersService: WinnersService,
               private personService: PersonService) { }
@@ -102,6 +104,8 @@ export class NomineesComponent implements OnInit {
           this.category.voted_on = nominee.id;
         }
         this.processingPick = undefined;
+        const source = timer(450);
+        source.subscribe(() => this.router.navigate(['/', 'vote', this.nextCategory.id]));
       });
     } else if (this.winnersMode() && this.auth.isAdmin()) {
       const deleting = this.isWinner(nominee);
