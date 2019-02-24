@@ -1,56 +1,47 @@
 <!-- src/app/app.component.html -->
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-expand navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" routerLink="/">Oscars 2019</a>
 
-      <button
-        class="btn btn-primary btn-margin"
-        *ngIf="!stillLoading() && auth.isUser() && (systemVarsService.canVote() || auth.isAdmin())"
-        routerLink="/vote">
-        Vote
-      </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav navbar-left">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item"
+          *ngIf="!stillLoading() && auth.isUser() && (systemVarsService.canVote() || auth.isAdmin())">
+          <a class="nav-link" routerLink="/vote">Vote</a>
+        </li>
+        <li class="nav-item"
+            *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())">
+          <a class="nav-link" routerLink="/scores">Scores</a>
+        </li>
+        <li class="nav-item"
+            *ngIf="!stillLoading() && auth.isAdmin()">
+          <a class="nav-link" routerLink="/odds">Odds</a>
+        </li>
+        <li class="nav-item"
+            *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())">
+          <a class="nav-link" routerLink="/winners">Winners</a>
+        </li>
+      </ul>
 
-      <button
-        class="btn btn-primary btn-margin"
-        *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())"
-        routerLink="/scores">
-        Scores
-      </button>
+      <ul class="navbar-nav navbar-right">
+        <li class="nav-item"
+            *ngIf="!auth.isAuthenticated()">
+          <a class="nav-link" (click)="auth.login()">Login</a>
+        </li>
+        <li class="nav-item"
+            *ngIf="auth.isAuthenticated()">
+          <a class="nav-link" (click)="auth.logout()">Logout</a>
+        </li>
 
-      <button
-        class="btn btn-primary btn-margin"
-        *ngIf="!stillLoading() && auth.isAdmin()"
-        routerLink="/odds">
-        Odds
-      </button>
-
-      <button
-        class="btn btn-primary btn-margin"
-        *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())"
-        routerLink="/winners">
-        Winners
-      </button>
-
-      <button
-        class="btn btn-primary btn-margin"
-        *ngIf="!auth.isAuthenticated()"
-        (click)="auth.login()">
-        Log In
-      </button>
-
-      <button
-        class="btn btn-primary btn-margin"
-        *ngIf="auth.isAuthenticated()"
-        (click)="auth.logout()">
-        Log Out
-      </button>
+      </ul>
 
     </div>
   </div>
 </nav>
 
-<main class="container">
+<main class="container wideContainer">
   <router-outlet></router-outlet>
 </main>

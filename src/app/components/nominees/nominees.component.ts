@@ -72,9 +72,9 @@ export class NomineesComponent implements OnInit {
   }
 
   getNominees(): Nominee[] {
-    return this.nominees.sort((nominee1, nominee2) => {
+    return this.nominees ? this.nominees.sort((nominee1, nominee2) => {
       return nominee1.nominee < nominee2.nominee ? -1 : 1;
-    });
+    }) : [];
   }
 
   personsForNominee(nominee: Nominee): Person[] {
