@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './services/auth/auth.service';
 import {SystemVarsService} from './services/system.vars.service';
+import {CategoryService} from './services/category.service';
 
 @Component({
   selector: 'osc-root',
@@ -10,9 +11,11 @@ import {SystemVarsService} from './services/system.vars.service';
 export class AppComponent implements OnInit {
 
   constructor(public auth: AuthService,
-              public systemVarsService: SystemVarsService) {
+              public systemVarsService: SystemVarsService,
+              private categoryService: CategoryService) {
     auth.handleAuthentication();
     auth.scheduleRenewal();
+    categoryService.getCategories().subscribe();
   }
 
   ngOnInit() {
