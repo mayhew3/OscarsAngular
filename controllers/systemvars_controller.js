@@ -1,5 +1,5 @@
 const model = require('./model');
-const _ = require('underscore');
+const events = require('./events_controller');
 
 exports.getSystemVars = function(request, response) {
   model.SystemVars.findAll().then(systemVars => {
@@ -14,7 +14,8 @@ exports.updateSystemVars = function(request, response) {
 
   model.SystemVars.findByPk(systemVar.id).then(result => {
     result.update(systemVar).then(() => {
-      response.json({msg: "Success!"});
+      const detail = systemVar.voting_open ? 'unlocked' : 'locked';
+      events.addEvent('votes_locked', detail, undefined, result, response);
     }).catch(error => {
       console.error(error);
       response.send({msg: "Error updating system_vars: " + JSON.stringify(systemVar)})

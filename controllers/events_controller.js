@@ -1,5 +1,4 @@
 const model = require('./model');
-const _ = require('underscore');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 

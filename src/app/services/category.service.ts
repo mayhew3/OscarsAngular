@@ -109,6 +109,12 @@ export class CategoryService {
             if (!categories.includes(category)) {
               categories.push(category);
             }
+          } else if (event.type === 'votes_locked') {
+            if (event.detail === 'locked') {
+              this.systemVarsService.lockVotingInternal();
+            } else if (event.detail === 'unlocked') {
+              this.systemVarsService.unlockVotingInternal();
+            }
           }
         });
         if (categories.length > 0) {

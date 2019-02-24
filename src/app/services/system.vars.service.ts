@@ -28,6 +28,18 @@ export class SystemVarsService {
     return this.systemVars ? this.systemVars.curr_year : undefined;
   }
 
+  lockVotingInternal(): void {
+    this.getSystemVars().subscribe(() => {
+      this.systemVars.voting_open = false;
+    });
+  }
+
+  unlockVotingInternal(): void {
+    this.getSystemVars().subscribe(() => {
+      this.systemVars.voting_open = true;
+    });
+  }
+
   public toggleVotingLock(): void {
     if (!this.systemVars) {
       throw new Error('No system vars found.');
