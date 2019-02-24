@@ -6,8 +6,7 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom justify-content-center"
-     *ngIf="winnersMode() || oddsMode()">
+<nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom justify-content-center">
   <osc-category-hopper [next]="nextCategory"
                        [prev]="previousCategory"
                        [nominees]="nominees"
@@ -141,13 +140,6 @@
         </div>
       </div>
 
-    </div>
-
-    <div class="row">
-      <div class="col-10">
-        <button class="btn btn-lg btn-primary"
-                (click)="router.navigate(['/', 'vote'])">Up to Categories</button>
-      </div>
     </div>
   </div>
 </div>
