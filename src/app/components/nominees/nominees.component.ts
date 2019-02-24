@@ -71,6 +71,12 @@ export class NomineesComponent implements OnInit {
     });
   }
 
+  getNominees(): Nominee[] {
+    return this.nominees.sort((nominee1, nominee2) => {
+      return nominee1.nominee < nominee2.nominee ? -1 : 1;
+    });
+  }
+
   personsForNominee(nominee: Nominee): Person[] {
     const votes = this.votesService.getVotesForCurrentYearAndCategory(this.category);
     const votesForNominee = _.where(votes, {nomination_id: nominee.id});

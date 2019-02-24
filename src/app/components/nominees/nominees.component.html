@@ -20,7 +20,7 @@
 
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-4"
-           *ngFor="let nominee of nominees">
+           *ngFor="let nominee of getNominees()">
 
         <div class="card nomineeCard"
              [ngClass]="getVotedClass(nominee)"
