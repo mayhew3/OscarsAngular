@@ -123,6 +123,10 @@ export class NomineesComponent implements OnInit {
     return this.category ? this.category.name : '';
   }
 
+  getHeaderPts(): string {
+    return this.category ? this.category.points.toString() : '';
+  }
+
   getMainLineText(nominee: Nominee): string {
     return nominee.nominee;
   }
