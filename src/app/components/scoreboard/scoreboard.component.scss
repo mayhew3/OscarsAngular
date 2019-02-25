@@ -16,9 +16,17 @@
   text-align: center;
 }
 
+.oddsSubtitle {
+  font-weight: normal;
+  font-size: 10pt;
+  color: $muted;
+  text-align: center;
+}
+
 .odds {
   font-weight: bold;
   font-size: 14pt;
   color: $muted;
   text-align: center;
+  margin-left: 4pt;
 }
