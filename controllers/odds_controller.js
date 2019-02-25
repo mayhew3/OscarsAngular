@@ -35,7 +35,11 @@ function handleOddsForEventID(event_id, response) {
   model.OddsExecution.findAll({
     where: {
       event_id: {
+        [Op.ne]: null,
         [Op.gte]: event_id
+      },
+      time_finished: {
+        [Op.ne]: null
       }
     },
     limit: 1,
