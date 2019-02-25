@@ -10,6 +10,7 @@ import {SystemVarsService} from './system.vars.service';
 import {Person} from '../interfaces/Person';
 import {VotesService} from './votes.service';
 import {EventsService} from './events.service';
+import {OddsService} from './odds.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,7 +31,8 @@ export class CategoryService {
               private auth: AuthService,
               private systemVarsService: SystemVarsService,
               private votesService: VotesService,
-              private eventsService: EventsService) {
+              private eventsService: EventsService,
+              private oddsService: OddsService) {
     this.cache = [];
     this.winnerListeners = [];
   }
@@ -109,6 +111,7 @@ export class CategoryService {
             if (!categories.includes(category)) {
               categories.push(category);
             }
+            this.oddsService.incomingEvent(event.id);
           } else if (event.type === 'votes_locked') {
             if (event.detail === 'locked') {
               this.systemVarsService.lockVotingInternal();

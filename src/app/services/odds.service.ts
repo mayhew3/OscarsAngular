@@ -33,7 +33,7 @@ export class OddsService {
     const source = timer(0, 2000);
     this.eventSubscription = source.subscribe(() => {
       this.checkForUpdate(event_id).subscribe(odds => {
-        if (odds.event_id > event_id) {
+        if (odds.event_id >= event_id) {
           this.odds = odds;
           this.eventSubscription.unsubscribe();
         }

@@ -4,7 +4,7 @@ const Op = Sequelize.Op;
 
 exports.getMostRecentOddsBundle = function(request, response) {
   if (request.query.event_id) {
-    handleOddsForEventID(request.query.event_id);
+    handleOddsForEventID(request.query.event_id, response);
   } else {
     handleFirstOdds(response);
   }
@@ -13,17 +13,21 @@ exports.getMostRecentOddsBundle = function(request, response) {
 function handleFirstOdds(response) {
   model.OddsExecution.findAll({
     where: {
-      event_id: {
+      time_finished: {
         [Op.ne]: null
       }
     },
     limit: 1,
     order:
       [
-        ['event_id', 'DESC']
+        ['time_finished', 'DESC']
       ]
   }).then(executions => {
-    attachOddsToExecution(executions[0], response);
+    if (executions.length === 0) {
+      response.json({});
+    } else {
+      attachOddsToExecution(executions[0], response);
+    }
   });
 }
 
@@ -31,7 +35,7 @@ function handleOddsForEventID(event_id, response) {
   model.OddsExecution.findAll({
     where: {
       event_id: {
-        [Op.gt]: event_id
+        [Op.gte]: event_id
       }
     },
     limit: 1,
@@ -40,7 +44,11 @@ function handleOddsForEventID(event_id, response) {
         ['event_id', 'DESC']
       ]
   }).then(executions => {
-    attachOddsToExecution(executions[0], response);
+    if (executions.length === 0) {
+      response.json({});
+    } else {
+      attachOddsToExecution(executions[0], response);
+    }
   });
 }
 
