@@ -13,21 +13,21 @@
     No players have voted yet!
   </p>
 
-  <div class="row" *ngIf="!stillLoading()">
+  <div class="row mt-2" *ngIf="!stillLoading()">
     <div class="col-12 col-sm-6 col-lg-4"
          *ngFor="let person of getVoters()">
       <div class="card scoreCard">
-        <div class="card-body">
+        <div class="card-body py-2 px-3">
           <div class="row">
-            <div class="col-8 scoreTitle">
+            <div class="col-5 scoreTitle">
               <span>{{person.first_name}}</span>
             </div>
-            <div class="col-4 scorePoints">
+            <div class="col-4">
+              <span class="oddsSubtitle">Odds</span>
+              <span class="odds">{{getOddsForPerson(person)}}</span>
+            </div>
+            <div class="col-3 scorePoints">
               <span>{{person.score}}</span>
-              <div>
-                <span class="oddsSubtitle">Odds</span>
-                <span class="odds">{{getOddsForPerson(person)}}</span>
-              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 @import "../../../variables";
 
 .scoreCard {
-  font-size: 18pt;
+  font-size: 16pt;
   margin-bottom: 10px;
   border-color: $highlight;
 }
@@ -13,20 +13,20 @@
 .scorePoints {
   font-weight: bold;
   color: $highlight;
-  text-align: center;
+  text-align: right;
 }
 
 .oddsSubtitle {
   font-weight: normal;
   font-size: 10pt;
   color: $muted;
-  text-align: center;
+  text-align: right;
 }
 
 .odds {
   font-weight: bold;
   font-size: 14pt;
   color: $muted;
-  text-align: center;
+  text-align: right;
   margin-left: 4pt;
 }
