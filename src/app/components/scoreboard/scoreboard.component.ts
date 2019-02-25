@@ -37,18 +37,31 @@ export class ScoreboardComponent implements OnInit {
 
   getOddsForPerson(person: Person): string {
     const odds = this.getOdds();
-    if (odds) {
-      const oddsForPerson = _.findWhere(odds.odds, {person_id: person.id});
-      const oddsValue = parseFloat(oddsForPerson.odds) * 100;
-      if (oddsValue < 0.1) {
-        return '<0.1%';
-      } else if (oddsValue > 10) {
-        return oddsValue.toFixed(0) + '%';
+    try {
+      if (odds) {
+        const oddsOdds = odds.odds;
+        if (!oddsOdds) {
+          return '--';
+        }
+        const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
+        if (!oddsForPerson || !oddsForPerson.odds) {
+          return '--';
+        }
+        const oddsValue = parseFloat(oddsForPerson.odds) * 100;
+        if (!oddsValue) {
+          return '--';
+        } else if (oddsValue < 0.1) {
+          return '<0.1%';
+        } else if (oddsValue > 10) {
+          return oddsValue.toFixed(0) + '%';
+        } else {
+          return oddsValue.toFixed(1) + '%';
+        }
       } else {
-        return oddsValue.toFixed(1) + '%';
+        return '--';
       }
-    } else {
-      return '--';
+    } catch (err) {
+      console.log(JSON.stringify(odds));
     }
   }
 
