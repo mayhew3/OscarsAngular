@@ -41,15 +41,15 @@ export class ScoreboardComponent implements OnInit {
       if (odds) {
         const oddsOdds = odds.odds;
         if (!oddsOdds) {
-          return '--';
+          return 'err';
         }
         const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
         if (!oddsForPerson || !oddsForPerson.odds) {
-          return '--';
+          return '0%';
         }
         const oddsValue = parseFloat(oddsForPerson.odds) * 100;
         if (!oddsValue) {
-          return '--';
+          return 'err';
         } else if (oddsValue < 0.1) {
           return '<0.1%';
         } else if (oddsValue > 10) {
@@ -58,7 +58,7 @@ export class ScoreboardComponent implements OnInit {
           return oddsValue.toFixed(1) + '%';
         }
       } else {
-        return '--';
+        return '...';
       }
     } catch (err) {
       console.log(JSON.stringify(odds));
