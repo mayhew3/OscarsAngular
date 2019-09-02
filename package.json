@@ -1,6 +1,6 @@
 {
   "name": "oscars",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "node ./bin/www",
@@ -65,7 +65,7 @@
     "tslint": "5.19.0"
   },
   "engines": {
-    "node": "8.11.2",
-    "npm": "6.5.0"
+    "node": "10.16.0",
+    "npm": "6.9.0"
   }
 }
