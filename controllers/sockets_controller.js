@@ -6,7 +6,7 @@ const persons = [];
 const existing_person_rooms = [];
 
 const personalChannels = [
-  'my_episode_viewed'
+  'winner'
 ];
 
 let io;
@@ -19,8 +19,14 @@ exports.initIO = function(in_io) {
 
     let person_id = parseInt(client.handshake.query.person_id);
     addClientForPerson(person_id, client);
+/*
 
     initAllRooms(client, person_id);
+*/
+
+    client.on('winner', msg => {
+      io.emit('winner', msg);
+    });
 
     client.on('disconnect', () => {
       console.log('Client disconnected. Removing from array.');
@@ -28,6 +34,7 @@ exports.initIO = function(in_io) {
       removeClientForPerson(person_id, client);
     });
   });
+
 };
 
 function addToPersonRooms(room_name) {

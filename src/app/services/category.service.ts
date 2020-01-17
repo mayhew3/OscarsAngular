@@ -11,6 +11,7 @@ import {Person} from '../interfaces/Person';
 import {VotesService} from './votes.service';
 import {EventsService} from './events.service';
 import {OddsService} from './odds.service';
+import {Socket} from 'ngx-socket-io';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,7 +33,8 @@ export class CategoryService {
               private systemVarsService: SystemVarsService,
               private votesService: VotesService,
               private eventsService: EventsService,
-              private oddsService: OddsService) {
+              private oddsService: OddsService,
+              private socket: Socket) {
     this.cache = [];
     this.winnerListeners = [];
   }
@@ -97,22 +99,19 @@ export class CategoryService {
   doEventsUpdate(): void {
     if (this.cache.length > 0) {
       const updateTime = new Date();
-      this.eventsService.getEvents(this.winnersLastUpdate).subscribe(events => {
-        const categories: Category[] = [];
-        _.forEach(events, event => {
-          if (event.type === 'winner') {
-            const category = this.getCategoryForNomination(event.nomination_id);
-            if (event.detail === 'add') {
-              this.addWinnerToCache(event.nomination_id, category);
-            } else if (event.detail === 'delete') {
-              this.removeWinnerFromCache(event.nomination_id);
-            }
 
-            if (!categories.includes(category)) {
-              categories.push(category);
-            }
-            this.oddsService.incomingEvent(event.id);
-          } else if (event.type === 'votes_locked') {
+      this.socket.on('winner', msg => {
+        const category = this.getCategoryForNomination(msg.data.nomination_id);
+        if (msg.detail === 'add') {
+          this.addWinnerToCache(msg.data.nomination_id, category);
+        } else if (msg.detail === 'delete') {
+          this.removeWinnerFromCache(msg.data.nomination_id);
+        }
+      });
+
+      this.eventsService.getEvents(this.winnersLastUpdate).subscribe(events => {
+        _.forEach(events, event => {
+          if (event.type === 'votes_locked') {
             if (event.detail === 'locked') {
               this.systemVarsService.lockVotingInternal();
             } else if (event.detail === 'unlocked') {
@@ -120,9 +119,6 @@ export class CategoryService {
             }
           }
         });
-        if (categories.length > 0) {
-          _.forEach(this.winnerListeners, listener => listener.next(categories));
-        }
         this.winnersLastUpdate = updateTime;
       });
     }

@@ -19,6 +19,13 @@ import {SystemVarsService} from './services/system.vars.service';
 import { WinnerMainComponent } from './components/winner-main/winner-main.component';
 import { WinnerDetailComponent } from './components/winner-detail/winner-detail.component';
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: {
+    query: {
+      person_id: 1
+    }
+  } };
 
 @NgModule({
   declarations: [
@@ -40,7 +47,8 @@ import { ScoreboardComponent } from './components/scoreboard/scoreboard.componen
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
+    environment.httpModules, // use in-memory for CLI environment, regular http for prod and local server
+    SocketIoModule.forRoot(config)
   ],
   providers: [AuthService, SystemVarsService],
   bootstrap: [AppComponent]

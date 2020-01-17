@@ -13,6 +13,7 @@ import {WinnersService} from '../../services/winners.service';
 import {Winner} from '../../interfaces/Winner';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
+import {Socket} from 'ngx-socket-io';
 
 @Component({
   selector: 'osc-nominees',
@@ -37,7 +38,8 @@ export class NomineesComponent implements OnInit {
               private auth: AuthService,
               private winnersService: WinnersService,
               private personService: PersonService,
-              private systemVarsService: SystemVarsService) { }
+              private systemVarsService: SystemVarsService,
+              private socket: Socket) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -64,7 +66,7 @@ export class NomineesComponent implements OnInit {
           this.updateLocalWinningNominees();
           this.personService.getPersonsForGroup(1).subscribe(persons => {
             this.persons = persons;
-            this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+            this.socket.on('winner', () => {
               this.updateLocalWinningNominees();
             });
           });
@@ -94,7 +96,7 @@ export class NomineesComponent implements OnInit {
     return this.auth.isMe(person) ? 'itsMe' : '';
   }
 
-  submitVote(nominee: Nominee): void {
+  submitVoteOrWinner(nominee: Nominee): void {
     if (this.votingMode()) {
       this.processingPick = nominee;
       this.votesService.addOrUpdateVote(nominee, this.person).subscribe((vote: Vote) => {
@@ -108,7 +110,7 @@ export class NomineesComponent implements OnInit {
     } else if (this.winnersMode() && this.auth.isAdmin()) {
       const deleting = this.isWinner(nominee);
       this.processingPick = nominee;
-      this.winnersService.addOrDeleteWinner(nominee).subscribe((winner: Winner) => {
+      this.winnersService.addOrDeleteWinner(nominee, deleting).subscribe((winner: Winner) => {
         if (deleting) {
           this.winningNominees = _.without(this.winningNominees, nominee);
           this.category.winners = _.without(this.category.winners, nominee.id);

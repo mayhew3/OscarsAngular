@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Winner} from '../interfaces/Winner';
+import {Socket} from 'ngx-socket-io';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,19 +16,28 @@ const httpOptions = {
 export class WinnersService {
   winnersUrl = 'api/winners';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private socket: Socket) { }
 
-  addOrDeleteWinner(nominee: Nominee): Observable<Winner> {
-    const data = {
-      category_id: nominee.category_id,
-      year: nominee.year,
-      nomination_id: nominee.id,
-      declared: new Date()
-    };
-    return this.http.post<Winner>(this.winnersUrl, data, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('addOrDeleteWinner', data))
-      );
+  addOrDeleteWinner(nominee: Nominee, deleting: boolean): Observable<Winner> {
+    return new Observable<Winner>(observer => {
+      const data = {
+        category_id: nominee.category_id,
+        year: nominee.year,
+        nomination_id: nominee.id,
+        declared: new Date()
+      };
+
+      this.http.post<Winner>(this.winnersUrl, data, httpOptions).subscribe(winner => {
+        const msg = {
+          detail: deleting ? 'delete' : 'add',
+          data: winner
+        };
+
+        this.socket.emit('winner', msg);
+        observer.next(winner);
+      }, (err: Error) => observer.error(err));
+    });
   }
 
 
