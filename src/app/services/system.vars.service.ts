@@ -60,7 +60,7 @@ export class SystemVarsService {
   }
 
   public stillLoading(): boolean {
-    return _.isUndefined(this.systemVars);
+    return this.systemVars === undefined;
   }
 
   public getSystemVars(): Observable<SystemVars> {

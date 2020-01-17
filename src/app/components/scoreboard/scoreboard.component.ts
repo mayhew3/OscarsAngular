@@ -6,7 +6,6 @@ import {_} from 'underscore';
 import {OddsService} from '../../services/odds.service';
 import {Odds} from '../../interfaces/Odds';
 import {OddsBundle} from '../../interfaces/OddsBundle';
-import {Socket} from 'ngx-socket-io';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -18,8 +17,7 @@ export class ScoreboardComponent implements OnInit {
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
-              private oddsService: OddsService,
-              private socket: Socket) {
+              private oddsService: OddsService) {
     this.persons = [];
   }
 
@@ -27,7 +25,7 @@ export class ScoreboardComponent implements OnInit {
     this.personService.getPersonsForGroup(1).subscribe(persons => {
       this.persons = persons;
       this.categoryService.populatePersonScores(this.persons);
-      this.socket.on('winner', () => {
+      this.categoryService.subscribeToWinnerEvents().subscribe(() => {
         this.updateScoreboard();
       });
     });

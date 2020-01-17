@@ -5,6 +5,10 @@ const clients = [];
 const persons = [];
 const existing_person_rooms = [];
 
+const globalChannels = [
+  'winner'
+];
+
 const personalChannels = [
   'winner'
 ];
@@ -19,14 +23,8 @@ exports.initIO = function(in_io) {
 
     let person_id = parseInt(client.handshake.query.person_id);
     addClientForPerson(person_id, client);
-/*
 
     initAllRooms(client, person_id);
-*/
-
-    client.on('winner', msg => {
-      io.emit('winner', msg);
-    });
 
     client.on('disconnect', () => {
       console.log('Client disconnected. Removing from array.');
@@ -44,8 +42,9 @@ function addToPersonRooms(room_name) {
 }
 
 function initAllRooms(client, person_id) {
-  initPersonRoom(client, person_id);
-  initPersonalChannels(client);
+  // initPersonRoom(client, person_id);
+  // initPersonalChannels(client);
+  // initGlobalChannels(client);
 }
 
 function initPersonRoom(client, person_id) {
@@ -67,6 +66,15 @@ function initPersonalChannels(client) {
   });
 }
 
+function initGlobalChannels(client) {
+  _.each(globalChannels, channelName => {
+    client.on(channelName, msg => {
+      console.log(`Message received on channel ${channelName} to everyone.`);
+      io.emit(channelName, msg);
+    });
+  });
+}
+
 /* API */
 
 exports.getNumberOfClients = function() {
@@ -74,7 +82,7 @@ exports.getNumberOfClients = function() {
 };
 
 exports.emitToAll = function(channel, msg) {
-  emitToClients(clients, channel, msg);
+  io.emit(channel, msg);
 };
 
 exports.emitToPerson = function(person_id, channel, msg) {

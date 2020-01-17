@@ -98,17 +98,18 @@ export class CategoryService {
 
   doEventsUpdate(): void {
     if (this.cache.length > 0) {
-      const updateTime = new Date();
 
       this.socket.on('winner', msg => {
-        const category = this.getCategoryForNomination(msg.data.nomination_id);
+        console.log(`Received winner message: ${JSON.stringify(msg)}`);
+        const category = this.getCategoryForNomination(msg.nomination_id);
         if (msg.detail === 'add') {
-          this.addWinnerToCache(msg.data.nomination_id, category);
+          this.addWinnerToCache(msg.nomination_id, category);
         } else if (msg.detail === 'delete') {
-          this.removeWinnerFromCache(msg.data.nomination_id);
+          this.removeWinnerFromCache(msg.nomination_id);
         }
+        this.updateWinnerSubscribers(msg);
       });
-
+/*
       this.eventsService.getEvents(this.winnersLastUpdate).subscribe(events => {
         _.forEach(events, event => {
           if (event.type === 'votes_locked') {
@@ -120,7 +121,7 @@ export class CategoryService {
           }
         });
         this.winnersLastUpdate = updateTime;
-      });
+      });*/
     }
   }
 
@@ -128,8 +129,12 @@ export class CategoryService {
     return new Observable<any>(observer => this.addWinnerSubscriber(observer));
   }
 
-  addWinnerSubscriber(subscriber: Subscriber<Category[]>): void {
+  addWinnerSubscriber(subscriber: Subscriber<any>): void {
     this.winnerListeners.push(subscriber);
+  }
+
+  updateWinnerSubscribers(msg): void {
+    _.forEach(this.winnerListeners, listener => listener.next(msg));
   }
 
   private addWinnerToCache(nomination_id: number, category: Category): void {

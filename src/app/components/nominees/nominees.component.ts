@@ -13,7 +13,7 @@ import {WinnersService} from '../../services/winners.service';
 import {Winner} from '../../interfaces/Winner';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {Socket} from 'ngx-socket-io';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-nominees',
@@ -38,8 +38,7 @@ export class NomineesComponent implements OnInit {
               private auth: AuthService,
               private winnersService: WinnersService,
               private personService: PersonService,
-              private systemVarsService: SystemVarsService,
-              private socket: Socket) { }
+              private systemVarsService: SystemVarsService) { }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -66,8 +65,9 @@ export class NomineesComponent implements OnInit {
           this.updateLocalWinningNominees();
           this.personService.getPersonsForGroup(1).subscribe(persons => {
             this.persons = persons;
-            this.socket.on('winner', () => {
+            this.categoryService.subscribeToWinnerEvents().subscribe(() => {
               this.updateLocalWinningNominees();
+              this.processingPick = undefined;
             });
           });
         }
@@ -108,18 +108,8 @@ export class NomineesComponent implements OnInit {
         this.processingPick = undefined;
       });
     } else if (this.winnersMode() && this.auth.isAdmin()) {
-      const deleting = this.isWinner(nominee);
       this.processingPick = nominee;
-      this.winnersService.addOrDeleteWinner(nominee, deleting).subscribe((winner: Winner) => {
-        if (deleting) {
-          this.winningNominees = _.without(this.winningNominees, nominee);
-          this.category.winners = _.without(this.category.winners, nominee.id);
-        } else if (winner && winner.id) {
-          this.winningNominees.push(nominee);
-          this.category.winners.push(nominee.id);
-        }
-        this.processingPick = undefined;
-      });
+      this.winnersService.addOrDeleteWinner(nominee).subscribe();
     }
   }
 
