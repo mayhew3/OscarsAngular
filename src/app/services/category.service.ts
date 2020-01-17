@@ -24,8 +24,10 @@ export class CategoryService {
   nomineesUrl = 'api/nominees';
   categoriesUrl = 'api/categories';
   cache: Category[];
+  /*
   private winnersLastUpdate: Date;
   private eventSubscription: Subscription;
+  */
   private readonly winnerListeners: Subscriber<any>[];
 
   constructor(private http: HttpClient,
@@ -97,32 +99,19 @@ export class CategoryService {
   }
 
   doEventsUpdate(): void {
-    if (this.cache.length > 0) {
-
-      this.socket.on('winner', msg => {
-        console.log(`Received winner message: ${JSON.stringify(msg)}`);
-        const category = this.getCategoryForNomination(msg.nomination_id);
-        if (msg.detail === 'add') {
-          this.addWinnerToCache(msg.nomination_id, category);
-        } else if (msg.detail === 'delete') {
-          this.removeWinnerFromCache(msg.nomination_id);
-        }
-        this.updateWinnerSubscribers(msg);
-      });
-/*
-      this.eventsService.getEvents(this.winnersLastUpdate).subscribe(events => {
-        _.forEach(events, event => {
-          if (event.type === 'votes_locked') {
-            if (event.detail === 'locked') {
-              this.systemVarsService.lockVotingInternal();
-            } else if (event.detail === 'unlocked') {
-              this.systemVarsService.unlockVotingInternal();
-            }
-          }
-        });
-        this.winnersLastUpdate = updateTime;
-      });*/
-    }
+    /*
+          this.eventsService.getEvents(this.winnersLastUpdate).subscribe(events => {
+            _.forEach(events, event => {
+              if (event.type === 'votes_locked') {
+                if (event.detail === 'locked') {
+                  this.systemVarsService.lockVotingInternal();
+                } else if (event.detail === 'unlocked') {
+                  this.systemVarsService.unlockVotingInternal();
+                }
+              }
+            });
+            this.winnersLastUpdate = updateTime;
+          });*/
   }
 
   subscribeToWinnerEvents(): Observable<any> {
@@ -202,13 +191,28 @@ export class CategoryService {
   }
 
   private maybeUpdateCache(): Observable<Category[]> {
+    // callback function doesn't have 'this' in scope.
+    const categoryServiceGlobal = this;
+    const updateWinnersInCacheAndNotify = function(msg) {
+      if (categoryServiceGlobal.cache.length > 0) {
+        console.log(`Received winner message: ${JSON.stringify(msg)}`);
+        const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
+        if (msg.detail === 'add') {
+          categoryServiceGlobal.addWinnerToCache(msg.nomination_id, category);
+        } else if (msg.detail === 'delete') {
+          categoryServiceGlobal.removeWinnerFromCache(msg.nomination_id);
+        }
+        categoryServiceGlobal.updateWinnerSubscribers(msg);
+      }
+    };
+
     if (this.cache.length === 0) {
+      this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
       return new Observable<Category[]>((observer) => {
         this.auth.getPerson().subscribe(person => {
           if (!person) {
             this.auth.logout();
           }
-          const updateStart = new Date();
           this.systemVarsService.getSystemVars().subscribe(systemVars => {
             const options = {
               params: {
@@ -222,9 +226,7 @@ export class CategoryService {
               .subscribe(
                 (categories: Category[]) => {
                   CategoryService.addToArray(this.cache, categories);
-                  this.winnersLastUpdate = updateStart;
-                  const source = timer(5000, 5000);
-                  this.eventSubscription = source.subscribe(() => this.doEventsUpdate());
+                  this.socket.on('winner', updateWinnersInCacheAndNotify);
                   observer.next(categories);
                 },
                 (err: Error) => observer.error(err)
@@ -236,6 +238,8 @@ export class CategoryService {
       return of(this.cache);
     }
   }
+
+
 
   private addToWinnersArray(category: Category, index: string, nomination_id: number) {
     if (!category.winners) {
