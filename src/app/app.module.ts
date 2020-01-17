@@ -21,7 +21,11 @@ import { WinnerDetailComponent } from './components/winner-detail/winner-detail.
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: {
+const config: SocketIoConfig = { url:
+    window.location.protocol + '//' +
+    window.location.hostname + ':' +
+    window.location.port
+  , options: {
     query: {
       person_id: 1
     }
