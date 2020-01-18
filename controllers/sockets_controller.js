@@ -21,15 +21,23 @@ exports.initIO = function(in_io) {
     console.log('Connection established. Adding client.');
     clients.push(client);
 
-    let person_id = parseInt(client.handshake.query.person_id);
-    addClientForPerson(person_id, client);
+    const person_id_str = client.handshake.query.person_id;
 
-    initAllRooms(client, person_id);
+    let person_id;
+    if (!!person_id_str) {
+      person_id = parseInt(person_id_str);
+      addClientForPerson(person_id, client);
+
+      initAllRooms(client, person_id);
+    }
 
     client.on('disconnect', () => {
       console.log('Client disconnected. Removing from array.');
       arrayService.removeFromArray(clients, client);
-      removeClientForPerson(person_id, client);
+
+      if (!!person_id) {
+        removeClientForPerson(person_id, client);
+      }
     });
   });
 
