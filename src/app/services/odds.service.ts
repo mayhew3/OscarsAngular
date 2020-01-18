@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subscription, timer} from 'rxjs';
 import {OddsBundle} from '../interfaces/OddsBundle';
+import {Socket} from 'ngx-socket-io';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,13 @@ export class OddsService {
   private odds: OddsBundle;
   private eventSubscription: Subscription;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private socket: Socket) {
     this.oddsFirstUpdate().subscribe(odds => {
       this.odds = odds;
+      this.socket.on('odds', msg => {
+        this.odds = msg;
+      });
     });
   }
 
