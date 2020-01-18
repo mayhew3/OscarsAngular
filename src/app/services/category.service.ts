@@ -123,6 +123,7 @@ export class CategoryService {
   }
 
   updateWinnerSubscribers(msg): void {
+    this.oddsService.clearOdds();
     _.forEach(this.winnerListeners, listener => listener.next(msg));
   }
 

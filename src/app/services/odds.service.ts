@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, Subscription, timer} from 'rxjs';
 import {OddsBundle} from '../interfaces/OddsBundle';
 import {Socket} from 'ngx-socket-io';
+import {CategoryService} from './category.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class OddsService {
         this.odds = msg;
       });
     });
+  }
+
+  clearOdds(): void {
+    this.odds = undefined;
   }
 
   getOdds(): OddsBundle {
