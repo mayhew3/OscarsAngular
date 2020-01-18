@@ -6,7 +6,7 @@ const persons = [];
 const existing_person_rooms = [];
 
 const globalChannels = [
-  'winner'
+  'odds'
 ];
 
 const personalChannels = [
@@ -27,9 +27,9 @@ exports.initIO = function(in_io) {
     if (!!person_id_str) {
       person_id = parseInt(person_id_str);
       addClientForPerson(person_id, client);
-
-      initAllRooms(client, person_id);
     }
+
+    initAllRooms(client, person_id);
 
     client.on('disconnect', () => {
       console.log('Client disconnected. Removing from array.');
@@ -50,9 +50,11 @@ function addToPersonRooms(room_name) {
 }
 
 function initAllRooms(client, person_id) {
-  // initPersonRoom(client, person_id);
+  if (!!person_id) {
+    // initPersonRoom(client, person_id);
+  }
   // initPersonalChannels(client);
-  // initGlobalChannels(client);
+  initGlobalChannels(client);
 }
 
 function initPersonRoom(client, person_id) {
