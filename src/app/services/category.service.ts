@@ -11,7 +11,7 @@ import {Person} from '../interfaces/Person';
 import {VotesService} from './votes.service';
 import {EventsService} from './events.service';
 import {OddsService} from './odds.service';
-import {Socket} from 'ngx-socket-io';
+import {SocketService} from './socket.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,7 +32,7 @@ export class CategoryService {
               private votesService: VotesService,
               private eventsService: EventsService,
               private oddsService: OddsService,
-              private socket: Socket) {
+              private socket: SocketService) {
     this.cache = [];
     this.winnerListeners = [];
   }

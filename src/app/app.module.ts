@@ -19,17 +19,7 @@ import {SystemVarsService} from './services/system.vars.service';
 import { WinnerMainComponent } from './components/winner-main/winner-main.component';
 import { WinnerDetailComponent } from './components/winner-detail/winner-detail.component';
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
-const config: SocketIoConfig = { url:
-    window.location.protocol + '//' +
-    window.location.hostname + ':' +
-    window.location.port
-  , options: {
-    query: {
-      person_id: 1
-    }
-  } };
+import {SocketService} from './services/socket.service';
 
 @NgModule({
   declarations: [
@@ -51,10 +41,9 @@ const config: SocketIoConfig = { url:
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    environment.httpModules, // use in-memory for CLI environment, regular http for prod and local server
-    SocketIoModule.forRoot(config)
+    environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
   ],
-  providers: [AuthService, SystemVarsService],
+  providers: [AuthService, SystemVarsService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

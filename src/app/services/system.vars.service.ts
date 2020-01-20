@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError, tap} from 'rxjs/operators';
-import {_} from 'underscore';
-import {Socket} from 'ngx-socket-io';
+import {catchError} from 'rxjs/operators';
+import {SocketService} from './socket.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,7 +17,7 @@ export class SystemVarsService {
   private systemVars: SystemVars;
 
   constructor(private http: HttpClient,
-              private socket: Socket) {
+              private socket: SocketService) {
     this.getSystemVars().subscribe(() => {
       this.socket.on('voting', msg => {
         if (!!msg.voting_open) {
