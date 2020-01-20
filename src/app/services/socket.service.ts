@@ -9,7 +9,7 @@ export class SocketService {
   public socket;
 
   constructor() {
-    this.socket = socketIo(SERVER_URL);
+    this.socket = socketIo();
   }
 
   on(channel, callback) {
