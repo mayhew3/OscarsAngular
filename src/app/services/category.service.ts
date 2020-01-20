@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of, Subscriber, Subscription, timer} from 'rxjs';
+import {Observable, of, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError, tap} from 'rxjs/operators';
 import {_} from 'underscore';
@@ -63,6 +63,7 @@ export class CategoryService {
     return _.findWhere(this.cache, {id: id});
   }
 
+  // noinspection DuplicatedCode
   getNextCategory(id: number): Observable<Category> {
     return this.getDataWithCacheUpdate<Category>(() => {
       const foundIndex = _.findIndex(this.cache, {id: id});
@@ -96,22 +97,6 @@ export class CategoryService {
         tap(() => console.log('did some tapping')),
         catchError(this.handleError<any>('updateCategories', nominee))
       );
-  }
-
-  doEventsUpdate(): void {
-    /*
-          this.eventsService.getEvents(this.winnersLastUpdate).subscribe(events => {
-            _.forEach(events, event => {
-              if (event.type === 'votes_locked') {
-                if (event.detail === 'locked') {
-                  this.systemVarsService.lockVotingInternal();
-                } else if (event.detail === 'unlocked') {
-                  this.systemVarsService.unlockVotingInternal();
-                }
-              }
-            });
-            this.winnersLastUpdate = updateTime;
-          });*/
   }
 
   subscribeToWinnerEvents(): Observable<any> {
@@ -237,26 +222,6 @@ export class CategoryService {
       });
     } else {
       return of(this.cache);
-    }
-  }
-
-
-
-  private addToWinnersArray(category: Category, index: string, nomination_id: number) {
-    if (!category.winners) {
-      category.winners = [];
-    }
-    if (!category.winners[index]) {
-      category.winners[index] = [];
-    }
-    category.winners[index].push(nomination_id);
-  }
-
-  private extractWinnersFromCategory(category: Category, year: string): number[] {
-    if (!category.winners) {
-      return [];
-    } else {
-      return category.winners;
     }
   }
 
