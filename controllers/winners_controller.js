@@ -1,5 +1,4 @@
 const model = require('./model');
-const events = require('./events_controller');
 const socket = require('./sockets_controller');
 const _ = require('underscore');
 

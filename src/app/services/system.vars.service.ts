@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
 import {catchError, tap} from 'rxjs/operators';
 import {_} from 'underscore';
+import {Socket} from 'ngx-socket-io';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,8 +17,17 @@ export class SystemVarsService {
   systemVarsUrl = 'api/systemVars';
   private systemVars: SystemVars;
 
-  constructor(private http: HttpClient) {
-    this.getSystemVars().subscribe();
+  constructor(private http: HttpClient,
+              private socket: Socket) {
+    this.getSystemVars().subscribe(() => {
+      this.socket.on('voting', msg => {
+        if (!!msg.voting_open) {
+          this.unlockVotingInternal();
+        } else {
+          this.lockVotingInternal();
+        }
+      });
+    });
   }
 
   public canVote(): boolean {
@@ -51,12 +61,8 @@ export class SystemVarsService {
     };
 
     this.http.put(this.systemVarsUrl, targetVars, httpOptions)
-      .pipe(
-        tap(() => {
-          this.systemVars.voting_open = !this.systemVars.voting_open;
-        }),
-        catchError(this.handleError<any>('toggleVotingLock'))
-      ).subscribe();
+      .pipe(catchError(this.handleError<any>('toggleVotingLock')))
+      .subscribe();
   }
 
   public stillLoading(): boolean {
