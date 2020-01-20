@@ -1,5 +1,5 @@
 const model = require('./model');
-const events = require('./events_controller');
+const socket = require('./sockets_controller');
 
 exports.getSystemVars = function(request, response) {
   model.SystemVars.findAll().then(systemVars => {
@@ -7,21 +7,29 @@ exports.getSystemVars = function(request, response) {
   });
 };
 
-exports.updateSystemVars = function(request, response) {
+exports.updateSystemVars = async function(request, response) {
   let systemVar = request.body;
-  let intValue = systemVar.voting_open ? 1 : 0;
-  systemVar.voting_open = intValue;
+  systemVar.voting_open = systemVar.voting_open ? 1 : 0;
 
-  model.SystemVars.findByPk(systemVar.id).then(result => {
-    result.update(systemVar).then(() => {
-      const detail = systemVar.voting_open ? 'unlocked' : 'locked';
-      events.addEvent('votes_locked', detail, undefined, result, response);
-    }).catch(error => {
-      console.error(error);
-      response.send({msg: "Error updating system_vars: " + JSON.stringify(systemVar)})
-    });
-  }).catch(error => {
+  let result;
+  try {
+    result = await model.SystemVars.findByPk(systemVar.id);
+  } catch (err) {
     console.error(error);
     response.send({msg: "Error finding system_var: " + error});
-  });
+  }
+
+  try {
+    await result.update(systemVar);
+  } catch (err) {
+    console.error(error);
+    response.send({msg: "Error updating system_vars: " + JSON.stringify(systemVar)});
+  }
+
+  const msg = {
+    voting_open: systemVar.voting_open
+  };
+  socket.emitToAll('voting', msg);
+
+  response.json({msg: 'Success'});
 };

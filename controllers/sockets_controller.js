@@ -6,7 +6,8 @@ const persons = [];
 const existing_person_rooms = [];
 
 const globalChannels = [
-  'odds'
+  'odds',
+  'voting'
 ];
 
 const personalChannels = [
