@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 
 import * as socketIo from 'socket.io-client';
 
-const SERVER_URL = 'http://localhost:5000';
-
 @Injectable()
 export class SocketService {
   public socket;
