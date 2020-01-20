@@ -24,10 +24,6 @@ export class CategoryService {
   nomineesUrl = 'api/nominees';
   categoriesUrl = 'api/categories';
   cache: Category[];
-  /*
-  private winnersLastUpdate: Date;
-  private eventSubscription: Subscription;
-  */
   private readonly winnerListeners: Subscriber<any>[];
 
   constructor(private http: HttpClient,
