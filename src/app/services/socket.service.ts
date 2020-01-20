@@ -19,4 +19,8 @@ export class SocketService {
   removeListener(channel, callback) {
     this.socket.removeListener(channel, callback);
   }
+
+  isConnected() {
+    return this.socket.connected;
+  }
 }
