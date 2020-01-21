@@ -16,7 +16,8 @@
   <div class="row mt-2" *ngIf="!stillLoading()">
     <div class="col-12 col-sm-6 col-lg-4"
          *ngFor="let person of getVoters()">
-      <div class="card scoreCard">
+      <div class="card scoreCard"
+           [ngClass]="scorecardClass(person)">
         <div class="card-body py-2 px-3">
           <div class="row">
             <div class="col-5 scoreTitle">
@@ -26,7 +27,8 @@
               <span class="oddsSubtitle">Odds</span>
               <span class="odds">{{getOddsForPerson(person)}}</span>
             </div>
-            <div class="col-3 scorePoints">
+            <div class="col-3 scorePoints"
+                 [ngClass]="scoreNumberClass(person)">
               <span>{{person.score}}</span>
             </div>
           </div>

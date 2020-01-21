@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError, tap} from 'rxjs/operators';
-import {_} from 'underscore';
+import {catchError} from 'rxjs/operators';
+import {SocketService} from './socket.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,8 +16,17 @@ export class SystemVarsService {
   systemVarsUrl = 'api/systemVars';
   private systemVars: SystemVars;
 
-  constructor(private http: HttpClient) {
-    this.getSystemVars().subscribe();
+  constructor(private http: HttpClient,
+              private socket: SocketService) {
+    this.getSystemVars().subscribe(() => {
+      this.socket.on('voting', msg => {
+        if (!!msg.voting_open) {
+          this.unlockVotingInternal();
+        } else {
+          this.lockVotingInternal();
+        }
+      });
+    });
   }
 
   public canVote(): boolean {
@@ -51,16 +60,12 @@ export class SystemVarsService {
     };
 
     this.http.put(this.systemVarsUrl, targetVars, httpOptions)
-      .pipe(
-        tap(() => {
-          this.systemVars.voting_open = !this.systemVars.voting_open;
-        }),
-        catchError(this.handleError<any>('toggleVotingLock'))
-      ).subscribe();
+      .pipe(catchError(this.handleError<any>('toggleVotingLock')))
+      .subscribe();
   }
 
   public stillLoading(): boolean {
-    return _.isUndefined(this.systemVars);
+    return this.systemVars === undefined;
   }
 
   public getSystemVars(): Observable<SystemVars> {

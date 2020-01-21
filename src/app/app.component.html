@@ -6,7 +6,17 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav navbar-left">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/">Home</a>
+          <a class="nav-link" routerLink="/">
+            <span style="font-size: 1em; color: LightGreen;"
+                  *ngIf="showHealthySocketStatus() && socketConnected()">
+              <i class="fas fa-check-circle"></i>
+            </span>
+            <span style="font-size: 1em; color: Tomato;"
+                  *ngIf="!socketConnected()">
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+            Home
+          </a>
         </li>
         <li class="nav-item"
           *ngIf="!stillLoading() && auth.isUser() && (systemVarsService.canVote() || auth.isAdmin())">
@@ -35,7 +45,6 @@
             *ngIf="auth.isAuthenticated()">
           <a class="nav-link" (click)="auth.logout()">Logout</a>
         </li>
-
       </ul>
 
     </div>

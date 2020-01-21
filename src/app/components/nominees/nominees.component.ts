@@ -13,6 +13,7 @@ import {WinnersService} from '../../services/winners.service';
 import {Winner} from '../../interfaces/Winner';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-nominees',
@@ -66,6 +67,7 @@ export class NomineesComponent implements OnInit {
             this.persons = persons;
             this.categoryService.subscribeToWinnerEvents().subscribe(() => {
               this.updateLocalWinningNominees();
+              this.processingPick = undefined;
             });
           });
         }
@@ -94,7 +96,7 @@ export class NomineesComponent implements OnInit {
     return this.auth.isMe(person) ? 'itsMe' : '';
   }
 
-  submitVote(nominee: Nominee): void {
+  submitVoteOrWinner(nominee: Nominee): void {
     if (this.votingMode()) {
       this.processingPick = nominee;
       this.votesService.addOrUpdateVote(nominee, this.person).subscribe((vote: Vote) => {
@@ -106,18 +108,8 @@ export class NomineesComponent implements OnInit {
         this.processingPick = undefined;
       });
     } else if (this.winnersMode() && this.auth.isAdmin()) {
-      const deleting = this.isWinner(nominee);
       this.processingPick = nominee;
-      this.winnersService.addOrDeleteWinner(nominee).subscribe((winner: Winner) => {
-        if (deleting) {
-          this.winningNominees = _.without(this.winningNominees, nominee);
-          this.category.winners = _.without(this.category.winners, nominee.id);
-        } else if (winner && winner.id) {
-          this.winningNominees.push(nominee);
-          this.category.winners.push(nominee.id);
-        }
-        this.processingPick = undefined;
-      });
+      this.winnersService.addOrDeleteWinner(nominee).subscribe();
     }
   }
 

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from './services/auth/auth.service';
 import {SystemVarsService} from './services/system.vars.service';
 import {CategoryService} from './services/category.service';
+import {SocketService} from './services/socket.service';
 
 @Component({
   selector: 'osc-root',
@@ -12,7 +13,8 @@ export class AppComponent implements OnInit {
 
   constructor(public auth: AuthService,
               public systemVarsService: SystemVarsService,
-              private categoryService: CategoryService) {
+              private categoryService: CategoryService,
+              private socket: SocketService) {
     auth.handleAuthentication();
     auth.scheduleRenewal();
     categoryService.getCategories().subscribe();
@@ -26,6 +28,14 @@ export class AppComponent implements OnInit {
 
   stillLoading() {
     return this.auth.stillLoading() || this.systemVarsService.stillLoading();
+  }
+
+  showHealthySocketStatus() {
+    return this.auth.isAdmin();
+  }
+
+  socketConnected() {
+    return this.socket.isConnected();
   }
 }
 

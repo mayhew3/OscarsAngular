@@ -19,6 +19,7 @@ import {SystemVarsService} from './services/system.vars.service';
 import { WinnerMainComponent } from './components/winner-main/winner-main.component';
 import { WinnerDetailComponent } from './components/winner-detail/winner-detail.component';
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
+import {SocketService} from './services/socket.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { ScoreboardComponent } from './components/scoreboard/scoreboard.componen
     AppRoutingModule,
     environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
   ],
-  providers: [AuthService, SystemVarsService],
+  providers: [AuthService, SystemVarsService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
