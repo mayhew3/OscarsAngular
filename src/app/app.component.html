@@ -8,11 +8,11 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/">
             <span style="font-size: 1em; color: LightGreen;"
-                  *ngIf="showSocketStatus() && socketConnected()">
+                  *ngIf="showHealthySocketStatus() && socketConnected()">
               <i class="fas fa-check-circle"></i>
             </span>
             <span style="font-size: 1em; color: Tomato;"
-                  *ngIf="showSocketStatus() && !socketConnected()">
+                  *ngIf="!socketConnected()">
               <i class="fas fa-exclamation-triangle"></i>
             </span>
             Home

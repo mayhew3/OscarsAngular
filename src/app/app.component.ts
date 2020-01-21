@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
     return this.auth.stillLoading() || this.systemVarsService.stillLoading();
   }
 
-  showSocketStatus() {
-    return this.auth.isAdmin() || !this.auth.isProductionMode();
+  showHealthySocketStatus() {
+    return this.auth.isAdmin();
   }
 
   socketConnected() {
