@@ -3,7 +3,15 @@
 .scoreCard {
   font-size: 16pt;
   margin-bottom: 10px;
+}
+
+.otherScoreCard {
   border-color: $highlight;
+}
+
+.myScoreCard {
+  background-color: darken($personal, 5%);
+  border-color: white;
 }
 
 .scoreTitle {
@@ -12,8 +20,15 @@
 
 .scorePoints {
   font-weight: bold;
-  color: $highlight;
   text-align: right;
+}
+
+.myScorePoints {
+  color: white;
+}
+
+.otherScorePoints {
+  color: $highlight;
 }
 
 .oddsSubtitle {

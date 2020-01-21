@@ -6,6 +6,7 @@ import {_} from 'underscore';
 import {OddsService} from '../../services/odds.service';
 import {Odds} from '../../interfaces/Odds';
 import {OddsBundle} from '../../interfaces/OddsBundle';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -17,7 +18,8 @@ export class ScoreboardComponent implements OnInit {
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
-              private oddsService: OddsService) {
+              private oddsService: OddsService,
+              private auth: AuthService) {
     this.persons = [];
   }
 
@@ -71,6 +73,18 @@ export class ScoreboardComponent implements OnInit {
 
   stillLoading(): boolean {
     return this.personService.stillLoading();
+  }
+
+  scorecardClass(person: Person): string {
+    if (this.auth.isMe(person)) {
+      return 'myScoreCard';
+    } else {
+      return 'otherScoreCard';
+    }
+  }
+
+  scoreNumberClass(person: Person): string {
+    return this.auth.isMe(person) ? 'myScorePoints' : 'otherScorePoints';
   }
 
   public getVoters(): Person[] {
