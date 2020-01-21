@@ -2,7 +2,7 @@ import {Category} from '../../interfaces/Category';
 /* tslint:disable quotemark */
 export const MockCategoryList: Category[] = [
   {
-    "winners": [2773],
+    "winners": [],
     "nominees": [
       {
         "category_id": 5,
@@ -11,6 +11,14 @@ export const MockCategoryList: Category[] = [
         "nominee": "BlacKkKlansman",
         "id": 2769,
         "detail": "Sean McKittrick, Jason Blum, Raymond Mansfield, Jordan Peele and Spike Lee, Producers"
+      },
+      {
+        "category_id": 5,
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Vice",
+        "id": 2775,
+        "detail": "Dede Gardner, Jeremy Kleiner, Adam McKay and Kevin Messick, Producers"
       },
       {
         "odds_expert": 2,
@@ -58,14 +66,6 @@ export const MockCategoryList: Category[] = [
         "detail": "Bill Gerber, Bradley Cooper and Lynette Howell Taylor, Producers"
       },
       {
-        "category_id": 5,
-        "year": 2018,
-        "context": "Vice",
-        "nominee": "Vice",
-        "id": 2775,
-        "detail": "Dede Gardner, Jeremy Kleiner, Adam McKay and Kevin Messick, Producers"
-      },
-      {
         "odds_expert": 8,
         "category_id": 5,
         "year": 2018,
@@ -90,20 +90,8 @@ export const MockCategoryList: Category[] = [
     "points": 5
   },
   {
-    "winners": [2698],
+    "winners": [],
     "nominees": [
-      {
-        "odds_expert": 3,
-        "odds_denominator": 1,
-        "category_id": 1,
-        "year": 2018,
-        "context": "A Star Is Born",
-        "nominee": "Bradley Cooper",
-        "odds_user": 11,
-        "id": 2696,
-        "detail": "A Star Is Born",
-        "odds_numerator": 25
-      },
       {
         "category_id": 1,
         "year": 2018,
@@ -119,6 +107,18 @@ export const MockCategoryList: Category[] = [
         "nominee": "Viggo Mortensen",
         "id": 2699,
         "detail": "Green Book"
+      },
+      {
+        "odds_expert": 3,
+        "odds_denominator": 1,
+        "category_id": 1,
+        "year": 2018,
+        "context": "A Star Is Born",
+        "nominee": "Bradley Cooper",
+        "odds_user": 11,
+        "id": 2696,
+        "detail": "A Star Is Born",
+        "odds_numerator": 25
       },
       {
         "odds_expert": 5,
@@ -150,7 +150,7 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [2706],
+    "winners": [],
     "nominees": [
       {
         "category_id": 2,
@@ -159,6 +159,14 @@ export const MockCategoryList: Category[] = [
         "nominee": "Yalitza Aparicio",
         "id": 2705,
         "detail": "Roma"
+      },
+      {
+        "category_id": 2,
+        "year": 2018,
+        "context": "Can You Ever Forgive Me?",
+        "nominee": "Melissa Mccarthy",
+        "id": 2709,
+        "detail": "Can You Ever Forgive Me?"
       },
       {
         "odds_expert": 98,
@@ -194,14 +202,6 @@ export const MockCategoryList: Category[] = [
         "id": 2708,
         "detail": "A Star Is Born",
         "odds_numerator": 20
-      },
-      {
-        "category_id": 2,
-        "year": 2018,
-        "context": "Can You Ever Forgive Me?",
-        "nominee": "Melissa Mccarthy",
-        "id": 2709,
-        "detail": "Can You Ever Forgive Me?"
       }
     ],
     "name": "Actress",
@@ -209,8 +209,16 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [2733],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 8,
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Vice",
+        "id": 2734,
+        "detail": "Adam McKay"
+      },
       {
         "odds_expert": 12,
         "odds_denominator": 1,
@@ -253,14 +261,6 @@ export const MockCategoryList: Category[] = [
         "id": 2733,
         "detail": "Alfonso Cuarón",
         "odds_numerator": 1
-      },
-      {
-        "category_id": 8,
-        "year": 2018,
-        "context": "Vice",
-        "nominee": "Vice",
-        "id": 2734,
-        "detail": "Adam McKay"
       }
     ],
     "name": "Directing",
@@ -268,19 +268,8 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [2719],
+    "winners": [],
     "nominees": [
-      {
-        "odds_denominator": 1,
-        "category_id": 3,
-        "year": 2018,
-        "context": "Isle of Dogs",
-        "nominee": "Isle of Dogs",
-        "odds_user": 13,
-        "id": 2716,
-        "detail": "Wes Anderson, Scott Rudin, Steven Rales and Jeremy Dawson",
-        "odds_numerator": 11
-      },
       {
         "category_id": 3,
         "year": 2018,
@@ -296,6 +285,17 @@ export const MockCategoryList: Category[] = [
         "nominee": "Ralph Breaks the Internet",
         "id": 2718,
         "detail": "Rich Moore, Phil Johnston and Clark Spencer"
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 3,
+        "year": 2018,
+        "context": "Isle of Dogs",
+        "nominee": "Isle of Dogs",
+        "odds_user": 13,
+        "id": 2716,
+        "detail": "Wes Anderson, Scott Rudin, Steven Rales and Jeremy Dawson",
+        "odds_numerator": 11
       },
       {
         "odds_expert": 100,
@@ -326,8 +326,16 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [2700],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 20,
+        "year": 2018,
+        "context": "Vice",
+        "nominee": "Sam Rockwell",
+        "id": 2704,
+        "detail": "Vice"
+      },
       {
         "odds_expert": 92,
         "odds_denominator": 20,
@@ -350,14 +358,6 @@ export const MockCategoryList: Category[] = [
         "id": 2703,
         "detail": "Can You Ever Forgive Me?",
         "odds_numerator": 9
-      },
-      {
-        "category_id": 20,
-        "year": 2018,
-        "context": "Vice",
-        "nominee": "Sam Rockwell",
-        "id": 2704,
-        "detail": "Vice"
       },
       {
         "category_id": 20,
@@ -386,7 +386,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [2712],
+    "winners": [],
     "nominees": [
       {
         "odds_denominator": 1,
@@ -447,7 +447,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [2807],
+    "winners": [],
     "nominees": [
       {
         "category_id": 23,
@@ -508,7 +508,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [2813],
+    "winners": [],
     "nominees": [
       {
         "odds_expert": 78,
@@ -568,8 +568,16 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [2723],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 6,
+        "year": 2018,
+        "context": "Never Look Away",
+        "nominee": "Never Look Away",
+        "id": 2722,
+        "detail": "Caleb Deschanel"
+      },
       {
         "odds_expert": 2,
         "odds_denominator": 1,
@@ -590,14 +598,6 @@ export const MockCategoryList: Category[] = [
         "odds_user": 10,
         "id": 2721,
         "detail": "Robbie Ryan"
-      },
-      {
-        "category_id": 6,
-        "year": 2018,
-        "context": "Never Look Away",
-        "nominee": "Never Look Away",
-        "id": 2722,
-        "detail": "Caleb Deschanel"
       },
       {
         "odds_expert": 98,
@@ -627,7 +627,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2727],
+    "winners": [],
     "nominees": [
       {
         "category_id": 7,
@@ -636,6 +636,22 @@ export const MockCategoryList: Category[] = [
         "nominee": "The Ballad of Buster Scruggs",
         "id": 2725,
         "detail": "Mary Zophres"
+      },
+      {
+        "category_id": 7,
+        "year": 2018,
+        "context": "Mary Poppins Returns",
+        "nominee": "Mary Poppins Returns",
+        "id": 2728,
+        "detail": "Sandy Powell"
+      },
+      {
+        "category_id": 7,
+        "year": 2018,
+        "context": "Mary Queen of Scots",
+        "nominee": "Mary Queen of Scots",
+        "id": 2729,
+        "detail": "Alexandra Byrne"
       },
       {
         "odds_expert": 57,
@@ -660,22 +676,6 @@ export const MockCategoryList: Category[] = [
         "id": 2727,
         "detail": "Sandy Powell",
         "odds_numerator": 2
-      },
-      {
-        "category_id": 7,
-        "year": 2018,
-        "context": "Mary Poppins Returns",
-        "nominee": "Mary Poppins Returns",
-        "id": 2728,
-        "detail": "Sandy Powell"
-      },
-      {
-        "category_id": 7,
-        "year": 2018,
-        "context": "Mary Queen of Scots",
-        "nominee": "Mary Queen of Scots",
-        "id": 2729,
-        "detail": "Alexandra Byrne"
       }
     ],
     "name": "Costume Design",
@@ -683,8 +683,16 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2747],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 11,
+        "year": 2018,
+        "context": "Green Book",
+        "nominee": "Green Book",
+        "id": 2748,
+        "detail": "Patrick J. Don Vito"
+      },
       {
         "odds_expert": 13,
         "category_id": 11,
@@ -694,14 +702,6 @@ export const MockCategoryList: Category[] = [
         "odds_user": 22,
         "id": 2745,
         "detail": "Barry Alexander Brown"
-      },
-      {
-        "category_id": 11,
-        "year": 2018,
-        "context": "Green Book",
-        "nominee": "Green Book",
-        "id": 2748,
-        "detail": "Patrick J. Don Vito"
       },
       {
         "odds_expert": 25,
@@ -743,7 +743,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2757],
+    "winners": [],
     "nominees": [
       {
         "category_id": 13,
@@ -783,7 +783,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2760],
+    "winners": [],
     "nominees": [
       {
         "odds_expert": 27,
@@ -843,20 +843,8 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2766],
+    "winners": [],
     "nominees": [
-      {
-        "odds_expert": 4,
-        "odds_denominator": 1,
-        "category_id": 15,
-        "year": 2018,
-        "context": "Black Panther",
-        "nominee": "All the Stars",
-        "odds_user": 11,
-        "id": 2763,
-        "detail": "from Black Panther; Music by Mark Spears, Kendrick Lamar Duckworth and Anthony Tiffith; Lyric by Kendrick Lamar Duckworth, Anthony Tiffith and Solana Rowe",
-        "odds_numerator": 9
-      },
       {
         "category_id": 15,
         "year": 2018,
@@ -874,6 +862,26 @@ export const MockCategoryList: Category[] = [
         "detail": "from Mary Poppins Returns; Music by Marc Shaiman; Lyric by Scott Wittman and Marc Shaiman"
       },
       {
+        "category_id": 15,
+        "year": 2018,
+        "context": "The Ballad of Buster Scruggs",
+        "nominee": "When a Cowboy Trades His Spurs For Wings",
+        "id": 2767,
+        "detail": "from The Ballad of Buster Scruggs; Music and Lyric by David Rawlings and Gillian Welch"
+      },
+      {
+        "odds_expert": 4,
+        "odds_denominator": 1,
+        "category_id": 15,
+        "year": 2018,
+        "context": "Black Panther",
+        "nominee": "All the Stars",
+        "odds_user": 11,
+        "id": 2763,
+        "detail": "from Black Panther; Music by Mark Spears, Kendrick Lamar Duckworth and Anthony Tiffith; Lyric by Kendrick Lamar Duckworth, Anthony Tiffith and Solana Rowe",
+        "odds_numerator": 9
+      },
+      {
         "odds_expert": 96,
         "odds_denominator": 33,
         "category_id": 15,
@@ -884,14 +892,6 @@ export const MockCategoryList: Category[] = [
         "id": 2766,
         "detail": "from A Star Is Born; Music and Lyric by Lady Gaga, Mark Ronson, Anthony Rossomando and Andrew Wyatt",
         "odds_numerator": 1
-      },
-      {
-        "category_id": 15,
-        "year": 2018,
-        "context": "The Ballad of Buster Scruggs",
-        "nominee": "When a Cowboy Trades His Spurs For Wings",
-        "id": 2767,
-        "detail": "from The Ballad of Buster Scruggs; Music and Lyric by David Rawlings and Gillian Welch"
       }
     ],
     "name": "Music (Original Song)",
@@ -899,8 +899,16 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2776],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 4,
+        "year": 2018,
+        "context": "Mary Poppins Returns",
+        "nominee": "Mary Poppins Returns",
+        "id": 2779,
+        "detail": "Production Design: John Myhre; Set Decoration: Gordon Sim"
+      },
       {
         "odds_expert": 42,
         "odds_denominator": 4,
@@ -935,14 +943,6 @@ export const MockCategoryList: Category[] = [
         "detail": "Production Design: Nathan Crowley; Set Decoration: Kathy Lucas"
       },
       {
-        "category_id": 4,
-        "year": 2018,
-        "context": "Mary Poppins Returns",
-        "nominee": "Mary Poppins Returns",
-        "id": 2779,
-        "detail": "Production Design: John Myhre; Set Decoration: Gordon Sim"
-      },
-      {
         "odds_denominator": 1,
         "category_id": 4,
         "year": 2018,
@@ -958,7 +958,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2793],
+    "winners": [],
     "nominees": [
       {
         "category_id": 18,
@@ -967,6 +967,14 @@ export const MockCategoryList: Category[] = [
         "nominee": "Black Panther",
         "id": 2791,
         "detail": "Benjamin A. Burtt and Steve Boeddeker"
+      },
+      {
+        "category_id": 18,
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2795,
+        "detail": "Sergio Díaz and Skip Lievsay"
       },
       {
         "odds_expert": 24,
@@ -1003,14 +1011,6 @@ export const MockCategoryList: Category[] = [
         "id": 2794,
         "detail": "Ethan Van der Ryn and Erik Aadahl",
         "odds_numerator": 6
-      },
-      {
-        "category_id": 18,
-        "year": 2018,
-        "context": "Roma",
-        "nominee": "Roma",
-        "id": 2795,
-        "detail": "Sergio Díaz and Skip Lievsay"
       }
     ],
     "name": "Sound Editing",
@@ -1018,7 +1018,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2800],
+    "winners": [],
     "nominees": [
       {
         "category_id": 19,
@@ -1027,6 +1027,14 @@ export const MockCategoryList: Category[] = [
         "nominee": "Black Panther",
         "id": 2796,
         "detail": "Steve Boeddeker, Brandon Proctor and Peter Devlin"
+      },
+      {
+        "category_id": 19,
+        "year": 2018,
+        "context": "Roma",
+        "nominee": "Roma",
+        "id": 2799,
+        "detail": "Skip Lievsay, Craig Henighan and José Antonio García"
       },
       {
         "odds_expert": 58,
@@ -1053,14 +1061,6 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 10
       },
       {
-        "category_id": 19,
-        "year": 2018,
-        "context": "Roma",
-        "nominee": "Roma",
-        "id": 2799,
-        "detail": "Skip Lievsay, Craig Henighan and José Antonio García"
-      },
-      {
         "odds_expert": 18,
         "odds_denominator": 5,
         "category_id": 19,
@@ -1078,8 +1078,24 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2801],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 22,
+        "year": 2018,
+        "context": "Christopher Robin",
+        "nominee": "Christopher Robin",
+        "id": 2802,
+        "detail": "Christopher Lawrence, Michael Eames, Theo Jones and Chris Corbould"
+      },
+      {
+        "category_id": 22,
+        "year": 2018,
+        "context": "Solo: A Star Wars Story",
+        "nominee": "Solo: A Star Wars Story",
+        "id": 2805,
+        "detail": "Rob Bredow, Patrick Tubach, Neal Scanlan and Dominic Tuohy"
+      },
       {
         "odds_expert": 67,
         "odds_denominator": 5,
@@ -1091,14 +1107,6 @@ export const MockCategoryList: Category[] = [
         "id": 2801,
         "detail": "Dan DeLeeuw, Kelly Port, Russell Earl and Dan Sudick",
         "odds_numerator": 1
-      },
-      {
-        "category_id": 22,
-        "year": 2018,
-        "context": "Christopher Robin",
-        "nominee": "Christopher Robin",
-        "id": 2802,
-        "detail": "Christopher Lawrence, Michael Eames, Theo Jones and Chris Corbould"
       },
       {
         "odds_expert": 28,
@@ -1123,14 +1131,6 @@ export const MockCategoryList: Category[] = [
         "id": 2804,
         "detail": "Roger Guyett, Grady Cofer, Matthew E. Butler and David Shirk",
         "odds_numerator": 10
-      },
-      {
-        "category_id": 22,
-        "year": 2018,
-        "context": "Solo: A Star Wars Story",
-        "nominee": "Solo: A Star Wars Story",
-        "id": 2805,
-        "detail": "Rob Bredow, Patrick Tubach, Neal Scanlan and Dominic Tuohy"
       }
     ],
     "name": "Visual Effects",
@@ -1138,8 +1138,24 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [2739],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 9,
+        "year": 2018,
+        "context": "Hale County This Morning, This Evening",
+        "nominee": "Hale County This Morning, This Evening",
+        "id": 2736,
+        "detail": "RaMell Ross, Joslyn Barnes and Su Kim"
+      },
+      {
+        "category_id": 9,
+        "year": 2018,
+        "context": "Of Fathers And Sons",
+        "nominee": "Of Fathers And Sons",
+        "id": 2738,
+        "detail": "Talal Derki, Ansgar Frerich, Eva Kemme and Tobias N. Siebert"
+      },
       {
         "odds_expert": 62,
         "odds_denominator": 11,
@@ -1153,14 +1169,6 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 8
       },
       {
-        "category_id": 9,
-        "year": 2018,
-        "context": "Hale County This Morning, This Evening",
-        "nominee": "Hale County This Morning, This Evening",
-        "id": 2736,
-        "detail": "RaMell Ross, Joslyn Barnes and Su Kim"
-      },
-      {
         "odds_expert": 6,
         "odds_denominator": 1,
         "category_id": 9,
@@ -1171,14 +1179,6 @@ export const MockCategoryList: Category[] = [
         "id": 2737,
         "detail": "Bing Liu and Diane Quon",
         "odds_numerator": 14
-      },
-      {
-        "category_id": 9,
-        "year": 2018,
-        "context": "Of Fathers And Sons",
-        "nominee": "Of Fathers And Sons",
-        "id": 2738,
-        "detail": "Talal Derki, Ansgar Frerich, Eva Kemme and Tobias N. Siebert"
       },
       {
         "odds_expert": 32,
@@ -1198,8 +1198,16 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [2744],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 10,
+        "year": 2018,
+        "context": "A Night at the Garden",
+        "nominee": "A Night at the Garden",
+        "id": 2743,
+        "detail": "Marshall Curry"
+      },
       {
         "odds_expert": 39,
         "odds_denominator": 5,
@@ -1234,14 +1242,6 @@ export const MockCategoryList: Category[] = [
         "detail": "Skye Fitzgerald and Bryn Mooser"
       },
       {
-        "category_id": 10,
-        "year": 2018,
-        "context": "A Night at the Garden",
-        "nominee": "A Night at the Garden",
-        "id": 2743,
-        "detail": "Marshall Curry"
-      },
-      {
         "odds_expert": 46,
         "odds_denominator": 5,
         "category_id": 10,
@@ -1258,7 +1258,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [2753],
+    "winners": [],
     "nominees": [
       {
         "category_id": 12,
@@ -1267,6 +1267,14 @@ export const MockCategoryList: Category[] = [
         "nominee": "Capernaum",
         "id": 2750,
         "detail": "Lebanon"
+      },
+      {
+        "category_id": 12,
+        "year": 2018,
+        "context": "Never Look Away",
+        "nominee": "Never Look Away",
+        "id": 2752,
+        "detail": "Germany"
       },
       {
         "odds_expert": 8,
@@ -1279,14 +1287,6 @@ export const MockCategoryList: Category[] = [
         "id": 2751,
         "detail": "Poland",
         "odds_numerator": 9
-      },
-      {
-        "category_id": 12,
-        "year": 2018,
-        "context": "Never Look Away",
-        "nominee": "Never Look Away",
-        "id": 2752,
-        "detail": "Germany"
       },
       {
         "odds_expert": 92,
@@ -1317,8 +1317,16 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [2782],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 16,
+        "year": 2018,
+        "context": "Late Afternoon",
+        "nominee": "Late Afternoon",
+        "id": 2783,
+        "detail": "Louise Bagnall and Nuria González Blanco"
+      },
       {
         "odds_expert": 5,
         "category_id": 16,
@@ -1340,14 +1348,6 @@ export const MockCategoryList: Category[] = [
         "id": 2782,
         "detail": "Domee Shi and Becky Neiman-Cobb",
         "odds_numerator": 2
-      },
-      {
-        "category_id": 16,
-        "year": 2018,
-        "context": "Late Afternoon",
-        "nominee": "Late Afternoon",
-        "id": 2783,
-        "detail": "Louise Bagnall and Nuria González Blanco"
       },
       {
         "odds_expert": 2,
@@ -1376,8 +1376,16 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [2788],
+    "winners": [],
     "nominees": [
+      {
+        "category_id": 17,
+        "year": 2018,
+        "context": "Fauve",
+        "nominee": "Fauve",
+        "id": 2787,
+        "detail": "Jeremy Comte and Maria Gracia Turgeon"
+      },
       {
         "odds_expert": 10,
         "odds_denominator": 1,
@@ -1388,14 +1396,6 @@ export const MockCategoryList: Category[] = [
         "id": 2786,
         "detail": "Vincent Lambe and Darren Mahon",
         "odds_numerator": 4
-      },
-      {
-        "category_id": 17,
-        "year": 2018,
-        "context": "Fauve",
-        "nominee": "Fauve",
-        "id": 2787,
-        "detail": "Jeremy Comte and Maria Gracia Turgeon"
       },
       {
         "odds_expert": 62,
