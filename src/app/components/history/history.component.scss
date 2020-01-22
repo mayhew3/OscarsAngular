@@ -1,0 +1,32 @@
+@import "../../../variables";
+
+.scoreCard {
+  font-size: 16pt;
+  margin-bottom: 10px;
+}
+
+.otherScoreCard {
+  border-color: $highlight;
+}
+
+.myScoreCard {
+  background-color: darken($personal, 5%);
+  border-color: white;
+}
+
+.scoreTitle {
+  color: white;
+}
+
+.scorePoints {
+  font-weight: bold;
+  text-align: right;
+}
+
+.myScorePoints {
+  color: white;
+}
+
+.otherScorePoints {
+  color: $highlight;
+}

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FinalResult} from '../interfaces/FinalResult';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subscription} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {_} from 'underscore';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,18 @@ export class FinalResultsService {
           });
       });
     }
+  }
+
+  public getFinalResultsForGroup(group_id: number): Observable<FinalResult[]> {
+    return new Observable<FinalResult[]>(observer => {
+      this.getFinalResults().subscribe(results => {
+        observer.next(_.filter(results, result => result.group_id === group_id));
+      });
+    });
+  }
+
+  stillLoading(): boolean {
+    return this.finalResults.length === 0;
   }
 
 
