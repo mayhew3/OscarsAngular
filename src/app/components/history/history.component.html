@@ -12,7 +12,8 @@
   <div class="row mt-2" *ngIf="!stillLoading()">
     <div class="col-12 col-sm-6 col-lg-4"
          *ngFor="let champions of getChampions()">
-      <div class="card scoreCard otherScoreCard">
+      <div class="card scoreCard mainScoreCard"
+           [ngClass]="getScoreCardClass(champions)">
         <div class="card-body py-1 px-3">
           <div class="row my-1">
             <div class="col-3 scoreTitle">
@@ -21,14 +22,15 @@
             <div class="col-6 scoreName">
               <span>{{getChampionsString(champions)}}</span>
             </div>
-            <div class="col-3 scorePoints otherScorePoints">
+            <div class="col-3 scorePoints"
+                 [ngClass]="getScoreScoreClass(champions)">
               <span>{{champions[0].score}}</span>
             </div>
           </div>
           <div class="row bottomRow"
                *ngIf="showMyRank(champions)">
             <div class="col-11">
-              <div class="card scoreCard myScoreCard">
+              <div class="card scoreCard subScoreCard myScoreCard">
                 <div class="card-body py-0 px-1">
                   <div class="row no-gutters">
                     <div class="col-3 myRank">
