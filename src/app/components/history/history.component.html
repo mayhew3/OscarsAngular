@@ -1,0 +1,33 @@
+
+<div class="container" style="padding: 10px">
+
+  <div class="row">
+    <div class="col-12">
+      <h1>Past Winners</h1>
+    </div>
+  </div>
+
+  <p *ngIf="stillLoading()">Loading...</p>
+
+  <div class="row mt-2" *ngIf="!stillLoading()">
+    <div class="col-12 col-sm-6 col-lg-4"
+         *ngFor="let champions of getChampions()">
+      <div class="card scoreCard otherScoreCard">
+        <div class="card-body py-2 px-3">
+          <div class="row">
+            <div class="col-3 scoreTitle">
+              <span>{{getYearFromChampionList(champions)}}</span>
+            </div>
+            <div class="col-6 scoreTitle">
+              <span>{{getChampionsString(champions)}}</span>
+            </div>
+            <div class="col-3 scorePoints otherScorePoints">
+              <span>{{champions[0].score}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

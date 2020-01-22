@@ -117,3 +117,26 @@ exports.OddsExecution = sequelize.sequelize.define("odds_execution", {
   createdAt: false,
   updatedAt: false
 });
+
+exports.FinalResult = sequelize.sequelize.define("final_result", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  person_id: Sequelize.INTEGER,
+  group_year_id: Sequelize.INTEGER,
+  score: Sequelize.INTEGER,
+  correct_count: Sequelize.INTEGER,
+  rank: Sequelize.INTEGER,
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});
+
+exports.GroupYear = sequelize.sequelize.define("group_year", {
+  id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
+  person_group_id: Sequelize.INTEGER,
+  year: Sequelize.INTEGER,
+}, {
+  freezeTableName: true,
+  createdAt: false,
+  updatedAt: false
+});

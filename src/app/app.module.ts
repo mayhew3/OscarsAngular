@@ -20,6 +20,7 @@ import { WinnerMainComponent } from './components/winner-main/winner-main.compon
 import { WinnerDetailComponent } from './components/winner-detail/winner-detail.component';
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
 import {SocketService} from './services/socket.service';
+import { HistoryComponent } from './components/history/history.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {SocketService} from './services/socket.service';
     OddsDetailComponent,
     WinnerMainComponent,
     WinnerDetailComponent,
-    ScoreboardComponent
+    ScoreboardComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
