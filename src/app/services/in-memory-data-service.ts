@@ -11,6 +11,7 @@ import {MockSystemVars} from './data/system.vars.mock';
 import {MockWinnerList} from './data/winners.mock';
 import {MockEvents} from './data/event.mock';
 import {MockOdds} from './data/odds.mock';
+import {MockFinalResultsList} from './data/finalresults.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,7 @@ export class InMemoryDataService implements InMemoryDbService {
   winners = MockWinnerList;
   events = MockEvents;
   odds = MockOdds;
+  finalResults = MockFinalResultsList;
 
   /////////// helpers ///////////////
 
@@ -45,7 +47,9 @@ export class InMemoryDataService implements InMemoryDbService {
       systemVars: this.systemVars,
       winners: this.winners,
       events: this.events,
-      odds: this.odds};
+      odds: this.odds,
+      finalResults: this.finalResults
+    };
   }
 
   get(requestInfo: RequestInfo) {
