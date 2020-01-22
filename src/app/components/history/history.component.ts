@@ -54,10 +54,22 @@ export class HistoryComponent implements OnInit {
     return this.personService.getPersonFromCache(person_id);
   }
 
-  showMyRank(champions: FinalResult[]): boolean {
+  getScoreCardClass(champions: FinalResult[]): string {
+    return this.iAmOneOfThe(champions) ? 'myScoreCard myMainScoreCard' : 'otherScoreCard';
+  }
+
+  getScoreScoreClass(champions: FinalResult[]): string {
+    return this.iAmOneOfThe(champions) ? 'myScorePoints' : 'otherScorePoints';
+  }
+
+  iAmOneOfThe(champions: FinalResult[]): boolean {
     const person_ids = _.map(champions, champion => champion.person_id);
     const myPersonID = this.auth.getPersonID();
-    return !!this.getFinalResultForMe(champions) && !_.contains(person_ids, myPersonID);
+    return _.contains(person_ids, myPersonID);
+  }
+
+  showMyRank(champions: FinalResult[]): boolean {
+    return !!this.getFinalResultForMe(champions) && !this.iAmOneOfThe(champions);
   }
 
   getChampionsString(champions: FinalResult[]): string {

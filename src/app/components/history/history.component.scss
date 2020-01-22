@@ -10,10 +10,23 @@
 }
 
 .myScoreCard {
-  background-color: darken($personal, 5%);
+  background-color: fade_out($personal, .05);
+}
+
+.myMainScoreCard {
+  border-color: white;
+}
+
+.mainScoreCard {
+  color: white;
+}
+
+.subScoreCard {
   border-color: lightgray;
   color: lightgray;
   font-size: 12pt;
+  background-color: fade_out($personal, .5);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
 }
 
 .bottomRow {
