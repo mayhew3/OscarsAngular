@@ -100,6 +100,10 @@ export class AuthService {
     return this._person ? this._person.first_name : undefined;
   }
 
+  public getPersonID(): number {
+    return this._person ? this._person.id : undefined;
+  }
+
   public isProductionMode(): boolean {
     return environment.production;
   }

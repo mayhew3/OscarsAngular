@@ -4,6 +4,8 @@ import {FinalResultsService} from '../../services/final-results.service';
 import {_} from 'underscore';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
+import {AuthService} from '../../services/auth/auth.service';
+import ordinal from 'ordinal';
 
 @Component({
   selector: 'osc-history',
@@ -14,7 +16,8 @@ export class HistoryComponent implements OnInit {
   public finalResults: FinalResult[];
 
   constructor(private finalResultsService: FinalResultsService,
-              private personService: PersonService) { }
+              private personService: PersonService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.finalResultsService.getFinalResultsForGroup(1).subscribe(finalResults => {
@@ -51,8 +54,34 @@ export class HistoryComponent implements OnInit {
     return this.personService.getPersonFromCache(person_id);
   }
 
+  showMyRank(champions: FinalResult[]): boolean {
+    const person_ids = _.map(champions, champion => champion.person_id);
+    const myPersonID = this.auth.getPersonID();
+    return !!this.getFinalResultForMe(champions) && !_.contains(person_ids, myPersonID);
+  }
+
   getChampionsString(champions: FinalResult[]): string {
     const names = _.map(champions, champion => this.getPerson(champion.person_id).first_name);
     return names.join(', ');
+  }
+
+  getFinalResultForMe(champions: FinalResult[]): FinalResult {
+    const year = this.getYearFromChampionList(champions);
+    const person_id = this.auth.getPersonID();
+    return _.findWhere(this.finalResults, {year: year, person_id: person_id});
+  }
+
+  getMyFirstName(): string {
+    return this.auth.getFirstName();
+  }
+
+  getMyRank(champions: FinalResult[]): string {
+    const rank = this.getFinalResultForMe(champions).rank;
+    return ordinal(rank);
+  }
+
+  getMyScore(champions: FinalResult[]): number {
+    const score = this.getFinalResultForMe(champions).score;
+    return score;
   }
 }
