@@ -54,6 +54,12 @@ export class HistoryComponent implements OnInit {
     return this.personService.getPersonFromCache(person_id);
   }
 
+  showMyRank(champions: FinalResult[]): boolean {
+    const person_ids = _.map(champions, champion => champion.person_id);
+    const myPersonID = this.auth.getPersonID();
+    return !!this.getFinalResultForMe(champions) && !_.contains(person_ids, myPersonID);
+  }
+
   getChampionsString(champions: FinalResult[]): string {
     const names = _.map(champions, champion => this.getPerson(champion.person_id).first_name);
     return names.join(', ');
