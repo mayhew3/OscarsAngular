@@ -15,11 +15,11 @@
       <div class="card scoreCard otherScoreCard">
         <div class="card-body py-2 px-3">
           <div class="row">
-            <div class="col-5 scoreTitle">
+            <div class="col-3 scoreTitle">
               <span>{{getYearFromChampionList(champions)}}</span>
             </div>
-            <div class="col-4 scoreTitle">
-              <span>{{champions[0].person_id}}</span>
+            <div class="col-6 scoreTitle">
+              <span>{{getChampionsString(champions)}}</span>
             </div>
             <div class="col-3 scorePoints otherScorePoints">
               <span>{{champions[0].score}}</span>

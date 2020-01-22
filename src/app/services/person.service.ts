@@ -51,7 +51,7 @@ export class PersonService {
   }
 
 
-  private getPersonFromCache(id: number): Person {
+  getPersonFromCache(id: number): Person {
     return _.findWhere(this.cache, {id: id});
   }
 

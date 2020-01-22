@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FinalResult} from '../../interfaces/FinalResult';
 import {FinalResultsService} from '../../services/final-results.service';
 import {_} from 'underscore';
+import {Person} from '../../interfaces/Person';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'osc-history',
@@ -11,7 +13,8 @@ import {_} from 'underscore';
 export class HistoryComponent implements OnInit {
   public finalResults: FinalResult[];
 
-  constructor(private finalResultsService: FinalResultsService) { }
+  constructor(private finalResultsService: FinalResultsService,
+              private personService: PersonService) { }
 
   ngOnInit() {
     this.finalResultsService.getFinalResultsForGroup(1).subscribe(finalResults => {
@@ -41,6 +44,15 @@ export class HistoryComponent implements OnInit {
   }
 
   stillLoading(): boolean {
-    return this.finalResultsService.stillLoading();
+    return this.finalResultsService.stillLoading() || this.personService.stillLoading();
+  }
+
+  getPerson(person_id: number): Person {
+    return this.personService.getPersonFromCache(person_id);
+  }
+
+  getChampionsString(champions: FinalResult[]): string {
+    const names = _.map(champions, champion => this.getPerson(champion.person_id).first_name);
+    return names.join(', ');
   }
 }
