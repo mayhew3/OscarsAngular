@@ -33,8 +33,11 @@
               <span>{{champions[0].score}}</span>
             </div>
           </div>
-          <div class="row bottomRow"
+          <div class="row bottomRow no-gutters"
                *ngIf="showMyRank(champions)">
+            <div class="col-1">
+              &nbsp;
+            </div>
             <div class="col-11">
               <div class="card scoreCard subScoreCard myScoreCard">
                 <div class="card-body py-0 px-1">
