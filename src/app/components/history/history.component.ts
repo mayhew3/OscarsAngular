@@ -5,6 +5,7 @@ import {_} from 'underscore';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
 import {AuthService} from '../../services/auth/auth.service';
+import ordinal from 'ordinal';
 
 @Component({
   selector: 'osc-history',
@@ -68,9 +69,9 @@ export class HistoryComponent implements OnInit {
     return this.auth.getFirstName();
   }
 
-  getMyRank(champions: FinalResult[]): number {
+  getMyRank(champions: FinalResult[]): string {
     const rank = this.getFinalResultForMe(champions).rank;
-    return rank;
+    return ordinal(rank);
   }
 
   getMyScore(champions: FinalResult[]): number {
