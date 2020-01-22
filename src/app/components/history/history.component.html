@@ -1,0 +1,65 @@
+
+<div class="container" style="padding: 10px">
+
+  <div class="row">
+    <div class="col-12">
+      <h1>Past Winners</h1>
+    </div>
+  </div>
+
+  <p *ngIf="stillLoading()">Loading...</p>
+
+  <div class="row mt-2" *ngIf="!stillLoading()">
+    <div class="col-12 col-sm-6 col-lg-4"
+         *ngFor="let champions of getChampions()">
+      <div class="card scoreCard mainScoreCard"
+           [ngClass]="getScoreCardClass(champions)">
+        <div class="card-body py-1 px-3">
+          <div class="row my-1 no-gutters">
+            <div class="col-2 scoreTitle">
+              <span>{{getYearFromChampionList(champions)}}</span>
+            </div>
+            <div class="col-1" style="justify-items: right">
+              <img *ngIf="iAmOneOfThe(champions)"
+                   src="../../../assets/oscar_statue_purple.png"
+                   height="30"
+                   width="11"/>
+            </div>
+            <div class="col-6 scoreName">
+              <span>{{getChampionsString(champions)}}</span>
+            </div>
+            <div class="col-3 scorePoints"
+                 [ngClass]="getScoreScoreClass(champions)">
+              <span>{{champions[0].score}}</span>
+            </div>
+          </div>
+          <div class="row bottomRow no-gutters"
+               *ngIf="showMyRank(champions)">
+            <div class="col-1">
+              &nbsp;
+            </div>
+            <div class="col-11">
+              <div class="card scoreCard subScoreCard myScoreCard">
+                <div class="card-body py-0 px-1">
+                  <div class="row no-gutters">
+                    <div class="col-3 myRank">
+                      <span>{{getMyRank(champions)}}</span>
+                    </div>
+                    <div class="col-6">
+                      <span>{{getMyFirstName()}}</span>
+                    </div>
+                    <div class="col-3 scorePoints">
+                      <span>{{getMyScore(champions)}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

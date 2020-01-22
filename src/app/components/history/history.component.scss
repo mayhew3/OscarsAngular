@@ -1,0 +1,60 @@
+@import "../../../variables";
+
+.scoreCard {
+  font-size: 16pt;
+  margin-bottom: 10px;
+}
+
+.otherScoreCard {
+  border-color: $highlight;
+}
+
+.myScoreCard {
+  background-color: fade_out($personal, .05);
+}
+
+.myMainScoreCard {
+  border-color: white;
+}
+
+.mainScoreCard {
+  color: white;
+}
+
+.subScoreCard {
+  border-color: lightgray;
+  color: lightgray;
+  font-size: 12pt;
+  background-color: fade_out($personal, .5);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+}
+
+.bottomRow {
+  justify-items: right;
+}
+
+.myRank {
+  font-weight: bold;
+}
+
+.scoreTitle {
+  color: white;
+  font-weight: bolder;
+}
+
+.scoreName {
+  color: white;
+}
+
+.scorePoints {
+  font-weight: bold;
+  text-align: right;
+}
+
+.myScorePoints {
+  color: white;
+}
+
+.otherScorePoints {
+  color: $highlight;
+}

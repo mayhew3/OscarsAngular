@@ -19,20 +19,20 @@
           </a>
         </li>
         <li class="nav-item"
-          *ngIf="!stillLoading() && auth.isUser() && (systemVarsService.canVote() || auth.isAdmin())">
+          *ngIf="!stillLoading() && auth.isUser() && systemVarsService.canVote()">
           <a class="nav-link" routerLink="/vote">Vote</a>
         </li>
         <li class="nav-item"
-            *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())">
+            *ngIf="!stillLoading() && auth.isUser() && !systemVarsService.canVote()">
           <a class="nav-link" routerLink="/scores">Scores</a>
         </li>
         <li class="nav-item"
-            *ngIf="!stillLoading() && auth.isAdmin()">
-          <a class="nav-link" routerLink="/odds">Odds</a>
+            *ngIf="!stillLoading() && auth.isUser() && !systemVarsService.canVote()">
+          <a class="nav-link" routerLink="/winners">Winners</a>
         </li>
         <li class="nav-item"
-            *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())">
-          <a class="nav-link" routerLink="/winners">Winners</a>
+            *ngIf="!stillLoading() && auth.isUser()">
+          <a class="nav-link" routerLink="/history">Past</a>
         </li>
       </ul>
 
