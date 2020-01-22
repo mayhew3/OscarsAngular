@@ -15,9 +15,15 @@
       <div class="card scoreCard mainScoreCard"
            [ngClass]="getScoreCardClass(champions)">
         <div class="card-body py-1 px-3">
-          <div class="row my-1">
-            <div class="col-3 scoreTitle">
+          <div class="row my-1 no-gutters">
+            <div class="col-2 scoreTitle">
               <span>{{getYearFromChampionList(champions)}}</span>
+            </div>
+            <div class="col-1" style="justify-items: right">
+              <img *ngIf="iAmOneOfThe(champions)"
+                   src="../../../assets/oscar_statue_purple.png"
+                   height="30"
+                   width="11"/>
             </div>
             <div class="col-6 scoreName">
               <span>{{getChampionsString(champions)}}</span>
