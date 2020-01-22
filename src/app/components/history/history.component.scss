@@ -16,11 +16,20 @@
   font-size: 12pt;
 }
 
+.bottomRow {
+  justify-content: right;
+}
+
 .myRank {
-  font-weight: bolder;
+  font-weight: bold;
 }
 
 .scoreTitle {
+  color: white;
+  font-weight: bolder;
+}
+
+.scoreName {
   color: white;
 }
 
