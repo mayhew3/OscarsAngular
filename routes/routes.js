@@ -8,6 +8,7 @@ module.exports = function(app) {
   let votes = require('../controllers/votes_controller');
   let winners = require('../controllers/winners_controller');
   let systemVars = require('../controllers/systemvars_controller');
+  let finalResults = require('../controllers/final_results_controller');
 
   let router = express.Router();
 
@@ -36,6 +37,9 @@ module.exports = function(app) {
   router.route('/systemVars')
     .get(systemVars.getSystemVars)
     .put(systemVars.updateSystemVars);
+
+  router.route('/finalResults')
+    .get(finalResults.getFinalResults);
 
   app.use('/api', router);
 
