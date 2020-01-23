@@ -18,18 +18,22 @@
          *ngFor="let person of getVoters()">
       <div class="card scoreCard"
            [ngClass]="scorecardClass(person)">
-        <div class="card-body py-2 px-3">
-          <div class="row">
-            <div class="col-5 scoreTitle">
+        <div class="card-body py-0 px-3">
+          <div class="row no-gutters mainRow">
+            <div class="col-5">
               <span>{{person.first_name}}</span>
             </div>
             <div class="col-4">
-              <span class="oddsSubtitle">Odds</span>
-              <span class="odds">{{getOddsForPerson(person)}}</span>
+              <span class="odds oddsSubtitle">Odds</span>
+              <span class="odds oddsValue">{{getOddsForPerson(person)}}</span>
             </div>
-            <div class="col-3 scorePoints"
-                 [ngClass]="scoreNumberClass(person)">
-              <span>{{person.score}}</span>
+            <div class="col-3" style="justify-items: right">
+              <div class="row no-gutters">
+                <div class="col-12 scorePoints px-0"
+                     [ngClass]="scoreNumberClass(person)">
+                  <span>{{person.score}}</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

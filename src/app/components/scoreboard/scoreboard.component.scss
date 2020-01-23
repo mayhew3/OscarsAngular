@@ -7,41 +7,50 @@
 
 .otherScoreCard {
   border-color: $highlight;
+  color: $highlight;
 }
 
 .myScoreCard {
   background-color: darken($personal, 5%);
   border-color: white;
+  color: white;
 }
 
-.scoreTitle {
-  color: white;
+.mainRow {
+  display: flex;
+  align-items: center;
 }
 
 .scorePoints {
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: 28pt;
   text-align: right;
+  font-family: "brandon-grotesque", sans-serif;
+  -webkit-text-stroke-width: 1.5px;
 }
 
 .myScorePoints {
-  color: white;
+  -webkit-text-fill-color: fade_out(white, 0.3); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: white;
 }
 
 .otherScorePoints {
-  color: $highlight;
+  -webkit-text-fill-color: fade_out($highlight, 0.3); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: $highlight;
+}
+
+.odds {
+  color: $muted;
+  text-align: right;
+}
+
+.oddsValue {
+  font-weight: bold;
+  font-size: 14pt;
+  margin-left: 4pt;
 }
 
 .oddsSubtitle {
   font-weight: normal;
   font-size: 10pt;
-  color: $muted;
-  text-align: right;
-}
-
-.odds {
-  font-weight: bold;
-  font-size: 14pt;
-  color: $muted;
-  text-align: right;
-  margin-left: 4pt;
 }
