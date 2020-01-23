@@ -13,6 +13,7 @@ import {EventsService} from './events.service';
 import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
+import fast_sort from 'fast-sort';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -130,6 +131,28 @@ export class CategoryService {
     return _.find(this.cache, category => _.findWhere(category.nominees, {id: nomination_id}));
   }
 
+  getMostRecentCategory(): Category {
+    const winners = _.flatten(_.map(this.cache, category => category.winners));
+    fast_sort(winners).desc([
+        (winner: Winner) => winner.declared
+      ]
+    );
+    if (winners.length > 0) {
+      return this.getCategoryFromCache(winners[0].category_id);
+    } else {
+      return undefined;
+    }
+  }
+
+  getNomineeFromCategory(category: Category, nomination_id: number) {
+    return _.findWhere(category.nominees, {id: nomination_id});
+  }
+
+  getNomineeFromWinner(winner: Winner): Nominee {
+    const category = this.getCategoryForNomination(winner.nomination_id);
+    return this.getNomineeFromCategory(category, winner.nomination_id);
+  }
+
   // SCOREBOARD
 
   populatePersonScores(persons: Person[]): Observable<any> {
@@ -190,13 +213,21 @@ export class CategoryService {
     // callback function doesn't have 'this' in scope.
     const categoryServiceGlobal = this;
     const updateWinnersInCacheAndNotify = function(msg) {
-      if (categoryServiceGlobal.cache.length > 0) {
+      const year = categoryServiceGlobal.systemVarsService.getCurrentYear();
+      if (categoryServiceGlobal.cache.length > 0 && !!year) {
         console.log(`Received winner message: ${JSON.stringify(msg)}`);
         const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
+        const winner: Winner = {
+          id: msg.winner_id,
+          category_id: category.id,
+          nomination_id: msg.nomination_id,
+          year: year,
+          declared: msg.declared
+        };
         if (msg.detail === 'add') {
-          categoryServiceGlobal.addWinnerToCache(msg, category);
+          categoryServiceGlobal.addWinnerToCache(winner, category);
         } else if (msg.detail === 'delete') {
-          categoryServiceGlobal.removeWinnerFromCache(msg);
+          categoryServiceGlobal.removeWinnerFromCache(winner.nomination_id);
         }
         categoryServiceGlobal.updateWinnerSubscribers(msg);
       }

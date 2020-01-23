@@ -1,4 +1,26 @@
 
+<nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom justify-content-center hopper">
+  <div class="container">
+
+    <div *ngIf="!!latestCategory">
+      <div class="row">
+        <div class="col-12">
+          Latest Winner: {{latestCategory.name}}<br>
+        </div>
+      </div>
+      <div class="row"
+           *ngFor="let winner of latestCategory.winners">
+        <div class="col-12">
+          {{getWinnerName(winner)}}
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+</nav>
+
 <div class="container" style="padding: 10px">
 
   <div class="row">

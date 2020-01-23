@@ -8,6 +8,9 @@ import {Odds} from '../../interfaces/Odds';
 import {OddsBundle} from '../../interfaces/OddsBundle';
 import {AuthService} from '../../services/auth/auth.service';
 import fast_sort from 'fast-sort';
+import {Nominee} from '../../interfaces/Nominee';
+import {Category} from '../../interfaces/Category';
+import {Winner} from '../../interfaces/Winner';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -16,6 +19,7 @@ import fast_sort from 'fast-sort';
 })
 export class ScoreboardComponent implements OnInit {
   public persons: Person[];
+  public latestCategory: Category;
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
@@ -70,7 +74,18 @@ export class ScoreboardComponent implements OnInit {
   }
 
   updateScoreboard(): void {
-    this.categoryService.populatePersonScores(this.persons).subscribe(() => this.fastSortPersons());
+    this.categoryService.populatePersonScores(this.persons).subscribe(() => {
+      this.fastSortPersons();
+      this.latestCategory = this.categoryService.getMostRecentCategory();
+    });
+  }
+
+  getLatestCategory(): Category {
+    return this.categoryService.getMostRecentCategory();
+  }
+
+  getWinnerName(winner: Winner): string {
+    return this.categoryService.getNomineeFromWinner(winner).nominee;
   }
 
   fastSortPersons(): void {
