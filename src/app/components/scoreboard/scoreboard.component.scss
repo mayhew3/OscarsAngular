@@ -18,6 +18,29 @@
   color: white;
 }
 
+.mainRow {
+  display: flex;
+  align-items: center;
+}
+
+.scorePointBox {
+  font-weight: bolder;
+  font-size: 28pt;
+  text-align: right;
+  font-family: "brandon-grotesque", sans-serif;
+  -webkit-text-stroke-width: 1.5px;
+}
+
+.myScorePointBox {
+  -webkit-text-fill-color: fade_out(white, 0.3); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: white;
+}
+
+.otherScorePointBox {
+  -webkit-text-fill-color: fade_out($highlight, 0.3); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: $highlight;
+}
+
 .scorePoints {
   font-weight: bold;
   text-align: right;
