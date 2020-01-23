@@ -54,3 +54,29 @@
   font-weight: normal;
   font-size: 10pt;
 }
+
+/* BOTTOM PART */
+
+.winnerFooter {
+  background-color: desaturate(darkblue, 25%);
+  color: lighten(cornflowerblue, 20%);
+  padding-bottom: 10px;
+  line-height: 100%
+}
+
+.footerInfo {
+  font-size: 10pt;
+  color: white;
+}
+
+.footerTitle {
+  font-size: 12pt;
+}
+
+.footerBig {
+  font-size: 24pt;
+  font-weight: bolder;
+  //margin-bottom: 30px;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+}

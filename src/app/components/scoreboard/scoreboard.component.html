@@ -1,23 +1,26 @@
 
-<nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom justify-content-center hopper">
-  <div class="container">
+<nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter">
+  <div class="container py-2">
 
     <div *ngIf="!!latestCategory">
-      <div class="row">
+      <div class="row py-1">
         <div class="col-12">
-          Latest Winner: {{latestCategory.name}}<br>
+          <span class="footerInfo">{{getLastTimeAgo()}}</span>
         </div>
       </div>
-      <div class="row"
+      <div class="row py-1">
+        <div class="col-12">
+          <span class="footerTitle">{{latestCategory.name}}</span>
+        </div>
+      </div>
+      <div class="row py-1"
            *ngFor="let winner of latestCategory.winners">
         <div class="col-12">
-          {{getWinnerName(winner)}}
+          <span class="footerBig">{{getWinnerName(winner)}}</span>
         </div>
       </div>
 
-
     </div>
-
   </div>
 </nav>
 

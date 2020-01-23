@@ -4,13 +4,12 @@ import {PersonService} from '../../services/person.service';
 import {CategoryService} from '../../services/category.service';
 import {_} from 'underscore';
 import {OddsService} from '../../services/odds.service';
-import {Odds} from '../../interfaces/Odds';
 import {OddsBundle} from '../../interfaces/OddsBundle';
 import {AuthService} from '../../services/auth/auth.service';
 import fast_sort from 'fast-sort';
-import {Nominee} from '../../interfaces/Nominee';
 import {Category} from '../../interfaces/Category';
 import {Winner} from '../../interfaces/Winner';
+import * as moment from 'moment';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -80,8 +79,16 @@ export class ScoreboardComponent implements OnInit {
     });
   }
 
-  getLatestCategory(): Category {
-    return this.categoryService.getMostRecentCategory();
+  getLastTimeAgo(): string {
+    if (this.latestCategory) {
+      const declaredDates = _.map(this.latestCategory.winners, winner => winner.declared);
+      fast_sort(declaredDates).desc();
+      if (declaredDates.length > 0) {
+        const mostLatest = declaredDates[0];
+        return moment(mostLatest).fromNow();
+      }
+    }
+    return '';
   }
 
   getWinnerName(winner: Winner): string {
