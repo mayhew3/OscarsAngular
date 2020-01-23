@@ -89,7 +89,10 @@ export class NomineesComponent implements OnInit {
 
   private updateLocalWinningNominees(): void {
     const winners = this.category.winners;
-    this.winningNominees = _.filter(this.nominees, nominee => winners.includes(nominee.id));
+    this.winningNominees = _.map(winners, winner => {
+      const nomination_id = winner.nomination_id;
+      return _.findWhere(this.nominees, {id: nomination_id});
+    });
   }
 
   getVoterClass(person: Person): string {

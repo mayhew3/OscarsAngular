@@ -12,6 +12,7 @@ import {VotesService} from './votes.service';
 import {EventsService} from './events.service';
 import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
+import {Winner} from '../interfaces/Winner';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -108,15 +109,21 @@ export class CategoryService {
     _.forEach(this.winnerListeners, listener => listener.next(msg));
   }
 
-  private addWinnerToCache(nomination_id: number, category: Category): void {
-    if (!category.winners.includes(nomination_id)) {
-      category.winners.push(nomination_id);
+  private addWinnerToCache(winner: Winner, category: Category): void {
+    const existingWinner = this.getWinnerForNominee(category, winner.nomination_id);
+    if (!existingWinner) {
+      category.winners.push(winner);
     }
+  }
+
+  private getWinnerForNominee(category: Category, nomination_id: number): Winner {
+    return _.findWhere(category.winners, {nomination_id: nomination_id});
   }
 
   private removeWinnerFromCache(nomination_id: number): void {
     const category = this.getCategoryForNomination(nomination_id);
-    category.winners = _.without(category.winners, nomination_id);
+    const existingWinner = this.getWinnerForNominee(category, nomination_id);
+    category.winners = _.without(category.winners, existingWinner);
   }
 
   private getCategoryForNomination(nomination_id: number): Category {
@@ -140,15 +147,17 @@ export class CategoryService {
           let score = 0;
           let numVotes = 0;
           _.forEach(categories, category => {
-            const winners = category.winners;
             const personVote = _.findWhere(votes, {
               person_id: person.id,
               category_id: category.id
             });
             if (personVote) {
               numVotes++;
-              if (winners.includes(personVote.nomination_id)) {
-                score += category.points;
+              if (category.winners.length > 0) {
+                const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
+                if (!!existingWinner) {
+                  score += category.points;
+                }
               }
             }
           });
@@ -185,9 +194,9 @@ export class CategoryService {
         console.log(`Received winner message: ${JSON.stringify(msg)}`);
         const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
         if (msg.detail === 'add') {
-          categoryServiceGlobal.addWinnerToCache(msg.nomination_id, category);
+          categoryServiceGlobal.addWinnerToCache(msg, category);
         } else if (msg.detail === 'delete') {
-          categoryServiceGlobal.removeWinnerFromCache(msg.nomination_id);
+          categoryServiceGlobal.removeWinnerFromCache(msg);
         }
         categoryServiceGlobal.updateWinnerSubscribers(msg);
       }

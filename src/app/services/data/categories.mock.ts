@@ -508,7 +508,13 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 11:19:02.924",
+      "category_id": 24,
+      "year": 2018,
+      "nomination_id": 2811,
+      "id": 343
+    }],
     "nominees": [
       {
         "odds_expert": 78,
@@ -627,7 +633,13 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 11:34:19.792",
+      "category_id": 7,
+      "year": 2018,
+      "nomination_id": 2727,
+      "id": 346
+    }],
     "nominees": [
       {
         "category_id": 7,
@@ -683,7 +695,13 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 11:35:23.882",
+      "category_id": 11,
+      "year": 2018,
+      "nomination_id": 2746,
+      "id": 347
+    }],
     "nominees": [
       {
         "category_id": 11,
@@ -743,7 +761,13 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 11:35:35.585",
+      "category_id": 13,
+      "year": 2018,
+      "nomination_id": 2756,
+      "id": 348
+    }],
     "nominees": [
       {
         "category_id": 13,
@@ -783,7 +807,13 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 11:35:42.251",
+      "category_id": 14,
+      "year": 2018,
+      "nomination_id": 2760,
+      "id": 349
+    }],
     "nominees": [
       {
         "odds_expert": 27,
@@ -843,7 +873,13 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 11:35:55.861",
+      "category_id": 15,
+      "year": 2018,
+      "nomination_id": 2766,
+      "id": 350
+    }],
     "nominees": [
       {
         "category_id": 15,

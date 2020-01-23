@@ -74,6 +74,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   fastSortPersons(): void {
+    this.persons = _.filter(this.persons, person => person.num_votes);
     fast_sort(this.persons)
       .by([
         { desc: person => person.score},

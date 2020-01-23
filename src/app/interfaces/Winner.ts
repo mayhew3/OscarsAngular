@@ -3,5 +3,5 @@ export class Winner {
   category_id: number;
   nomination_id: number;
   year: number;
-  declared: Date;
+  declared: any;
 }
