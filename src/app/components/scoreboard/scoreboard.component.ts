@@ -84,7 +84,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   scoreNumberClass(person: Person): string {
-    return this.auth.isMe(person) ? 'myScorePointBox' : 'otherScorePointBox';
+    return this.auth.isMe(person) ? 'myScorePoints' : 'otherScorePoints';
   }
 
   public getVoters(): Person[] {

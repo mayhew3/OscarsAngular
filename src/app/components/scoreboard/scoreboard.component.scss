@@ -7,14 +7,12 @@
 
 .otherScoreCard {
   border-color: $highlight;
+  color: $highlight;
 }
 
 .myScoreCard {
   background-color: darken($personal, 5%);
   border-color: white;
-}
-
-.scoreTitle {
   color: white;
 }
 
@@ -23,7 +21,7 @@
   align-items: center;
 }
 
-.scorePointBox {
+.scorePoints {
   font-weight: bolder;
   font-size: 28pt;
   text-align: right;
@@ -31,40 +29,28 @@
   -webkit-text-stroke-width: 1.5px;
 }
 
-.myScorePointBox {
+.myScorePoints {
   -webkit-text-fill-color: fade_out(white, 0.3); /* Will override color (regardless of order) */
   -webkit-text-stroke-color: white;
 }
 
-.otherScorePointBox {
+.otherScorePoints {
   -webkit-text-fill-color: fade_out($highlight, 0.3); /* Will override color (regardless of order) */
   -webkit-text-stroke-color: $highlight;
 }
 
-.scorePoints {
-  font-weight: bold;
+.odds {
+  color: $muted;
   text-align: right;
 }
 
-.myScorePoints {
-  color: white;
-}
-
-.otherScorePoints {
-  color: $highlight;
+.oddsValue {
+  font-weight: bold;
+  font-size: 14pt;
+  margin-left: 4pt;
 }
 
 .oddsSubtitle {
   font-weight: normal;
   font-size: 10pt;
-  color: $muted;
-  text-align: right;
-}
-
-.odds {
-  font-weight: bold;
-  font-size: 14pt;
-  color: $muted;
-  text-align: right;
-  margin-left: 4pt;
 }
