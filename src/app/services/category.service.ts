@@ -125,32 +125,37 @@ export class CategoryService {
 
   // SCOREBOARD
 
-  populatePersonScores(persons: Person[]) {
-    this.maybeUpdateCache().subscribe(categories => {
-      this.populatePersonScoresForCategories(persons, categories);
+  populatePersonScores(persons: Person[]): Observable<any> {
+    return new Observable<any>(observer => {
+      this.maybeUpdateCache().subscribe(categories => {
+        this.populatePersonScoresForCategories(persons, categories).subscribe(() => observer.next());
+      });
     });
   }
 
-  populatePersonScoresForCategories(persons: Person[], categories: Category[]) {
-    this.votesService.getVotesForCurrentYear().subscribe(votes => {
-      _.forEach(persons, person => {
-        let score = 0;
-        let numVotes = 0;
-        _.forEach(categories, category => {
-          const winners = category.winners;
-          const personVote = _.findWhere(votes, {
-            person_id: person.id,
-            category_id: category.id
-          });
-          if (personVote) {
-            numVotes++;
-            if (winners.includes(personVote.nomination_id)) {
-              score += category.points;
+  populatePersonScoresForCategories(persons: Person[], categories: Category[]): Observable<any> {
+    return new Observable<any>(observer => {
+      this.votesService.getVotesForCurrentYear().subscribe(votes => {
+        _.forEach(persons, person => {
+          let score = 0;
+          let numVotes = 0;
+          _.forEach(categories, category => {
+            const winners = category.winners;
+            const personVote = _.findWhere(votes, {
+              person_id: person.id,
+              category_id: category.id
+            });
+            if (personVote) {
+              numVotes++;
+              if (winners.includes(personVote.nomination_id)) {
+                score += category.points;
+              }
             }
-          }
+          });
+          person.score = score;
+          person.num_votes = numVotes;
         });
-        person.score = score;
-        person.num_votes = numVotes;
+        observer.next();
       });
     });
   }

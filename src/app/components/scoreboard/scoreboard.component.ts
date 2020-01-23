@@ -7,6 +7,7 @@ import {OddsService} from '../../services/odds.service';
 import {Odds} from '../../interfaces/Odds';
 import {OddsBundle} from '../../interfaces/OddsBundle';
 import {AuthService} from '../../services/auth/auth.service';
+import fast_sort from 'fast-sort';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -26,7 +27,8 @@ export class ScoreboardComponent implements OnInit {
   ngOnInit() {
     this.personService.getPersonsForGroup(1).subscribe(persons => {
       this.persons = persons;
-      this.categoryService.populatePersonScores(this.persons);
+
+      this.updateScoreboard();
       this.categoryService.subscribeToWinnerEvents().subscribe(() => {
         this.updateScoreboard();
       });
@@ -68,7 +70,16 @@ export class ScoreboardComponent implements OnInit {
   }
 
   updateScoreboard(): void {
-    this.categoryService.populatePersonScores(this.persons);
+    this.categoryService.populatePersonScores(this.persons).subscribe(() => this.fastSortPersons());
+  }
+
+  fastSortPersons(): void {
+    fast_sort(this.persons)
+      .by([
+        { desc: person => person.score},
+        { desc: person => this.auth.isMe(person)},
+        { asc: person => person.first_name},
+      ]);
   }
 
   stillLoading(): boolean {
@@ -88,12 +99,6 @@ export class ScoreboardComponent implements OnInit {
   }
 
   public getVoters(): Person[] {
-    return _.filter(this.persons, person => person.num_votes).sort((person1, person2) => {
-      if (person1.score === person2.score) {
-        return person2.first_name > person1.first_name ? -1 : 1;
-      } else {
-        return person2.score - person1.score;
-      }
-    });
+    return this.persons;
   }
 }
