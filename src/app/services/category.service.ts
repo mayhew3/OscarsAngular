@@ -155,6 +155,16 @@ export class CategoryService {
 
   // SCOREBOARD
 
+  didPersonVoteCorrectlyFor(person: Person, category: Category): boolean {
+    const votes = this.votesService.getVotesForCurrentYearAndCategory(category);
+    const personVote = _.findWhere(votes, {person_id: person.id});
+    if (!!personVote) {
+      const winningIds = _.map(category.winners, winner => winner.nomination_id);
+      return winningIds.includes(personVote.nomination_id);
+    }
+    return false;
+  }
+
   populatePersonScores(persons: Person[]): Observable<any> {
     return new Observable<any>(observer => {
       this.maybeUpdateCache().subscribe(categories => {

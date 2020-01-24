@@ -105,6 +105,10 @@ export class ScoreboardComponent implements OnInit {
     return Nominee.getSubtitleText(this.latestCategory, nominee);
   }
 
+  gotPointsForLastWinner(person: Person): boolean {
+    return this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory);
+  }
+
   fastSortPersons(): void {
     this.persons = _.filter(this.persons, person => person.num_votes);
     fast_sort(this.persons)

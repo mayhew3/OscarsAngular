@@ -26,12 +26,21 @@
   align-items: center;
 }
 
-.scorePoints {
+.scorePositive {
+  font-size: 16pt;
+  color: lighten(forestgreen, 20%);
+  margin-right: 4px;
+}
+
+.scoreText {
   font-weight: bolder;
   font-size: 28pt;
-  text-align: right;
   font-family: "brandon-grotesque", sans-serif;
   -webkit-text-stroke-width: 1.5px;
+}
+
+.scorePoints {
+  text-align: right;
 }
 
 .myScorePoints {

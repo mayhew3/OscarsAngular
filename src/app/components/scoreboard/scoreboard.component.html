@@ -73,9 +73,13 @@
               </div>
               <div class="col-3" style="justify-items: right">
                 <div class="row no-gutters">
-                  <div class="col-12 scorePoints px-0"
-                       [ngClass]="scoreNumberClass(person)">
-                    <span>{{person.score}}</span>
+                  <div class="col-12 px-0 scorePoints">
+                    <span *ngIf="gotPointsForLastWinner(person)"
+                          class="scorePositive">
+                      <i class="fas fa-angle-double-up"></i>
+                    </span>
+                    <span class="scoreText"
+                      [ngClass]="scoreNumberClass(person)">{{person.score}}</span>
                   </div>
                 </div>
               </div>
