@@ -143,15 +143,7 @@ export class NomineesComponent implements OnInit {
   }
 
   getSubtitleText(nominee: Nominee): string {
-    const singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
-
-    if (singleLineCategories.includes(this.category.name)) {
-      return undefined;
-    } else if (nominee.nominee === nominee.context) {
-      return nominee.detail;
-    } else {
-      return nominee.context;
-    }
+    return Nominee.getSubtitleText(this.category, nominee);
   }
 
   isVoted(nominee: Nominee): boolean {

@@ -10,6 +10,7 @@ import fast_sort from 'fast-sort';
 import {Category} from '../../interfaces/Category';
 import {Winner} from '../../interfaces/Winner';
 import * as moment from 'moment';
+import {Nominee} from '../../interfaces/Nominee';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -93,6 +94,15 @@ export class ScoreboardComponent implements OnInit {
 
   getWinnerName(winner: Winner): string {
     return this.categoryService.getNomineeFromWinner(winner).nominee;
+  }
+
+  getWinnerSubtitle(winner: Winner): string {
+    const nominee = this.categoryService.getNomineeFromWinner(winner);
+    return this.getSubtitleText(nominee);
+  }
+
+  getSubtitleText(nominee: Nominee): string {
+    return Nominee.getSubtitleText(this.latestCategory, nominee);
   }
 
   fastSortPersons(): void {

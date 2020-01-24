@@ -326,7 +326,13 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 17:27:54.554",
+      "category_id": 20,
+      "year": 2018,
+      "nomination_id": 2703,
+      "id": 364
+    }],
     "nominees": [
       {
         "category_id": 20,
@@ -386,7 +392,13 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 14:22:02.289",
+      "category_id": 21,
+      "year": 2018,
+      "nomination_id": 2712,
+      "id": 353
+    }],
     "nominees": [
       {
         "odds_denominator": 1,
@@ -508,13 +520,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [{
-      "declared": "2020-01-23 11:19:02.924",
-      "category_id": 24,
-      "year": 2018,
-      "nomination_id": 2811,
-      "id": 343
-    }],
+    "winners": [],
     "nominees": [
       {
         "odds_expert": 78,
@@ -935,7 +941,13 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 14:39:41.788",
+      "category_id": 4,
+      "year": 2018,
+      "nomination_id": 2777,
+      "id": 359
+    }],
     "nominees": [
       {
         "category_id": 4,
@@ -1054,7 +1066,13 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2020-01-23 15:20:46.202",
+      "category_id": 19,
+      "year": 2018,
+      "nomination_id": 2797,
+      "id": 361
+    }],
     "nominees": [
       {
         "category_id": 19,
@@ -1114,7 +1132,22 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [
+      {
+        "declared": "2020-01-23 17:28:21.966",
+        "category_id": 22,
+        "year": 2018,
+        "nomination_id": 2803,
+        "id": 365
+      },
+      {
+        "declared": "2020-01-23 17:28:22.986",
+        "category_id": 22,
+        "year": 2018,
+        "nomination_id": 2801,
+        "id": 366
+      }
+    ],
     "nominees": [
       {
         "category_id": 22,
