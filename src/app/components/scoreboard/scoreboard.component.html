@@ -71,6 +71,11 @@
               <div class="col-4">
                 <span class="odds oddsSubtitle">Odds</span>
                 <span class="odds oddsValue">{{getOddsForPerson(person)}}</span>
+                <span *ngIf="showOddsChange(person)"
+                      class="oddsDiff"
+                      [ngClass]="oddsDirectionClass(person)">
+                  {{oddsDirectionFormatted(person)}}
+                </span>
               </div>
               <div class="col-3" style="justify-items: right">
                 <div class="row no-gutters">

@@ -81,21 +81,27 @@ export class ScoreboardComponent implements OnInit {
       const currentOddsForPerson = _.findWhere(currentOdds.odds, {person_id: person.id});
       const previousOddsForPerson = _.findWhere(previousOdds.odds, {person_id: person.id});
 
-      if (!currentOddsForPerson || !currentOddsForPerson.odds ||
-        !previousOddsForPerson || !previousOddsForPerson.odds) {
-        return 0;
-      }
-
-      const currentValue = parseFloat(currentOddsForPerson.odds) * 100;
-      const previousValue = parseFloat(previousOddsForPerson.odds) * 100;
-
-      if (!currentValue || !previousValue) {
-        return 0;
-      }
+      const currentValue = !currentOddsForPerson ? 0 : parseFloat(currentOddsForPerson.odds) * 100;
+      const previousValue = !previousOddsForPerson ? 0 : parseFloat(previousOddsForPerson.odds) * 100;
 
       return currentValue - previousValue;
     }
     return 0;
+  }
+
+  showOddsChange(person: Person): boolean {
+    const diff = this.oddsDirection(person);
+    return Math.abs(diff) >= 1;
+  }
+
+  oddsDirectionFormatted(person: Person): string {
+    const diff = this.oddsDirection(person);
+    const formatted = diff.toFixed(0);
+    return diff > 0 ? '+' + formatted : formatted;
+  }
+
+  oddsDirectionClass(person: Person): string {
+    return this.oddsDirection(person) > 0 ? 'oddsDiffGood' : 'oddsDiffBad';
   }
 
   updateScoreboard(): void {
