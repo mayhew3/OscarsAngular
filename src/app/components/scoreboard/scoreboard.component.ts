@@ -4,10 +4,13 @@ import {PersonService} from '../../services/person.service';
 import {CategoryService} from '../../services/category.service';
 import {_} from 'underscore';
 import {OddsService} from '../../services/odds.service';
-import {Odds} from '../../interfaces/Odds';
 import {OddsBundle} from '../../interfaces/OddsBundle';
 import {AuthService} from '../../services/auth/auth.service';
 import fast_sort from 'fast-sort';
+import {Category} from '../../interfaces/Category';
+import {Winner} from '../../interfaces/Winner';
+import * as moment from 'moment';
+import {Nominee} from '../../interfaces/Nominee';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -16,6 +19,7 @@ import fast_sort from 'fast-sort';
 })
 export class ScoreboardComponent implements OnInit {
   public persons: Person[];
+  public latestCategory: Category;
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
@@ -70,10 +74,39 @@ export class ScoreboardComponent implements OnInit {
   }
 
   updateScoreboard(): void {
-    this.categoryService.populatePersonScores(this.persons).subscribe(() => this.fastSortPersons());
+    this.categoryService.populatePersonScores(this.persons).subscribe(() => {
+      this.fastSortPersons();
+      this.latestCategory = this.categoryService.getMostRecentCategory();
+    });
+  }
+
+  getLastTimeAgo(): string {
+    if (this.latestCategory) {
+      const declaredDates = _.map(this.latestCategory.winners, winner => winner.declared);
+      fast_sort(declaredDates).desc();
+      if (declaredDates.length > 0) {
+        const mostLatest = declaredDates[0];
+        return moment(mostLatest).fromNow();
+      }
+    }
+    return '';
+  }
+
+  getWinnerName(winner: Winner): string {
+    return this.categoryService.getNomineeFromWinner(winner).nominee;
+  }
+
+  getWinnerSubtitle(winner: Winner): string {
+    const nominee = this.categoryService.getNomineeFromWinner(winner);
+    return this.getSubtitleText(nominee);
+  }
+
+  getSubtitleText(nominee: Nominee): string {
+    return Nominee.getSubtitleText(this.latestCategory, nominee);
   }
 
   fastSortPersons(): void {
+    this.persons = _.filter(this.persons, person => person.num_votes);
     fast_sort(this.persons)
       .by([
         { desc: person => person.score},

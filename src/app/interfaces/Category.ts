@@ -1,4 +1,5 @@
 import {Nominee} from './Nominee';
+import {Winner} from './Winner';
 
 export class Category {
   id: number;
@@ -6,5 +7,5 @@ export class Category {
   points: number;
   nominees: Nominee[];
   voted_on?: number;
-  winners: number[];
+  winners: Winner[];
 }

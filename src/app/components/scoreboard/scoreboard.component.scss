@@ -1,5 +1,10 @@
 @import "../../../variables";
 
+.scoreboard-body {
+  padding-top: 10px;
+  padding-bottom: 300px;
+}
+
 .scoreCard {
   font-size: 16pt;
   margin-bottom: 10px;
@@ -53,4 +58,58 @@
 .oddsSubtitle {
   font-weight: normal;
   font-size: 10pt;
+}
+
+/* BOTTOM PART */
+
+.winnerFooter {
+  background-color: desaturate(darkblue, 25%);
+  color: lighten(cornflowerblue, 10%);
+  border-color: lighten(desaturate(darkblue, 45%), 30%);
+  border-top-width: 2px;
+  line-height: 130%
+}
+
+.footerInfo {
+  font-size: 10pt;
+  color: white;
+}
+
+.footerTitle {
+  font-size: 12pt;
+}
+
+.footerTieNotification {
+  font-size: 12pt;
+  font-weight: bold;
+  color: lighten(cornflowerblue, 20%);
+}
+
+.footerBig {
+  font-size: 24pt;
+  font-weight: bolder;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  color: lighten(cornflowerblue, 20%);
+}
+
+.footerSmall {
+  font-size: 13pt;
+  font-weight: bolder;
+  //margin-bottom: 30px;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+}
+
+.footerScore {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 48pt;
+  font-family: "brandon-grotesque", sans-serif;
+  -webkit-text-fill-color: fade_out(lighten(cornflowerblue, 20%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(cornflowerblue, 20%);
+  -webkit-text-stroke-width: 2px;
 }
