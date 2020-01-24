@@ -89,7 +89,10 @@ export class NomineesComponent implements OnInit {
 
   private updateLocalWinningNominees(): void {
     const winners = this.category.winners;
-    this.winningNominees = _.filter(this.nominees, nominee => winners.includes(nominee.id));
+    this.winningNominees = _.map(winners, winner => {
+      const nomination_id = winner.nomination_id;
+      return _.findWhere(this.nominees, {id: nomination_id});
+    });
   }
 
   getVoterClass(person: Person): string {
@@ -140,15 +143,7 @@ export class NomineesComponent implements OnInit {
   }
 
   getSubtitleText(nominee: Nominee): string {
-    const singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
-
-    if (singleLineCategories.includes(this.category.name)) {
-      return undefined;
-    } else if (nominee.nominee === nominee.context) {
-      return nominee.detail;
-    } else {
-      return nominee.context;
-    }
+    return Nominee.getSubtitleText(this.category, nominee);
   }
 
   isVoted(nominee: Nominee): boolean {

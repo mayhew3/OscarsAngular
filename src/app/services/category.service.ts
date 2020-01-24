@@ -12,6 +12,8 @@ import {VotesService} from './votes.service';
 import {EventsService} from './events.service';
 import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
+import {Winner} from '../interfaces/Winner';
+import fast_sort from 'fast-sort';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -108,49 +110,94 @@ export class CategoryService {
     _.forEach(this.winnerListeners, listener => listener.next(msg));
   }
 
-  private addWinnerToCache(nomination_id: number, category: Category): void {
-    if (!category.winners.includes(nomination_id)) {
-      category.winners.push(nomination_id);
+  private addWinnerToCache(winner: Winner, category: Category): void {
+    const existingWinner = this.getWinnerForNominee(category, winner.nomination_id);
+    if (!existingWinner) {
+      category.winners.push(winner);
     }
+  }
+
+  private getWinnerForNominee(category: Category, nomination_id: number): Winner {
+    return _.findWhere(category.winners, {nomination_id: nomination_id});
   }
 
   private removeWinnerFromCache(nomination_id: number): void {
     const category = this.getCategoryForNomination(nomination_id);
-    category.winners = _.without(category.winners, nomination_id);
+    const existingWinner = this.getWinnerForNominee(category, nomination_id);
+    category.winners = _.without(category.winners, existingWinner);
   }
 
   private getCategoryForNomination(nomination_id: number): Category {
     return _.find(this.cache, category => _.findWhere(category.nominees, {id: nomination_id}));
   }
 
+  getMostRecentCategory(): Category {
+    const winners = _.flatten(_.map(this.cache, category => category.winners));
+    fast_sort(winners).desc([
+        (winner: Winner) => winner.declared
+      ]
+    );
+    if (winners.length > 0) {
+      return this.getCategoryFromCache(winners[0].category_id);
+    } else {
+      return undefined;
+    }
+  }
+
+  getNomineeFromCategory(category: Category, nomination_id: number) {
+    return _.findWhere(category.nominees, {id: nomination_id});
+  }
+
+  getNomineeFromWinner(winner: Winner): Nominee {
+    const category = this.getCategoryForNomination(winner.nomination_id);
+    return this.getNomineeFromCategory(category, winner.nomination_id);
+  }
+
   // SCOREBOARD
 
-  populatePersonScores(persons: Person[]) {
-    this.maybeUpdateCache().subscribe(categories => {
-      this.populatePersonScoresForCategories(persons, categories);
+  didPersonVoteCorrectlyFor(person: Person, category: Category): boolean {
+    const votes = this.votesService.getVotesForCurrentYearAndCategory(category);
+    const personVote = _.findWhere(votes, {person_id: person.id});
+    if (!!personVote) {
+      const winningIds = _.map(category.winners, winner => winner.nomination_id);
+      return winningIds.includes(personVote.nomination_id);
+    }
+    return false;
+  }
+
+  populatePersonScores(persons: Person[]): Observable<any> {
+    return new Observable<any>(observer => {
+      this.maybeUpdateCache().subscribe(categories => {
+        this.populatePersonScoresForCategories(persons, categories).subscribe(() => observer.next());
+      });
     });
   }
 
-  populatePersonScoresForCategories(persons: Person[], categories: Category[]) {
-    this.votesService.getVotesForCurrentYear().subscribe(votes => {
-      _.forEach(persons, person => {
-        let score = 0;
-        let numVotes = 0;
-        _.forEach(categories, category => {
-          const winners = category.winners;
-          const personVote = _.findWhere(votes, {
-            person_id: person.id,
-            category_id: category.id
-          });
-          if (personVote) {
-            numVotes++;
-            if (winners.includes(personVote.nomination_id)) {
-              score += category.points;
+  populatePersonScoresForCategories(persons: Person[], categories: Category[]): Observable<any> {
+    return new Observable<any>(observer => {
+      this.votesService.getVotesForCurrentYear().subscribe(votes => {
+        _.forEach(persons, person => {
+          let score = 0;
+          let numVotes = 0;
+          _.forEach(categories, category => {
+            const personVote = _.findWhere(votes, {
+              person_id: person.id,
+              category_id: category.id
+            });
+            if (personVote) {
+              numVotes++;
+              if (category.winners.length > 0) {
+                const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
+                if (!!existingWinner) {
+                  score += category.points;
+                }
+              }
             }
-          }
+          });
+          person.score = score;
+          person.num_votes = numVotes;
         });
-        person.score = score;
-        person.num_votes = numVotes;
+        observer.next();
       });
     });
   }
@@ -176,13 +223,21 @@ export class CategoryService {
     // callback function doesn't have 'this' in scope.
     const categoryServiceGlobal = this;
     const updateWinnersInCacheAndNotify = function(msg) {
-      if (categoryServiceGlobal.cache.length > 0) {
+      const year = categoryServiceGlobal.systemVarsService.getCurrentYear();
+      if (categoryServiceGlobal.cache.length > 0 && !!year) {
         console.log(`Received winner message: ${JSON.stringify(msg)}`);
         const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
+        const winner: Winner = {
+          id: msg.winner_id,
+          category_id: category.id,
+          nomination_id: msg.nomination_id,
+          year: year,
+          declared: new Date(msg.declared)
+        };
         if (msg.detail === 'add') {
-          categoryServiceGlobal.addWinnerToCache(msg.nomination_id, category);
+          categoryServiceGlobal.addWinnerToCache(winner, category);
         } else if (msg.detail === 'delete') {
-          categoryServiceGlobal.removeWinnerFromCache(msg.nomination_id);
+          categoryServiceGlobal.removeWinnerFromCache(winner.nomination_id);
         }
         categoryServiceGlobal.updateWinnerSubscribers(msg);
       }
@@ -207,6 +262,9 @@ export class CategoryService {
               )
               .subscribe(
                 (categories: Category[]) => {
+                  _.forEach(categories, category => {
+                    _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
+                  });
                   CategoryService.addToArray(this.cache, categories);
                   this.socket.on('winner', updateWinnersInCacheAndNotify);
                   observer.next(categories);

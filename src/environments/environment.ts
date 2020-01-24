@@ -6,6 +6,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from '../app/services/in-memory-data-service';
 import {EnvironmentConfig} from './environment.interface';
+import {SocketService} from '../app/services/socket.service';
+import {SocketServiceMock} from '../app/services/socket.mock.service';
 
 export const environment: EnvironmentConfig = {
   production: false,
@@ -13,6 +15,7 @@ export const environment: EnvironmentConfig = {
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false, delay: 0 }
     )],
+  socketModule: {provide: SocketService, useClass: SocketServiceMock},
   clientID: 'Re282m5GM0575vOJjhpguBptT8slmIb0',
   domain: 'mayhew3.auth0.com'
 };

@@ -19,8 +19,8 @@ import {SystemVarsService} from './services/system.vars.service';
 import { WinnerMainComponent } from './components/winner-main/winner-main.component';
 import { WinnerDetailComponent } from './components/winner-detail/winner-detail.component';
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
-import {SocketService} from './services/socket.service';
 import { HistoryComponent } from './components/history/history.component';
+import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { HistoryComponent } from './components/history/history.component';
     AppRoutingModule,
     environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
   ],
-  providers: [AuthService, SystemVarsService, SocketService],
+  providers: [AuthService, SystemVarsService, environment.socketModule, InMemoryCallbacksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
