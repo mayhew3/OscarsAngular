@@ -105,6 +105,14 @@ export class ScoreboardComponent implements OnInit {
     return Nominee.getSubtitleText(this.latestCategory, nominee);
   }
 
+  meGotPointsForLastWinner(): boolean {
+    return this.gotPointsForLastWinner(this.auth.getPersonNow());
+  }
+
+  getMyLastWinnerScoreClass(): string {
+    return this.meGotPointsForLastWinner() ? 'footerWinningScore' : 'footerLosingScore';
+  }
+
   gotPointsForLastWinner(person: Person): boolean {
     return this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory);
   }

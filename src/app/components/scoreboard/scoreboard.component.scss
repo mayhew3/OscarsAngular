@@ -118,7 +118,16 @@
   font-weight: bolder;
   font-size: 48pt;
   font-family: "brandon-grotesque", sans-serif;
-  -webkit-text-fill-color: fade_out(lighten(cornflowerblue, 20%), 0.25); /* Will override color (regardless of order) */
-  -webkit-text-stroke-color: lighten(cornflowerblue, 20%);
+}
+
+.footerWinningScore {
+  -webkit-text-fill-color: fade_out(lighten(forestgreen, 20%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(forestgreen, 20%);
+  -webkit-text-stroke-width: 2px;
+}
+
+.footerLosingScore {
+  -webkit-text-fill-color: fade_out(lighten(tomato, 5%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(tomato, 5%);
   -webkit-text-stroke-width: 2px;
 }
