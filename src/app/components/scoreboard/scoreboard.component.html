@@ -30,7 +30,8 @@
                 </div>
               </div>
             </div>
-            <div class="col-2 footerScore myScorePoints">
+            <div class="col-2 footerScore"
+                 [ngClass]="getMyLastWinnerScoreClass()">
               {{latestCategory.points}}
             </div>
           </div>
@@ -70,12 +71,21 @@
               <div class="col-4">
                 <span class="odds oddsSubtitle">Odds</span>
                 <span class="odds oddsValue">{{getOddsForPerson(person)}}</span>
+                <span *ngIf="showOddsChange(person)"
+                      class="oddsDiff"
+                      [ngClass]="oddsDirectionClass(person)">
+                  {{oddsDirectionFormatted(person)}}
+                </span>
               </div>
               <div class="col-3" style="justify-items: right">
                 <div class="row no-gutters">
-                  <div class="col-12 scorePoints px-0"
-                       [ngClass]="scoreNumberClass(person)">
-                    <span>{{person.score}}</span>
+                  <div class="col-12 px-0 scorePoints">
+                    <span *ngIf="gotPointsForLastWinner(person)"
+                          class="scorePositive">
+                      <i class="fas fa-angle-double-up"></i>
+                    </span>
+                    <span class="scoreText"
+                      [ngClass]="scoreNumberClass(person)">{{person.score}}</span>
                   </div>
                 </div>
               </div>

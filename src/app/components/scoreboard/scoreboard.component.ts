@@ -73,6 +73,37 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 
+  oddsDirection(person: Person): number {
+    const currentOdds = this.oddsService.getOdds();
+    const previousOdds = this.oddsService.getPreviousOdds();
+
+    if (!!currentOdds && !!previousOdds) {
+      const currentOddsForPerson = _.findWhere(currentOdds.odds, {person_id: person.id});
+      const previousOddsForPerson = _.findWhere(previousOdds.odds, {person_id: person.id});
+
+      const currentValue = !currentOddsForPerson ? 0 : parseFloat(currentOddsForPerson.odds) * 100;
+      const previousValue = !previousOddsForPerson ? 0 : parseFloat(previousOddsForPerson.odds) * 100;
+
+      return currentValue - previousValue;
+    }
+    return 0;
+  }
+
+  showOddsChange(person: Person): boolean {
+    const diff = this.oddsDirection(person);
+    return Math.abs(diff) >= 1;
+  }
+
+  oddsDirectionFormatted(person: Person): string {
+    const diff = this.oddsDirection(person);
+    const formatted = diff.toFixed(0);
+    return diff > 0 ? '+' + formatted : formatted;
+  }
+
+  oddsDirectionClass(person: Person): string {
+    return this.oddsDirection(person) > 0 ? 'oddsDiffGood' : 'oddsDiffBad';
+  }
+
   updateScoreboard(): void {
     this.categoryService.populatePersonScores(this.persons).subscribe(() => {
       this.fastSortPersons();
@@ -82,7 +113,9 @@ export class ScoreboardComponent implements OnInit {
 
   getLastTimeAgo(): string {
     if (this.latestCategory) {
+      // noinspection TypeScriptValidateJSTypes
       const declaredDates = _.map(this.latestCategory.winners, winner => winner.declared);
+      // noinspection TypeScriptValidateJSTypes
       fast_sort(declaredDates).desc();
       if (declaredDates.length > 0) {
         const mostLatest = declaredDates[0];
@@ -105,8 +138,22 @@ export class ScoreboardComponent implements OnInit {
     return Nominee.getSubtitleText(this.latestCategory, nominee);
   }
 
+  meGotPointsForLastWinner(): boolean {
+    return this.gotPointsForLastWinner(this.auth.getPersonNow());
+  }
+
+  getMyLastWinnerScoreClass(): string {
+    return this.meGotPointsForLastWinner() ? 'footerWinningScore' : 'footerLosingScore';
+  }
+
+  gotPointsForLastWinner(person: Person): boolean {
+    return this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory);
+  }
+
   fastSortPersons(): void {
+    // noinspection TypeScriptValidateJSTypes
     this.persons = _.filter(this.persons, person => person.num_votes);
+    // noinspection JSUnusedGlobalSymbols
     fast_sort(this.persons)
       .by([
         { desc: person => person.score},

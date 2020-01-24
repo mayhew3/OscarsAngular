@@ -9,6 +9,7 @@ import {SocketService} from './socket.service';
 })
 export class OddsService {
   private odds: OddsBundle;
+  private previousOdds: OddsBundle;
   private eventSubscription: Subscription;
 
   constructor(private http: HttpClient,
@@ -22,11 +23,16 @@ export class OddsService {
   }
 
   clearOdds(): void {
+    this.previousOdds = this.odds;
     this.odds = undefined;
   }
 
   getOdds(): OddsBundle {
     return this.odds;
+  }
+
+  getPreviousOdds(): OddsBundle {
+    return this.previousOdds;
   }
 
   oddsFirstUpdate(): Observable<OddsBundle> {

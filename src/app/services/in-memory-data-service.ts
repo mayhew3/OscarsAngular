@@ -14,6 +14,7 @@ import {MockOdds} from './data/odds.mock';
 import {MockFinalResultsList} from './data/finalresults.mock';
 import {Category} from '../interfaces/Category';
 import {InMemoryCallbacksService} from './in-memory-callbacks.service';
+import {Person} from '../interfaces/Person';
 
 @Injectable({
   providedIn: 'root',
@@ -145,6 +146,26 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const callbacks = this.getCallbacks('winner');
     _.forEach(callbacks, callback => callback(socketMsg));
+
+    const voters = this.getVoters();
+    const odds_results = _.map(voters, voter => {
+      return {
+        id: 1,
+        person_id: voter,
+        odds: Math.random(),
+      };
+    });
+    const odds_execution = {
+      id: 1,
+      event_id: 1,
+      odds: odds_results,
+    };
+    _.forEach(this.getCallbacks('odds'), callback => callback(odds_execution));
+  }
+
+  private getVoters(): number[] {
+    const fullList = _.map(this.votes, vote => vote.person_id);
+    return _.uniq(fullList);
   }
 
   private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<any> {

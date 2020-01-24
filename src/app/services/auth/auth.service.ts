@@ -120,6 +120,10 @@ export class AuthService {
     }
   }
 
+  public getPersonNow(): Person {
+    return this._person;
+  }
+
   private localLogin(authResult): void {
     // Set isLoggedIn flag in localStorage
     localStorage.setItem('isLoggedIn', 'true');
