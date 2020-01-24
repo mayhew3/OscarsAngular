@@ -73,6 +73,31 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 
+  oddsDirection(person: Person): number {
+    const currentOdds = this.oddsService.getOdds();
+    const previousOdds = this.oddsService.getPreviousOdds();
+
+    if (!!currentOdds && !!previousOdds) {
+      const currentOddsForPerson = _.findWhere(currentOdds.odds, {person_id: person.id});
+      const previousOddsForPerson = _.findWhere(previousOdds.odds, {person_id: person.id});
+
+      if (!currentOddsForPerson || !currentOddsForPerson.odds ||
+        !previousOddsForPerson || !previousOddsForPerson.odds) {
+        return 0;
+      }
+
+      const currentValue = parseFloat(currentOddsForPerson.odds) * 100;
+      const previousValue = parseFloat(previousOddsForPerson.odds) * 100;
+
+      if (!currentValue || !previousValue) {
+        return 0;
+      }
+
+      return currentValue - previousValue;
+    }
+    return 0;
+  }
+
   updateScoreboard(): void {
     this.categoryService.populatePersonScores(this.persons).subscribe(() => {
       this.fastSortPersons();
@@ -82,7 +107,9 @@ export class ScoreboardComponent implements OnInit {
 
   getLastTimeAgo(): string {
     if (this.latestCategory) {
+      // noinspection TypeScriptValidateJSTypes
       const declaredDates = _.map(this.latestCategory.winners, winner => winner.declared);
+      // noinspection TypeScriptValidateJSTypes
       fast_sort(declaredDates).desc();
       if (declaredDates.length > 0) {
         const mostLatest = declaredDates[0];
@@ -118,7 +145,9 @@ export class ScoreboardComponent implements OnInit {
   }
 
   fastSortPersons(): void {
+    // noinspection TypeScriptValidateJSTypes
     this.persons = _.filter(this.persons, person => person.num_votes);
+    // noinspection JSUnusedGlobalSymbols
     fast_sort(this.persons)
       .by([
         { desc: person => person.score},
