@@ -222,7 +222,7 @@ export class CategoryService {
           category_id: category.id,
           nomination_id: msg.nomination_id,
           year: year,
-          declared: msg.declared
+          declared: new Date(msg.declared)
         };
         if (msg.detail === 'add') {
           categoryServiceGlobal.addWinnerToCache(winner, category);
@@ -252,6 +252,9 @@ export class CategoryService {
               )
               .subscribe(
                 (categories: Category[]) => {
+                  _.forEach(categories, category => {
+                    _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
+                  });
                   CategoryService.addToArray(this.cache, categories);
                   this.socket.on('winner', updateWinnersInCacheAndNotify);
                   observer.next(categories);

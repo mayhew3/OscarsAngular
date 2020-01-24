@@ -12,6 +12,8 @@ import {MockWinnerList} from './data/winners.mock';
 import {MockEvents} from './data/event.mock';
 import {MockOdds} from './data/odds.mock';
 import {MockFinalResultsList} from './data/finalresults.mock';
+import {Category} from '../interfaces/Category';
+import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +39,10 @@ export class InMemoryDataService implements InMemoryDbService {
     return options;
   }
 
+  constructor(private callbackService: InMemoryCallbacksService) {
+  }
+
+
   createDb(): {} {
     // Need an empty nominees list so the service knows the collection exists.
     return {
@@ -50,6 +56,18 @@ export class InMemoryDataService implements InMemoryDbService {
       odds: this.odds,
       finalResults: this.finalResults
     };
+  }
+
+  on(channel, callback) {
+    this.callbackService.on(channel, callback);
+  }
+
+  removeCallback(channel, callback) {
+    this.callbackService.removeCallback(channel, callback);
+  }
+
+  getCallbacks(channel) {
+    return this.callbackService.getCallbacks(channel);
   }
 
   get(requestInfo: RequestInfo) {
@@ -67,6 +85,8 @@ export class InMemoryDataService implements InMemoryDbService {
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'nominees') {
       this.updateNomination(requestInfo);
+    } else if (requestInfo.collectionName === 'systemVars') {
+      this.changeVotingOpen(requestInfo);
     }
     return undefined;
   }
@@ -77,8 +97,54 @@ export class InMemoryDataService implements InMemoryDbService {
       if (existingVote) {
         return this.updateVote(requestInfo, existingVote);
       }
+    } else if (requestInfo.collectionName === 'winners') {
+      this.addOrDeleteWinner(requestInfo);
     }
     return undefined;
+  }
+
+  private changeVotingOpen(requestInfo: RequestInfo) {
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+    const systemVars = this.systemVars[0];
+    systemVars.voting_open = jsonBody.voting_open;
+
+    const msg = {
+      voting_open: systemVars.voting_open
+    };
+
+    const callbacks = this.getCallbacks('voting');
+    _.forEach(callbacks, callback => callback(msg));
+  }
+
+  private addOrDeleteWinner(requestInfo: RequestInfo) {
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+    const categoryForExistingWinner = this.existingCategoryForWinner(jsonBody.nomination_id);
+
+    let socketMsg;
+    if (!!categoryForExistingWinner) {
+      const existingWinner = _.findWhere(categoryForExistingWinner.winners, {nomination_id: jsonBody.nomination_id});
+      categoryForExistingWinner.winners = _.without(this.winners, existingWinner);
+      socketMsg = {
+        detail: 'delete',
+        nomination_id: jsonBody.nomination_id,
+        event_id: 1,
+        event_time: new Date
+      };
+    } else {
+      const categoryForNominee = this.categoryForNominee(jsonBody.nomination_id);
+      categoryForNominee.winners.push(jsonBody);
+      socketMsg = {
+        detail: 'add',
+        nomination_id: jsonBody.nomination_id,
+        event_id: 1,
+        event_time: new Date,
+        winner_id: 1234,
+        declared: new Date,
+      };
+    }
+
+    const callbacks = this.getCallbacks('winner');
+    _.forEach(callbacks, callback => callback(socketMsg));
   }
 
   private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<any> {
@@ -167,6 +233,20 @@ export class InMemoryDataService implements InMemoryDbService {
       person_id: jsonBody.person_id,
       year: jsonBody.year
     });
+  }
+
+  private existingCategoryForWinner(nomination_id: number): Category {
+    const results = _.filter(this.categories, category => {
+      return !!_.findWhere(category.winner, {nomination_id: nomination_id});
+    });
+    return _.first(results);
+  }
+
+  private categoryForNominee(nomination_id: number): Category {
+    const results = _.filter(this.categories, category => {
+      return !!_.findWhere(category.nominees, {id: nomination_id});
+    });
+    return _.first(results);
   }
 
   private updateVote(requestInfo: RequestInfo, existingVote: Vote) {
