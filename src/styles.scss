@@ -2,3 +2,9 @@
 @import "slate_variables";
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "slate_bootswatch";
+
+h1 {
+  font-weight: bolder;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+}
