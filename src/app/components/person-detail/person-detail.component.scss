@@ -3,7 +3,7 @@
 .categoryCard {
   font-size: 14pt;
   margin-bottom: 10px;
-  border-color: $highlight;
+  border-color: gray;
 }
 
 .categoryTitle {
@@ -21,17 +21,19 @@
 }
 
 .winnerIcon {
-  color: lighten(forestgreen, 20%);
+  color: lighten(forestgreen, 28%);
 }
 
 .loserIcon {
-  color: lighten(tomato, 5%);
+  color: lighten(tomato, 13%);
 }
 
 .winner {
   background-color: fade_out(forestgreen, .75);
+  border-color: lighten(forestgreen, 28%);
 }
 
 .loser {
   background-color: fade_out(tomato, .75);
+  border-color: lighten(tomato, 13%);
 }

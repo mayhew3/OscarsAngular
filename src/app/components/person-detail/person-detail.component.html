@@ -41,7 +41,7 @@
                         class="statusIcon loserIcon">
                     <i class="fas fa-times"></i>
                   </span>
-                  <span>{{voteInfo.category.points}}</span>
+                  <span [ngClass]="winnerScoreClass(voteInfo)">{{voteInfo.category.points}}</span>
                 </div>
               </div>
             </div>

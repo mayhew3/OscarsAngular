@@ -7,6 +7,7 @@ import {Category} from '../../interfaces/Category';
 import {_} from 'underscore';
 import fast_sort from 'fast-sort';
 import {Winner} from '../../interfaces/Winner';
+import {Vote} from '../../interfaces/Vote';
 
 @Component({
   selector: 'osc-person-detail',
@@ -71,6 +72,10 @@ export class PersonDetailComponent implements OnInit {
 
   winnerClass(voteInfo: VoteInfo): string {
     return voteInfo.isWinner ? 'winner' : 'loser';
+  }
+
+  winnerScoreClass(voteInfo: VoteInfo): string {
+    return voteInfo.isWinner ? 'winnerIcon' : 'loserIcon';
   }
 
   stillLoading(): boolean {
