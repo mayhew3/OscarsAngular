@@ -37,6 +37,7 @@ export class PersonDetailComponent implements OnInit {
 
   updateVoteInfos(): void {
     this.categoryService.getCategories().subscribe(categories => {
+      this.voteInfos = [];
       _.forEach(categories, category => {
         const isWinner = this.categoryService.didPersonVoteCorrectlyFor(this.person, category);
         const winners: Winner[] = category.winners;
