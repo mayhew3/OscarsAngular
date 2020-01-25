@@ -1,0 +1,37 @@
+@import "../../../variables";
+
+.categoryCard {
+  font-size: 14pt;
+  margin-bottom: 10px;
+  border-color: $highlight;
+}
+
+.categoryTitle {
+  color: white;
+}
+
+.categoryPoints {
+  font-weight: bold;
+  color: $highlight;
+  text-align: right;
+}
+
+.statusIcon {
+  margin-right: 5px;
+}
+
+.winnerIcon {
+  color: lighten(forestgreen, 20%);
+}
+
+.loserIcon {
+  color: lighten(tomato, 5%);
+}
+
+.winner {
+  background-color: fade_out(forestgreen, .75);
+}
+
+.loser {
+  background-color: fade_out(tomato, .75);
+}
