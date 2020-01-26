@@ -21,6 +21,7 @@ import { WinnerDetailComponent } from './components/winner-detail/winner-detail.
 import { ScoreboardComponent } from './components/scoreboard/scoreboard.component';
 import { HistoryComponent } from './components/history/history.component';
 import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
+import { PersonDetailComponent } from './components/person-detail/person-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
     WinnerMainComponent,
     WinnerDetailComponent,
     ScoreboardComponent,
-    HistoryComponent
+    HistoryComponent,
+    PersonDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -11,13 +11,20 @@
 }
 
 .otherScoreCard {
-  border-color: $highlight;
-  color: $highlight;
+  border-color: darken($highlight, 25%);
+  color: lighten($highlight, 5%);
+  background-color: darken($highlight, 53%);
+}
+
+.loserScoreCard {
+  border-color: darken($silver, 30%);
+  color: $silver;
+  background-color: darken($silver, 62%);
 }
 
 .myScoreCard {
   background-color: darken($personal, 5%);
-  border-color: white;
+  border-color: lighten($personal, 50%);
   color: white;
 }
 
@@ -51,6 +58,11 @@
 .otherScorePoints {
   -webkit-text-fill-color: fade_out($highlight, 0.3); /* Will override color (regardless of order) */
   -webkit-text-stroke-color: $highlight;
+}
+
+.loserScorePoints {
+  -webkit-text-fill-color: fade_out($silver, 0.3); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: $silver;
 }
 
 .odds {
