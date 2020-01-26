@@ -142,6 +142,14 @@ export class ScoreboardComponent implements OnInit {
     return this.gotPointsForLastWinner(this.auth.getPersonNow());
   }
 
+  getPersonName(person: Person): string {
+    if (!!person.middle_name) {
+      return person.first_name + ' ' + person.middle_name.charAt(0);
+    } else {
+      return person.first_name;
+    }
+  }
+
   getMyLastWinnerScoreClass(): string {
     return this.meGotPointsForLastWinner() ? 'footerWinningScore' : 'footerLosingScore';
   }

@@ -44,6 +44,7 @@ exports.Person = sequelize.sequelize.define("person", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   first_name: Sequelize.TEXT,
   last_name: Sequelize.TEXT,
+  middle_name: Sequelize.TEXT,
   role: Sequelize.TEXT,
   email: Sequelize.TEXT
 }, {

@@ -273,27 +273,11 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
-    "last_name": "Seavey",
-    "groups": [1],
-    "id": 29,
-    "first_name": "Mayhew",
-    "email": "mayhew650@gmail.com"
-  },
-  {
-    "role": "user",
     "last_name": "Campbell",
     "groups": [1],
     "id": 31,
     "first_name": "Kathy",
     "email": "katherine.irene.campbell@gmail.com"
-  },
-  {
-    "role": "admin",
-    "last_name": "Seavey",
-    "groups": [1],
-    "id": 32,
-    "first_name": "Mayhew3",
-    "email": "scorpy@gmail.com"
   },
   {
     "role": "user",
@@ -318,5 +302,23 @@ export const MockPersonList: Person[] = [
     "id": 14,
     "first_name": "Ira",
     "email": "irafaygames@gmail.com"
+  },
+  {
+    "role": "admin",
+    "last_name": "Seavey",
+    "groups": [1],
+    "id": 32,
+    "middle_name": "Campbell",
+    "first_name": "Mayhew",
+    "email": "scorpy@gmail.com"
+  },
+  {
+    "role": "user",
+    "last_name": "Seavey",
+    "groups": [1],
+    "id": 29,
+    "middle_name": "Duncan",
+    "first_name": "Mayhew",
+    "email": "mayhew650@gmail.com"
   }
 ];

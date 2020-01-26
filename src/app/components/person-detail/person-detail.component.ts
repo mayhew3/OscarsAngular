@@ -36,6 +36,14 @@ export class PersonDetailComponent implements OnInit {
     });
   }
 
+  getPersonName(person: Person): string {
+    if (!!person.middle_name) {
+      return person.first_name + ' ' + person.middle_name.charAt(0) + ' ' + person.last_name;
+    } else {
+      return person.first_name + ' ' + person.last_name;
+    }
+  }
+
   updateVoteInfos(): void {
     this.categoryService.getCategories().subscribe(categories => {
       this.voteInfos = [];
