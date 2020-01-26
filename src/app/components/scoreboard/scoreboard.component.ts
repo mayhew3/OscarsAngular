@@ -166,16 +166,28 @@ export class ScoreboardComponent implements OnInit {
     return this.personService.stillLoading();
   }
 
+  anyoneIsHigherInRankings(person: Person): boolean {
+    return this.persons.filter(otherPerson => otherPerson.score > person.score).length > 0;
+  }
+
   scorecardClass(person: Person): string {
     if (this.auth.isMe(person)) {
       return 'myScoreCard';
+    } else if (this.anyoneIsHigherInRankings(person)) {
+      return 'loserScoreCard';
     } else {
       return 'otherScoreCard';
     }
   }
 
   scoreNumberClass(person: Person): string {
-    return this.auth.isMe(person) ? 'myScorePoints' : 'otherScorePoints';
+    if (this.auth.isMe(person)) {
+      return 'myScorePoints';
+    } else if (this.anyoneIsHigherInRankings(person)) {
+      return 'loserScorePoints';
+    } else {
+      return 'otherScorePoints';
+    }
   }
 
   public getVoters(): Person[] {
