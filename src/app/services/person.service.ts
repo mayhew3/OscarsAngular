@@ -34,6 +34,10 @@ export class PersonService {
     });
   }
 
+  getPersonsForGroupNow(group_id: number): Person[] {
+    return _.filter(this.cache, person => person.groups.includes(group_id));
+  }
+
   getPerson(id: number): Observable<Person> {
     return this.getDataWithCacheUpdate<Person>(() => {
       return this.getPersonFromCache(id);

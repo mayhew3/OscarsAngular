@@ -143,11 +143,32 @@ export class ScoreboardComponent implements OnInit {
   }
 
   getPersonName(person: Person): string {
-    if (!!person.middle_name) {
-      return person.first_name + ' ' + person.middle_name.charAt(0);
+    if (this.hasDuplicateFirstName(person)) {
+      if (this.hasDuplicateFirstAndLastName(person)) {
+        if (!!person.middle_name) {
+          return person.first_name + ' ' + person.middle_name.charAt(0);
+        } else {
+          return person.first_name + ' ' + person.last_name.charAt(0);
+        }
+      } else {
+        return person.first_name + ' ' + person.last_name.charAt(0);
+      }
     } else {
       return person.first_name;
     }
+  }
+
+  hasDuplicateFirstName(person: Person): boolean {
+    const matching = _.filter(this.persons, otherPerson => otherPerson.id !== person.id &&
+      otherPerson.first_name === person.first_name);
+    return matching.length > 0;
+  }
+
+  hasDuplicateFirstAndLastName(person: Person): boolean {
+    const matching = _.filter(this.persons, otherPerson => otherPerson.id !== person.id &&
+      otherPerson.first_name === person.first_name &&
+      otherPerson.last_name === person.last_name);
+    return matching.length > 0;
   }
 
   getMyLastWinnerScoreClass(): string {
@@ -159,8 +180,6 @@ export class ScoreboardComponent implements OnInit {
   }
 
   fastSortPersons(): void {
-    // noinspection TypeScriptValidateJSTypes
-    this.persons = _.filter(this.persons, person => person.num_votes);
     // noinspection JSUnusedGlobalSymbols
     fast_sort(this.persons)
       .by([
@@ -199,6 +218,6 @@ export class ScoreboardComponent implements OnInit {
   }
 
   public getVoters(): Person[] {
-    return this.persons;
+    return _.filter(this.persons, person => person.num_votes);
   }
 }
