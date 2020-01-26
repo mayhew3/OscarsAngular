@@ -147,7 +147,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   gotPointsForLastWinner(person: Person): boolean {
-    return this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory);
+    return !!this.latestCategory && this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory);
   }
 
   fastSortPersons(): void {

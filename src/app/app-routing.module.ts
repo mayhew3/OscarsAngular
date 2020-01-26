@@ -10,6 +10,7 @@ import {WinnerMainComponent} from './components/winner-main/winner-main.componen
 import {WinnerDetailComponent} from './components/winner-detail/winner-detail.component';
 import {ScoreboardComponent} from './components/scoreboard/scoreboard.component';
 import {HistoryComponent} from './components/history/history.component';
+import {PersonDetailComponent} from './components/person-detail/person-detail.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'winners/:category_id', component: WinnerDetailComponent },
   { path: 'scores', component: ScoreboardComponent },
   { path: 'history', component: HistoryComponent },
+  { path: 'person/:person_id', component: PersonDetailComponent },
 ];
 
 @NgModule({

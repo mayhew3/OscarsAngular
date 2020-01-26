@@ -62,7 +62,8 @@
       <div class="col-12 col-sm-6 col-lg-4"
            *ngFor="let person of getVoters()">
         <div class="card scoreCard"
-             [ngClass]="scorecardClass(person)">
+             [ngClass]="scorecardClass(person)"
+             [routerLink]="['/person', person.id]">
           <div class="card-body py-0 px-3">
             <div class="row no-gutters mainRow">
               <div class="col-5">
