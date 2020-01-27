@@ -11,6 +11,7 @@ import {Category} from '../../interfaces/Category';
 import {Winner} from '../../interfaces/Winner';
 import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
+import {OddsFilter} from '../odds.filter';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -20,6 +21,7 @@ import {Nominee} from '../../interfaces/Nominee';
 export class ScoreboardComponent implements OnInit {
   public persons: Person[];
   public latestCategory: Category;
+  private me: Person;
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
@@ -31,10 +33,13 @@ export class ScoreboardComponent implements OnInit {
   ngOnInit() {
     this.personService.getPersonsForGroup(1).subscribe(persons => {
       this.persons = persons;
+      this.auth.getPerson().subscribe(person => {
+        this.me = person;
 
-      this.updateScoreboard();
-      this.categoryService.subscribeToWinnerEvents().subscribe(() => {
         this.updateScoreboard();
+        this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+          this.updateScoreboard();
+        });
       });
     });
   }
@@ -139,7 +144,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   meGotPointsForLastWinner(): boolean {
-    return this.gotPointsForLastWinner(this.auth.getPersonNow());
+    return this.gotPointsForLastWinner(this.me);
   }
 
   getPersonName(person: Person): string {
@@ -171,7 +176,7 @@ export class ScoreboardComponent implements OnInit {
     fast_sort(this.persons)
       .by([
         { desc: person => person.score},
-        { desc: person => this.auth.isMe(person)},
+        { desc: person => this.isMe(person)},
         { asc: person => person.first_name},
       ]);
   }
@@ -185,7 +190,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   scorecardClass(person: Person): string {
-    if (this.auth.isMe(person)) {
+    if (this.isMe(person)) {
       return 'myScoreCard';
     } else if (this.anyoneIsHigherInRankings(person)) {
       return 'loserScoreCard';
@@ -195,7 +200,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   scoreNumberClass(person: Person): string {
-    if (this.auth.isMe(person)) {
+    if (this.isMe(person)) {
       return 'myScorePoints';
     } else if (this.anyoneIsHigherInRankings(person)) {
       return 'loserScorePoints';
@@ -204,7 +209,18 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 
+  isMe(person: Person): boolean {
+    return person.id === this.me.id;
+  }
+
   public getVoters(): Person[] {
     return _.filter(this.persons, person => person.num_votes);
+  }
+
+  /* FILTER OPTIONS */
+
+  changeOddsOption(oddsFilter: OddsFilter): void {
+    this.me.odds_filter = oddsFilter;
+    this.personService.updatePerson(this.me).subscribe();
   }
 }

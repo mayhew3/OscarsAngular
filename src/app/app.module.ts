@@ -22,6 +22,7 @@ import { ScoreboardComponent } from './components/scoreboard/scoreboard.componen
 import { HistoryComponent } from './components/history/history.component';
 import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
 import { PersonDetailComponent } from './components/person-detail/person-detail.component';
+import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,9 @@ import { PersonDetailComponent } from './components/person-detail/person-detail.
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
+    environment.httpModules,
+    NgbDropdownModule,
+    // use in-memory for CLI environment, regular http for prod and local server
   ],
   providers: [AuthService, SystemVarsService, environment.socketModule, InMemoryCallbacksService],
   bootstrap: [AppComponent]

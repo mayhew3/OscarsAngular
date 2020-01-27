@@ -46,9 +46,21 @@
 <div class="scoreboard-body">
   <div class="container">
 
-    <div class="row">
-      <div class="col-12">
+    <div class="row no-gutters">
+      <div class="col-9">
         <h1>Live Scoring</h1>
+      </div>
+      <div class="col-3 text-right">
+        <div ngbDropdown placement="bottom-right" class="d-inline-block">
+          <button class="btn btn-small btn-primary" ngbDropdownToggle>
+            <i class="fas fa-filter"></i>
+          </button>
+          <div ngbDropdownMenu>
+            <button ngbDropdownItem>Show All</button>
+            <button ngbDropdownItem>Hide Elimination</button>
+            <button ngbDropdownItem>Hide All</button>
+          </div>
+        </div>
       </div>
     </div>
 

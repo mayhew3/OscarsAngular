@@ -1,9 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {_} from 'underscore';
 import {Person} from '../interfaces/Person';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -32,10 +36,6 @@ export class PersonService {
     return this.getDataWithCacheUpdate<Person[]>(() => {
       return _.filter(this.cache, person => person.groups.includes(group_id));
     });
-  }
-
-  getPersonsForGroupNow(group_id: number): Person[] {
-    return _.filter(this.cache, person => person.groups.includes(group_id));
   }
 
   getPerson(id: number): Observable<Person> {
@@ -106,6 +106,13 @@ export class PersonService {
     } else {
       return of(this.cache);
     }
+  }
+
+  updatePerson(person: Person): Observable<any> {
+    return this.http.put(this.personsUrl, person, httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('updatePerson', person))
+      );
   }
 
   /**
