@@ -209,6 +209,22 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 
+  getOddsOptions(): string[] {
+    return Object.keys(OddsFilter);
+  }
+
+  getDisplayValueOf(oddsOption: string): string {
+    return OddsFilter[oddsOption];
+  }
+
+  isOddsOptionSelected(oddsOption: string): boolean {
+    return this.me.odds_filter === oddsOption;
+  }
+
+  getOddsFilterClass(oddsOption: string): string {
+    return this.isOddsOptionSelected(oddsOption) ? 'selectedOddsFilter' : '';
+  }
+
   isMe(person: Person): boolean {
     return person.id === this.me.id;
   }
@@ -219,8 +235,8 @@ export class ScoreboardComponent implements OnInit {
 
   /* FILTER OPTIONS */
 
-  changeOddsOption(oddsFilter: OddsFilter): void {
-    this.me.odds_filter = oddsFilter;
+  changeOddsOption(oddsKey: string): void {
+    this.me.odds_filter = oddsKey;
     this.personService.updatePerson(this.me).subscribe();
   }
 }

@@ -52,13 +52,16 @@
       </div>
       <div class="col-3 text-right">
         <div ngbDropdown placement="bottom-right" class="d-inline-block">
-          <button class="btn btn-small btn-primary" ngbDropdownToggle>
+          <button class="btn btn-small btn-primary" id="oddsFilterDropdown" ngbDropdownToggle>
             <i class="fas fa-filter"></i>
           </button>
-          <div ngbDropdownMenu>
-            <button ngbDropdownItem>Show All</button>
-            <button ngbDropdownItem>Hide Elimination</button>
-            <button ngbDropdownItem>Hide All</button>
+          <div ngbDropdownMenu aria-labelledby="oddsFilterDropdown">
+            <button *ngFor="let oddsOption of getOddsOptions()"
+                    (click)="changeOddsOption(oddsOption)"
+                    [ngClass]="getOddsFilterClass(oddsOption)"
+                    ngbDropdownItem>
+              {{getDisplayValueOf(oddsOption)}}
+            </button>
           </div>
         </div>
       </div>

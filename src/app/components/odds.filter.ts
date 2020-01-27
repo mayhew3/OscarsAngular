@@ -1,5 +1,5 @@
 export enum OddsFilter {
-  ShowAll = 'Show All',
-  HideElimination = 'Hide Elimination',
-  HideAll = 'Hide All'
+  show = 'Show Odds',
+  hideElimination = 'Hide Elimination',
+  hide = 'Hide Odds'
 }
