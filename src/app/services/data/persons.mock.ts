@@ -3,6 +3,7 @@ import {Person} from '../../interfaces/Person';
 export const MockPersonList: Person[] = [
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Gunning",
     "groups": [2],
     "id": 1,
@@ -11,6 +12,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Aroneau",
     "groups": [2],
     "id": 2,
@@ -19,6 +21,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Velasquez",
     "groups": [1],
     "id": 3,
@@ -27,6 +30,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Barb",
     "groups": [
       2,
@@ -38,6 +42,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Shiue",
     "groups": [1],
     "id": 8,
@@ -46,6 +51,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "McCrea",
     "groups": [1],
     "id": 9,
@@ -54,6 +60,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Pearson",
     "groups": [1],
     "id": 10,
@@ -62,6 +69,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "McCrea",
     "groups": [1],
     "id": 11,
@@ -70,6 +78,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Prevas",
     "groups": [1],
     "id": 12,
@@ -78,6 +87,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Howe",
     "groups": [1],
     "id": 13,
@@ -86,6 +96,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Greaves",
     "groups": [1],
     "id": 15,
@@ -94,6 +105,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Gaddis",
     "groups": [2],
     "id": 17,
@@ -102,6 +114,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "",
     "groups": [2],
     "id": 19,
@@ -110,6 +123,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Goska",
     "groups": [2],
     "id": 20,
@@ -118,6 +132,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Austin",
     "groups": [1],
     "id": 21,
@@ -126,6 +141,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Basilico",
     "groups": [1],
     "id": 22,
@@ -134,6 +150,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Seavey",
     "groups": [
       1,
@@ -145,6 +162,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Dai",
     "groups": [1],
     "id": 25,
@@ -153,6 +171,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Jayapalan",
     "groups": [1],
     "id": 26,
@@ -161,6 +180,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Pearson",
     "groups": [1],
     "id": 28,
@@ -169,6 +189,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "O'Connell",
     "groups": [2],
     "id": 30,
@@ -177,6 +198,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Mongeon",
     "groups": [2],
     "id": 33,
@@ -185,6 +207,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Ghiocel",
     "groups": [1],
     "id": 35,
@@ -193,6 +216,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Maclay",
     "groups": [1],
     "id": 36,
@@ -201,6 +225,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Maclay",
     "groups": [1],
     "id": 37,
@@ -209,6 +234,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Kaplan",
     "groups": [1],
     "id": 38,
@@ -217,6 +243,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Dai",
     "groups": [1],
     "id": 39,
@@ -225,6 +252,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Steinberg",
     "groups": [2],
     "id": 40,
@@ -233,6 +261,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Park",
     "groups": [1],
     "id": 41,
@@ -241,6 +270,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "",
     "groups": [2],
     "id": 42,
@@ -249,6 +279,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Tao",
     "groups": [],
     "id": 44,
@@ -257,6 +288,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Fleig",
     "groups": [],
     "id": 45,
@@ -265,6 +297,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Darga",
     "groups": [],
     "id": 46,
@@ -273,6 +306,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Campbell",
     "groups": [1],
     "id": 31,
@@ -281,6 +315,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "LastName",
     "groups": [1],
     "id": 18,
@@ -289,6 +324,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Pellecchia",
     "groups": [1],
     "id": 16,
@@ -297,6 +333,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Fay",
     "groups": [1],
     "id": 14,
@@ -305,6 +342,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "admin",
+    "odds_filter": "show",
     "last_name": "Seavey",
     "groups": [1],
     "id": 32,
@@ -314,6 +352,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Seavey",
     "groups": [1],
     "id": 29,
