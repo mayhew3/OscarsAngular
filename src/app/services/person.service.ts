@@ -63,6 +63,19 @@ export class PersonService {
     return _.findWhere(this.cache, {email: email});
   }
 
+  hasDuplicateFirstName(person: Person): boolean {
+    const matching = _.filter(this.cache, otherPerson => otherPerson.id !== person.id &&
+      otherPerson.first_name === person.first_name);
+    return matching.length > 0;
+  }
+
+  hasDuplicateFirstAndLastName(person: Person): boolean {
+    const matching = _.filter(this.cache, otherPerson => otherPerson.id !== person.id &&
+      otherPerson.first_name === person.first_name &&
+      otherPerson.last_name === person.last_name);
+    return matching.length > 0;
+  }
+
 
   // DATA HELPERS
 

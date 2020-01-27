@@ -143,8 +143,8 @@ export class ScoreboardComponent implements OnInit {
   }
 
   getPersonName(person: Person): string {
-    if (this.hasDuplicateFirstName(person)) {
-      if (this.hasDuplicateFirstAndLastName(person)) {
+    if (this.personService.hasDuplicateFirstName(person)) {
+      if (this.personService.hasDuplicateFirstAndLastName(person)) {
         if (!!person.middle_name) {
           return person.first_name + ' ' + person.middle_name.charAt(0);
         } else {
@@ -156,19 +156,6 @@ export class ScoreboardComponent implements OnInit {
     } else {
       return person.first_name;
     }
-  }
-
-  hasDuplicateFirstName(person: Person): boolean {
-    const matching = _.filter(this.persons, otherPerson => otherPerson.id !== person.id &&
-      otherPerson.first_name === person.first_name);
-    return matching.length > 0;
-  }
-
-  hasDuplicateFirstAndLastName(person: Person): boolean {
-    const matching = _.filter(this.persons, otherPerson => otherPerson.id !== person.id &&
-      otherPerson.first_name === person.first_name &&
-      otherPerson.last_name === person.last_name);
-    return matching.length > 0;
   }
 
   getMyLastWinnerScoreClass(): string {
