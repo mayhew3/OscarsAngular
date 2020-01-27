@@ -25,7 +25,8 @@ module.exports = function(app) {
     .get(odds.getMostRecentOddsBundle);
 
   router.route('/persons')
-    .get(persons.getPersons);
+    .get(persons.getPersons)
+    .put(persons.updatePerson);
 
   router.route('/votes')
     .get(votes.getVotes)

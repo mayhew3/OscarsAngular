@@ -52,7 +52,10 @@
       </div>
       <div class="col-3 text-right">
         <div ngbDropdown placement="bottom-right" class="d-inline-block">
-          <button class="btn btn-small btn-primary" id="oddsFilterDropdown" ngbDropdownToggle>
+          <button class="btn btn-small btn-primary"
+                  [disabled]="updatingOddsFilter"
+                  id="oddsFilterDropdown"
+                  ngbDropdownToggle>
             <i class="fas fa-filter"></i>
           </button>
           <div ngbDropdownMenu aria-labelledby="oddsFilterDropdown">
@@ -85,13 +88,15 @@
                 <span>{{getPersonName(person)}}</span>
               </div>
               <div class="col-4">
-                <span class="odds oddsSubtitle">Odds</span>
-                <span class="odds oddsValue">{{getOddsForPerson(person)}}</span>
-                <span *ngIf="showOddsChange(person)"
-                      class="oddsDiff"
-                      [ngClass]="oddsDirectionClass(person)">
+                <div *ngIf="shouldShowOdds()">
+                  <span class="odds oddsSubtitle">Odds</span>
+                  <span class="odds oddsValue">{{getOddsForPerson(person)}}</span>
+                  <span *ngIf="showOddsChange(person)"
+                        class="oddsDiff"
+                        [ngClass]="oddsDirectionClass(person)">
                   {{oddsDirectionFormatted(person)}}
                 </span>
+                </div>
               </div>
               <div class="col-3" style="justify-items: right">
                 <div class="row no-gutters">

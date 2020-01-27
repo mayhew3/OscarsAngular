@@ -22,6 +22,7 @@ export class ScoreboardComponent implements OnInit {
   public persons: Person[];
   public latestCategory: Category;
   private me: Person;
+  public updatingOddsFilter = false;
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
@@ -48,6 +49,10 @@ export class ScoreboardComponent implements OnInit {
     return this.oddsService.getOdds();
   }
 
+  shouldHideElimination(): boolean {
+    return this.me.odds_filter === 'hideElimination';
+  }
+
   getOddsForPerson(person: Person): string {
     const odds = this.getOdds();
     try {
@@ -58,13 +63,19 @@ export class ScoreboardComponent implements OnInit {
         }
         const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
         if (!oddsForPerson || !oddsForPerson.odds) {
-          return '0%';
+          if (this.shouldHideElimination()) {
+            return '<1%';
+          } else {
+            return '0%';
+          }
         }
         const oddsValue = parseFloat(oddsForPerson.odds) * 100;
         if (!oddsValue) {
           return 'err';
-        } else if (oddsValue < 0.1) {
-          return '<0.1%';
+        } else if (oddsValue < 1.0) {
+          return '<1%';
+        } else if (oddsValue > 99.0) {
+          return '>99%';
         } else if (oddsValue > 10) {
           return oddsValue.toFixed(0) + '%';
         } else {
@@ -97,6 +108,10 @@ export class ScoreboardComponent implements OnInit {
   showOddsChange(person: Person): boolean {
     const diff = this.oddsDirection(person);
     return Math.abs(diff) >= 1;
+  }
+
+  shouldShowOdds(): boolean {
+    return this.me.odds_filter !== 'hide';
   }
 
   oddsDirectionFormatted(person: Person): string {
@@ -237,6 +252,9 @@ export class ScoreboardComponent implements OnInit {
 
   changeOddsOption(oddsKey: string): void {
     this.me.odds_filter = oddsKey;
-    this.personService.updatePerson(this.me).subscribe();
+    this.updatingOddsFilter = true;
+    this.personService.updatePerson(this.me).subscribe(() => {
+      this.updatingOddsFilter = false;
+    });
   }
 }
