@@ -34,6 +34,10 @@ export class PersonService {
     });
   }
 
+  getPersonsForGroupNow(group_id: number): Person[] {
+    return _.filter(this.cache, person => person.groups.includes(group_id));
+  }
+
   getPerson(id: number): Observable<Person> {
     return this.getDataWithCacheUpdate<Person>(() => {
       return this.getPersonFromCache(id);
@@ -57,6 +61,19 @@ export class PersonService {
 
   private getPersonWithEmailFromCache(email: string): Person {
     return _.findWhere(this.cache, {email: email});
+  }
+
+  hasDuplicateFirstName(person: Person): boolean {
+    const matching = _.filter(this.cache, otherPerson => otherPerson.id !== person.id &&
+      otherPerson.first_name === person.first_name);
+    return matching.length > 0;
+  }
+
+  hasDuplicateFirstAndLastName(person: Person): boolean {
+    const matching = _.filter(this.cache, otherPerson => otherPerson.id !== person.id &&
+      otherPerson.first_name === person.first_name &&
+      otherPerson.last_name === person.last_name);
+    return matching.length > 0;
   }
 
 
