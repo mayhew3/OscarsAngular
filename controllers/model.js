@@ -103,6 +103,7 @@ exports.OddsResult = sequelize.sequelize.define("odds_result", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   odds: Sequelize.INTEGER,
   person_id: Sequelize.INTEGER,
+  clinched: Sequelize.BOOLEAN,
   odds_execution_id: Sequelize.INTEGER
 }, {
   freezeTableName: true,

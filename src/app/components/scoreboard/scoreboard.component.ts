@@ -74,6 +74,9 @@ export class ScoreboardComponent implements OnInit {
         if (!oddsForPerson || !oddsForPerson.odds) {
           return '<1%';
         }
+        if (!!oddsForPerson.clinched && !this.shouldHideElimination()) {
+          return '100%';
+        }
         const oddsValue = parseFloat(oddsForPerson.odds) * 100;
         if (!oddsValue) {
           return 'err';
