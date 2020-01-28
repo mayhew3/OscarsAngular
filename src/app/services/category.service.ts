@@ -156,6 +156,23 @@ export class CategoryService {
     return this.getNomineeFromCategory(category, winner.nomination_id);
   }
 
+  // CATEGORY LIST FORMATTING
+
+  getCategoryName(category: Category): string {
+    const parts = category.name.split(' (');
+    return parts[0];
+  }
+
+  getCategorySubtitle(category: Category): string {
+    const parts = category.name.split(' (');
+    if (parts.length > 1) {
+      return parts[1].replace(')', '');
+    } else {
+      return undefined;
+    }
+  }
+
+
   // SCOREBOARD
 
   didPersonVoteCorrectlyFor(person: Person, category: Category): boolean {

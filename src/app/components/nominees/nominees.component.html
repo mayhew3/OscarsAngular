@@ -1,13 +1,18 @@
-<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between">
+<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between header">
   <div class="navbar-text">
-    <h2>
-      {{getHeaderText()}}
-    </h2>
+    <div class="row">
+      <div class="col-12 headerMain">
+        {{getHeaderText()}}
+      </div>
+    </div>
+    <div class="row" *ngIf="!!getHeaderSubtitle()">
+      <div class="col-12 headerSubtitle">
+        {{getHeaderSubtitle()}}
+      </div>
+    </div>
   </div>
-  <div class="navbar-text">
-    <h2>
-      {{getHeaderPts()}}
-    </h2>
+  <div class="navbar-text headerScore">
+    {{getHeaderPts()}}
   </div>
 </nav>
 

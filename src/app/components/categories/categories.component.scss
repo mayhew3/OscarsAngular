@@ -10,6 +10,13 @@
   color: white;
 }
 
+.categorySubtitle {
+  font-size: 13pt;
+  font-weight: bold;
+  color: fade_out(white, .4);
+  line-height: 120%;
+}
+
 .categoryPoints {
   font-weight: bold;
   color: $highlight;

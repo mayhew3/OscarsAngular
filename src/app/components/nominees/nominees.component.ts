@@ -117,7 +117,11 @@ export class NomineesComponent implements OnInit {
   }
 
   getHeaderText(): string {
-    return this.category ? this.category.name : '';
+    return this.category ? this.categoryService.getCategoryName(this.category) : '';
+  }
+
+  getHeaderSubtitle(): string {
+    return this.category ? this.categoryService.getCategorySubtitle(this.category) : '';
   }
 
   getHeaderPts(): string {
