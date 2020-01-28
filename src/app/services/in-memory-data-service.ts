@@ -124,7 +124,7 @@ export class InMemoryDataService implements InMemoryDbService {
     let socketMsg;
     if (!!categoryForExistingWinner) {
       const existingWinner = _.findWhere(categoryForExistingWinner.winners, {nomination_id: jsonBody.nomination_id});
-      categoryForExistingWinner.winners = _.without(this.winners, existingWinner);
+      categoryForExistingWinner.winners = _.without(categoryForExistingWinner.winners, existingWinner);
       socketMsg = {
         detail: 'delete',
         nomination_id: jsonBody.nomination_id,
