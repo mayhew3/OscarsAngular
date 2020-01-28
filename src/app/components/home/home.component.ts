@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  getOscarYear(): number {
+    return this.systemVarsService.getCurrentYear();
+  }
+
   isLoggedOut(): boolean {
     return !this.auth.isLoggedIn();
   }
