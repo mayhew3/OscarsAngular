@@ -54,6 +54,11 @@ export class ScoreboardComponent implements OnInit {
   }
 
   getOddsForPerson(person: Person): string {
+    const isEliminated = this.categoryService.isEliminated(person, this.persons);
+    if (isEliminated && !this.shouldHideElimination()) {
+      return '0%';
+    }
+
     const odds = this.getOdds();
     try {
       if (odds) {
@@ -63,11 +68,7 @@ export class ScoreboardComponent implements OnInit {
         }
         const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
         if (!oddsForPerson || !oddsForPerson.odds) {
-          if (this.shouldHideElimination()) {
-            return '<1%';
-          } else {
-            return '0%';
-          }
+          return '<1%';
         }
         const oddsValue = parseFloat(oddsForPerson.odds) * 100;
         if (!oddsValue) {

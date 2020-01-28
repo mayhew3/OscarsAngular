@@ -14,6 +14,8 @@ import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import fast_sort from 'fast-sort';
+import {Vote} from '../interfaces/Vote';
+import {PersonService} from './person.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -34,7 +36,8 @@ export class CategoryService {
               private votesService: VotesService,
               private eventsService: EventsService,
               private oddsService: OddsService,
-              private socket: SocketService) {
+              private socket: SocketService,
+              private personService: PersonService) {
     this.cache = [];
     this.winnerListeners = [];
   }
@@ -200,6 +203,37 @@ export class CategoryService {
         observer.next();
       });
     });
+  }
+
+  maxPosition(person: Person, persons: Person[]): number {
+    const categoriesWithoutWinners = _.filter(this.cache, category => !category.winners || category.winners.length === 0);
+    const myVotes = _.map(categoriesWithoutWinners, category => {
+      const myVotesForCategory = this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category);
+      return myVotesForCategory.length === 0 ? undefined : myVotesForCategory[0];
+    });
+    const finalScores = _.map(persons, otherPerson => {
+      const theirVotes = this.votesService.getVotesForCurrentYearAndPerson(otherPerson);
+      const theirVotesThatMatch = _.filter(theirVotes, vote => {
+        const myVote = _.findWhere(myVotes, {category_id: vote.category_id});
+        return !!myVote && myVote.nomination_id === vote.nomination_id;
+      });
+      const theirScore = _.reduce(theirVotesThatMatch, (memo, theirVote) => {
+        const category = this.getCategoryFromCache(theirVote.category_id);
+        return !!category ? memo + category.points : memo;
+      }, 0);
+      return {
+        person_id: otherPerson.id,
+        score: theirScore + otherPerson.score
+      };
+    });
+
+    const myScore = _.findWhere(finalScores, {person_id: person.id});
+    const scoresBetterThanMine = _.filter(finalScores, otherScore => otherScore.score > myScore.score);
+    return scoresBetterThanMine.length + 1;
+  }
+
+  isEliminated(person: Person, persons: Person[]): boolean {
+    return this.maxPosition(person, persons) > 1;
   }
 
   // LOADING

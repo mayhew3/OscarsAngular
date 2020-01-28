@@ -48,6 +48,13 @@ export class VotesService {
     return _.where(this.cache, {category_id: category.id});
   }
 
+  getVotesForCurrentYearAndPerson(person: Person): Vote[] {
+    return _.where(this.cache, {person_id: person.id});
+  }
+
+  getVotesForCurrentYearAndPersonAndCategory(person: Person, category: Category): Vote[] {
+    return _.where(this.cache, {person_id: person.id, category_id: category.id});
+  }
 
   private maybeUpdateCache(year: number): Observable<Vote[]> {
     const params = new HttpParams()
