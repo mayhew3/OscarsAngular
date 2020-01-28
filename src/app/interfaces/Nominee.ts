@@ -2,6 +2,7 @@ import {Category} from './Category';
 
 export class Nominee {
   static singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
+  static songCategories = ['Music (Original Song)'];
 
   id: number;
   nominee: string;
@@ -16,6 +17,10 @@ export class Nominee {
 
   static isSingleLineCategory(categoryName: string): boolean {
     return Nominee.singleLineCategories.includes(categoryName);
+  }
+
+  static isSongCategory(categoryName: string): boolean {
+    return Nominee.songCategories.includes(categoryName);
   }
 
   static getSubtitleText(category: Category, nominee: Nominee): string {

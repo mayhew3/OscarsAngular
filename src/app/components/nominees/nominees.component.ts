@@ -146,8 +146,20 @@ export class NomineesComponent implements OnInit {
     return Nominee.getSubtitleText(this.category, nominee);
   }
 
+  getSongSubtitles(nominee: Nominee): string[] {
+    return nominee.detail.split('; ');
+  }
+
   isVoted(nominee: Nominee): boolean {
     return this.votedNominee && this.votedNominee.id === nominee.id;
+  }
+
+  showSubtitleText(nominee: Nominee): boolean {
+    return !!nominee.context && !Nominee.isSongCategory(this.category.name);
+  }
+
+  showSongSubtitle(nominee: Nominee): boolean {
+    return !!nominee.context && Nominee.isSongCategory(this.category.name);
   }
 
   getVotedClass(nominee: Nominee): string {
