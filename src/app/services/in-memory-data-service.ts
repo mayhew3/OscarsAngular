@@ -258,7 +258,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private existingCategoryForWinner(nomination_id: number): Category {
     const results = _.filter(this.categories, category => {
-      return !!_.findWhere(category.winner, {nomination_id: nomination_id});
+      return !!_.findWhere(category.winners, {nomination_id: nomination_id});
     });
     return _.first(results);
   }
