@@ -5,7 +5,8 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav navbar-left">
-        <li class="nav-item">
+        <li class="nav-item"
+            *ngIf="auth.isUser()">
           <a class="nav-link" routerLink="/">
             <span style="font-size: 1em; color: LightGreen;"
                   *ngIf="showHealthySocketStatus() && socketConnected()">

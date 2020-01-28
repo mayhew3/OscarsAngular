@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  isLoggedOut(): boolean {
+    return !this.auth.isLoggedIn();
+  }
+
   stillLoading(): boolean {
     return this.auth.stillLoading() || this.systemVarsService.stillLoading();
   }

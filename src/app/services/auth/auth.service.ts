@@ -27,6 +27,8 @@ export class AuthService {
   private _loginFailed = false;
   refreshSubscription: any;
 
+  private authenticating = false;
+
   private personObserver: Subscriber<Person>;
 
   auth0 = new auth0.WebAuth({
@@ -68,7 +70,9 @@ export class AuthService {
   }
 
   public handleAuthentication(): void {
+    this.authenticating = true;
     this.auth0.parseHash((err, authResult) => {
+      this.authenticating = false;
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.localLogin(authResult);
         this.router.navigate(['/']);
@@ -88,8 +92,12 @@ export class AuthService {
     return this.isUser() && 'admin' === this._person.role;
   }
 
+  public isLoggedIn(): boolean {
+    return !!localStorage.getItem('isLoggedIn');
+  }
+
   public stillLoading(): boolean {
-    return _.isUndefined(this._person) && !this._loginFailed;
+    return this.authenticating || (_.isUndefined(this._person) && !this._loginFailed);
   }
 
   public isUser(): boolean {
