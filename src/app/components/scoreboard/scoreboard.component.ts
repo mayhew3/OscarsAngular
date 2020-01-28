@@ -49,6 +49,10 @@ export class ScoreboardComponent implements OnInit {
     return this.oddsService.getOdds();
   }
 
+  shouldShowEliminationOdds(): boolean {
+    return this.me.odds_filter === 'show';
+  }
+
   shouldHideElimination(): boolean {
     return this.me.odds_filter === 'hideElimination';
   }
@@ -206,8 +210,11 @@ export class ScoreboardComponent implements OnInit {
   }
 
   scorecardClass(person: Person): string {
+    const isEliminated = this.categoryService.isEliminated(person, this.persons);
     if (this.isMe(person)) {
       return 'myScoreCard';
+    } else if (isEliminated && this.shouldShowEliminationOdds()) {
+      return 'eliminatedScoreCard';
     } else if (this.anyoneIsHigherInRankings(person)) {
       return 'loserScoreCard';
     } else {
@@ -216,8 +223,11 @@ export class ScoreboardComponent implements OnInit {
   }
 
   scoreNumberClass(person: Person): string {
+    const isEliminated = this.categoryService.isEliminated(person, this.persons);
     if (this.isMe(person)) {
       return 'myScorePoints';
+    } else if (isEliminated && this.shouldShowEliminationOdds()) {
+      return 'eliminatedScorePoints';
     } else if (this.anyoneIsHigherInRankings(person)) {
       return 'loserScorePoints';
     } else {

@@ -97,6 +97,15 @@ export const MockPersonList: Person[] = [
   {
     "role": "user",
     "odds_filter": "show",
+    "last_name": "Fay",
+    "groups": [1],
+    "id": 14,
+    "first_name": "Ira",
+    "email": "irafaygames@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
     "last_name": "Greaves",
     "groups": [1],
     "id": 15,
@@ -106,11 +115,29 @@ export const MockPersonList: Person[] = [
   {
     "role": "user",
     "odds_filter": "show",
+    "last_name": "Pellecchia",
+    "groups": [1],
+    "id": 16,
+    "first_name": "Jenn",
+    "email": "hamcakes@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
     "last_name": "Gaddis",
     "groups": [2],
     "id": 17,
     "first_name": "Jess",
     "email": "jgaddis00@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "LastName",
+    "groups": [1],
+    "id": 18,
+    "first_name": "Jim",
+    "email": "commander.boffo@gmail.com"
   },
   {
     "role": "user",
@@ -190,11 +217,40 @@ export const MockPersonList: Person[] = [
   {
     "role": "user",
     "odds_filter": "show",
+    "last_name": "Seavey",
+    "groups": [1],
+    "id": 29,
+    "middle_name": "Duncan",
+    "first_name": "Mayhew",
+    "email": "mayhew650@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
     "last_name": "O'Connell",
     "groups": [2],
     "id": 30,
     "first_name": "Meghan",
     "email": "meghanaoc@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Campbell",
+    "groups": [1],
+    "id": 31,
+    "first_name": "Kathy",
+    "email": "katherine.irene.campbell@gmail.com"
+  },
+  {
+    "role": "admin",
+    "odds_filter": "show",
+    "last_name": "Seavey",
+    "groups": [1],
+    "id": 32,
+    "middle_name": "Campbell",
+    "first_name": "Mayhew",
+    "email": "scorpy@gmail.com"
   },
   {
     "role": "user",
@@ -303,61 +359,5 @@ export const MockPersonList: Person[] = [
     "id": 46,
     "first_name": "Mike",
     "email": "mike.darga@gmail.com"
-  },
-  {
-    "role": "user",
-    "odds_filter": "show",
-    "last_name": "Campbell",
-    "groups": [1],
-    "id": 31,
-    "first_name": "Kathy",
-    "email": "katherine.irene.campbell@gmail.com"
-  },
-  {
-    "role": "user",
-    "odds_filter": "show",
-    "last_name": "LastName",
-    "groups": [1],
-    "id": 18,
-    "first_name": "Jim",
-    "email": "commander.boffo@gmail.com"
-  },
-  {
-    "role": "user",
-    "odds_filter": "show",
-    "last_name": "Pellecchia",
-    "groups": [1],
-    "id": 16,
-    "first_name": "Jenn",
-    "email": "hamcakes@gmail.com"
-  },
-  {
-    "role": "user",
-    "odds_filter": "show",
-    "last_name": "Fay",
-    "groups": [1],
-    "id": 14,
-    "first_name": "Ira",
-    "email": "irafaygames@gmail.com"
-  },
-  {
-    "role": "admin",
-    "odds_filter": "show",
-    "last_name": "Seavey",
-    "groups": [1],
-    "id": 32,
-    "middle_name": "Campbell",
-    "first_name": "Mayhew",
-    "email": "scorpy@gmail.com"
-  },
-  {
-    "role": "user",
-    "odds_filter": "show",
-    "last_name": "Seavey",
-    "groups": [1],
-    "id": 29,
-    "middle_name": "Duncan",
-    "first_name": "Mayhew",
-    "email": "mayhew650@gmail.com"
   }
 ];

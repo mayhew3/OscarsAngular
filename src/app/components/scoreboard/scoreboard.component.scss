@@ -22,6 +22,12 @@
   background-color: darken($silver, 62%);
 }
 
+.eliminatedScoreCard {
+  border-color: desaturate(darken(tomato, 45%), 50%);
+  color: desaturate(tomato, 50%);
+  background-color: desaturate(darken(tomato, 55%), 50%);
+}
+
 .myScoreCard {
   background-color: darken($personal, 5%);
   border-color: lighten($personal, 50%);
@@ -62,6 +68,11 @@
 .otherScorePoints {
   -webkit-text-fill-color: fade_out($highlight, 0.3); /* Will override color (regardless of order) */
   -webkit-text-stroke-color: $highlight;
+}
+
+.eliminatedScorePoints {
+  -webkit-text-fill-color: fade_out(desaturate(tomato, 50%), 0.3); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: desaturate(tomato, 50%);
 }
 
 .loserScorePoints {
