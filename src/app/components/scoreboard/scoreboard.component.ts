@@ -39,6 +39,7 @@ export class ScoreboardComponent implements OnInit {
 
         this.updateScoreboard();
         this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+          this.clearSortingOdds();
           this.updateScoreboard();
         });
         this.oddsService.subscribeToOddsEvents().subscribe(() => {
@@ -46,6 +47,10 @@ export class ScoreboardComponent implements OnInit {
         });
       });
     });
+  }
+
+  clearSortingOdds(): void {
+    _.forEach(this.persons, person => person.sortingOdds = -1);
   }
 
   getOdds(): OddsBundle {
