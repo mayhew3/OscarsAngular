@@ -92,6 +92,16 @@ export class InMemoryDataService implements InMemoryDbService {
     return undefined;
   }
 
+  // noinspection JSUnusedGlobalSymbols
+  patch(requestInfo: RequestInfo) {
+    console.log('HTTP override: PATCH');
+    const collectionName = requestInfo.collectionName;
+    if (collectionName === 'winners') {
+      this.deleteWinners();
+    }
+    return undefined;
+  }
+
   post(requestInfo: RequestInfo) {
     if (requestInfo.collectionName === 'votes') {
       const existingVote = this.existingVote(requestInfo);
@@ -102,6 +112,20 @@ export class InMemoryDataService implements InMemoryDbService {
       this.addOrDeleteWinner(requestInfo);
     }
     return undefined;
+  }
+
+  private deleteWinners() {
+    _.forEach(this.categories, category => category.winners = []);
+
+    const socketMsg = {
+      detail: 'reset',
+      event_id: 1,
+      event_time: new Date
+    };
+    const callbacks = this.getCallbacks('winner');
+    _.forEach(callbacks, callback => callback(socketMsg));
+
+    this.sendUpdatedOdds();
   }
 
   private changeVotingOpen(requestInfo: RequestInfo) {
@@ -147,6 +171,10 @@ export class InMemoryDataService implements InMemoryDbService {
     const callbacks = this.getCallbacks('winner');
     _.forEach(callbacks, callback => callback(socketMsg));
 
+    this.sendUpdatedOdds();
+  }
+
+  private sendUpdatedOdds(): void {
     const voters = this.getVoters();
     const odds_results = _.map(voters, voter => {
       return {

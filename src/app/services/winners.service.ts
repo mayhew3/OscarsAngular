@@ -30,6 +30,14 @@ export class WinnersService {
       );
   }
 
+  resetWinners(year: number): Observable<any> {
+    const data = {year: year};
+    return this.http.patch(this.winnersUrl, data, httpOptions)
+      .pipe(
+        catchError(this.handleError<any>('resetWinners', data))
+      );
+  }
+
 
   /**
    * Handle Http operation that failed.

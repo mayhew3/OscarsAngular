@@ -10,10 +10,8 @@ import {AuthService} from '../../services/auth/auth.service';
 import {Vote} from '../../interfaces/Vote';
 import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
-import {Winner} from '../../interfaces/Winner';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-nominees',
@@ -89,6 +87,7 @@ export class NomineesComponent implements OnInit {
 
   private updateLocalWinningNominees(): void {
     const winners = this.category.winners;
+    // noinspection TypeScriptValidateJSTypes
     this.winningNominees = _.map(winners, winner => {
       const nomination_id = winner.nomination_id;
       return _.findWhere(this.nominees, {id: nomination_id});
