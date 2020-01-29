@@ -57,43 +57,60 @@ export class ScoreboardComponent implements OnInit {
     return this.me.odds_filter === 'hideElimination';
   }
 
-  getOddsForPerson(person: Person): string {
+  getNumericOddsForPerson(person: Person): number {
     const isEliminated = this.categoryService.isEliminated(person, this.persons);
     if (isEliminated && !this.shouldHideElimination()) {
-      return '0%';
+      return 0.0;
     }
 
     const odds = this.getOdds();
-    try {
-      if (odds) {
-        const oddsOdds = odds.odds;
-        if (!oddsOdds) {
-          return 'err';
-        }
-        const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
-        if (!oddsForPerson || !oddsForPerson.odds) {
-          return '<1%';
-        }
-        if (!!oddsForPerson.clinched && !this.shouldHideElimination()) {
-          return '100%';
-        }
-        const oddsValue = parseFloat(oddsForPerson.odds) * 100;
-        if (!oddsValue) {
-          return 'err';
-        } else if (oddsValue < 1.0) {
-          return '<1%';
-        } else if (oddsValue > 99.0) {
-          return '>99%';
-        } else if (oddsValue > 10) {
-          return oddsValue.toFixed(0) + '%';
-        } else {
-          return oddsValue.toFixed(1) + '%';
-        }
+    if (odds) {
+      const oddsOdds = odds.odds;
+      if (!oddsOdds) {
+        throw new Error('No odds object found.');
+      }
+      const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
+      if (!oddsForPerson || !oddsForPerson.odds) {
+        return 0.001;
+      }
+      if (!!oddsForPerson.clinched && !this.shouldHideElimination()) {
+        return 100.0;
+      }
+      const oddsValue = parseFloat(oddsForPerson.odds) * 100;
+      if (!oddsValue) {
+        throw new Error('Invalid float value: ' + oddsForPerson.odds);
+      } else if (oddsValue === 100.0) {
+        return 99.9;
       } else {
+        return oddsValue;
+      }
+    } else {
+      return undefined;
+    }
+  }
+
+  getOddsForPerson(person: Person): string {
+
+    try {
+      const numericOdds = this.getNumericOddsForPerson(person);
+
+      if (numericOdds === undefined) {
         return '...';
+      } else if (numericOdds === 0.0) {
+        return '0%';
+      } else if (numericOdds === 100.0) {
+        return '100%';
+      } else if (numericOdds < 1.0) {
+        return '<1%';
+      } else if (numericOdds > 99.0) {
+        return '>99%';
+      } else if (numericOdds > 10) {
+        return numericOdds.toFixed(0) + '%';
+      } else {
+        return numericOdds.toFixed(1) + '%';
       }
     } catch (err) {
-      console.log(JSON.stringify(odds));
+      return 'err';
     }
   }
 
