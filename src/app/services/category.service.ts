@@ -104,7 +104,7 @@ export class CategoryService {
     return new Observable<any>(observer => this.addWinnerSubscriber(observer));
   }
 
-  addWinnerSubscriber(subscriber: Subscriber<any>): void {
+  private addWinnerSubscriber(subscriber: Subscriber<any>): void {
     this.winnerListeners.push(subscriber);
   }
 

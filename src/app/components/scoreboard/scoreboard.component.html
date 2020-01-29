@@ -74,7 +74,7 @@
 
     <p *ngIf="stillLoading()">Loading...</p>
 
-    <p *ngIf="getVoters().length === 0">
+    <p *ngIf="!stillLoading() && getVoters().length === 0">
       No players have voted yet!
     </p>
 

@@ -41,6 +41,9 @@ export class ScoreboardComponent implements OnInit {
         this.categoryService.subscribeToWinnerEvents().subscribe(() => {
           this.updateScoreboard();
         });
+        this.oddsService.subscribeToOddsEvents().subscribe(() => {
+          this.fastSortPersons();
+        });
       });
     });
   }
@@ -235,7 +238,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   stillLoading(): boolean {
-    return this.personService.stillLoading() || this.categoryService.stillLoading();
+    return this.personService.stillLoading() || this.categoryService.stillLoading() || this.oddsService.stillLoading();
   }
 
   anyoneIsHigherInRankings(person: Person): boolean {
