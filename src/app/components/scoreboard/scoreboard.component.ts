@@ -57,6 +57,19 @@ export class ScoreboardComponent implements OnInit {
     return this.me.odds_filter === 'hideElimination';
   }
 
+  getSortingOddsForPerson(person: Person): number {
+    try {
+      const numericOdds = this.getNumericOddsForPerson(person);
+      if (numericOdds === undefined) {
+        return -1;
+      } else {
+        return numericOdds;
+      }
+    } catch (err) {
+      return -1;
+    }
+  }
+
   getNumericOddsForPerson(person: Person): number {
     const isEliminated = this.categoryService.isEliminated(person, this.persons);
     if (isEliminated && !this.shouldHideElimination()) {
@@ -216,13 +229,13 @@ export class ScoreboardComponent implements OnInit {
     fast_sort(this.persons)
       .by([
         { desc: person => person.score},
-        { asc: person => this.isMe(person)},
+        { desc: person => this.getSortingOddsForPerson(person)},
         { asc: person => person.first_name},
       ]);
   }
 
   stillLoading(): boolean {
-    return this.personService.stillLoading();
+    return this.personService.stillLoading() || this.categoryService.stillLoading();
   }
 
   anyoneIsHigherInRankings(person: Person): boolean {
