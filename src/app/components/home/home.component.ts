@@ -19,6 +19,10 @@ export class HomeComponent implements OnInit {
               private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+      this.winnersDeleting = false;
+      this.winnersDeleted = true;
+    });
   }
 
   getOscarYear(): number {
@@ -45,11 +49,7 @@ export class HomeComponent implements OnInit {
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
       const year = systemVars.curr_year;
       this.winnersDeleting = true;
-      this.winnersService.resetWinners(year).subscribe(() => {
-        this.winnersDeleting = false;
-        this.winnersDeleted = true;
-        this.categoryService.resetWinners();
-      });
+      this.winnersService.resetWinners(year).subscribe();
     });
   }
 

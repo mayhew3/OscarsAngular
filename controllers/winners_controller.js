@@ -1,6 +1,5 @@
 const model = require('./model');
 const socket = require('./sockets_controller');
-const _ = require('underscore');
 
 exports.addOrDeleteWinner = async function(request, response) {
   const nomination_id = request.body.nomination_id;
@@ -24,6 +23,21 @@ exports.resetWinners = async function(request, response) {
   await model.Winner.destroy({
     where: {year: year}
   });
+
+  const event_time = new Date;
+
+  const event = await model.Event.create({
+    type: 'winner',
+    detail: 'reset',
+    event_time: event_time
+  });
+
+  const msg = {
+    detail: 'reset',
+    event_id: event.id,
+    event_time: event_time
+  };
+  socket.emitToAll('winner', msg);
 
   response.json({msg: 'Success!'});
 };

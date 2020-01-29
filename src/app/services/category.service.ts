@@ -274,7 +274,6 @@ export class CategoryService {
     _.forEach(this.cache, category => {
       category.winners = [];
     });
-    this.updateWinnerSubscribers();
   }
 
   private maybeUpdateCache(): Observable<Category[]> {
@@ -284,18 +283,22 @@ export class CategoryService {
       const year = categoryServiceGlobal.systemVarsService.getCurrentYear();
       if (categoryServiceGlobal.cache.length > 0 && !!year) {
         console.log(`Received winner message: ${JSON.stringify(msg)}`);
-        const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
-        const winner: Winner = {
-          id: msg.winner_id,
-          category_id: category.id,
-          nomination_id: msg.nomination_id,
-          year: year,
-          declared: new Date(msg.declared)
-        };
-        if (msg.detail === 'add') {
-          categoryServiceGlobal.addWinnerToCache(winner, category);
-        } else if (msg.detail === 'delete') {
-          categoryServiceGlobal.removeWinnerFromCache(winner.nomination_id);
+        if (msg.detail === 'reset') {
+          categoryServiceGlobal.resetWinners();
+        } else {
+          const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
+          const winner: Winner = {
+            id: msg.winner_id,
+            category_id: category.id,
+            nomination_id: msg.nomination_id,
+            year: year,
+            declared: new Date(msg.declared)
+          };
+          if (msg.detail === 'add') {
+            categoryServiceGlobal.addWinnerToCache(winner, category);
+          } else if (msg.detail === 'delete') {
+            categoryServiceGlobal.removeWinnerFromCache(winner.nomination_id);
+          }
         }
         categoryServiceGlobal.updateWinnerSubscribers();
       }
