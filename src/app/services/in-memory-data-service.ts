@@ -92,6 +92,16 @@ export class InMemoryDataService implements InMemoryDbService {
     return undefined;
   }
 
+  // noinspection JSUnusedGlobalSymbols
+  patch(requestInfo: RequestInfo) {
+    console.log('HTTP override: PATCH');
+    const collectionName = requestInfo.collectionName;
+    if (collectionName === 'winners') {
+      this.deleteWinners();
+    }
+    return undefined;
+  }
+
   post(requestInfo: RequestInfo) {
     if (requestInfo.collectionName === 'votes') {
       const existingVote = this.existingVote(requestInfo);
@@ -102,6 +112,10 @@ export class InMemoryDataService implements InMemoryDbService {
       this.addOrDeleteWinner(requestInfo);
     }
     return undefined;
+  }
+
+  private deleteWinners() {
+    _.forEach(this.categories, category => category.winners = []);
   }
 
   private changeVotingOpen(requestInfo: RequestInfo) {

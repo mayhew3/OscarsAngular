@@ -18,6 +18,16 @@ exports.addOrDeleteWinner = async function(request, response) {
   }
 };
 
+exports.resetWinners = async function(request, response) {
+  const year = request.body.year;
+
+  await model.Winner.destroy({
+    where: {year: year}
+  });
+
+  response.json({msg: 'Success!'});
+};
+
 async function deleteWinner(winner, response, nomination_id) {
   try {
     await winner.destroy();

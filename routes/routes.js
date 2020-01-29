@@ -33,7 +33,8 @@ module.exports = function(app) {
     .post(votes.addOrUpdateVote);
 
   router.route('/winners')
-    .post(winners.addOrDeleteWinner);
+    .post(winners.addOrDeleteWinner)
+    .patch(winners.resetWinners);
 
   router.route('/systemVars')
     .get(systemVars.getSystemVars)

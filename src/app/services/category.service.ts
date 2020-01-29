@@ -108,9 +108,9 @@ export class CategoryService {
     this.winnerListeners.push(subscriber);
   }
 
-  updateWinnerSubscribers(msg): void {
+  updateWinnerSubscribers(): void {
     this.oddsService.clearOdds();
-    _.forEach(this.winnerListeners, listener => listener.next(msg));
+    _.forEach(this.winnerListeners, listener => listener.next());
   }
 
   private addWinnerToCache(winner: Winner, category: Category): void {
@@ -270,6 +270,13 @@ export class CategoryService {
     });
   }
 
+  resetWinners(): void {
+    _.forEach(this.cache, category => {
+      category.winners = [];
+    });
+    this.updateWinnerSubscribers();
+  }
+
   private maybeUpdateCache(): Observable<Category[]> {
     // callback function doesn't have 'this' in scope.
     const categoryServiceGlobal = this;
@@ -290,7 +297,7 @@ export class CategoryService {
         } else if (msg.detail === 'delete') {
           categoryServiceGlobal.removeWinnerFromCache(winner.nomination_id);
         }
-        categoryServiceGlobal.updateWinnerSubscribers(msg);
+        categoryServiceGlobal.updateWinnerSubscribers();
       }
     };
 
