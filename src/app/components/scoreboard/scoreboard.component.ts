@@ -216,7 +216,7 @@ export class ScoreboardComponent implements OnInit {
     fast_sort(this.persons)
       .by([
         { desc: person => person.score},
-        { desc: person => this.getNumericOddsForPerson(person)},
+        { asc: person => this.isMe(person)},
         { asc: person => person.first_name},
       ]);
   }
