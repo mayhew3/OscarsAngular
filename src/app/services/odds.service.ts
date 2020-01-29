@@ -12,18 +12,19 @@ export class OddsService {
   private odds: OddsBundle;
   private previousOdds: OddsBundle;
 
-  private oddsChangedCallbacks: any[];
+  private oddsChangedCallbacks: Subscriber<any>[];
   private loading = true;
 
   constructor(private http: HttpClient,
               private socket: SocketService) {
+    this.oddsChangedCallbacks = [];
     this.oddsFirstUpdate().subscribe(odds => {
       this.loading = false;
       this.odds = odds;
-      this.updateOddsSubscribers(this.odds);
+      this.updateOddsSubscribers();
       this.socket.on('odds', msg => {
         this.odds = msg;
-        this.updateOddsSubscribers(this.odds);
+        this.updateOddsSubscribers();
       });
     });
   }
@@ -40,8 +41,8 @@ export class OddsService {
     this.oddsChangedCallbacks.push(subscriber);
   }
 
-  updateOddsSubscribers(odds): void {
-    _.forEach(this.oddsChangedCallbacks, callback => callback.next(odds));
+  updateOddsSubscribers(): void {
+    _.forEach(this.oddsChangedCallbacks, callback => callback.next());
   }
 
   clearOdds(): void {
