@@ -9,4 +9,5 @@ export class Person {
   groups: number[];
   score?: number;
   num_votes?: number;
+  sortingOdds?: number;
 }

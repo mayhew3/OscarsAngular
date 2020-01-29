@@ -229,10 +229,11 @@ export class ScoreboardComponent implements OnInit {
 
   fastSortPersons(): void {
     // noinspection JSUnusedGlobalSymbols
+    _.forEach(this.persons, person => person.sortingOdds = this.getSortingOddsForPerson(person));
     fast_sort(this.persons)
       .by([
         { desc: person => person.score},
-        { desc: person => this.getSortingOddsForPerson(person)},
+        { desc: person => person.sortingOdds},
         { asc: person => person.first_name},
       ]);
   }
