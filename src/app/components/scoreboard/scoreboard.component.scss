@@ -23,9 +23,9 @@
 }
 
 .eliminatedScoreCard {
-  border-color: desaturate(darken(tomato, 45%), 50%);
-  color: desaturate(tomato, 50%);
-  background-color: desaturate(darken(tomato, 55%), 50%);
+  border-color: fade_out(darken($silver, 30%), .7);
+  color: fade_out($silver, .5);
+  background-color: fade_out(darken($silver, 62%), .5);
 }
 
 .myScoreCard {
