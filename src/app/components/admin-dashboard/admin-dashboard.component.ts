@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -15,17 +14,17 @@ export class AdminDashboardComponent implements OnInit {
 
   yearForm;
 
+  possibleYears: number[] = [];
+
   constructor(private systemVarsService: SystemVarsService,
               private categoryService: CategoryService,
-              private votesService: VotesService,
-              private formBuilder: FormBuilder) { }
+              private votesService: VotesService) { }
 
   ngOnInit() {
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
       this.categoryService.getMaxYear().subscribe(maxYear => {
-        this.yearForm = this.formBuilder.group({
-          year: maxYear
-        });
+        this.possibleYears.push(systemVars.curr_year);
+        this.possibleYears.push(maxYear);
       });
     });
   }
