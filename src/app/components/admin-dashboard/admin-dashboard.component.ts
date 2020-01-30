@@ -22,9 +22,10 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      const year = systemVars.curr_year;
-      this.yearForm = this.formBuilder.group({
-        year: year
+      this.categoryService.getMaxYear().subscribe(maxYear => {
+        this.yearForm = this.formBuilder.group({
+          year: maxYear
+        });
       });
     });
   }

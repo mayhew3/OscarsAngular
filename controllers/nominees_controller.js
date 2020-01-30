@@ -73,3 +73,9 @@ exports.updateNomination = function(request, response) {
     response.send({msg: "Error finding nomination: " + error});
   });
 };
+
+exports.getMostRecentYear = async function(request, response) {
+  const maxYear = await model.Nomination.max('year');
+
+  response.json({maxYear: maxYear});
+};

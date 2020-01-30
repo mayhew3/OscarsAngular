@@ -6,7 +6,7 @@ import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';
 import {Vote} from '../interfaces/Vote';
 import {Event} from '../interfaces/Event';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {MockSystemVars} from './data/system.vars.mock';
 import {MockWinnerList} from './data/winners.mock';
 import {MockEvents} from './data/event.mock';
@@ -76,6 +76,8 @@ export class InMemoryDataService implements InMemoryDbService {
       return this.getCategoriesWithVotes(requestInfo);
     } else if (collectionName === 'events') {
       return this.getEventsSinceDate(requestInfo);
+    } else if (collectionName === 'maxYear') {
+      return this.getMaxYear(requestInfo);
     }
   }
 
@@ -221,6 +223,30 @@ export class InMemoryDataService implements InMemoryDbService {
         };
         data.push(copyCategory);
       });
+
+      const options: ResponseOptions = data ?
+        {
+          body: dataEncapsulation ? { data } : data,
+          status: STATUS.OK
+        } :
+        {
+          body: dataEncapsulation ? { } : data,
+          status: STATUS.OK
+        };
+      return InMemoryDataService.finishOptions(options, requestInfo);
+    });
+  }
+
+  private getMaxYear(requestInfo: RequestInfo): Observable<any> {
+    return requestInfo.utils.createResponse$(() => {
+      console.log('HTTP GET override');
+
+      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
+
+      const maxYear = _.max(_.map(this.categories, category => _.max(_.map(category.nominees, nominee => nominee.year))));
+      const data = {
+        maxYear: maxYear
+      };
 
       const options: ResponseOptions = data ?
         {

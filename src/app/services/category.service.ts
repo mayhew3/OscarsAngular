@@ -255,6 +255,21 @@ export class CategoryService {
     return this.cache.length === 0;
   }
 
+  // MAX YEAR
+
+  getMaxYear(): Observable<number> {
+    return new Observable<number>(observer => {
+      this.http.get('/api/maxYear')
+        .pipe(
+          tap(() => console.log('did some tapping')),
+          catchError(this.handleError<any>('getMaxYear'))
+        )
+        .subscribe(maxYear => {
+          observer.next(maxYear.maxYear);
+        });
+    });
+  }
+
   // DATA HELPERS
 
   private getDataWithCacheUpdate<T>(getCallback): Observable<T> {

@@ -43,6 +43,9 @@ module.exports = function(app) {
   router.route('/finalResults')
     .get(finalResults.getFinalResults);
 
+  router.route('/maxYear')
+    .get(nominees.getMostRecentYear);
+
   app.use('/api', router);
 
   // error handlers
