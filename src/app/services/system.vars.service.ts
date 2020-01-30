@@ -55,7 +55,8 @@ export class SystemVarsService {
     }
     const targetVars = {
       id: this.systemVars.id,
-      voting_open: !this.systemVars.voting_open
+      voting_open: !this.systemVars.voting_open,
+      curr_year: this.systemVars.curr_year
     };
 
     this.http.put(this.systemVarsUrl, targetVars, httpOptions)
@@ -64,16 +65,18 @@ export class SystemVarsService {
   }
 
   changeCurrentYear(year: number): Observable<any> {
+    const outsideThis = this;
     return new Observable<any>(observer => {
       const targetVars = {
         id: this.systemVars.id,
+        voting_open: this.systemVars.voting_open,
         curr_year: year
       };
 
       this.http.put(this.systemVarsUrl, targetVars, httpOptions)
         .pipe(catchError(this.handleError<any>('changeCurrentYear')))
         .subscribe(() => {
-          this.systemVars.curr_year = year;
+          outsideThis.systemVars.curr_year = year;
           observer.next();
         });
     });

@@ -112,6 +112,20 @@
     <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="!stillLoading() && auth.isAdmin()">
       <div class="card navCard"
+           routerLink="admin">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-10 navTitle">
+              <span>Admin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4"
+         *ngIf="!stillLoading() && auth.isAdmin()">
+      <div class="card navCard"
            (click)="resetWinners()">
         <div class="card-body">
           <div class="row">

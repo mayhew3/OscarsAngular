@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { NomineesComponent } from './components/nominees/nominees.component';
 import { CategoryHopperComponent } from './components/category-hopper/category-hopper.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
 import {AuthService} from './services/auth/auth.service';
 import {CallbackComponent} from './components/callback/callback.component';
@@ -44,14 +44,15 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
     PersonDetailComponent,
     AdminDashboardComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    environment.httpModules,
-    NgbDropdownModule,
-    // use in-memory for CLI environment, regular http for prod and local server
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        environment.httpModules,
+        NgbDropdownModule,
+        ReactiveFormsModule,
+        // use in-memory for CLI environment, regular http for prod and local server
+    ],
   providers: [AuthService, SystemVarsService, environment.socketModule, InMemoryCallbacksService],
   bootstrap: [AppComponent]
 })

@@ -1,1 +1,18 @@
-<p>admin-dashboard works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="yearForm"
+            (ngSubmit)="changeCurrentYear(yearForm.value)">
+
+        <label title="Year">
+          <input type="text"
+                 class="form-control"
+                 formControlName="year">
+          <button class="btn btn-success"
+                  type="submit">Update</button>
+        </label>
+
+      </form>
+    </div>
+  </div>
+</div>
