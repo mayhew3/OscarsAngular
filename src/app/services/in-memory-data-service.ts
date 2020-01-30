@@ -208,12 +208,19 @@ export class InMemoryDataService implements InMemoryDbService {
       const person_id = entries.next().value[1][0];
       const year = entries.next().value[1][0];
 
-      _.forEach(requestInfo.collection, category => {
-        category.nominees = _.where(category.nominees, {year: +year});
-        category.voted_on = this.getVoteForCategory(category.id, +person_id, +year);
-      });
+      const data = [];
 
-      const data = requestInfo.collection;
+      _.forEach(requestInfo.collection, category => {
+        const copyCategory: Category = {
+          id: category.id,
+          name: category.name,
+          points: category.points,
+          nominees: _.where(category.nominees, {year: +year}),
+          voted_on: this.getVoteForCategory(category.id, +person_id, +year),
+          winners: _.where(category.winners, {year: +year})
+        };
+        data.push(copyCategory);
+      });
 
       const options: ResponseOptions = data ?
         {
