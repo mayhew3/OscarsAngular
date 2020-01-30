@@ -6,7 +6,7 @@ import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';
 import {Vote} from '../interfaces/Vote';
 import {Event} from '../interfaces/Event';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {MockSystemVars} from './data/system.vars.mock';
 import {MockWinnerList} from './data/winners.mock';
 import {MockEvents} from './data/event.mock';
@@ -14,8 +14,6 @@ import {MockOdds} from './data/odds.mock';
 import {MockFinalResultsList} from './data/finalresults.mock';
 import {Category} from '../interfaces/Category';
 import {InMemoryCallbacksService} from './in-memory-callbacks.service';
-import {Person} from '../interfaces/Person';
-import {json} from 'sequelize';
 
 @Injectable({
   providedIn: 'root',
