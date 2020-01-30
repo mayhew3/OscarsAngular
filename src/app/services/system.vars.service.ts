@@ -30,7 +30,7 @@ export class SystemVarsService {
   }
 
   canVote(): boolean {
-    return this.systemVars && this.systemVars.voting_open;
+    return !!this.systemVars && !!this.systemVars.voting_open;
   }
 
   getCurrentYear(): number {

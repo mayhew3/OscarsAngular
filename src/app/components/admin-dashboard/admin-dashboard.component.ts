@@ -36,6 +36,10 @@ export class AdminDashboardComponent implements OnInit {
         if (!_.contains(this.possibleYears, this.currentYear)) {
           this.possibleYears.push(this.currentYear);
         }
+        this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+          this.winnersDeleting = false;
+          this.winnersDeleted = true;
+        });
       });
     });
   }
@@ -51,10 +55,6 @@ export class AdminDashboardComponent implements OnInit {
 
   getVotingButtonClass(votingOpen: boolean): string {
     return this.isVotingOpen() === votingOpen ? 'btn-success' : 'btn-primary';
-  }
-
-  getVotingHeader(): string {
-    return this.isVotingOpen() ? 'Voting Open' : 'Voting Locked';
   }
 
   yearButtonClass(year): string {

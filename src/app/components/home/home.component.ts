@@ -10,19 +10,11 @@ import {CategoryService} from '../../services/category.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  winnersDeleting = false;
-  winnersDeleted = false;
 
   constructor(public auth: AuthService,
-              public systemVarsService: SystemVarsService,
-              private winnersService: WinnersService,
-              private categoryService: CategoryService) { }
+              public systemVarsService: SystemVarsService) { }
 
   ngOnInit() {
-    this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-      this.winnersDeleting = false;
-      this.winnersDeleted = true;
-    });
   }
 
   getOscarYear(): number {
