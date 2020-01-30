@@ -2,15 +2,19 @@
   <div class="row" *ngIf="auth.isAdmin() && !stillLoading()">
 
     <div class="col-12 col-sm-6 col-lg-4">
-      <div class="card navCard" (click)="toggleVotingLock()">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-10 navTitle">
-              <span>{{getVotingHeader()}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      Voting:
+
+      <button class="btn btn-lg"
+              [ngClass]="getVotingButtonClass(true)"
+              (click)="toggleVotingLock(true)">
+        Open
+      </button>
+      <button class="btn btn-lg"
+              [ngClass]="getVotingButtonClass(false)"
+              (click)="toggleVotingLock(false)">
+        Closed
+      </button>
+
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4">
