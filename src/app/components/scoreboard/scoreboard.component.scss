@@ -76,8 +76,8 @@
 }
 
 .eliminatedScorePoints {
-  -webkit-text-fill-color: fade_out(desaturate(tomato, 50%), 0.3); /* Will override color (regardless of order) */
-  -webkit-text-stroke-color: desaturate(tomato, 50%);
+  -webkit-text-fill-color: fade_out(darken($silver, 30%), .7); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: fade_out($silver, .5);
 }
 
 .loserScorePoints {
@@ -120,7 +120,7 @@
   background-color: desaturate(darkblue, 25%);
   color: lighten(cornflowerblue, 10%);
   border-color: lighten(desaturate(darkblue, 45%), 30%);
-  border-top-width: 2px;
+  border-width: 2px 0 0 0;
   line-height: 130%
 }
 
