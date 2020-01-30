@@ -15,6 +15,7 @@ import {MockFinalResultsList} from './data/finalresults.mock';
 import {Category} from '../interfaces/Category';
 import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 import {Person} from '../interfaces/Person';
+import {json} from 'sequelize';
 
 @Injectable({
   providedIn: 'root',
@@ -87,7 +88,7 @@ export class InMemoryDataService implements InMemoryDbService {
     if (collectionName === 'nominees') {
       this.updateNomination(requestInfo);
     } else if (requestInfo.collectionName === 'systemVars') {
-      this.changeVotingOpen(requestInfo);
+      this.updateSystemVars(requestInfo);
     }
     return undefined;
   }
@@ -128,17 +129,20 @@ export class InMemoryDataService implements InMemoryDbService {
     this.sendUpdatedOdds();
   }
 
-  private changeVotingOpen(requestInfo: RequestInfo) {
+  private updateSystemVars(requestInfo: RequestInfo) {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const systemVars = this.systemVars[0];
-    systemVars.voting_open = jsonBody.voting_open;
 
-    const msg = {
-      voting_open: systemVars.voting_open
-    };
+    if (systemVars.voting_open !== jsonBody.voting_open) {
+      systemVars.voting_open = jsonBody.voting_open;
 
-    const callbacks = this.getCallbacks('voting');
-    _.forEach(callbacks, callback => callback(msg));
+      const msg = {
+        voting_open: systemVars.voting_open
+      };
+
+      const callbacks = this.getCallbacks('voting');
+      _.forEach(callbacks, callback => callback(msg));
+    }
   }
 
   private addOrDeleteWinner(requestInfo: RequestInfo) {

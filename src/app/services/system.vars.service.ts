@@ -29,11 +29,11 @@ export class SystemVarsService {
     });
   }
 
-  public canVote(): boolean {
+  canVote(): boolean {
     return this.systemVars && this.systemVars.voting_open;
   }
 
-  public getCurrentYear(): number {
+  getCurrentYear(): number {
     return this.systemVars ? this.systemVars.curr_year : undefined;
   }
 
@@ -49,13 +49,12 @@ export class SystemVarsService {
     });
   }
 
-  public toggleVotingLock(): void {
+  toggleVotingLock(): void {
     if (!this.systemVars) {
       throw new Error('No system vars found.');
     }
     const targetVars = {
       id: this.systemVars.id,
-      curr_year: this.systemVars.curr_year,
       voting_open: !this.systemVars.voting_open
     };
 
@@ -64,11 +63,27 @@ export class SystemVarsService {
       .subscribe();
   }
 
-  public stillLoading(): boolean {
+  changeCurrentYear(year: number): Observable<any> {
+    return new Observable<any>(observer => {
+      const targetVars = {
+        id: this.systemVars.id,
+        curr_year: year
+      };
+
+      this.http.put(this.systemVarsUrl, targetVars, httpOptions)
+        .pipe(catchError(this.handleError<any>('changeCurrentYear')))
+        .subscribe(() => {
+          this.systemVars.curr_year = year;
+          observer.next();
+        });
+    });
+  }
+
+  stillLoading(): boolean {
     return this.systemVars === undefined;
   }
 
-  public getSystemVars(): Observable<SystemVars> {
+  getSystemVars(): Observable<SystemVars> {
     if (this.systemVars) {
       return of(this.systemVars);
     } else {

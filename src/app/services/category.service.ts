@@ -9,13 +9,10 @@ import {AuthService} from './auth/auth.service';
 import {SystemVarsService} from './system.vars.service';
 import {Person} from '../interfaces/Person';
 import {VotesService} from './votes.service';
-import {EventsService} from './events.service';
 import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import fast_sort from 'fast-sort';
-import {Vote} from '../interfaces/Vote';
-import {PersonService} from './person.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -34,10 +31,8 @@ export class CategoryService {
               private auth: AuthService,
               private systemVarsService: SystemVarsService,
               private votesService: VotesService,
-              private eventsService: EventsService,
               private oddsService: OddsService,
-              private socket: SocketService,
-              private personService: PersonService) {
+              private socket: SocketService) {
     this.cache = [];
     this.winnerListeners = [];
   }
@@ -135,6 +130,7 @@ export class CategoryService {
   }
 
   getMostRecentCategory(): Category {
+    // noinspection TypeScriptValidateJSTypes
     const winners = _.flatten(_.map(this.cache, category => category.winners));
     fast_sort(winners).desc([
         (winner: Winner) => winner.declared
@@ -277,6 +273,15 @@ export class CategoryService {
   }
 
   private maybeUpdateCache(): Observable<Category[]> {
+    if (this.cache.length === 0) {
+      return this.refreshCache();
+    } else {
+      return of(this.cache);
+    }
+  }
+
+  refreshCache(): Observable<Category[]> {
+    this.cache.length = 0;
     // callback function doesn't have 'this' in scope.
     const categoryServiceGlobal = this;
     const updateWinnersInCacheAndNotify = function(msg) {
@@ -304,42 +309,37 @@ export class CategoryService {
       }
     };
 
-    if (this.cache.length === 0) {
-      this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
-      return new Observable<Category[]>((observer) => {
-        this.auth.getPerson().subscribe(person => {
-          if (!person) {
-            this.auth.logout();
-          }
-          this.systemVarsService.getSystemVars().subscribe(systemVars => {
-            const options = {
-              params: {
-                person_id: person.id.toString(),
-                year: systemVars.curr_year.toString()
-              }};
-            this.http.get<Category[]>(this.categoriesUrl, options)
-              .pipe(
-                catchError(this.handleError<Category[]>('getCategories', []))
-              )
-              .subscribe(
-                (categories: Category[]) => {
-                  _.forEach(categories, category => {
-                    _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
-                  });
-                  CategoryService.addToArray(this.cache, categories);
-                  this.socket.on('winner', updateWinnersInCacheAndNotify);
-                  observer.next(categories);
-                },
-                (err: Error) => observer.error(err)
-              );
-          });
+    this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
+    return new Observable<Category[]>((observer) => {
+      this.auth.getPerson().subscribe(person => {
+        if (!person) {
+          this.auth.logout();
+        }
+        this.systemVarsService.getSystemVars().subscribe(systemVars => {
+          const options = {
+            params: {
+              person_id: person.id.toString(),
+              year: systemVars.curr_year.toString()
+            }};
+          this.http.get<Category[]>(this.categoriesUrl, options)
+            .pipe(
+              catchError(this.handleError<Category[]>('getCategories', []))
+            )
+            .subscribe(
+              (categories: Category[]) => {
+                _.forEach(categories, category => {
+                  _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
+                });
+                CategoryService.addToArray(this.cache, categories);
+                this.socket.on('winner', updateWinnersInCacheAndNotify);
+                observer.next(categories);
+              },
+              (err: Error) => observer.error(err)
+            );
         });
       });
-    } else {
-      return of(this.cache);
-    }
+    });
   }
-
 
 
   /**

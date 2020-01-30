@@ -57,28 +57,31 @@ export class VotesService {
   }
 
   private maybeUpdateCache(year: number): Observable<Vote[]> {
-    const params = new HttpParams()
-      .set('year', year.toString());
     if (this.cache.length === 0) {
-      return new Observable<Vote[]>((observer) => {
-        this.http.get<Vote[]>(this.votesUrl, {params: params})
-          .pipe(
-            catchError(this.handleError<Vote[]>('getVotes', []))
-          )
-          .subscribe(
-            (votes: Vote[]) => {
-              this.cache.length = 0;
-              VotesService.addToArray(this.cache, votes);
-              observer.next(votes);
-            },
-            (err: Error) => observer.error(err)
-          );
-      });
+      return this.refreshCache(year);
     } else {
       return of(this.cache);
     }
   }
 
+  refreshCache(year: number): Observable<Vote[]> {
+    const params = new HttpParams()
+      .set('year', year.toString());
+    return new Observable<Vote[]>((observer) => {
+      this.http.get<Vote[]>(this.votesUrl, {params: params})
+        .pipe(
+          catchError(this.handleError<Vote[]>('getVotes', []))
+        )
+        .subscribe(
+          (votes: Vote[]) => {
+            this.cache.length = 0;
+            VotesService.addToArray(this.cache, votes);
+            observer.next(votes);
+          },
+          (err: Error) => observer.error(err)
+        );
+    });
+  }
 
   addOrUpdateVote(nominee: Nominee, person: Person): Observable<Vote> {
     const data = {
