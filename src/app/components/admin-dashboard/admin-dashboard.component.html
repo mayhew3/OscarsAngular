@@ -4,7 +4,9 @@
 
       <span>Change Year:</span><br>
       <button *ngFor="let year of possibleYears"
-              class="btn btn-lg">
+              class="btn btn-lg"
+              [ngClass]="yearButtonClass(year)"
+              (click)="changeCurrentYear(year)">
         {{year}}
       </button>
 

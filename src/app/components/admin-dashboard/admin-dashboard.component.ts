@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
+import {_} from 'underscore';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -12,8 +13,7 @@ export class AdminDashboardComponent implements OnInit {
 
   reloadingData = false;
 
-  yearForm;
-
+  currentYear: number;
   possibleYears: number[] = [];
 
   constructor(private systemVarsService: SystemVarsService,
@@ -23,19 +23,31 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
       this.categoryService.getMaxYear().subscribe(maxYear => {
-        this.possibleYears.push(systemVars.curr_year);
+        this.currentYear = systemVars.curr_year;
+        this.possibleYears.push(maxYear - 1);
         this.possibleYears.push(maxYear);
+        if (!_.contains(this.possibleYears, this.currentYear)) {
+          this.possibleYears.push(this.currentYear);
+        }
       });
     });
   }
 
-  changeCurrentYear(yearData): void {
+  yearButtonClass(year): string {
+    if (this.currentYear === year) {
+      return 'btn-success';
+    } else {
+      return 'btn-primary';
+    }
+  }
+
+  changeCurrentYear(year): void {
     this.reloadingData = true;
-    this.systemVarsService.changeCurrentYear(yearData.year).subscribe(() => {
+    this.systemVarsService.changeCurrentYear(year).subscribe(() => {
       this.categoryService.refreshCache().subscribe(() => {
-        this.votesService.refreshCache(yearData.year).subscribe(() => {
+        this.votesService.refreshCache(year).subscribe(() => {
           this.reloadingData = false;
-          this.yearForm.reset();
+          this.currentYear = year;
         });
       });
     });
