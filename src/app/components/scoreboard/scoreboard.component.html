@@ -1,48 +1,4 @@
 
-<nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter">
-  <div class="container py-2">
-
-    <div *ngIf="!!latestCategory">
-
-      <div class="row py-1">
-        <div class="col-12">
-          <span class="footerInfo">{{getLastTimeAgo()}}</span>
-        </div>
-
-        <div class="col-12 py-1">
-          <div class="row no-gutters">
-            <div class="col-10">
-              <div class="row">
-                <div class="col-12 py-1">
-                  <span class="footerTitle">{{latestCategory.name}}</span>
-                  <span class="footerTieNotification"
-                        *ngIf="latestCategory.winners.length > 1"> (Tie!)</span>
-                </div>
-              </div>
-              <div class="row my-2"
-                   *ngFor="let winner of latestCategory.winners">
-                <div class="col-12">
-                  <span class="footerBig">{{getWinnerName(winner)}}</span>
-                </div>
-                <div class="col-12"
-                     *ngIf="!!getWinnerSubtitle(winner)">
-                  <span class="footerSmall">{{getWinnerSubtitle(winner)}}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-2 footerScore"
-                 [ngClass]="getMyLastWinnerScoreClass()">
-              {{latestCategory.points}}
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</nav>
-
 <div class="scoreboard-body">
   <div class="container">
 
@@ -50,6 +6,9 @@
       <div class="col-9">
         <h1>Live Scoring</h1>
       </div>
+
+      <!-- ODDS FILTER BUTTON -->
+
       <div class="col-3 text-right">
         <div ngbDropdown placement="bottom-right"
              class="d-inline-block"
@@ -77,6 +36,8 @@
     <p *ngIf="!stillLoading() && getVoters().length === 0">
       No players have voted yet!
     </p>
+
+    <!-- PLAYER SCORES -->
 
     <div class="row mt-2" *ngIf="!stillLoading()">
       <div class="col-12 col-sm-6 col-lg-4"
@@ -121,3 +82,48 @@
   </div>
 </div>
 
+<!-- LAST WINNER FOOTER BAR -->
+
+<nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter">
+  <div class="container py-2">
+
+    <div *ngIf="!!latestCategory">
+
+      <div class="row py-1">
+        <div class="col-12">
+          <span class="footerInfo">{{getLastTimeAgo()}}</span>
+        </div>
+
+        <div class="col-12 py-1">
+          <div class="row no-gutters">
+            <div class="col-10">
+              <div class="row">
+                <div class="col-12 py-1">
+                  <span class="footerTitle">{{latestCategory.name}}</span>
+                  <span class="footerTieNotification"
+                        *ngIf="latestCategory.winners.length > 1"> (Tie!)</span>
+                </div>
+              </div>
+              <div class="row my-2"
+                   *ngFor="let winner of latestCategory.winners">
+                <div class="col-12">
+                  <span class="footerBig">{{getWinnerName(winner)}}</span>
+                </div>
+                <div class="col-12"
+                     *ngIf="!!getWinnerSubtitle(winner)">
+                  <span class="footerSmall">{{getWinnerSubtitle(winner)}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-2 footerScore"
+                 [ngClass]="getMyLastWinnerScoreClass()">
+              {{latestCategory.points}}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</nav>
