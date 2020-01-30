@@ -266,7 +266,9 @@ export class ScoreboardComponent implements OnInit {
 
   scoreNumberClass(person: Person): string {
     const isEliminated = this.categoryService.isEliminated(person, this.persons);
-    if (this.isMe(person)) {
+    if (this.gotPointsForLastWinner(person)) {
+      return 'winnerScorePoints';
+    } else if (this.isMe(person)) {
       return 'myScorePoints';
     } else if (isEliminated && this.shouldShowEliminationOdds()) {
       return 'eliminatedScorePoints';

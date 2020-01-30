@@ -12,7 +12,7 @@ export class OddsService {
   private odds: OddsBundle;
   private previousOdds: OddsBundle;
 
-  private oddsChangedCallbacks: Subscriber<any>[];
+  private readonly oddsChangedCallbacks: Subscriber<any>[];
   private loading = true;
 
   constructor(private http: HttpClient,

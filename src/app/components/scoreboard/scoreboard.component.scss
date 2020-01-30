@@ -70,6 +70,11 @@
   -webkit-text-stroke-color: $highlight;
 }
 
+.winnerScorePoints {
+  -webkit-text-fill-color: fade_out(lighten(forestgreen, 20%), 0.3); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(forestgreen, 20%);
+}
+
 .eliminatedScorePoints {
   -webkit-text-fill-color: fade_out(desaturate(tomato, 50%), 0.3); /* Will override color (regardless of order) */
   -webkit-text-stroke-color: desaturate(tomato, 50%);
