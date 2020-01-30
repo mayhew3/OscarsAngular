@@ -84,8 +84,16 @@
 
 <!-- LAST WINNER FOOTER BAR -->
 
-<nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter">
+<nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter"
+    *ngIf="!stillLoading()">
+
   <div class="container py-2">
+
+    <div *ngIf="!latestCategory">
+      <span class="footerSmall">
+        Waiting for the first award to be presented!
+      </span>
+    </div>
 
     <div *ngIf="!!latestCategory">
 
