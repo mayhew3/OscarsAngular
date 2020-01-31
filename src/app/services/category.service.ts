@@ -43,7 +43,7 @@ export class CategoryService {
       });
     };
 
-    this.socket.on('reconnect', refreshNow);
+    // this.socket.on('reconnect', refreshNow);
   }
 
   // HELPERS

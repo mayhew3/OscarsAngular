@@ -33,7 +33,7 @@ export class VotesService {
 
       this.socket.removeListener('reconnect', refreshNow);
       this.maybeUpdateCache(systemVars.curr_year).subscribe(() => {
-        this.socket.on('reconnect', refreshNow);
+        // this.socket.on('reconnect', refreshNow);
       });
     });
   }

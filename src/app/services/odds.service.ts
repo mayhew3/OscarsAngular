@@ -31,7 +31,7 @@ export class OddsService {
         this.odds = msg;
         this.updateOddsSubscribers();
       });
-      this.socket.on('reconnect', refreshNow);
+      // this.socket.on('reconnect', refreshNow);
     });
   }
 

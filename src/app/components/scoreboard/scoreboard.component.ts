@@ -12,6 +12,8 @@ import {Winner} from '../../interfaces/Winner';
 import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
+import {SocketService} from '../../services/socket.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -27,7 +29,8 @@ export class ScoreboardComponent implements OnInit {
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private oddsService: OddsService,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private socket: SocketService) {
     this.persons = [];
   }
 
@@ -37,14 +40,25 @@ export class ScoreboardComponent implements OnInit {
       this.auth.getPerson().subscribe(person => {
         this.me = person;
 
-        this.updateScoreboard();
+        this.updateScoreboard().subscribe(() => {
+          this.socket.on('reconnect', () => {
+            this.categoryService.refreshCache().subscribe(() => {
+              this.oddsService.refreshCache().subscribe(() => {
+                this.clearSortingOdds();
+                this.updateScoreboard().subscribe();
+              });
+            });
+          });
+        });
+
         this.categoryService.subscribeToWinnerEvents().subscribe(() => {
           this.clearSortingOdds();
-          this.updateScoreboard();
+          this.updateScoreboard().subscribe();
         });
         this.oddsService.subscribeToOddsEvents().subscribe(() => {
           this.fastSortPersons();
         });
+
       });
     });
   }
@@ -170,10 +184,13 @@ export class ScoreboardComponent implements OnInit {
     return this.oddsDirection(person) > 0 ? 'oddsDiffGood' : 'oddsDiffBad';
   }
 
-  updateScoreboard(): void {
-    this.categoryService.populatePersonScores(this.persons).subscribe(() => {
-      this.fastSortPersons();
-      this.latestCategory = this.categoryService.getMostRecentCategory();
+  updateScoreboard(): Observable<any> {
+    return new Observable<any>(observer => {
+      this.categoryService.populatePersonScores(this.persons).subscribe(() => {
+        this.fastSortPersons();
+        this.latestCategory = this.categoryService.getMostRecentCategory();
+        observer.next();
+      });
     });
   }
 
