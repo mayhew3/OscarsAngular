@@ -20,7 +20,9 @@ export class OddsService {
     this.oddsChangedCallbacks = [];
     const oddsServiceThis = this;
     const refreshNow = function() {
-      oddsServiceThis.refreshCache().subscribe();
+      oddsServiceThis.refreshCache().subscribe(() => {
+        oddsServiceThis.updateOddsSubscribers();
+      });
     };
 
     this.socket.removeListener('reconnect', refreshNow);
