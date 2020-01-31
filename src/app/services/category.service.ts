@@ -35,15 +35,6 @@ export class CategoryService {
               private socket: SocketService) {
     this.cache = [];
     this.winnerListeners = [];
-
-    const categoryServiceGlobal = this;
-    const refreshNow = function() {
-      categoryServiceGlobal.refreshCache().subscribe(() => {
-        categoryServiceGlobal.updateWinnerSubscribers();
-      });
-    };
-
-    // this.socket.on('reconnect', refreshNow);
   }
 
   // HELPERS

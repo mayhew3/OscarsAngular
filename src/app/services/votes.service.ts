@@ -8,7 +8,6 @@ import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
 import {Category} from '../interfaces/Category';
 import {_} from 'underscore';
-import {SocketService} from './socket.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,19 +21,10 @@ export class VotesService {
   private readonly cache: Vote[];
 
   constructor(private http: HttpClient,
-              private systemVarsService: SystemVarsService,
-              private socket: SocketService) {
+              private systemVarsService: SystemVarsService) {
     this.cache = [];
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      const voteServiceThis = this;
-      const refreshNow = function() {
-        voteServiceThis.refreshCache(systemVars.curr_year).subscribe();
-      };
-
-      this.socket.removeListener('reconnect', refreshNow);
-      this.maybeUpdateCache(systemVars.curr_year).subscribe(() => {
-        // this.socket.on('reconnect', refreshNow);
-      });
+      this.maybeUpdateCache(systemVars.curr_year).subscribe();
     });
   }
 

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {WinnersService} from '../../services/winners.service';
-import {CategoryService} from '../../services/category.service';
 
 @Component({
   selector: 'osc-home',
