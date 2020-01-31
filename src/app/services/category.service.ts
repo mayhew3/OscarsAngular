@@ -322,7 +322,12 @@ export class CategoryService {
       }
     };
 
+    const refreshNow = function() {
+      categoryServiceGlobal.refreshCache().subscribe();
+    };
+
     this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
+    this.socket.removeListener('reconnect', refreshNow);
     return new Observable<Category[]>((observer) => {
       this.auth.getPerson().subscribe(person => {
         if (!person) {
@@ -345,6 +350,7 @@ export class CategoryService {
                 });
                 CategoryService.addToArray(this.cache, categories);
                 this.socket.on('winner', updateWinnersInCacheAndNotify);
+                this.socket.on('reconnect', refreshNow);
                 observer.next(categories);
               },
               (err: Error) => observer.error(err)

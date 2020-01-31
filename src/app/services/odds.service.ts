@@ -18,11 +18,18 @@ export class OddsService {
   constructor(private http: HttpClient,
               private socket: SocketService) {
     this.oddsChangedCallbacks = [];
+    const oddsServiceThis = this;
+    const refreshNow = function() {
+      oddsServiceThis.refreshCache().subscribe();
+    };
+
+    this.socket.removeListener('reconnect', refreshNow);
     this.refreshCache().subscribe(() => {
       this.socket.on('odds', msg => {
         this.odds = msg;
         this.updateOddsSubscribers();
       });
+      this.socket.on('reconnect', refreshNow);
     });
   }
 
