@@ -5,6 +5,7 @@ import {VotesService} from '../../services/votes.service';
 import {_} from 'underscore';
 import {WinnersService} from '../../services/winners.service';
 import {AuthService} from '../../services/auth/auth.service';
+import {OddsService} from '../../services/odds.service';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -25,6 +26,7 @@ export class AdminDashboardComponent implements OnInit {
               private categoryService: CategoryService,
               private votesService: VotesService,
               private winnersService: WinnersService,
+              private oddsService: OddsService,
               private auth: AuthService) { }
 
   ngOnInit() {
@@ -42,6 +44,12 @@ export class AdminDashboardComponent implements OnInit {
         });
       });
     });
+  }
+
+  refreshAllData(): void {
+    this.categoryService.refreshCache().subscribe();
+    this.votesService.refreshCacheForThisYear().subscribe();
+    this.oddsService.refreshCache().subscribe();
   }
 
   stillLoading(): boolean {

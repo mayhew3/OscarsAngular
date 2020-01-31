@@ -90,7 +90,6 @@ export class CategoryService {
   updateNominee(nominee: Nominee): Observable<any> {
     return this.http.put(this.nomineesUrl, nominee, httpOptions)
       .pipe(
-        tap(() => console.log('did some tapping')),
         catchError(this.handleError<any>('updateCategories', nominee))
       );
   }
@@ -261,7 +260,6 @@ export class CategoryService {
     return new Observable<number>(observer => {
       this.http.get('/api/maxYear')
         .pipe(
-          tap(() => console.log('did some tapping')),
           catchError(this.handleError<any>('getMaxYear'))
         )
         .subscribe(maxYear => {

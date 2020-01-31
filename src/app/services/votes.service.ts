@@ -64,6 +64,14 @@ export class VotesService {
     }
   }
 
+  refreshCacheForThisYear(): Observable<Vote[]> {
+    return new Observable<Vote[]>(observer => {
+      this.systemVarsService.getSystemVars().subscribe(systemVars => {
+        this.refreshCache(systemVars.curr_year).subscribe(votes => observer.next(votes));
+      });
+    });
+  }
+
   refreshCache(year: number): Observable<Vote[]> {
     const params = new HttpParams()
       .set('year', year.toString());

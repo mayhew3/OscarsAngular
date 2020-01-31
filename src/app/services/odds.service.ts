@@ -18,13 +18,23 @@ export class OddsService {
   constructor(private http: HttpClient,
               private socket: SocketService) {
     this.oddsChangedCallbacks = [];
-    this.oddsFirstUpdate().subscribe(odds => {
-      this.loading = false;
-      this.odds = odds;
-      this.updateOddsSubscribers();
+    this.refreshCache().subscribe(() => {
       this.socket.on('odds', msg => {
         this.odds = msg;
         this.updateOddsSubscribers();
+      });
+    });
+  }
+
+  refreshCache(): Observable<any> {
+    return new Observable<any>(observer => {
+      this.loading = true;
+      this.clearOdds();
+      this.getOddsFromDatabase().subscribe(odds => {
+        this.loading = false;
+        this.odds = odds;
+        this.updateOddsSubscribers();
+        observer.next();
       });
     });
   }
@@ -58,7 +68,7 @@ export class OddsService {
     return this.previousOdds;
   }
 
-  oddsFirstUpdate(): Observable<OddsBundle> {
+  getOddsFromDatabase(): Observable<OddsBundle> {
     return this.http.get<OddsBundle>('api/odds');
   }
 
