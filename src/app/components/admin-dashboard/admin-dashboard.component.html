@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row" *ngIf="auth.isAdmin() && !stillLoading()">
+
+    <div class="col-12 col-sm-6 col-lg-4">
+      Voting:
+
+      <button class="btn btn-lg"
+              [ngClass]="getVotingButtonClass(true)"
+              (click)="toggleVotingLock(true)">
+        Open
+      </button>
+      <button class="btn btn-lg"
+              [ngClass]="getVotingButtonClass(false)"
+              (click)="toggleVotingLock(false)">
+        Closed
+      </button>
+
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="card navCard">
+        <div class="card-body"
+             routerLink="/odds">
+          <div class="row">
+            <div class="col-10 navTitle">
+              <span>Input Odds</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12">
+
+      <span>Change Year:</span><br>
+      <button *ngFor="let year of possibleYears"
+              class="btn btn-lg"
+              [ngClass]="yearButtonClass(year)"
+              (click)="changeCurrentYear(year)">
+        {{year}}
+      </button>
+
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="card navCard"
+           (click)="resetWinners()">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-10"
+                 [ngClass]="getWinnersButtonClass()">
+              <span>Reset Winners</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

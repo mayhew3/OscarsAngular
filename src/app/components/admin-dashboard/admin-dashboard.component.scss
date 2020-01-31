@@ -1,0 +1,19 @@
+@import "../../../variables";
+
+.navCard {
+  font-size: 24pt;
+  margin-bottom: 10px;
+  border-color: $highlight;
+}
+
+.navTitle {
+  color: white;
+}
+
+.inProcess {
+  color: #6f42c1;
+}
+
+.winnersAreReset {
+  color: dimgray;
+}

@@ -14,7 +14,6 @@ import {MockOdds} from './data/odds.mock';
 import {MockFinalResultsList} from './data/finalresults.mock';
 import {Category} from '../interfaces/Category';
 import {InMemoryCallbacksService} from './in-memory-callbacks.service';
-import {Person} from '../interfaces/Person';
 
 @Injectable({
   providedIn: 'root',
@@ -77,6 +76,8 @@ export class InMemoryDataService implements InMemoryDbService {
       return this.getCategoriesWithVotes(requestInfo);
     } else if (collectionName === 'events') {
       return this.getEventsSinceDate(requestInfo);
+    } else if (collectionName === 'maxYear') {
+      return this.getMaxYear(requestInfo);
     }
   }
 
@@ -87,7 +88,7 @@ export class InMemoryDataService implements InMemoryDbService {
     if (collectionName === 'nominees') {
       this.updateNomination(requestInfo);
     } else if (requestInfo.collectionName === 'systemVars') {
-      this.changeVotingOpen(requestInfo);
+      this.updateSystemVars(requestInfo);
     }
     return undefined;
   }
@@ -128,17 +129,20 @@ export class InMemoryDataService implements InMemoryDbService {
     this.sendUpdatedOdds();
   }
 
-  private changeVotingOpen(requestInfo: RequestInfo) {
+  private updateSystemVars(requestInfo: RequestInfo) {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const systemVars = this.systemVars[0];
-    systemVars.voting_open = jsonBody.voting_open;
 
-    const msg = {
-      voting_open: systemVars.voting_open
-    };
+    if (systemVars.voting_open !== jsonBody.voting_open) {
+      systemVars.voting_open = jsonBody.voting_open;
 
-    const callbacks = this.getCallbacks('voting');
-    _.forEach(callbacks, callback => callback(msg));
+      const msg = {
+        voting_open: systemVars.voting_open
+      };
+
+      const callbacks = this.getCallbacks('voting');
+      _.forEach(callbacks, callback => callback(msg));
+    }
   }
 
   private addOrDeleteWinner(requestInfo: RequestInfo) {
@@ -206,12 +210,43 @@ export class InMemoryDataService implements InMemoryDbService {
       const person_id = entries.next().value[1][0];
       const year = entries.next().value[1][0];
 
+      const data = [];
+
       _.forEach(requestInfo.collection, category => {
-        category.nominees = _.where(category.nominees, {year: +year});
-        category.voted_on = this.getVoteForCategory(category.id, +person_id, +year);
+        const copyCategory: Category = {
+          id: category.id,
+          name: category.name,
+          points: category.points,
+          nominees: _.where(category.nominees, {year: +year}),
+          voted_on: this.getVoteForCategory(category.id, +person_id, +year),
+          winners: _.where(category.winners, {year: +year})
+        };
+        data.push(copyCategory);
       });
 
-      const data = requestInfo.collection;
+      const options: ResponseOptions = data ?
+        {
+          body: dataEncapsulation ? { data } : data,
+          status: STATUS.OK
+        } :
+        {
+          body: dataEncapsulation ? { } : data,
+          status: STATUS.OK
+        };
+      return InMemoryDataService.finishOptions(options, requestInfo);
+    });
+  }
+
+  private getMaxYear(requestInfo: RequestInfo): Observable<any> {
+    return requestInfo.utils.createResponse$(() => {
+      console.log('HTTP GET override');
+
+      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
+
+      const maxYear = _.max(_.map(this.categories, category => _.max(_.map(category.nominees, nominee => nominee.year))));
+      const data = {
+        maxYear: maxYear
+      };
 
       const options: ResponseOptions = data ?
         {
