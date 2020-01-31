@@ -29,8 +29,17 @@ exports.updateSystemVars = async function(request, response) {
   }
 
   if (isVotingOpenChanged) {
+    const event_time = new Date;
+    const event = await model.Event.create({
+      type: 'voting',
+      detail: !!systemVar.voting_open ? 'open' : 'locked',
+      event_time: event_time
+    });
+
     const msg = {
-      voting_open: systemVar.voting_open
+      voting_open: systemVar.voting_open,
+      event_id: event.id,
+      event_time: event_time
     };
     socket.emitToAll('voting', msg);
   }

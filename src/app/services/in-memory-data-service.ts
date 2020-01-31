@@ -137,7 +137,9 @@ export class InMemoryDataService implements InMemoryDbService {
       systemVars.voting_open = jsonBody.voting_open;
 
       const msg = {
-        voting_open: systemVars.voting_open
+        voting_open: systemVars.voting_open,
+        event_id: 1,
+        event_time: new Date
       };
 
       const callbacks = this.getCallbacks('voting');
