@@ -55,6 +55,10 @@ export class CategoryService {
     });
   }
 
+  getCategoryCountNow(): number {
+    return this.cache.length;
+  }
+
   private getCategoryFromCache(id: number): Category {
     return _.findWhere(this.cache, {id: id});
   }

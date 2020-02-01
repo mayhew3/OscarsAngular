@@ -18,14 +18,21 @@ const httpOptions = {
 })
 export class VotesService {
   votesUrl = 'api/votes';
+  isLoading = true;
   private readonly cache: Vote[];
 
   constructor(private http: HttpClient,
               private systemVarsService: SystemVarsService) {
     this.cache = [];
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      this.maybeUpdateCache(systemVars.curr_year).subscribe();
+      this.maybeUpdateCache(systemVars.curr_year).subscribe(() => {
+        this.isLoading = false;
+      });
     });
+  }
+
+  stillLoading(): boolean {
+    return this.isLoading;
   }
 
   // HELPERS

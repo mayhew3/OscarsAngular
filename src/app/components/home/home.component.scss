@@ -10,10 +10,7 @@
   color: white;
 }
 
-.inProcess {
-  color: #6f42c1;
-}
-
-.winnersAreReset {
-  color: dimgray;
+.votesRemaining {
+  color: lighten(forestgreen, 20%);
+  font-weight: bold;
 }
