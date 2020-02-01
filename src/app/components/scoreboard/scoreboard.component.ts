@@ -317,6 +317,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   public getVoters(): Person[] {
+    // noinspection TypeScriptValidateJSTypes
     return _.filter(this.persons, person => person.num_votes);
   }
 
@@ -328,5 +329,15 @@ export class ScoreboardComponent implements OnInit {
     this.personService.updatePerson(this.me).subscribe(() => {
       this.updatingOddsFilter = false;
     });
+  }
+
+  /* CATEGORY PROGRESS BAR */
+
+  getTotalCategoryCount(): number {
+    return this.categoryService.getCategoryCountNow();
+  }
+
+  getWinnerCategoryCount(): number {
+    return this.categoryService.getCategoriesWithWinners().length;
   }
 }

@@ -130,6 +130,13 @@
           </div>
         </div>
 
+        <div class="col-12 text-right">
+          {{getWinnerCategoryCount()}}/{{getTotalCategoryCount()}}
+        </div>
+        <div class="col-12">
+          <ngb-progressbar type="info" [value]="getWinnerCategoryCount()" [max]="getTotalCategoryCount()"></ngb-progressbar>
+        </div>
+
       </div>
 
     </div>

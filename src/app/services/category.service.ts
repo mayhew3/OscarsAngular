@@ -132,6 +132,11 @@ export class CategoryService {
     return _.find(this.cache, category => _.findWhere(category.nominees, {id: nomination_id}));
   }
 
+  getCategoriesWithWinners(): Category[] {
+    // noinspection TypeScriptValidateJSTypes
+    return _.filter(this.cache, category => category.winners.length > 0);
+  }
+
   getMostRecentCategory(): Category {
     // noinspection TypeScriptValidateJSTypes
     const winners = _.flatten(_.map(this.cache, category => category.winners));
