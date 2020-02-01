@@ -92,16 +92,27 @@ export class VotesService {
   }
 
   addOrUpdateVote(nominee: Nominee, person: Person): Observable<Vote> {
-    const data = {
-      category_id: nominee.category_id,
-      year: nominee.year,
-      person_id: person.id,
-      nomination_id: nominee.id
-    };
-    return this.http.post(this.votesUrl, data, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('addOrUpdateVote', data))
-      );
+    return new Observable<Vote>(observer => {
+      const data = {
+        category_id: nominee.category_id,
+        year: nominee.year,
+        person_id: person.id,
+        nomination_id: nominee.id
+      };
+      this.http.post(this.votesUrl, data, httpOptions)
+        .pipe(
+          catchError(this.handleError<any>('addOrUpdateVote', data))
+        )
+        .subscribe(vote => {
+          const existingVote = _.findWhere(this.cache, {id: vote.id});
+          if (!!existingVote) {
+            existingVote.nomination_id = nominee.id;
+          } else {
+            this.cache.push(vote);
+          }
+          observer.next(vote);
+        });
+    });
   }
 
 
