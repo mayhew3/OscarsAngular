@@ -23,6 +23,7 @@ import { HistoryComponent } from './components/history/history.component';
 import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
 import { PersonDetailComponent } from './components/person-detail/person-detail.component';
 import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbProgressbarModule} from '@ng-bootstrap/ng-bootstrap';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
@@ -50,6 +51,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
         AppRoutingModule,
         environment.httpModules,
         NgbDropdownModule,
+        NgbProgressbarModule,
         ReactiveFormsModule,
         // use in-memory for CLI environment, regular http for prod and local server
     ],
