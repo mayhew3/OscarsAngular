@@ -31,7 +31,7 @@ $cyan:    #5bc0de !default;
 $primary:       $gray-800 !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
-$info:          $cyan !default;
+$info:          lighten(cornflowerblue, 10%) !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-200 !default;
