@@ -42,12 +42,7 @@ export class ScoreboardComponent implements OnInit {
 
         this.updateScoreboard().subscribe(() => {
           this.socket.on('reconnect', () => {
-            this.categoryService.refreshCache().subscribe(() => {
-              this.oddsService.refreshCache().subscribe(() => {
-                this.clearSortingOdds();
-                this.updateScoreboard().subscribe();
-              });
-            });
+            this.refreshData();
           });
         });
 
@@ -59,6 +54,21 @@ export class ScoreboardComponent implements OnInit {
           this.fastSortPersons();
         });
 
+      });
+    });
+  }
+
+  adminRefreshData(): void {
+    if (this.auth.isAdmin()) {
+      this.refreshData();
+    }
+  }
+
+  refreshData(): void {
+    this.categoryService.refreshCache().subscribe(() => {
+      this.oddsService.refreshCache().subscribe(() => {
+        this.clearSortingOdds();
+        this.updateScoreboard().subscribe();
       });
     });
   }

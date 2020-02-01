@@ -352,6 +352,7 @@ export class CategoryService {
                 _.forEach(categories, category => {
                   _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
                 });
+                this.cache.length = 0;
                 CategoryService.addToArray(this.cache, categories);
                 this.socket.on('winner', updateWinnersInCacheAndNotify);
                 observer.next(categories);
