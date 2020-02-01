@@ -5,9 +5,6 @@ import {_} from 'underscore';
 import {forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
-import {VotesService} from '../../services/votes.service';
-import {PersonService} from '../../services/person.service';
-import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'osc-category-hopper',
@@ -21,19 +18,12 @@ export class CategoryHopperComponent implements OnInit {
   @Input() nominees: Nominee[];
   @Input() activeContext: ActiveContext;
   private readonly contextUrls: string[];
-  categoryCount: number;
 
-  constructor(private categoryService: CategoryService,
-              private votesService: VotesService,
-              private auth: AuthService) {
+  constructor(private categoryService: CategoryService) {
     this.contextUrls = [];
     this.contextUrls[ActiveContext.Vote] = 'vote';
     this.contextUrls[ActiveContext.OddsAssignment] = 'odds';
     this.contextUrls[ActiveContext.Winner] = 'winners';
-
-    this.categoryService.getCategories().subscribe(categories => {
-      this.categoryCount = categories.length;
-    });
   }
 
   ngOnInit() {
@@ -42,24 +32,6 @@ export class CategoryHopperComponent implements OnInit {
 
   baseLink(): string {
     return this.contextUrls[this.activeContext];
-  }
-
-  votingMode(): boolean {
-    return ActiveContext.Vote === this.activeContext;
-  }
-
-  numVotesComplete(): number {
-    const me = this.auth.getPersonNow();
-    if (!!me) {
-      return this.votesService.getVotesForCurrentYearAndPerson(me).length;
-    } else {
-      return 0;
-    }
-  }
-
-  percentVotesComplete(): number {
-    const voteCount = this.numVotesComplete();
-    return !!this.categoryCount ? (voteCount * 100) / this.categoryCount : 0;
   }
 
   showOdds(): boolean {
