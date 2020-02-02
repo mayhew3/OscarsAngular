@@ -53,7 +53,9 @@
               <div class="col-4">
                 <div *ngIf="shouldShowOdds()">
                   <span class="odds oddsSubtitle">Odds</span>
-                  <span class="odds oddsValue">{{getOddsForPerson(person)}}</span>
+                  <span class="odds oddsValue"
+                        [ngStyle]="{ color: getOddsStyle(person)}">{{getOddsForPerson(person)}}
+                  </span>
                   <span *ngIf="showOddsChange(person)"
                         class="oddsDiff"
                         [ngClass]="oddsDirectionClass(person)">

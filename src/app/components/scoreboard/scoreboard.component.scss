@@ -86,7 +86,6 @@
 }
 
 .odds {
-  color: $muted;
   text-align: right;
 }
 
@@ -97,6 +96,7 @@
 }
 
 .oddsSubtitle {
+  color: $muted;
   font-weight: normal;
   font-size: 10pt;
 }
