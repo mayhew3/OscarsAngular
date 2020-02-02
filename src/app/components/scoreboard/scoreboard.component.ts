@@ -21,10 +21,10 @@ import {Observable} from 'rxjs';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
-  public persons: Person[];
-  public latestCategory: Category;
-  private me: Person;
-  public updatingOddsFilter = false;
+  persons: Person[];
+  latestCategory: Category;
+  me: Person;
+  updatingOddsFilter = false;
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,

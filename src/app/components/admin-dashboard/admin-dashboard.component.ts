@@ -27,7 +27,7 @@ export class AdminDashboardComponent implements OnInit {
               private votesService: VotesService,
               private winnersService: WinnersService,
               private oddsService: OddsService,
-              private auth: AuthService) { }
+              public auth: AuthService) { }
 
   ngOnInit() {
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
