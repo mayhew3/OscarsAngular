@@ -205,7 +205,7 @@ export class ScoreboardComponent implements OnInit {
 
   showOddsChange(person: Person): boolean {
     const diff = this.oddsDirection(person);
-    return Math.abs(diff) >= 1;
+    return !this.itsOver() && Math.abs(diff) >= 1;
   }
 
   shouldShowOdds(): boolean {
