@@ -318,7 +318,7 @@ export class ScoreboardComponent implements OnInit {
     const isEliminated = this.categoryService.isEliminated(person, this.persons);
     if (this.isMe(person)) {
       return 'myScoreCard';
-    } else if (isEliminated && this.shouldShowEliminationOdds()) {
+    } else if (!this.itsOver() && isEliminated && this.shouldShowEliminationOdds()) {
       return 'eliminatedScoreCard';
     } else if (this.anyoneIsHigherInRankings(person)) {
       return 'loserScoreCard';
@@ -333,7 +333,7 @@ export class ScoreboardComponent implements OnInit {
       return 'winnerScorePoints';
     } else if (this.isMe(person)) {
       return 'myScorePoints';
-    } else if (isEliminated && this.shouldShowEliminationOdds()) {
+    } else if (!this.itsOver() && isEliminated && this.shouldShowEliminationOdds()) {
       return 'eliminatedScorePoints';
     } else if (this.anyoneIsHigherInRankings(person)) {
       return 'loserScorePoints';
