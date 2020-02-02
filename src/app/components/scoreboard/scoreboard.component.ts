@@ -15,6 +15,7 @@ import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {Observable} from 'rxjs';
 import {SystemVarsService} from '../../services/system.vars.service';
+import ordinal from 'ordinal';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -159,14 +160,6 @@ export class ScoreboardComponent implements OnInit {
     try {
       const numericOdds = this.getNumericOddsForPerson(person);
 
-      if (this.itsOver()) {
-        if (numericOdds === 100.0) {
-          return 'WINNER!';
-        } else {
-          return '';
-        }
-      }
-
       if (numericOdds === undefined) {
         return '...';
       } else if (numericOdds === 0.0) {
@@ -205,11 +198,11 @@ export class ScoreboardComponent implements OnInit {
 
   showOddsChange(person: Person): boolean {
     const diff = this.oddsDirection(person);
-    return !this.itsOver() && Math.abs(diff) >= 1;
+    return Math.abs(diff) >= 1;
   }
 
   shouldShowOdds(): boolean {
-    return this.me.odds_filter !== 'hide';
+    return !this.itsOver() && this.me.odds_filter !== 'hide';
   }
 
   oddsDirectionFormatted(person: Person): string {
@@ -303,8 +296,14 @@ export class ScoreboardComponent implements OnInit {
       .by([
         { desc: person => person.score},
         { desc: person => person.sortingOdds},
+        { desc: person => this.isMe(person)},
         { asc: person => person.first_name},
       ]);
+  }
+
+  getRank(person: Person): string {
+    const myRank = _.filter(this.persons, otherPerson => otherPerson.score > person.score).length + 1;
+    return ordinal(myRank);
   }
 
   stillLoading(): boolean {

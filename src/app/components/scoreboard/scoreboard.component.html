@@ -51,18 +51,31 @@
                 <span>{{getPersonName(person)}}</span>
               </div>
               <div class="col-4">
+
                 <div *ngIf="shouldShowOdds()">
-                  <span class="odds oddsSubtitle"
-                  *ngIf="!itsOver()">Odds</span>
+                  <span class="odds oddsSubtitle">Odds</span>
                   <span class="odds oddsValue"
                         [ngStyle]="{ color: getOddsStyle(person)}">{{getOddsForPerson(person)}}
                   </span>
                   <span *ngIf="showOddsChange(person)"
                         class="oddsDiff"
                         [ngClass]="oddsDirectionClass(person)">
-                  {{oddsDirectionFormatted(person)}}
+                    {{oddsDirectionFormatted(person)}}
                   </span>
                 </div>
+
+                <div *ngIf="itsOver()"
+                     class="text-center oddsValue">
+                  <div *ngIf="anyoneIsHigherInRankings(person)">
+                    {{getRank(person)}}
+                  </div>
+
+                  <div *ngIf="!anyoneIsHigherInRankings(person)"
+                       class="text-center oddsValue goldOdds">
+                    WINNER!
+                  </div>
+                </div>
+
               </div>
               <div class="col-3" style="justify-items: right">
                 <div class="row no-gutters">
