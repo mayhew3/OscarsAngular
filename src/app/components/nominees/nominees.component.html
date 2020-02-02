@@ -1,21 +1,27 @@
-<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between">
+<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between header">
   <div class="navbar-text">
-    <h2>
-      {{getHeaderText()}}
-    </h2>
+    <div class="row">
+      <div class="col-12 headerMain">
+        {{getHeaderText()}}
+      </div>
+    </div>
+    <div class="row" *ngIf="!!getHeaderSubtitle()">
+      <div class="col-12 headerSubtitle">
+        {{getHeaderSubtitle()}}
+      </div>
+    </div>
   </div>
-  <div class="navbar-text">
-    <h2>
-      {{getHeaderPts()}}
-    </h2>
+  <div class="navbar-text headerScore">
+    {{getHeaderPts()}}
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark fixed-bottom justify-content-center hopper">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom justify-content-center hopper">
   <osc-category-hopper [next]="nextCategory"
                        [prev]="previousCategory"
                        [nominees]="nominees"
-                       [activeContext]="activeContext">
+                       [activeContext]="activeContext"
+                        class="container container-fluid">
   </osc-category-hopper>
 </nav>
 
@@ -39,13 +45,19 @@
 
               <div class="col-9">
                 <div class="row">
-                  <div class="col-12 nomineeName">
+                  <div class="col-12 nomineeName py-1">
                     {{getMainLineText(nominee)}}
                   </div>
                 </div>
-                <div class="row" *ngIf="nominee.context">
-                  <div class="col-12 nomineeSubtitle">
+                <div class="row" *ngIf="showSubtitleText(nominee)">
+                  <div class="col-12 nomineeSubtitle py-1">
                     {{getSubtitleText(nominee)}}
+                  </div>
+                </div>
+                <div class="row" *ngIf="showSongSubtitle(nominee)">
+                  <div class="col-12 nomineeSubtitle py-1"
+                       *ngFor="let subtitle of getSongSubtitles(nominee)">
+                    {{subtitle}}
                   </div>
                 </div>
               </div>

@@ -46,7 +46,8 @@ exports.Person = sequelize.sequelize.define("person", {
   last_name: Sequelize.TEXT,
   middle_name: Sequelize.TEXT,
   role: Sequelize.TEXT,
-  email: Sequelize.TEXT
+  email: Sequelize.TEXT,
+  odds_filter: Sequelize.TEXT,
 }, {
   freezeTableName: true,
   createdAt: false,
@@ -102,6 +103,7 @@ exports.OddsResult = sequelize.sequelize.define("odds_result", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   odds: Sequelize.INTEGER,
   person_id: Sequelize.INTEGER,
+  clinched: Sequelize.BOOLEAN,
   odds_execution_id: Sequelize.INTEGER
 }, {
   freezeTableName: true,

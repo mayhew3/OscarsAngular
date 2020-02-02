@@ -19,6 +19,8 @@ exports.updateSystemVars = async function(request, response) {
     response.send({msg: "Error finding system_var: " + error});
   }
 
+  const isVotingOpenChanged = result.voting_open !== systemVar.voting_open;
+
   try {
     await result.update(systemVar);
   } catch (err) {
@@ -26,10 +28,21 @@ exports.updateSystemVars = async function(request, response) {
     response.send({msg: "Error updating system_vars: " + JSON.stringify(systemVar)});
   }
 
-  const msg = {
-    voting_open: systemVar.voting_open
-  };
-  socket.emitToAll('voting', msg);
+  if (isVotingOpenChanged) {
+    const event_time = new Date;
+    const event = await model.Event.create({
+      type: 'voting',
+      detail: !!systemVar.voting_open ? 'open' : 'locked',
+      event_time: event_time
+    });
+
+    const msg = {
+      voting_open: systemVar.voting_open,
+      event_id: event.id,
+      event_time: event_time
+    };
+    socket.emitToAll('voting', msg);
+  }
 
   response.json({msg: 'Success'});
 };

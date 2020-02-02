@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { NomineesComponent } from './components/nominees/nominees.component';
 import { CategoryHopperComponent } from './components/category-hopper/category-hopper.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
 import {AuthService} from './services/auth/auth.service';
 import {CallbackComponent} from './components/callback/callback.component';
@@ -22,6 +22,9 @@ import { ScoreboardComponent } from './components/scoreboard/scoreboard.componen
 import { HistoryComponent } from './components/history/history.component';
 import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
 import { PersonDetailComponent } from './components/person-detail/person-detail.component';
+import {NgbDropdownModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbProgressbarModule} from '@ng-bootstrap/ng-bootstrap';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,14 +42,19 @@ import { PersonDetailComponent } from './components/person-detail/person-detail.
     WinnerDetailComponent,
     ScoreboardComponent,
     HistoryComponent,
-    PersonDetailComponent
+    PersonDetailComponent,
+    AdminDashboardComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    AppRoutingModule,
-    environment.httpModules // use in-memory for CLI environment, regular http for prod and local server
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        AppRoutingModule,
+        environment.httpModules,
+        NgbDropdownModule,
+        NgbProgressbarModule,
+        ReactiveFormsModule,
+        // use in-memory for CLI environment, regular http for prod and local server
+    ],
   providers: [AuthService, SystemVarsService, environment.socketModule, InMemoryCallbacksService],
   bootstrap: [AppComponent]
 })

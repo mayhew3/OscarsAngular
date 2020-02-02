@@ -3,6 +3,7 @@ import {Person} from '../../interfaces/Person';
 export const TestPersonList: Person[] = [
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "LastName",
     "groups": [1],
     "id": 18,
@@ -11,6 +12,7 @@ export const TestPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Park",
     "groups": [1],
     "id": 41,
@@ -19,6 +21,7 @@ export const TestPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Seavey",
     "groups": [
       1,

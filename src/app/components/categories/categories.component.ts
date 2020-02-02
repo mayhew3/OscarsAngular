@@ -42,6 +42,14 @@ export class CategoriesComponent implements OnInit {
       (this.systemVarsService.canVote() || !this.votingMode());
   }
 
+  getCategoryName(category: Category): string {
+    return this.categoryService.getCategoryName(category);
+  }
+
+  getCategorySubtitle(category: Category): string {
+    return this.categoryService.getCategorySubtitle(category);
+  }
+
   showVotingClosedMessage(): boolean {
     return !this.stillLoading() &&
       this.votingMode() && !this.systemVarsService.canVote();

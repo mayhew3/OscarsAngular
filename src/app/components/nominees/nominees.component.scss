@@ -5,6 +5,26 @@
   padding-bottom: 120px;
 }
 
+.header {
+  line-height: 180%;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  font-weight: bolder;
+  padding-top: 7px;
+}
+
+.headerMain {
+  font-size: 23pt;
+}
+
+.headerSubtitle {
+  font-size: 16pt;
+}
+
+.headerScore {
+  font-size: 28pt;
+}
+
 .nomineeCard {
   margin-bottom: 10px;
   border-color: $highlight;
@@ -16,11 +36,13 @@
 
 .nomineeName {
   font-size: 16pt;
+  line-height: 120%;
 }
 
 .nomineeSubtitle {
   font-size: 12pt;
   color: $muted;
+  line-height: 120%;
 }
 
 .votedOn {

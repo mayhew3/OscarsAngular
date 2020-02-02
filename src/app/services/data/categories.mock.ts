@@ -83,6 +83,78 @@ export const MockCategoryList: Category[] = [
         "id": 2770,
         "detail": "Graham King, Producer",
         "odds_numerator": 25
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "Ford v Ferrari",
+        "nominee": "Ford v Ferrari",
+        "id": 4007,
+        "detail": "Peter Chernin, Jenno Topping and James Mangold, Producers"
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 4008,
+        "detail": "Martin Scorsese, Robert De Niro, Jane Rosenthal and Emma Tillinger Koskoff, Producers"
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "Jojo Rabbit",
+        "nominee": "Jojo Rabbit",
+        "id": 4009,
+        "detail": "Carthew Neal, Taika Waititi and Chelsea Winstanley, Producers"
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 4010,
+        "detail": "Todd Phillips, Bradley Cooper and Emma Tillinger Koskoff, Producers"
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "Little Women",
+        "nominee": "Little Women",
+        "id": 4011,
+        "detail": "Amy Pascal, Producer"
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "Marriage Story",
+        "nominee": "Marriage Story",
+        "id": 4012,
+        "detail": "Noah Baumbach and David Heyman, Producers"
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 4013,
+        "detail": "Sam Mendes, Pippa Harris, Jayne-Ann Tenggren and Callum McDougall, Producers"
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 4014,
+        "detail": "David Heyman, Shannon McIntosh and Quentin Tarantino, Producers"
+      },
+      {
+        "category_id": 5,
+        "year": 2019,
+        "context": "Parasite",
+        "nominee": "Parasite",
+        "id": 4015,
+        "detail": "Kwak Sin Ae and Bong Joon Ho, Producers"
       }
     ],
     "name": "Best Picture",
@@ -121,6 +193,14 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 25
       },
       {
+        "category_id": 1,
+        "year": 2019,
+        "context": "Pain and Glory",
+        "nominee": "Antonio Banderas ",
+        "id": 3932,
+        "detail": "Pain and Glory"
+      },
+      {
         "odds_expert": 5,
         "odds_denominator": 1,
         "category_id": 1,
@@ -143,6 +223,38 @@ export const MockCategoryList: Category[] = [
         "id": 2698,
         "detail": "Bohemian Rhapsody",
         "odds_numerator": 1
+      },
+      {
+        "category_id": 1,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Leonardo DiCaprio ",
+        "id": 3933,
+        "detail": "Once Upon a Time...in Hollywood"
+      },
+      {
+        "category_id": 1,
+        "year": 2019,
+        "context": "Marriage Story",
+        "nominee": "Adam Driver ",
+        "id": 3934,
+        "detail": "Marriage Story"
+      },
+      {
+        "category_id": 1,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joaquin Phoenix ",
+        "id": 3935,
+        "detail": "Joker"
+      },
+      {
+        "category_id": 1,
+        "year": 2019,
+        "context": "The Two Popes",
+        "nominee": "Jonathan Pryce ",
+        "id": 3936,
+        "detail": "The Two Popes"
       }
     ],
     "name": "Actor",
@@ -202,6 +314,46 @@ export const MockCategoryList: Category[] = [
         "id": 2708,
         "detail": "A Star Is Born",
         "odds_numerator": 20
+      },
+      {
+        "category_id": 2,
+        "year": 2019,
+        "context": "Harriet",
+        "nominee": "Cynthia Erivo ",
+        "id": 3942,
+        "detail": "Harriet"
+      },
+      {
+        "category_id": 2,
+        "year": 2019,
+        "context": "Marriage Story",
+        "nominee": "Scarlett Johansson ",
+        "id": 3943,
+        "detail": "Marriage Story"
+      },
+      {
+        "category_id": 2,
+        "year": 2019,
+        "context": "Little Women",
+        "nominee": "Saoirse Ronan ",
+        "id": 3944,
+        "detail": "Little Women"
+      },
+      {
+        "category_id": 2,
+        "year": 2019,
+        "context": "Bombshell",
+        "nominee": "Charlize Theron ",
+        "id": 3945,
+        "detail": "Bombshell"
+      },
+      {
+        "category_id": 2,
+        "year": 2019,
+        "context": "Judy",
+        "nominee": "Renée Zellweger ",
+        "id": 3946,
+        "detail": "Judy"
       }
     ],
     "name": "Actress",
@@ -261,6 +413,46 @@ export const MockCategoryList: Category[] = [
         "id": 2733,
         "detail": "Alfonso Cuarón",
         "odds_numerator": 1
+      },
+      {
+        "category_id": 8,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 3967,
+        "detail": "Martin Scorsese"
+      },
+      {
+        "category_id": 8,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 3968,
+        "detail": "Todd Phillips"
+      },
+      {
+        "category_id": 8,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 3969,
+        "detail": "Sam Mendes"
+      },
+      {
+        "category_id": 8,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 3970,
+        "detail": "Quentin Tarantino"
+      },
+      {
+        "category_id": 8,
+        "year": 2019,
+        "context": "Parasite",
+        "nominee": "Parasite",
+        "id": 3971,
+        "detail": "Bong Joon Ho"
       }
     ],
     "name": "Directing",
@@ -319,6 +511,46 @@ export const MockCategoryList: Category[] = [
         "id": 2715,
         "detail": "Brad Bird, John Walker and Nicole Paradis Grindle",
         "odds_numerator": 9
+      },
+      {
+        "category_id": 3,
+        "year": 2019,
+        "context": "How to Train Your Dragon: The Hidden World",
+        "nominee": "How to Train Your Dragon: The Hidden World",
+        "id": 3952,
+        "detail": "Dean DeBlois, Bradford Lewis and Bonnie Arnold"
+      },
+      {
+        "category_id": 3,
+        "year": 2019,
+        "context": "I Lost My Body",
+        "nominee": "I Lost My Body",
+        "id": 3953,
+        "detail": "Jérémy Clapin and Marc du Pontavice"
+      },
+      {
+        "category_id": 3,
+        "year": 2019,
+        "context": "Klaus",
+        "nominee": "Klaus",
+        "id": 3954,
+        "detail": "Sergio Pablos, Jinko Gotoh and Marisa Román"
+      },
+      {
+        "category_id": 3,
+        "year": 2019,
+        "context": "Missing Link",
+        "nominee": "Missing Link",
+        "id": 3955,
+        "detail": "Chris Butler, Arianne Sutner and Travis Knight"
+      },
+      {
+        "category_id": 3,
+        "year": 2019,
+        "context": "Toy Story 4",
+        "nominee": "Toy Story 4",
+        "id": 3956,
+        "detail": "Josh Cooley, Mark Nielsen and Jonas Rivera"
       }
     ],
     "name": "Animated Feature",
@@ -327,11 +559,11 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2020-01-23 17:27:54.554",
+      "declared": "2020-01-28 18:39:53.128",
       "category_id": 20,
       "year": 2018,
       "nomination_id": 2703,
-      "id": 364
+      "id": 379
     }],
     "nominees": [
       {
@@ -385,6 +617,46 @@ export const MockCategoryList: Category[] = [
         "id": 2702,
         "detail": "A Star Is Born",
         "odds_numerator": 16
+      },
+      {
+        "category_id": 20,
+        "year": 2019,
+        "context": "A Beautiful Day in the Neighborhood",
+        "nominee": "Tom Hanks ",
+        "id": 3937,
+        "detail": "A Beautiful Day in the Neighborhood"
+      },
+      {
+        "category_id": 20,
+        "year": 2019,
+        "context": "The Two Popes",
+        "nominee": "Anthony Hopkins ",
+        "id": 3938,
+        "detail": "The Two Popes"
+      },
+      {
+        "category_id": 20,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "Al Pacino ",
+        "id": 3939,
+        "detail": "The Irishman"
+      },
+      {
+        "category_id": 20,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "Joe Pesci ",
+        "id": 3940,
+        "detail": "The Irishman"
+      },
+      {
+        "category_id": 20,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Brad Pitt ",
+        "id": 3941,
+        "detail": "Once Upon a Time...in Hollywood"
       }
     ],
     "name": "Supporting Actor",
@@ -392,13 +664,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [{
-      "declared": "2020-01-23 14:22:02.289",
-      "category_id": 21,
-      "year": 2018,
-      "nomination_id": 2712,
-      "id": 353
-    }],
+    "winners": [],
     "nominees": [
       {
         "odds_denominator": 1,
@@ -452,6 +718,46 @@ export const MockCategoryList: Category[] = [
         "id": 2714,
         "detail": "The Favourite",
         "odds_numerator": 6
+      },
+      {
+        "category_id": 21,
+        "year": 2019,
+        "context": "Richard Jewell",
+        "nominee": "Kathy Bates ",
+        "id": 3947,
+        "detail": "Richard Jewell"
+      },
+      {
+        "category_id": 21,
+        "year": 2019,
+        "context": "Marriage Story",
+        "nominee": "Laura Dern ",
+        "id": 3948,
+        "detail": "Marriage Story"
+      },
+      {
+        "category_id": 21,
+        "year": 2019,
+        "context": "Jojo Rabbit",
+        "nominee": "Scarlett Johansson ",
+        "id": 3949,
+        "detail": "Jojo Rabbit"
+      },
+      {
+        "category_id": 21,
+        "year": 2019,
+        "context": "Little Women",
+        "nominee": "Florence Pugh ",
+        "id": 3950,
+        "detail": "Little Women"
+      },
+      {
+        "category_id": 21,
+        "year": 2019,
+        "context": "Bombshell",
+        "nominee": "Margot Robbie ",
+        "id": 3951,
+        "detail": "Bombshell"
       }
     ],
     "name": "Supporting Actress",
@@ -513,6 +819,46 @@ export const MockCategoryList: Category[] = [
         "odds_user": 26,
         "id": 2810,
         "detail": "Screenplay by Eric Roth and Bradley Cooper & Will Fetters"
+      },
+      {
+        "category_id": 23,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 4046,
+        "detail": "Screenplay by Steven Zaillian"
+      },
+      {
+        "category_id": 23,
+        "year": 2019,
+        "context": "Jojo Rabbit",
+        "nominee": "Jojo Rabbit",
+        "id": 4047,
+        "detail": "Screenplay by Taika Waititi"
+      },
+      {
+        "category_id": 23,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 4048,
+        "detail": "Written by Todd Phillips & Scott Silver"
+      },
+      {
+        "category_id": 23,
+        "year": 2019,
+        "context": "Little Women",
+        "nominee": "Little Women",
+        "id": 4049,
+        "detail": "Written for the screen by Greta Gerwig"
+      },
+      {
+        "category_id": 23,
+        "year": 2019,
+        "context": "The Two Popes",
+        "nominee": "The Two Popes",
+        "id": 4050,
+        "detail": "Written by Anthony McCarten"
       }
     ],
     "name": "Writing (Adapted Screenplay)",
@@ -573,6 +919,46 @@ export const MockCategoryList: Category[] = [
         "nominee": "Vice",
         "id": 2815,
         "detail": "Written by Adam McKay"
+      },
+      {
+        "category_id": 24,
+        "year": 2019,
+        "context": "Knives Out",
+        "nominee": "Knives Out",
+        "id": 4051,
+        "detail": "Written by Rian Johnson"
+      },
+      {
+        "category_id": 24,
+        "year": 2019,
+        "context": "Marriage Story",
+        "nominee": "Marriage Story",
+        "id": 4052,
+        "detail": "Written by Noah Baumbach"
+      },
+      {
+        "category_id": 24,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 4053,
+        "detail": "Written by Sam Mendes & Krysty Wilson-Cairns"
+      },
+      {
+        "category_id": 24,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 4054,
+        "detail": "Written by Quentin Tarantino"
+      },
+      {
+        "category_id": 24,
+        "year": 2019,
+        "context": "Parasite",
+        "nominee": "Parasite",
+        "id": 4055,
+        "detail": "Screenplay by Bong Joon Ho, Han Jin Won; Story by Bong Joon Ho"
       }
     ],
     "name": "Writing (Original Screenplay)",
@@ -632,6 +1018,46 @@ export const MockCategoryList: Category[] = [
         "id": 2724,
         "detail": "Matthew Libatique",
         "odds_numerator": 14
+      },
+      {
+        "category_id": 6,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 3957,
+        "detail": "Rodrigo Prieto"
+      },
+      {
+        "category_id": 6,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 3958,
+        "detail": "Lawrence Sher"
+      },
+      {
+        "category_id": 6,
+        "year": 2019,
+        "context": "The Lighthouse",
+        "nominee": "The Lighthouse",
+        "id": 3959,
+        "detail": "Jarin Blaschke"
+      },
+      {
+        "category_id": 6,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 3960,
+        "detail": "Roger Deakins"
+      },
+      {
+        "category_id": 6,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 3961,
+        "detail": "Robert Richardson"
       }
     ],
     "name": "Cinematography",
@@ -639,13 +1065,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-01-23 11:34:19.792",
-      "category_id": 7,
-      "year": 2018,
-      "nomination_id": 2727,
-      "id": 346
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 7,
@@ -694,6 +1114,46 @@ export const MockCategoryList: Category[] = [
         "id": 2727,
         "detail": "Sandy Powell",
         "odds_numerator": 2
+      },
+      {
+        "category_id": 7,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 3962,
+        "detail": "Sandy Powell and Christopher Peterson"
+      },
+      {
+        "category_id": 7,
+        "year": 2019,
+        "context": "Jojo Rabbit",
+        "nominee": "Jojo Rabbit",
+        "id": 3963,
+        "detail": "Mayes C. Rubeo"
+      },
+      {
+        "category_id": 7,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 3964,
+        "detail": "Mark Bridges"
+      },
+      {
+        "category_id": 7,
+        "year": 2019,
+        "context": "Little Women",
+        "nominee": "Little Women",
+        "id": 3965,
+        "detail": "Jacqueline Durran"
+      },
+      {
+        "category_id": 7,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 3966,
+        "detail": "Arianne Phillips"
       }
     ],
     "name": "Costume Design",
@@ -754,6 +1214,46 @@ export const MockCategoryList: Category[] = [
         "id": 2749,
         "detail": "Hank Corwin",
         "odds_numerator": 4
+      },
+      {
+        "category_id": 11,
+        "year": 2019,
+        "context": "Ford v Ferrari",
+        "nominee": "Ford v Ferrari",
+        "id": 3982,
+        "detail": "Michael McCusker and Andrew Buckland"
+      },
+      {
+        "category_id": 11,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 3983,
+        "detail": "Thelma Schoonmaker"
+      },
+      {
+        "category_id": 11,
+        "year": 2019,
+        "context": "Jojo Rabbit",
+        "nominee": "Jojo Rabbit",
+        "id": 3984,
+        "detail": "Tom Eagles"
+      },
+      {
+        "category_id": 11,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 3985,
+        "detail": "Jeff Groth"
+      },
+      {
+        "category_id": 11,
+        "year": 2019,
+        "context": "Parasite",
+        "nominee": "Parasite",
+        "id": 3986,
+        "detail": "Yang Jinmo"
       }
     ],
     "name": "Film Editing",
@@ -761,13 +1261,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-01-23 11:35:35.585",
-      "category_id": 13,
-      "year": 2018,
-      "nomination_id": 2756,
-      "id": 348
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 13,
@@ -800,6 +1294,46 @@ export const MockCategoryList: Category[] = [
         "id": 2757,
         "detail": "Greg Cannom, Kate Biscoe and Patricia DeHaney",
         "odds_numerator": 1
+      },
+      {
+        "category_id": 13,
+        "year": 2019,
+        "context": "Bombshell",
+        "nominee": "Bombshell",
+        "id": 3992,
+        "detail": "Kazu Hiro, Anne Morgan and Vivian Baker"
+      },
+      {
+        "category_id": 13,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 3993,
+        "detail": "Nicki Ledermann and Kay Georgiou"
+      },
+      {
+        "category_id": 13,
+        "year": 2019,
+        "context": "Judy",
+        "nominee": "Judy",
+        "id": 3994,
+        "detail": "Jeremy Woodhead"
+      },
+      {
+        "category_id": 13,
+        "year": 2019,
+        "context": "Maleficent: Mistress of Evil",
+        "nominee": "Maleficent: Mistress of Evil",
+        "id": 3995,
+        "detail": "Paul Gooch, Arjen Tuiten and David White"
+      },
+      {
+        "category_id": 13,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 3996,
+        "detail": "Naomi Donne, Tristan Versluis and Rebecca Cole"
       }
     ],
     "name": "Makeup and Hairstyling",
@@ -860,6 +1394,46 @@ export const MockCategoryList: Category[] = [
         "id": 2762,
         "detail": "Marc Shaiman",
         "odds_numerator": 5
+      },
+      {
+        "category_id": 14,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 3997,
+        "detail": "Hildur Guðnadóttir"
+      },
+      {
+        "category_id": 14,
+        "year": 2019,
+        "context": "Little Women",
+        "nominee": "Little Women",
+        "id": 3998,
+        "detail": "Alexandre Desplat"
+      },
+      {
+        "category_id": 14,
+        "year": 2019,
+        "context": "Marriage Story",
+        "nominee": "Marriage Story",
+        "id": 3999,
+        "detail": "Randy Newman"
+      },
+      {
+        "category_id": 14,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 4000,
+        "detail": "Thomas Newman"
+      },
+      {
+        "category_id": 14,
+        "year": 2019,
+        "context": "Star Wars: The Rise of Skywalker",
+        "nominee": "Star Wars: The Rise of Skywalker",
+        "id": 4001,
+        "detail": "John Williams"
       }
     ],
     "name": "Music (Original Score)",
@@ -916,6 +1490,46 @@ export const MockCategoryList: Category[] = [
         "id": 2766,
         "detail": "from A Star Is Born; Music and Lyric by Lady Gaga, Mark Ronson, Anthony Rossomando and Andrew Wyatt",
         "odds_numerator": 1
+      },
+      {
+        "category_id": 15,
+        "year": 2019,
+        "context": "Toy Story 4",
+        "nominee": "Toy Story 4",
+        "id": 4002,
+        "detail": "\"I Can't Let You Throw Yourself Away\" "
+      },
+      {
+        "category_id": 15,
+        "year": 2019,
+        "context": "Rocketman",
+        "nominee": "Rocketman",
+        "id": 4003,
+        "detail": "\"(I'm Gonna) Love Me Again\" "
+      },
+      {
+        "category_id": 15,
+        "year": 2019,
+        "context": "Breakthrough",
+        "nominee": "Breakthrough",
+        "id": 4004,
+        "detail": "\"I'm Standing With You\" "
+      },
+      {
+        "category_id": 15,
+        "year": 2019,
+        "context": "Frozen II",
+        "nominee": "Frozen II",
+        "id": 4005,
+        "detail": "\"Into The Unknown\" "
+      },
+      {
+        "category_id": 15,
+        "year": 2019,
+        "context": "Harriet",
+        "nominee": "Harriet",
+        "id": 4006,
+        "detail": "\"Stand Up\" "
       }
     ],
     "name": "Music (Original Song)",
@@ -975,6 +1589,46 @@ export const MockCategoryList: Category[] = [
         "id": 2780,
         "detail": "Production Design: Eugenio Caballero; Set Decoration: Bárbara Enríquez",
         "odds_numerator": 10
+      },
+      {
+        "category_id": 4,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 4016,
+        "detail": "Production Design: Bob Shaw"
+      },
+      {
+        "category_id": 4,
+        "year": 2019,
+        "context": "Jojo Rabbit",
+        "nominee": "Jojo Rabbit",
+        "id": 4017,
+        "detail": "Production Design: Ra Vincent"
+      },
+      {
+        "category_id": 4,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 4018,
+        "detail": "Production Design: Dennis Gassner"
+      },
+      {
+        "category_id": 4,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 4019,
+        "detail": "Production Design: Barbara Ling"
+      },
+      {
+        "category_id": 4,
+        "year": 2019,
+        "context": "Parasite",
+        "nominee": "Parasite",
+        "id": 4020,
+        "detail": "Production Design: Lee Ha Jun"
       }
     ],
     "name": "Production Design",
@@ -1035,6 +1689,46 @@ export const MockCategoryList: Category[] = [
         "id": 2794,
         "detail": "Ethan Van der Ryn and Erik Aadahl",
         "odds_numerator": 6
+      },
+      {
+        "category_id": 18,
+        "year": 2019,
+        "context": "Ford v Ferrari",
+        "nominee": "Ford v Ferrari",
+        "id": 4031,
+        "detail": "Donald Sylvester"
+      },
+      {
+        "category_id": 18,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 4032,
+        "detail": "Alan Robert Murray"
+      },
+      {
+        "category_id": 18,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 4033,
+        "detail": "Oliver Tarney and Rachael Tate"
+      },
+      {
+        "category_id": 18,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 4034,
+        "detail": "Wylie Stateman"
+      },
+      {
+        "category_id": 18,
+        "year": 2019,
+        "context": "Star Wars: The Rise of Skywalker",
+        "nominee": "Star Wars: The Rise of Skywalker",
+        "id": 4035,
+        "detail": "Matthew Wood and David Acord"
       }
     ],
     "name": "Sound Editing",
@@ -1095,6 +1789,46 @@ export const MockCategoryList: Category[] = [
         "id": 2800,
         "detail": "Tom Ozanich, Dean Zupancic, Jason Ruder and Steve Morrow",
         "odds_numerator": 7
+      },
+      {
+        "category_id": 19,
+        "year": 2019,
+        "context": "Ad Astra",
+        "nominee": "Ad Astra",
+        "id": 4036,
+        "detail": "Gary Rydstrom, Tom Johnson and Mark Ulano"
+      },
+      {
+        "category_id": 19,
+        "year": 2019,
+        "context": "Ford v Ferrari",
+        "nominee": "Ford v Ferrari",
+        "id": 4037,
+        "detail": "Paul Massey, David Giammarco and Steven A. Morrow"
+      },
+      {
+        "category_id": 19,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "id": 4038,
+        "detail": "Tom Ozanich, Dean Zupancic and Tod Maitland"
+      },
+      {
+        "category_id": 19,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 4039,
+        "detail": "Mark Taylor and Stuart Wilson"
+      },
+      {
+        "category_id": 19,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 4040,
+        "detail": "Michael Minkler, Christian P. Minkler and Mark Ulano"
       }
     ],
     "name": "Sound Mixing",
@@ -1155,6 +1889,46 @@ export const MockCategoryList: Category[] = [
         "id": 2804,
         "detail": "Roger Guyett, Grady Cofer, Matthew E. Butler and David Shirk",
         "odds_numerator": 10
+      },
+      {
+        "category_id": 22,
+        "year": 2019,
+        "context": "Avengers: Endgame",
+        "nominee": "Avengers: Endgame",
+        "id": 4041,
+        "detail": "Dan DeLeeuw, Russell Earl, Matt Aitken and Dan Sudick"
+      },
+      {
+        "category_id": 22,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 4042,
+        "detail": "Pablo Helman, Leandro Estebecorena, Nelson Sepulveda-Fauser and Stephane Grabli"
+      },
+      {
+        "category_id": 22,
+        "year": 2019,
+        "context": "The Lion King",
+        "nominee": "The Lion King",
+        "id": 4043,
+        "detail": "Robert Legato, Adam Valdez, Andrew R. Jones and Elliot Newman"
+      },
+      {
+        "category_id": 22,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 4044,
+        "detail": "Guillaume Rocheron, Greg Butler and Dominic Tuohy"
+      },
+      {
+        "category_id": 22,
+        "year": 2019,
+        "context": "Star Wars: The Rise of Skywalker",
+        "nominee": "Star Wars: The Rise of Skywalker",
+        "id": 4045,
+        "detail": "Roger Guyett, Neal Scanlan, Patrick Tubach and Dominic Tuohy"
       }
     ],
     "name": "Visual Effects",
@@ -1215,6 +1989,46 @@ export const MockCategoryList: Category[] = [
         "id": 2739,
         "detail": "Betsy West and Julie Cohen",
         "odds_numerator": 1
+      },
+      {
+        "category_id": 9,
+        "year": 2019,
+        "context": "American Factory",
+        "nominee": "American Factory",
+        "id": 3972,
+        "detail": "Steven Bognar, Julia Reichert and Jeff Reichert"
+      },
+      {
+        "category_id": 9,
+        "year": 2019,
+        "context": "The Cave",
+        "nominee": "The Cave",
+        "id": 3973,
+        "detail": "Feras Fayyad, Kirstine Barfod and Sigrid Dyekjær"
+      },
+      {
+        "category_id": 9,
+        "year": 2019,
+        "context": "The Edge of Democracy",
+        "nominee": "The Edge of Democracy",
+        "id": 3974,
+        "detail": "Petra Costa, Joanna Natasegara, Shane Boris and Tiago Pavan"
+      },
+      {
+        "category_id": 9,
+        "year": 2019,
+        "context": "For Sama",
+        "nominee": "For Sama",
+        "id": 3975,
+        "detail": "Waad al-Kateab and Edward Watts"
+      },
+      {
+        "category_id": 9,
+        "year": 2019,
+        "context": "Honeyland",
+        "nominee": "Honeyland",
+        "id": 3976,
+        "detail": "Ljubo Stefanov, Tamara Kotevska and Atanas Georgiev"
       }
     ],
     "name": "Documentary Feature",
@@ -1275,6 +2089,46 @@ export const MockCategoryList: Category[] = [
         "id": 2744,
         "detail": "Rayka Zehtabchi and Melissa Berton",
         "odds_numerator": 4
+      },
+      {
+        "category_id": 10,
+        "year": 2019,
+        "context": "In the Absence",
+        "nominee": "In the Absence",
+        "id": 3977,
+        "detail": "Yi Seung-Jun and Gary Byung-Seok Kam"
+      },
+      {
+        "category_id": 10,
+        "year": 2019,
+        "context": "Learning to Skateboard in a Warzone (If You\u2019re a Girl)",
+        "nominee": "Learning to Skateboard in a Warzone (If You\u2019re a Girl)",
+        "id": 3978,
+        "detail": "Carol Dysinger and Elena Andreicheva"
+      },
+      {
+        "category_id": 10,
+        "year": 2019,
+        "context": "Life Overtakes Me",
+        "nominee": "Life Overtakes Me",
+        "id": 3979,
+        "detail": "John Haptas and Kristine Samuelson"
+      },
+      {
+        "category_id": 10,
+        "year": 2019,
+        "context": "St. Louis Superman",
+        "nominee": "St. Louis Superman",
+        "id": 3980,
+        "detail": "Smriti Mundhra and Sami Khan"
+      },
+      {
+        "category_id": 10,
+        "year": 2019,
+        "context": "Walk Run Cha-cha",
+        "nominee": "Walk Run Cha-cha",
+        "id": 3981,
+        "detail": "Laura Nix and Colette Sandstedt"
       }
     ],
     "name": "Documentary Short",
@@ -1334,6 +2188,46 @@ export const MockCategoryList: Category[] = [
         "id": 2754,
         "detail": "Japan",
         "odds_numerator": 20
+      },
+      {
+        "category_id": 12,
+        "year": 2019,
+        "context": "Corpus Christi",
+        "nominee": "Corpus Christi",
+        "id": 3987,
+        "detail": "Poland"
+      },
+      {
+        "category_id": 12,
+        "year": 2019,
+        "context": "Honeyland",
+        "nominee": "Honeyland",
+        "id": 3988,
+        "detail": "North Macedonia"
+      },
+      {
+        "category_id": 12,
+        "year": 2019,
+        "context": "Les Misérables",
+        "nominee": "Les Misérables",
+        "id": 3989,
+        "detail": "France"
+      },
+      {
+        "category_id": 12,
+        "year": 2019,
+        "context": "Pain and Glory",
+        "nominee": "Pain and Glory",
+        "id": 3990,
+        "detail": "Spain"
+      },
+      {
+        "category_id": 12,
+        "year": 2019,
+        "context": "Parasite",
+        "nominee": "Parasite",
+        "id": 3991,
+        "detail": "South Korea"
       }
     ],
     "name": "Foreign Language Film",
@@ -1393,6 +2287,46 @@ export const MockCategoryList: Category[] = [
         "id": 2785,
         "detail": "Trevor Jimenez",
         "odds_numerator": 7
+      },
+      {
+        "category_id": 16,
+        "year": 2019,
+        "context": "Dcera (Daughter)",
+        "nominee": "Dcera (Daughter)",
+        "id": 4021,
+        "detail": "Daria Kashcheeva"
+      },
+      {
+        "category_id": 16,
+        "year": 2019,
+        "context": "Hair Love",
+        "nominee": "Hair Love",
+        "id": 4022,
+        "detail": "Matthew A. Cherry and Karen Rupert Toliver"
+      },
+      {
+        "category_id": 16,
+        "year": 2019,
+        "context": "Kitbull",
+        "nominee": "Kitbull",
+        "id": 4023,
+        "detail": "Rosana Sullivan and Kathryn Hendrickson"
+      },
+      {
+        "category_id": 16,
+        "year": 2019,
+        "context": "Memorable",
+        "nominee": "Memorable",
+        "id": 4024,
+        "detail": "Bruno Collet and Jean-François Le Corre"
+      },
+      {
+        "category_id": 16,
+        "year": 2019,
+        "context": "Sister",
+        "nominee": "Sister",
+        "id": 4025,
+        "detail": "Siqi Song"
       }
     ],
     "name": "Short Film (Animated)",
@@ -1454,6 +2388,46 @@ export const MockCategoryList: Category[] = [
         "id": 2790,
         "detail": "Guy Nattiv and Jaime Ray Newman",
         "odds_numerator": 5
+      },
+      {
+        "category_id": 17,
+        "year": 2019,
+        "context": "Brotherhood",
+        "nominee": "Brotherhood",
+        "id": 4026,
+        "detail": "Meryam Joobeur and Maria Gracia Turgeon"
+      },
+      {
+        "category_id": 17,
+        "year": 2019,
+        "context": "Nefta Football Club",
+        "nominee": "Nefta Football Club",
+        "id": 4027,
+        "detail": "Yves Piat and Damien Megherbi"
+      },
+      {
+        "category_id": 17,
+        "year": 2019,
+        "context": "The Neighbors\u2019 Window",
+        "nominee": "The Neighbors\u2019 Window",
+        "id": 4028,
+        "detail": "Marshall Curry"
+      },
+      {
+        "category_id": 17,
+        "year": 2019,
+        "context": "Saria",
+        "nominee": "Saria",
+        "id": 4029,
+        "detail": "Bryan Buckley and Matt Lefebvre"
+      },
+      {
+        "category_id": 17,
+        "year": 2019,
+        "context": "A Sister",
+        "nominee": "A Sister",
+        "id": 4030,
+        "detail": "Delphine Girard"
       }
     ],
     "name": "Short Film (Live Action)",

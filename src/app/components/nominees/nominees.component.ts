@@ -10,10 +10,8 @@ import {AuthService} from '../../services/auth/auth.service';
 import {Vote} from '../../interfaces/Vote';
 import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
-import {Winner} from '../../interfaces/Winner';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-nominees',
@@ -89,6 +87,7 @@ export class NomineesComponent implements OnInit {
 
   private updateLocalWinningNominees(): void {
     const winners = this.category.winners;
+    // noinspection TypeScriptValidateJSTypes
     this.winningNominees = _.map(winners, winner => {
       const nomination_id = winner.nomination_id;
       return _.findWhere(this.nominees, {id: nomination_id});
@@ -117,7 +116,11 @@ export class NomineesComponent implements OnInit {
   }
 
   getHeaderText(): string {
-    return this.category ? this.category.name : '';
+    return this.category ? this.categoryService.getCategoryName(this.category) : '';
+  }
+
+  getHeaderSubtitle(): string {
+    return this.category ? this.categoryService.getCategorySubtitle(this.category) : '';
   }
 
   getHeaderPts(): string {
@@ -146,8 +149,20 @@ export class NomineesComponent implements OnInit {
     return Nominee.getSubtitleText(this.category, nominee);
   }
 
+  getSongSubtitles(nominee: Nominee): string[] {
+    return nominee.detail.split('; ');
+  }
+
   isVoted(nominee: Nominee): boolean {
     return this.votedNominee && this.votedNominee.id === nominee.id;
+  }
+
+  showSubtitleText(nominee: Nominee): boolean {
+    return !!nominee.context && !Nominee.isSongCategory(this.category.name);
+  }
+
+  showSongSubtitle(nominee: Nominee): boolean {
+    return !!nominee.context && Nominee.isSongCategory(this.category.name);
   }
 
   getVotedClass(nominee: Nominee): string {

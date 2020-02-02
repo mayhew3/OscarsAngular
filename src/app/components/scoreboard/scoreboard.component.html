@@ -1,6 +1,101 @@
 
-<nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter">
+<div class="scoreboard-body">
+  <div class="container">
+
+    <div class="row no-gutters">
+      <div class="col-9" (click)="adminRefreshData()">
+        <h1>Live Scoring</h1>
+      </div>
+
+      <!-- ODDS FILTER BUTTON -->
+
+      <div class="col-3 text-right">
+        <div ngbDropdown placement="bottom-right"
+             class="d-inline-block"
+             *ngIf="!!me">
+          <button class="btn btn-small btn-primary"
+                  [disabled]="updatingOddsFilter"
+                  id="oddsFilterDropdown"
+                  ngbDropdownToggle>
+            <i class="fas fa-filter"></i>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="oddsFilterDropdown">
+            <button *ngFor="let oddsOption of getOddsOptions()"
+                    (click)="changeOddsOption(oddsOption)"
+                    [ngClass]="getOddsFilterClass(oddsOption)"
+                    ngbDropdownItem>
+              {{getDisplayValueOf(oddsOption)}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p *ngIf="stillLoading()">Loading...</p>
+
+    <p *ngIf="!stillLoading() && getVoters().length === 0">
+      No players have voted yet!
+    </p>
+
+    <!-- PLAYER SCORES -->
+
+    <div class="row mt-2" *ngIf="!stillLoading()">
+      <div class="col-12 col-sm-6 col-lg-4"
+           *ngFor="let person of getVoters()">
+        <div class="card scoreCard"
+             [ngClass]="scorecardClass(person)"
+             [routerLink]="['/person', person.id]">
+          <div class="card-body py-0 px-3">
+            <div class="row no-gutters mainRow">
+              <div class="col-5">
+                <span>{{getPersonName(person)}}</span>
+              </div>
+              <div class="col-4">
+                <div *ngIf="shouldShowOdds()">
+                  <span class="odds oddsSubtitle">Odds</span>
+                  <span class="odds oddsValue"
+                        [ngStyle]="{ color: getOddsStyle(person)}">{{getOddsForPerson(person)}}
+                  </span>
+                  <span *ngIf="showOddsChange(person)"
+                        class="oddsDiff"
+                        [ngClass]="oddsDirectionClass(person)">
+                  {{oddsDirectionFormatted(person)}}
+                  </span>
+                </div>
+              </div>
+              <div class="col-3" style="justify-items: right">
+                <div class="row no-gutters">
+                  <div class="col-12 px-0 scorePoints">
+                    <span *ngIf="gotPointsForLastWinner(person)"
+                          class="scorePositive">
+                      <i class="fas fa-angle-double-up"></i>
+                    </span>
+                    <span class="scoreText"
+                      [ngClass]="scoreNumberClass(person)">{{person.score}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LAST WINNER FOOTER BAR -->
+
+<nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter"
+    *ngIf="!stillLoading()">
+
   <div class="container py-2">
+
+    <div *ngIf="!latestCategory">
+      <span class="footerSmall">
+        Waiting for the first award to be presented!
+      </span>
+    </div>
 
     <div *ngIf="!!latestCategory">
 
@@ -37,65 +132,15 @@
           </div>
         </div>
 
+        <div class="col-12 text-right">
+          {{getWinnerCategoryCount()}}/{{getTotalCategoryCount()}}
+        </div>
+        <div class="col-12">
+          <ngb-progressbar type="info" [value]="getWinnerCategoryCount()" [max]="getTotalCategoryCount()"></ngb-progressbar>
+        </div>
+
       </div>
 
     </div>
   </div>
 </nav>
-
-<div class="scoreboard-body">
-  <div class="container">
-
-    <div class="row">
-      <div class="col-12">
-        <h1>Live Scoring</h1>
-      </div>
-    </div>
-
-    <p *ngIf="stillLoading()">Loading...</p>
-
-    <p *ngIf="getVoters().length === 0">
-      No players have voted yet!
-    </p>
-
-    <div class="row mt-2" *ngIf="!stillLoading()">
-      <div class="col-12 col-sm-6 col-lg-4"
-           *ngFor="let person of getVoters()">
-        <div class="card scoreCard"
-             [ngClass]="scorecardClass(person)"
-             [routerLink]="['/person', person.id]">
-          <div class="card-body py-0 px-3">
-            <div class="row no-gutters mainRow">
-              <div class="col-5">
-                <span>{{getPersonName(person)}}</span>
-              </div>
-              <div class="col-4">
-                <span class="odds oddsSubtitle">Odds</span>
-                <span class="odds oddsValue">{{getOddsForPerson(person)}}</span>
-                <span *ngIf="showOddsChange(person)"
-                      class="oddsDiff"
-                      [ngClass]="oddsDirectionClass(person)">
-                  {{oddsDirectionFormatted(person)}}
-                </span>
-              </div>
-              <div class="col-3" style="justify-items: right">
-                <div class="row no-gutters">
-                  <div class="col-12 px-0 scorePoints">
-                    <span *ngIf="gotPointsForLastWinner(person)"
-                          class="scorePositive">
-                      <i class="fas fa-angle-double-up"></i>
-                    </span>
-                    <span class="scoreText"
-                      [ngClass]="scoreNumberClass(person)">{{person.score}}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-

@@ -22,6 +22,12 @@
   background-color: darken($silver, 62%);
 }
 
+.eliminatedScoreCard {
+  border-color: fade_out(darken($silver, 30%), .7);
+  color: fade_out($silver, .5);
+  background-color: fade_out(darken($silver, 62%), .5);
+}
+
 .myScoreCard {
   background-color: darken($personal, 5%);
   border-color: lighten($personal, 50%);
@@ -46,6 +52,10 @@
   -webkit-text-stroke-width: 1.5px;
 }
 
+.selectedOddsFilter {
+  background-color: #4f1561;
+}
+
 .scorePoints {
   text-align: right;
 }
@@ -60,13 +70,22 @@
   -webkit-text-stroke-color: $highlight;
 }
 
+.winnerScorePoints {
+  -webkit-text-fill-color: fade_out(lighten(forestgreen, 20%), 0.3); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(forestgreen, 20%);
+}
+
+.eliminatedScorePoints {
+  -webkit-text-fill-color: fade_out(darken($silver, 30%), .7); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: fade_out($silver, .5);
+}
+
 .loserScorePoints {
   -webkit-text-fill-color: fade_out($silver, 0.3); /* Will override color (regardless of order) */
   -webkit-text-stroke-color: $silver;
 }
 
 .odds {
-  color: $muted;
   text-align: right;
 }
 
@@ -77,6 +96,7 @@
 }
 
 .oddsSubtitle {
+  color: $muted;
   font-weight: normal;
   font-size: 10pt;
 }
@@ -84,6 +104,10 @@
 .oddsDiff {
   font-weight: bold;
   font-size: 10pt;
+}
+
+.goldOdds {
+  color: gold;
 }
 
 .oddsDiffGood {
@@ -100,7 +124,7 @@
   background-color: desaturate(darkblue, 25%);
   color: lighten(cornflowerblue, 10%);
   border-color: lighten(desaturate(darkblue, 45%), 30%);
-  border-top-width: 2px;
+  border-width: 2px 0 0 0;
   line-height: 130%
 }
 

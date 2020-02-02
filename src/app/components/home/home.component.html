@@ -1,21 +1,29 @@
 <div class="container p-3">
 
-  <p *ngIf="stillLoading()">Loading...</p>
+  <p *ngIf="stillLoading() && !isLoggedOut()">Loading...</p>
+
+  <p *ngIf="isLoggedOut()">Welcome to Mayhew's Oscars Voting site! Click the link above to sign in!</p>
 
   <p *ngIf="!stillLoading() && !auth.isUser() && auth.isAuthenticated()">
     No user account found for this google user. Could your invite be for a different gmail address?
   </p>
 
   <p *ngIf="!stillLoading() && auth.isUser()">
-    Welcome to the Oscars 2019, {{auth.getFirstName()}}!
+    Welcome to the Oscars {{getOscarYear()}}, {{auth.getFirstName()}}!
+  </p>
+
+  <p *ngIf="!stillLoadingVotesAndCategories() && hasVotesRemaining()"
+  class="votesRemaining">
+    You have {{numVotesRemaining()}} categories left to vote on!
   </p>
 
   <p *ngIf="!stillLoading() && auth.isUser() && systemVarsService.canVote()">
-    The site has been re-designed primarily for mobile devices. Live Scoring should be up and running by Sunday, February 24 at 5pm PT / 8pm ET, when the ballots will lock.
-    The new voting screen has been expanded to include the betting odds, expert picks, and metacritic user favorites, as found on <a href="https://www.metacritic.com/feature/picks-for-who-will-win-2019-oscars" target="_blank">Metacritic</a>.
+    Live Scoring will be viewable on Sunday, February 9 at 5pm PT / 8pm ET, when the ballots will lock.
+    The new voting screen has been expanded to include the betting odds, expert picks, and metacritic user favorites, as
+    found on <a href="https://www.metacritic.com/feature/picks-for-who-will-win-2019-oscars" target="_blank">Metacritic</a>.
   </p>
 
-  <p *ngIf="!stillLoading() && !systemVarsService.canVote()">
+  <p *ngIf="!stillLoading() && auth.isUser() && !systemVarsService.canVote()">
     Voting is currently closed, but you can head over to Live Scoring to see how the scores are progressing, or see the final scores.
   </p>
 
@@ -52,20 +60,6 @@
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4"
-         *ngIf="!stillLoading() && auth.isAdmin()">
-      <div class="card navCard">
-        <div class="card-body"
-             routerLink="odds">
-          <div class="row">
-            <div class="col-10 navTitle">
-              <span>Input Odds</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())">
       <div class="card navCard">
         <div class="card-body"
@@ -95,18 +89,17 @@
 
     <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="!stillLoading() && auth.isAdmin()">
-      <div class="card navCard" (click)="toggleVotingLock()">
+      <div class="card navCard"
+           routerLink="admin">
         <div class="card-body">
           <div class="row">
             <div class="col-10 navTitle">
-              <span>{{getVotingHeader()}}</span>
+              <span>Admin</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
 
   </div>
 

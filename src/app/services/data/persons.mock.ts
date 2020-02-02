@@ -3,6 +3,7 @@ import {Person} from '../../interfaces/Person';
 export const MockPersonList: Person[] = [
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Gunning",
     "groups": [2],
     "id": 1,
@@ -11,6 +12,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Aroneau",
     "groups": [2],
     "id": 2,
@@ -19,6 +21,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Velasquez",
     "groups": [1],
     "id": 3,
@@ -27,6 +30,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Barb",
     "groups": [
       2,
@@ -38,6 +42,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Shiue",
     "groups": [1],
     "id": 8,
@@ -46,6 +51,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "McCrea",
     "groups": [1],
     "id": 9,
@@ -54,6 +60,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Pearson",
     "groups": [1],
     "id": 10,
@@ -62,6 +69,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "McCrea",
     "groups": [1],
     "id": 11,
@@ -70,6 +78,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Prevas",
     "groups": [1],
     "id": 12,
@@ -78,6 +87,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Howe",
     "groups": [1],
     "id": 13,
@@ -86,6 +96,16 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
+    "last_name": "Fay",
+    "groups": [1],
+    "id": 14,
+    "first_name": "Ira",
+    "email": "irafaygames@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
     "last_name": "Greaves",
     "groups": [1],
     "id": 15,
@@ -94,6 +114,16 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
+    "last_name": "Pellecchia",
+    "groups": [1],
+    "id": 16,
+    "first_name": "Jenn",
+    "email": "hamcakes@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
     "last_name": "Gaddis",
     "groups": [2],
     "id": 17,
@@ -102,6 +132,16 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
+    "last_name": "LastName",
+    "groups": [1],
+    "id": 18,
+    "first_name": "Jim",
+    "email": "commander.boffo@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
     "last_name": "",
     "groups": [2],
     "id": 19,
@@ -110,6 +150,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Goska",
     "groups": [2],
     "id": 20,
@@ -118,6 +159,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Austin",
     "groups": [1],
     "id": 21,
@@ -126,6 +168,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Basilico",
     "groups": [1],
     "id": 22,
@@ -134,6 +177,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Seavey",
     "groups": [
       1,
@@ -145,6 +189,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Dai",
     "groups": [1],
     "id": 25,
@@ -153,6 +198,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Jayapalan",
     "groups": [1],
     "id": 26,
@@ -161,6 +207,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
     "last_name": "Pearson",
     "groups": [1],
     "id": 28,
@@ -169,6 +216,17 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
+    "odds_filter": "show",
+    "last_name": "Seavey",
+    "groups": [1],
+    "id": 29,
+    "middle_name": "Duncan",
+    "first_name": "Mayhew",
+    "email": "mayhew650@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
     "last_name": "O'Connell",
     "groups": [2],
     "id": 30,
@@ -177,102 +235,7 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
-    "last_name": "Mongeon",
-    "groups": [2],
-    "id": 33,
-    "first_name": "Nicole",
-    "email": "mongiemongie@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Ghiocel",
-    "groups": [1],
-    "id": 35,
-    "first_name": "Patrick",
-    "email": "pghiocel@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Maclay",
-    "groups": [1],
-    "id": 36,
-    "first_name": "Rachel",
-    "email": "rrubin@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Maclay",
-    "groups": [1],
-    "id": 37,
-    "first_name": "Rob",
-    "email": "rob.maclay@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Kaplan",
-    "groups": [1],
-    "id": 38,
-    "first_name": "Ruth",
-    "email": "ruthannakaplan@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Dai",
-    "groups": [1],
-    "id": 39,
-    "first_name": "Scott",
-    "email": "scott.dai@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Steinberg",
-    "groups": [2],
-    "id": 40,
-    "first_name": "Shalom",
-    "email": "shalom.steinberg@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Park",
-    "groups": [1],
-    "id": 41,
-    "first_name": "Shirley",
-    "email": "smp2as@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "",
-    "groups": [2],
-    "id": 42,
-    "first_name": "Tami",
-    "email": "tamidtnguyen@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Tao",
-    "groups": [],
-    "id": 44,
-    "first_name": "Lynn",
-    "email": "lynn.tao@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Fleig",
-    "groups": [],
-    "id": 45,
-    "first_name": "Rodney",
-    "email": "rodney.fleig@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Darga",
-    "groups": [],
-    "id": 46,
-    "first_name": "Mike",
-    "email": "mike.darga@gmail.com"
-  },
-  {
-    "role": "user",
+    "odds_filter": "show",
     "last_name": "Campbell",
     "groups": [1],
     "id": 31,
@@ -280,31 +243,8 @@ export const MockPersonList: Person[] = [
     "email": "katherine.irene.campbell@gmail.com"
   },
   {
-    "role": "user",
-    "last_name": "LastName",
-    "groups": [1],
-    "id": 18,
-    "first_name": "Jim",
-    "email": "commander.boffo@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Pellecchia",
-    "groups": [1],
-    "id": 16,
-    "first_name": "Jenn",
-    "email": "hamcakes@gmail.com"
-  },
-  {
-    "role": "user",
-    "last_name": "Fay",
-    "groups": [1],
-    "id": 14,
-    "first_name": "Ira",
-    "email": "irafaygames@gmail.com"
-  },
-  {
     "role": "admin",
+    "odds_filter": "show",
     "last_name": "Seavey",
     "groups": [1],
     "id": 32,
@@ -314,11 +254,110 @@ export const MockPersonList: Person[] = [
   },
   {
     "role": "user",
-    "last_name": "Seavey",
+    "odds_filter": "show",
+    "last_name": "Mongeon",
+    "groups": [2],
+    "id": 33,
+    "first_name": "Nicole",
+    "email": "mongiemongie@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Ghiocel",
     "groups": [1],
-    "id": 29,
-    "middle_name": "Duncan",
-    "first_name": "Mayhew",
-    "email": "mayhew650@gmail.com"
+    "id": 35,
+    "first_name": "Patrick",
+    "email": "pghiocel@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Maclay",
+    "groups": [1],
+    "id": 36,
+    "first_name": "Rachel",
+    "email": "rrubin@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Maclay",
+    "groups": [1],
+    "id": 37,
+    "first_name": "Rob",
+    "email": "rob.maclay@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Kaplan",
+    "groups": [1],
+    "id": 38,
+    "first_name": "Ruth",
+    "email": "ruthannakaplan@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Dai",
+    "groups": [1],
+    "id": 39,
+    "first_name": "Scott",
+    "email": "scott.dai@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Steinberg",
+    "groups": [2],
+    "id": 40,
+    "first_name": "Shalom",
+    "email": "shalom.steinberg@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Park",
+    "groups": [1],
+    "id": 41,
+    "first_name": "Shirley",
+    "email": "smp2as@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "",
+    "groups": [2],
+    "id": 42,
+    "first_name": "Tami",
+    "email": "tamidtnguyen@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Tao",
+    "groups": [],
+    "id": 44,
+    "first_name": "Lynn",
+    "email": "lynn.tao@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Fleig",
+    "groups": [],
+    "id": 45,
+    "first_name": "Rodney",
+    "email": "rodney.fleig@gmail.com"
+  },
+  {
+    "role": "user",
+    "odds_filter": "show",
+    "last_name": "Darga",
+    "groups": [],
+    "id": 46,
+    "first_name": "Mike",
+    "email": "mike.darga@gmail.com"
   }
 ];

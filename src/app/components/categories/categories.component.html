@@ -18,7 +18,17 @@
              [routerLink]="[category.id]">
           <div class="row">
             <div class="col-10 categoryTitle">
-              <span>{{category.name}}</span>
+              <div class="row">
+                <div class="col-12">
+                  {{getCategoryName(category)}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 categorySubtitle"
+                     *ngIf="getCategorySubtitle(category)">
+                  {{getCategorySubtitle(category)}}
+                </div>
+              </div>
             </div>
             <div class="col-2 categoryPoints">
               <span>{{category.points}}</span>

@@ -2,14 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import {_} from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {AuthService} from './auth/auth.service';
 import {SystemVarsService} from './system.vars.service';
 import {Person} from '../interfaces/Person';
 import {VotesService} from './votes.service';
-import {EventsService} from './events.service';
 import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
@@ -32,7 +31,6 @@ export class CategoryService {
               private auth: AuthService,
               private systemVarsService: SystemVarsService,
               private votesService: VotesService,
-              private eventsService: EventsService,
               private oddsService: OddsService,
               private socket: SocketService) {
     this.cache = [];
@@ -55,6 +53,10 @@ export class CategoryService {
     return this.getDataWithCacheUpdate<Category>(() => {
       return this.getCategoryFromCache(id);
     });
+  }
+
+  getCategoryCountNow(): number {
+    return this.cache.length;
   }
 
   private getCategoryFromCache(id: number): Category {
@@ -92,7 +94,6 @@ export class CategoryService {
   updateNominee(nominee: Nominee): Observable<any> {
     return this.http.put(this.nomineesUrl, nominee, httpOptions)
       .pipe(
-        tap(() => console.log('did some tapping')),
         catchError(this.handleError<any>('updateCategories', nominee))
       );
   }
@@ -101,13 +102,13 @@ export class CategoryService {
     return new Observable<any>(observer => this.addWinnerSubscriber(observer));
   }
 
-  addWinnerSubscriber(subscriber: Subscriber<any>): void {
+  private addWinnerSubscriber(subscriber: Subscriber<any>): void {
     this.winnerListeners.push(subscriber);
   }
 
-  updateWinnerSubscribers(msg): void {
+  updateWinnerSubscribers(): void {
     this.oddsService.clearOdds();
-    _.forEach(this.winnerListeners, listener => listener.next(msg));
+    _.forEach(this.winnerListeners, listener => listener.next());
   }
 
   private addWinnerToCache(winner: Winner, category: Category): void {
@@ -131,7 +132,13 @@ export class CategoryService {
     return _.find(this.cache, category => _.findWhere(category.nominees, {id: nomination_id}));
   }
 
+  getCategoriesWithWinners(): Category[] {
+    // noinspection TypeScriptValidateJSTypes
+    return _.filter(this.cache, category => category.winners.length > 0);
+  }
+
   getMostRecentCategory(): Category {
+    // noinspection TypeScriptValidateJSTypes
     const winners = _.flatten(_.map(this.cache, category => category.winners));
     fast_sort(winners).desc([
         (winner: Winner) => winner.declared
@@ -152,6 +159,23 @@ export class CategoryService {
     const category = this.getCategoryForNomination(winner.nomination_id);
     return this.getNomineeFromCategory(category, winner.nomination_id);
   }
+
+  // CATEGORY LIST FORMATTING
+
+  getCategoryName(category: Category): string {
+    const parts = category.name.split(' (');
+    return parts[0];
+  }
+
+  getCategorySubtitle(category: Category): string {
+    const parts = category.name.split(' (');
+    if (parts.length > 1) {
+      return parts[1].replace(')', '');
+    } else {
+      return undefined;
+    }
+  }
+
 
   // SCOREBOARD
 
@@ -202,10 +226,55 @@ export class CategoryService {
     });
   }
 
+  maxPosition(person: Person, persons: Person[]): number {
+    const categoriesWithoutWinners = _.filter(this.cache, category => !category.winners || category.winners.length === 0);
+    const myVotes = _.map(categoriesWithoutWinners, category => {
+      const myVotesForCategory = this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category);
+      return myVotesForCategory.length === 0 ? undefined : myVotesForCategory[0];
+    });
+    const finalScores = _.map(persons, otherPerson => {
+      const theirVotes = this.votesService.getVotesForCurrentYearAndPerson(otherPerson);
+      const theirVotesThatMatch = _.filter(theirVotes, vote => {
+        const myVote = _.findWhere(myVotes, {category_id: vote.category_id});
+        return !!myVote && myVote.nomination_id === vote.nomination_id;
+      });
+      const theirScore = _.reduce(theirVotesThatMatch, (memo, theirVote) => {
+        const category = this.getCategoryFromCache(theirVote.category_id);
+        return !!category ? memo + category.points : memo;
+      }, 0);
+      return {
+        person_id: otherPerson.id,
+        score: theirScore + otherPerson.score
+      };
+    });
+
+    const myScore = _.findWhere(finalScores, {person_id: person.id});
+    const scoresBetterThanMine = _.filter(finalScores, otherScore => otherScore.score > myScore.score);
+    return scoresBetterThanMine.length + 1;
+  }
+
+  isEliminated(person: Person, persons: Person[]): boolean {
+    return this.maxPosition(person, persons) > 1;
+  }
+
   // LOADING
 
   stillLoading(): boolean {
     return this.cache.length === 0;
+  }
+
+  // MAX YEAR
+
+  getMaxYear(): Observable<number> {
+    return new Observable<number>(observer => {
+      this.http.get('/api/maxYear')
+        .pipe(
+          catchError(this.handleError<any>('getMaxYear'))
+        )
+        .subscribe(maxYear => {
+          observer.next(maxYear.maxYear);
+        });
+    });
   }
 
   // DATA HELPERS
@@ -219,66 +288,81 @@ export class CategoryService {
     });
   }
 
+  resetWinners(): void {
+    _.forEach(this.cache, category => {
+      category.winners = [];
+    });
+  }
+
   private maybeUpdateCache(): Observable<Category[]> {
+    if (this.cache.length === 0) {
+      return this.refreshCache();
+    } else {
+      return of(this.cache);
+    }
+  }
+
+  refreshCache(): Observable<Category[]> {
+    this.cache.length = 0;
     // callback function doesn't have 'this' in scope.
     const categoryServiceGlobal = this;
     const updateWinnersInCacheAndNotify = function(msg) {
       const year = categoryServiceGlobal.systemVarsService.getCurrentYear();
       if (categoryServiceGlobal.cache.length > 0 && !!year) {
         console.log(`Received winner message: ${JSON.stringify(msg)}`);
-        const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
-        const winner: Winner = {
-          id: msg.winner_id,
-          category_id: category.id,
-          nomination_id: msg.nomination_id,
-          year: year,
-          declared: new Date(msg.declared)
-        };
-        if (msg.detail === 'add') {
-          categoryServiceGlobal.addWinnerToCache(winner, category);
-        } else if (msg.detail === 'delete') {
-          categoryServiceGlobal.removeWinnerFromCache(winner.nomination_id);
+        if (msg.detail === 'reset') {
+          categoryServiceGlobal.resetWinners();
+        } else {
+          const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
+          const winner: Winner = {
+            id: msg.winner_id,
+            category_id: category.id,
+            nomination_id: msg.nomination_id,
+            year: year,
+            declared: new Date(msg.declared)
+          };
+          if (msg.detail === 'add') {
+            categoryServiceGlobal.addWinnerToCache(winner, category);
+          } else if (msg.detail === 'delete') {
+            categoryServiceGlobal.removeWinnerFromCache(winner.nomination_id);
+          }
         }
-        categoryServiceGlobal.updateWinnerSubscribers(msg);
+        categoryServiceGlobal.updateWinnerSubscribers();
       }
     };
 
-    if (this.cache.length === 0) {
-      this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
-      return new Observable<Category[]>((observer) => {
-        this.auth.getPerson().subscribe(person => {
-          if (!person) {
-            this.auth.logout();
-          }
-          this.systemVarsService.getSystemVars().subscribe(systemVars => {
-            const options = {
-              params: {
-                person_id: person.id.toString(),
-                year: systemVars.curr_year.toString()
-              }};
-            this.http.get<Category[]>(this.categoriesUrl, options)
-              .pipe(
-                catchError(this.handleError<Category[]>('getCategories', []))
-              )
-              .subscribe(
-                (categories: Category[]) => {
-                  _.forEach(categories, category => {
-                    _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
-                  });
-                  CategoryService.addToArray(this.cache, categories);
-                  this.socket.on('winner', updateWinnersInCacheAndNotify);
-                  observer.next(categories);
-                },
-                (err: Error) => observer.error(err)
-              );
-          });
+    this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
+    return new Observable<Category[]>((observer) => {
+      this.auth.getPerson().subscribe(person => {
+        if (!person) {
+          this.auth.logout();
+        }
+        this.systemVarsService.getSystemVars().subscribe(systemVars => {
+          const options = {
+            params: {
+              person_id: person.id.toString(),
+              year: systemVars.curr_year.toString()
+            }};
+          this.http.get<Category[]>(this.categoriesUrl, options)
+            .pipe(
+              catchError(this.handleError<Category[]>('getCategories', []))
+            )
+            .subscribe(
+              (categories: Category[]) => {
+                _.forEach(categories, category => {
+                  _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
+                });
+                this.cache.length = 0;
+                CategoryService.addToArray(this.cache, categories);
+                this.socket.on('winner', updateWinnersInCacheAndNotify);
+                observer.next(categories);
+              },
+              (err: Error) => observer.error(err)
+            );
         });
       });
-    } else {
-      return of(this.cache);
-    }
+    });
   }
-
 
 
   /**

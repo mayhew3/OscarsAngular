@@ -25,14 +25,16 @@ module.exports = function(app) {
     .get(odds.getMostRecentOddsBundle);
 
   router.route('/persons')
-    .get(persons.getPersons);
+    .get(persons.getPersons)
+    .put(persons.updatePerson);
 
   router.route('/votes')
     .get(votes.getVotes)
     .post(votes.addOrUpdateVote);
 
   router.route('/winners')
-    .post(winners.addOrDeleteWinner);
+    .post(winners.addOrDeleteWinner)
+    .patch(winners.resetWinners);
 
   router.route('/systemVars')
     .get(systemVars.getSystemVars)
@@ -40,6 +42,9 @@ module.exports = function(app) {
 
   router.route('/finalResults')
     .get(finalResults.getFinalResults);
+
+  router.route('/maxYear')
+    .get(nominees.getMostRecentYear);
 
   app.use('/api', router);
 

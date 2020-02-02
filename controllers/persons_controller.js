@@ -26,3 +26,23 @@ exports.getPersons = function(request, response) {
     });
   });
 };
+
+exports.updatePerson = async function(request, response) {
+  let person = request.body;
+
+  let result;
+  try {
+    result = await model.Person.findByPk(person.id);
+  } catch (err) {
+    console.error(err);
+    response.send({msg: 'Error finding'});
+  }
+
+  try {
+    await result.update(person);
+    response.json({msg: "Success!"});
+  } catch(err) {
+    console.error(err);
+    response.send({msg: "Error updating nominee: " + JSON.stringify(person)});
+  }
+};

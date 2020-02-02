@@ -18,14 +18,21 @@ const httpOptions = {
 })
 export class VotesService {
   votesUrl = 'api/votes';
+  isLoading = true;
   private readonly cache: Vote[];
 
   constructor(private http: HttpClient,
               private systemVarsService: SystemVarsService) {
     this.cache = [];
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      this.maybeUpdateCache(systemVars.curr_year).subscribe();
+      this.maybeUpdateCache(systemVars.curr_year).subscribe(() => {
+        this.isLoading = false;
+      });
     });
+  }
+
+  stillLoading(): boolean {
+    return this.isLoading;
   }
 
   // HELPERS
@@ -48,42 +55,71 @@ export class VotesService {
     return _.where(this.cache, {category_id: category.id});
   }
 
+  getVotesForCurrentYearAndPerson(person: Person): Vote[] {
+    return _.where(this.cache, {person_id: person.id});
+  }
+
+  getVotesForCurrentYearAndPersonAndCategory(person: Person, category: Category): Vote[] {
+    return _.where(this.cache, {person_id: person.id, category_id: category.id});
+  }
 
   private maybeUpdateCache(year: number): Observable<Vote[]> {
-    const params = new HttpParams()
-      .set('year', year.toString());
     if (this.cache.length === 0) {
-      return new Observable<Vote[]>((observer) => {
-        this.http.get<Vote[]>(this.votesUrl, {params: params})
-          .pipe(
-            catchError(this.handleError<Vote[]>('getVotes', []))
-          )
-          .subscribe(
-            (votes: Vote[]) => {
-              this.cache.length = 0;
-              VotesService.addToArray(this.cache, votes);
-              observer.next(votes);
-            },
-            (err: Error) => observer.error(err)
-          );
-      });
+      return this.refreshCache(year);
     } else {
       return of(this.cache);
     }
   }
 
+  refreshCacheForThisYear(): Observable<Vote[]> {
+    return new Observable<Vote[]>(observer => {
+      this.systemVarsService.getSystemVars().subscribe(systemVars => {
+        this.refreshCache(systemVars.curr_year).subscribe(votes => observer.next(votes));
+      });
+    });
+  }
+
+  refreshCache(year: number): Observable<Vote[]> {
+    const params = new HttpParams()
+      .set('year', year.toString());
+    return new Observable<Vote[]>((observer) => {
+      this.http.get<Vote[]>(this.votesUrl, {params: params})
+        .pipe(
+          catchError(this.handleError<Vote[]>('getVotes', []))
+        )
+        .subscribe(
+          (votes: Vote[]) => {
+            this.cache.length = 0;
+            VotesService.addToArray(this.cache, votes);
+            observer.next(votes);
+          },
+          (err: Error) => observer.error(err)
+        );
+    });
+  }
 
   addOrUpdateVote(nominee: Nominee, person: Person): Observable<Vote> {
-    const data = {
-      category_id: nominee.category_id,
-      year: nominee.year,
-      person_id: person.id,
-      nomination_id: nominee.id
-    };
-    return this.http.post(this.votesUrl, data, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('addOrUpdateVote', data))
-      );
+    return new Observable<Vote>(observer => {
+      const data = {
+        category_id: nominee.category_id,
+        year: nominee.year,
+        person_id: person.id,
+        nomination_id: nominee.id
+      };
+      this.http.post(this.votesUrl, data, httpOptions)
+        .pipe(
+          catchError(this.handleError<any>('addOrUpdateVote', data))
+        )
+        .subscribe(vote => {
+          const existingVote = _.findWhere(this.cache, {id: vote.id});
+          if (!!existingVote) {
+            existingVote.nomination_id = nominee.id;
+          } else {
+            this.cache.push(vote);
+          }
+          observer.next(vote);
+        });
+    });
   }
 
 
