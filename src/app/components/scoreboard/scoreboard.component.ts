@@ -68,7 +68,11 @@ export class ScoreboardComponent implements OnInit {
     if (!!person) {
       const numericOddsForPerson = this.getNumericOddsForPerson(person);
       if (!!numericOddsForPerson) {
-        return `hsl(25, ${numericOddsForPerson}%, 60%)`;
+        if (numericOddsForPerson === 100.0) {
+          return 'hsl(48, 100%, 56%)';
+        } else {
+          return `hsl(25, ${numericOddsForPerson}%, 60%)`;
+        }
       }
     }
     return `hsl(25, 0%, 60%)`;
