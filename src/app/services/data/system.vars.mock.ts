@@ -4,6 +4,7 @@ export const MockSystemVars: SystemVars[] = [
   {
     id: 1,
     curr_year: 2018,
-    voting_open: true
+    voting_open: true,
+    its_over: true
   }
 ];

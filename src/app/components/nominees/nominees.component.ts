@@ -109,10 +109,14 @@ export class NomineesComponent implements OnInit {
         }
         this.processingPick = undefined;
       });
-    } else if (this.winnersMode() && this.auth.isAdmin()) {
+    } else if (this.winnersMode() && this.auth.isAdmin() && !this.itsOver()) {
       this.processingPick = nominee;
       this.winnersService.addOrDeleteWinner(nominee).subscribe();
     }
+  }
+
+  itsOver(): boolean {
+    return this.systemVarsService.itsOver();
   }
 
   getHeaderText(): string {

@@ -125,4 +125,7 @@ export class SystemVarsService {
     };
   }
 
+  itsOver(): boolean {
+    return this.systemVars.its_over;
+  }
 }

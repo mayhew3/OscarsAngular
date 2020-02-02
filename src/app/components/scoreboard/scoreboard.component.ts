@@ -14,6 +14,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {Observable} from 'rxjs';
+import {SystemVarsService} from '../../services/system.vars.service';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -30,7 +31,8 @@ export class ScoreboardComponent implements OnInit {
               private categoryService: CategoryService,
               private oddsService: OddsService,
               private auth: AuthService,
-              private socket: SocketService) {
+              private socket: SocketService,
+              private systemVarsService: SystemVarsService) {
     this.persons = [];
   }
 
@@ -148,10 +150,22 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 
+  itsOver(): boolean {
+    return this.systemVarsService.itsOver();
+  }
+
   getOddsForPerson(person: Person): string {
 
     try {
       const numericOdds = this.getNumericOddsForPerson(person);
+
+      if (this.itsOver()) {
+        if (numericOdds === 100.0) {
+          return 'WINNER!';
+        } else {
+          return '';
+        }
+      }
 
       if (numericOdds === undefined) {
         return '...';
