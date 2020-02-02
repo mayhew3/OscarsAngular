@@ -284,7 +284,16 @@ export class ScoreboardComponent implements OnInit {
   }
 
   gotPointsForLastWinner(person: Person): boolean {
-    return !!this.latestCategory && this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory);
+    return !this.itsOver() && !!this.latestCategory && this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory);
+  }
+
+  getPlayersInFirstPlace(): Person[] {
+    return _.filter(this.persons, person => !this.anyoneIsHigherInRankings(person));
+  }
+
+  getWinnerFullNames(): string[] {
+    const winners = this.getPlayersInFirstPlace();
+    return _.map(winners, winner => this.personService.getFullName(winner));
   }
 
   fastSortPersons(): void {
@@ -321,7 +330,7 @@ export class ScoreboardComponent implements OnInit {
 
   scoreNumberClass(person: Person): string {
     const isEliminated = this.categoryService.isEliminated(person, this.persons);
-    if (this.gotPointsForLastWinner(person)) {
+    if (this.gotPointsForLastWinner(person) && !this.itsOver()) {
       return 'winnerScorePoints';
     } else if (this.isMe(person)) {
       return 'myScorePoints';

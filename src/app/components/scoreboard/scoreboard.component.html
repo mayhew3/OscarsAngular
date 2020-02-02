@@ -92,13 +92,28 @@
 
   <div class="container py-2">
 
-    <div *ngIf="!latestCategory">
-      <span class="footerSmall">
-        Waiting for the first award to be presented!
-      </span>
+    <div *ngIf="!latestCategory && !itsOver()">
+      <div class="row py-1">
+        <div class="col-12">
+          <span class="footerSmall">Waiting for the first award to be presented!</span>
+        </div>
+      </div>
     </div>
 
-    <div *ngIf="!!latestCategory">
+    <div *ngIf="itsOver()">
+      <div class="row py-1">
+        <div class="col-12 py-1">
+          <span class="footerSmall">It's over!! Congrats,</span>
+        </div>
+
+        <div class="col-12 py-1"
+             *ngFor="let winnerName of getWinnerFullNames()">
+          <span class="footerBig">{{winnerName}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!!latestCategory && !itsOver()">
 
       <div class="row py-1">
         <div class="col-12">
