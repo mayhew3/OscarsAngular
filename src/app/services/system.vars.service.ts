@@ -56,7 +56,8 @@ export class SystemVarsService {
     const targetVars = {
       id: this.systemVars.id,
       voting_open: !this.systemVars.voting_open,
-      curr_year: this.systemVars.curr_year
+      curr_year: this.systemVars.curr_year,
+      its_over: this.systemVars.its_over
     };
 
     this.http.put(this.systemVarsUrl, targetVars, httpOptions)
@@ -70,13 +71,35 @@ export class SystemVarsService {
       const targetVars = {
         id: this.systemVars.id,
         voting_open: this.systemVars.voting_open,
-        curr_year: year
+        curr_year: year,
+        its_over: this.systemVars.its_over
       };
 
       this.http.put(this.systemVarsUrl, targetVars, httpOptions)
         .pipe(catchError(this.handleError<any>('changeCurrentYear')))
         .subscribe(() => {
           outsideThis.systemVars.curr_year = year;
+          observer.next();
+        });
+    });
+  }
+
+  toggleItsOver(): Observable<any> {
+    return new Observable<any>(observer => {
+      if (!this.systemVars) {
+        throw new Error('No system vars found.');
+      }
+      const targetVars = {
+        id: this.systemVars.id,
+        voting_open: this.systemVars.voting_open,
+        curr_year: this.systemVars.curr_year,
+        its_over: !this.systemVars.its_over
+      };
+
+      this.http.put(this.systemVarsUrl, targetVars, httpOptions)
+        .pipe(catchError(this.handleError<any>('toggleItsOver')))
+        .subscribe(() => {
+          this.systemVars.its_over = !this.systemVars.its_over;
           observer.next();
         });
     });

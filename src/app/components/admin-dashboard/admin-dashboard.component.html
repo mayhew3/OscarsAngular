@@ -18,6 +18,22 @@
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4">
+      It's:
+
+      <button class="btn btn-lg"
+              [ngClass]="getItsOverButtonClass(true)"
+              (click)="toggleItsOver(true)">
+        Over
+      </button>
+      <button class="btn btn-lg"
+              [ngClass]="getItsOverButtonClass(false)"
+              (click)="toggleItsOver(false)">
+        Not Over
+      </button>
+
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4">
       <div class="card navCard">
         <div class="card-body"
              routerLink="/odds">
