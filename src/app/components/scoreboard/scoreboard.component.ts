@@ -14,7 +14,6 @@ import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {Observable} from 'rxjs';
-import {SystemVarsService} from '../../services/system.vars.service';
 import ordinal from 'ordinal';
 
 @Component({
@@ -32,8 +31,7 @@ export class ScoreboardComponent implements OnInit {
               private categoryService: CategoryService,
               private oddsService: OddsService,
               private auth: AuthService,
-              private socket: SocketService,
-              private systemVarsService: SystemVarsService) {
+              private socket: SocketService) {
     this.persons = [];
   }
 

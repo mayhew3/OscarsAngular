@@ -3,6 +3,8 @@ import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {SystemVarsService} from '../../services/system.vars.service';
+import fast_sort from 'fast-sort';
+import {_} from 'underscore';
 
 @Component({
   selector: 'osc-categories',
@@ -17,12 +19,22 @@ export class CategoriesComponent implements OnInit {
               public systemVarsService: SystemVarsService) { }
 
   ngOnInit() {
-    this.getCategories();
+    this.categoryService.getCategories()
+      .subscribe(categories => {
+        this.categories = categories;
+        this.fastSortCategories();
+      });
   }
 
-  getCategories(): void {
-    this.categoryService.getCategories()
-      .subscribe(categories => this.categories = categories);
+  mostRecentWinDate(category: Category): Date {
+    return _.max(_.map(category.winners, winner => winner.declared));
+  }
+
+  fastSortCategories(): void {
+    fast_sort(this.categories)
+      .by([
+        {desc: category => this.mostRecentWinDate(category)}
+      ]);
   }
 
   getVotedClass(category: Category): string {
