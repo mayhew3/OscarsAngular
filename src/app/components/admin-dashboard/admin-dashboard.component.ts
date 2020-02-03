@@ -101,7 +101,7 @@ export class AdminDashboardComponent implements OnInit {
 
   toggleItsOver(itsOver: boolean): void {
     if (itsOver !== this.itsOver()) {
-      this.systemVarsService.toggleItsOver().subscribe();
+      this.systemVarsService.toggleItsOver();
     }
   }
 
