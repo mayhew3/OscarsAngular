@@ -2,13 +2,7 @@ import {Category} from '../../interfaces/Category';
 /* tslint:disable quotemark */
 export const MockCategoryList: Category[] = [
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:13.885",
-      "category_id": 5,
-      "year": 2018,
-      "nomination_id": 2772,
-      "id": 401
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 5,
@@ -95,7 +89,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Ford v Ferrari",
         "nominee": "Ford v Ferrari",
-        "id": 4255,
+        "id": 4007,
         "detail": "Peter Chernin, Jenno Topping and James Mangold, Producers"
       },
       {
@@ -103,7 +97,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "The Irishman",
-        "id": 4256,
+        "id": 4008,
         "detail": "Martin Scorsese, Robert De Niro, Jane Rosenthal and Emma Tillinger Koskoff, Producers"
       },
       {
@@ -111,7 +105,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Jojo Rabbit",
         "nominee": "Jojo Rabbit",
-        "id": 4257,
+        "id": 4009,
         "detail": "Carthew Neal, Taika Waititi and Chelsea Winstanley, Producers"
       },
       {
@@ -119,7 +113,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4258,
+        "id": 4010,
         "detail": "Todd Phillips, Bradley Cooper and Emma Tillinger Koskoff, Producers"
       },
       {
@@ -127,7 +121,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Little Women",
         "nominee": "Little Women",
-        "id": 4259,
+        "id": 4011,
         "detail": "Amy Pascal, Producer"
       },
       {
@@ -135,7 +129,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Marriage Story",
         "nominee": "Marriage Story",
-        "id": 4260,
+        "id": 4012,
         "detail": "Noah Baumbach and David Heyman, Producers"
       },
       {
@@ -143,7 +137,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4261,
+        "id": 4013,
         "detail": "Sam Mendes, Pippa Harris, Jayne-Ann Tenggren and Callum McDougall, Producers"
       },
       {
@@ -151,7 +145,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Once Upon a Time...in Hollywood",
-        "id": 4262,
+        "id": 4014,
         "detail": "David Heyman, Shannon McIntosh and Quentin Tarantino, Producers"
       },
       {
@@ -159,7 +153,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Parasite",
         "nominee": "Parasite",
-        "id": 4263,
+        "id": 4015,
         "detail": "Kwak Sin Ae and Bong Joon Ho, Producers"
       }
     ],
@@ -168,13 +162,7 @@ export const MockCategoryList: Category[] = [
     "points": 5
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:18.722",
-      "category_id": 1,
-      "year": 2018,
-      "nomination_id": 2698,
-      "id": 402
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 1,
@@ -205,6 +193,14 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 25
       },
       {
+        "category_id": 1,
+        "year": 2019,
+        "context": "Pain and Glory",
+        "nominee": "Antonio Banderas ",
+        "id": 3932,
+        "detail": "Pain and Glory"
+      },
+      {
         "odds_expert": 5,
         "odds_denominator": 1,
         "category_id": 1,
@@ -231,17 +227,9 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 1,
         "year": 2019,
-        "context": "Pain and Glory",
-        "nominee": "Antonio Banderas ",
-        "id": 4180,
-        "detail": "Pain and Glory"
-      },
-      {
-        "category_id": 1,
-        "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Leonardo DiCaprio ",
-        "id": 4181,
+        "id": 3933,
         "detail": "Once Upon a Time...in Hollywood"
       },
       {
@@ -249,7 +237,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Marriage Story",
         "nominee": "Adam Driver ",
-        "id": 4182,
+        "id": 3934,
         "detail": "Marriage Story"
       },
       {
@@ -257,7 +245,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joaquin Phoenix ",
-        "id": 4183,
+        "id": 3935,
         "detail": "Joker"
       },
       {
@@ -265,7 +253,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Two Popes",
         "nominee": "Jonathan Pryce ",
-        "id": 4184,
+        "id": 3936,
         "detail": "The Two Popes"
       }
     ],
@@ -274,13 +262,7 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:22.327",
-      "category_id": 2,
-      "year": 2018,
-      "nomination_id": 2708,
-      "id": 403
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 2,
@@ -338,7 +320,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Harriet",
         "nominee": "Cynthia Erivo ",
-        "id": 4190,
+        "id": 3942,
         "detail": "Harriet"
       },
       {
@@ -346,7 +328,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Marriage Story",
         "nominee": "Scarlett Johansson ",
-        "id": 4191,
+        "id": 3943,
         "detail": "Marriage Story"
       },
       {
@@ -354,7 +336,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Little Women",
         "nominee": "Saoirse Ronan ",
-        "id": 4192,
+        "id": 3944,
         "detail": "Little Women"
       },
       {
@@ -362,7 +344,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Bombshell",
         "nominee": "Charlize Theron ",
-        "id": 4193,
+        "id": 3945,
         "detail": "Bombshell"
       },
       {
@@ -370,7 +352,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Judy",
         "nominee": "Renée Zellweger ",
-        "id": 4194,
+        "id": 3946,
         "detail": "Judy"
       }
     ],
@@ -379,13 +361,7 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:25.123",
-      "category_id": 8,
-      "year": 2018,
-      "nomination_id": 2733,
-      "id": 404
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 8,
@@ -443,7 +419,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "The Irishman",
-        "id": 4215,
+        "id": 3967,
         "detail": "Martin Scorsese"
       },
       {
@@ -451,7 +427,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4216,
+        "id": 3968,
         "detail": "Todd Phillips"
       },
       {
@@ -459,7 +435,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4217,
+        "id": 3969,
         "detail": "Sam Mendes"
       },
       {
@@ -467,7 +443,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Once Upon a Time...in Hollywood",
-        "id": 4218,
+        "id": 3970,
         "detail": "Quentin Tarantino"
       },
       {
@@ -475,7 +451,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Parasite",
         "nominee": "Parasite",
-        "id": 4219,
+        "id": 3971,
         "detail": "Bong Joon Ho"
       }
     ],
@@ -484,13 +460,7 @@ export const MockCategoryList: Category[] = [
     "points": 4
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:27.432",
-      "category_id": 3,
-      "year": 2018,
-      "nomination_id": 2719,
-      "id": 405
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 3,
@@ -547,7 +517,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "How to Train Your Dragon: The Hidden World",
         "nominee": "How to Train Your Dragon: The Hidden World",
-        "id": 4200,
+        "id": 3952,
         "detail": "Dean DeBlois, Bradford Lewis and Bonnie Arnold"
       },
       {
@@ -555,7 +525,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "I Lost My Body",
         "nominee": "I Lost My Body",
-        "id": 4201,
+        "id": 3953,
         "detail": "Jérémy Clapin and Marc du Pontavice"
       },
       {
@@ -563,7 +533,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Klaus",
         "nominee": "Klaus",
-        "id": 4202,
+        "id": 3954,
         "detail": "Sergio Pablos, Jinko Gotoh and Marisa Román"
       },
       {
@@ -571,7 +541,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Missing Link",
         "nominee": "Missing Link",
-        "id": 4203,
+        "id": 3955,
         "detail": "Chris Butler, Arianne Sutner and Travis Knight"
       },
       {
@@ -579,7 +549,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Toy Story 4",
         "nominee": "Toy Story 4",
-        "id": 4204,
+        "id": 3956,
         "detail": "Josh Cooley, Mark Nielsen and Jonas Rivera"
       }
     ],
@@ -589,11 +559,11 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2020-02-01 11:10:00.231",
+      "declared": "2020-01-28 18:39:53.128",
       "category_id": 20,
       "year": 2018,
       "nomination_id": 2703,
-      "id": 384
+      "id": 379
     }],
     "nominees": [
       {
@@ -653,7 +623,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "A Beautiful Day in the Neighborhood",
         "nominee": "Tom Hanks ",
-        "id": 4185,
+        "id": 3937,
         "detail": "A Beautiful Day in the Neighborhood"
       },
       {
@@ -661,7 +631,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Two Popes",
         "nominee": "Anthony Hopkins ",
-        "id": 4186,
+        "id": 3938,
         "detail": "The Two Popes"
       },
       {
@@ -669,7 +639,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "Al Pacino ",
-        "id": 4187,
+        "id": 3939,
         "detail": "The Irishman"
       },
       {
@@ -677,7 +647,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "Joe Pesci ",
-        "id": 4188,
+        "id": 3940,
         "detail": "The Irishman"
       },
       {
@@ -685,7 +655,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Brad Pitt ",
-        "id": 4189,
+        "id": 3941,
         "detail": "Once Upon a Time...in Hollywood"
       }
     ],
@@ -694,13 +664,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 11:10:03.367",
-      "category_id": 21,
-      "year": 2018,
-      "nomination_id": 2712,
-      "id": 385
-    }],
+    "winners": [],
     "nominees": [
       {
         "odds_denominator": 1,
@@ -760,7 +724,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Richard Jewell",
         "nominee": "Kathy Bates ",
-        "id": 4195,
+        "id": 3947,
         "detail": "Richard Jewell"
       },
       {
@@ -768,7 +732,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Marriage Story",
         "nominee": "Laura Dern ",
-        "id": 4196,
+        "id": 3948,
         "detail": "Marriage Story"
       },
       {
@@ -776,7 +740,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Jojo Rabbit",
         "nominee": "Scarlett Johansson ",
-        "id": 4197,
+        "id": 3949,
         "detail": "Jojo Rabbit"
       },
       {
@@ -784,7 +748,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Little Women",
         "nominee": "Florence Pugh ",
-        "id": 4198,
+        "id": 3950,
         "detail": "Little Women"
       },
       {
@@ -792,7 +756,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Bombshell",
         "nominee": "Margot Robbie ",
-        "id": 4199,
+        "id": 3951,
         "detail": "Bombshell"
       }
     ],
@@ -801,13 +765,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 11:10:05.555",
-      "category_id": 23,
-      "year": 2018,
-      "nomination_id": 2807,
-      "id": 386
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 23,
@@ -867,7 +825,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "The Irishman",
-        "id": 4294,
+        "id": 4046,
         "detail": "Screenplay by Steven Zaillian"
       },
       {
@@ -875,7 +833,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Jojo Rabbit",
         "nominee": "Jojo Rabbit",
-        "id": 4295,
+        "id": 4047,
         "detail": "Screenplay by Taika Waititi"
       },
       {
@@ -883,7 +841,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4296,
+        "id": 4048,
         "detail": "Written by Todd Phillips & Scott Silver"
       },
       {
@@ -891,7 +849,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Little Women",
         "nominee": "Little Women",
-        "id": 4297,
+        "id": 4049,
         "detail": "Written for the screen by Greta Gerwig"
       },
       {
@@ -899,7 +857,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Two Popes",
         "nominee": "The Two Popes",
-        "id": 4298,
+        "id": 4050,
         "detail": "Written by Anthony McCarten"
       }
     ],
@@ -908,13 +866,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 11:10:08.432",
-      "category_id": 24,
-      "year": 2018,
-      "nomination_id": 2813,
-      "id": 387
-    }],
+    "winners": [],
     "nominees": [
       {
         "odds_expert": 78,
@@ -973,7 +925,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Knives Out",
         "nominee": "Knives Out",
-        "id": 4299,
+        "id": 4051,
         "detail": "Written by Rian Johnson"
       },
       {
@@ -981,7 +933,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Marriage Story",
         "nominee": "Marriage Story",
-        "id": 4300,
+        "id": 4052,
         "detail": "Written by Noah Baumbach"
       },
       {
@@ -989,7 +941,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4301,
+        "id": 4053,
         "detail": "Written by Sam Mendes & Krysty Wilson-Cairns"
       },
       {
@@ -997,7 +949,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Once Upon a Time...in Hollywood",
-        "id": 4302,
+        "id": 4054,
         "detail": "Written by Quentin Tarantino"
       },
       {
@@ -1005,7 +957,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Parasite",
         "nominee": "Parasite",
-        "id": 4303,
+        "id": 4055,
         "detail": "Screenplay by Bong Joon Ho, Han Jin Won; Story by Bong Joon Ho"
       }
     ],
@@ -1014,13 +966,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 11:10:10.927",
-      "category_id": 6,
-      "year": 2018,
-      "nomination_id": 2723,
-      "id": 388
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 6,
@@ -1078,7 +1024,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "The Irishman",
-        "id": 4205,
+        "id": 3957,
         "detail": "Rodrigo Prieto"
       },
       {
@@ -1086,7 +1032,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4206,
+        "id": 3958,
         "detail": "Lawrence Sher"
       },
       {
@@ -1094,7 +1040,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Lighthouse",
         "nominee": "The Lighthouse",
-        "id": 4207,
+        "id": 3959,
         "detail": "Jarin Blaschke"
       },
       {
@@ -1102,7 +1048,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4208,
+        "id": 3960,
         "detail": "Roger Deakins"
       },
       {
@@ -1110,7 +1056,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Once Upon a Time...in Hollywood",
-        "id": 4209,
+        "id": 3961,
         "detail": "Robert Richardson"
       }
     ],
@@ -1119,13 +1065,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 11:10:14.756",
-      "category_id": 7,
-      "year": 2018,
-      "nomination_id": 2726,
-      "id": 389
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 7,
@@ -1180,7 +1120,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "The Irishman",
-        "id": 4210,
+        "id": 3962,
         "detail": "Sandy Powell and Christopher Peterson"
       },
       {
@@ -1188,7 +1128,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Jojo Rabbit",
         "nominee": "Jojo Rabbit",
-        "id": 4211,
+        "id": 3963,
         "detail": "Mayes C. Rubeo"
       },
       {
@@ -1196,7 +1136,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4212,
+        "id": 3964,
         "detail": "Mark Bridges"
       },
       {
@@ -1204,7 +1144,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Little Women",
         "nominee": "Little Women",
-        "id": 4213,
+        "id": 3965,
         "detail": "Jacqueline Durran"
       },
       {
@@ -1212,7 +1152,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Once Upon a Time...in Hollywood",
-        "id": 4214,
+        "id": 3966,
         "detail": "Arianne Phillips"
       }
     ],
@@ -1221,13 +1161,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 11:10:17.287",
-      "category_id": 11,
-      "year": 2018,
-      "nomination_id": 2746,
-      "id": 390
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 11,
@@ -1286,7 +1220,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Ford v Ferrari",
         "nominee": "Ford v Ferrari",
-        "id": 4230,
+        "id": 3982,
         "detail": "Michael McCusker and Andrew Buckland"
       },
       {
@@ -1294,7 +1228,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "The Irishman",
-        "id": 4231,
+        "id": 3983,
         "detail": "Thelma Schoonmaker"
       },
       {
@@ -1302,7 +1236,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Jojo Rabbit",
         "nominee": "Jojo Rabbit",
-        "id": 4232,
+        "id": 3984,
         "detail": "Tom Eagles"
       },
       {
@@ -1310,7 +1244,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4233,
+        "id": 3985,
         "detail": "Jeff Groth"
       },
       {
@@ -1318,7 +1252,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Parasite",
         "nominee": "Parasite",
-        "id": 4234,
+        "id": 3986,
         "detail": "Yang Jinmo"
       }
     ],
@@ -1327,13 +1261,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 11:10:19.635",
-      "category_id": 13,
-      "year": 2018,
-      "nomination_id": 2757,
-      "id": 391
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 13,
@@ -1356,14 +1284,6 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 9
       },
       {
-        "category_id": 13,
-        "year": 2019,
-        "context": "Bombshell",
-        "nominee": "Bombshell",
-        "id": 4240,
-        "detail": "Kazu Hiro, Anne Morgan and Vivian Baker"
-      },
-      {
         "odds_expert": 96,
         "odds_denominator": 25,
         "category_id": 13,
@@ -1378,9 +1298,17 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 13,
         "year": 2019,
+        "context": "Bombshell",
+        "nominee": "Bombshell",
+        "id": 3992,
+        "detail": "Kazu Hiro, Anne Morgan and Vivian Baker"
+      },
+      {
+        "category_id": 13,
+        "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4241,
+        "id": 3993,
         "detail": "Nicki Ledermann and Kay Georgiou"
       },
       {
@@ -1388,7 +1316,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Judy",
         "nominee": "Judy",
-        "id": 4242,
+        "id": 3994,
         "detail": "Jeremy Woodhead"
       },
       {
@@ -1396,7 +1324,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Maleficent: Mistress of Evil",
         "nominee": "Maleficent: Mistress of Evil",
-        "id": 4243,
+        "id": 3995,
         "detail": "Paul Gooch, Arjen Tuiten and David White"
       },
       {
@@ -1404,7 +1332,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4244,
+        "id": 3996,
         "detail": "Naomi Donne, Tristan Versluis and Rebecca Cole"
       }
     ],
@@ -1413,13 +1341,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:22.355",
-      "category_id": 14,
-      "year": 2018,
-      "nomination_id": 2758,
-      "id": 393
-    }],
+    "winners": [],
     "nominees": [
       {
         "odds_expert": 27,
@@ -1478,7 +1400,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4245,
+        "id": 3997,
         "detail": "Hildur Guðnadóttir"
       },
       {
@@ -1486,7 +1408,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Little Women",
         "nominee": "Little Women",
-        "id": 4246,
+        "id": 3998,
         "detail": "Alexandre Desplat"
       },
       {
@@ -1494,7 +1416,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Marriage Story",
         "nominee": "Marriage Story",
-        "id": 4247,
+        "id": 3999,
         "detail": "Randy Newman"
       },
       {
@@ -1502,7 +1424,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4248,
+        "id": 4000,
         "detail": "Thomas Newman"
       },
       {
@@ -1510,7 +1432,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Star Wars: The Rise of Skywalker",
         "nominee": "Star Wars: The Rise of Skywalker",
-        "id": 4249,
+        "id": 4001,
         "detail": "John Williams"
       }
     ],
@@ -1519,13 +1441,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:35.332",
-      "category_id": 15,
-      "year": 2018,
-      "nomination_id": 2766,
-      "id": 394
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 15,
@@ -1580,7 +1496,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Toy Story 4",
         "nominee": "Toy Story 4",
-        "id": 4250,
+        "id": 4002,
         "detail": "\"I Can't Let You Throw Yourself Away\" "
       },
       {
@@ -1588,7 +1504,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Rocketman",
         "nominee": "Rocketman",
-        "id": 4251,
+        "id": 4003,
         "detail": "\"(I'm Gonna) Love Me Again\" "
       },
       {
@@ -1596,7 +1512,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Breakthrough",
         "nominee": "Breakthrough",
-        "id": 4252,
+        "id": 4004,
         "detail": "\"I'm Standing With You\" "
       },
       {
@@ -1604,7 +1520,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Frozen II",
         "nominee": "Frozen II",
-        "id": 4253,
+        "id": 4005,
         "detail": "\"Into The Unknown\" "
       },
       {
@@ -1612,7 +1528,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Harriet",
         "nominee": "Harriet",
-        "id": 4254,
+        "id": 4006,
         "detail": "\"Stand Up\" "
       }
     ],
@@ -1621,13 +1537,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:37.846",
-      "category_id": 4,
-      "year": 2018,
-      "nomination_id": 2776,
-      "id": 395
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 4,
@@ -1685,7 +1595,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "The Irishman",
-        "id": 4264,
+        "id": 4016,
         "detail": "Production Design: Bob Shaw"
       },
       {
@@ -1693,7 +1603,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Jojo Rabbit",
         "nominee": "Jojo Rabbit",
-        "id": 4265,
+        "id": 4017,
         "detail": "Production Design: Ra Vincent"
       },
       {
@@ -1701,7 +1611,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4266,
+        "id": 4018,
         "detail": "Production Design: Dennis Gassner"
       },
       {
@@ -1709,7 +1619,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Once Upon a Time...in Hollywood",
-        "id": 4267,
+        "id": 4019,
         "detail": "Production Design: Barbara Ling"
       },
       {
@@ -1717,7 +1627,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Parasite",
         "nominee": "Parasite",
-        "id": 4268,
+        "id": 4020,
         "detail": "Production Design: Lee Ha Jun"
       }
     ],
@@ -1726,13 +1636,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:41.913",
-      "category_id": 18,
-      "year": 2018,
-      "nomination_id": 2792,
-      "id": 396
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 18,
@@ -1791,7 +1695,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Ford v Ferrari",
         "nominee": "Ford v Ferrari",
-        "id": 4279,
+        "id": 4031,
         "detail": "Donald Sylvester"
       },
       {
@@ -1799,7 +1703,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4280,
+        "id": 4032,
         "detail": "Alan Robert Murray"
       },
       {
@@ -1807,7 +1711,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4281,
+        "id": 4033,
         "detail": "Oliver Tarney and Rachael Tate"
       },
       {
@@ -1815,7 +1719,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Once Upon a Time...in Hollywood",
-        "id": 4282,
+        "id": 4034,
         "detail": "Wylie Stateman"
       },
       {
@@ -1823,7 +1727,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Star Wars: The Rise of Skywalker",
         "nominee": "Star Wars: The Rise of Skywalker",
-        "id": 4283,
+        "id": 4035,
         "detail": "Matthew Wood and David Acord"
       }
     ],
@@ -1832,13 +1736,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:45.831",
-      "category_id": 19,
-      "year": 2018,
-      "nomination_id": 2797,
-      "id": 397
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 19,
@@ -1897,7 +1795,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Ad Astra",
         "nominee": "Ad Astra",
-        "id": 4284,
+        "id": 4036,
         "detail": "Gary Rydstrom, Tom Johnson and Mark Ulano"
       },
       {
@@ -1905,7 +1803,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Ford v Ferrari",
         "nominee": "Ford v Ferrari",
-        "id": 4285,
+        "id": 4037,
         "detail": "Paul Massey, David Giammarco and Steven A. Morrow"
       },
       {
@@ -1913,7 +1811,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
-        "id": 4286,
+        "id": 4038,
         "detail": "Tom Ozanich, Dean Zupancic and Tod Maitland"
       },
       {
@@ -1921,7 +1819,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4287,
+        "id": 4039,
         "detail": "Mark Taylor and Stuart Wilson"
       },
       {
@@ -1929,7 +1827,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Once Upon a Time...in Hollywood",
         "nominee": "Once Upon a Time...in Hollywood",
-        "id": 4288,
+        "id": 4040,
         "detail": "Michael Minkler, Christian P. Minkler and Mark Ulano"
       }
     ],
@@ -1938,13 +1836,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:49.764",
-      "category_id": 22,
-      "year": 2018,
-      "nomination_id": 2801,
-      "id": 398
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 22,
@@ -2003,7 +1895,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Avengers: Endgame",
         "nominee": "Avengers: Endgame",
-        "id": 4289,
+        "id": 4041,
         "detail": "Dan DeLeeuw, Russell Earl, Matt Aitken and Dan Sudick"
       },
       {
@@ -2011,7 +1903,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Irishman",
         "nominee": "The Irishman",
-        "id": 4290,
+        "id": 4042,
         "detail": "Pablo Helman, Leandro Estebecorena, Nelson Sepulveda-Fauser and Stephane Grabli"
       },
       {
@@ -2019,7 +1911,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Lion King",
         "nominee": "The Lion King",
-        "id": 4291,
+        "id": 4043,
         "detail": "Robert Legato, Adam Valdez, Andrew R. Jones and Elliot Newman"
       },
       {
@@ -2027,7 +1919,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "1917",
         "nominee": "1917",
-        "id": 4292,
+        "id": 4044,
         "detail": "Guillaume Rocheron, Greg Butler and Dominic Tuohy"
       },
       {
@@ -2035,7 +1927,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Star Wars: The Rise of Skywalker",
         "nominee": "Star Wars: The Rise of Skywalker",
-        "id": 4293,
+        "id": 4045,
         "detail": "Roger Guyett, Neal Scanlan, Patrick Tubach and Dominic Tuohy"
       }
     ],
@@ -2044,13 +1936,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:53.764",
-      "category_id": 9,
-      "year": 2018,
-      "nomination_id": 2739,
-      "id": 399
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 9,
@@ -2109,7 +1995,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "American Factory",
         "nominee": "American Factory",
-        "id": 4220,
+        "id": 3972,
         "detail": "Steven Bognar, Julia Reichert and Jeff Reichert"
       },
       {
@@ -2117,7 +2003,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Cave",
         "nominee": "The Cave",
-        "id": 4221,
+        "id": 3973,
         "detail": "Feras Fayyad, Kirstine Barfod and Sigrid Dyekjær"
       },
       {
@@ -2125,7 +2011,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Edge of Democracy",
         "nominee": "The Edge of Democracy",
-        "id": 4222,
+        "id": 3974,
         "detail": "Petra Costa, Joanna Natasegara, Shane Boris and Tiago Pavan"
       },
       {
@@ -2133,7 +2019,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "For Sama",
         "nominee": "For Sama",
-        "id": 4223,
+        "id": 3975,
         "detail": "Waad al-Kateab and Edward Watts"
       },
       {
@@ -2141,7 +2027,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Honeyland",
         "nominee": "Honeyland",
-        "id": 4224,
+        "id": 3976,
         "detail": "Ljubo Stefanov, Tamara Kotevska and Atanas Georgiev"
       }
     ],
@@ -2150,13 +2036,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:57.6",
-      "category_id": 10,
-      "year": 2018,
-      "nomination_id": 2741,
-      "id": 400
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 10,
@@ -2215,7 +2095,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "In the Absence",
         "nominee": "In the Absence",
-        "id": 4225,
+        "id": 3977,
         "detail": "Yi Seung-Jun and Gary Byung-Seok Kam"
       },
       {
@@ -2223,7 +2103,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Learning to Skateboard in a Warzone (If You\u2019re a Girl)",
         "nominee": "Learning to Skateboard in a Warzone (If You\u2019re a Girl)",
-        "id": 4226,
+        "id": 3978,
         "detail": "Carol Dysinger and Elena Andreicheva"
       },
       {
@@ -2231,7 +2111,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Life Overtakes Me",
         "nominee": "Life Overtakes Me",
-        "id": 4227,
+        "id": 3979,
         "detail": "John Haptas and Kristine Samuelson"
       },
       {
@@ -2239,7 +2119,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "St. Louis Superman",
         "nominee": "St. Louis Superman",
-        "id": 4228,
+        "id": 3980,
         "detail": "Smriti Mundhra and Sami Khan"
       },
       {
@@ -2247,7 +2127,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Walk Run Cha-cha",
         "nominee": "Walk Run Cha-cha",
-        "id": 4229,
+        "id": 3981,
         "detail": "Laura Nix and Colette Sandstedt"
       }
     ],
@@ -2256,13 +2136,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:33.112",
-      "category_id": 12,
-      "year": 2018,
-      "nomination_id": 2753,
-      "id": 406
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 12,
@@ -2320,7 +2194,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Corpus Christi",
         "nominee": "Corpus Christi",
-        "id": 4235,
+        "id": 3987,
         "detail": "Poland"
       },
       {
@@ -2328,7 +2202,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Honeyland",
         "nominee": "Honeyland",
-        "id": 4236,
+        "id": 3988,
         "detail": "North Macedonia"
       },
       {
@@ -2336,7 +2210,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Les Misérables",
         "nominee": "Les Misérables",
-        "id": 4237,
+        "id": 3989,
         "detail": "France"
       },
       {
@@ -2344,7 +2218,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Pain and Glory",
         "nominee": "Pain and Glory",
-        "id": 4238,
+        "id": 3990,
         "detail": "Spain"
       },
       {
@@ -2352,7 +2226,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Parasite",
         "nominee": "Parasite",
-        "id": 4239,
+        "id": 3991,
         "detail": "South Korea"
       }
     ],
@@ -2361,13 +2235,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:34.954",
-      "category_id": 16,
-      "year": 2018,
-      "nomination_id": 2782,
-      "id": 407
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 16,
@@ -2425,7 +2293,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Dcera (Daughter)",
         "nominee": "Dcera (Daughter)",
-        "id": 4269,
+        "id": 4021,
         "detail": "Daria Kashcheeva"
       },
       {
@@ -2433,7 +2301,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Hair Love",
         "nominee": "Hair Love",
-        "id": 4270,
+        "id": 4022,
         "detail": "Matthew A. Cherry and Karen Rupert Toliver"
       },
       {
@@ -2441,7 +2309,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Kitbull",
         "nominee": "Kitbull",
-        "id": 4271,
+        "id": 4023,
         "detail": "Rosana Sullivan and Kathryn Hendrickson"
       },
       {
@@ -2449,7 +2317,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Memorable",
         "nominee": "Memorable",
-        "id": 4272,
+        "id": 4024,
         "detail": "Bruno Collet and Jean-François Le Corre"
       },
       {
@@ -2457,7 +2325,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Sister",
         "nominee": "Sister",
-        "id": 4273,
+        "id": 4025,
         "detail": "Siqi Song"
       }
     ],
@@ -2466,13 +2334,7 @@ export const MockCategoryList: Category[] = [
     "points": 1
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:37.719",
-      "category_id": 17,
-      "year": 2018,
-      "nomination_id": 2790,
-      "id": 408
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 17,
@@ -2532,7 +2394,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Brotherhood",
         "nominee": "Brotherhood",
-        "id": 4274,
+        "id": 4026,
         "detail": "Meryam Joobeur and Maria Gracia Turgeon"
       },
       {
@@ -2540,7 +2402,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Nefta Football Club",
         "nominee": "Nefta Football Club",
-        "id": 4275,
+        "id": 4027,
         "detail": "Yves Piat and Damien Megherbi"
       },
       {
@@ -2548,7 +2410,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "The Neighbors\u2019 Window",
         "nominee": "The Neighbors\u2019 Window",
-        "id": 4276,
+        "id": 4028,
         "detail": "Marshall Curry"
       },
       {
@@ -2556,7 +2418,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "Saria",
         "nominee": "Saria",
-        "id": 4277,
+        "id": 4029,
         "detail": "Bryan Buckley and Matt Lefebvre"
       },
       {
@@ -2564,7 +2426,7 @@ export const MockCategoryList: Category[] = [
         "year": 2019,
         "context": "A Sister",
         "nominee": "A Sister",
-        "id": 4278,
+        "id": 4030,
         "detail": "Delphine Girard"
       }
     ],
