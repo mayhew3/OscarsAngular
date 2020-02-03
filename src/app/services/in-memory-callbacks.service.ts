@@ -7,6 +7,7 @@ export class InMemoryCallbacksService {
   winnerCallbacks = [];
   votingOpenCallbacks = [];
   oddsCallbacks = [];
+  itsOverCallbacks = [];
 
   on(channel, callback) {
     if (channel === 'winner') {
@@ -15,6 +16,8 @@ export class InMemoryCallbacksService {
       this.votingOpenCallbacks.push(callback);
     } else if (channel === 'odds') {
       this.oddsCallbacks.push(callback);
+    } else if (channel === 'its_over') {
+      this.itsOverCallbacks.push(callback);
     }
   }
 
@@ -25,6 +28,8 @@ export class InMemoryCallbacksService {
       this.votingOpenCallbacks = _.without(this.votingOpenCallbacks, callback);
     } else if (channel === 'odds') {
       this.oddsCallbacks = _.without(this.oddsCallbacks, callback);
+    } else if (channel === 'its_over') {
+      this.itsOverCallbacks = _.without(this.itsOverCallbacks, callback);
     }
   }
 
@@ -35,6 +40,8 @@ export class InMemoryCallbacksService {
       return this.votingOpenCallbacks;
     } else if (channel === 'odds') {
       return this.oddsCallbacks;
+    } else if (channel === 'its_over') {
+      return this.itsOverCallbacks;
     }
   }
 }

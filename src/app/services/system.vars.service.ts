@@ -27,6 +27,15 @@ export class SystemVarsService {
         }
       });
     });
+    this.getSystemVars().subscribe(() => {
+      this.socket.on('its_over', msg => {
+        if (!!msg.its_over) {
+          this.makeItOverInternal();
+        } else {
+          this.makeItNotOverInternal();
+        }
+      });
+    });
   }
 
   canVote(): boolean {
@@ -46,6 +55,18 @@ export class SystemVarsService {
   unlockVotingInternal(): void {
     this.getSystemVars().subscribe(() => {
       this.systemVars.voting_open = true;
+    });
+  }
+
+  makeItOverInternal(): void {
+    this.getSystemVars().subscribe(() => {
+      this.systemVars.its_over = true;
+    });
+  }
+
+  makeItNotOverInternal(): void {
+    this.getSystemVars().subscribe(() => {
+      this.systemVars.its_over = false;
     });
   }
 
