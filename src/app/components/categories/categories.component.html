@@ -26,6 +26,12 @@
       <div class="card categoryCard" [ngClass]="getVotedClass(category)">
         <div class="card-body fakeLink"
              [routerLink]="[category.id]">
+          <div class="row no-gutters timeAgoDiv"
+               *ngIf="!!mostRecentWinDate(category)">
+            <div class="col-12 py-0">
+              <span class="timeAgo">{{getTimeAgo(category)}}</span>
+            </div>
+          </div>
           <div class="row">
             <div class="col-10 categoryTitle">
               <div class="row">
@@ -37,6 +43,16 @@
                 <div class="col-12 categorySubtitle"
                      *ngIf="getCategorySubtitle(category)">
                   {{getCategorySubtitle(category)}}
+                </div>
+              </div>
+              <div class="row"
+                   *ngFor="let winner of category.winners">
+                <div class="col-12">
+                  {{getWinnerName(winner)}}
+                </div>
+                <div class="col-12"
+                     *ngIf="!!getWinnerSubtitle(winner, category)">
+                  {{getWinnerSubtitle(winner, category)}}
                 </div>
               </div>
             </div>

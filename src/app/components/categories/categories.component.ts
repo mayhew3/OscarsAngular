@@ -5,6 +5,9 @@ import {ActiveContext} from '../categories.context';
 import {SystemVarsService} from '../../services/system.vars.service';
 import fast_sort from 'fast-sort';
 import {_} from 'underscore';
+import * as moment from 'moment';
+import {Winner} from '../../interfaces/Winner';
+import {Nominee} from '../../interfaces/Nominee';
 
 @Component({
   selector: 'osc-categories',
@@ -26,8 +29,32 @@ export class CategoriesComponent implements OnInit {
       });
   }
 
+  getTimeAgo(category: Category): string {
+    const winDate = this.mostRecentWinDate(category);
+    if (!!winDate) {
+      return moment(winDate).fromNow();
+    } else {
+      return undefined;
+    }
+  }
+
+  getWinnerName(winner: Winner): string {
+    return this.categoryService.getNomineeFromWinner(winner).nominee;
+  }
+
+  getWinnerSubtitle(winner: Winner, category: Category): string {
+    const nominee = this.categoryService.getNomineeFromWinner(winner);
+    return this.getSubtitleText(nominee, category);
+  }
+
+  getSubtitleText(nominee: Nominee, category: Category): string {
+    return Nominee.getSubtitleText(category, nominee);
+  }
+
   mostRecentWinDate(category: Category): Date {
-    return _.max(_.map(category.winners, winner => winner.declared));
+    return category.winners.length > 0 ?
+      _.max(_.map(category.winners, winner => winner.declared)) :
+      undefined;
   }
 
   fastSortCategories(): void {
