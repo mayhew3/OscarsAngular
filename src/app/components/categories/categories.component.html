@@ -1,6 +1,16 @@
 
 <div class="container" style="padding: 10px">
 
+  <div class="row"
+       *ngIf="winnersMode()">
+    <div class="col-12">
+      <button class="btn btn-sm btn-secondary"
+              routerLink="/scores">
+        <i class="fas fa-angle-left"></i> Back to Scoreboard
+      </button>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-12">
       <h2>{{activeContext}}</h2>

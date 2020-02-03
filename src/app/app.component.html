@@ -28,10 +28,6 @@
           <a class="nav-link" routerLink="/scores">Scores</a>
         </li>
         <li class="nav-item"
-            *ngIf="!stillLoading() && auth.isUser() && !systemVarsService.canVote()">
-          <a class="nav-link" routerLink="/winners">Winners</a>
-        </li>
-        <li class="nav-item"
             *ngIf="!stillLoading() && auth.isUser()">
           <a class="nav-link" routerLink="/history">Past</a>
         </li>
