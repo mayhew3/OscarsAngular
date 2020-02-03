@@ -91,8 +91,7 @@ exports.Winner = sequelize.sequelize.define("winner", {
 exports.SystemVars = sequelize.sequelize.define("system_vars", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   curr_year: Sequelize.INTEGER,
-  voting_open: Sequelize.INTEGER,
-  its_over: Sequelize.BOOLEAN
+  voting_open: Sequelize.INTEGER
 }, {
   freezeTableName: true,
   createdAt: false,

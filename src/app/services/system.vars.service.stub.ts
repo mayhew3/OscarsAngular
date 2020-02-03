@@ -10,7 +10,6 @@ export class SystemVarsServiceStub {
     return of({
       curr_year: 2018,
       voting_open: true,
-      its_over: false,
     });
   }
 
