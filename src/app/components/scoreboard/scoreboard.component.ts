@@ -152,7 +152,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   itsOver(): boolean {
-    return this.systemVarsService.itsOver();
+    return this.getWinnerCategoryCount() === this.getTotalCategoryCount();
   }
 
   getOddsForPerson(person: Person): string {

@@ -20,7 +20,6 @@ exports.updateSystemVars = async function(request, response) {
   }
 
   const isVotingOpenChanged = result.voting_open !== systemVar.voting_open;
-  const isItsOverChanged = result.its_over !== systemVar.its_over;
 
   try {
     await result.update(systemVar);
@@ -43,13 +42,6 @@ exports.updateSystemVars = async function(request, response) {
       event_time: event_time
     };
     socket.emitToAll('voting', msg);
-  }
-
-  if (isItsOverChanged) {
-    const msg = {
-      voting_open: systemVar.its_over
-    };
-    socket.emitToAll('its_over', msg);
   }
 
   response.json({msg: 'Success'});

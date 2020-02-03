@@ -61,16 +61,8 @@ export class AdminDashboardComponent implements OnInit {
     return this.systemVarsService.canVote();
   }
 
-  itsOver(): boolean {
-    return this.systemVarsService.itsOver();
-  }
-
   getVotingButtonClass(votingOpen: boolean): string {
     return this.isVotingOpen() === votingOpen ? 'btn-success' : 'btn-primary';
-  }
-
-  getItsOverButtonClass(itsOver: boolean): string {
-    return this.itsOver() === itsOver ? 'btn-success' : 'btn-primary';
   }
 
   yearButtonClass(year): string {
@@ -96,12 +88,6 @@ export class AdminDashboardComponent implements OnInit {
   toggleVotingLock(votingOpen: boolean): void {
     if (votingOpen !== this.isVotingOpen()) {
       this.systemVarsService.toggleVotingLock();
-    }
-  }
-
-  toggleItsOver(itsOver: boolean): void {
-    if (itsOver !== this.itsOver()) {
-      this.systemVarsService.toggleItsOver();
     }
   }
 

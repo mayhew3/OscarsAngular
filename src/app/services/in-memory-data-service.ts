@@ -145,16 +145,6 @@ export class InMemoryDataService implements InMemoryDbService {
       const callbacks = this.getCallbacks('voting');
       _.forEach(callbacks, callback => callback(msg));
     }
-    if (systemVars.its_over !== jsonBody.its_over) {
-      systemVars.its_over = jsonBody.its_over;
-
-      const msg = {
-        its_over: systemVars.its_over
-      };
-
-      const callbacks = this.getCallbacks('its_over');
-      _.forEach(callbacks, callback => callback(msg));
-    }
   }
 
   private addOrDeleteWinner(requestInfo: RequestInfo) {

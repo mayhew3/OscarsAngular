@@ -27,15 +27,6 @@ export class SystemVarsService {
         }
       });
     });
-    this.getSystemVars().subscribe(() => {
-      this.socket.on('its_over', msg => {
-        if (!!msg.its_over) {
-          this.makeItOverInternal();
-        } else {
-          this.makeItNotOverInternal();
-        }
-      });
-    });
   }
 
   canVote(): boolean {
@@ -58,18 +49,6 @@ export class SystemVarsService {
     });
   }
 
-  makeItOverInternal(): void {
-    this.getSystemVars().subscribe(() => {
-      this.systemVars.its_over = true;
-    });
-  }
-
-  makeItNotOverInternal(): void {
-    this.getSystemVars().subscribe(() => {
-      this.systemVars.its_over = false;
-    });
-  }
-
   toggleVotingLock(): void {
     if (!this.systemVars) {
       throw new Error('No system vars found.');
@@ -77,8 +56,7 @@ export class SystemVarsService {
     const targetVars = {
       id: this.systemVars.id,
       voting_open: !this.systemVars.voting_open,
-      curr_year: this.systemVars.curr_year,
-      its_over: this.systemVars.its_over
+      curr_year: this.systemVars.curr_year
     };
 
     this.http.put(this.systemVarsUrl, targetVars, httpOptions)
@@ -92,8 +70,7 @@ export class SystemVarsService {
       const targetVars = {
         id: this.systemVars.id,
         voting_open: this.systemVars.voting_open,
-        curr_year: year,
-        its_over: this.systemVars.its_over
+        curr_year: year
       };
 
       this.http.put(this.systemVarsUrl, targetVars, httpOptions)
@@ -103,22 +80,6 @@ export class SystemVarsService {
           observer.next();
         });
     });
-  }
-
-  toggleItsOver(): void {
-    if (!this.systemVars) {
-      throw new Error('No system vars found.');
-    }
-    const targetVars = {
-      id: this.systemVars.id,
-      voting_open: this.systemVars.voting_open,
-      curr_year: this.systemVars.curr_year,
-      its_over: !this.systemVars.its_over
-    };
-
-    this.http.put(this.systemVarsUrl, targetVars, httpOptions)
-      .pipe(catchError(this.handleError<any>('toggleItsOver')))
-      .subscribe();
   }
 
   stillLoading(): boolean {
@@ -164,7 +125,4 @@ export class SystemVarsService {
     };
   }
 
-  itsOver(): boolean {
-    return this.systemVars.its_over;
-  }
 }
