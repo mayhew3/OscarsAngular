@@ -34,6 +34,7 @@ export class CategoriesComponent implements OnInit {
     fast_sort(this.categories)
       .by([
         {desc: category => this.mostRecentWinDate(category)},
+        {asc: category => category.points},
         {asc: category => category.name}
       ]);
   }
