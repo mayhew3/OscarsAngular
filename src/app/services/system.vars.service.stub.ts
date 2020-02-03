@@ -9,7 +9,7 @@ export class SystemVarsServiceStub {
   getSystemVars(): Observable<SystemVars> {
     return of({
       curr_year: 2018,
-      voting_open: true,
+      voting_open: true
     });
   }
 
