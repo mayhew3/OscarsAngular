@@ -4,6 +4,7 @@
   font-size: 16pt;
   margin-bottom: 10px;
   border-color: $highlight;
+  line-height: 130%;
 }
 
 .categoryTitle {
@@ -16,7 +17,7 @@
   font-size: 12pt;
   font-weight: bold;
   color: fade_out(lighten(cornflowerblue, 20%), .3);
-  line-height: 120%;
+  line-height: 0.5;
 }
 
 .categoryPoints {
@@ -25,6 +26,9 @@
   -webkit-text-stroke-color: lighten(cornflowerblue, 20%);
   -webkit-text-stroke-width: 2px;
   text-align: center;
+  display: grid;
+  justify-items: center;
+  align-items: center;
   line-height: 0.8;
   font-size: 36pt;
   font-family: "brandon-grotesque", sans-serif;
@@ -40,9 +44,29 @@
 
 .timeAgoDiv {
   line-height: 0.5;
+  margin-bottom: 7px;
 }
 
 .timeAgo {
   font-size: 10pt;
   color: white;
+}
+
+.winnerTitle {
+  font-size: 24pt;
+  font-weight: bolder;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  color: lighten(cornflowerblue, 30%);
+  margin-top: 10px;
+}
+
+.winnerSubtitle {
+  font-size: 13pt;
+  font-weight: bolder;
+  //margin-bottom: 30px;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  line-height: 1.0;
+  color: fade_out(lighten(cornflowerblue, 30%), 0.3);
 }

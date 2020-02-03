@@ -47,10 +47,10 @@
               </div>
               <div class="row"
                    *ngFor="let winner of category.winners">
-                <div class="col-12">
+                <div class="col-12 winnerTitle">
                   {{getWinnerName(winner)}}
                 </div>
-                <div class="col-12"
+                <div class="col-12 winnerSubtitle"
                      *ngIf="!!getWinnerSubtitle(winner, category)">
                   {{getWinnerSubtitle(winner, category)}}
                 </div>
