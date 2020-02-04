@@ -8,6 +8,9 @@ import {_} from 'underscore';
 import * as moment from 'moment';
 import {Winner} from '../../interfaces/Winner';
 import {Nominee} from '../../interfaces/Nominee';
+import {VotesService} from '../../services/votes.service';
+import {AuthService} from '../../services/auth/auth.service';
+import {Person} from '../../interfaces/Person';
 
 @Component({
   selector: 'osc-categories',
@@ -16,20 +19,26 @@ import {Nominee} from '../../interfaces/Nominee';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[];
+  me: Person;
   @Input() activeContext: ActiveContext;
 
   constructor(private categoryService: CategoryService,
-              public systemVarsService: SystemVarsService) { }
+              public systemVarsService: SystemVarsService,
+              private votesService: VotesService,
+              private auth: AuthService) { }
 
   ngOnInit() {
-    this.categoryService.getCategories()
-      .subscribe(categories => {
-        this.categories = categories;
-        this.fastSortCategories();
-        this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+    this.auth.getPerson().subscribe(person => {
+      this.me = person;
+      this.categoryService.getCategories()
+        .subscribe(categories => {
+          this.categories = categories;
           this.fastSortCategories();
+          this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+            this.fastSortCategories();
+          });
         });
-      });
+    });
   }
 
   getTimeAgo(category: Category): string {
@@ -113,6 +122,21 @@ export class CategoriesComponent implements OnInit {
 
   stillLoading(): boolean {
     return this.systemVarsService.stillLoading() || this.categoryService.stillLoading();
+  }
+
+  showYourPick(category: Category): boolean {
+    const yourPick = this.getYourPick(category);
+    const winning_ids = _.map(category.winners, winner => winner.nomination_id);
+    return !!yourPick && !_.contains(winning_ids, yourPick.id);
+  }
+
+  getYourPick(category: Category): Nominee {
+    const myVotes = this.votesService.getVotesForCurrentYearAndPersonAndCategory(this.me, category);
+    if (myVotes.length > 0) {
+      return _.findWhere(category.nominees, {id: myVotes[0].nomination_id});
+    } else {
+      return undefined;
+    }
   }
 
 }

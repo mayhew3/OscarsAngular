@@ -4,7 +4,7 @@
   font-size: 16pt;
   margin-bottom: 10px;
   border-color: $highlight;
-  line-height: 130%;
+  line-height: 0.8;
 }
 
 .categoryCardBody {
@@ -21,7 +21,6 @@
   font-size: 12pt;
   font-weight: bold;
   color: fade_out(lighten(cornflowerblue, 20%), .3);
-  line-height: 0.5;
 }
 
 .categoryPoints {
@@ -33,9 +32,13 @@
   display: grid;
   justify-items: center;
   align-items: center;
-  line-height: 0.8;
   font-size: 36pt;
   font-family: "brandon-grotesque", sans-serif;
+}
+
+.cardSection {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .votedOn {
@@ -62,7 +65,6 @@
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
   color: lighten(cornflowerblue, 30%);
-  margin-top: 10px;
 }
 
 .winnerSubtitle {
@@ -71,6 +73,5 @@
   //margin-bottom: 30px;
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
-  line-height: 1.0;
   color: fade_out(lighten(cornflowerblue, 30%), 0.3);
 }

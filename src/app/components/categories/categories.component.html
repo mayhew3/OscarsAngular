@@ -23,29 +23,40 @@
   <div class="row" *ngIf="showCategories()">
     <div class="col-12 col-sm-6 col-lg-4"
          *ngFor="let category of categories">
+
+      <!-- CATEGORY CARD -->
+
       <div class="card categoryCard" [ngClass]="getVotedClass(category)">
         <div class="card-body fakeLink categoryCardBody"
              [routerLink]="[category.id]">
+
+          <!-- TIME AGO -->
+
           <div class="row no-gutters timeAgoDiv"
                *ngIf="!!mostRecentWinDate(category)">
             <div class="col-12 py-0">
               <span class="timeAgo">{{getTimeAgo(category)}}</span>
             </div>
           </div>
+
           <div class="row">
             <div class="col-10 categoryTitle">
-              <div class="row">
+
+              <!-- CATEGORY NAME -->
+
+              <div class="row py-1">
                 <div class="col-12">
                   {{getCategoryName(category)}}
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-12 categorySubtitle"
                      *ngIf="getCategorySubtitle(category)">
                   {{getCategorySubtitle(category)}}
                 </div>
               </div>
-              <div class="row"
+
+              <!-- WINNER -->
+
+              <div class="row py-1"
                    *ngFor="let winner of category.winners">
                 <div class="col-12 winnerTitle">
                   {{getWinnerName(winner)}}
@@ -55,13 +66,32 @@
                   {{getWinnerSubtitle(winner, category)}}
                 </div>
               </div>
+
+              <!-- YOUR PICK -->
+
+              <div class="row py-1"
+                   *ngIf="showYourPick(category)">
+                <div class="col-12">
+                  Your Pick:
+                </div>
+                <div class="col-12 winnerTitle">
+                  {{getYourPick(category).nominee}}
+                </div>
+              </div>
+
             </div>
+
+            <!-- POINTS -->
+
             <div class="col-2 categoryPoints">
               <span>{{category.points}}</span>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- END CARD -->
+
     </div>
   </div>
 
