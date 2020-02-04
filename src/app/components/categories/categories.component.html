@@ -71,10 +71,10 @@
 
               <div class="row py-1"
                    *ngIf="showYourPick(category)">
-                <div class="col-12">
+                <div class="col-12 incorrectPickHeader">
                   Your Pick:
                 </div>
-                <div class="col-12 winnerTitle">
+                <div class="col-12 winnerTitle incorrectPick">
                   {{getYourPick(category).nominee}}
                 </div>
               </div>
@@ -83,7 +83,8 @@
 
             <!-- POINTS -->
 
-            <div class="col-2 categoryPoints">
+            <div class="col-2 categoryPoints"
+                 [ngClass]="getMyWinnerScoreClass(category)">
               <span>{{category.points}}</span>
             </div>
           </div>

@@ -139,4 +139,12 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
+  getMyWinnerScoreClass(category: Category): string {
+    return this.gotPointsForWinner(category) ? 'winningScore' : 'losingScore';
+  }
+
+  gotPointsForWinner(category: Category): boolean {
+    return this.categoryService.didPersonVoteCorrectlyFor(this.me, category);
+  }
+
 }
