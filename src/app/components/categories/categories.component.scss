@@ -1,7 +1,7 @@
 @import "../../../variables";
 
 .categoryCard {
-  font-size: 16pt;
+  font-size: 14pt;
   margin-bottom: 10px;
   border-color: $highlight;
   line-height: 0.8;
@@ -18,7 +18,7 @@
 }
 
 .categorySubtitle {
-  font-size: 12pt;
+  font-size: 11pt;
   font-weight: bold;
   color: fade_out(lighten(cornflowerblue, 20%), .3);
 }
@@ -30,7 +30,7 @@
   display: grid;
   justify-items: center;
   align-items: center;
-  font-size: 36pt;
+  font-size: 42pt;
   font-family: "brandon-grotesque", sans-serif;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .winnerTitle {
-  font-size: 24pt;
+  font-size: 20pt;
   font-weight: bolder;
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
@@ -66,9 +66,8 @@
 }
 
 .winnerSubtitle {
-  font-size: 13pt;
+  font-size: 11pt;
   font-weight: bolder;
-  //margin-bottom: 30px;
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
   color: fade_out(lighten(cornflowerblue, 30%), 0.3);

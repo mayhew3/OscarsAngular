@@ -127,7 +127,7 @@ export class CategoriesComponent implements OnInit {
   showYourPick(category: Category): boolean {
     const yourPick = this.getYourPick(category);
     const winning_ids = _.map(category.winners, winner => winner.nomination_id);
-    return !!yourPick && !_.contains(winning_ids, yourPick.id);
+    return !yourPick || !_.contains(winning_ids, yourPick.id);
   }
 
   getYourPick(category: Category): Nominee {
@@ -137,6 +137,11 @@ export class CategoriesComponent implements OnInit {
     } else {
       return undefined;
     }
+  }
+
+  yourPickName(category: Category): string {
+    const yourPick = this.getYourPick(category);
+    return !!yourPick ? yourPick.nominee : '(no pick made)';
   }
 
   getMyWinnerScoreClass(category: Category): string {
