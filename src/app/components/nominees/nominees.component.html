@@ -36,7 +36,7 @@
       <div class="col-12 col-sm-6 col-lg-4"
            *ngFor="let nominee of getNominees()">
 
-        <div class="card nomineeCard fakeLink"
+        <div class="card nomineeCard"
              [ngClass]="getVotedClass(nominee)"
              (click)="submitVoteOrWinner(nominee)" >
           <div class="card-body nomineeCardBody">
