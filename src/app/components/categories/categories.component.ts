@@ -22,6 +22,9 @@ export class CategoriesComponent implements OnInit {
   me: Person;
   @Input() activeContext: ActiveContext;
 
+  showWinnerless = true;
+  showWinners = true;
+
   constructor(private categoryService: CategoryService,
               public systemVarsService: SystemVarsService,
               private votesService: VotesService,
@@ -39,6 +42,14 @@ export class CategoriesComponent implements OnInit {
           });
         });
     });
+  }
+
+  toggleShowWinnerless(): void {
+    this.showWinnerless = !this.showWinnerless;
+  }
+
+  toggleShowWinners(): void {
+    this.showWinners = !this.showWinners;
   }
 
   getCategoriesWithNoWinner(): Category[] {

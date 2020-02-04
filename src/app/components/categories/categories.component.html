@@ -13,7 +13,7 @@
 
   <div class="row">
     <div class="col-12">
-      <h2>{{activeContext}}</h2>
+      <h1>{{activeContext}}</h1>
     </div>
   </div>
 
@@ -23,150 +23,160 @@
 
   <div class="row" *ngIf="showCategoriesWithNoWinners()">
 
-    <div class="col-12" *ngIf="winnersMode()">
-      <h5>UPCOMING</h5>
+    <div class="col-12"
+         *ngIf="winnersMode()">
+      <span class="sectionHeader">UPCOMING</span> <span class="fakeLink hideLink" (click)="toggleShowWinnerless()">(hide)</span>
     </div>
 
-    <div class="col-12 col-sm-6 col-lg-4"
-         *ngFor="let category of getCategoriesWithNoWinner()">
+    <div class="col-12"
+         *ngIf="showWinnerless">
+      <div class="row">
+        <div class="col-12 col-sm-6 col-lg-4"
+             *ngFor="let category of getCategoriesWithNoWinner()">
 
-      <!-- CATEGORY CARD -->
+          <!-- CATEGORY CARD -->
 
-      <div class="card categoryCard" [ngClass]="getVotedClass(category)">
-        <div class="card-body fakeLink categoryCardBody"
-             [routerLink]="[category.id]">
+          <div class="card categoryCard" [ngClass]="getVotedClass(category)">
+            <div class="card-body fakeLink categoryCardBody"
+                 [routerLink]="[category.id]">
 
-          <!-- TIME AGO -->
+              <!-- TIME AGO -->
 
-          <div class="row no-gutters timeAgoDiv"
-               *ngIf="!!mostRecentWinDate(category)">
-            <div class="col-12 py-0">
-              <span class="timeAgo">{{getTimeAgo(category)}}</span>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-10 categoryVotingTitle">
-
-              <!-- CATEGORY NAME -->
-
-              <div class="row py-1">
-                <div class="col-12">
-                  {{getCategoryName(category)}}
-                </div>
-                <div class="col-12 categoryVotingSubtitle"
-                     *ngIf="getCategorySubtitle(category)">
-                  {{getCategorySubtitle(category)}}
+              <div class="row no-gutters timeAgoDiv"
+                   *ngIf="!!mostRecentWinDate(category)">
+                <div class="col-12 py-0">
+                  <span class="timeAgo">{{getTimeAgo(category)}}</span>
                 </div>
               </div>
 
-              <!-- YOUR PICK -->
+              <div class="row">
+                <div class="col-10 categoryVotingTitle">
 
-              <div class="row py-1"
-                   *ngIf="showYourPick(category)">
-                <div class="col-12 neutralPickHeader">
-                  Your Pick:
+                  <!-- CATEGORY NAME -->
+
+                  <div class="row py-1">
+                    <div class="col-12">
+                      {{getCategoryName(category)}}
+                    </div>
+                    <div class="col-12 categoryVotingSubtitle"
+                         *ngIf="getCategorySubtitle(category)">
+                      {{getCategorySubtitle(category)}}
+                    </div>
+                  </div>
+
+                  <!-- YOUR PICK -->
+
+                  <div class="row py-1"
+                       *ngIf="showYourPick(category)">
+                    <div class="col-12 neutralPickHeader">
+                      Your Pick:
+                    </div>
+                    <div class="col-12 winnerTitle neutralPick">
+                      {{yourPickName(category)}}
+                    </div>
+                  </div>
+
                 </div>
-                <div class="col-12 winnerTitle neutralPick">
-                  {{yourPickName(category)}}
+
+                <!-- POINTS -->
+
+                <div class="col-2 categoryPoints neutralScore">
+                  <span>{{category.points}}</span>
                 </div>
               </div>
-
-            </div>
-
-            <!-- POINTS -->
-
-            <div class="col-2 categoryPoints neutralScore">
-              <span>{{category.points}}</span>
             </div>
           </div>
+
+          <!-- END CARD -->
+
         </div>
       </div>
-
-      <!-- END CARD -->
-
     </div>
+
   </div>
 
   <div class="row" *ngIf="showCategoriesWithWinners()">
 
     <div class="col-12">
-      <h5>PAST</h5>
+      <span class="sectionHeader">WINNERS</span> <span class="fakeLink hideLink" (click)="toggleShowWinners()">(hide)</span>
     </div>
 
-    <div class="col-12 col-sm-6 col-lg-4"
-         *ngFor="let category of getCategoriesWithAtLeastOneWinner()">
+    <div *ngIf="showWinners">
+      <div class="col-12 col-sm-6 col-lg-4"
+           *ngFor="let category of getCategoriesWithAtLeastOneWinner()">
 
-      <!-- CATEGORY CARD -->
+        <!-- CATEGORY CARD -->
 
-      <div class="card categoryCard" [ngClass]="getVotedClass(category)">
-        <div class="card-body fakeLink categoryCardBody"
-             [routerLink]="[category.id]">
+        <div class="card categoryCard" [ngClass]="getVotedClass(category)">
+          <div class="card-body fakeLink categoryCardBody"
+               [routerLink]="[category.id]">
 
-          <!-- TIME AGO -->
+            <!-- TIME AGO -->
 
-          <div class="row no-gutters timeAgoDiv"
-               *ngIf="!!mostRecentWinDate(category)">
-            <div class="col-12 py-0">
-              <span class="timeAgo">{{getTimeAgo(category)}}</span>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-10 categoryTitle">
-
-              <!-- CATEGORY NAME -->
-
-              <div class="row py-1">
-                <div class="col-12">
-                  {{getCategoryName(category)}}
-                </div>
-                <div class="col-12 categorySubtitle"
-                     *ngIf="getCategorySubtitle(category)">
-                  {{getCategorySubtitle(category)}}
-                </div>
+            <div class="row no-gutters timeAgoDiv"
+                 *ngIf="!!mostRecentWinDate(category)">
+              <div class="col-12 py-0">
+                <span class="timeAgo">{{getTimeAgo(category)}}</span>
               </div>
-
-              <!-- WINNER -->
-
-              <div class="row py-1"
-                   *ngFor="let winner of category.winners">
-                <div class="col-12 winnerTitle">
-                  {{getWinnerName(winner)}}
-                </div>
-                <div class="col-12 winnerSubtitle"
-                     *ngIf="!!getWinnerSubtitle(winner, category)">
-                  {{getWinnerSubtitle(winner, category)}}
-                </div>
-              </div>
-
-              <!-- YOUR PICK -->
-
-              <div class="row py-1"
-                   *ngIf="showYourPick(category)">
-                <div class="col-12 incorrectPickHeader">
-                  Your Pick:
-                </div>
-                <div class="col-12 winnerTitle incorrectPick">
-                  {{yourPickName(category)}}
-                </div>
-              </div>
-
             </div>
 
-            <!-- POINTS -->
+            <div class="row">
+              <div class="col-10 categoryTitle">
 
-            <div class="col-2 categoryPoints"
-                 [ngClass]="getMyWinnerScoreClass(category)">
-              <span>{{category.points}}</span>
+                <!-- CATEGORY NAME -->
+
+                <div class="row py-1">
+                  <div class="col-12">
+                    {{getCategoryName(category)}}
+                  </div>
+                  <div class="col-12 categorySubtitle"
+                       *ngIf="getCategorySubtitle(category)">
+                    {{getCategorySubtitle(category)}}
+                  </div>
+                </div>
+
+                <!-- WINNER -->
+
+                <div class="row py-1"
+                     *ngFor="let winner of category.winners">
+                  <div class="col-12 winnerTitle">
+                    {{getWinnerName(winner)}}
+                  </div>
+                  <div class="col-12 winnerSubtitle"
+                       *ngIf="!!getWinnerSubtitle(winner, category)">
+                    {{getWinnerSubtitle(winner, category)}}
+                  </div>
+                </div>
+
+                <!-- YOUR PICK -->
+
+                <div class="row py-1"
+                     *ngIf="showYourPick(category)">
+                  <div class="col-12 incorrectPickHeader">
+                    Your Pick:
+                  </div>
+                  <div class="col-12 winnerTitle incorrectPick">
+                    {{yourPickName(category)}}
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- POINTS -->
+
+              <div class="col-2 categoryPoints"
+                   [ngClass]="getMyWinnerScoreClass(category)">
+                <span>{{category.points}}</span>
+              </div>
             </div>
           </div>
         </div>
+
+        <!-- END CARD -->
+
       </div>
-
-      <!-- END CARD -->
-
     </div>
+
   </div>
 
 </div>
