@@ -23,6 +23,19 @@
   color: fade_out(lighten(cornflowerblue, 20%), .3);
 }
 
+.categoryVotingTitle {
+  font-size: 16pt;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  color: lighten(cornflowerblue, 20%);
+}
+
+.categoryVotingSubtitle {
+  font-size: 12pt;
+  font-weight: bold;
+  color: fade_out(lighten(cornflowerblue, 20%), .3);
+}
+
 .categoryPoints {
   font-weight: bold;
   -webkit-text-stroke-width: 2px;
@@ -83,10 +96,23 @@
   -webkit-text-stroke-color: lighten(tomato, 5%);
 }
 
+.neutralScore {
+  -webkit-text-fill-color: fade_out(lighten(cornflowerblue, 20%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(cornflowerblue, 20%);
+}
+
 .incorrectPickHeader {
   color: fade_out(lighten(tomato, 5%), 0.3);
 }
 
 .incorrectPick {
   color: lighten(tomato, 5%);
+}
+
+.neutralPickHeader {
+  color: fade_out(lighten(cornflowerblue, 20%), 0.3);
+}
+
+.neutralPick {
+  color: lighten(cornflowerblue, 20%);
 }

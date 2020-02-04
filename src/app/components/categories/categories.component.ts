@@ -41,6 +41,14 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  getCategoriesWithNoWinner(): Category[] {
+    return _.filter(this.categories, category => category.winners.length === 0);
+  }
+
+  getCategoriesWithAtLeastOneWinner(): Category[] {
+    return _.filter(this.categories, category => category.winners.length > 0);
+  }
+
   getTimeAgo(category: Category): string {
     const winDate = this.mostRecentWinDate(category);
     if (!!winDate) {
@@ -95,6 +103,14 @@ export class CategoriesComponent implements OnInit {
       (this.systemVarsService.canVote() || !this.votingMode());
   }
 
+  showCategoriesWithNoWinners(): boolean {
+    return this.showCategories() && this.getCategoriesWithNoWinner().length > 0;
+  }
+
+  showCategoriesWithWinners(): boolean {
+    return this.showCategories() && this.getCategoriesWithAtLeastOneWinner().length > 0 && this.winnersMode();
+  }
+
   getCategoryName(category: Category): string {
     return this.categoryService.getCategoryName(category);
   }
@@ -127,7 +143,11 @@ export class CategoriesComponent implements OnInit {
   showYourPick(category: Category): boolean {
     const yourPick = this.getYourPick(category);
     const winning_ids = _.map(category.winners, winner => winner.nomination_id);
-    return !yourPick || !_.contains(winning_ids, yourPick.id);
+    if (this.votingMode()) {
+      return !!yourPick;
+    } else {
+      return !yourPick || !_.contains(winning_ids, yourPick.id);
+    }
   }
 
   getYourPick(category: Category): Nominee {
