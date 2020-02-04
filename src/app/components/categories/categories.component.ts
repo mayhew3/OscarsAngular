@@ -26,6 +26,9 @@ export class CategoriesComponent implements OnInit {
       .subscribe(categories => {
         this.categories = categories;
         this.fastSortCategories();
+        this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+          this.fastSortCategories();
+        });
       });
   }
 
