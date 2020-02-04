@@ -43,6 +43,7 @@ export class ScoreboardComponent implements OnInit {
 
         this.updateScoreboard().subscribe(() => {
           this.socket.on('reconnect', () => {
+            console.log('Reconnect event triggered! Refreshing data!');
             this.refreshData();
           });
         });
