@@ -52,6 +52,10 @@ export class CategoriesComponent implements OnInit {
     this.showWinners = !this.showWinners;
   }
 
+  hideShowLink(showVar: boolean): string {
+    return !!showVar ? '(hide)' : '(show)';
+  }
+
   getCategoriesWithNoWinner(): Category[] {
     return _.filter(this.categories, category => category.winners.length === 0);
   }
