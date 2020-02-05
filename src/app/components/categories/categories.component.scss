@@ -137,6 +137,14 @@
   color: lighten(cornflowerblue, 20%);
 }
 
+.myDifferentPickHeader {
+  color: fade_out(lighten($personal, 40%), 0.3);
+}
+
+.myDifferentPick {
+  color: lighten($personal, 40%);
+}
+
 .sectionHeader {
   font-size: 15pt;
   font-weight: bold;

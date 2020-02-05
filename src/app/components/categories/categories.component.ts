@@ -169,11 +169,35 @@ export class CategoriesComponent implements OnInit {
   }
 
   personPickClass(person: Person, category: Category): string {
-    return this.didPickWinner(person, category) ? 'correctPick' : 'incorrectPick';
+    if (!this.hasAtLeastOneWinner(category)) {
+      if (this.me.id === person.id && !this.pickedTheSame(this.me, this.person, category)) {
+        return 'myDifferentPick';
+      } else {
+        return 'neutralPick';
+      }
+    } else {
+      if (this.didPickWinner(person, category)) {
+        return 'correctPick';
+      } else {
+        return 'incorrectPick';
+      }
+    }
   }
 
   personPickHeaderClass(person: Person, category: Category): string {
-    return this.didPickWinner(person, category) ? 'correctPickHeader' : 'incorrectPickHeader';
+    if (!this.hasAtLeastOneWinner(category)) {
+      if (this.me.id === person.id && !this.pickedTheSame(this.me, this.person, category)) {
+        return 'myDifferentPickHeader';
+      } else {
+        return 'neutralPickHeader';
+      }
+    } else {
+      if (this.didPickWinner(person, category)) {
+        return 'correctPickHeader';
+      } else {
+        return 'incorrectPickHeader';
+      }
+    }
   }
 
   private pickedTheSame(person1: Person, person2: Person, category: Category): boolean {
@@ -190,6 +214,10 @@ export class CategoriesComponent implements OnInit {
     } else {
       return !!personPick && _.contains(winning_ids, personPick.id);
     }
+  }
+
+  private hasAtLeastOneWinner(category: Category): boolean {
+    return category.winners.length > 0;
   }
 
   getPersonPick(category: Category): Nominee {
