@@ -45,6 +45,20 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  getPageTitle(): string {
+    if (this.winnersMode() && !this.personIsMe()) {
+      return this.getPersonName(this.person);
+    } else {
+      return this.activeContext;
+    }
+  }
+  getPersonName(person: Person): string {
+    if (!!person.middle_name) {
+      return person.first_name + ' ' + person.middle_name.charAt(0) + ' ' + person.last_name;
+    } else {
+      return person.first_name + ' ' + person.last_name;
+    }
+  }
   toggleShowWinnerless(): void {
     this.showWinnerless = !this.showWinnerless;
   }

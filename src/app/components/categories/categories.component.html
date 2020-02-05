@@ -11,9 +11,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="!!me">
     <div class="col-12">
-      <h1>{{activeContext}}</h1>
+      <h1>{{getPageTitle()}}</h1>
     </div>
   </div>
 
