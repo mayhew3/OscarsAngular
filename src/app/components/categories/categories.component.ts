@@ -179,7 +179,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   showPersonPick(category: Category): boolean {
-    return this.didPickWinner(this.person, category);
+    return !!this.person && this.didPickWinner(this.person, category);
   }
 
   showMyPick(category: Category): boolean {

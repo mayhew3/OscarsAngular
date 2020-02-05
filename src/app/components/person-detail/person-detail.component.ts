@@ -10,7 +10,7 @@ import {ActiveContext} from '../categories.context';
   styleUrls: ['./person-detail.component.scss']
 })
 export class PersonDetailComponent implements OnInit {
-  private person: Person;
+  person: Person;
   public activeContext = ActiveContext.Winner;
 
   constructor(private route: ActivatedRoute,
