@@ -11,9 +11,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="!!me">
     <div class="col-12">
-      <h1>{{activeContext}}</h1>
+      <h1>{{getPageTitle()}}</h1>
     </div>
   </div>
 
@@ -38,7 +38,7 @@
 
         <div class="card categoryCard" [ngClass]="getVotedClass(category)">
           <div class="card-body fakeLink categoryCardBody"
-               [routerLink]="[category.id]">
+               [routerLink]="getRouterLink(category)">
 
             <!-- TIME AGO -->
 
@@ -68,7 +68,7 @@
 
                 <div class="row py-1"
                      *ngFor="let winner of category.winners">
-                  <div class="col-12 winnerTitle">
+                  <div class="col-12 pickTitle winnerTitle">
                     {{getWinnerName(winner)}}
                   </div>
                   <div class="col-12 winnerSubtitle"
@@ -80,12 +80,12 @@
                 <!-- YOUR PICK -->
 
                 <div class="row py-1"
-                     *ngIf="showYourPick(category)">
-                  <div class="col-12 incorrectPickHeader">
+                     *ngIf="showMyPick(category)">
+                  <div class="col-12 pickHeader incorrectPickHeader">
                     Your Pick:
                   </div>
-                  <div class="col-12 winnerTitle incorrectPick">
-                    {{yourPickName(category)}}
+                  <div class="col-12 pickTitle personPickTitle incorrectPick">
+                    {{myPickName(category)}}
                   </div>
                 </div>
 
@@ -98,6 +98,51 @@
                 <span>{{category.points}}</span>
               </div>
             </div>
+
+            <!-- PERSON DETAIL COMPARISON -->
+
+            <div class="row py-1"
+                 *ngIf="!personIsMe() && wePickedTheSame(category)">
+              <div class="col-12 pickHeader"
+                   [ngClass]="personPickHeaderClass(person, category)">
+                {{bothPersonsDisplayName()}}
+              </div>
+              <div class="col-12 pickTitle personPickTitle"
+                   [ngClass]="personPickClass(person, category)">
+                {{personPickName(category)}}
+              </div>
+            </div>
+
+            <div class="row py-1 no-gutters"
+                 *ngIf="!personIsMe() && !wePickedTheSame(category)">
+              <!-- YOUR SIDE PICK -->
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-12 pickHeader"
+                       [ngClass]="personPickHeaderClass(me, category)">
+                    {{myDisplayName()}}
+                  </div>
+                  <div class="col-12 pickTitle personPickTitle"
+                       [ngClass]="personPickClass(me, category)">
+                    {{myPickName(category)}}
+                  </div>
+                </div>
+              </div>
+              <!-- THEIR SIDE PICK -->
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-12 pickHeader"
+                       [ngClass]="personPickHeaderClass(person, category)">
+                    {{personDisplayName()}}
+                  </div>
+                  <div class="col-12 pickTitle personPickTitle"
+                       [ngClass]="personPickClass(person, category)">
+                    {{personPickName(category)}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -157,12 +202,12 @@
                   <!-- YOUR PICK -->
 
                   <div class="row py-1"
-                       *ngIf="showYourPick(category)">
+                       *ngIf="showPersonPick(category)">
                     <div class="col-12 neutralPickHeader">
-                      Your Pick:
+                      {{personPossessiveDisplayName()}} Pick:
                     </div>
-                    <div class="col-12 winnerTitle neutralPick">
-                      {{yourPickName(category)}}
+                    <div class="col-12 pickTitle personPickTitle neutralPick">
+                      {{personPickName(category)}}
                     </div>
                   </div>
 
@@ -174,6 +219,53 @@
                   <span>{{category.points}}</span>
                 </div>
               </div>
+
+
+              <!-- PERSON DETAIL COMPARISON -->
+
+              <div class="row py-1"
+                   *ngIf="!personIsMe() && wePickedTheSame(category)">
+                <div class="col-12 pickHeader"
+                     [ngClass]="personPickHeaderClass(person, category)">
+                  {{bothPersonsDisplayName()}}
+                </div>
+                <div class="col-12 pickTitle personPickTitle"
+                     [ngClass]="personPickClass(person, category)">
+                  {{personPickName(category)}}
+                </div>
+              </div>
+
+              <div class="row py-1 no-gutters"
+                   *ngIf="!personIsMe() && !wePickedTheSame(category)">
+                <!-- YOUR SIDE PICK -->
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-12 pickHeader"
+                         [ngClass]="personPickHeaderClass(me, category)">
+                      {{myDisplayName()}}
+                    </div>
+                    <div class="col-12 pickTitle personPickTitle"
+                         [ngClass]="personPickClass(me, category)">
+                      {{myPickName(category)}}
+                    </div>
+                  </div>
+                </div>
+                <!-- THEIR SIDE PICK -->
+                <div class="col-6">
+                  <div class="row">
+                    <div class="col-12 pickHeader"
+                         [ngClass]="personPickHeaderClass(person, category)">
+                      {{personDisplayName()}}
+                    </div>
+                    <div class="col-12 pickTitle personPickTitle"
+                         [ngClass]="personPickClass(person, category)">
+                      {{personPickName(category)}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
           </div>
 

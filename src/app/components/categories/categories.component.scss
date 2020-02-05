@@ -72,6 +72,13 @@
 
 .winnerTitle {
   font-size: 20pt;
+}
+
+.personPickTitle {
+  font-size: 17pt;
+}
+
+.pickTitle {
   font-weight: bolder;
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
@@ -101,6 +108,11 @@
   -webkit-text-stroke-color: lighten(cornflowerblue, 20%);
 }
 
+.pickHeader {
+  font-weight: bold;
+  font-size: 10pt;
+}
+
 .incorrectPickHeader {
   color: fade_out(lighten(tomato, 5%), 0.3);
 }
@@ -109,12 +121,28 @@
   color: lighten(tomato, 5%);
 }
 
+.correctPickHeader {
+  color: fade_out(lighten(forestgreen, 20%), 0.3);
+}
+
+.correctPick {
+  color: lighten(forestgreen, 20%);
+}
+
 .neutralPickHeader {
   color: fade_out(lighten(cornflowerblue, 20%), 0.3);
 }
 
 .neutralPick {
   color: lighten(cornflowerblue, 20%);
+}
+
+.myDifferentPickHeader {
+  color: fade_out(lighten($personal, 40%), 0.3);
+}
+
+.myDifferentPick {
+  color: lighten($personal, 40%);
 }
 
 .sectionHeader {

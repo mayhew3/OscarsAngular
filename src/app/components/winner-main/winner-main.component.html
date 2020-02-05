@@ -1,1 +1,4 @@
-<osc-categories [activeContext]="activeContext"></osc-categories>
+<osc-categories *ngIf="!!person"
+                [activeContext]="activeContext"
+                [person]="person">
+</osc-categories>

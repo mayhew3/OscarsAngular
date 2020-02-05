@@ -2,13 +2,7 @@ import {Category} from '../../interfaces/Category';
 /* tslint:disable quotemark */
 export const MockCategoryList: Category[] = [
   {
-    "winners": [{
-      "declared": "2020-02-01 19:10:13.885",
-      "category_id": 5,
-      "year": 2018,
-      "nomination_id": 2772,
-      "id": 401
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 5,
@@ -380,11 +374,11 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2020-02-01 19:10:25.123",
+      "declared": "2020-02-05 13:14:08.755",
       "category_id": 8,
       "year": 2018,
       "nomination_id": 2733,
-      "id": 404
+      "id": 412
     }],
     "nominees": [
       {
@@ -908,13 +902,7 @@ export const MockCategoryList: Category[] = [
     "points": 3
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 11:10:08.432",
-      "category_id": 24,
-      "year": 2018,
-      "nomination_id": 2813,
-      "id": 387
-    }],
+    "winners": [],
     "nominees": [
       {
         "odds_expert": 78,
@@ -1413,13 +1401,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:22.355",
-      "category_id": 14,
-      "year": 2018,
-      "nomination_id": 2758,
-      "id": 393
-    }],
+    "winners": [],
     "nominees": [
       {
         "odds_expert": 27,
@@ -1621,13 +1603,7 @@ export const MockCategoryList: Category[] = [
     "points": 2
   },
   {
-    "winners": [{
-      "declared": "2020-02-01 18:29:37.846",
-      "category_id": 4,
-      "year": 2018,
-      "nomination_id": 2776,
-      "id": 395
-    }],
+    "winners": [],
     "nominees": [
       {
         "category_id": 4,
@@ -2467,11 +2443,11 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2020-02-01 19:10:37.719",
+      "declared": "2020-02-05 13:14:16.703",
       "category_id": 17,
       "year": 2018,
       "nomination_id": 2790,
-      "id": 408
+      "id": 413
     }],
     "nominees": [
       {
