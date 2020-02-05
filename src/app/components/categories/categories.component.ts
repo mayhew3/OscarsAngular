@@ -21,6 +21,7 @@ export class CategoriesComponent implements OnInit {
   categories: Category[];
   me: Person;
   @Input() activeContext: ActiveContext;
+  @Input() person: Person;
 
   showWinnerless = true;
   showWinners = true;
@@ -166,9 +167,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   getYourPick(category: Category): Nominee {
-    const myVotes = this.votesService.getVotesForCurrentYearAndPersonAndCategory(this.me, category);
-    if (myVotes.length > 0) {
-      return _.findWhere(category.nominees, {id: myVotes[0].nomination_id});
+    const myVote = this.votesService.getVotesForCurrentYearAndPersonAndCategory(this.me, category);
+    if (!!myVote) {
+      return _.findWhere(category.nominees, {id: myVote.nomination_id});
     } else {
       return undefined;
     }
