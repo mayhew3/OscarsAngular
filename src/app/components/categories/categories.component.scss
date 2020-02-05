@@ -1,26 +1,55 @@
 @import "../../../variables";
 
 .categoryCard {
-  font-size: 18pt;
+  font-size: 14pt;
   margin-bottom: 10px;
   border-color: $highlight;
+  line-height: 0.8;
+}
+
+.categoryCardBody {
+  padding: 1rem;
 }
 
 .categoryTitle {
-  color: white;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  color: lighten(cornflowerblue, 20%);
 }
 
 .categorySubtitle {
-  font-size: 13pt;
+  font-size: 11pt;
   font-weight: bold;
-  color: fade_out(white, .4);
-  line-height: 120%;
+  color: fade_out(lighten(cornflowerblue, 20%), .3);
+}
+
+.categoryVotingTitle {
+  font-size: 16pt;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  color: lighten(cornflowerblue, 20%);
+}
+
+.categoryVotingSubtitle {
+  font-size: 12pt;
+  font-weight: bold;
+  color: fade_out(lighten(cornflowerblue, 20%), .3);
 }
 
 .categoryPoints {
   font-weight: bold;
-  color: $highlight;
+  -webkit-text-stroke-width: 2px;
   text-align: center;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  font-size: 42pt;
+  font-family: "brandon-grotesque", sans-serif;
+}
+
+.cardSection {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .votedOn {
@@ -29,4 +58,74 @@
 
 .winner {
   background-color: darkblue;
+}
+
+.timeAgoDiv {
+  line-height: 0.5;
+  margin-bottom: 7px;
+}
+
+.timeAgo {
+  font-size: 10pt;
+  color: white;
+}
+
+.winnerTitle {
+  font-size: 20pt;
+  font-weight: bolder;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  color: lighten(cornflowerblue, 30%);
+}
+
+.winnerSubtitle {
+  font-size: 11pt;
+  font-weight: bolder;
+  font-family: "brandon-grotesque", sans-serif;
+  font-variant-caps: small-caps;
+  color: fade_out(lighten(cornflowerblue, 30%), 0.3);
+}
+
+.winningScore {
+  -webkit-text-fill-color: fade_out(lighten(forestgreen, 20%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(forestgreen, 20%);
+}
+
+.losingScore {
+  -webkit-text-fill-color: fade_out(lighten(tomato, 5%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(tomato, 5%);
+}
+
+.neutralScore {
+  -webkit-text-fill-color: fade_out(lighten(cornflowerblue, 20%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten(cornflowerblue, 20%);
+}
+
+.incorrectPickHeader {
+  color: fade_out(lighten(tomato, 5%), 0.3);
+}
+
+.incorrectPick {
+  color: lighten(tomato, 5%);
+}
+
+.neutralPickHeader {
+  color: fade_out(lighten(cornflowerblue, 20%), 0.3);
+}
+
+.neutralPick {
+  color: lighten(cornflowerblue, 20%);
+}
+
+.sectionHeader {
+  font-size: 15pt;
+  font-weight: bold;
+  color: white;
+}
+
+.hideLink {
+  font-size: 10pt;
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: underline;
 }

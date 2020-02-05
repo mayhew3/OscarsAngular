@@ -3,6 +3,14 @@ import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {SystemVarsService} from '../../services/system.vars.service';
+import fast_sort from 'fast-sort';
+import {_} from 'underscore';
+import * as moment from 'moment';
+import {Winner} from '../../interfaces/Winner';
+import {Nominee} from '../../interfaces/Nominee';
+import {VotesService} from '../../services/votes.service';
+import {AuthService} from '../../services/auth/auth.service';
+import {Person} from '../../interfaces/Person';
 
 @Component({
   selector: 'osc-categories',
@@ -11,18 +19,86 @@ import {SystemVarsService} from '../../services/system.vars.service';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[];
+  me: Person;
   @Input() activeContext: ActiveContext;
 
+  showWinnerless = true;
+  showWinners = true;
+
   constructor(private categoryService: CategoryService,
-              public systemVarsService: SystemVarsService) { }
+              public systemVarsService: SystemVarsService,
+              private votesService: VotesService,
+              private auth: AuthService) { }
 
   ngOnInit() {
-    this.getCategories();
+    this.auth.getPerson().subscribe(person => {
+      this.me = person;
+      this.categoryService.getCategories()
+        .subscribe(categories => {
+          this.categories = categories;
+          this.fastSortCategories();
+          this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+            this.fastSortCategories();
+          });
+        });
+    });
   }
 
-  getCategories(): void {
-    this.categoryService.getCategories()
-      .subscribe(categories => this.categories = categories);
+  toggleShowWinnerless(): void {
+    this.showWinnerless = !this.showWinnerless;
+  }
+
+  toggleShowWinners(): void {
+    this.showWinners = !this.showWinners;
+  }
+
+  hideShowLink(showVar: boolean): string {
+    return !!showVar ? '(hide)' : '(show)';
+  }
+
+  getCategoriesWithNoWinner(): Category[] {
+    return _.filter(this.categories, category => category.winners.length === 0);
+  }
+
+  getCategoriesWithAtLeastOneWinner(): Category[] {
+    return _.filter(this.categories, category => category.winners.length > 0);
+  }
+
+  getTimeAgo(category: Category): string {
+    const winDate = this.mostRecentWinDate(category);
+    if (!!winDate) {
+      return moment(winDate).fromNow();
+    } else {
+      return undefined;
+    }
+  }
+
+  getWinnerName(winner: Winner): string {
+    return this.categoryService.getNomineeFromWinner(winner).nominee;
+  }
+
+  getWinnerSubtitle(winner: Winner, category: Category): string {
+    const nominee = this.categoryService.getNomineeFromWinner(winner);
+    return this.getSubtitleText(nominee, category);
+  }
+
+  getSubtitleText(nominee: Nominee, category: Category): string {
+    return Nominee.getSubtitleText(category, nominee);
+  }
+
+  mostRecentWinDate(category: Category): Date {
+    return category.winners.length > 0 ?
+      _.max(_.map(category.winners, winner => winner.declared)) :
+      undefined;
+  }
+
+  fastSortCategories(): void {
+    fast_sort(this.categories)
+      .by([
+        {desc: category => this.mostRecentWinDate(category)},
+        {asc: category => category.points},
+        {asc: category => category.name}
+      ]);
   }
 
   getVotedClass(category: Category): string {
@@ -40,6 +116,14 @@ export class CategoriesComponent implements OnInit {
   showCategories(): boolean {
     return !this.stillLoading() &&
       (this.systemVarsService.canVote() || !this.votingMode());
+  }
+
+  showCategoriesWithNoWinners(): boolean {
+    return this.showCategories() && this.getCategoriesWithNoWinner().length > 0;
+  }
+
+  showCategoriesWithWinners(): boolean {
+    return this.showCategories() && this.getCategoriesWithAtLeastOneWinner().length > 0 && this.winnersMode();
   }
 
   getCategoryName(category: Category): string {
@@ -69,6 +153,38 @@ export class CategoriesComponent implements OnInit {
 
   stillLoading(): boolean {
     return this.systemVarsService.stillLoading() || this.categoryService.stillLoading();
+  }
+
+  showYourPick(category: Category): boolean {
+    const yourPick = this.getYourPick(category);
+    const winning_ids = _.map(category.winners, winner => winner.nomination_id);
+    if (this.votingMode()) {
+      return !!yourPick;
+    } else {
+      return !yourPick || !_.contains(winning_ids, yourPick.id);
+    }
+  }
+
+  getYourPick(category: Category): Nominee {
+    const myVotes = this.votesService.getVotesForCurrentYearAndPersonAndCategory(this.me, category);
+    if (myVotes.length > 0) {
+      return _.findWhere(category.nominees, {id: myVotes[0].nomination_id});
+    } else {
+      return undefined;
+    }
+  }
+
+  yourPickName(category: Category): string {
+    const yourPick = this.getYourPick(category);
+    return !!yourPick ? yourPick.nominee : '(no pick made)';
+  }
+
+  getMyWinnerScoreClass(category: Category): string {
+    return this.gotPointsForWinner(category) ? 'winningScore' : 'losingScore';
+  }
+
+  gotPointsForWinner(category: Category): boolean {
+    return this.categoryService.didPersonVoteCorrectlyFor(this.me, category);
   }
 
 }
