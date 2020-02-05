@@ -80,12 +80,12 @@
                 <!-- YOUR PICK -->
 
                 <div class="row py-1"
-                     *ngIf="showYourPick(category)">
+                     *ngIf="personIsMe()">
                   <div class="col-12 incorrectPickHeader">
                     Your Pick:
                   </div>
                   <div class="col-12 winnerTitle incorrectPick">
-                    {{yourPickName(category)}}
+                    {{myPickName(category)}}
                   </div>
                 </div>
 
@@ -96,6 +96,50 @@
               <div class="col-2 categoryPoints"
                    [ngClass]="getMyWinnerScoreClass(category)">
                 <span>{{category.points}}</span>
+              </div>
+            </div>
+
+            <!-- PERSON DETAIL COMPARISON -->
+
+            <div class="row py-1"
+                 *ngIf="!personIsMe() && wePickedTheSame(category)">
+              <div class="col-12 pickHeader"
+                   [ngClass]="personPickHeaderClass(person, category)">
+                {{bothPersonsDisplayName()}}
+              </div>
+              <div class="col-12 winnerTitle"
+                   [ngClass]="personPickClass(person, category)">
+                {{personPickName(category)}}
+              </div>
+            </div>
+
+            <div class="row py-1 no-gutters"
+                 *ngIf="!personIsMe() && !wePickedTheSame(category)">
+              <!-- YOUR SIDE PICK -->
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-12 pickHeader"
+                       [ngClass]="personPickHeaderClass(me, category)">
+                    {{myDisplayName()}}
+                  </div>
+                  <div class="col-12 winnerTitle"
+                       [ngClass]="personPickClass(me, category)">
+                    {{myPickName(category)}}
+                  </div>
+                </div>
+              </div>
+              <!-- THEIR SIDE PICK -->
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-12 pickHeader"
+                       [ngClass]="personPickHeaderClass(person, category)">
+                    {{personDisplayName()}}
+                  </div>
+                  <div class="col-12 winnerTitle"
+                       [ngClass]="personPickClass(person, category)">
+                    {{personPickName(category)}}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -157,12 +201,12 @@
                   <!-- YOUR PICK -->
 
                   <div class="row py-1"
-                       *ngIf="showYourPick(category)">
+                       *ngIf="showPersonPick(category)">
                     <div class="col-12 neutralPickHeader">
-                      Your Pick:
+                      {{personPossessiveDisplayName()}} Pick:
                     </div>
                     <div class="col-12 winnerTitle neutralPick">
-                      {{yourPickName(category)}}
+                      {{personPickName(category)}}
                     </div>
                   </div>
 

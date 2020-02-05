@@ -101,12 +101,25 @@
   -webkit-text-stroke-color: lighten(cornflowerblue, 20%);
 }
 
+.pickHeader {
+  font-weight: bold;
+  font-size: 11pt;
+}
+
 .incorrectPickHeader {
   color: fade_out(lighten(tomato, 5%), 0.3);
 }
 
 .incorrectPick {
   color: lighten(tomato, 5%);
+}
+
+.correctPickHeader {
+  color: fade_out(lighten(forestgreen, 20%), 0.3);
+}
+
+.correctPick {
+  color: lighten(forestgreen, 20%);
 }
 
 .neutralPickHeader {

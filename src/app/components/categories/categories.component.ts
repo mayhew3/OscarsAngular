@@ -32,8 +32,8 @@ export class CategoriesComponent implements OnInit {
               private auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.getPerson().subscribe(person => {
-      this.me = person;
+    this.auth.getPerson().subscribe(me => {
+      this.me = me;
       this.categoryService.getCategories()
         .subscribe(categories => {
           this.categories = categories;
@@ -156,18 +156,52 @@ export class CategoriesComponent implements OnInit {
     return this.systemVarsService.stillLoading() || this.categoryService.stillLoading();
   }
 
-  showYourPick(category: Category): boolean {
-    const yourPick = this.getYourPick(category);
+  showPersonPick(category: Category): boolean {
+    return this.didPickWinner(this.person, category);
+  }
+
+  showMyPick(): boolean {
+    return this.personIsMe();
+  }
+
+  wePickedTheSame(category: Category): boolean {
+    return this.pickedTheSame(this.me, this.person, category);
+  }
+
+  personPickClass(person: Person, category: Category): string {
+    return this.didPickWinner(person, category) ? 'correctPick' : 'incorrectPick';
+  }
+
+  personPickHeaderClass(person: Person, category: Category): string {
+    return this.didPickWinner(person, category) ? 'correctPickHeader' : 'incorrectPickHeader';
+  }
+
+  private pickedTheSame(person1: Person, person2: Person, category: Category): boolean {
+    const person1pick = this.getPick(person1, category);
+    const person2pick = this.getPick(person2, category);
+    return !!person1pick && !!person2pick && person1pick.id === person2pick.id;
+  }
+
+  private didPickWinner(person: Person, category: Category): boolean {
+    const personPick = this.getPick(person, category);
     const winning_ids = _.map(category.winners, winner => winner.nomination_id);
     if (this.votingMode()) {
-      return !!yourPick;
+      return !personPick;
     } else {
-      return !yourPick || !_.contains(winning_ids, yourPick.id);
+      return !!personPick && _.contains(winning_ids, personPick.id);
     }
   }
 
-  getYourPick(category: Category): Nominee {
-    const myVote = this.votesService.getVotesForCurrentYearAndPersonAndCategory(this.me, category);
+  getPersonPick(category: Category): Nominee {
+    return this.getPick(this.person, category);
+  }
+
+  getMyPick(category: Category): Nominee {
+    return this.getPick(this.me, category);
+  }
+
+  private getPick(person: Person, category: Category): Nominee {
+    const myVote = this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category);
     if (!!myVote) {
       return _.findWhere(category.nominees, {id: myVote.nomination_id});
     } else {
@@ -175,8 +209,33 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  yourPickName(category: Category): string {
-    const yourPick = this.getYourPick(category);
+  personIsMe(): boolean {
+    return this.me.id === this.person.id;
+  }
+
+  personPossessiveDisplayName(): string {
+    return this.personIsMe() ? 'Your' : this.person.first_name + '\'s';
+  }
+
+  myDisplayName(): string {
+    return this.me.first_name;
+  }
+
+  personDisplayName(): string {
+    return this.person.first_name;
+  }
+
+  bothPersonsDisplayName(): string {
+    return this.person.first_name + ' & ' + this.me.first_name;
+  }
+
+  myPickName(category: Category): string {
+    const myPick = this.getMyPick(category);
+    return !!myPick ? myPick.nominee : '(no pick made)';
+  }
+
+  personPickName(category: Category): string {
+    const yourPick = this.getPersonPick(category);
     return !!yourPick ? yourPick.nominee : '(no pick made)';
   }
 
@@ -185,7 +244,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   gotPointsForWinner(category: Category): boolean {
-    return this.categoryService.didPersonVoteCorrectlyFor(this.me, category);
+    return this.categoryService.didPersonVoteCorrectlyFor(this.person, category);
   }
 
 }
