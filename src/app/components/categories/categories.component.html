@@ -68,7 +68,7 @@
 
                 <div class="row py-1"
                      *ngFor="let winner of category.winners">
-                  <div class="col-12 winnerTitle">
+                  <div class="col-12 pickTitle winnerTitle">
                     {{getWinnerName(winner)}}
                   </div>
                   <div class="col-12 winnerSubtitle"
@@ -80,11 +80,11 @@
                 <!-- YOUR PICK -->
 
                 <div class="row py-1"
-                     *ngIf="personIsMe()">
+                     *ngIf="showMyPick(category)">
                   <div class="col-12 incorrectPickHeader">
                     Your Pick:
                   </div>
-                  <div class="col-12 winnerTitle incorrectPick">
+                  <div class="col-12 pickTitle personPickTitle incorrectPick">
                     {{myPickName(category)}}
                   </div>
                 </div>
@@ -107,7 +107,7 @@
                    [ngClass]="personPickHeaderClass(person, category)">
                 {{bothPersonsDisplayName()}}
               </div>
-              <div class="col-12 winnerTitle"
+              <div class="col-12 pickTitle personPickTitle"
                    [ngClass]="personPickClass(person, category)">
                 {{personPickName(category)}}
               </div>
@@ -122,7 +122,7 @@
                        [ngClass]="personPickHeaderClass(me, category)">
                     {{myDisplayName()}}
                   </div>
-                  <div class="col-12 winnerTitle"
+                  <div class="col-12 pickTitle personPickTitle"
                        [ngClass]="personPickClass(me, category)">
                     {{myPickName(category)}}
                   </div>
@@ -135,7 +135,7 @@
                        [ngClass]="personPickHeaderClass(person, category)">
                     {{personDisplayName()}}
                   </div>
-                  <div class="col-12 winnerTitle"
+                  <div class="col-12 pickTitle personPickTitle"
                        [ngClass]="personPickClass(person, category)">
                     {{personPickName(category)}}
                   </div>
@@ -205,7 +205,7 @@
                     <div class="col-12 neutralPickHeader">
                       {{personPossessiveDisplayName()}} Pick:
                     </div>
-                    <div class="col-12 winnerTitle neutralPick">
+                    <div class="col-12 pickTitle personPickTitle neutralPick">
                       {{personPickName(category)}}
                     </div>
                   </div>
