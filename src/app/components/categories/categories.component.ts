@@ -45,6 +45,14 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
+  getRouterLink(category: Category): any[] {
+    if (this.personIsMe() || !this.winnersMode()) {
+      return [category.id];
+    } else {
+      return [];
+    }
+  }
+
   getPageTitle(): string {
     if (this.winnersMode() && !this.personIsMe()) {
       return this.getPersonName(this.person);
