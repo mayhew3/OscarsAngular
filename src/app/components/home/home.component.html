@@ -34,7 +34,7 @@
     <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="!stillLoading() && auth.isUser() && (systemVarsService.canVote() || auth.isAdmin())">
       <div class="card navCard">
-        <div class="card-body"
+        <div class="card-body fakeLink"
              routerLink="vote">
           <div class="row">
             <div class="col-10 navTitle">
@@ -48,7 +48,7 @@
     <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())">
       <div class="card navCard">
-        <div class="card-body"
+        <div class="card-body fakeLink"
              routerLink="scores">
           <div class="row">
             <div class="col-10 navTitle">
@@ -62,7 +62,7 @@
     <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="!stillLoading() && auth.isUser() && (!systemVarsService.canVote() || auth.isAdmin())">
       <div class="card navCard">
-        <div class="card-body"
+        <div class="card-body fakeLink"
              routerLink="winners">
           <div class="row">
             <div class="col-10 navTitle">
@@ -76,7 +76,7 @@
     <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="!stillLoading() && auth.isUser()">
       <div class="card navCard">
-        <div class="card-body"
+        <div class="card-body fakeLink"
              routerLink="history">
           <div class="row">
             <div class="col-10 navTitle">
@@ -89,7 +89,7 @@
 
     <div class="col-12 col-sm-6 col-lg-4"
          *ngIf="!stillLoading() && auth.isAdmin()">
-      <div class="card navCard"
+      <div class="card navCard fakeLink"
            routerLink="admin">
         <div class="card-body">
           <div class="row">

@@ -59,8 +59,9 @@ export class VotesService {
     return _.where(this.cache, {person_id: person.id});
   }
 
-  getVotesForCurrentYearAndPersonAndCategory(person: Person, category: Category): Vote[] {
-    return _.where(this.cache, {person_id: person.id, category_id: category.id});
+  getVotesForCurrentYearAndPersonAndCategory(person: Person, category: Category): Vote {
+    const allVotes = _.where(this.cache, {person_id: person.id, category_id: category.id});
+    return allVotes.length === 1 ? allVotes[0] : undefined;
   }
 
   private maybeUpdateCache(year: number): Observable<Vote[]> {

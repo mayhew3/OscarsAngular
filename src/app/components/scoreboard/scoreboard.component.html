@@ -42,7 +42,7 @@
     <div class="row mt-2" *ngIf="!stillLoading()">
       <div class="col-12 col-sm-6 col-lg-4"
            *ngFor="let person of getVoters()">
-        <div class="card scoreCard"
+        <div class="card scoreCard fakeLink"
              [ngClass]="scorecardClass(person)"
              [routerLink]="['/person', person.id]">
           <div class="card-body py-0 px-3">
@@ -106,7 +106,9 @@
   <div class="container py-2">
     <div class="row flex-fill">
 
-      <div *ngIf="!latestCategory && !itsOver()">
+      <div *ngIf="!latestCategory && !itsOver()"
+           routerLink="/winners"
+           class="fakeLink">
         <div class="col-12 py-1">
           <span class="footerSmall">Waiting for the first award to be presented!</span>
         </div>
@@ -127,7 +129,8 @@
       </div>
 
       <div *ngIf="!!latestCategory"
-           class="col-12 flex-fill">
+           class="col-12 flex-fill fakeLink"
+           routerLink="/winners">
 
         <div class="row py-1">
           <div class="col-12">

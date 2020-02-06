@@ -166,14 +166,21 @@ export class NomineesComponent implements OnInit {
   }
 
   getVotedClass(nominee: Nominee): string {
+    const classes = [];
+
     if (this.processingPick && this.processingPick.id === nominee.id) {
-      return 'processing';
+      classes.push('processing');
     } else if (this.votingMode() && this.isVoted(nominee)) {
-      return 'votedOn';
+      classes.push('votedOn');
     } else if (this.winnersMode() && this.isWinner(nominee)) {
-      return 'winner';
+      classes.push('winner');
     }
-    return '';
+
+    if (this.auth.isAdmin() || this.votingMode()) {
+      classes.push('fakeLink');
+    }
+
+    return classes.join(' ');
   }
 
   isWinner(nominee: Nominee): boolean {

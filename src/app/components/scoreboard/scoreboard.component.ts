@@ -14,7 +14,6 @@ import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {Observable} from 'rxjs';
-import {SystemVarsService} from '../../services/system.vars.service';
 import ordinal from 'ordinal';
 
 @Component({
@@ -32,8 +31,7 @@ export class ScoreboardComponent implements OnInit {
               private categoryService: CategoryService,
               private oddsService: OddsService,
               private auth: AuthService,
-              private socket: SocketService,
-              private systemVarsService: SystemVarsService) {
+              private socket: SocketService) {
     this.persons = [];
   }
 
@@ -45,6 +43,7 @@ export class ScoreboardComponent implements OnInit {
 
         this.updateScoreboard().subscribe(() => {
           this.socket.on('reconnect', () => {
+            console.log('Reconnect event triggered! Refreshing data!');
             this.refreshData();
           });
         });
@@ -69,13 +68,17 @@ export class ScoreboardComponent implements OnInit {
 
   getOddsStyle(person: Person): string {
     if (!!person) {
-      const numericOddsForPerson = this.getNumericOddsForPerson(person);
-      if (!!numericOddsForPerson) {
-        if (numericOddsForPerson === 100.0) {
-          return 'hsl(48, 100%, 56%)';
-        } else {
-          return `hsl(25, ${numericOddsForPerson}%, 60%)`;
+      try {
+        const numericOddsForPerson = this.getNumericOddsForPerson(person);
+        if (!!numericOddsForPerson) {
+          if (numericOddsForPerson === 100.0) {
+            return 'hsl(48, 100%, 56%)';
+          } else {
+            return `hsl(25, ${numericOddsForPerson}%, 60%)`;
+          }
         }
+      } catch (err) {
+        return 'hsl(0, 90%, 60%)';
       }
     }
     return `hsl(25, 0%, 60%)`;

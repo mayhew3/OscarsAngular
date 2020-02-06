@@ -229,8 +229,7 @@ export class CategoryService {
   maxPosition(person: Person, persons: Person[]): number {
     const categoriesWithoutWinners = _.filter(this.cache, category => !category.winners || category.winners.length === 0);
     const myVotes = _.map(categoriesWithoutWinners, category => {
-      const myVotesForCategory = this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category);
-      return myVotesForCategory.length === 0 ? undefined : myVotesForCategory[0];
+      return this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category);
     });
     const finalScores = _.map(persons, otherPerson => {
       const theirVotes = this.votesService.getVotesForCurrentYearAndPerson(otherPerson);
