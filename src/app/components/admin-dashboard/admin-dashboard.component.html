@@ -2,19 +2,26 @@
   <div class="row" *ngIf="auth.isAdmin() && !stillLoading()">
 
     <div class="col-12 col-sm-6 col-lg-4">
-      Voting:
+      <div class="card navCard p-3">
+        Voting:
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-lg"
+                    [ngClass]="getVotingButtonClass(true)"
+                    (click)="toggleVotingLock(true)">
+              Open
+            </button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-lg"
+                    [ngClass]="getVotingButtonClass(false)"
+                    (click)="toggleVotingLock(false)">
+              Closed
+            </button>
+          </div>
+        </div>
 
-      <button class="btn btn-lg"
-              [ngClass]="getVotingButtonClass(true)"
-              (click)="toggleVotingLock(true)">
-        Open
-      </button>
-      <button class="btn btn-lg"
-              [ngClass]="getVotingButtonClass(false)"
-              (click)="toggleVotingLock(false)">
-        Closed
-      </button>
-
+      </div>
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4">
@@ -30,16 +37,20 @@
       </div>
     </div>
 
-    <div class="col-12">
-
-      <span>Change Year:</span><br>
-      <button *ngFor="let year of possibleYears"
+    <div class="col-12 col-sm-6 col-lg-4">
+      <div class="card navCard p-3">
+        <span>Change Year:</span><br>
+        <div class="row">
+          <div class="col-6" *ngFor="let year of possibleYears">
+            <button
               class="btn btn-lg"
               [ngClass]="yearButtonClass(year)"
               (click)="changeCurrentYear(year)">
-        {{year}}
-      </button>
-
+              {{year}}
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4">
