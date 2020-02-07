@@ -10,7 +10,7 @@
   <p *ngIf="stillLoading()">Loading...</p>
 
   <div class="row mt-2" *ngIf="!stillLoading()">
-    <div class="col-12 col-sm-6 col-lg-4"
+    <div class="col-12"
          *ngFor="let champions of getChampions()">
       <div class="card scoreCard mainScoreCard"
            [ngClass]="getScoreCardClass(champions)">

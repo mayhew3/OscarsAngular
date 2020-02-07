@@ -40,7 +40,7 @@
     <!-- PLAYER SCORES -->
 
     <div class="row mt-2" *ngIf="!stillLoading()">
-      <div class="col-12 col-sm-6 col-lg-4"
+      <div class="col-12"
            *ngFor="let person of getVoters()">
         <div class="card scoreCard fakeLink"
              [ngClass]="scorecardClass(person)"
