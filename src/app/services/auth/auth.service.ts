@@ -27,6 +27,8 @@ export class AuthService {
   private _loginFailed = false;
   refreshSubscription: any;
 
+  private _failedEmail: string;
+
   private authenticating = false;
 
   private personObserver: Subscriber<Person>;
@@ -92,6 +94,10 @@ export class AuthService {
     return this.isUser() && 'admin' === this._person.role;
   }
 
+  public getFailedEmail(): string {
+    return this._failedEmail;
+  }
+
   public isLoggedIn(): boolean {
     return !!localStorage.getItem('isLoggedIn');
   }
@@ -150,6 +156,7 @@ export class AuthService {
       this.personService.getPersonWithEmail(authResult.idTokenPayload.email).subscribe((person) => {
         if (!person) {
           this._loginFailed = true;
+          this._failedEmail = authResult.idTokenPayload.email;
         } else {
           this._person = person;
           this._loginFailed = false;

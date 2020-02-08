@@ -25,6 +25,10 @@ export class HomeComponent implements OnInit {
     return this.categoryService.getCategoryCountNow();
   }
 
+  getFailedEmail(): string {
+    return this.auth.getFailedEmail();
+  }
+
   numVotesRemaining(): number {
     const me = this.auth.getPersonNow();
     if (!!me) {
