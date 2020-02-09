@@ -135,7 +135,7 @@ export class ScoreboardComponent implements OnInit {
         throw new Error('No odds object found.');
       }
       const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
-      if (!oddsForPerson || !oddsForPerson.odds) {
+      if (!oddsForPerson || !oddsForPerson.odds || oddsForPerson.odds === '0') {
         return 0.001;
       }
       if (!!oddsForPerson.clinched && !this.shouldHideElimination()) {

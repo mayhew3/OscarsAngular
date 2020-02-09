@@ -5,7 +5,7 @@
   <p *ngIf="isLoggedOut()">Welcome to Mayhew's Oscars Voting site! Click the link above to sign in!</p>
 
   <p *ngIf="!stillLoading() && !auth.isUser() && auth.isAuthenticated()">
-    No user account found for this google user. Could your invite be for a different gmail address?
+    No user account found for google address "{{getFailedEmail()}}". Could your invite be for a different gmail address?
   </p>
 
   <p *ngIf="!stillLoading() && auth.isUser()">

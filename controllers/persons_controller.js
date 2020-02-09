@@ -1,15 +1,8 @@
 const model = require('./model');
 const _ = require('underscore');
-const Sequelize = require('sequelize');
 
 exports.getPersons = function(request, response) {
-  model.Person.findAll({
-    where: {
-      email: {
-        [Sequelize.Op.like]: '%@gmail.com'
-      }
-    }
-  }).then(persons => {
+  model.Person.findAll().then(persons => {
     model.PersonGroupRole.findAll().then(personGroupRoles => {
       let outputObject = [];
 
