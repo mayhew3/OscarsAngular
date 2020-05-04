@@ -33,7 +33,7 @@
     "debug": "4.1.1",
     "express": "4.17.1",
     "fast-sort": "2.0.1",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "moment": "2.24.0",
     "morgan": "1.9.1",
     "@ng-bootstrap/ng-bootstrap": "5.2.1",
