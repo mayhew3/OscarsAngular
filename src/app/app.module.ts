@@ -56,13 +56,14 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
     ReactiveFormsModule,
     // use in-memory for CLI environment, regular http for prod and local server
     AuthModule.forRoot({
-      domain: environment.domain,
+      domain: 'mayhew3.auth0.com',
       clientId: environment.clientID,
+      audience: 'https://oscars.v2.mayhew3.com/',
       redirectUri: AppModule.getCallbackUrl(),
 
       // Specify configuration for the interceptor
       httpInterceptor: {
-        allowedList: ['/api/*'],
+        allowedList: ['*'],
       },
     }),
   ],
@@ -78,6 +79,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 export class AppModule {
 
   static getCallbackUrl(): string {
+    console.log('Environment doman: ' + environment.domain);
     const protocol = window.location.protocol;
     const path = window.location.hostname;
     const port = window.location.port;

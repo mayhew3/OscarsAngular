@@ -38,7 +38,7 @@ export class ScoreboardComponent implements OnInit {
   ngOnInit() {
     this.personService.getPersonsForGroup(1).subscribe(persons => {
       this.persons = persons;
-      this.auth.getPerson().subscribe(person => {
+      this.auth.me$.subscribe(person => {
         this.me = person;
 
         this.updateScoreboard().subscribe(() => {

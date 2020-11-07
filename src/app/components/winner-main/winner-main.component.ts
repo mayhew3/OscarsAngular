@@ -12,7 +12,7 @@ export class WinnerMainComponent implements OnInit {
   public person;
 
   constructor(private auth: MyAuthService) {
-    this.auth.getPerson().subscribe(person => this.person = person);
+    this.auth.me$.subscribe(person => this.person = person);
   }
 
   ngOnInit() {

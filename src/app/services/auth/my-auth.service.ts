@@ -6,6 +6,7 @@ import {Observable, of, Subscriber} from 'rxjs';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../person.service';
 import {AuthService} from '@auth0/auth0-angular';
+import {concatMap, filter, tap} from 'rxjs/operators';
 
 enum UserRole {
   Guest = 'guest',
@@ -26,7 +27,16 @@ export class MyAuthService {
   private authenticating = false;
   private authenticated = false;
 
-  private personObserver: Subscriber<Person>;
+  private personObservers: Subscriber<Person>[] = [];
+
+  me$ = this.auth.user$.pipe(
+    filter(user => !!user),
+    concatMap((user) => this.personService.getPersonWithEmail(user.email)),
+    tap((person: Person) => {
+      this._person = person;
+    })
+  );
+
 
   constructor(public router: Router,
               private personService: PersonService,
@@ -77,7 +87,7 @@ export class MyAuthService {
   }
 
   public stillLoading(): boolean {
-    return this.authenticating || (_.isUndefined(this._person) && !this._loginFailed);
+    return this.authenticating || (this._person !== undefined && !this._loginFailed);
   }
 
   public isUser(): boolean {
@@ -99,12 +109,10 @@ export class MyAuthService {
   public getPerson(): Observable<Person> {
     if (!!this._person) {
       return of(this._person);
-    } else if (this.isLoggedIn()) {
-      return new Observable<Person>(observer => {
-        this.personObserver = observer;
-      });
     } else {
-      return of(undefined);
+      return new Observable<Person>(observer => {
+        this.personObservers.push(observer);
+      });
     }
   }
 
@@ -124,10 +132,10 @@ export class MyAuthService {
           this._person = person;
           this._loginFailed = false;
         }
-        if (this.personObserver) {
-          this.personObserver.next(person);
-          this.personObserver = undefined;
+        for (const callback of this.personObservers) {
+          callback.next(person);
         }
+        this.personObservers = [];
       });
     } else {
       throw new Error('No email found in payload.');
@@ -148,4 +156,7 @@ export class MyAuthService {
     return this.authenticated;
   }
 
+  public listenForLogin(callback) {
+    this.personObservers.push(callback);
+  }
 }

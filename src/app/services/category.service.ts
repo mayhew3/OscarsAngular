@@ -332,7 +332,7 @@ export class CategoryService {
 
     this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
     return new Observable<Category[]>((observer) => {
-      this.auth.getPerson().subscribe(person => {
+      this.auth.me$.subscribe(person => {
         if (!!person) {
           this.systemVarsService.getSystemVars().subscribe(systemVars => {
             const options = {

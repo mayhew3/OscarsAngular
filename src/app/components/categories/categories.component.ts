@@ -32,7 +32,7 @@ export class CategoriesComponent implements OnInit {
               private auth: MyAuthService) { }
 
   ngOnInit() {
-    this.auth.getPerson().subscribe(me => {
+    this.auth.me$.subscribe(me => {
       this.me = me;
       this.categoryService.getCategories()
         .subscribe(categories => {
