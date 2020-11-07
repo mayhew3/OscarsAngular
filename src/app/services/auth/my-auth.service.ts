@@ -25,28 +25,21 @@ export class MyAuthService {
   private _failedEmail: string;
 
   private authenticating = false;
-  private authenticated = false;
 
   private personObservers: Subscriber<Person>[] = [];
 
   me$ = this.auth.user$.pipe(
     filter(user => !!user),
-    concatMap((user) => this.personService.getPersonWithEmail(user.email)),
-    tap((person: Person) => {
-      this._person = person;
+    concatMap((user) => {
+      this.authenticating = false;
+      return this.localLogin(user);
     })
   );
-
 
   constructor(public router: Router,
               private personService: PersonService,
               private auth: AuthService) {
     this._userRole = UserRole.Guest;
-    this.auth.user$.subscribe(user => {
-      this.authenticating = false;
-      this.authenticated = true;
-      this.localLogin(user);
-    });
   }
 
   static getCallbackUrl(): string {
@@ -83,23 +76,23 @@ export class MyAuthService {
   }
 
   public isLoggedIn(): boolean {
-    return this.authenticated;
+    return this.isAuthenticated();
   }
 
   public stillLoading(): boolean {
-    return this.authenticating || (this._person !== undefined && !this._loginFailed);
+    return this.authenticating;
   }
 
   public isUser(): boolean {
-    return this.isAuthenticated() && (this._person !== undefined);
+    return this.isAuthenticated();
   }
 
   public getFirstName(): string {
-    return this._person ? this._person.first_name : undefined;
+    return !!this._person ? this._person.first_name : undefined;
   }
 
   public getPersonID(): number {
-    return this._person ? this._person.id : undefined;
+    return !!this._person ? this._person.id : undefined;
   }
 
   public isProductionMode(): boolean {
@@ -120,32 +113,34 @@ export class MyAuthService {
     return this._person;
   }
 
-  private localLogin(authResult): void {
-    // on first login, profile is in payload, but on renewal, need to request it again.
-    if (authResult.email) {
-      this._profile = authResult;
-      this.personService.getPersonWithEmail(authResult.email).subscribe((person) => {
-        if (!person) {
-          this._loginFailed = true;
-          this._failedEmail = authResult.email;
-        } else {
-          this._person = person;
-          this._loginFailed = false;
-        }
-        for (const callback of this.personObservers) {
-          callback.next(person);
-        }
-        this.personObservers = [];
-      });
-    } else {
-      throw new Error('No email found in payload.');
-    }
+  private localLogin(user): Observable<Person> {
+    return new Observable<Person>(observer => {
+      if (user.email) {
+        this._profile = user;
+        this.personService.getPersonWithEmail(user.email).subscribe((person) => {
+          if (!person) {
+            this._loginFailed = true;
+            this._failedEmail = user.email;
+          } else {
+            this._person = person;
+            this._loginFailed = false;
+          }
+          for (const callback of this.personObservers) {
+            callback.next(person);
+          }
+          this.personObservers = [];
+          observer.next(person);
+        });
+      } else {
+        throw new Error('No email found in payload.');
+      }
+    });
   }
 
   public logout(): void {
     this.auth.logout({returnTo: MyAuthService.getLogoutUrl()});
     this._profile = null;
-    this.authenticated = false;
+    this._person = null;
     this._userRole = UserRole.Guest;
     // Remove isLoggedIn flag from localStorage
     // Go back to the home route
@@ -153,7 +148,7 @@ export class MyAuthService {
   }
 
   public isAuthenticated(): boolean {
-    return this.authenticated;
+    return !!this._person && !this._failedEmail;
   }
 
   public listenForLogin(callback) {
