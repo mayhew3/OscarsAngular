@@ -7,7 +7,7 @@ import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
 import {PersonService} from '../../services/person.service';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 
 @Component({
   selector: 'osc-category-hopper',
@@ -25,7 +25,7 @@ export class CategoryHopperComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
-              private auth: AuthService) {
+              private auth: MyAuthService) {
     this.contextUrls = [];
     this.contextUrls[ActiveContext.Vote] = 'vote';
     this.contextUrls[ActiveContext.OddsAssignment] = 'odds';

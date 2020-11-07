@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import {AuthServiceStub} from '../../services/auth/auth.service.stub';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
@@ -15,7 +15,7 @@ describe('HomeComponent', () => {
       imports: [HttpClientTestingModule],
       declarations: [ HomeComponent ],
       providers: [
-        {provide: AuthService, useClass: AuthServiceStub}
+        {provide: MyAuthService, useClass: AuthServiceStub}
       ]
     })
     .compileComponents();

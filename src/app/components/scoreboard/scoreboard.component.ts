@@ -5,7 +5,7 @@ import {CategoryService} from '../../services/category.service';
 import {_} from 'underscore';
 import {OddsService} from '../../services/odds.service';
 import {OddsBundle} from '../../interfaces/OddsBundle';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import fast_sort from 'fast-sort';
 import {Category} from '../../interfaces/Category';
 import {Winner} from '../../interfaces/Winner';
@@ -30,7 +30,7 @@ export class ScoreboardComponent implements OnInit {
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private oddsService: OddsService,
-              private auth: AuthService,
+              private auth: MyAuthService,
               private socket: SocketService) {
     this.persons = [];
   }

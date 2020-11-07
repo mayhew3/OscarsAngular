@@ -19,7 +19,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ActivatedRouteStub} from '../../../testing/activated-route-stub';
 import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import {AuthServiceStub} from '../../services/auth/auth.service.stub';
 import {ScoreboardComponent} from '../scoreboard/scoreboard.component';
 
@@ -49,7 +49,7 @@ describe('WinnerMainComponent', () => {
       providers: [
         {provide: ActivatedRoute, useValue: new ActivatedRouteStub({category_id: 2})},
         {provide: CategoryService, useClass: CategoryServiceStub},
-        {provide: AuthService, useClass: AuthServiceStub}
+        {provide: MyAuthService, useClass: AuthServiceStub}
       ]
     });
   }));

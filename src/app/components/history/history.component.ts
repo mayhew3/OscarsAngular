@@ -4,7 +4,7 @@ import {FinalResultsService} from '../../services/final-results.service';
 import {_} from 'underscore';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import ordinal from 'ordinal';
 
 @Component({
@@ -17,7 +17,7 @@ export class HistoryComponent implements OnInit {
 
   constructor(private finalResultsService: FinalResultsService,
               private personService: PersonService,
-              private auth: AuthService) { }
+              private auth: MyAuthService) { }
 
   ngOnInit() {
     this.finalResultsService.getFinalResultsForGroup(1).subscribe(finalResults => {

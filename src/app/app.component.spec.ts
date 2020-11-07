@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {AuthService} from './services/auth/auth.service';
+import {MyAuthService} from './services/auth/my-auth.service';
 import {AuthServiceStub} from './services/auth/auth.service.stub';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
@@ -16,7 +16,7 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        {provide: AuthService, useClass: AuthServiceStub}
+        {provide: MyAuthService, useClass: AuthServiceStub}
       ]
     }).compileComponents();
   }));

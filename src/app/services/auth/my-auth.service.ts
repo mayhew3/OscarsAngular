@@ -1,0 +1,151 @@
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {_} from 'underscore';
+import {environment} from '../../../environments/environment';
+import {Observable, of, Subscriber} from 'rxjs';
+import {Person} from '../../interfaces/Person';
+import {PersonService} from '../person.service';
+import {AuthService} from '@auth0/auth0-angular';
+
+enum UserRole {
+  Guest = 'guest',
+  User = 'user',
+  Admin = 'admin'
+}
+
+@Injectable()
+export class MyAuthService {
+
+  private _profile: any;
+  private _userRole: UserRole;
+  private _person: Person;
+  private _loginFailed = false;
+
+  private _failedEmail: string;
+
+  private authenticating = false;
+  private authenticated = false;
+
+  private personObserver: Subscriber<Person>;
+
+  constructor(public router: Router,
+              private personService: PersonService,
+              private auth: AuthService) {
+    this._userRole = UserRole.Guest;
+    this.auth.user$.subscribe(user => {
+      this.authenticating = false;
+      this.authenticated = true;
+      this.localLogin(user);
+    });
+  }
+
+  static getCallbackUrl(): string {
+    return this.getLogoutUrl() + '/callback';
+  }
+
+  static getLogoutUrl(): string {
+    const protocol = window.location.protocol;
+    const path = window.location.hostname;
+    const port = window.location.port;
+    const portDisplay = port === '' ? '' : ':' + port;
+    // noinspection UnnecessaryLocalVariableJS
+    const fullPath = protocol + '//' + path + portDisplay;
+    return fullPath;
+  }
+
+  public login(): void {
+    this.authenticating = true;
+    this.auth.loginWithRedirect({
+      redirect_uri: MyAuthService.getCallbackUrl()
+    });
+  }
+
+  public isMe(person: Person): boolean {
+    return this._person && this._person.id === person.id;
+  }
+
+  public isAdmin(): boolean {
+    return this.isUser() && 'admin' === this._person.role;
+  }
+
+  public getFailedEmail(): string {
+    return this._failedEmail;
+  }
+
+  public isLoggedIn(): boolean {
+    return this.authenticated;
+  }
+
+  public stillLoading(): boolean {
+    return this.authenticating || (_.isUndefined(this._person) && !this._loginFailed);
+  }
+
+  public isUser(): boolean {
+    return this.isAuthenticated() && (this._person !== undefined);
+  }
+
+  public getFirstName(): string {
+    return this._person ? this._person.first_name : undefined;
+  }
+
+  public getPersonID(): number {
+    return this._person ? this._person.id : undefined;
+  }
+
+  public isProductionMode(): boolean {
+    return environment.production;
+  }
+
+  public getPerson(): Observable<Person> {
+    if (!!this._person) {
+      return of(this._person);
+    } else if (this.isLoggedIn()) {
+      return new Observable<Person>(observer => {
+        this.personObserver = observer;
+      });
+    } else {
+      return of(undefined);
+    }
+  }
+
+  public getPersonNow(): Person {
+    return this._person;
+  }
+
+  private localLogin(authResult): void {
+    // on first login, profile is in payload, but on renewal, need to request it again.
+    if (authResult.email) {
+      this._profile = authResult;
+      this.personService.getPersonWithEmail(authResult.email).subscribe((person) => {
+        if (!person) {
+          this._loginFailed = true;
+          this._failedEmail = authResult.email;
+        } else {
+          this._person = person;
+          this._loginFailed = false;
+        }
+        if (this.personObserver) {
+          this.personObserver.next(person);
+          this.personObserver = undefined;
+        }
+      });
+    } else {
+      throw new Error('No email found in payload.');
+    }
+  }
+
+  public logout(): void {
+    this.auth.logout({returnTo: MyAuthService.getLogoutUrl()});
+    this._profile = null;
+    this.authenticated = false;
+    this._userRole = UserRole.Guest;
+    // Remove isLoggedIn flag from localStorage
+    // Go back to the home route
+    this.router.navigate(['/']);
+  }
+
+  public isAuthenticated(): boolean {
+    return this.authenticated;
+  }
+
+}

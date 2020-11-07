@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {CategoryService} from './category.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestCategoryList} from './data/categories.test.mock';
-import {AuthService} from './auth/auth.service';
+import {MyAuthService} from './auth/my-auth.service';
 import {AuthServiceStub} from './auth/auth.service.stub';
 import {SystemVarsService} from './system.vars.service';
 import {SystemVarsServiceStub} from './system.vars.service.stub';
@@ -18,7 +18,7 @@ describe('CategoryService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [HttpClientTestingModule],
     providers: [
-      {provide: AuthService, useClass: AuthServiceStub},
+      {provide: MyAuthService, useClass: AuthServiceStub},
       {provide: SystemVarsService, useClass: SystemVarsServiceStub},
       {provide: VotesService, useClass: VotesServiceStub}
     ]
