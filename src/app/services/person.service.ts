@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class PersonService implements OnDestroy {
   personsUrl = 'api/persons';
-  private _persons$ = new Subject<Person[]>();
+  private _persons$ = new ReplaySubject<Person[]>(1);
   private _dataStore: {persons: Person[]} = {persons: []};
   private _fetching = false;
 
