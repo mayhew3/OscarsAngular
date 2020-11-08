@@ -14,7 +14,6 @@ import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {Observable} from 'rxjs';
-import ordinal from 'ordinal';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -306,7 +305,7 @@ export class ScoreboardComponent implements OnInit {
 
   getRank(person: Person): string {
     const myRank = _.filter(this.persons, otherPerson => otherPerson.score > person.score).length + 1;
-    return ordinal(myRank);
+    return moment.localeData().ordinal(myRank);
   }
 
   stillLoading(): boolean {

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FinalResult} from '../../interfaces/FinalResult';
 import {FinalResultsService} from '../../services/final-results.service';
 import {_} from 'underscore';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
-import ordinal from 'ordinal';
+import * as moment from 'moment';
 
 @Component({
   selector: 'osc-history',
@@ -89,7 +89,7 @@ export class HistoryComponent implements OnInit {
 
   getMyRank(champions: FinalResult[]): string {
     const rank = this.getFinalResultForMe(champions).rank;
-    return ordinal(rank);
+    return moment.localeData().ordinal(rank);
   }
 
   getMyScore(champions: FinalResult[]): number {
