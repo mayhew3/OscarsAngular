@@ -34,6 +34,8 @@ export class PersonService implements OnDestroy {
 
   get persons(): Observable<Person[]> {
     return this._persons$.asObservable().pipe(
+      // todo: not sure why I need this! shouldn't BehaviorSubject only return when I push to it?
+      // todo: this is returning an empty array even though no empty array is being pushed.
       filter(persons => !!persons && persons.length > 0)
     );
   }
