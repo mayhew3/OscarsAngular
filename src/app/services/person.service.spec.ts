@@ -32,18 +32,17 @@ describe('PersonService', () => {
   });
 
   it('nothing in cache initially', () => {
-    expect(service.cache).toBeTruthy();
-    expect(service.cache.length).toBe(0);
+    expect(service.getNumberOfCachedPersons()).toBe(0);
   });
 
   it('getPersons doesn\'t call http get if there is a cache already', () => {
     // do an initial call to fill the cache
-    service.getPersons().subscribe();
+    service.persons.subscribe();
 
     doFirstPersonsRequest();
 
     // subsequent calls to getPersons should just use the cache and do no HTTP request
-    service.getPersons().subscribe((persons) => {
+    service.persons.subscribe((persons) => {
       expect(persons).toBeTruthy();
       expect(persons.length).toBe(3);
     });
@@ -62,17 +61,17 @@ describe('PersonService', () => {
     });
 
     it('getPersons calls http get if cache is empty', () => {
-      service.getPersons().subscribe((persons) => {
+      service.persons.subscribe((persons) => {
         expect(persons).toBeTruthy();
         expect(persons.length).toBe(3);
       });
     });
 
     it('getPersons puts things in cache', () => {
-      service.getPersons().subscribe((persons) => {
-        expect(service.cache.length).toBeGreaterThan(0);
+      service.persons.subscribe((persons) => {
+        expect(service.getNumberOfCachedPersons).toBeGreaterThan(0);
         expect(persons.length).toBeGreaterThan(0);
-        expect(persons.length).toBe(service.cache.length);
+        expect(persons.length).toBe(service.getNumberOfCachedPersons());
         expect(persons.length).toBe(3);
       });
     });

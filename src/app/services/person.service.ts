@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {catchError, filter, map} from 'rxjs/operators';
 import {_} from 'underscore';
 import {Person} from '../interfaces/Person';
+import {ArrayService} from './array.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,65 +13,78 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService {
+export class PersonService implements OnDestroy {
   personsUrl = 'api/persons';
-  cache: Person[];
+  private _persons$ = new BehaviorSubject<Person[]>([]);
+  private _dataStore: {persons: Person[]} = {persons: []};
+  private _fetching = false;
 
-  constructor(private http: HttpClient) {
-    this.cache = [];
-  }
+  private _destroy$ = new Subject();
 
-  // HELPERS
-
-  private static addToArray<T>(existingArray: T[], newArray: T[]) {
-    existingArray.push.apply(existingArray, newArray);
+  constructor(private http: HttpClient,
+              private arrayService: ArrayService) {
   }
 
   // REAL METHODS
 
-  getPersons(): Observable<Person[]> {
-    return this.maybeUpdateCache();
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  get persons(): Observable<Person[]> {
+    return this._persons$.asObservable().pipe(
+      filter(persons => !!persons && persons.length > 0)
+    );
+  }
+
+  getNumberOfCachedPersons(): number {
+    return this._dataStore.persons.length;
+  }
+
+  maybeUpdateCache(): void {
+    if (this._dataStore.persons.length === 0 && !this._fetching) {
+      this._fetching = true;
+      this.refreshCache();
+    }
   }
 
   getPersonsForGroup(group_id: number): Observable<Person[]> {
-    return this.getDataWithCacheUpdate<Person[]>(() => {
-      return _.filter(this.cache, person => person.groups.includes(group_id));
-    });
+    return this.persons.pipe(
+      map(persons => _.filter(persons, person => person.groups.includes(group_id)))
+    );
   }
 
   getPerson(id: number): Observable<Person> {
-    return this.getDataWithCacheUpdate<Person>(() => {
-      return this.getPersonFromCache(id);
-    });
+    return this.persons.pipe(
+      map(persons => _.findWhere(persons, {id: id}))
+    );
   }
 
   getPersonWithEmail(email: string): Observable<Person> {
-    return this.getDataWithCacheUpdate<Person>(() => {
-      return this.getPersonWithEmailFromCache(email);
-    });
+    return this.persons.pipe(
+      map(persons => {
+        return _.findWhere(persons, {email: email});
+      })
+    );
   }
 
   stillLoading(): boolean {
-    return this.cache.length === 0;
+    return this._dataStore.persons.length === 0;
   }
-
 
   getPersonFromCache(id: number): Person {
-    return _.findWhere(this.cache, {id: id});
-  }
-
-  private getPersonWithEmailFromCache(email: string): Person {
-    return _.findWhere(this.cache, {email: email});
+    return _.findWhere(this._dataStore.persons, {id: id});
   }
 
   hasDuplicateFirstName(person: Person): boolean {
-    const matching = _.filter(this.cache, otherPerson => otherPerson.id !== person.id &&
+    const matching = _.filter(this._dataStore.persons, otherPerson => otherPerson.id !== person.id &&
       otherPerson.first_name === person.first_name);
     return matching.length > 0;
   }
 
   hasDuplicateFirstAndLastName(person: Person): boolean {
-    const matching = _.filter(this.cache, otherPerson => otherPerson.id !== person.id &&
+    const matching = _.filter(this._dataStore.persons, otherPerson => otherPerson.id !== person.id &&
       otherPerson.first_name === person.first_name &&
       otherPerson.last_name === person.last_name);
     return matching.length > 0;
@@ -87,33 +101,17 @@ export class PersonService {
 
   // DATA HELPERS
 
-  private getDataWithCacheUpdate<T>(getCallback): Observable<T> {
-    return new Observable(observer => {
-      this.maybeUpdateCache().subscribe(
-        () => observer.next(getCallback()),
-        (err: Error) => observer.error(err)
+  private refreshCache(): void {
+    this.http.get<Person[]>(this.personsUrl)
+      .pipe(
+        catchError(this.handleError<Person[]>('getPersons', []))
+      )
+      .subscribe(
+        (persons: Person[]) => {
+          this._dataStore.persons = persons;
+          this.pushPersonListChange();
+        }
       );
-    });
-  }
-
-  private maybeUpdateCache(): Observable<Person[]> {
-    if (this.cache.length === 0) {
-      return new Observable<Person[]>((observer) => {
-        this.http.get<Person[]>(this.personsUrl)
-          .pipe(
-            catchError(this.handleError<Person[]>('getPersons', []))
-          )
-          .subscribe(
-            (persons: Person[]) => {
-              PersonService.addToArray(this.cache, persons);
-              observer.next(persons);
-            },
-            (err: Error) => observer.error(err)
-          );
-      });
-    } else {
-      return of(this.cache);
-    }
   }
 
   updatePerson(person: Person): Observable<any> {
@@ -121,6 +119,10 @@ export class PersonService {
       .pipe(
         catchError(this.handleError<any>('updatePerson', person))
       );
+  }
+
+  private pushPersonListChange() {
+    this._persons$.next(this.arrayService.cloneArray(this._dataStore.persons));
   }
 
   /**

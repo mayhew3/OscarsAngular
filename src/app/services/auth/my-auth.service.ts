@@ -31,8 +31,12 @@ export class MyAuthService {
   me$ = this.auth.user$.pipe(
     filter(user => !!user),
     concatMap((user) => {
-      this.authenticating = false;
-      return this.localLogin(user);
+      if (!this._person) {
+        this.authenticating = false;
+        return this.localLogin(user);
+      } else {
+        return of(this._person);
+      }
     })
   );
 
@@ -40,6 +44,7 @@ export class MyAuthService {
               private personService: PersonService,
               private auth: AuthService) {
     this._userRole = UserRole.Guest;
+    this.personService.maybeUpdateCache();
   }
 
   static getCallbackUrl(): string {
