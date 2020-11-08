@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
-import {catchError, filter, map} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 import {_} from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
@@ -15,7 +15,7 @@ const httpOptions = {
 })
 export class PersonService implements OnDestroy {
   personsUrl = 'api/persons';
-  private _persons$ = new BehaviorSubject<Person[]>([]);
+  private _persons$ = new Subject<Person[]>();
   private _dataStore: {persons: Person[]} = {persons: []};
   private _fetching = false;
 
@@ -33,11 +33,7 @@ export class PersonService implements OnDestroy {
   }
 
   get persons(): Observable<Person[]> {
-    return this._persons$.asObservable().pipe(
-      // todo: not sure why I need this! shouldn't BehaviorSubject only return when I push to it?
-      // todo: this is returning an empty array even though no empty array is being pushed.
-      filter(persons => !!persons && persons.length > 0)
-    );
+    return this._persons$.asObservable();
   }
 
   getNumberOfCachedPersons(): number {
