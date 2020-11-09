@@ -12,20 +12,68 @@ import {ScoreboardComponent} from './components/scoreboard/scoreboard.component'
 import {HistoryComponent} from './components/history/history.component';
 import {PersonDetailComponent} from './components/person-detail/person-detail.component';
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent},
-  { path: 'callback', component: CallbackComponent },
-  { path: 'vote', component: VoteMainComponent },
-  { path: 'vote/:category_id', component: VoteDetailComponent },
-  { path: 'odds', component: OddsMainComponent },
-  { path: 'odds/:category_id', component: OddsDetailComponent },
-  { path: 'winners', component: WinnerMainComponent },
-  { path: 'winners/:category_id', component: WinnerDetailComponent },
-  { path: 'scores', component: ScoreboardComponent },
-  { path: 'history', component: HistoryComponent },
-  { path: 'person/:person_id', component: PersonDetailComponent },
-  { path: 'admin', component: AdminDashboardComponent },
+  {
+    path: '',
+    component: HomeComponent,
+  },
+  {
+    path: 'callback',
+    component: CallbackComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'vote',
+    component: VoteMainComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'vote/:category_id',
+    component: VoteDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'odds',
+    component: OddsMainComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'odds/:category_id',
+    component: OddsDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'winners',
+    component: WinnerMainComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'winners/:category_id',
+    component: WinnerDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'scores',
+    component: ScoreboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'history',
+    component: HistoryComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'person/:person_id',
+    component: PersonDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin',
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
