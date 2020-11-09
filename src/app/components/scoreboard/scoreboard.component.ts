@@ -5,7 +5,7 @@ import {CategoryService} from '../../services/category.service';
 import {_} from 'underscore';
 import {OddsService} from '../../services/odds.service';
 import {OddsBundle} from '../../interfaces/OddsBundle';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import fast_sort from 'fast-sort';
 import {Category} from '../../interfaces/Category';
 import {Winner} from '../../interfaces/Winner';
@@ -14,7 +14,6 @@ import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {Observable} from 'rxjs';
-import ordinal from 'ordinal';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -30,7 +29,7 @@ export class ScoreboardComponent implements OnInit {
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private oddsService: OddsService,
-              private auth: AuthService,
+              private auth: MyAuthService,
               private socket: SocketService) {
     this.persons = [];
   }
@@ -38,7 +37,7 @@ export class ScoreboardComponent implements OnInit {
   ngOnInit() {
     this.personService.getPersonsForGroup(1).subscribe(persons => {
       this.persons = persons;
-      this.auth.getPerson().subscribe(person => {
+      this.auth.me$.subscribe(person => {
         this.me = person;
 
         this.updateScoreboard().subscribe(() => {
@@ -306,7 +305,7 @@ export class ScoreboardComponent implements OnInit {
 
   getRank(person: Person): string {
     const myRank = _.filter(this.persons, otherPerson => otherPerson.score > person.score).length + 1;
-    return ordinal(myRank);
+    return moment.localeData().ordinal(myRank);
   }
 
   stillLoading(): boolean {

@@ -29,7 +29,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "underscore",
+              "socket.io-client"
+            ]
           },
           "configurations": {
             "node-server": {

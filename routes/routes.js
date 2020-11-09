@@ -1,4 +1,6 @@
 let express = require('express');
+const jwt = require("express-jwt");
+const jwks = require("jwks-rsa");
 
 module.exports = function(app) {
   let events = require('../controllers/events_controller');
@@ -10,43 +12,62 @@ module.exports = function(app) {
   let systemVars = require('../controllers/systemvars_controller');
   let finalResults = require('../controllers/final_results_controller');
 
+  const authConfig = {
+    domain: 'mayhew3.auth0.com',
+    audience: 'https://oscars.v2.mayhew3.com/'
+  }
+
+  const authCheck = jwt({
+    secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: `https://${authConfig.domain}/.well-known/jwks.json`
+    }),
+    audience: authConfig.audience,
+    issuer: `https://${authConfig.domain}/`,
+    algorithms: ['RS256']
+  });
+
   let router = express.Router();
 
-  router.route('/categories')
-    .get(nominees.getCategories);
+  privateGet('/categories', nominees.getCategories);
+  privateGet('/events', events.getRecentEvents);
+  privatePut('/nominees', nominees.updateNomination);
+  privateGet('/odds', odds.getMostRecentOddsBundle);
 
-  router.route('/events')
-    .get(events.getRecentEvents);
+  privateGet('/persons', persons.getPersons);
+  privatePut('/persons', persons.updatePerson);
 
-  router.route('/nominees')
-    .put(nominees.updateNomination);
+  privateGet('/votes', votes.getVotes);
+  privatePost('/votes', votes.addOrUpdateVote);
 
-  router.route('/odds')
-    .get(odds.getMostRecentOddsBundle);
+  privatePost('/winners', winners.addOrDeleteWinner);
+  privatePatch('/winners', winners.resetWinners);
 
-  router.route('/persons')
-    .get(persons.getPersons)
-    .put(persons.updatePerson);
+  privateGet('/systemVars', systemVars.getSystemVars);
+  privatePut('/systemVars', systemVars.updateSystemVars);
 
-  router.route('/votes')
-    .get(votes.getVotes)
-    .post(votes.addOrUpdateVote);
-
-  router.route('/winners')
-    .post(winners.addOrDeleteWinner)
-    .patch(winners.resetWinners);
-
-  router.route('/systemVars')
-    .get(systemVars.getSystemVars)
-    .put(systemVars.updateSystemVars);
-
-  router.route('/finalResults')
-    .get(finalResults.getFinalResults);
-
-  router.route('/maxYear')
-    .get(nominees.getMostRecentYear);
+  privateGet('/finalResults', finalResults.getFinalResults);
+  privateGet('/maxYear', nominees.getMostRecentYear);
 
   app.use('/api', router);
+
+  function privateGet(endpoint, callback) {
+    router.get(endpoint, authCheck, callback);
+  }
+
+  function privatePost(endpoint, callback) {
+    router.post(endpoint, authCheck, callback);
+  }
+
+  function privatePut(endpoint, callback) {
+    router.put(endpoint, authCheck, callback);
+  }
+
+  function privatePatch(endpoint, callback) {
+    router.patch(endpoint, authCheck, callback);
+  }
 
   // error handlers
 

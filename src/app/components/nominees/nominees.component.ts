@@ -6,12 +6,14 @@ import {CategoryService} from '../../services/category.service';
 import {_} from 'underscore';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Vote} from '../../interfaces/Vote';
 import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-nominees',
@@ -33,7 +35,7 @@ export class NomineesComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
               private route: ActivatedRoute,
-              private auth: AuthService,
+              private auth: MyAuthService,
               private winnersService: WinnersService,
               private personService: PersonService,
               private systemVarsService: SystemVarsService) { }
@@ -41,7 +43,7 @@ export class NomineesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       const category_id = +params['category_id'];
-      this.auth.getPerson().subscribe(person => {
+      this.auth.me$.subscribe(person => {
         this.person = person;
         this.categoryService.getNominees(category_id)
           .subscribe(nominees => {

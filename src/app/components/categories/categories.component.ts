@@ -9,7 +9,7 @@ import * as moment from 'moment';
 import {Winner} from '../../interfaces/Winner';
 import {Nominee} from '../../interfaces/Nominee';
 import {VotesService} from '../../services/votes.service';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Person} from '../../interfaces/Person';
 
 @Component({
@@ -29,10 +29,10 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               public systemVarsService: SystemVarsService,
               private votesService: VotesService,
-              private auth: AuthService) { }
+              private auth: MyAuthService) { }
 
   ngOnInit() {
-    this.auth.getPerson().subscribe(me => {
+    this.auth.me$.subscribe(me => {
       this.me = me;
       this.categoryService.getCategories()
         .subscribe(categories => {

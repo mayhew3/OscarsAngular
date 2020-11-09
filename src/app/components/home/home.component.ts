@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth/auth.service';
+import {Component, OnInit} from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 
 @Component({
   selector: 'osc-home',
@@ -11,7 +11,7 @@ import {VotesService} from '../../services/votes.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public auth: AuthService,
+  constructor(public auth: MyAuthService,
               public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
               public votesService: VotesService) {

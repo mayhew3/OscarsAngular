@@ -2,22 +2,22 @@
 
 import { TestBed, inject } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { MyAuthService } from './my-auth.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
-describe('AuthService', () => {
+describe('MyAuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        AuthService,
+        MyAuthService,
         {
           provide: Router, useValue: { navigate: () => {} }
         }]
     });
   });
 
-  it('should ...', inject([AuthService], (service: AuthService) => {
+  it('should ...', inject([MyAuthService], (service: MyAuthService) => {
     expect(service).toBeTruthy();
   }));
 });

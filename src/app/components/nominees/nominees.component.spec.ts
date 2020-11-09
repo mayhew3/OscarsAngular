@@ -17,7 +17,7 @@ import {OddsMainComponent} from '../odds-main/odds-main.component';
 import {VoteDetailComponent} from '../vote-detail/vote-detail.component';
 import {OddsDetailComponent} from '../odds-detail/odds-detail.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import {AuthServiceStub} from '../../services/auth/auth.service.stub';
 import {WinnerMainComponent} from '../winner-main/winner-main.component';
 import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
@@ -49,7 +49,7 @@ describe('NomineesComponent', () => {
       providers: [
         {provide: ActivatedRoute, useValue: new ActivatedRouteStub({category_id: 2})},
         {provide: CategoryService, useClass: CategoryServiceStub},
-        {provide: AuthService, useClass: AuthServiceStub}
+        {provide: MyAuthService, useClass: AuthServiceStub}
       ]
     });
   }));

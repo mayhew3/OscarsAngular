@@ -2,8 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError} from 'rxjs/operators';
+import {catchError, concatMap, map} from 'rxjs/operators';
 import {SocketService} from './socket.service';
+import {MyAuthService} from './auth/my-auth.service';
+import {Person} from '../interfaces/Person';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,7 +19,8 @@ export class SystemVarsService {
   private systemVars: SystemVars;
 
   constructor(private http: HttpClient,
-              private socket: SocketService) {
+              private socket: SocketService,
+              private auth: MyAuthService) {
     this.getSystemVars().subscribe(() => {
       this.socket.on('voting', msg => {
         if (!!msg.voting_open) {
@@ -87,23 +90,26 @@ export class SystemVarsService {
   }
 
   getSystemVars(): Observable<SystemVars> {
-    if (this.systemVars) {
+    return this.auth.me$.pipe(
+      concatMap((_) => this.getSystemVarsFromPerson())
+    );
+  }
+
+  private getSystemVarsFromPerson(): Observable<SystemVars> {
+    if (!!this.systemVars) {
       return of(this.systemVars);
     } else {
-      return new Observable<SystemVars>(observer => {
-        this.http.get<SystemVars[]>(this.systemVarsUrl)
-          .pipe(
-            catchError(this.handleError<SystemVars[]>('getSystemVars', []))
-          )
-          .subscribe((systemVars: SystemVars[]) => {
-              if (systemVars.length !== 1) {
-                throw new Error('Should only have one row in system vars.');
-              }
-              this.systemVars = systemVars[0];
-              observer.next(systemVars[0]);
-            },
-            (err: Error) => observer.error(err));
-      });
+      return this.http.get<SystemVars[]>(this.systemVarsUrl)
+        .pipe(
+          catchError(this.handleError<SystemVars[]>('getSystemVars', [])),
+          map((systemVars: SystemVars[]) => {
+            if (systemVars.length !== 1) {
+              throw new Error('Should only have one row in system vars.');
+            }
+            this.systemVars = systemVars[0];
+            return systemVars[0];
+          })
+        );
     }
   }
 

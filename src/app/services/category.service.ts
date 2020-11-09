@@ -5,7 +5,7 @@ import {Category} from '../interfaces/Category';
 import {catchError} from 'rxjs/operators';
 import {_} from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
-import {AuthService} from './auth/auth.service';
+import {MyAuthService} from './auth/my-auth.service';
 import {SystemVarsService} from './system.vars.service';
 import {Person} from '../interfaces/Person';
 import {VotesService} from './votes.service';
@@ -28,7 +28,7 @@ export class CategoryService {
   private readonly winnerListeners: Subscriber<any>[];
 
   constructor(private http: HttpClient,
-              private auth: AuthService,
+              private auth: MyAuthService,
               private systemVarsService: SystemVarsService,
               private votesService: VotesService,
               private oddsService: OddsService,
@@ -332,33 +332,33 @@ export class CategoryService {
 
     this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
     return new Observable<Category[]>((observer) => {
-      this.auth.getPerson().subscribe(person => {
-        if (!person) {
-          this.auth.logout();
+      this.auth.me$.subscribe(person => {
+        if (!!person) {
+          this.systemVarsService.getSystemVars().subscribe(systemVars => {
+            const options = {
+              params: {
+                person_id: person.id.toString(),
+                year: systemVars.curr_year.toString()
+              }
+            };
+            this.http.get<Category[]>(this.categoriesUrl, options)
+              .pipe(
+                catchError(this.handleError<Category[]>('getCategories', []))
+              )
+              .subscribe(
+                (categories: Category[]) => {
+                  _.forEach(categories, category => {
+                    _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
+                  });
+                  this.cache.length = 0;
+                  CategoryService.addToArray(this.cache, categories);
+                  this.socket.on('winner', updateWinnersInCacheAndNotify);
+                  observer.next(categories);
+                },
+                (err: Error) => observer.error(err)
+              );
+          });
         }
-        this.systemVarsService.getSystemVars().subscribe(systemVars => {
-          const options = {
-            params: {
-              person_id: person.id.toString(),
-              year: systemVars.curr_year.toString()
-            }};
-          this.http.get<Category[]>(this.categoriesUrl, options)
-            .pipe(
-              catchError(this.handleError<Category[]>('getCategories', []))
-            )
-            .subscribe(
-              (categories: Category[]) => {
-                _.forEach(categories, category => {
-                  _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
-                });
-                this.cache.length = 0;
-                CategoryService.addToArray(this.cache, categories);
-                this.socket.on('winner', updateWinnersInCacheAndNotify);
-                observer.next(categories);
-              },
-              (err: Error) => observer.error(err)
-            );
-        });
       });
     });
   }

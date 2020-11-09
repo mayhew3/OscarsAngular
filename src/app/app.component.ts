@@ -1,33 +1,28 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from './services/auth/auth.service';
+import {Component} from '@angular/core';
 import {SystemVarsService} from './services/system.vars.service';
 import {CategoryService} from './services/category.service';
 import {SocketService} from './services/socket.service';
+import {MyAuthService} from './services/auth/my-auth.service';
+import {PersonService} from './services/person.service';
 
 @Component({
   selector: 'osc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
-  constructor(public auth: AuthService,
+  constructor(public auth: MyAuthService,
               public systemVarsService: SystemVarsService,
               private categoryService: CategoryService,
-              private socket: SocketService) {
-    auth.handleAuthentication();
-    auth.scheduleRenewal();
+              private socket: SocketService,
+              private personService: PersonService) {
+    personService.maybeUpdateCache();
     categoryService.getCategories().subscribe();
   }
 
-  ngOnInit() {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-      this.auth.renewTokens();
-    }
-  }
-
   stillLoading() {
-    return this.auth.stillLoading() || this.systemVarsService.stillLoading();
+    return this.systemVarsService.stillLoading();
   }
 
   showHealthySocketStatus() {

@@ -4,8 +4,9 @@ import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
 import {_} from 'underscore';
 import {WinnersService} from '../../services/winners.service';
-import {AuthService} from '../../services/auth/auth.service';
+import {MyAuthService} from '../../services/auth/my-auth.service';
 import {OddsService} from '../../services/odds.service';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -27,7 +28,7 @@ export class AdminDashboardComponent implements OnInit {
               private votesService: VotesService,
               private winnersService: WinnersService,
               private oddsService: OddsService,
-              public auth: AuthService) { }
+              public auth: MyAuthService) { }
 
   ngOnInit() {
     this.systemVarsService.getSystemVars().subscribe(systemVars => {
