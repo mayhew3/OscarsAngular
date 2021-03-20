@@ -1,20 +1,36 @@
 const Sequelize = require('sequelize');
-let config = process.env.DATABASE_URL;
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
 
-exports.sequelize = new Sequelize(config, {
+const ssl = Boolean(process.env.DATABASE_SSL);
+let databaseUrl = process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+  const argv = yargs(hideBin(process.argv)).argv;
+  const local_password = process.env.postgres_local_password;
+  const port = argv.port;
+  databaseUrl = `postgres://postgres:${local_password}@localhost:${port}/oscars`;
+}
+
+const options = {
   dialect: 'postgres',
-  ssl: true,
   pool: {
     max: 5,
     min: 0,
     acquire: 30000,
     idle: 10000
-  },
-  dialectOptions: {
+  }
+};
+
+if (ssl) {
+  options.ssl = true;
+  options.dialectOptions = {
     ssl: {
       require: true,
       rejectUnauthorized: false
     }
-  }
-});
+  };
+}
+
+exports.sequelize = new Sequelize(databaseUrl, options);
 
