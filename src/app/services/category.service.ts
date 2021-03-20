@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError} from 'rxjs/operators';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {MyAuthService} from './auth/my-auth.service';
 import {SystemVarsService} from './system.vars.service';

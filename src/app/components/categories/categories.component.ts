@@ -4,7 +4,7 @@ import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {SystemVarsService} from '../../services/system.vars.service';
 import fast_sort from 'fast-sort';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import * as moment from 'moment';
 import {Winner} from '../../interfaces/Winner';
 import {Nominee} from '../../interfaces/Nominee';

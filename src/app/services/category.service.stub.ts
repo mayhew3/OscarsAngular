@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {TestCategoryList} from './data/categories.test.mock';
 

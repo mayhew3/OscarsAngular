@@ -1,6 +1,6 @@
 import {getStatusText, InMemoryDbService, RequestInfo, ResponseOptions, STATUS} from 'angular-in-memory-web-api';
 import {Injectable} from '@angular/core';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {MockCategoryList} from './data/categories.mock';
 import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';

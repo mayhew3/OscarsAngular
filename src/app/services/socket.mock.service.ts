@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {InMemoryDataService} from './in-memory-data-service';
 
 @Injectable()

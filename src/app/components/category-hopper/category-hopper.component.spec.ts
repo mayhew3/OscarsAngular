@@ -10,7 +10,7 @@ import {CategoryService} from '../../services/category.service';
 import {CategoryServiceStub} from '../../services/category.service.stub';
 import {TestCategoryList} from '../../services/data/categories.test.mock';
 import {Category} from '../../interfaces/Category';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {CallbackComponent} from '../callback/callback.component';

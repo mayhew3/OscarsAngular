@@ -7,7 +7,7 @@ import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
 import {Category} from '../interfaces/Category';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

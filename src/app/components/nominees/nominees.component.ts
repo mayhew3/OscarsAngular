@@ -3,7 +3,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';

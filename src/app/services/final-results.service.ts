@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {FinalResult} from '../interfaces/FinalResult';
 import {Observable, of, Subscription} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {environment} from '../../../environments/environment';
 import {Observable, of, Subscriber} from 'rxjs';
 import {Person} from '../../interfaces/Person';

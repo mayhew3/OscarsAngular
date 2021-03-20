@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
 import {CategoryService} from '../../services/category.service';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {OddsService} from '../../services/odds.service';
 import {OddsBundle} from '../../interfaces/OddsBundle';
 import {MyAuthService} from '../../services/auth/my-auth.service';

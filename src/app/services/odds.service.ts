@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, Subscriber} from 'rxjs';
 import {OddsBundle} from '../interfaces/OddsBundle';
 import {SocketService} from './socket.service';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FinalResult} from '../../interfaces/FinalResult';
 import {FinalResultsService} from '../../services/final-results.service';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';

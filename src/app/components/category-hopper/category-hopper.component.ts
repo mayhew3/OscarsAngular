@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {Nominee} from '../../interfaces/Nominee';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';

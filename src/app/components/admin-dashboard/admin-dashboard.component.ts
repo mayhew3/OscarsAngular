@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {WinnersService} from '../../services/winners.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {OddsService} from '../../services/odds.service';
