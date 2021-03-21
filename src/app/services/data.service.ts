@@ -2,13 +2,12 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {DataCache} from '../interfaces/DataCache';
 import {Vote} from '../interfaces/Vote';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {BehaviorSubject, combineLatest, forkJoin, merge, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
 import * as _ from 'underscore';
 import {SystemVars} from '../interfaces/SystemVars';
 import {map} from 'rxjs/operators';
 import {Category} from '../interfaces/Category';
 import {MyAuthService} from './auth/my-auth.service';
-import {Person} from '../interfaces/Person';
 
 @Injectable({
   providedIn: 'root'
@@ -35,27 +34,35 @@ export class DataService implements OnDestroy {
 
     this.votes = this.addDataCache(
       'votes',
-      this.systemVars.data.pipe(
-        map((systemVars: SystemVars[]) => {
-          return new HttpParams().set('year', systemVars[0].curr_year.toString());
-        })
-      ),
+      this.voteParams(),
       ((voteObj: any) => voteObj)
     );
 
     this.categories = this.addDataCache(
       'categories',
-      combineLatest([this.systemVars.data, this.auth.me$]).pipe(
-        map(([systemVars, person]) => {
-          return {
-            person_id: person.id,
-            year: systemVars[0].curr_year.toString()
-          };
-        })
-      ),
+      this.categoryParams(),
       ((categoryObj: any) => categoryObj)
     );
 
+  }
+
+  private categoryParams() {
+    return combineLatest([this.systemVars.data, this.auth.me$]).pipe(
+      map(([systemVars, person]) => {
+        return {
+          person_id: person.id,
+          year: systemVars[0].curr_year.toString()
+        };
+      })
+    );
+  }
+
+  private voteParams() {
+    return this.systemVars.data.pipe(
+      map((systemVars: SystemVars[]) => {
+        return new HttpParams().set('year', systemVars[0].curr_year.toString());
+      })
+    );
   }
 
   private refreshDataCaches(): void {
