@@ -5,6 +5,7 @@ import {SystemVars} from '../interfaces/SystemVars';
 import {catchError, concatMap, filter, first, map, takeUntil} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
+import {DataService} from './data.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,13 +24,12 @@ export class SystemVarsService implements OnDestroy {
 
   constructor(private http: HttpClient,
               private socket: SocketService,
-              private auth: MyAuthService) {
+              private auth: MyAuthService,
+              private dataService: DataService) {
   }
 
   get systemVars(): Observable<SystemVars> {
-    return this._systemVars$.asObservable().pipe(
-      filter(systemVars => !!systemVars)
-    );
+    return this.dataService.systemVars$;
   }
 
   maybeRefreshCache(): void {

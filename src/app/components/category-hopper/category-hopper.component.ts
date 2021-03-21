@@ -2,11 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {Nominee} from '../../interfaces/Nominee';
 import * as _ from 'underscore';
-import {forkJoin, Observable} from 'rxjs';
+import {combineLatest, forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
+import {concatMap, map} from 'rxjs/operators';
 
 @Component({
   selector: 'osc-category-hopper',
@@ -48,18 +49,17 @@ export class CategoryHopperComponent implements OnInit {
     return ActiveContext.Vote === this.activeContext;
   }
 
-  numVotesComplete(): number {
-    const me = this.auth.getPersonNow();
-    if (!!me) {
-      return this.votesService.getVotesForCurrentYearAndPerson(me).length;
-    } else {
-      return 0;
-    }
+  numVotesComplete(): Observable<number> {
+    return this.auth.me$.pipe(
+      concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me)),
+      map(votes => votes.length)
+    );
   }
 
-  percentVotesComplete(): number {
-    const voteCount = this.numVotesComplete();
-    return !!this.categoryCount ? (voteCount * 100) / this.categoryCount : 0;
+  percentVotesComplete(): Observable<number> {
+    return this.numVotesComplete().pipe(
+      map(voteCount => !!this.categoryCount ? (voteCount * 100) / this.categoryCount : 0)
+    );
   }
 
   showOdds(): boolean {

@@ -14,6 +14,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -256,7 +257,7 @@ export class ScoreboardComponent implements OnInit {
     return Nominee.getSubtitleText(this.latestCategory, nominee);
   }
 
-  meGotPointsForLastWinner(): boolean {
+  meGotPointsForLastWinner(): Observable<boolean> {
     return this.gotPointsForLastWinner(this.me);
   }
 
@@ -280,8 +281,10 @@ export class ScoreboardComponent implements OnInit {
     return this.meGotPointsForLastWinner() ? 'footerWinningScore' : 'footerLosingScore';
   }
 
-  gotPointsForLastWinner(person: Person): boolean {
-    return !this.itsOver() && !!this.latestCategory && this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory);
+  gotPointsForLastWinner(person: Person): Observable<boolean> {
+    return this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory).pipe(
+      map(correctly => !this.itsOver() && !!this.latestCategory && correctly)
+    );
   }
 
   getPlayersInFirstPlace(): Person[] {

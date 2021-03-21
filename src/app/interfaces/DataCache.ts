@@ -12,7 +12,7 @@ export class DataCache<T> {
               private http: HttpClient,
               private destroy$: Subject<any>,
               private params: Observable<any>,
-              private postProcess: (dataObj: T) => T) {
+              private postProcess: (dataObjs: T[]) => Observable<T[]>) {
   }
 
   get data(): Observable<T[]> {
@@ -52,9 +52,11 @@ export class DataCache<T> {
   }
 
   private updateData(dataObjects: T[]): void {
-    this._dataStore.data = _.map(dataObjects, this.postProcess);
-    this._fetching = false;
-    this.pushListChangeToListeners();
+    this.postProcess(dataObjects).subscribe(resultObjs => {
+      this._dataStore.data = resultObjs;
+      this._fetching = false;
+      this.pushListChangeToListeners();
+    });
   }
 
   private pushListChangeToListeners(): void {

@@ -12,7 +12,7 @@ import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Person} from '../../interfaces/Person';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-categories',
@@ -189,7 +189,7 @@ export class CategoriesComponent implements OnInit {
     return this.systemVarsService.stillLoading() || this.categoryService.stillLoading();
   }
 
-  showPersonPick(category: Category): boolean {
+  showPersonPick(category: Category): Observable<boolean> {
     return !!this.person && this.didPickWinner(this.person, category);
   }
 
@@ -197,7 +197,7 @@ export class CategoriesComponent implements OnInit {
     return this.personIsMe() && !this.didPickWinner(this.me, category);
   }
 
-  wePickedTheSame(category: Category): boolean {
+  wePickedTheSame(category: Category): Observable<boolean> {
     return this.pickedTheSame(this.me, this.person, category);
   }
 
@@ -233,41 +233,49 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  private pickedTheSame(person1: Person, person2: Person, category: Category): boolean {
+  private pickedTheSame(person1: Person, person2: Person, category: Category): Observable<boolean> {
     const person1pick = this.getPick(person1, category);
     const person2pick = this.getPick(person2, category);
-    return !!person1pick && !!person2pick && person1pick.id === person2pick.id;
+    return combineLatest([person1pick, person2pick]).pipe(
+      map(([p1, p2]) => !!p1 && !!p2 && p1.id === p2.id)
+    );
   }
 
-  private didPickWinner(person: Person, category: Category): boolean {
-    const personPick = this.getPick(person, category);
-    const winning_ids = _.map(category.winners, winner => winner.nomination_id);
-    if (this.votingMode()) {
-      return !personPick;
-    } else {
-      return !!personPick && _.contains(winning_ids, personPick.id);
-    }
+  private didPickWinner(person: Person, category: Category): Observable<boolean> {
+    return this.getPick(person, category).pipe(
+      map(personPick => {
+        const winning_ids = _.map(category.winners, winner => winner.nomination_id);
+        if (this.votingMode()) {
+          return !personPick;
+        } else {
+          return !!personPick && _.contains(winning_ids, personPick.id);
+        }
+      })
+    );
   }
 
   private hasAtLeastOneWinner(category: Category): boolean {
     return category.winners.length > 0;
   }
 
-  getPersonPick(category: Category): Nominee {
+  getPersonPick(category: Category): Observable<Nominee> {
     return this.getPick(this.person, category);
   }
 
-  getMyPick(category: Category): Nominee {
+  getMyPick(category: Category): Observable<Nominee> {
     return this.getPick(this.me, category);
   }
 
-  private getPick(person: Person, category: Category): Nominee {
-    const myVote = this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category);
-    if (!!myVote) {
-      return _.findWhere(category.nominees, {id: myVote.nomination_id});
-    } else {
-      return undefined;
-    }
+  private getPick(person: Person, category: Category): Observable<Nominee> {
+    return this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category).pipe(
+      map(myVote => {
+        if (!!myVote) {
+          return _.findWhere(category.nominees, {id: myVote.nomination_id});
+        } else {
+          return undefined;
+        }
+      })
+    );
   }
 
   personIsMe(): boolean {
@@ -290,21 +298,25 @@ export class CategoriesComponent implements OnInit {
     return this.person.first_name + ' & ' + this.me.first_name;
   }
 
-  myPickName(category: Category): string {
-    const myPick = this.getMyPick(category);
-    return !!myPick ? myPick.nominee : '(no pick made)';
+  myPickName(category: Category): Observable<string> {
+    return this.pickName(this.me, category);
   }
 
-  personPickName(category: Category): string {
-    const yourPick = this.getPersonPick(category);
-    return !!yourPick ? yourPick.nominee : '(no pick made)';
+  personPickName(category: Category): Observable<string> {
+    return this.pickName(this.person, category);
+  }
+
+  pickName(person: Person, category: Category): Observable<string> {
+    return this.getPick(person, category).pipe(
+      map(pick => !!pick ? pick.nominee : '(no pick made)')
+    );
   }
 
   getMyWinnerScoreClass(category: Category): string {
     return this.gotPointsForWinner(category) ? 'winningScore' : 'losingScore';
   }
 
-  gotPointsForWinner(category: Category): boolean {
+  gotPointsForWinner(category: Category): Observable<boolean> {
     return this.categoryService.didPersonVoteCorrectlyFor(this.person, category);
   }
 

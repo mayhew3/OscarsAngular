@@ -81,10 +81,13 @@ export class NomineesComponent implements OnInit {
     }) : [];
   }
 
-  personsForNominee(nominee: Nominee): Person[] {
-    const votes = this.votesService.getVotesForCurrentYearAndCategory(this.category);
-    const votesForNominee = _.where(votes, {nomination_id: nominee.id});
-    return _.map(votesForNominee, vote => _.findWhere(this.persons, {id: vote.person_id}));
+  personsForNominee(nominee: Nominee): Observable<Person[]> {
+    return this.votesService.getVotesForCurrentYearAndCategory(this.category).pipe(
+      map(votes => {
+        const votesForNominee = _.where(votes, {nomination_id: nominee.id});
+        return _.map(votesForNominee, vote => _.findWhere(this.persons, {id: vote.person_id}));
+      })
+    );
   }
 
   private updateLocalWinningNominees(): void {

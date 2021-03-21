@@ -3,6 +3,8 @@ import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
+import {concatMap, map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-home',
@@ -30,14 +32,11 @@ export class HomeComponent implements OnInit {
     return this.auth.getFailedEmail();
   }
 
-  numVotesRemaining(): number {
-    const me = this.auth.getPersonNow();
-    if (!!me) {
-      const numVotes = this.votesService.getVotesForCurrentYearAndPerson(me).length;
-      return !!this.categoryCount() ? this.categoryCount() - numVotes : 0;
-    } else {
-      return 0;
-    }
+  numVotesRemaining(): Observable<number> {
+    return this.auth.me$.pipe(
+      concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me)),
+      map(votes => !!this.categoryCount() ? this.categoryCount() - votes.length : 0)
+    );
   }
 
   getOscarYear(): number {
@@ -58,8 +57,10 @@ export class HomeComponent implements OnInit {
       this.votesService.stillLoading();
   }
 
-  hasVotesRemaining(): boolean {
-    return this.numVotesRemaining() > 0;
+  hasVotesRemaining(): Observable<boolean> {
+    return this.numVotesRemaining().pipe(
+      map(numVotes => numVotes > 0)
+    );
   }
 
 }

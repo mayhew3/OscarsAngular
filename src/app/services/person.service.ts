@@ -5,6 +5,7 @@ import {catchError, map} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
+import {DataService} from './data.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,7 +23,8 @@ export class PersonService implements OnDestroy {
   private _destroy$ = new Subject();
 
   constructor(private http: HttpClient,
-              private arrayService: ArrayService) {
+              private arrayService: ArrayService,
+              private dataService: DataService) {
   }
 
   // REAL METHODS
@@ -33,7 +35,7 @@ export class PersonService implements OnDestroy {
   }
 
   get persons(): Observable<Person[]> {
-    return this._persons$.asObservable();
+    return this.dataService.persons$;
   }
 
   getNumberOfCachedPersons(): number {

@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, filter, first} from 'rxjs/operators';
+import {catchError, filter, first, map} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {MyAuthService} from './auth/my-auth.service';
@@ -204,14 +204,17 @@ export class CategoryService implements OnDestroy {
 
   // SCOREBOARD
 
-  didPersonVoteCorrectlyFor(person: Person, category: Category): boolean {
-    const votes = this.votesService.getVotesForCurrentYearAndCategory(category);
-    const personVote = _.findWhere(votes, {person_id: person.id});
-    if (!!personVote) {
-      const winningIds = _.map(category.winners, winner => winner.nomination_id);
-      return winningIds.includes(personVote.nomination_id);
-    }
-    return false;
+  didPersonVoteCorrectlyFor(person: Person, category: Category): Observable<boolean> {
+    return this.votesService.getVotesForCurrentYearAndCategory(category).pipe(
+      map(votes => {
+        const personVote = _.findWhere(votes, {person_id: person.id});
+        if (!!personVote) {
+          const winningIds = _.map(category.winners, winner => winner.nomination_id);
+          return winningIds.includes(personVote.nomination_id);
+        }
+        return false;
+      })
+    );
   }
 
   populatePersonScores(persons: Person[]): Observable<any> {
