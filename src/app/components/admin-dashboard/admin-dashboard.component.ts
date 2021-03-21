@@ -46,10 +46,12 @@ export class AdminDashboardComponent implements OnInit {
       });
     });
     this.systemVarsService.maybeRefreshCache();
+    this.categoryService.maybeRefreshCache();
   }
 
   refreshAllData(): void {
-    this.categoryService.refreshCache().subscribe();
+    this.categoryService.emptyCache();
+    this.categoryService.maybeRefreshCache();
     this.votesService.refreshCacheForThisYear().subscribe();
     this.oddsService.refreshCache().subscribe();
   }
@@ -77,14 +79,17 @@ export class AdminDashboardComponent implements OnInit {
 
   changeCurrentYear(year): void {
     this.reloadingData = true;
+    this.categoryService.emptyCache();
+
     this.systemVarsService.changeCurrentYear(year).subscribe(() => {
-      this.categoryService.refreshCache().subscribe(() => {
+      this.categoryService.categories.subscribe(() => {
         this.votesService.refreshCache(year).subscribe(() => {
           this.reloadingData = false;
           this.currentYear = year;
         });
       });
     });
+    this.categoryService.maybeRefreshCache();
   }
 
   toggleVotingLock(votingOpen: boolean): void {

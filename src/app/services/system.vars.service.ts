@@ -56,7 +56,9 @@ export class SystemVarsService implements OnDestroy {
           throw new Error('Should only have one row in system vars.');
         }
         this._dataStore.systemVars = systemVars[0];
+        this._fetching = false;
         this.initListeners();
+        this.pushChangeToListeners();
       });
   }
 
@@ -68,6 +70,10 @@ export class SystemVarsService implements OnDestroy {
         this.lockVotingInternal();
       }
     });
+  }
+
+  pushChangeToListeners(): void {
+    this._systemVars$.next(this._dataStore.systemVars);
   }
 
   canVote(): boolean {

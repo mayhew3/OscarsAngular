@@ -68,7 +68,7 @@ export class PersonService implements OnDestroy {
   }
 
   stillLoading(): boolean {
-    return this._dataStore.persons.length === 0;
+    return this._fetching;
   }
 
   getPersonFromCache(id: number): Person {
@@ -107,6 +107,7 @@ export class PersonService implements OnDestroy {
       .subscribe(
         (persons: Person[]) => {
           this._dataStore.persons = persons;
+          this._fetching = false;
           this.pushPersonListChange();
         }
       );

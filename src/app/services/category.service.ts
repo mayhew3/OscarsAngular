@@ -68,6 +68,11 @@ export class CategoryService implements OnDestroy {
     }
   }
 
+  emptyCache(): void {
+    this._dataStore.categories = undefined;
+    this._categories$.next(undefined);
+  }
+
   // REAL METHODS
   getCategory(id: number): Observable<Category> {
     return this.getDataWithCacheUpdate<Category>(() => {
@@ -338,48 +343,49 @@ export class CategoryService implements OnDestroy {
     }
   }
 
-  refreshCache(): Observable<Category[]> {
+  private refreshCache(): void {
     this._dataStore.categories = [];
     // callback function doesn't have 'this' in scope.
 
     this.socket.removeListener('winner', this.updateWinnersInCacheAndNotify.bind(this));
-    return new Observable<Category[]>((observer) => {
-      this.auth.me$
-        .pipe(first())
-        .subscribe(person => {
+    this.auth.me$
+      .pipe(first())
+      .subscribe(person => {
         if (!!person) {
           this.systemVarsService.systemVars
             .pipe(first())
             .subscribe(systemVars => {
-            const options = {
-              params: {
-                person_id: person.id.toString(),
-                year: systemVars.curr_year.toString()
-              }
-            };
-            this.http.get<Category[]>(this.categoriesUrl, options)
-              .pipe(
-                catchError(this.handleError<Category[]>('getCategories', [])),
-                first()
-              )
-              .subscribe(
-                (categories: Category[]) => {
-                  _.forEach(categories, category => {
-                    _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
-                  });
-                  this._dataStore.categories.length = 0;
-                  CategoryService.addToArray(this._dataStore.categories, categories);
-                  this.socket.on('winner', this.updateWinnersInCacheAndNotify.bind(this));
-                  observer.next(categories);
-                },
-                (err: Error) => observer.error(err)
-              );
-          });
+              const options = {
+                params: {
+                  person_id: person.id.toString(),
+                  year: systemVars.curr_year.toString()
+                }
+              };
+              this.http.get<Category[]>(this.categoriesUrl, options)
+                .pipe(
+                  catchError(this.handleError<Category[]>('getCategories', [])),
+                  first()
+                )
+                .subscribe(
+                  (categories: Category[]) => {
+                    _.forEach(categories, category => {
+                      _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
+                    });
+                    this._dataStore.categories.length = 0;
+                    CategoryService.addToArray(this._dataStore.categories, categories);
+                    this.socket.on('winner', this.updateWinnersInCacheAndNotify.bind(this));
+                    this._fetching = false;
+                    this.pushListChange();
+                  }
+                );
+            });
         }
       });
-    });
   }
 
+  private pushListChange(): void {
+    this._categories$.next(this._dataStore.categories);
+  }
 
   /**
    * Handle Http operation that failed.

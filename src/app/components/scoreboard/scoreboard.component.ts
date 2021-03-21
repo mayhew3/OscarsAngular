@@ -84,12 +84,14 @@ export class ScoreboardComponent implements OnInit {
   }
 
   refreshData(): void {
-    this.categoryService.refreshCache().subscribe(() => {
+    this.categoryService.emptyCache();
+    this.categoryService.categories.subscribe(() => {
       this.oddsService.refreshCache().subscribe(() => {
         this.clearSortingOdds();
         this.updateScoreboard().subscribe();
       });
     });
+    this.categoryService.maybeRefreshCache();
   }
 
   clearSortingOdds(): void {
