@@ -24,6 +24,8 @@ import {SystemVarsServiceStub} from '../../services/system.vars.service.stub';
 import {WinnerMainComponent} from '../winner-main/winner-main.component';
 import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
 import {ScoreboardComponent} from '../scoreboard/scoreboard.component';
+import {MyAuthService} from '../../services/auth/my-auth.service';
+import {AuthServiceStub} from '../../services/auth/auth.service.stub';
 
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
@@ -63,7 +65,8 @@ describe('CategoriesComponent', () => {
         CallbackComponent],
       providers: [
         {provide: SystemVarsService, useClass: SystemVarsServiceStub},
-        {provide: CategoryService, useClass: CategoryServiceStub}
+        {provide: CategoryService, useClass: CategoryServiceStub},
+        {provide: MyAuthService, useClass: AuthServiceStub}
       ]
     });
   }));
@@ -91,25 +94,32 @@ describe('CategoriesComponent', () => {
     expect(location.path()).toBe('/');
   }));
 
-  it ('expect same number of cards as categories', () => {
-    const items = element.queryAll(By.css('.card'));
-    expect(items.length)
-      .toBeGreaterThan(0);
-    expect(items.length)
-      .toBe(component.categories.length);
-    expect(items.length)
-      .toBe(3);
+  it ('expect same number of cards as categories', done => {
+    component.categories$.subscribe(categories => {
+      const items = element.queryAll(By.css('.card'));
+      expect(items.length)
+        .toBeGreaterThan(0);
+      expect(items.length)
+        .toBe(categories.length);
+      expect(items.length)
+        .toBe(3);
+      done();
+    });
   });
 
-  it ('expect category names and points displayed', () => {
-    const items = element.queryAll(By.css('.card-body'));
+  it ('expect category names and points displayed', done => {
+    component.categories$.subscribe(categories => {
+      const items = element.queryAll(By.css('.card-body'));
 
-    for (let i = 0; i < items.length; i++) {
-      const categoryTitle = getHTMLFromCSSSelector(items[i], 'categoryTitle');
-      const categoryPoints = getHTMLFromCSSSelector(items[i], 'categoryPoints');
+      for (let i = 0; i < items.length; i++) {
+        const categoryTitle = getHTMLFromCSSSelector(items[i], 'categoryTitle');
+        const categoryPoints = getHTMLFromCSSSelector(items[i], 'categoryPoints');
 
-      expect(categoryTitle).toContain(component.categories[i].name);
-      expect(categoryPoints).toContain(component.categories[i].points);
-    }
+        expect(categoryTitle).toContain(categories[i].name);
+        expect(categoryPoints).toContain(categories[i].points);
+      }
+
+      done();
+    });
   });
 });

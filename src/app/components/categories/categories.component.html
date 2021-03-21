@@ -21,7 +21,7 @@
   <p *ngIf="showVotingClosedMessage()">Voting is currently closed!</p>
 
 
-  <div class="row" *ngIf="showCategoriesWithWinners()">
+  <div class="row" *ngIf="showCategoriesWithWinners$() | async">
 
     <div class="col-12">
       <span class="sectionHeader">WINNERS</span>&nbsp;
@@ -33,7 +33,7 @@
     <div *ngIf="showWinners" class="col-12">
       <div class="row">
         <div class="col-12"
-             *ngFor="let category of getCategoriesWithAtLeastOneWinner()">
+             *ngFor="let category of getCategoriesWithAtLeastOneWinner$() | async">
 
           <!-- CATEGORY CARD -->
 
@@ -155,7 +155,7 @@
 
   </div>
 
-  <div class="row" *ngIf="showCategoriesWithNoWinners()">
+  <div class="row" *ngIf="showCategoriesWithNoWinners$() | async">
 
     <div class="col-12"
          *ngIf="winnersMode()">
@@ -169,7 +169,7 @@
          *ngIf="showWinnerless">
       <div class="row">
         <div class="col-12"
-             *ngFor="let category of getCategoriesWithNoWinner()">
+             *ngFor="let category of getCategoriesWithNoWinner$() | async">
 
           <!-- CATEGORY CARD -->
 

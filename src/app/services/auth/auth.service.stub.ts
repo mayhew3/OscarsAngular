@@ -34,6 +34,10 @@ export class AuthServiceStub {
     return undefined;
   }
 
+  get me$(): Observable<Person> {
+    return this.getPerson();
+  }
+
   public getPerson(): Observable<Person> {
     return of(TestPersonList[0]);
   }

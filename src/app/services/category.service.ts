@@ -13,6 +13,7 @@ import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import fast_sort from 'fast-sort';
+import {DataService} from './data.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -39,7 +40,8 @@ export class CategoryService implements OnDestroy {
               private systemVarsService: SystemVarsService,
               private votesService: VotesService,
               private oddsService: OddsService,
-              private socket: SocketService) {
+              private socket: SocketService,
+              private dataService: DataService) {
     this.winnerListeners = [];
     this.systemVarsService.maybeRefreshCache();
   }
@@ -51,9 +53,7 @@ export class CategoryService implements OnDestroy {
   }
 
   get categories(): Observable<Category[]> {
-    return this._categories$.asObservable().pipe(
-      filter(categories => !!categories)
-    );
+    return this.dataService.categories$;
   }
 
   ngOnDestroy(): void {

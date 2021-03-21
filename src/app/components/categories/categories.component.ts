@@ -11,7 +11,8 @@ import {Nominee} from '../../interfaces/Nominee';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Person} from '../../interfaces/Person';
-import {first} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-categories',
@@ -19,7 +20,6 @@ import {first} from 'rxjs/operators';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  categories: Category[];
   me: Person;
   @Input() activeContext: ActiveContext;
   @Input() person: Person;
@@ -36,16 +36,25 @@ export class CategoriesComponent implements OnInit {
     this.auth.me$
       .subscribe(me => {
       this.me = me;
-      this.categoryService.categories
-        .subscribe(categories => {
-          this.categories = categories;
-          this.fastSortCategories();
-          this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-            this.fastSortCategories();
-          });
-        });
-      this.categoryService.maybeRefreshCache();
     });
+  }
+
+  get categories$(): Observable<Category[]> {
+    return this.categoryService.categories;
+  }
+
+  get categoriesSorted$(): Observable<Category[]> {
+    return this.categories$.pipe(
+      map(categories => {
+        fast_sort(categories)
+          .by([
+            {desc: category => this.mostRecentWinDate(category)},
+            {asc: category => category.points},
+            {asc: category => category.name}
+          ]);
+        return categories;
+      }
+    ));
   }
 
   getRouterLink(category: Category): any[] {
@@ -82,12 +91,16 @@ export class CategoriesComponent implements OnInit {
     return !!showVar ? '(hide)' : '(show)';
   }
 
-  getCategoriesWithNoWinner(): Category[] {
-    return _.filter(this.categories, category => category.winners.length === 0);
+  getCategoriesWithNoWinner$(): Observable<Category[]> {
+    return this.categoriesSorted$.pipe(
+      map(categories => _.filter(categories, category => category.winners.length === 0))
+    );
   }
 
-  getCategoriesWithAtLeastOneWinner(): Category[] {
-    return _.filter(this.categories, category => category.winners.length > 0);
+  getCategoriesWithAtLeastOneWinner$(): Observable<Category[]> {
+    return this.categoriesSorted$.pipe(
+      map(categories => _.filter(categories, category => category.winners.length > 0))
+    );
   }
 
   getTimeAgo(category: Category): string {
@@ -118,15 +131,6 @@ export class CategoriesComponent implements OnInit {
       undefined;
   }
 
-  fastSortCategories(): void {
-    fast_sort(this.categories)
-      .by([
-        {desc: category => this.mostRecentWinDate(category)},
-        {asc: category => category.points},
-        {asc: category => category.name}
-      ]);
-  }
-
   getVotedClass(category: Category): string {
     if (this.votingMode() && category.voted_on) {
       return 'votedOn';
@@ -144,12 +148,16 @@ export class CategoriesComponent implements OnInit {
       (this.systemVarsService.canVote() || !this.votingMode());
   }
 
-  showCategoriesWithNoWinners(): boolean {
-    return this.showCategories() && this.getCategoriesWithNoWinner().length > 0;
+  showCategoriesWithNoWinners$(): Observable<boolean> {
+    return this.getCategoriesWithNoWinner$().pipe(
+      map(categories => categories.length > 0 && this.showCategories())
+    );
   }
 
-  showCategoriesWithWinners(): boolean {
-    return this.showCategories() && this.getCategoriesWithAtLeastOneWinner().length > 0 && this.winnersMode();
+  showCategoriesWithWinners$(): Observable<boolean> {
+    return this.getCategoriesWithAtLeastOneWinner$().pipe(
+      map(categories => categories.length > 0 && this.showCategories())
+    );
   }
 
   getCategoryName(category: Category): string {

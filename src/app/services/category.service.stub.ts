@@ -17,7 +17,7 @@ export class CategoryServiceStub {
 
   // REAL METHODS
 
-  getCategories(): Observable<Category[]> {
+  get categories(): Observable<Category[]> {
     return this.maybeUpdateCache();
   }
 
@@ -25,6 +25,20 @@ export class CategoryServiceStub {
     return this.getDataWithCacheUpdate<Category>(() => {
       return this.getCategoryFromCache(id);
     });
+  }
+
+  getCategoryName(category: Category): string {
+    const parts = category.name.split(' (');
+    return parts[0];
+  }
+
+  getCategorySubtitle(category: Category): string {
+    const parts = category.name.split(' (');
+    if (parts.length > 1) {
+      return parts[1].replace(')', '');
+    } else {
+      return undefined;
+    }
   }
 
   getCategoryFromCache(id: number): Category {
