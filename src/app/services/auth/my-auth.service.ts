@@ -37,7 +37,8 @@ export class MyAuthService {
       } else {
         return of(this._person);
       }
-    })
+    }),
+    filter(person => !!person)
   );
 
   constructor(public router: Router,
