@@ -1,11 +1,10 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError, concatMap, map} from 'rxjs/operators';
+import {catchError, concatMap, filter, first, map, takeUntil} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
-import {Person} from '../interfaces/Person';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,52 +13,91 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class SystemVarsService {
+export class SystemVarsService implements OnDestroy {
   systemVarsUrl = 'api/systemVars';
-  private systemVars: SystemVars;
+  private _systemVars$ = new BehaviorSubject<SystemVars>(undefined);
+  private _dataStore: {systemVars: SystemVars} = {systemVars: undefined};
+  private _fetching = false;
+
+  private _destroy$ = new Subject();
 
   constructor(private http: HttpClient,
               private socket: SocketService,
               private auth: MyAuthService) {
-    this.getSystemVars().subscribe(() => {
-      this.socket.on('voting', msg => {
-        if (!!msg.voting_open) {
-          this.unlockVotingInternal();
-        } else {
-          this.lockVotingInternal();
+  }
+
+  get systemVars(): Observable<SystemVars> {
+    return this._systemVars$.asObservable().pipe(
+      filter(systemVars => !!systemVars)
+    );
+  }
+
+  maybeRefreshCache(): void {
+    if (!this._dataStore.systemVars && !this._fetching) {
+      this._fetching = true;
+      this.refreshCache();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  private refreshCache(): void {
+    this.http.get<SystemVars[]>(this.systemVarsUrl)
+      .pipe(
+        takeUntil(this._destroy$),
+        first(),
+        catchError(this.handleError<SystemVars[]>('getSystemVars', [])),
+      )
+      .subscribe((systemVars: SystemVars[]) => {
+        if (systemVars.length !== 1) {
+          throw new Error('Should only have one row in system vars.');
         }
+        this._dataStore.systemVars = systemVars[0];
+        this.initListeners();
       });
+  }
+
+  initListeners(): void {
+    this.socket.on('voting', msg => {
+      if (!!msg.voting_open) {
+        this.unlockVotingInternal();
+      } else {
+        this.lockVotingInternal();
+      }
     });
   }
 
   canVote(): boolean {
-    return !!this.systemVars && !!this.systemVars.voting_open;
+    return !!this._dataStore.systemVars && !!this._dataStore.systemVars.voting_open;
   }
 
   getCurrentYear(): number {
-    return this.systemVars ? this.systemVars.curr_year : undefined;
+    return this._dataStore.systemVars ? this._dataStore.systemVars.curr_year : undefined;
   }
 
   lockVotingInternal(): void {
-    this.getSystemVars().subscribe(() => {
-      this.systemVars.voting_open = false;
+    this.systemVars.subscribe(() => {
+      this._dataStore.systemVars.voting_open = false;
     });
   }
 
   unlockVotingInternal(): void {
-    this.getSystemVars().subscribe(() => {
-      this.systemVars.voting_open = true;
+    this.systemVars.subscribe(() => {
+      this._dataStore.systemVars.voting_open = true;
     });
   }
 
   toggleVotingLock(): void {
-    if (!this.systemVars) {
+    if (!this._dataStore.systemVars) {
       throw new Error('No system vars found.');
     }
     const targetVars = {
-      id: this.systemVars.id,
-      voting_open: !this.systemVars.voting_open,
-      curr_year: this.systemVars.curr_year
+      id: this._dataStore.systemVars.id,
+      voting_open: !this._dataStore.systemVars.voting_open,
+      curr_year: this._dataStore.systemVars.curr_year
     };
 
     this.http.put(this.systemVarsUrl, targetVars, httpOptions)
@@ -71,46 +109,22 @@ export class SystemVarsService {
     const outsideThis = this;
     return new Observable<any>(observer => {
       const targetVars = {
-        id: this.systemVars.id,
-        voting_open: this.systemVars.voting_open,
+        id: this._dataStore.systemVars.id,
+        voting_open: this._dataStore.systemVars.voting_open,
         curr_year: year
       };
 
       this.http.put(this.systemVarsUrl, targetVars, httpOptions)
         .pipe(catchError(this.handleError<any>('changeCurrentYear')))
         .subscribe(() => {
-          outsideThis.systemVars.curr_year = year;
+          outsideThis._dataStore.systemVars.curr_year = year;
           observer.next();
         });
     });
   }
 
   stillLoading(): boolean {
-    return this.systemVars === undefined;
-  }
-
-  getSystemVars(): Observable<SystemVars> {
-    return this.auth.me$.pipe(
-      concatMap((_) => this.getSystemVarsFromPerson())
-    );
-  }
-
-  private getSystemVarsFromPerson(): Observable<SystemVars> {
-    if (!!this.systemVars) {
-      return of(this.systemVars);
-    } else {
-      return this.http.get<SystemVars[]>(this.systemVarsUrl)
-        .pipe(
-          catchError(this.handleError<SystemVars[]>('getSystemVars', [])),
-          map((systemVars: SystemVars[]) => {
-            if (systemVars.length !== 1) {
-              throw new Error('Should only have one row in system vars.');
-            }
-            this.systemVars = systemVars[0];
-            return systemVars[0];
-          })
-        );
-    }
+    return this._dataStore.systemVars === undefined;
   }
 
 

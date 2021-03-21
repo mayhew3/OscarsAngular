@@ -69,12 +69,12 @@ describe('CategoryService', () => {
 
   it('getCategories doesn\'t call http get if there is a cache already', () => {
     // do an initial call to fill the cache
-    service.getCategories().subscribe();
+    service.maybeRefreshCache();
 
     doFirstCategoriesRequest();
 
     // subsequent calls to getCategories should just use the cache and do no HTTP request
-    service.getCategories().subscribe((categories) => {
+    service.categories.subscribe((categories) => {
       expect(categories).toBeTruthy();
       expect(categories.length).toBe(3);
     });
@@ -93,14 +93,14 @@ describe('CategoryService', () => {
     });
 
     it('getCategories calls http get if cache is empty', () => {
-      service.getCategories().subscribe((categories) => {
+      service.categories.subscribe((categories) => {
         expect(categories).toBeTruthy();
         expect(categories.length).toBe(3);
       });
     });
 
     it('getCategories puts things in cache', () => {
-      service.getCategories().subscribe((categories) => {
+      service.categories.subscribe((categories) => {
         expect(service.cache.length).toBeGreaterThan(0);
         expect(categories.length).toBeGreaterThan(0);
         expect(categories.length).toBe(service.cache.length);

@@ -18,7 +18,7 @@ export class AppComponent {
               private socket: SocketService,
               private personService: PersonService) {
     personService.maybeUpdateCache();
-    categoryService.getCategories().subscribe();
+    auth.me$.subscribe();
   }
 
   stillLoading() {

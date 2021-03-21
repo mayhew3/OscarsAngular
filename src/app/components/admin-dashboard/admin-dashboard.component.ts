@@ -31,7 +31,7 @@ export class AdminDashboardComponent implements OnInit {
               public auth: MyAuthService) { }
 
   ngOnInit() {
-    this.systemVarsService.getSystemVars().subscribe(systemVars => {
+    this.systemVarsService.systemVars.subscribe(systemVars => {
       this.categoryService.getMaxYear().subscribe(maxYear => {
         this.currentYear = systemVars.curr_year;
         this.possibleYears.push(maxYear - 1);
@@ -45,6 +45,7 @@ export class AdminDashboardComponent implements OnInit {
         });
       });
     });
+    this.systemVarsService.maybeRefreshCache();
   }
 
   refreshAllData(): void {
@@ -93,7 +94,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   resetWinners(): void {
-    this.systemVarsService.getSystemVars().subscribe(systemVars => {
+    this.systemVarsService.systemVars.subscribe(systemVars => {
       const year = systemVars.curr_year;
       this.winnersDeleting = true;
       this.winnersService.resetWinners(year).subscribe();

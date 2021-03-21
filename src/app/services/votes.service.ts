@@ -24,15 +24,12 @@ export class VotesService {
   constructor(private http: HttpClient,
               private systemVarsService: SystemVarsService) {
     this.cache = [];
-    this.systemVarsService.getSystemVars().subscribe(systemVars => {
+    this.systemVarsService.systemVars.subscribe(systemVars => {
       this.maybeUpdateCache(systemVars.curr_year).subscribe(() => {
         this.isLoading = false;
       });
     });
-  }
-
-  stillLoading(): boolean {
-    return this.isLoading;
+    this.systemVarsService.maybeRefreshCache();
   }
 
   // HELPERS
@@ -41,9 +38,13 @@ export class VotesService {
     existingArray.push.apply(existingArray, newArray);
   }
 
+  stillLoading(): boolean {
+    return this.isLoading;
+  }
+
   getVotesForCurrentYear(): Observable<Vote[]> {
     return new Observable<Vote[]>(observer => {
-      this.systemVarsService.getSystemVars().subscribe(systemVars => {
+      this.systemVarsService.systemVars.subscribe(systemVars => {
         this.maybeUpdateCache(systemVars.curr_year).subscribe(votes => {
           observer.next(votes);
         });
@@ -74,7 +75,7 @@ export class VotesService {
 
   refreshCacheForThisYear(): Observable<Vote[]> {
     return new Observable<Vote[]>(observer => {
-      this.systemVarsService.getSystemVars().subscribe(systemVars => {
+      this.systemVarsService.systemVars.subscribe(systemVars => {
         this.refreshCache(systemVars.curr_year).subscribe(votes => observer.next(votes));
       });
     });

@@ -6,7 +6,6 @@ import {forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
-import {PersonService} from '../../services/person.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 
 @Component({
@@ -31,9 +30,10 @@ export class CategoryHopperComponent implements OnInit {
     this.contextUrls[ActiveContext.OddsAssignment] = 'odds';
     this.contextUrls[ActiveContext.Winner] = 'winners';
 
-    this.categoryService.getCategories().subscribe(categories => {
+    this.categoryService.categories.subscribe(categories => {
       this.categoryCount = categories.length;
     });
+    this.categoryService.maybeRefreshCache();
   }
 
   ngOnInit() {

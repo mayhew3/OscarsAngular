@@ -11,6 +11,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Person} from '../../interfaces/Person';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'osc-categories',
@@ -32,9 +33,10 @@ export class CategoriesComponent implements OnInit {
               private auth: MyAuthService) { }
 
   ngOnInit() {
-    this.auth.me$.subscribe(me => {
+    this.auth.me$
+      .subscribe(me => {
       this.me = me;
-      this.categoryService.getCategories()
+      this.categoryService.categories
         .subscribe(categories => {
           this.categories = categories;
           this.fastSortCategories();
@@ -42,6 +44,7 @@ export class CategoriesComponent implements OnInit {
             this.fastSortCategories();
           });
         });
+      this.categoryService.maybeRefreshCache();
     });
   }
 

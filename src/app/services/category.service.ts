@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of, Subscriber} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError} from 'rxjs/operators';
+import {catchError, filter, first} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {MyAuthService} from './auth/my-auth.service';
@@ -21,10 +21,17 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
+export class CategoryService implements OnDestroy {
   nomineesUrl = 'api/nominees';
   categoriesUrl = 'api/categories';
   cache: Category[];
+
+  private _categories$ = new BehaviorSubject<Category[]>(undefined);
+  private _dataStore: {categories: Category[]} = {categories: undefined};
+  private _fetching = false;
+
+  private _destroy$ = new Subject();
+
   private readonly winnerListeners: Subscriber<any>[];
 
   constructor(private http: HttpClient,
@@ -33,8 +40,8 @@ export class CategoryService {
               private votesService: VotesService,
               private oddsService: OddsService,
               private socket: SocketService) {
-    this.cache = [];
     this.winnerListeners = [];
+    this.systemVarsService.maybeRefreshCache();
   }
 
   // HELPERS
@@ -43,12 +50,25 @@ export class CategoryService {
     existingArray.push.apply(existingArray, newArray);
   }
 
-  // REAL METHODS
-
-  getCategories(): Observable<Category[]> {
-    return this.maybeUpdateCache();
+  get categories(): Observable<Category[]> {
+    return this._categories$.asObservable().pipe(
+      filter(categories => !!categories)
+    );
   }
 
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  maybeRefreshCache(): void {
+    if (!this._dataStore.categories && !this._fetching) {
+      this._fetching = true;
+      this.refreshCache();
+    }
+  }
+
+  // REAL METHODS
   getCategory(id: number): Observable<Category> {
     return this.getDataWithCacheUpdate<Category>(() => {
       return this.getCategoryFromCache(id);
@@ -56,31 +76,31 @@ export class CategoryService {
   }
 
   getCategoryCountNow(): number {
-    return this.cache.length;
+    return this._dataStore.categories.length;
   }
 
   private getCategoryFromCache(id: number): Category {
-    return _.findWhere(this.cache, {id: id});
+    return _.findWhere(this._dataStore.categories, {id: id});
   }
 
   // noinspection DuplicatedCode
   getNextCategory(id: number): Observable<Category> {
     return this.getDataWithCacheUpdate<Category>(() => {
-      const foundIndex = _.findIndex(this.cache, {id: id});
-      if (foundIndex === -1 || this.cache.length < (foundIndex + 1)) {
+      const foundIndex = _.findIndex(this._dataStore.categories, {id: id});
+      if (foundIndex === -1 || this._dataStore.categories.length < (foundIndex + 1)) {
         return null;
       }
-      return this.cache[foundIndex + 1];
+      return this._dataStore.categories[foundIndex + 1];
     });
   }
 
   getPreviousCategory(id: number): Observable<Category> {
     return this.getDataWithCacheUpdate<Category>(() => {
-      const foundIndex = _.findIndex(this.cache, {id: id});
+      const foundIndex = _.findIndex(this._dataStore.categories, {id: id});
       if (0 > (foundIndex - 1)) {
         return null;
       }
-      return this.cache[foundIndex - 1];
+      return this._dataStore.categories[foundIndex - 1];
     });
   }
 
@@ -129,17 +149,17 @@ export class CategoryService {
   }
 
   private getCategoryForNomination(nomination_id: number): Category {
-    return _.find(this.cache, category => _.findWhere(category.nominees, {id: nomination_id}));
+    return _.find(this._dataStore.categories, category => _.findWhere(category.nominees, {id: nomination_id}));
   }
 
   getCategoriesWithWinners(): Category[] {
     // noinspection TypeScriptValidateJSTypes
-    return _.filter(this.cache, category => category.winners.length > 0);
+    return _.filter(this._dataStore.categories, category => category.winners.length > 0);
   }
 
   getMostRecentCategory(): Category {
     // noinspection TypeScriptValidateJSTypes
-    const winners = _.flatten(_.map(this.cache, category => category.winners));
+    const winners = _.flatten(_.map(this._dataStore.categories, category => category.winners));
     fast_sort(winners).desc([
         (winner: Winner) => winner.declared
       ]
@@ -191,7 +211,7 @@ export class CategoryService {
 
   populatePersonScores(persons: Person[]): Observable<any> {
     return new Observable<any>(observer => {
-      this.maybeUpdateCache().subscribe(categories => {
+      this.categories.subscribe(categories => {
         this.populatePersonScoresForCategories(persons, categories).subscribe(() => observer.next());
       });
     });
@@ -227,7 +247,7 @@ export class CategoryService {
   }
 
   maxPosition(person: Person, persons: Person[]): number {
-    const categoriesWithoutWinners = _.filter(this.cache, category => !category.winners || category.winners.length === 0);
+    const categoriesWithoutWinners = _.filter(this._dataStore.categories, category => !category.winners || category.winners.length === 0);
     const myVotes = _.map(categoriesWithoutWinners, category => {
       return this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category);
     });
@@ -259,7 +279,7 @@ export class CategoryService {
   // LOADING
 
   stillLoading(): boolean {
-    return this.cache.length === 0;
+    return this._fetching;
   }
 
   // MAX YEAR
@@ -280,7 +300,7 @@ export class CategoryService {
 
   private getDataWithCacheUpdate<T>(getCallback): Observable<T> {
     return new Observable(observer => {
-      this.maybeUpdateCache().subscribe(
+      this.categories.subscribe(
         () => observer.next(getCallback()),
         (err: Error) => observer.error(err)
       );
@@ -288,53 +308,49 @@ export class CategoryService {
   }
 
   resetWinners(): void {
-    _.forEach(this.cache, category => {
+    _.forEach(this._dataStore.categories, category => {
       category.winners = [];
     });
   }
 
-  private maybeUpdateCache(): Observable<Category[]> {
-    if (this.cache.length === 0) {
-      return this.refreshCache();
-    } else {
-      return of(this.cache);
+  private updateWinnersInCacheAndNotify(msg) {
+    const year = this.systemVarsService.getCurrentYear();
+    if (this._dataStore.categories.length > 0 && !!year) {
+      console.log(`Received winner message: ${JSON.stringify(msg)}`);
+      if (msg.detail === 'reset') {
+        this.resetWinners();
+      } else {
+        const category = this.getCategoryForNomination(msg.nomination_id);
+        const winner: Winner = {
+          id: msg.winner_id,
+          category_id: category.id,
+          nomination_id: msg.nomination_id,
+          year: year,
+          declared: new Date(msg.declared)
+        };
+        if (msg.detail === 'add') {
+          this.addWinnerToCache(winner, category);
+        } else if (msg.detail === 'delete') {
+          this.removeWinnerFromCache(winner.nomination_id);
+        }
+      }
+      this.updateWinnerSubscribers();
     }
   }
 
   refreshCache(): Observable<Category[]> {
-    this.cache.length = 0;
+    this._dataStore.categories = [];
     // callback function doesn't have 'this' in scope.
-    const categoryServiceGlobal = this;
-    const updateWinnersInCacheAndNotify = function(msg) {
-      const year = categoryServiceGlobal.systemVarsService.getCurrentYear();
-      if (categoryServiceGlobal.cache.length > 0 && !!year) {
-        console.log(`Received winner message: ${JSON.stringify(msg)}`);
-        if (msg.detail === 'reset') {
-          categoryServiceGlobal.resetWinners();
-        } else {
-          const category = categoryServiceGlobal.getCategoryForNomination(msg.nomination_id);
-          const winner: Winner = {
-            id: msg.winner_id,
-            category_id: category.id,
-            nomination_id: msg.nomination_id,
-            year: year,
-            declared: new Date(msg.declared)
-          };
-          if (msg.detail === 'add') {
-            categoryServiceGlobal.addWinnerToCache(winner, category);
-          } else if (msg.detail === 'delete') {
-            categoryServiceGlobal.removeWinnerFromCache(winner.nomination_id);
-          }
-        }
-        categoryServiceGlobal.updateWinnerSubscribers();
-      }
-    };
 
-    this.socket.removeListener('winner', updateWinnersInCacheAndNotify);
+    this.socket.removeListener('winner', this.updateWinnersInCacheAndNotify.bind(this));
     return new Observable<Category[]>((observer) => {
-      this.auth.me$.subscribe(person => {
+      this.auth.me$
+        .pipe(first())
+        .subscribe(person => {
         if (!!person) {
-          this.systemVarsService.getSystemVars().subscribe(systemVars => {
+          this.systemVarsService.systemVars
+            .pipe(first())
+            .subscribe(systemVars => {
             const options = {
               params: {
                 person_id: person.id.toString(),
@@ -343,16 +359,17 @@ export class CategoryService {
             };
             this.http.get<Category[]>(this.categoriesUrl, options)
               .pipe(
-                catchError(this.handleError<Category[]>('getCategories', []))
+                catchError(this.handleError<Category[]>('getCategories', [])),
+                first()
               )
               .subscribe(
                 (categories: Category[]) => {
                   _.forEach(categories, category => {
                     _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
                   });
-                  this.cache.length = 0;
-                  CategoryService.addToArray(this.cache, categories);
-                  this.socket.on('winner', updateWinnersInCacheAndNotify);
+                  this._dataStore.categories.length = 0;
+                  CategoryService.addToArray(this._dataStore.categories, categories);
+                  this.socket.on('winner', this.updateWinnersInCacheAndNotify.bind(this));
                   observer.next(categories);
                 },
                 (err: Error) => observer.error(err)

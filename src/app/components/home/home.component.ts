@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
               public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
               public votesService: VotesService) {
-    this.categoryService.getCategories().subscribe();
+    this.systemVarsService.maybeRefreshCache();
+    this.categoryService.maybeRefreshCache();
   }
 
   ngOnInit() {
