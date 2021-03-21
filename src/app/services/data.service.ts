@@ -41,7 +41,7 @@ export class DataService implements OnDestroy {
     this.categories = this.addDataCache(
       'categories',
       this.categoryParams(),
-      ((categoryObj: any) => categoryObj)
+      ((categoryObj: Category) => _.each(categoryObj.winners, winner => winner.declared = new Date(winner.declared)))
     );
 
   }
