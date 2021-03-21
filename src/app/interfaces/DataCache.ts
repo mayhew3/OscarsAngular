@@ -1,5 +1,5 @@
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {filter, takeUntil} from 'rxjs/operators';
+import {filter, first, takeUntil, tap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import * as _ from 'underscore';
 
@@ -12,11 +12,12 @@ export class DataCache<T> {
               private http: HttpClient,
               private destroy$: Subject<any>,
               private params: Observable<any>,
-              private postProcess: (dataObj: any) => any) {
+              private postProcess: (dataObj: T) => T) {
   }
 
   get data(): Observable<T[]> {
     return this._dataSubject$.asObservable().pipe(
+      tap(() => this.maybeRefreshCache()),
       filter(data => !!data)
     );
   }
@@ -39,16 +40,21 @@ export class DataCache<T> {
   }
 
   private refreshCache(): void {
-    this.params.subscribe(params => {
-      this.http
-        .get<any[]>(this.apiUrl, {params})
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(dataObjects => {
-          this._dataStore.data = _.map(dataObjects, this.postProcess);
-          this._fetching = false;
-          this.pushListChangeToListeners();
-        });
-    });
+    this.params
+      .subscribe(this.runHttpMethod.bind(this));
+  }
+
+  private runHttpMethod(params: any): void {
+    this.http
+      .get<any[]>(this.apiUrl, {params})
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(this.updateData.bind(this));
+  }
+
+  private updateData(dataObjects: T[]): void {
+    this._dataStore.data = _.map(dataObjects, this.postProcess);
+    this._fetching = false;
+    this.pushListChangeToListeners();
   }
 
   private pushListChangeToListeners(): void {

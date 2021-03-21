@@ -5,7 +5,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
 import * as _ from 'underscore';
 import {SystemVars} from '../interfaces/SystemVars';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {Category} from '../interfaces/Category';
 import {MyAuthService} from './auth/my-auth.service';
 
@@ -13,15 +13,14 @@ import {MyAuthService} from './auth/my-auth.service';
   providedIn: 'root'
 })
 export class DataService implements OnDestroy {
-  caches: DataCache<any>[] = [];
-  systemVars: DataCache<SystemVars>;
-  votes: DataCache<Vote>;
-  categories: DataCache<Category>;
+  private caches: DataCache<any>[] = [];
+  private systemVars: DataCache<SystemVars>;
+  private votes: DataCache<Vote>;
+  private categories: DataCache<Category>;
 
   constructor(private http: HttpClient,
               private auth: MyAuthService) {
     this.initDataCaches();
-    this.refreshDataCaches();
   }
 
   private initDataCaches(): void {
@@ -29,32 +28,44 @@ export class DataService implements OnDestroy {
     this.systemVars = this.addDataCache(
       'systemVars',
       new BehaviorSubject(undefined).asObservable(),
-      ((systemVarsObj: any) => systemVarsObj)
+      ((systemVarsObj: SystemVars) => systemVarsObj)
     );
 
     this.votes = this.addDataCache(
       'votes',
       this.voteParams(),
-      ((voteObj: any) => voteObj)
+      ((voteObj: Vote) => voteObj)
     );
 
     this.categories = this.addDataCache(
       'categories',
       this.categoryParams(),
-      ((categoryObj: Category) => _.each(categoryObj.winners, winner => winner.declared = new Date(winner.declared)))
+      ((categoryObj: Category) => {
+        _.each(categoryObj.winners, winner => winner.declared = new Date(winner.declared));
+        return categoryObj;
+      })
     );
 
   }
 
-  private categoryParams() {
-    return combineLatest([this.systemVars.data, this.auth.me$]).pipe(
-      map(([systemVars, person]) => {
-        return {
-          person_id: person.id,
-          year: systemVars[0].curr_year.toString()
-        };
-      })
-    );
+  get categories$(): Observable<Category[]> {
+    return this.categories.data;
+  }
+
+  get votes$(): Observable<Vote[]> {
+    return this.votes.data;
+  }
+
+  private categoryParams(): Observable<any> {
+    return combineLatest([this.systemVars.data, this.auth.me$.pipe(first())])
+      .pipe(
+        map(([systemVars, person]) => {
+          return {
+            person_id: person.id,
+            year: systemVars[0].curr_year.toString()
+          };
+        })
+      );
   }
 
   private voteParams() {

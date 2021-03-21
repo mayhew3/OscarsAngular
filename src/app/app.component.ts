@@ -17,8 +17,7 @@ export class AppComponent {
               public systemVarsService: SystemVarsService,
               private categoryService: CategoryService,
               private socket: SocketService,
-              private personService: PersonService,
-              private dataService: DataService) {
+              private personService: PersonService) {
     personService.maybeUpdateCache();
     auth.me$.subscribe();
   }
