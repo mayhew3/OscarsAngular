@@ -8,6 +8,7 @@ import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {concatMap, map} from 'rxjs/operators';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'osc-category-hopper',
@@ -25,7 +26,7 @@ export class CategoryHopperComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
-              private auth: MyAuthService) {
+              private personService: PersonService) {
     this.contextUrls = [];
     this.contextUrls[ActiveContext.Vote] = 'vote';
     this.contextUrls[ActiveContext.OddsAssignment] = 'odds';
@@ -50,7 +51,7 @@ export class CategoryHopperComponent implements OnInit {
   }
 
   numVotesComplete(): Observable<number> {
-    return this.auth.me$.pipe(
+    return this.personService.me$.pipe(
       concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me)),
       map(votes => votes.length)
     );

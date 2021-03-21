@@ -6,7 +6,6 @@ import {CategoryService} from '../../services/category.service';
 import * as _ from 'underscore';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Vote} from '../../interfaces/Vote';
 import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
@@ -35,7 +34,6 @@ export class NomineesComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
               private route: ActivatedRoute,
-              private auth: MyAuthService,
               private winnersService: WinnersService,
               private personService: PersonService,
               private systemVarsService: SystemVarsService) { }
@@ -43,7 +41,7 @@ export class NomineesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       const category_id = +params['category_id'];
-      this.auth.me$.subscribe(person => {
+      this.personService.me$.subscribe(person => {
         this.person = person;
         this.categoryService.getNominees(category_id)
           .subscribe(nominees => {
@@ -99,8 +97,10 @@ export class NomineesComponent implements OnInit {
     });
   }
 
-  getVoterClass(person: Person): string {
-    return this.auth.isMe(person) ? 'itsMe' : '';
+  getVoterClass(person: Person): Observable<string> {
+    return this.personService.isMe(person).pipe(
+      map(isMe => !!isMe ? 'itsMe' : '')
+    );
   }
 
   submitVoteOrWinner(nominee: Nominee): void {
@@ -114,7 +114,7 @@ export class NomineesComponent implements OnInit {
         }
         this.processingPick = undefined;
       });
-    } else if (this.winnersMode() && this.auth.isAdmin()) {
+    } else if (this.winnersMode() && this.personService.isAdmin) {
       this.processingPick = nominee;
       this.winnersService.addOrDeleteWinner(nominee).subscribe();
     }
@@ -181,7 +181,7 @@ export class NomineesComponent implements OnInit {
       classes.push('winner');
     }
 
-    if (this.auth.isAdmin() || this.votingMode()) {
+    if (this.personService.isAdmin || this.votingMode()) {
       classes.push('fakeLink');
     }
 

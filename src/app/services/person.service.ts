@@ -1,11 +1,12 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, concatMap, filter, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
 import {DataService} from './data.service';
+import {MyAuthService} from './auth/my-auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,9 +23,18 @@ export class PersonService implements OnDestroy {
 
   private _destroy$ = new Subject();
 
+  me$ = this.myAuthService.user$.pipe(
+    filter(user => !!user),
+    concatMap((user) => this.getPersonWithEmail(user.email)),
+    tap((person: Person) => this.isAdmin = person.role === 'admin')
+  );
+
+  isAdmin: boolean = null;
+
   constructor(private http: HttpClient,
               private arrayService: ArrayService,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private myAuthService: MyAuthService) {
   }
 
   // REAL METHODS
@@ -47,6 +57,12 @@ export class PersonService implements OnDestroy {
       this._fetching = true;
       this.refreshCache();
     }
+  }
+
+  isMe(person: Person): Observable<boolean> {
+    return this.me$.pipe(
+      map(me => me.id === person.id)
+    );
   }
 
   getPersonsForGroup(group_id: number): Observable<Person[]> {

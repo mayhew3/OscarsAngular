@@ -5,6 +5,7 @@ import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {concatMap, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'osc-home',
@@ -14,6 +15,7 @@ import {Observable} from 'rxjs';
 export class HomeComponent implements OnInit {
 
   constructor(public auth: MyAuthService,
+              public personService: PersonService,
               public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
               public votesService: VotesService) {
@@ -28,12 +30,12 @@ export class HomeComponent implements OnInit {
     return this.categoryService.getCategoryCountNow();
   }
 
-  getFailedEmail(): string {
-    return this.auth.getFailedEmail();
+  getFailedEmail(): boolean {
+    return this.auth.failedEmail;
   }
 
   numVotesRemaining(): Observable<number> {
-    return this.auth.me$.pipe(
+    return this.personService.me$.pipe(
       concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me)),
       map(votes => !!this.categoryCount() ? this.categoryCount() - votes.length : 0)
     );
@@ -43,12 +45,12 @@ export class HomeComponent implements OnInit {
     return this.systemVarsService.getCurrentYear();
   }
 
-  isLoggedOut(): boolean {
-    return !this.auth.isLoggedIn();
+  isLoggedIn(): Observable<boolean> {
+    return this.auth.isAuthenticated$;
   }
 
   stillLoading(): boolean {
-    return this.auth.stillLoading() ||
+    return this.personService.stillLoading() ||
       this.systemVarsService.stillLoading();
   }
 

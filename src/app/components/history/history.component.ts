@@ -4,8 +4,9 @@ import {FinalResultsService} from '../../services/final-results.service';
 import * as _ from 'underscore';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import * as moment from 'moment';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'osc-history',
@@ -16,8 +17,7 @@ export class HistoryComponent implements OnInit {
   public finalResults: FinalResult[];
 
   constructor(private finalResultsService: FinalResultsService,
-              private personService: PersonService,
-              private auth: MyAuthService) { }
+              private personService: PersonService) { }
 
   ngOnInit() {
     this.finalResultsService.getFinalResultsForGroup(1).subscribe(finalResults => {
@@ -62,10 +62,11 @@ export class HistoryComponent implements OnInit {
     return this.iAmOneOfThe(champions) ? 'myScorePoints' : 'otherScorePoints';
   }
 
-  iAmOneOfThe(champions: FinalResult[]): boolean {
+  iAmOneOfThe(champions: FinalResult[]): Observable<boolean> {
     const person_ids = _.map(champions, champion => champion.person_id);
-    const myPersonID = this.auth.getPersonID();
-    return _.contains(person_ids, myPersonID);
+    return this.personService.me$.pipe(
+      map(me => _.contains(person_ids, me.id))
+    );
   }
 
   showMyRank(champions: FinalResult[]): boolean {
@@ -77,23 +78,30 @@ export class HistoryComponent implements OnInit {
     return names.join(', ');
   }
 
-  getFinalResultForMe(champions: FinalResult[]): FinalResult {
-    const year = this.getYearFromChampionList(champions);
-    const person_id = this.auth.getPersonID();
-    return _.findWhere(this.finalResults, {year: year, person_id: person_id});
+  getFinalResultForMe(champions: FinalResult[]): Observable<FinalResult> {
+    return this.personService.me$.pipe(
+      map(me => {
+        const year = this.getYearFromChampionList(champions);
+        return _.findWhere(this.finalResults, {year: year, person_id: me});
+      })
+    );
   }
 
-  getMyFirstName(): string {
-    return this.auth.getFirstName();
+  getMyFirstName(): Observable<string> {
+    return this.personService.me$.pipe(
+      map(me => me.first_name)
+    );
   }
 
-  getMyRank(champions: FinalResult[]): string {
-    const rank = this.getFinalResultForMe(champions).rank;
-    return moment.localeData().ordinal(rank);
+  getMyRank(champions: FinalResult[]): Observable<string> {
+    return this.getFinalResultForMe(champions).pipe(
+      map(finalResult => moment.localeData().ordinal(finalResult.rank))
+    );
   }
 
-  getMyScore(champions: FinalResult[]): number {
-    const score = this.getFinalResultForMe(champions).score;
-    return score;
+  getMyScore(champions: FinalResult[]): Observable<number> {
+    return this.getFinalResultForMe(champions).pipe(
+      map(finalResult => finalResult.score)
+    );
   }
 }

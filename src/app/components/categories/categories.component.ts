@@ -13,6 +13,7 @@ import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Person} from '../../interfaces/Person';
 import {map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'osc-categories',
@@ -30,10 +31,10 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               public systemVarsService: SystemVarsService,
               private votesService: VotesService,
-              private auth: MyAuthService) { }
+              private personService: PersonService) { }
 
   ngOnInit() {
-    this.auth.me$
+    this.personService.me$
       .subscribe(me => {
       this.me = me;
     });

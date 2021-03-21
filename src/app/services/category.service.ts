@@ -14,6 +14,7 @@ import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import fast_sort from 'fast-sort';
 import {DataService} from './data.service';
+import {PersonService} from './person.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -36,7 +37,7 @@ export class CategoryService implements OnDestroy {
   private readonly winnerListeners: Subscriber<any>[];
 
   constructor(private http: HttpClient,
-              private auth: MyAuthService,
+              private personService: PersonService,
               private systemVarsService: SystemVarsService,
               private votesService: VotesService,
               private oddsService: OddsService,
@@ -351,7 +352,7 @@ export class CategoryService implements OnDestroy {
     // callback function doesn't have 'this' in scope.
 
     this.socket.removeListener('winner', this.updateWinnersInCacheAndNotify.bind(this));
-    this.auth.me$
+    this.personService.me$
       .pipe(first())
       .subscribe(person => {
         if (!!person) {

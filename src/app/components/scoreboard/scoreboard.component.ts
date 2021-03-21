@@ -38,7 +38,7 @@ export class ScoreboardComponent implements OnInit {
   ngOnInit() {
     this.personService.getPersonsForGroup(1).subscribe(persons => {
       this.persons = persons;
-      this.auth.me$.subscribe(person => {
+      this.personService.me$.subscribe(person => {
         this.me = person;
 
         this.updateScoreboard().subscribe(() => {
@@ -61,7 +61,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   adminRefreshData(): void {
-    if (this.auth.isAdmin()) {
+    if (this.personService.isAdmin) {
       this.refreshData();
     }
   }

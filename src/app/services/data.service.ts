@@ -5,7 +5,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject} from 'rxjs';
 import * as _ from 'underscore';
 import {SystemVars} from '../interfaces/SystemVars';
-import {first, map} from 'rxjs/operators';
+import {concatMap, filter, first, map} from 'rxjs/operators';
 import {Category} from '../interfaces/Category';
 import {MyAuthService} from './auth/my-auth.service';
 import {Person} from '../interfaces/Person';
@@ -103,7 +103,13 @@ export class DataService implements OnDestroy {
   }
 
   private categoryParams(): Observable<any> {
-    return combineLatest([this.systemVars.data, this.auth.me$.pipe(first())])
+    const me$ = this.auth.user$.pipe(
+      filter(user => !!user),
+      concatMap(user => this.getPersonWithEmail(user.email)),
+      filter(person => !!person),
+      first()
+    );
+    return combineLatest([this.systemVars.data, me$])
       .pipe(
         map(([systemVars, person]) => {
           return {
@@ -112,6 +118,14 @@ export class DataService implements OnDestroy {
           };
         })
       );
+  }
+
+  private getPersonWithEmail(email: string): Observable<Person> {
+    return this.persons.data.pipe(
+      map(persons => {
+        return _.findWhere(persons, {email: email});
+      })
+    );
   }
 
   private voteParams() {

@@ -18,8 +18,7 @@ export class AppComponent {
               private categoryService: CategoryService,
               private socket: SocketService,
               private personService: PersonService) {
-    personService.maybeUpdateCache();
-    auth.me$.subscribe();
+    personService.me$.subscribe();
   }
 
   stillLoading() {
@@ -27,7 +26,7 @@ export class AppComponent {
   }
 
   showHealthySocketStatus() {
-    return this.auth.isAdmin();
+    return this.personService.isAdmin;
   }
 
   socketConnected() {
