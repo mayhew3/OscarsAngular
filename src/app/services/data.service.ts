@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {DataCache} from '../interfaces/DataCache';
 import {Vote} from '../interfaces/Vote';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import * as _ from 'underscore';
 import {SystemVars} from '../interfaces/SystemVars';
 import {map} from 'rxjs/operators';
@@ -23,14 +23,14 @@ export class DataService implements OnDestroy {
   private initDataCaches(): void {
     this.systemVars = this.addDataCache(new DataCache<SystemVars>(
       '/api/systemVars', this.http, new Subject<any>(),
-      new Observable(),
+      new BehaviorSubject(undefined).asObservable(),
       ((systemVarsObj: any) => systemVarsObj)
     ));
     this.votes = this.addDataCache(new DataCache<Vote>(
       '/api/votes', this.http, new Subject<any>(),
       this.systemVars.data.pipe(
-        map(systemVars => {
-          return new HttpParams()
+        map((systemVars: SystemVars[]) => {
+          return new HttpParams().set('year', systemVars[0].curr_year.toString());
         })
       ),
       ((voteObj: any) => voteObj)

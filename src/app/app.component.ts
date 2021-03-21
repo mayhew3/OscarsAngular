@@ -4,6 +4,7 @@ import {CategoryService} from './services/category.service';
 import {SocketService} from './services/socket.service';
 import {MyAuthService} from './services/auth/my-auth.service';
 import {PersonService} from './services/person.service';
+import {DataService} from './services/data.service';
 
 @Component({
   selector: 'osc-root',
@@ -16,7 +17,8 @@ export class AppComponent {
               public systemVarsService: SystemVarsService,
               private categoryService: CategoryService,
               private socket: SocketService,
-              private personService: PersonService) {
+              private personService: PersonService,
+              private dataService: DataService) {
     personService.maybeUpdateCache();
     auth.me$.subscribe();
   }
