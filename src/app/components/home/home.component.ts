@@ -4,8 +4,9 @@ import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {concatMap, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {PersonService} from '../../services/person.service';
+import {Person} from '../../interfaces/Person';
 
 @Component({
   selector: 'osc-home',
@@ -19,15 +20,17 @@ export class HomeComponent implements OnInit {
               public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
               public votesService: VotesService) {
-    this.systemVarsService.maybeRefreshCache();
-    this.categoryService.maybeRefreshCache();
   }
 
   ngOnInit() {
   }
 
-  categoryCount(): number {
-    return this.categoryService.getCategoryCountNow();
+  get me$(): Observable<Person> {
+    return this.personService.me$;
+  }
+
+  categoryCount(): Observable<number> {
+    return this.categoryService.getCategoryCount();
   }
 
   getFailedEmail(): boolean {
@@ -35,9 +38,12 @@ export class HomeComponent implements OnInit {
   }
 
   numVotesRemaining(): Observable<number> {
-    return this.personService.me$.pipe(
-      concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me)),
-      map(votes => !!this.categoryCount() ? this.categoryCount() - votes.length : 0)
+    const categoryCount$ = this.categoryCount();
+    const votes$ = this.personService.me$.pipe(
+      concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me))
+    );
+    return combineLatest([categoryCount$, votes$]).pipe(
+      map(([categoryCount, votes]) => !!categoryCount ? categoryCount - votes.length : 0)
     );
   }
 
@@ -45,7 +51,7 @@ export class HomeComponent implements OnInit {
     return this.systemVarsService.getCurrentYear();
   }
 
-  isLoggedIn(): Observable<boolean> {
+  get isLoggedIn$(): Observable<boolean> {
     return this.auth.isAuthenticated$;
   }
 

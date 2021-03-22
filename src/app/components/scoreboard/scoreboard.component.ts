@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -156,8 +156,12 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 
-  itsOver(): boolean {
-    return this.getWinnerCategoryCount() === this.getTotalCategoryCount();
+  itsOver(): Observable<boolean> {
+    const winnerCategoryCount$ = of(this.getWinnerCategoryCount());
+    const totalCategoryCount$ = this.getTotalCategoryCount();
+    return combineLatest([winnerCategoryCount$, totalCategoryCount$]).pipe(
+      map(([winnerCategoryCount, totalCategoryCount]) => winnerCategoryCount === totalCategoryCount)
+    );
   }
 
   getOddsForPerson(person: Person): string {
@@ -224,7 +228,7 @@ export class ScoreboardComponent implements OnInit {
     return new Observable<any>(observer => {
       this.categoryService.populatePersonScores(this.persons).subscribe(() => {
         this.fastSortPersons();
-        this.latestCategory = this.categoryService.getMostRecentCategory();
+        this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
         observer.next();
       });
     });
@@ -386,8 +390,8 @@ export class ScoreboardComponent implements OnInit {
 
   /* CATEGORY PROGRESS BAR */
 
-  getTotalCategoryCount(): number {
-    return this.categoryService.getCategoryCountNow();
+  getTotalCategoryCount(): Observable<number> {
+    return this.categoryService.getCategoryCount();
   }
 
   getWinnerCategoryCount(): number {

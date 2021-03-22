@@ -31,7 +31,6 @@ export class VotesService {
         this.isLoading = false;
       });
     });
-    this.systemVarsService.maybeRefreshCache();
   }
 
   // HELPERS

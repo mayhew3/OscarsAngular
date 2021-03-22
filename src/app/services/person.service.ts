@@ -26,7 +26,8 @@ export class PersonService implements OnDestroy {
   me$ = this.myAuthService.user$.pipe(
     filter(user => !!user),
     concatMap((user) => this.getPersonWithEmail(user.email)),
-    tap((person: Person) => this.isAdmin = person.role === 'admin')
+    tap((person: Person) => this.isAdmin = person.role === 'admin'),
+    filter(person => !!person)
   );
 
   isAdmin: boolean = null;

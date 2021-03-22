@@ -87,7 +87,9 @@ export class DataService implements OnDestroy {
   }
 
   get systemVars$(): Observable<SystemVars> {
-    return this.systemVars.data[0];
+    return this.systemVars.data.pipe(
+      map(systemVarsAll => systemVarsAll[0])
+    );
   }
 
   get persons$(): Observable<Person[]> {
