@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {catchError, concatMap, filter, map, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of, ReplaySubject, Subject} from 'rxjs';
+import {catchError, concatMap, filter, first, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
@@ -23,12 +23,8 @@ export class PersonService implements OnDestroy {
 
   private _destroy$ = new Subject();
 
-  me$ = this.myAuthService.user$.pipe(
-    filter(user => !!user),
-    concatMap((user) => this.getPersonWithEmail(user.email)),
-    tap((person: Person) => this.isAdmin = person.role === 'admin'),
-    filter(person => !!person)
-  );
+  private _me$ = new BehaviorSubject<Person>(undefined);
+  private _me: {me: Person} = {me: undefined};
 
   isAdmin: boolean = null;
 
@@ -36,6 +32,22 @@ export class PersonService implements OnDestroy {
               private arrayService: ArrayService,
               private dataService: DataService,
               private myAuthService: MyAuthService) {
+    this.myAuthService.user$.pipe(
+      filter(user => !!user),
+      first()
+    ).subscribe(user => {
+      if (!this._me.me) {
+        this.getPersonWithEmail(user.email).subscribe(person => {
+          this._me.me = person;
+          this.isAdmin = (person.role === 'admin');
+          this._me$.next(person);
+        });
+      }
+    });
+  }
+
+  get me$(): Observable<Person> {
+    return this._me$.asObservable();
   }
 
   // REAL METHODS

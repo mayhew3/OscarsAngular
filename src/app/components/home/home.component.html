@@ -12,13 +12,10 @@
     Welcome to the Oscars {{getOscarYear()}}, {{(me$ | async)?.first_name}}!
   </p>
 
-<!--
-
   <p *ngIf="!stillLoadingVotesAndCategories() && (hasVotesRemaining() | async)"
      class="votesRemaining">
     You have {{numVotesRemaining() | async}} categories left to vote on!
   </p>
--->
 
   <p *ngIf="!stillLoading() && (isLoggedIn$ | async) && systemVarsService.canVote()">
     Live Scoring will be viewable on Sunday, February 9 at 5pm PT / 8pm ET, when the ballots will lock.
