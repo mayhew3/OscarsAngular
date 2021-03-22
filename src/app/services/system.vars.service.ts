@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError, concatMap, filter, first, map, takeUntil} from 'rxjs/operators';
+import {catchError, first, map, takeUntil} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
 import {DataService} from './data.service';
@@ -80,8 +80,10 @@ export class SystemVarsService implements OnDestroy {
     return !!this._dataStore.systemVars && !!this._dataStore.systemVars.voting_open;
   }
 
-  getCurrentYear(): number {
-    return this._dataStore.systemVars ? this._dataStore.systemVars.curr_year : undefined;
+  getCurrentYear(): Observable<number> {
+    return this.systemVars.pipe(
+      map(systemVars => systemVars.curr_year)
+    );
   }
 
   lockVotingInternal(): void {

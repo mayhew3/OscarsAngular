@@ -62,27 +62,7 @@ export class DataService implements OnDestroy {
       ((votes: Vote[]) => {
         return combineLatest([this.persons.data, this.categories.data]).pipe(
           map(([persons, categories]) => {
-            _.forEach(persons, person => {
-              let score = 0;
-              let numVotes = 0;
-              _.forEach(categories, category => {
-                const personVote = _.findWhere(votes, {
-                  person_id: person.id,
-                  category_id: category.id
-                });
-                if (personVote) {
-                  numVotes++;
-                  if (category.winners.length > 0) {
-                    const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
-                    if (!!existingWinner) {
-                      score += category.points;
-                    }
-                  }
-                }
-              });
-              person.score = score;
-              person.num_votes = numVotes;
-            });
+            this.updatePersonScores(persons, categories, votes);
             return votes;
           })
         );
@@ -135,6 +115,30 @@ export class DataService implements OnDestroy {
         return new HttpParams().set('year', systemVars[0].curr_year.toString());
       })
     );
+  }
+
+  private updatePersonScores(persons: Person[], categories: Category[], votes: Vote[]): void {
+    _.forEach(persons, person => {
+      let score = 0;
+      let numVotes = 0;
+      _.forEach(categories, category => {
+        const personVote = _.findWhere(votes, {
+          person_id: person.id,
+          category_id: category.id
+        });
+        if (personVote) {
+          numVotes++;
+          if (category.winners.length > 0) {
+            const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
+            if (!!existingWinner) {
+              score += category.points;
+            }
+          }
+        }
+      });
+      person.score = score;
+      person.num_votes = numVotes;
+    });
   }
 
   private refreshDataCaches(): void {

@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getOscarYear(): number {
+  getOscarYear(): Observable<number> {
     return this.systemVarsService.getCurrentYear();
   }
 

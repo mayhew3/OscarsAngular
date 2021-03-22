@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
-import {combineLatest, Observable, of} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -157,7 +157,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   itsOver(): Observable<boolean> {
-    const winnerCategoryCount$ = of(this.getWinnerCategoryCount());
+    const winnerCategoryCount$ = this.getWinnerCategoryCount();
     const totalCategoryCount$ = this.getTotalCategoryCount();
     return combineLatest([winnerCategoryCount$, totalCategoryCount$]).pipe(
       map(([winnerCategoryCount, totalCategoryCount]) => winnerCategoryCount === totalCategoryCount)
@@ -248,13 +248,16 @@ export class ScoreboardComponent implements OnInit {
     return '';
   }
 
-  getWinnerName(winner: Winner): string {
-    return this.categoryService.getNomineeFromWinner(winner).nominee;
+  getWinnerName(winner: Winner): Observable<string> {
+    return this.categoryService.getNomineeFromWinner(winner).pipe(
+      map(nominee => nominee.nominee)
+    );
   }
 
-  getWinnerSubtitle(winner: Winner): string {
-    const nominee = this.categoryService.getNomineeFromWinner(winner);
-    return this.getSubtitleText(nominee);
+  getWinnerSubtitle(winner: Winner): Observable<string> {
+    return this.categoryService.getNomineeFromWinner(winner).pipe(
+      map(nominee => this.getSubtitleText(nominee))
+    );
   }
 
   getSubtitleText(nominee: Nominee): string {
@@ -394,7 +397,9 @@ export class ScoreboardComponent implements OnInit {
     return this.categoryService.getCategoryCount();
   }
 
-  getWinnerCategoryCount(): number {
-    return this.categoryService.getCategoriesWithWinners().length;
+  getWinnerCategoryCount(): Observable<number> {
+    return this.categoryService.getCategoriesWithWinners().pipe(
+      map(categories => categories.length)
+    );
   }
 }

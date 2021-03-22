@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, first, map} from 'rxjs/operators';
+import {catchError, concatMap, first, map} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -88,23 +88,27 @@ export class CategoryService implements OnDestroy {
 
   // noinspection DuplicatedCode
   getNextCategory(id: number): Observable<Category> {
-    return this.getDataWithCacheUpdate<Category>(() => {
-      const foundIndex = _.findIndex(this._dataStore.categories, {id: id});
-      if (foundIndex === -1 || this._dataStore.categories.length < (foundIndex + 1)) {
-        return null;
-      }
-      return this._dataStore.categories[foundIndex + 1];
-    });
+    return this.categories.pipe(
+      map(categories => {
+        const foundIndex = _.findIndex(categories, {id: id});
+        if (foundIndex === -1 || categories.length < (foundIndex + 1)) {
+          return null;
+        }
+        return categories[foundIndex + 1];
+      })
+    );
   }
 
   getPreviousCategory(id: number): Observable<Category> {
-    return this.getDataWithCacheUpdate<Category>(() => {
-      const foundIndex = _.findIndex(this._dataStore.categories, {id: id});
-      if (0 > (foundIndex - 1)) {
-        return null;
-      }
-      return this._dataStore.categories[foundIndex - 1];
-    });
+    return this.categories.pipe(
+      map(categories => {
+        const foundIndex = _.findIndex(categories, {id: id});
+        if (0 > (foundIndex - 1)) {
+          return null;
+        }
+        return categories[foundIndex - 1];
+      })
+    );
   }
 
   getNominees(category_id: number): Observable<Nominee[]> {
@@ -140,23 +144,30 @@ export class CategoryService implements OnDestroy {
     }
   }
 
+  // noinspection JSMethodCanBeStatic
   private getWinnerForNominee(category: Category, nomination_id: number): Winner {
     return _.findWhere(category.winners, {nomination_id: nomination_id});
   }
 
-  private removeWinnerFromCache(nomination_id: number): void {
-    const category = this.getCategoryForNomination(nomination_id);
-    const existingWinner = this.getWinnerForNominee(category, nomination_id);
-    category.winners = _.without(category.winners, existingWinner);
+  private removeWinnerFromCache(nomination_id: number): Observable<void> {
+    return this.getCategoryForNomination(nomination_id).pipe(
+      map(category => {
+        const existingWinner = this.getWinnerForNominee(category, nomination_id);
+        category.winners = _.without(category.winners, existingWinner);
+      })
+    );
   }
 
-  private getCategoryForNomination(nomination_id: number): Category {
-    return _.find(this._dataStore.categories, category => _.findWhere(category.nominees, {id: nomination_id}));
+  private getCategoryForNomination(nomination_id: number): Observable<Category> {
+    return this.categories.pipe(
+      map(categories => _.find(categories, category => _.findWhere(category.nominees, {id: nomination_id})))
+    );
   }
 
-  getCategoriesWithWinners(): Category[] {
-    // noinspection TypeScriptValidateJSTypes
-    return _.filter(this._dataStore.categories, category => category.winners.length > 0);
+  getCategoriesWithWinners(): Observable<Category[]> {
+    return this.categories.pipe(
+      map(categories => _.filter(categories, category => category.winners.length > 0))
+    );
   }
 
   getMostRecentCategory(): Observable<Category> {
@@ -172,9 +183,10 @@ export class CategoryService implements OnDestroy {
     return _.findWhere(category.nominees, {id: nomination_id});
   }
 
-  getNomineeFromWinner(winner: Winner): Nominee {
-    const category = this.getCategoryForNomination(winner.nomination_id);
-    return this.getNomineeFromCategory(category, winner.nomination_id);
+  getNomineeFromWinner(winner: Winner): Observable<Nominee> {
+    return this.getCategoryForNomination(winner.nomination_id).pipe(
+      map(category => this.getNomineeFromCategory(category, winner.nomination_id))
+    );
   }
 
   // CATEGORY LIST FORMATTING
@@ -306,43 +318,45 @@ export class CategoryService implements OnDestroy {
 
   // DATA HELPERS
 
-  private getDataWithCacheUpdate<T>(getCallback): Observable<T> {
-    return new Observable(observer => {
-      this.categories.subscribe(
-        () => observer.next(getCallback()),
-        (err: Error) => observer.error(err)
-      );
-    });
+  resetWinners(): Observable<void> {
+    return this.categories.pipe(
+      map(categories => {
+        _.forEach(categories, category => {
+          category.winners = [];
+        });
+      })
+    );
   }
 
-  resetWinners(): void {
-    _.forEach(this._dataStore.categories, category => {
-      category.winners = [];
-    });
-  }
+  private updateWinnersInCacheAndNotify(msg): Observable<void> {
+    const year$ = this.systemVarsService.getCurrentYear();
+    const category$ = this.getCategoryForNomination(msg.nomination_id);
 
-  private updateWinnersInCacheAndNotify(msg) {
-    const year = this.systemVarsService.getCurrentYear();
-    if (this._dataStore.categories.length > 0 && !!year) {
-      console.log(`Received winner message: ${JSON.stringify(msg)}`);
-      if (msg.detail === 'reset') {
-        this.resetWinners();
-      } else {
-        const category = this.getCategoryForNomination(msg.nomination_id);
+    return combineLatest([year$, category$]).pipe(
+      concatMap(([year, category]) => {
+        console.log(`Received winner message: ${JSON.stringify(msg)}`);
         const winner: Winner = {
           id: msg.winner_id,
           category_id: category.id,
           nomination_id: msg.nomination_id,
-          year: year,
+          year,
           declared: new Date(msg.declared)
         };
-        if (msg.detail === 'add') {
-          this.addWinnerToCache(winner, category);
-        } else if (msg.detail === 'delete') {
-          this.removeWinnerFromCache(winner.nomination_id);
-        }
+        return this.updateWinners(category, msg.detail, winner);
+      }),
+      map(() => this.updateWinnerSubscribers())
+    );
+  }
+
+  private updateWinners(category: Category, operation: string, winner: Winner): Observable<void> {
+    if (operation === 'reset') {
+      return this.resetWinners();
+    } else {
+      if (operation === 'add') {
+        return of(this.addWinnerToCache(winner, category));
+      } else if (operation === 'delete') {
+        return this.removeWinnerFromCache(winner.nomination_id);
       }
-      this.updateWinnerSubscribers();
     }
   }
 

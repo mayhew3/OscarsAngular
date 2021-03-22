@@ -9,7 +9,7 @@
   </p>
 
   <p *ngIf="!stillLoading() && (isLoggedIn$ | async)">
-    Welcome to the Oscars {{getOscarYear()}}, {{(me$ | async)?.first_name}}!
+    Welcome to the Oscars {{getOscarYear() | async}}, {{(me$ | async)?.first_name}}!
   </p>
 
   <p *ngIf="!stillLoadingVotesAndCategories() && (hasVotesRemaining() | async)"

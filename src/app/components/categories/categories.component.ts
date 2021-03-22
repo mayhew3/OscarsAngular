@@ -113,13 +113,16 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  getWinnerName(winner: Winner): string {
-    return this.categoryService.getNomineeFromWinner(winner).nominee;
+  getWinnerName(winner: Winner): Observable<string> {
+    return this.categoryService.getNomineeFromWinner(winner).pipe(
+      map(nominee => nominee.nominee)
+    );
   }
 
-  getWinnerSubtitle(winner: Winner, category: Category): string {
-    const nominee = this.categoryService.getNomineeFromWinner(winner);
-    return this.getSubtitleText(nominee, category);
+  getWinnerSubtitle(winner: Winner, category: Category): Observable<string> {
+    return this.categoryService.getNomineeFromWinner(winner).pipe(
+      map(nominee => this.getSubtitleText(nominee, category))
+    );
   }
 
   getSubtitleText(nominee: Nominee, category: Category): string {
