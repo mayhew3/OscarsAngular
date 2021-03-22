@@ -86,7 +86,7 @@ export class HistoryComponent implements OnInit {
     return this.personService.me$.pipe(
       map(me => {
         const year = this.getYearFromChampionList(champions);
-        return _.findWhere(this.finalResults, {year, person_id: me});
+        return _.findWhere(this.finalResults, {year, person_id: me.id});
       })
     );
   }

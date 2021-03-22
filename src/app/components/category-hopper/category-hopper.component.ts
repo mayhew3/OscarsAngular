@@ -2,11 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {Nominee} from '../../interfaces/Nominee';
 import * as _ from 'underscore';
-import {combineLatest, forkJoin, Observable} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import {concatMap, map} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
 
@@ -38,7 +37,7 @@ export class CategoryHopperComponent implements OnInit {
     this.categoryService.maybeRefreshCache();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.clearOriginals();
   }
 
@@ -91,7 +90,7 @@ export class CategoryHopperComponent implements OnInit {
     return total_num ? total_num : 0;
   }
 
-  private getChanges() {
+  private getChanges(): Nominee[] {
     return _.filter(this.nominees, (nominee) =>
       nominee.original_odds_expert !== nominee.odds_expert ||
       nominee.original_odds_user !== nominee.odds_user ||
@@ -100,16 +99,16 @@ export class CategoryHopperComponent implements OnInit {
     );
   }
 
-  hasChanges() {
+  hasChanges(): boolean {
     const filtered = this.getChanges();
     return filtered.length > 0;
   }
 
-  submitOdds() {
+  submitOdds(): void {
     const requests: Observable<any>[] = [];
     const changes = this.getChanges();
     const categoryService = this.categoryService;
-    _.forEach(changes, function(nominee) {
+    _.forEach(changes, nominee => {
       requests.push(categoryService.updateNominee(nominee));
     });
     forkJoin(requests).subscribe(() => {
@@ -117,7 +116,7 @@ export class CategoryHopperComponent implements OnInit {
     });
   }
 
-  private clearOriginals() {
+  private clearOriginals(): void {
     _.forEach(this.nominees, (nominee) => {
       nominee.original_odds_expert = nominee.odds_expert;
       nominee.original_odds_user = nominee.odds_user;

@@ -161,6 +161,6 @@ export class DataService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    _.each(caches, cache => cache.onDestroy());
+    _.each(this.caches, cache => cache.onDestroy());
   }
 }

@@ -141,7 +141,7 @@ export class CategoryService implements OnDestroy {
 
   private getCategoryForNomination(nomination_id: number): Observable<Category> {
     return this.categories.pipe(
-      map(categories => _.find(categories, category => _.findWhere(category.nominees, {id: nomination_id})))
+      map(categories => _.find(categories, category => !!_.findWhere(category.nominees, {id: nomination_id})))
     );
   }
 
@@ -154,9 +154,9 @@ export class CategoryService implements OnDestroy {
   getMostRecentCategory(): Observable<Category> {
     return this.categories.pipe(
       map(categories => _.max(categories, (category: Category) => {
-        const maxWinner = _.max(category.winners, winner => winner.declared);
+        const maxWinner = _.max(category.winners, winner => winner.declared) as Winner;
         return !!maxWinner ? maxWinner.declared : null;
-      }))
+      }) as Category)
     );
   }
 

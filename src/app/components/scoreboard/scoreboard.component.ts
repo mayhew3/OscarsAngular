@@ -137,13 +137,13 @@ export class ScoreboardComponent implements OnInit {
         throw new Error('No odds object found.');
       }
       const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
-      if (!oddsForPerson || !oddsForPerson.odds || oddsForPerson.odds === '0') {
+      if (!oddsForPerson || !oddsForPerson.odds) {
         return 0.001;
       }
       if (!!oddsForPerson.clinched && !this.shouldHideElimination()) {
         return 100.0;
       }
-      const oddsValue = parseFloat(oddsForPerson.odds) * 100;
+      const oddsValue = oddsForPerson.odds * 100;
       if (!oddsValue) {
         throw new Error('Invalid float value: ' + oddsForPerson.odds);
       } else if (oddsValue === 100.0) {
@@ -197,8 +197,8 @@ export class ScoreboardComponent implements OnInit {
       const currentOddsForPerson = _.findWhere(currentOdds.odds, {person_id: person.id});
       const previousOddsForPerson = _.findWhere(previousOdds.odds, {person_id: person.id});
 
-      const currentValue = !currentOddsForPerson ? 0 : parseFloat(currentOddsForPerson.odds) * 100;
-      const previousValue = !previousOddsForPerson ? 0 : parseFloat(previousOddsForPerson.odds) * 100;
+      const currentValue = !currentOddsForPerson ? 0 : currentOddsForPerson.odds * 100;
+      const previousValue = !previousOddsForPerson ? 0 : previousOddsForPerson.odds * 100;
 
       return currentValue - previousValue;
     }
@@ -395,7 +395,7 @@ export class ScoreboardComponent implements OnInit {
 
   public getVoters(): Person[] {
     // noinspection TypeScriptValidateJSTypes
-    return _.filter(this.persons, person => person.num_votes);
+    return _.filter(this.persons, person => !!person.num_votes);
   }
 
   /* FILTER OPTIONS */
