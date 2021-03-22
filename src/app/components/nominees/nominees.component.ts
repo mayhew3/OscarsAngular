@@ -38,9 +38,9 @@ export class NomineesComponent implements OnInit {
               private personService: PersonService,
               private systemVarsService: SystemVarsService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      const category_id = +params['category_id'];
+      const category_id = +params.category_id;
       this.personService.me$.subscribe(person => {
         this.person = person;
         this.categoryService.getNominees(category_id)
@@ -132,9 +132,10 @@ export class NomineesComponent implements OnInit {
     return this.category ? this.category.points.toString() : '';
   }
 
-  showNominees(): boolean {
-    return !this.stillLoading() &&
-      (this.systemVarsService.canVote() || !this.votingMode());
+  showNominees(): Observable<boolean> {
+    return this.systemVarsService.canVote().pipe(
+      map(canVote => !this.stillLoading() && (canVote || !this.votingMode()))
+    );
   }
 
   showVotingClosedMessage(): boolean {

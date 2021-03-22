@@ -146,20 +146,22 @@ export class CategoriesComponent implements OnInit {
     return '';
   }
 
-  showCategories(): boolean {
-    return !this.stillLoading() &&
-      (this.systemVarsService.canVote() || !this.votingMode());
+  showCategories(): Observable<boolean> {
+    return this.systemVarsService.canVote().pipe(
+      map(canVote => !this.stillLoading() &&
+        (canVote || !this.votingMode()))
+    );
   }
 
   showCategoriesWithNoWinners$(): Observable<boolean> {
-    return this.getCategoriesWithNoWinner$().pipe(
-      map(categories => categories.length > 0 && this.showCategories())
+    return combineLatest([this.getCategoriesWithNoWinner$(), this.showCategories()]).pipe(
+      map(([categories, showCategories]) => categories.length > 0 && showCategories)
     );
   }
 
   showCategoriesWithWinners$(): Observable<boolean> {
-    return this.getCategoriesWithAtLeastOneWinner$().pipe(
-      map(categories => categories.length > 0 && this.showCategories())
+    return combineLatest([this.getCategoriesWithAtLeastOneWinner$(), this.showCategories()]).pipe(
+      map(([categories, showCategories]) => categories.length > 0 && showCategories)
     );
   }
 

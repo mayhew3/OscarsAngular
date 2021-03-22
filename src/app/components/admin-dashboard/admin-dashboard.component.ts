@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
@@ -6,7 +6,8 @@ import * as _ from 'underscore';
 import {WinnersService} from '../../services/winners.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {OddsService} from '../../services/odds.service';
-import {PersonService} from '../../services/person.service';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -30,7 +31,7 @@ export class AdminDashboardComponent implements OnInit {
               private oddsService: OddsService,
               public auth: MyAuthService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.systemVarsService.systemVars.subscribe(systemVars => {
       this.categoryService.getMaxYear().subscribe(maxYear => {
         this.currentYear = systemVars.curr_year;
@@ -61,12 +62,14 @@ export class AdminDashboardComponent implements OnInit {
       this.systemVarsService.stillLoading();
   }
 
-  isVotingOpen(): boolean {
+  isVotingOpen(): Observable<boolean> {
     return this.systemVarsService.canVote();
   }
 
-  getVotingButtonClass(votingOpen: boolean): string {
-    return this.isVotingOpen() === votingOpen ? 'btn-success' : 'btn-primary';
+  getVotingButtonClass(votingOpen: boolean): Observable<string> {
+    return this.isVotingOpen().pipe(
+      map(isVotingOpen => isVotingOpen === votingOpen ? 'btn-success' : 'btn-primary')
+    );
   }
 
   yearButtonClass(year): string {
@@ -92,10 +95,14 @@ export class AdminDashboardComponent implements OnInit {
     this.categoryService.maybeRefreshCache();
   }
 
-  toggleVotingLock(votingOpen: boolean): void {
-    if (votingOpen !== this.isVotingOpen()) {
-      this.systemVarsService.toggleVotingLock();
-    }
+  toggleVotingLock(votingOpen: boolean): Observable<void> {
+    return this.isVotingOpen().pipe(
+      map(isVotingOpen => {
+        if (votingOpen !== isVotingOpen) {
+          this.systemVarsService.toggleVotingLock();
+        }
+      })
+    );
   }
 
   resetWinners(): void {

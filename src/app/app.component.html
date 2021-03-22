@@ -20,11 +20,11 @@
           </a>
         </li>
         <li class="nav-item"
-          *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && systemVarsService.canVote()">
+          *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
           <a class="nav-link" routerLink="/vote">Vote</a>
         </li>
         <li class="nav-item"
-            *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && !systemVarsService.canVote()">
+            *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && !(systemVarsService.canVote() | async)">
           <a class="nav-link" routerLink="/scores">Scores</a>
         </li>
         <li class="nav-item"

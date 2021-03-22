@@ -76,8 +76,10 @@ export class SystemVarsService implements OnDestroy {
     this._systemVars$.next(this._dataStore.systemVars);
   }
 
-  canVote(): boolean {
-    return !!this._dataStore.systemVars && !!this._dataStore.systemVars.voting_open;
+  canVote(): Observable<boolean> {
+    return this.systemVars.pipe(
+      map(systemVars => systemVars.voting_open)
+    );
   }
 
   getCurrentYear(): Observable<number> {
