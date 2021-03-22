@@ -40,7 +40,7 @@ export class MyAuthService {
     });
   }
 
-  get user$(): Observable<any> {
+  private get user$(): Observable<any> {
     return this._user$.asObservable().pipe(
       filter(user => !!user)
     );

@@ -33,9 +33,8 @@ export class CategoriesComponent implements OnInit {
               private votesService: VotesService,
               private personService: PersonService) { }
 
-  ngOnInit() {
-    this.personService.me$
-      .subscribe(me => {
+  ngOnInit(): void {
+    this.personService.me$.subscribe(me => {
       this.me = me;
     });
   }
@@ -258,16 +257,13 @@ export class CategoriesComponent implements OnInit {
     );
   }
 
+  // noinspection JSMethodCanBeStatic
   private hasAtLeastOneWinner(category: Category): boolean {
     return category.winners.length > 0;
   }
 
   getPersonPick(category: Category): Observable<Nominee> {
     return this.getPick(this.person, category);
-  }
-
-  getMyPick(category: Category): Observable<Nominee> {
-    return this.getPick(this.me, category);
   }
 
   private getPick(person: Person, category: Category): Observable<Nominee> {

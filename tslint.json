@@ -44,14 +44,19 @@
       }
     ],
     "no-console": [
-      false
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
     ],
     "no-empty": false,
     "no-inferrable-types": [
       true,
       "ignore-params"
     ],
-    "no-non-null-assertion": false,
+    "no-non-null-assertion": true,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
     "no-var-requires": false,
@@ -136,13 +141,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "uni",
+      "osc",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "uni",
+      "osc",
       "kebab-case"
     ]
   }
