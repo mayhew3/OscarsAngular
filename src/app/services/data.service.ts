@@ -9,7 +9,6 @@ import {concatMap, filter, map} from 'rxjs/operators';
 import {Category} from '../interfaces/Category';
 import {MyAuthService} from './auth/my-auth.service';
 import {Person} from '../interfaces/Person';
-import {Winner} from '../interfaces/Winner';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +90,10 @@ export class DataService implements OnDestroy {
 
   get systemVarsLoading(): boolean {
     return this.systemVars.stillLoading();
+  }
+
+  getNumberOfCachedPersons(): number {
+    return this.persons.numberCached();
   }
 
   private categoryParams(): Observable<any> {

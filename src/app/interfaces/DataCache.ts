@@ -44,6 +44,10 @@ export class DataCache<T> {
     return !this._initialized;
   }
 
+  numberCached(): number {
+    return this._dataStore.data.length;
+  }
+
   private refreshCache(): void {
     this.params
       .subscribe(this.runHttpMethod.bind(this));

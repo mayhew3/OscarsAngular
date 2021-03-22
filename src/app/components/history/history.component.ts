@@ -19,7 +19,7 @@ export class HistoryComponent implements OnInit {
   constructor(private finalResultsService: FinalResultsService,
               private personService: PersonService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.finalResultsService.getFinalResultsForGroup(1).subscribe(finalResults => {
       this.finalResults = finalResults;
     });
@@ -50,8 +50,8 @@ export class HistoryComponent implements OnInit {
     return this.finalResultsService.stillLoading() || this.personService.stillLoading();
   }
 
-  getPerson(person_id: number): Person {
-    return this.personService.getPersonFromCache(person_id);
+  getPerson(person_id: number): Observable<Person> {
+    return this.personService.getPerson(person_id);
   }
 
   getScoreCardClass(champions: FinalResult[]): string {
@@ -73,16 +73,20 @@ export class HistoryComponent implements OnInit {
     return !!this.getFinalResultForMe(champions) && !this.iAmOneOfThe(champions);
   }
 
-  getChampionsString(champions: FinalResult[]): string {
-    const names = _.map(champions, champion => this.getPerson(champion.person_id).first_name);
-    return names.join(', ');
+  getChampionsString(champions: FinalResult[]): Observable<string> {
+    return this.personService.persons.pipe(
+      map(persons => {
+        const names = _.map(champions, champion => _.findWhere(persons, {id: champion.person_id}).first_name);
+        return names.join(', ');
+      })
+    );
   }
 
   getFinalResultForMe(champions: FinalResult[]): Observable<FinalResult> {
     return this.personService.me$.pipe(
       map(me => {
         const year = this.getYearFromChampionList(champions);
-        return _.findWhere(this.finalResults, {year: year, person_id: me});
+        return _.findWhere(this.finalResults, {year, person_id: me});
       })
     );
   }

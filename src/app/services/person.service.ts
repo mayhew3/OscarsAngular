@@ -1,12 +1,11 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {catchError, concatMap, filter, map, tap} from 'rxjs/operators';
+import {Observable, of, Subject} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
 import {DataService} from './data.service';
-import {MyAuthService} from './auth/my-auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,8 +16,6 @@ const httpOptions = {
 })
 export class PersonService implements OnDestroy {
   personsUrl = 'api/persons';
-  private _persons$ = new ReplaySubject<Person[]>(1);
-  private _dataStore: {persons: Person[]} = {persons: []};
   private _fetching = false;
 
   private _destroy$ = new Subject();
@@ -48,14 +45,7 @@ export class PersonService implements OnDestroy {
   }
 
   getNumberOfCachedPersons(): number {
-    return this._dataStore.persons.length;
-  }
-
-  maybeUpdateCache(): void {
-    if (this._dataStore.persons.length === 0 && !this._fetching) {
-      this._fetching = true;
-      this.refreshCache();
-    }
+    return this.dataService.getNumberOfCachedPersons();
   }
 
   isMe(person: Person): Observable<boolean> {
@@ -88,23 +78,6 @@ export class PersonService implements OnDestroy {
     return this._fetching;
   }
 
-  getPersonFromCache(id: number): Person {
-    return _.findWhere(this._dataStore.persons, {id});
-  }
-
-  hasDuplicateFirstName(person: Person): boolean {
-    const matching = _.filter(this._dataStore.persons, otherPerson => otherPerson.id !== person.id &&
-      otherPerson.first_name === person.first_name);
-    return matching.length > 0;
-  }
-
-  hasDuplicateFirstAndLastName(person: Person): boolean {
-    const matching = _.filter(this._dataStore.persons, otherPerson => otherPerson.id !== person.id &&
-      otherPerson.first_name === person.first_name &&
-      otherPerson.last_name === person.last_name);
-    return matching.length > 0;
-  }
-
   getFullName(person: Person): string {
     if (!!person.middle_name) {
       return person.first_name + ' ' + person.middle_name.charAt(0) + ' ' + person.last_name;
@@ -116,29 +89,11 @@ export class PersonService implements OnDestroy {
 
   // DATA HELPERS
 
-  private refreshCache(): void {
-    this.http.get<Person[]>(this.personsUrl)
-      .pipe(
-        catchError(this.handleError<Person[]>('getPersons', []))
-      )
-      .subscribe(
-        (persons: Person[]) => {
-          this._dataStore.persons = persons;
-          this._fetching = false;
-          this.pushPersonListChange();
-        }
-      );
-  }
-
   updatePerson(person: Person): Observable<any> {
     return this.http.put(this.personsUrl, person, httpOptions)
       .pipe(
         catchError(this.handleError<any>('updatePerson', person))
       );
-  }
-
-  private pushPersonListChange(): void {
-    this._persons$.next(this.arrayService.cloneArray(this._dataStore.persons));
   }
 
   /**
