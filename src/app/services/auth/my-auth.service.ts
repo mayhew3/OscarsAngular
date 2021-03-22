@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
-import {filter} from 'rxjs/operators';
+import {filter, tap} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 enum UserRole {
   Guest = 'guest',
@@ -16,14 +17,18 @@ export class MyAuthService {
   private _otherFailureMessage: string;
   isAuthenticated$ = this.auth.isAuthenticated$;
   isLoading$ = this.auth.isLoading$;
-  user$ = this.auth.user$;
+
+  private _user$ = new BehaviorSubject<any>(undefined);
+  private _user = undefined;
 
   constructor(private auth: AuthService) {
-    this.user$.pipe(
-      filter(user => !!user)
-    ).subscribe(() => {
+    this.auth.user$.pipe(
+      filter(user => !!user && (!this._user || this._user.email !== user.email))
+    ).subscribe(user => {
+      this._user = user;
       this._failedEmail = false;
       this._otherFailure = false;
+      this._user$.next(this._user);
     });
     this.auth.error$.subscribe((error) => {
       if (error.message === 'No account for email.') {
@@ -33,6 +38,10 @@ export class MyAuthService {
         this._otherFailureMessage = error.message;
       }
     });
+  }
+
+  get user$() {
+    return this._user$.asObservable();
   }
 
   login(): void {
