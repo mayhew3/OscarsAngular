@@ -1,5 +1,6 @@
 import {Person} from '../../interfaces/Person';
 /* tslint:disable quotemark */
+/* tslint:disable:object-literal-key-quotes */
 export const MockPersonList: Person[] = [
   {
     "role": "user",

@@ -1,6 +1,7 @@
 import {FinalResult} from '../../interfaces/FinalResult';
 /* tslint:disable quotemark */
-export const MockFinalResultsList: FinalResult[] = [
+/* tslint:disable:object-literal-key-quotes */
+export const MockFinalResultsList: any[] = [
   {
     "score": 24,
     "correct_count": 10,

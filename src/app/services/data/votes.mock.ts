@@ -1,5 +1,6 @@
 import {Vote} from '../../interfaces/Vote';
 /* tslint:disable quotemark */
+/* tslint:disable:object-literal-key-quotes */
 export const MockVoteList: Vote[] = [
   {
     "category_id": 11,

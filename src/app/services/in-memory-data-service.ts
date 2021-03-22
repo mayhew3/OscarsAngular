@@ -222,6 +222,7 @@ export class InMemoryDataService implements InMemoryDbService {
         copyCategory.nominees = _.where(category.nominees, {year: +year});
         copyCategory.voted_on = this.getVoteForCategory(category.id, +person_id, +year);
         copyCategory.winners = _.where(category.winners, {year: +year});
+        copyCategory.points = category.points;
 
         data.push(copyCategory);
       });

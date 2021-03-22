@@ -1,5 +1,6 @@
 import {Vote} from '../../interfaces/Vote';
 /* tslint:disable quotemark */
+/* tslint:disable:object-literal-key-quotes */
 export const TestVoteList: Vote[] = [
   {
     "id": 1,

@@ -1,5 +1,6 @@
 import {OddsBundle} from '../../interfaces/OddsBundle';
 /* tslint:disable quotemark */
+/* tslint:disable:object-literal-key-quotes */
 export const MockOdds: OddsBundle = {
   "event_id": 125,
   "odds": [
