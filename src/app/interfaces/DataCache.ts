@@ -1,17 +1,18 @@
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {filter, first, takeUntil, tap} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import * as _ from 'underscore';
 
 export class DataCache<T> {
   private _dataSubject$ = new BehaviorSubject<T[]>(undefined);
   private _dataStore: {data: T[]} = {data: undefined};
   private _fetching = false;
+  private _initialized = false;
 
   constructor(private apiUrl: string,
               private http: HttpClient,
               private destroy$: Subject<any>,
-              private params: Observable<any>,
+              private params: Observable<HttpParams>,
               private postProcess: (dataObjs: T[]) => Observable<T[]>) {
   }
 
@@ -39,6 +40,10 @@ export class DataCache<T> {
     this._dataSubject$.next(undefined);
   }
 
+  stillLoading(): boolean {
+    return !this._initialized;
+  }
+
   private refreshCache(): void {
     this.params
       .subscribe(this.runHttpMethod.bind(this));
@@ -55,6 +60,7 @@ export class DataCache<T> {
     this.postProcess(dataObjects).subscribe(resultObjs => {
       this._dataStore.data = resultObjs;
       this._fetching = false;
+      this._initialized = true;
       this.pushListChangeToListeners();
     });
   }

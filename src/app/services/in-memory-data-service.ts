@@ -32,7 +32,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   /////////// helpers ///////////////
 
-  private static finishOptions(options: ResponseOptions, {headers, url}: RequestInfo) {
+  private static finishOptions(options: ResponseOptions, {headers, url}: RequestInfo): ResponseOptions {
     options.statusText = getStatusText(options.status);
     options.headers = headers;
     options.url = url;
@@ -58,19 +58,19 @@ export class InMemoryDataService implements InMemoryDbService {
     };
   }
 
-  on(channel, callback) {
+  on(channel, callback): void {
     this.callbackService.on(channel, callback);
   }
 
-  removeCallback(channel, callback) {
+  removeCallback(channel, callback): void {
     this.callbackService.removeCallback(channel, callback);
   }
 
-  getCallbacks(channel) {
+  getCallbacks(channel): any[] {
     return this.callbackService.getCallbacks(channel);
   }
 
-  get(requestInfo: RequestInfo) {
+  get(requestInfo: RequestInfo): Observable<ResponseOptions> {
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'categories') {
       return this.getCategoriesWithVotes(requestInfo);
@@ -82,7 +82,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   // noinspection JSUnusedGlobalSymbols
-  put(requestInfo: RequestInfo) {
+  put(requestInfo: RequestInfo): Observable<Response> {
     console.log('HTTP override: PUT');
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'nominees') {
@@ -94,7 +94,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   // noinspection JSUnusedGlobalSymbols
-  patch(requestInfo: RequestInfo) {
+  patch(requestInfo: RequestInfo): Observable<Response> {
     console.log('HTTP override: PATCH');
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'winners') {
@@ -103,7 +103,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return undefined;
   }
 
-  post(requestInfo: RequestInfo) {
+  post(requestInfo: RequestInfo): Observable<Response> {
     if (requestInfo.collectionName === 'votes') {
       const existingVote = this.existingVote(requestInfo);
       if (existingVote) {
@@ -115,13 +115,13 @@ export class InMemoryDataService implements InMemoryDbService {
     return undefined;
   }
 
-  private deleteWinners() {
+  private deleteWinners(): void {
     _.forEach(this.categories, category => category.winners = []);
 
     const socketMsg = {
       detail: 'reset',
       event_id: 1,
-      event_time: new Date
+      event_time: new Date()
     };
     const callbacks = this.getCallbacks('winner');
     _.forEach(callbacks, callback => callback(socketMsg));
@@ -129,7 +129,7 @@ export class InMemoryDataService implements InMemoryDbService {
     this.sendUpdatedOdds();
   }
 
-  private updateSystemVars(requestInfo: RequestInfo) {
+  private updateSystemVars(requestInfo: RequestInfo): void {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const systemVars = this.systemVars[0];
 
@@ -139,7 +139,7 @@ export class InMemoryDataService implements InMemoryDbService {
       const msg = {
         voting_open: systemVars.voting_open,
         event_id: 1,
-        event_time: new Date
+        event_time: new Date()
       };
 
       const callbacks = this.getCallbacks('voting');
@@ -147,7 +147,7 @@ export class InMemoryDataService implements InMemoryDbService {
     }
   }
 
-  private addOrDeleteWinner(requestInfo: RequestInfo) {
+  private addOrDeleteWinner(requestInfo: RequestInfo): void {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const categoryForExistingWinner = this.existingCategoryForWinner(jsonBody.nomination_id);
 
@@ -159,7 +159,7 @@ export class InMemoryDataService implements InMemoryDbService {
         detail: 'delete',
         nomination_id: jsonBody.nomination_id,
         event_id: 1,
-        event_time: new Date
+        event_time: new Date()
       };
     } else {
       const categoryForNominee = this.categoryForNominee(jsonBody.nomination_id);
@@ -168,9 +168,9 @@ export class InMemoryDataService implements InMemoryDbService {
         detail: 'add',
         nomination_id: jsonBody.nomination_id,
         event_id: 1,
-        event_time: new Date,
+        event_time: new Date(),
         winner_id: 1234,
-        declared: new Date,
+        declared: new Date(),
       };
     }
 
@@ -215,14 +215,14 @@ export class InMemoryDataService implements InMemoryDbService {
       const data = [];
 
       _.forEach(requestInfo.collection, category => {
-        const copyCategory: Category = {
-          id: category.id,
-          name: category.name,
-          points: category.points,
-          nominees: _.where(category.nominees, {year: +year}),
-          voted_on: this.getVoteForCategory(category.id, +person_id, +year),
-          winners: _.where(category.winners, {year: +year})
-        };
+        const copyCategory: Category = new Category();
+
+        copyCategory.id = category.id;
+        copyCategory.name = category.name;
+        copyCategory.nominees = _.where(category.nominees, {year: +year});
+        copyCategory.voted_on = this.getVoteForCategory(category.id, +person_id, +year);
+        copyCategory.winners = _.where(category.winners, {year: +year});
+
         data.push(copyCategory);
       });
 
@@ -246,9 +246,7 @@ export class InMemoryDataService implements InMemoryDbService {
       const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
 
       const maxYear = _.max(_.map(this.categories, category => _.max(_.map(category.nominees, nominee => nominee.year))));
-      const data = {
-        maxYear: maxYear
-      };
+      const data = {maxYear};
 
       const options: ResponseOptions = data ?
         {
@@ -263,7 +261,7 @@ export class InMemoryDataService implements InMemoryDbService {
     });
   }
 
-  private getEventsSinceDate(requestInfo: RequestInfo): Observable<Event[]> {
+  private getEventsSinceDate(requestInfo: RequestInfo): Observable<ResponseOptions> {
     return requestInfo.utils.createResponse$(() => {
       console.log('HTTP GET override');
 
@@ -290,14 +288,14 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private getVoteForCategory(category_id: number, person_id: number, year: number): number {
     const existingVote = _.findWhere(this.votes, {
-      category_id: category_id,
-      person_id: person_id,
-      year: year
+      category_id,
+      person_id,
+      year
     });
     return existingVote ? existingVote.nomination_id : undefined;
   }
 
-  private updateNomination(requestInfo: RequestInfo) {
+  private updateNomination(requestInfo: RequestInfo): Observable<Response> {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     this.updateObject(jsonBody);
 
@@ -323,7 +321,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private existingCategoryForWinner(nomination_id: number): Category {
     const results = _.filter(this.categories, category => {
-      return !!_.findWhere(category.winners, {nomination_id: nomination_id});
+      return !!_.findWhere(category.winners, {nomination_id});
     });
     return _.first(results);
   }
@@ -335,7 +333,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return _.first(results);
   }
 
-  private updateVote(requestInfo: RequestInfo, existingVote: Vote) {
+  private updateVote(requestInfo: RequestInfo, existingVote: Vote): Observable<Response> {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     existingVote.nomination_id = jsonBody.nomination_id;
 
@@ -349,12 +347,12 @@ export class InMemoryDataService implements InMemoryDbService {
     return requestInfo.utils.createResponse$(() => finishedOptions);
   }
 
-  private updateObject(jsonBody: any) {
+  private updateObject(jsonBody: any): void {
     const id = jsonBody.id;
     const odds_expert = jsonBody.odds_expert;
 
-    _.forEach(this.categories, function(category) {
-      _.forEach(category.nominees, function(nominee) {
+    _.forEach(this.categories, category => {
+      _.forEach(category.nominees, nominee => {
         if (nominee.id === id) {
           nominee.odds_expert = odds_expert;
         }

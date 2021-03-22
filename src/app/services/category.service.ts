@@ -132,23 +132,10 @@ export class CategoryService implements OnDestroy {
     _.forEach(this.winnerListeners, listener => listener.next());
   }
 
-  private addWinnerToCache(winner: Winner, category: Category): void {
-    const existingWinner = this.getWinnerForNominee(category, winner.nomination_id);
-    if (!existingWinner) {
-      category.winners.push(winner);
-    }
-  }
-
-  // noinspection JSMethodCanBeStatic
-  private getWinnerForNominee(category: Category, nomination_id: number): Winner {
-    return _.findWhere(category.winners, {nomination_id});
-  }
-
   private removeWinnerFromCache(nomination_id: number): Observable<void> {
     return this.getCategoryForNomination(nomination_id).pipe(
       map(category => {
-        const existingWinner = this.getWinnerForNominee(category, nomination_id);
-        category.winners = _.without(category.winners, existingWinner);
+        category.removeWinner(nomination_id);
       })
     );
   }
@@ -238,7 +225,7 @@ export class CategoryService implements OnDestroy {
             if (personVote) {
               numVotes++;
               if (category.winners.length > 0) {
-                const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
+                const existingWinner = category.getWinnerForNominee(personVote.nomination_id);
                 if (!!existingWinner) {
                   score += category.points;
                 }
@@ -348,7 +335,7 @@ export class CategoryService implements OnDestroy {
       return this.resetWinners();
     } else {
       if (operation === 'add') {
-        return of(this.addWinnerToCache(winner, category));
+        return of(category.addWinner(winner));
       } else if (operation === 'delete') {
         return this.removeWinnerFromCache(winner.nomination_id);
       }

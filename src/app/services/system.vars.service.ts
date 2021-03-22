@@ -134,7 +134,7 @@ export class SystemVarsService implements OnDestroy {
   }
 
   stillLoading(): boolean {
-    return this._dataStore.systemVars === undefined;
+    return this.dataService.systemVarsLoading;
   }
 
 

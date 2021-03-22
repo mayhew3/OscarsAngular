@@ -89,6 +89,10 @@ export class DataService implements OnDestroy {
     return this.votes.data;
   }
 
+  get systemVarsLoading(): boolean {
+    return this.systemVars.stillLoading();
+  }
+
   private categoryParams(): Observable<any> {
     return combineLatest([this.systemVars.data, this.me$])
       .pipe(
@@ -104,12 +108,12 @@ export class DataService implements OnDestroy {
   private getPersonWithEmail(email: string): Observable<Person> {
     return this.persons.data.pipe(
       map(persons => {
-        return _.findWhere(persons, {email: email});
+        return _.findWhere(persons, {email});
       })
     );
   }
 
-  private voteParams() {
+  private voteParams(): Observable<HttpParams> {
     return this.systemVars.data.pipe(
       map((systemVars: SystemVars[]) => {
         return new HttpParams().set('year', systemVars[0].curr_year.toString());
@@ -129,7 +133,7 @@ export class DataService implements OnDestroy {
         if (personVote) {
           numVotes++;
           if (category.winners.length > 0) {
-            const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
+            const existingWinner = category.getWinnerForNominee(personVote.nomination_id);
             if (!!existingWinner) {
               score += category.points;
             }
@@ -146,15 +150,11 @@ export class DataService implements OnDestroy {
   }
 
   private addDataCache<T>(apiBase: string,
-                       params: Observable<any>,
-                       postProcess: (dataObj: T[]) => Observable<T[]>): DataCache<any> {
+                          params: Observable<HttpParams>,
+                          postProcess: (dataObj: T[]) => Observable<T[]>): DataCache<any> {
     const dataCache = new DataCache<T>(`/api/${apiBase}`, this.http, new Subject<any>(), params, postProcess);
     this.caches.push(dataCache);
     return dataCache;
-  }
-
-  private getWinnerForNominee(category: Category, nomination_id: number): Winner {
-    return _.findWhere(category.winners, {nomination_id: nomination_id});
   }
 
   ngOnDestroy(): void {
