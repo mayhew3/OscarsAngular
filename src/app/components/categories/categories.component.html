@@ -70,11 +70,11 @@
                   <div class="row py-1"
                        *ngFor="let winner of category.winners">
                     <div class="col-12 pickTitle winnerTitle">
-                      {{getWinnerName(winner)}}
+                      {{getWinnerName(winner) | async}}
                     </div>
                     <div class="col-12 winnerSubtitle"
-                         *ngIf="!!getWinnerSubtitle(winner, category)">
-                      {{getWinnerSubtitle(winner, category)}}
+                         *ngIf="!!(getWinnerSubtitle(winner, category) | async)">
+                      {{getWinnerSubtitle(winner, category) | async}}
                     </div>
                   </div>
 
@@ -86,7 +86,7 @@
                       Your Pick:
                     </div>
                     <div class="col-12 pickTitle personPickTitle incorrectPick">
-                      {{myPickName(category)}}
+                      {{myPickName(category) | async}}
                     </div>
                   </div>
 
@@ -103,29 +103,29 @@
               <!-- PERSON DETAIL COMPARISON -->
 
               <div class="row py-1"
-                   *ngIf="winnersMode() && !personIsMe() && wePickedTheSame(category)">
+                   *ngIf="winnersMode() && !personIsMe() && (wePickedTheSame(category) | async)">
                 <div class="col-12 pickHeader"
-                     [ngClass]="personPickHeaderClass(person, category)">
+                     [ngClass]="personPickHeaderClass(person, category) | async">
                   {{bothPersonsDisplayName()}}
                 </div>
                 <div class="col-12 pickTitle personPickTitle"
-                     [ngClass]="personPickClass(person, category)">
-                  {{personPickName(category)}}
+                     [ngClass]="personPickClass(person, category) | async">
+                  {{personPickName(category) | async}}
                 </div>
               </div>
 
               <div class="row py-1 no-gutters"
-                   *ngIf="winnersMode() && !personIsMe() && !wePickedTheSame(category)">
+                   *ngIf="winnersMode() && !personIsMe() && !(wePickedTheSame(category) | async)">
                 <!-- YOUR SIDE PICK -->
                 <div class="col-6">
                   <div class="row">
                     <div class="col-12 pickHeader"
-                         [ngClass]="personPickHeaderClass(me, category)">
+                         [ngClass]="personPickHeaderClass(me, category) | async">
                       {{myDisplayName()}}
                     </div>
                     <div class="col-12 pickTitle personPickTitle"
-                         [ngClass]="personPickClass(me, category)">
-                      {{myPickName(category)}}
+                         [ngClass]="personPickClass(me, category) | async">
+                      {{myPickName(category) | async}}
                     </div>
                   </div>
                 </div>
@@ -133,12 +133,12 @@
                 <div class="col-6">
                   <div class="row">
                     <div class="col-12 pickHeader"
-                         [ngClass]="personPickHeaderClass(person, category)">
+                         [ngClass]="personPickHeaderClass(person, category) | async">
                       {{personDisplayName()}}
                     </div>
                     <div class="col-12 pickTitle personPickTitle"
-                         [ngClass]="personPickClass(person, category)">
-                      {{personPickName(category)}}
+                         [ngClass]="personPickClass(person, category) | async">
+                      {{personPickName(category) | async}}
                     </div>
                   </div>
                 </div>
@@ -204,12 +204,12 @@
                   <!-- YOUR PICK -->
 
                   <div class="row py-1"
-                       *ngIf="showPersonPick(category)">
+                       *ngIf="showPersonPick(category) | async">
                     <div class="col-12 neutralPickHeader">
                       {{personPossessiveDisplayName()}} Pick:
                     </div>
                     <div class="col-12 pickTitle personPickTitle neutralPick">
-                      {{personPickName(category)}}
+                      {{personPickName(category) | async}}
                     </div>
                   </div>
 
@@ -226,29 +226,29 @@
               <!-- PERSON DETAIL COMPARISON -->
 
               <div class="row py-1"
-                   *ngIf="winnersMode() && !personIsMe() && wePickedTheSame(category)">
+                   *ngIf="winnersMode() && !personIsMe() && (wePickedTheSame(category) | async)">
                 <div class="col-12 pickHeader"
-                     [ngClass]="personPickHeaderClass(person, category)">
+                     [ngClass]="personPickHeaderClass(person, category) | async">
                   {{bothPersonsDisplayName()}}
                 </div>
                 <div class="col-12 pickTitle personPickTitle"
-                     [ngClass]="personPickClass(person, category)">
-                  {{personPickName(category)}}
+                     [ngClass]="personPickClass(person, category) | async">
+                  {{personPickName(category) | async}}
                 </div>
               </div>
 
               <div class="row py-1 no-gutters"
-                   *ngIf="winnersMode() && !personIsMe() && !wePickedTheSame(category)">
+                   *ngIf="winnersMode() && !personIsMe() && !(wePickedTheSame(category) | async)">
                 <!-- YOUR SIDE PICK -->
                 <div class="col-6">
                   <div class="row">
                     <div class="col-12 pickHeader"
-                         [ngClass]="personPickHeaderClass(me, category)">
+                         [ngClass]="personPickHeaderClass(me, category) | async">
                       {{myDisplayName()}}
                     </div>
                     <div class="col-12 pickTitle personPickTitle"
-                         [ngClass]="personPickClass(me, category)">
-                      {{myPickName(category)}}
+                         [ngClass]="personPickClass(me, category) | async">
+                      {{myPickName(category) | async}}
                     </div>
                   </div>
                 </div>
@@ -256,12 +256,12 @@
                 <div class="col-6">
                   <div class="row">
                     <div class="col-12 pickHeader"
-                         [ngClass]="personPickHeaderClass(person, category)">
+                         [ngClass]="personPickHeaderClass(person, category) | async">
                       {{personDisplayName()}}
                     </div>
                     <div class="col-12 pickTitle personPickTitle"
-                         [ngClass]="personPickClass(person, category)">
-                      {{personPickName(category)}}
+                         [ngClass]="personPickClass(person, category) | async">
+                      {{personPickName(category) | async}}
                     </div>
                   </div>
                 </div>

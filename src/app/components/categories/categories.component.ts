@@ -206,36 +206,50 @@ export class CategoriesComponent implements OnInit {
     return this.pickedTheSame(this.me, this.person, category);
   }
 
-  personPickClass(person: Person, category: Category): string {
-    if (!this.hasAtLeastOneWinner(category)) {
-      if (this.me.id === person.id && !this.pickedTheSame(this.me, this.person, category)) {
-        return 'myDifferentPick';
-      } else {
-        return 'neutralPick';
-      }
-    } else {
-      if (this.didPickWinner(person, category)) {
-        return 'correctPick';
-      } else {
-        return 'incorrectPick';
-      }
-    }
+  personPickClass(person: Person, category: Category): Observable<string> {
+    return combineLatest([
+      this.pickedTheSame(this.me, this.person, category),
+      this.didPickWinner(person, category)
+    ]).pipe(
+      map(([pickedTheSame, didPickWinner]) => {
+        if (!this.hasAtLeastOneWinner(category)) {
+          if (this.me.id === person.id && !pickedTheSame) {
+            return 'myDifferentPick';
+          } else {
+            return 'neutralPick';
+          }
+        } else {
+          if (didPickWinner) {
+            return 'correctPick';
+          } else {
+            return 'incorrectPick';
+          }
+        }
+      })
+    );
   }
 
-  personPickHeaderClass(person: Person, category: Category): string {
-    if (!this.hasAtLeastOneWinner(category)) {
-      if (this.me.id === person.id && !this.pickedTheSame(this.me, this.person, category)) {
-        return 'myDifferentPickHeader';
-      } else {
-        return 'neutralPickHeader';
-      }
-    } else {
-      if (this.didPickWinner(person, category)) {
-        return 'correctPickHeader';
-      } else {
-        return 'incorrectPickHeader';
-      }
-    }
+  personPickHeaderClass(person: Person, category: Category): Observable<string> {
+    return combineLatest([
+      this.pickedTheSame(this.me, this.person, category),
+      this.didPickWinner(person, category)
+    ]).pipe(
+      map(([pickedTheSame, didPickWinner]) => {
+        if (!this.hasAtLeastOneWinner(category)) {
+          if (this.me.id === person.id && !pickedTheSame) {
+            return 'myDifferentPickHeader';
+          } else {
+            return 'neutralPickHeader';
+          }
+        } else {
+          if (didPickWinner) {
+            return 'correctPickHeader';
+          } else {
+            return 'incorrectPickHeader';
+          }
+        }
+      })
+    );
   }
 
   private pickedTheSame(person1: Person, person2: Person, category: Category): Observable<boolean> {
