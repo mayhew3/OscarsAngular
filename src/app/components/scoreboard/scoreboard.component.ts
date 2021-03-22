@@ -35,7 +35,7 @@ export class ScoreboardComponent implements OnInit {
     this.persons = [];
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.personService.getPersonsForGroup(1).subscribe(persons => {
       this.persons = persons;
       this.personService.me$.subscribe(person => {

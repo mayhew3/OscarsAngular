@@ -10,15 +10,15 @@ export class SocketService {
     this.socket = socketIo();
   }
 
-  on(channel, callback) {
+  on(channel, callback): void {
     this.socket.on(channel, callback);
   }
 
-  removeListener(channel, callback) {
+  removeListener(channel, callback): void {
     this.socket.removeListener(channel, callback);
   }
 
-  isConnected() {
+  isConnected(): boolean {
     return this.socket.connected;
   }
 }

@@ -32,13 +32,6 @@ export class SystemVarsService implements OnDestroy {
     return this.dataService.systemVars$;
   }
 
-  maybeRefreshCache(): void {
-    if (!this._dataStore.systemVars && !this._fetching) {
-      this._fetching = true;
-      this.refreshCache();
-    }
-  }
-
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
@@ -58,10 +51,10 @@ export class SystemVarsService implements OnDestroy {
         this._dataStore.systemVars = systemVars[0];
         this._fetching = false;
         this.initListeners();
-        this.pushChangeToListeners();
       });
   }
 
+  // todo: add to data init
   initListeners(): void {
     this.socket.on('voting', msg => {
       if (!!msg.voting_open) {
@@ -70,10 +63,6 @@ export class SystemVarsService implements OnDestroy {
         this.lockVotingInternal();
       }
     });
-  }
-
-  pushChangeToListeners(): void {
-    this._systemVars$.next(this._dataStore.systemVars);
   }
 
   canVote(): Observable<boolean> {

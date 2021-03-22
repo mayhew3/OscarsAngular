@@ -46,8 +46,6 @@ export class AdminDashboardComponent implements OnInit {
         });
       });
     });
-    this.systemVarsService.maybeRefreshCache();
-    this.categoryService.maybeRefreshCache();
   }
 
   refreshAllData(): void {

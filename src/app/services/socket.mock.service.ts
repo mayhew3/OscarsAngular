@@ -8,15 +8,15 @@ export class SocketServiceMock {
   constructor(private inMemoryDB: InMemoryDataService) {
   }
 
-  on(channel, callback) {
+  on(channel, callback): void {
     this.inMemoryDB.on(channel, callback);
   }
 
-  removeListener(channel, callback) {
+  removeListener(channel, callback): void {
     this.inMemoryDB.removeCallback(channel, callback);
   }
 
-  isConnected() {
+  isConnected(): boolean {
     return true;
   }
 }

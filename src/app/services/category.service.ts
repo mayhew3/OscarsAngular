@@ -44,7 +44,6 @@ export class CategoryService implements OnDestroy {
               private socket: SocketService,
               private dataService: DataService) {
     this.winnerListeners = [];
-    this.systemVarsService.maybeRefreshCache();
   }
 
   get categories(): Observable<Category[]> {
