@@ -14,6 +14,7 @@ import {Winner} from '../interfaces/Winner';
 import {DataService} from './data.service';
 import {PersonService} from './person.service';
 import {Vote} from '../interfaces/Vote';
+import {ArrayUtil} from '../utility/ArrayUtil';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -44,12 +45,6 @@ export class CategoryService implements OnDestroy {
               private dataService: DataService) {
     this.winnerListeners = [];
     this.systemVarsService.maybeRefreshCache();
-  }
-
-  // HELPERS
-
-  private static addToArray<T>(existingArray: T[], newArray: T[]) {
-    existingArray.push.apply(existingArray, newArray);
   }
 
   get categories(): Observable<Category[]> {
@@ -90,7 +85,7 @@ export class CategoryService implements OnDestroy {
   getNextCategory(id: number): Observable<Category> {
     return this.categories.pipe(
       map(categories => {
-        const foundIndex = _.findIndex(categories, {id: id});
+        const foundIndex = _.findIndex(categories, {id});
         if (foundIndex === -1 || categories.length < (foundIndex + 1)) {
           return null;
         }
@@ -102,7 +97,7 @@ export class CategoryService implements OnDestroy {
   getPreviousCategory(id: number): Observable<Category> {
     return this.categories.pipe(
       map(categories => {
-        const foundIndex = _.findIndex(categories, {id: id});
+        const foundIndex = _.findIndex(categories, {id});
         if (0 > (foundIndex - 1)) {
           return null;
         }
@@ -146,7 +141,7 @@ export class CategoryService implements OnDestroy {
 
   // noinspection JSMethodCanBeStatic
   private getWinnerForNominee(category: Category, nomination_id: number): Winner {
-    return _.findWhere(category.winners, {nomination_id: nomination_id});
+    return _.findWhere(category.winners, {nomination_id});
   }
 
   private removeWinnerFromCache(nomination_id: number): Observable<void> {
@@ -179,7 +174,7 @@ export class CategoryService implements OnDestroy {
     );
   }
 
-  getNomineeFromCategory(category: Category, nomination_id: number) {
+  getNomineeFromCategory(category: Category, nomination_id: number): Nominee {
     return _.findWhere(category.nominees, {id: nomination_id});
   }
 
@@ -389,7 +384,7 @@ export class CategoryService implements OnDestroy {
                       _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
                     });
                     this._dataStore.categories.length = 0;
-                    CategoryService.addToArray(this._dataStore.categories, categories);
+                    ArrayUtil.addToArray(this._dataStore.categories, categories);
                     this.socket.on('winner', this.updateWinnersInCacheAndNotify.bind(this));
                     this._fetching = false;
                     this.pushListChange();
@@ -410,7 +405,7 @@ export class CategoryService implements OnDestroy {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T>  {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

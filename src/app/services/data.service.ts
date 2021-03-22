@@ -21,8 +21,8 @@ export class DataService implements OnDestroy {
   private categories: DataCache<Category>;
   private persons: DataCache<Person>;
 
-  me$ = this.auth.user$.pipe(
-    concatMap(user => this.getPersonWithEmail(user.email)),
+  me$ = this.auth.userEmail$.pipe(
+    concatMap(email => this.getPersonWithEmail(email)),
     filter(person => !!person)
   );
 

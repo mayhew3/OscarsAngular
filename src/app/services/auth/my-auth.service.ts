@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
-import {filter, tap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 enum UserRole {
   Guest = 'guest',
@@ -40,9 +40,16 @@ export class MyAuthService {
     });
   }
 
-  get user$() {
+  get user$(): Observable<any> {
     return this._user$.asObservable().pipe(
       filter(user => !!user)
+    );
+  }
+
+  get userEmail$(): Observable<string> {
+    return this.user$.pipe(
+      map(user => user.email),
+      distinctUntilChanged()
     );
   }
 

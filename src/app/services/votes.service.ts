@@ -9,6 +9,7 @@ import {SystemVarsService} from './system.vars.service';
 import {Category} from '../interfaces/Category';
 import * as _ from 'underscore';
 import {DataService} from './data.service';
+import {ArrayUtil} from '../utility/ArrayUtil';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,12 +32,6 @@ export class VotesService {
         this.isLoading = false;
       });
     });
-  }
-
-  // HELPERS
-
-  private static addToArray<T>(existingArray: T[], newArray: T[]) {
-    existingArray.push.apply(existingArray, newArray);
   }
 
   stillLoading(): boolean {
@@ -88,14 +83,14 @@ export class VotesService {
     const params = new HttpParams()
       .set('year', year.toString());
     return new Observable<Vote[]>((observer) => {
-      this.http.get<Vote[]>(this.votesUrl, {params: params})
+      this.http.get<Vote[]>(this.votesUrl, {params})
         .pipe(
           catchError(this.handleError<Vote[]>('getVotes', []))
         )
         .subscribe(
           (votes: Vote[]) => {
             this.cache.length = 0;
-            VotesService.addToArray(this.cache, votes);
+            ArrayUtil.addToArray(this.cache, votes);
             observer.next(votes);
           },
           (err: Error) => observer.error(err)
@@ -134,7 +129,7 @@ export class VotesService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T> {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

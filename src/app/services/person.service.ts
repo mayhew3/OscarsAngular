@@ -72,14 +72,14 @@ export class PersonService implements OnDestroy {
 
   getPerson(id: number): Observable<Person> {
     return this.persons.pipe(
-      map(persons => _.findWhere(persons, {id: id}))
+      map(persons => _.findWhere(persons, {id}))
     );
   }
 
   getPersonWithEmail(email: string): Observable<Person> {
     return this.persons.pipe(
       map(persons => {
-        return _.findWhere(persons, {email: email});
+        return _.findWhere(persons, {email});
       })
     );
   }
@@ -89,7 +89,7 @@ export class PersonService implements OnDestroy {
   }
 
   getPersonFromCache(id: number): Person {
-    return _.findWhere(this._dataStore.persons, {id: id});
+    return _.findWhere(this._dataStore.persons, {id});
   }
 
   hasDuplicateFirstName(person: Person): boolean {
@@ -137,7 +137,7 @@ export class PersonService implements OnDestroy {
       );
   }
 
-  private pushPersonListChange() {
+  private pushPersonListChange(): void {
     this._persons$.next(this.arrayService.cloneArray(this._dataStore.persons));
   }
 
@@ -147,7 +147,7 @@ export class PersonService implements OnDestroy {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T> {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
