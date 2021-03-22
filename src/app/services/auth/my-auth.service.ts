@@ -41,7 +41,9 @@ export class MyAuthService {
   }
 
   get user$() {
-    return this._user$.asObservable();
+    return this._user$.asObservable().pipe(
+      filter(user => !!user)
+    );
   }
 
   login(): void {

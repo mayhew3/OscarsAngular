@@ -23,18 +23,17 @@ export class PersonService implements OnDestroy {
 
   private _destroy$ = new Subject();
 
-  me$ = this.myAuthService.user$.pipe(
-    concatMap((user) => this.getPersonWithEmail(user.email)),
-    tap((person: Person) => this.isAdmin = person.role === 'admin'),
-    filter(person => !!person)
-  );
-
   isAdmin: boolean = null;
 
   constructor(private http: HttpClient,
               private arrayService: ArrayService,
-              private dataService: DataService,
-              private myAuthService: MyAuthService) {
+              private dataService: DataService) {
+  }
+
+  get me$(): Observable<Person> {
+    return this.dataService.me$.pipe(
+      tap(me => this.isAdmin = (me.role === 'admin'))
+    );
   }
 
   // REAL METHODS
