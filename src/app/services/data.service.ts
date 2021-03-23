@@ -92,6 +92,10 @@ export class DataService implements OnDestroy {
     return this.systemVars.stillLoading();
   }
 
+  get categoriesLoading(): boolean {
+    return this.categories.stillLoading();
+  }
+
   getNumberOfCachedPersons(): number {
     return this.persons.numberCached();
   }

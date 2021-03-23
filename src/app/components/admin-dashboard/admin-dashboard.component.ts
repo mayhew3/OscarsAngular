@@ -4,22 +4,20 @@ import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
 import * as _ from 'underscore';
 import {WinnersService} from '../../services/winners.service';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import {OddsService} from '../../services/odds.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {PersonService} from '../../services/person.service';
+import fast_sort from 'fast-sort';
 
 @Component({
   selector: 'osc-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.scss']
+  styleUrls: ['./admin-dashboard.component.scss'],
 })
 export class AdminDashboardComponent implements OnInit {
 
   reloadingData = false;
-
-  currentYear: number;
-  possibleYears: number[] = [];
 
   winnersDeleting = false;
   winnersDeleted = false;
@@ -29,23 +27,35 @@ export class AdminDashboardComponent implements OnInit {
               private votesService: VotesService,
               private winnersService: WinnersService,
               private oddsService: OddsService,
-              public auth: MyAuthService) { }
+              private personService: PersonService) { }
 
   ngOnInit(): void {
-    this.systemVarsService.systemVars.subscribe(systemVars => {
-      this.categoryService.getMaxYear().subscribe(maxYear => {
-        this.currentYear = systemVars.curr_year;
-        this.possibleYears.push(maxYear - 1);
-        this.possibleYears.push(maxYear);
-        if (!_.contains(this.possibleYears, this.currentYear)) {
-          this.possibleYears.push(this.currentYear);
-        }
-        this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-          this.winnersDeleting = false;
-          this.winnersDeleted = true;
-        });
-      });
+    this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+      this.winnersDeleting = false;
+      this.winnersDeleted = true;
     });
+  }
+
+  get isAdmin(): boolean {
+    return this.personService.isAdmin;
+  }
+
+  get currentYear(): Observable<number> {
+    return this.systemVarsService.getCurrentYear();
+  }
+
+  getPossibleYears(currentYear: number): Observable<number[]> {
+    return this.categoryService.getMaxYear().pipe(
+      map(maxYear => {
+        const yearsSet = new Set<number>();
+        yearsSet.add(maxYear);
+        yearsSet.add(maxYear - 1);
+        yearsSet.add(currentYear);
+        const yearsList = Array.from(yearsSet);
+        fast_sort(yearsList);
+        return yearsList;
+      })
+    );
   }
 
   refreshAllData(): void {
@@ -56,8 +66,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   stillLoading(): boolean {
-    return this.categoryService.stillLoading() ||
-      this.systemVarsService.stillLoading();
+    return this.systemVarsService.stillLoading();
   }
 
   isVotingOpen(): Observable<boolean> {
@@ -70,14 +79,6 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  yearButtonClass(year): string {
-    if (this.currentYear === year) {
-      return 'btn-success';
-    } else {
-      return 'btn-primary';
-    }
-  }
-
   changeCurrentYear(year): void {
     this.reloadingData = true;
     this.categoryService.emptyCache();
@@ -86,7 +87,6 @@ export class AdminDashboardComponent implements OnInit {
       this.categoryService.categories.subscribe(() => {
         this.votesService.refreshCache(year).subscribe(() => {
           this.reloadingData = false;
-          this.currentYear = year;
         });
       });
     });

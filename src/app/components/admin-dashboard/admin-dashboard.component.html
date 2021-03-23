@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row" *ngIf="auth.isAdmin() && !stillLoading()">
+  <div class="row" *ngIf="isAdmin && !stillLoading()">
 
     <div class="col-12 col-sm-6 col-lg-4">
       <div class="card navCard p-3">
@@ -7,14 +7,14 @@
         <div class="row">
           <div class="col-6">
             <button class="btn btn-lg"
-                    [ngClass]="getVotingButtonClass(true)"
+                    [ngClass]="getVotingButtonClass(true) | async"
                     (click)="toggleVotingLock(true)">
               Open
             </button>
           </div>
           <div class="col-6">
             <button class="btn btn-lg"
-                    [ngClass]="getVotingButtonClass(false)"
+                    [ngClass]="getVotingButtonClass(false) | async"
                     (click)="toggleVotingLock(false)">
               Closed
             </button>
@@ -41,10 +41,11 @@
       <div class="card navCard p-3">
         <span>Change Year:</span><br>
         <div class="row">
-          <div class="col-6" *ngFor="let year of possibleYears">
+          <div class="col-6"
+               *ngFor="let year of (getPossibleYears(currentYear | async) | async)">
             <button
               class="btn btn-lg"
-              [ngClass]="yearButtonClass(year)"
+              [ngClass]="(currentYear | async) === year ? 'btn-success' : 'btn-primary'"
               (click)="changeCurrentYear(year)">
               {{year}}
             </button>
