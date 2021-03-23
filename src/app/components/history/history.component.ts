@@ -5,7 +5,7 @@ import * as _ from 'underscore';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
 import * as moment from 'moment';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -54,12 +54,16 @@ export class HistoryComponent implements OnInit {
     return this.personService.getPerson(person_id);
   }
 
-  getScoreCardClass(champions: FinalResult[]): string {
-    return this.iAmOneOfThe(champions) ? 'myScoreCard myMainScoreCard' : 'otherScoreCard';
+  getScoreCardClass(champions: FinalResult[]): Observable<string> {
+    return this.iAmOneOfThe(champions).pipe(
+      map(meChamp => !!meChamp ? 'myScoreCard myMainScoreCard' : 'otherScoreCard')
+    );
   }
 
-  getScoreScoreClass(champions: FinalResult[]): string {
-    return this.iAmOneOfThe(champions) ? 'myScorePoints' : 'otherScorePoints';
+  getScoreScoreClass(champions: FinalResult[]): Observable<string> {
+    return this.iAmOneOfThe(champions).pipe(
+      map(meChamp => !!meChamp ? 'myScorePoints' : 'otherScorePoints')
+    );
   }
 
   iAmOneOfThe(champions: FinalResult[]): Observable<boolean> {
@@ -69,8 +73,10 @@ export class HistoryComponent implements OnInit {
     );
   }
 
-  showMyRank(champions: FinalResult[]): boolean {
-    return !!this.getFinalResultForMe(champions) && !this.iAmOneOfThe(champions);
+  showMyRank(champions: FinalResult[]): Observable<boolean> {
+    return combineLatest([this.getFinalResultForMe(champions), this.iAmOneOfThe(champions)]).pipe(
+      map(([finalResult, meChamp]) => !!finalResult && !meChamp)
+    );
   }
 
   getChampionsString(champions: FinalResult[]): Observable<string> {

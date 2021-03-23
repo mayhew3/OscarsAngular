@@ -13,28 +13,28 @@
     <div class="col-12"
          *ngFor="let champions of getChampions()">
       <div class="card scoreCard mainScoreCard"
-           [ngClass]="getScoreCardClass(champions)">
+           [ngClass]="getScoreCardClass(champions) | async">
         <div class="card-body py-1 px-3">
           <div class="row my-1 no-gutters">
             <div class="col-2 scoreTitle">
               <span>{{getYearFromChampionList(champions)}}</span>
             </div>
             <div class="col-1" style="justify-items: right">
-              <img *ngIf="iAmOneOfThe(champions)"
+              <img *ngIf="iAmOneOfThe(champions) | async"
                    src="../../../assets/oscar_statue_purple.png"
                    height="30"
                    width="11"/>
             </div>
             <div class="col-6 scoreName">
-              <span>{{getChampionsString(champions)}}</span>
+              <span>{{getChampionsString(champions) | async}}</span>
             </div>
             <div class="col-3 scorePoints"
-                 [ngClass]="getScoreScoreClass(champions)">
+                 [ngClass]="getScoreScoreClass(champions) | async">
               <span>{{champions[0].score}}</span>
             </div>
           </div>
           <div class="row bottomRow no-gutters"
-               *ngIf="showMyRank(champions)">
+               *ngIf="showMyRank(champions) | async">
             <div class="col-1">
               &nbsp;
             </div>
@@ -43,13 +43,13 @@
                 <div class="card-body py-0 px-1">
                   <div class="row no-gutters">
                     <div class="col-3 myRank">
-                      <span>{{getMyRank(champions)}}</span>
+                      <span>{{getMyRank(champions) | async}}</span>
                     </div>
                     <div class="col-6">
-                      <span>{{getMyFirstName()}}</span>
+                      <span>{{getMyFirstName() | async}}</span>
                     </div>
                     <div class="col-3 scorePoints">
-                      <span>{{getMyScore(champions)}}</span>
+                      <span>{{getMyScore(champions) | async}}</span>
                     </div>
                   </div>
                 </div>
