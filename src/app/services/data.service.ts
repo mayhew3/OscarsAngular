@@ -9,6 +9,7 @@ import {concatMap, filter, map} from 'rxjs/operators';
 import {Category} from '../interfaces/Category';
 import {MyAuthService} from './auth/my-auth.service';
 import {Person} from '../interfaces/Person';
+import {MaxYear} from '../interfaces/MaxYear';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class DataService implements OnDestroy {
   private votes: DataCache<Vote>;
   private categories: DataCache<Category>;
   private persons: DataCache<Person>;
+  private maxYear: DataCache<MaxYear>;
 
   me$ = this.auth.userEmail$.pipe(
     concatMap(email => this.getPersonWithEmail(email)),
@@ -36,6 +38,12 @@ export class DataService implements OnDestroy {
       'persons',
       of(undefined),
       ((persons: Person[]) => of(persons))
+    );
+
+    this.maxYear = this.addDataCache(
+      'maxYear',
+      of(undefined),
+      ((maxYears: MaxYear[]) => of(maxYears))
     );
 
     this.systemVars = this.addDataCache(
@@ -86,6 +94,12 @@ export class DataService implements OnDestroy {
 
   get votes$(): Observable<Vote[]> {
     return this.votes.data;
+  }
+
+  get maxYear$(): Observable<number> {
+    return this.maxYear.data.pipe(
+      map(maxYears => maxYears[0].maxYear)
+    );
   }
 
   get systemVarsLoading(): boolean {

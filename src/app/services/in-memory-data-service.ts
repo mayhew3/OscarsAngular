@@ -247,7 +247,7 @@ export class InMemoryDataService implements InMemoryDbService {
       const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
 
       const maxYear = _.max(_.map(this.categories, category => _.max(_.map(category.nominees, nominee => nominee.year))));
-      const data = {maxYear};
+      const data = [{maxYear}];
 
       const options: ResponseOptions = data ?
         {

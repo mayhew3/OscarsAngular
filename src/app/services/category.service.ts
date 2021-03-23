@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, concatMap, filter, first, map, tap} from 'rxjs/operators';
+import {catchError, concatMap, first, map} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -27,10 +27,6 @@ export class CategoryService implements OnDestroy {
   nomineesUrl = 'api/nominees';
   categoriesUrl = 'api/categories';
   cache: Category[];
-
-  private _maxYear: number;
-  private _maxYear$ = new BehaviorSubject<number>(undefined);
-  private _fetchingMaxYear = false;
 
   private _categories$ = new BehaviorSubject<Category[]>(undefined);
   private _dataStore: {categories: Category[]} = {categories: undefined};
@@ -290,20 +286,7 @@ export class CategoryService implements OnDestroy {
   // MAX YEAR
 
   getMaxYear(): Observable<number> {
-    return this._maxYear$.asObservable().pipe(
-      tap(() => {
-        if (!this._maxYear && !this._fetchingMaxYear) {
-          this._fetchingMaxYear = true;
-          this.http.get<any>('/api/maxYear')
-            .subscribe(maxYear => {
-              this._maxYear = maxYear.maxYear;
-              this._fetchingMaxYear = false;
-              this._maxYear$.next(this._maxYear);
-            });
-        }
-      }),
-      filter(maxYear => !!maxYear)
-    );
+    return this.dataService.maxYear$;
   }
 
   // DATA HELPERS

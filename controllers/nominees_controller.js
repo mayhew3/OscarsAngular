@@ -77,5 +77,5 @@ exports.updateNomination = function(request, response) {
 exports.getMostRecentYear = async function(request, response) {
   const maxYear = await model.Nomination.max('year');
 
-  response.json({maxYear: maxYear});
+  response.json([{maxYear: maxYear}]);
 };
