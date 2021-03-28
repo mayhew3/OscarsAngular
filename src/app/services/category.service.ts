@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, concatMap, first, map} from 'rxjs/operators';
+import {catchError, concatMap, filter, first, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -15,6 +15,8 @@ import {DataService} from './data.service';
 import {PersonService} from './person.service';
 import {Vote} from '../interfaces/Vote';
 import {ArrayUtil} from '../utility/ArrayUtil';
+import {Store} from '@ngxs/store';
+import {GetCategories} from '../actions/categories.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -40,14 +42,29 @@ export class CategoryService implements OnDestroy {
 
   private readonly winnerListeners: Subscriber<any>[];
 
+  categories: Observable<Category[]>;
+
   constructor(private http: HttpClient,
               private personService: PersonService,
               private systemVarsService: SystemVarsService,
               private votesService: VotesService,
               private oddsService: OddsService,
               private socket: SocketService,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private store: Store) {
     this.winnerListeners = [];
+    combineLatest([this.personService.me$, this.systemVarsService.systemVars])
+      .pipe(first())
+      .subscribe(([me, systemVars]) => {
+        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id));
+      });
+    this.categories = this.store.select(state => state.uncharted).pipe(
+      map(state => state.categories),
+      filter(categories => !!categories),
+      tap(() => {
+        this._fetching = false;
+      })
+    );
   }
 
   static isSingleLineCategory(categoryName: string): boolean {
@@ -66,10 +83,6 @@ export class CategoryService implements OnDestroy {
     } else {
       return nominee.context;
     }
-  }
-
-  get categories(): Observable<Category[]> {
-    return this.dataService.categories$;
   }
 
   ngOnDestroy(): void {

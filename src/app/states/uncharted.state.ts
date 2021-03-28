@@ -9,9 +9,8 @@ import {HttpClient} from '@angular/common/http';
 import {GetSystemVars} from '../actions/systemVars.action';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {SystemVarsStateModel} from './systemVars.state';
 import {GetPersons} from '../actions/person.action';
-import {PersonStateModel} from './person.state';
+import {GetCategories} from '../actions/categories.action';
 
 export class UnchartedStateModel {
   persons: Person[];
@@ -37,17 +36,22 @@ export class UnchartedState {
   }
 
   @Selector()
-  static getPersonList(state: PersonStateModel): Person[] {
+  static getPersonList(state: UnchartedStateModel): Person[] {
     return state.persons;
   }
 
   @Selector()
-  static getSystemVars(state: SystemVarsStateModel): SystemVars {
+  static getSystemVars(state: UnchartedStateModel): SystemVars {
     return state.systemVars;
   }
 
+  @Selector()
+  static getCategories(state: UnchartedStateModel): Category[] {
+    return state.categories;
+  }
+
   @Action(GetPersons)
-  getPersons({getState, setState}: StateContext<PersonStateModel>): Observable<any> {
+  getPersons({getState, setState}: StateContext<UnchartedStateModel>): Observable<any> {
     return this.http.get<any[]>('/api/persons').pipe(
       tap(result => {
         const state = getState();
@@ -60,13 +64,30 @@ export class UnchartedState {
   }
 
   @Action(GetSystemVars)
-  getSystemVars({getState, setState}: StateContext<SystemVarsStateModel>): Observable<any> {
+  getSystemVars({getState, setState}: StateContext<UnchartedStateModel>): Observable<any> {
     return this.http.get<any[]>('/api/systemVars').pipe(
       tap(result => {
         const state = getState();
         setState({
           ...state,
           systemVars: result[0]
+        });
+      })
+    );
+  }
+
+  @Action(GetCategories)
+  getCategories({getState, setState}: StateContext<UnchartedStateModel>, action: GetCategories): Observable<any> {
+    const params = {
+      year: action.year.toString(),
+      person_id: action.person_id.toString()
+    };
+    return this.http.get<any[]>('/api/categories', {params}).pipe(
+      tap(result => {
+        const state = getState();
+        setState({
+          ...state,
+          categories: result
         });
       })
     );

@@ -29,8 +29,6 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
-import {PersonState} from './states/person.state';
-import {SystemVarsState} from './states/systemVars.state';
 import {UnchartedState} from './states/uncharted.state';
 
 @NgModule({
