@@ -6,13 +6,10 @@ import {catchError, concatMap, filter, first, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
-import {Person} from '../interfaces/Person';
-import {VotesService} from './votes.service';
 import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
-import {Vote} from '../interfaces/Vote';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Store} from '@ngxs/store';
 import {GetCategories} from '../actions/categories.action';
@@ -59,7 +56,6 @@ export class CategoryService implements OnDestroy {
   constructor(private http: HttpClient,
               private personService: PersonService,
               private systemVarsService: SystemVarsService,
-              private votesService: VotesService,
               private oddsService: OddsService,
               private socket: SocketService,
               private store: Store) {
@@ -229,20 +225,7 @@ export class CategoryService implements OnDestroy {
   }
 
 
-  // SCOREBOARD
-
-  didPersonVoteCorrectlyFor(person: Person, category: Category): Observable<boolean> {
-    return this.votesService.getVotesForCurrentYearAndCategory(category).pipe(
-      map(votes => {
-        const personVote = _.findWhere(votes, {person_id: person.id});
-        if (!!personVote) {
-          const winningIds = _.map(category.winners, winner => winner.nomination_id);
-          return winningIds.includes(personVote.nomination_id);
-        }
-        return false;
-      })
-    );
-  }
+/*
 
   populatePersonScores(persons: Person[]): Observable<any> {
     return new Observable<any>(observer => {
@@ -280,44 +263,7 @@ export class CategoryService implements OnDestroy {
       });
     });
   }
-
-  maxPosition(person: Person, persons: Person[]): Observable<number> {
-    return combineLatest([this.categories, this.votesService.votes]).pipe(
-      map(([categories, votes]) => {
-        const categoriesWithoutWinners = _.filter(categories, category => !category.winners || category.winners.length === 0);
-        const myVotes = _.map(categoriesWithoutWinners, category => {
-          const allVotes = _.where(votes, {person_id: person.id, category_id: category.id});
-          return allVotes.length === 1 ? allVotes[0] : undefined;
-        });
-        const finalScores = _.map(persons, (otherPerson: Person) => {
-          const theirVotes: Vote[] = _.where(votes, {person_id: otherPerson.id});
-          const theirVotesThatMatch = _.filter(theirVotes, (vote: Vote) => {
-            const myVote = _.findWhere(myVotes, {category_id: vote.category_id});
-            return !!myVote && myVote.nomination_id === vote.nomination_id;
-          });
-          const theirScore = _.reduce(theirVotesThatMatch, (memo: number, theirVote: Vote) => {
-            const category = _.findWhere(categories, {id: theirVote.category_id});
-            return !!category ? memo + category.points : memo;
-          }, 0);
-          return {
-            person_id: otherPerson.id,
-            score: theirScore + otherPerson.score
-          };
-        });
-
-        const myScore = _.findWhere(finalScores, {person_id: person.id});
-        const scoresBetterThanMine = _.filter(finalScores, otherScore => otherScore.score > myScore.score);
-        return scoresBetterThanMine.length + 1;
-      })
-    );
-  }
-
-
-  isEliminated(person: Person, persons: Person[]): Observable<boolean> {
-    return this.maxPosition(person, persons).pipe(
-      map(maxPosition => maxPosition > 1)
-    );
-  }
+*/
 
   // LOADING
 

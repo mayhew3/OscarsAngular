@@ -333,7 +333,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   gotPointsForWinner(category: Category): Observable<boolean> {
-    return this.categoryService.didPersonVoteCorrectlyFor(this.person, category);
+    return this.votesService.didPersonVoteCorrectlyFor(this.person, category);
   }
 
 }

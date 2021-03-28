@@ -15,6 +15,7 @@ import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {VotesService} from '../../services/votes.service';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -29,6 +30,7 @@ export class ScoreboardComponent implements OnInit {
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
+              private voteService: VotesService,
               private oddsService: OddsService,
               private auth: MyAuthService,
               private socket: SocketService) {
@@ -40,8 +42,10 @@ export class ScoreboardComponent implements OnInit {
       this.persons = persons;
       this.personService.me$.subscribe(person => {
         this.me = person;
+        this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
 
-        this.updateScoreboard().subscribe(() => {
+        this.voteService.votes.subscribe(() => {
+          this.fastSortPersons();
           this.socket.on('reconnect', () => {
             console.log('Reconnect event triggered! Refreshing data!');
             this.refreshData();
@@ -50,7 +54,7 @@ export class ScoreboardComponent implements OnInit {
 
         this.categoryService.subscribeToWinnerEvents().subscribe(() => {
           this.clearSortingOdds();
-          this.updateScoreboard().subscribe();
+          // this.updateScoreboard().subscribe();
         });
         this.oddsService.subscribeToOddsEvents().subscribe(() => {
           this.fastSortPersons();
@@ -89,7 +93,7 @@ export class ScoreboardComponent implements OnInit {
     this.categoryService.categories.subscribe(() => {
       this.oddsService.refreshCache().subscribe(() => {
         this.clearSortingOdds();
-        this.updateScoreboard().subscribe();
+        // this.updateScoreboard().subscribe();
       });
     });
     this.categoryService.maybeRefreshCache();
@@ -125,7 +129,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   getNumericOddsForPerson(person: Person): number {
-    const isEliminated = this.categoryService.isEliminated(person, this.persons);
+    const isEliminated = this.voteService.isEliminated(person, this.persons);
     if (isEliminated && !this.shouldHideElimination()) {
       return 0.0;
     }
@@ -223,6 +227,7 @@ export class ScoreboardComponent implements OnInit {
   oddsDirectionClass(person: Person): string {
     return this.oddsDirection(person) > 0 ? 'oddsDiffGood' : 'oddsDiffBad';
   }
+/*
 
   updateScoreboard(): Observable<any> {
     return new Observable<any>(observer => {
@@ -233,6 +238,7 @@ export class ScoreboardComponent implements OnInit {
       });
     });
   }
+*/
 
   getLastTimeAgo(): string {
     if (this.latestCategory) {
@@ -306,7 +312,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   gotPointsForLastWinner(person: Person): Observable<boolean> {
-    return this.categoryService.didPersonVoteCorrectlyFor(person, this.latestCategory).pipe(
+    return this.voteService.didPersonVoteCorrectlyFor(person, this.latestCategory).pipe(
       map(correctly => !this.itsOver() && !!this.latestCategory && correctly)
     );
   }
@@ -346,7 +352,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   scorecardClass(person: Person): string {
-    const isEliminated = this.categoryService.isEliminated(person, this.persons);
+    const isEliminated = this.voteService.isEliminated(person, this.persons);
     if (this.isMe(person)) {
       return 'myScoreCard';
     } else if (!this.itsOver() && isEliminated && this.shouldShowEliminationOdds()) {
@@ -359,7 +365,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   scoreNumberClass(person: Person): string {
-    const isEliminated = this.categoryService.isEliminated(person, this.persons);
+    const isEliminated = this.voteService.isEliminated(person, this.persons);
     if (this.gotPointsForLastWinner(person) && !this.itsOver()) {
       return 'winnerScorePoints';
     } else if (this.isMe(person)) {
