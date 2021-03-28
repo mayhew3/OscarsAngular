@@ -35,7 +35,7 @@ export class VotesService {
     this.systemVarsService.systemVars
       .pipe(first())
       .subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
-    this.votes = this.store.select(state => state.uncharted).pipe(
+    this.votes = this.store.select(state => state.oscars).pipe(
       map(state => state.votes),
       filter(votes => !!votes),
       tap(() => {

@@ -58,7 +58,7 @@ export class CategoryService implements OnDestroy {
       .subscribe(([me, systemVars]) => {
         this.store.dispatch(new GetCategories(systemVars.curr_year, me.id));
       });
-    this.categories = this.store.select(state => state.uncharted).pipe(
+    this.categories = this.store.select(state => state.oscars).pipe(
       map(state => state.categories),
       filter(categories => !!categories),
       tap(() => {

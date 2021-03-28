@@ -13,7 +13,7 @@ import {GetPersons} from '../actions/person.action';
 import {GetCategories} from '../actions/categories.action';
 import {GetVotes} from '../actions/votes.action';
 
-export class UnchartedStateModel {
+export class OscarsStateModel {
   persons: Person[];
   systemVars: SystemVars;
   categories: Category[];
@@ -21,8 +21,8 @@ export class UnchartedStateModel {
   maxYear: MaxYear[];
 }
 
-@State<UnchartedStateModel>({
-  name: 'uncharted',
+@State<OscarsStateModel>({
+  name: 'oscars',
   defaults: {
     persons: undefined,
     systemVars: undefined,
@@ -32,12 +32,12 @@ export class UnchartedStateModel {
   }
 })
 @Injectable()
-export class UnchartedState {
+export class OscarsState {
   constructor(private http: HttpClient) {
   }
 
   @Action(GetPersons)
-  getPersons({getState, setState}: StateContext<UnchartedStateModel>): Observable<any> {
+  getPersons({getState, setState}: StateContext<OscarsStateModel>): Observable<any> {
     return this.http.get<any[]>('/api/persons').pipe(
       tap(result => {
         const state = getState();
@@ -50,7 +50,7 @@ export class UnchartedState {
   }
 
   @Action(GetSystemVars)
-  getSystemVars({getState, setState}: StateContext<UnchartedStateModel>): Observable<any> {
+  getSystemVars({getState, setState}: StateContext<OscarsStateModel>): Observable<any> {
     return this.http.get<any[]>('/api/systemVars').pipe(
       tap(result => {
         const state = getState();
@@ -63,7 +63,7 @@ export class UnchartedState {
   }
 
   @Action(GetCategories)
-  getCategories({getState, setState}: StateContext<UnchartedStateModel>, action: GetCategories): Observable<any> {
+  getCategories({getState, setState}: StateContext<OscarsStateModel>, action: GetCategories): Observable<any> {
     const params = new HttpParams()
       .set('person_id', action.person_id.toString())
       .set('year', action.year.toString());
@@ -79,7 +79,7 @@ export class UnchartedState {
   }
 
   @Action(GetVotes)
-  getVotes({getState, setState}: StateContext<UnchartedStateModel>, action: GetVotes): Observable<any> {
+  getVotes({getState, setState}: StateContext<OscarsStateModel>, action: GetVotes): Observable<any> {
     const params = new HttpParams()
       .set('year', action.year.toString());
     return this.http.get<any[]>('/api/votes', {params}).pipe(

@@ -29,7 +29,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
-import {UnchartedState} from './states/uncharted.state';
+import {OscarsState} from './states/oscars-state.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +59,7 @@ import {UnchartedState} from './states/uncharted.state';
     NgbProgressbarModule,
     ReactiveFormsModule,
     NgxsModule.forRoot([
-      UnchartedState
+      OscarsState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

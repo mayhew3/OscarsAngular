@@ -208,9 +208,8 @@ export class InMemoryDataService implements InMemoryDbService {
 
       const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
 
-      const entries = requestInfo.query.entries();
-      const person_id = entries.next().value[1][0];
-      const year = entries.next().value[1][0];
+      const person_id = requestInfo.query.get('person_id')[0];
+      const year = requestInfo.query.get('year')[0];
 
       const data = [];
 
