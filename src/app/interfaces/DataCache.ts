@@ -1,7 +1,6 @@
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {filter, first, takeUntil, tap} from 'rxjs/operators';
+import {filter, takeUntil, tap} from 'rxjs/operators';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import * as _ from 'underscore';
 
 export class DataCache<T> {
   private _dataSubject$ = new BehaviorSubject<T[]>(undefined);

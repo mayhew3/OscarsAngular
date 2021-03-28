@@ -24,8 +24,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.personService.persons.subscribe(persons => console.log('Persons fetched'));
-    this.systemVarsService.systemVars.subscribe(systemVars => console.log('SystemVars fetched'));
   }
 
   get me$(): Observable<Person> {
