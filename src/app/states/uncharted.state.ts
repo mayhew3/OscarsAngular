@@ -5,7 +5,7 @@ import {MaxYear} from '../interfaces/MaxYear';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Vote} from '../interfaces/Vote';
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {GetSystemVars} from '../actions/systemVars.action';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
@@ -78,10 +78,9 @@ export class UnchartedState {
 
   @Action(GetCategories)
   getCategories({getState, setState}: StateContext<UnchartedStateModel>, action: GetCategories): Observable<any> {
-    const params = {
-      year: action.year.toString(),
-      person_id: action.person_id.toString()
-    };
+    const params = new HttpParams()
+      .set('year', action.year.toString())
+      .set('person_id', action.person_id.toString());
     return this.http.get<any[]>('/api/categories', {params}).pipe(
       tap(result => {
         const state = getState();
