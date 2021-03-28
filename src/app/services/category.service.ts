@@ -11,7 +11,6 @@ import {VotesService} from './votes.service';
 import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
-import {DataService} from './data.service';
 import {PersonService} from './person.service';
 import {Vote} from '../interfaces/Vote';
 import {ArrayUtil} from '../utility/ArrayUtil';
@@ -44,8 +43,18 @@ export class CategoryService implements OnDestroy {
 
   private readonly winnerListeners: Subscriber<any>[];
 
-  categories: Observable<Category[]>;
-  maxYear: Observable<MaxYear>;
+  categories: Observable<Category[]> = this.store.select(state => state.oscars).pipe(
+    map(state => state.categories),
+    filter(categories => !!categories),
+    tap(() => {
+      this._fetching = false;
+    })
+  );
+
+  maxYear: Observable<MaxYear> = this.store.select(state => state.oscars).pipe(
+    map(state => state.maxYear),
+    filter(maxYear => !!maxYear)
+  );
 
   constructor(private http: HttpClient,
               private personService: PersonService,
@@ -53,26 +62,16 @@ export class CategoryService implements OnDestroy {
               private votesService: VotesService,
               private oddsService: OddsService,
               private socket: SocketService,
-              private dataService: DataService,
               private store: Store) {
     this.winnerListeners = [];
-    this.store.dispatch(new GetMaxYear());
+
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .pipe(first())
       .subscribe(([me, systemVars]) => {
         this.store.dispatch(new GetCategories(systemVars.curr_year, me.id));
       });
-    this.categories = this.store.select(state => state.oscars).pipe(
-      map(state => state.categories),
-      filter(categories => !!categories),
-      tap(() => {
-        this._fetching = false;
-      })
-    );
-    this.maxYear = this.store.select(state => state.oscars).pipe(
-      map(state => state.maxYear),
-      filter(maxYear => !!maxYear)
-    );
+
+    this.store.dispatch(new GetMaxYear());
   }
 
   static isSingleLineCategory(categoryName: string): boolean {

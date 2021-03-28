@@ -5,7 +5,6 @@ import {SystemVars} from '../interfaces/SystemVars';
 import {catchError, filter, first, map, takeUntil, tap} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
-import {DataService} from './data.service';
 import {Store} from '@ngxs/store';
 import {GetSystemVars} from '../actions/systemVars.action';
 
@@ -29,7 +28,6 @@ export class SystemVarsService implements OnDestroy {
   constructor(private http: HttpClient,
               private socket: SocketService,
               private auth: MyAuthService,
-              private dataService: DataService,
               private store: Store) {
     this._fetching = true;
     this.store.dispatch(new GetSystemVars());

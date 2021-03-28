@@ -5,7 +5,6 @@ import {catchError, concatMap, filter, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
-import {DataService} from './data.service';
 import {Store} from '@ngxs/store';
 import {GetPersons} from '../actions/person.action';
 import {MyAuthService} from './auth/my-auth.service';
@@ -35,7 +34,6 @@ export class PersonService implements OnDestroy {
 
   constructor(private http: HttpClient,
               private arrayService: ArrayService,
-              private dataService: DataService,
               private auth: MyAuthService,
               private store: Store) {
     this._fetching = true;
@@ -57,7 +55,7 @@ export class PersonService implements OnDestroy {
   }
 
   getNumberOfCachedPersons(): number {
-    return this.dataService.getNumberOfCachedPersons();
+    return this.store.selectSnapshot(state => state.oscars.persons.length);
   }
 
   isMe(person: Person): Observable<boolean> {

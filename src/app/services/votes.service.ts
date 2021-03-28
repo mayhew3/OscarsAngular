@@ -8,7 +8,6 @@ import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
 import {Category} from '../interfaces/Category';
 import * as _ from 'underscore';
-import {DataService} from './data.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Store} from '@ngxs/store';
 import {GetVotes} from '../actions/votes.action';
@@ -29,7 +28,6 @@ export class VotesService {
 
   constructor(private http: HttpClient,
               private systemVarsService: SystemVarsService,
-              private dataService: DataService,
               private store: Store) {
     this.cache = [];
     this.systemVarsService.systemVars
