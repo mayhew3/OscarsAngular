@@ -30,8 +30,15 @@ export class PersonService implements OnDestroy {
               private arrayService: ArrayService,
               private dataService: DataService,
               private store: Store) {
+    this._fetching = true;
     this.store.dispatch(new GetPersons());
-    this.persons = this.store.select(state => state.persons);
+    this.persons = this.store.select(state => state.persons).pipe(
+      tap(persons => {
+        if (persons.length > 0) {
+          this._fetching = false;
+        }
+      })
+    );
   }
 
   get me$(): Observable<Person> {

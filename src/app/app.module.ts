@@ -30,6 +30,7 @@ import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {PersonState} from './states/person.state';
+import {SystemVarsState} from './states/systemVars.state';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {PersonState} from './states/person.state';
     NgbProgressbarModule,
     ReactiveFormsModule,
     NgxsModule.forRoot([
-      PersonState
+      PersonState,
+      SystemVarsState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

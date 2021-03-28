@@ -27,11 +27,6 @@ export class VotesService {
               private systemVarsService: SystemVarsService,
               private dataService: DataService) {
     this.cache = [];
-    this.systemVarsService.systemVars.subscribe(systemVars => {
-      this.maybeUpdateCache(systemVars.curr_year).subscribe(() => {
-        this.isLoading = false;
-      });
-    });
   }
 
   stillLoading(): boolean {

@@ -2,10 +2,12 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError, first, map, takeUntil} from 'rxjs/operators';
+import {catchError, filter, first, map, takeUntil, tap} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
 import {DataService} from './data.service';
+import {Store} from '@ngxs/store';
+import {GetSystemVars} from '../actions/systemVars.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,14 +24,23 @@ export class SystemVarsService implements OnDestroy {
 
   private _destroy$ = new Subject();
 
+  systemVars: Observable<SystemVars>;
+
   constructor(private http: HttpClient,
               private socket: SocketService,
               private auth: MyAuthService,
-              private dataService: DataService) {
-  }
-
-  get systemVars(): Observable<SystemVars> {
-    return this.dataService.systemVars$;
+              private dataService: DataService,
+              private store: Store) {
+    this._fetching = true;
+    this.store.dispatch(new GetSystemVars());
+    this.systemVars = this.store.select(state => state.systemVars).pipe(
+      map(state => state.systemVars),
+      tap(systemVars => {
+        if (!!systemVars) {
+          this._fetching = false;
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {

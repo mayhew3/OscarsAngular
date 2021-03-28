@@ -23,7 +23,9 @@ export class HomeComponent implements OnInit {
               public votesService: VotesService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.personService.persons.subscribe(persons => console.log('Persons fetched'));
+    this.systemVarsService.systemVars.subscribe(systemVars => console.log('SystemVars fetched'));
   }
 
   get me$(): Observable<Person> {
@@ -58,11 +60,10 @@ export class HomeComponent implements OnInit {
   }
 
   stillLoading(): boolean {
-    return this.personService.stillLoading() ||
-      this.systemVarsService.stillLoading();
+    return false;
   }
 
-  stillLoadingVotesAndCategories() {
+  stillLoadingVotesAndCategories(): boolean {
     return this.categoryService.stillLoading() ||
       this.votesService.stillLoading();
   }
