@@ -144,7 +144,7 @@ export class NomineesComponent implements OnInit {
   }
 
   stillLoading(): boolean {
-    return this.categoryService.stillLoading() || this.personService.stillLoading() || this.systemVarsService.stillLoading();
+    return false;
   }
 
   getMainLineText(nominee: Nominee): string {

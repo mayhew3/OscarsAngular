@@ -133,7 +133,7 @@ export class SystemVarsService implements OnDestroy {
   }
 
   stillLoading(): boolean {
-    return this.dataService.systemVarsLoading;
+    return this._fetching;
   }
 
 

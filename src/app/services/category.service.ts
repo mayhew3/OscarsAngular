@@ -315,7 +315,7 @@ export class CategoryService implements OnDestroy {
   // LOADING
 
   stillLoading(): boolean {
-    return this.dataService.categoriesLoading;
+    return this._fetching;
   }
 
   // MAX YEAR

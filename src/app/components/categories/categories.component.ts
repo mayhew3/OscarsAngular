@@ -191,7 +191,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   stillLoading(): boolean {
-    return this.systemVarsService.stillLoading() || this.categoryService.stillLoading();
+    return false;
   }
 
   showPersonPick(category: Category): Observable<boolean> {

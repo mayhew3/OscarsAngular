@@ -65,8 +65,8 @@ export class UnchartedState {
   @Action(GetCategories)
   getCategories({getState, setState}: StateContext<UnchartedStateModel>, action: GetCategories): Observable<any> {
     const params = new HttpParams()
-      .set('year', action.year.toString())
-      .set('person_id', action.person_id.toString());
+      .set('person_id', action.person_id.toString())
+      .set('year', action.year.toString());
     return this.http.get<any[]>('/api/categories', {params}).pipe(
       tap(result => {
         const state = getState();

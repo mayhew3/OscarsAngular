@@ -61,8 +61,7 @@ export class HomeComponent implements OnInit {
   }
 
   stillLoadingVotesAndCategories(): boolean {
-    return this.categoryService.stillLoading() ||
-      this.votesService.stillLoading();
+    return false;
   }
 
   hasVotesRemaining(): Observable<boolean> {
