@@ -26,6 +26,10 @@ import {NgbDropdownModule, NgbProgressbarModule} from '@ng-bootstrap/ng-bootstra
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
 import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {NgxsModule} from '@ngxs/store';
+import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
+import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
+import {PersonState} from './states/person.state';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,11 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
     NgbDropdownModule,
     NgbProgressbarModule,
     ReactiveFormsModule,
+    NgxsModule.forRoot([
+      PersonState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
     // use in-memory for CLI environment, regular http for prod and local server
     AuthModule.forRoot({
       domain: 'mayhew3.auth0.com',

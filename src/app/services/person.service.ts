@@ -6,6 +6,8 @@ import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
 import {DataService} from './data.service';
+import {Store} from '@ngxs/store';
+import {GetPersons} from '../actions/person.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,9 +24,14 @@ export class PersonService implements OnDestroy {
 
   isAdmin: boolean = null;
 
+  persons: Observable<Person[]>;
+
   constructor(private http: HttpClient,
               private arrayService: ArrayService,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private store: Store) {
+    this.store.dispatch(new GetPersons());
+    this.persons = this.store.select(state => state.persons);
   }
 
   get me$(): Observable<Person> {
@@ -38,10 +45,6 @@ export class PersonService implements OnDestroy {
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
-  }
-
-  get persons(): Observable<Person[]> {
-    return this.dataService.persons$;
   }
 
   getNumberOfCachedPersons(): number {
