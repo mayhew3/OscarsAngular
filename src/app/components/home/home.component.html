@@ -4,7 +4,7 @@
 
   <p *ngIf="!(isLoggedIn$ | async)">Welcome to Mayhew's Oscars Voting site! Click the link above to sign in!</p>
 
-  <p *ngIf="!stillLoading() && getFailedEmail && (isLoggedIn$ | async)">
+  <p *ngIf="!stillLoading() && !!failedEmail && (isLoggedIn$ | async)">
     No user account found for google address. Could your invite be for a different gmail address?
   </p>
 
@@ -12,7 +12,7 @@
     Welcome to the Oscars {{getOscarYear() | async}}, {{(me$ | async)?.first_name}}!
   </p>
 
-  <p *ngIf="!stillLoadingVotesAndCategories() && (hasVotesRemaining() | async)"
+  <p *ngIf="(hasVotesRemaining() | async)"
      class="votesRemaining">
     You have {{numVotesRemaining() | async}} categories left to vote on!
   </p>

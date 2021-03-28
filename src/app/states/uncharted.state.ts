@@ -36,21 +36,6 @@ export class UnchartedState {
   constructor(private http: HttpClient) {
   }
 
-  @Selector()
-  static getPersonList(state: UnchartedStateModel): Person[] {
-    return state.persons;
-  }
-
-  @Selector()
-  static getSystemVars(state: UnchartedStateModel): SystemVars {
-    return state.systemVars;
-  }
-
-  @Selector()
-  static getCategories(state: UnchartedStateModel): Category[] {
-    return state.categories;
-  }
-
   @Action(GetPersons)
   getPersons({getState, setState}: StateContext<UnchartedStateModel>): Observable<any> {
     return this.http.get<any[]>('/api/persons').pipe(

@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     return this.categoryService.getCategoryCount();
   }
 
-  getFailedEmail(): boolean {
+  get failedEmail(): boolean {
     return this.auth.failedEmail;
   }
 
