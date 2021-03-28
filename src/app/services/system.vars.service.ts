@@ -35,10 +35,9 @@ export class SystemVarsService implements OnDestroy {
     this.store.dispatch(new GetSystemVars());
     this.systemVars = this.store.select(state => state.uncharted).pipe(
       map(state => state.systemVars),
-      tap(systemVars => {
-        if (!!systemVars) {
-          this._fetching = false;
-        }
+      filter(systemVars => !!systemVars),
+      tap(() => {
+        this._fetching = false;
       })
     );
   }

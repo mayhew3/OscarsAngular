@@ -41,10 +41,9 @@ export class PersonService implements OnDestroy {
     this.store.dispatch(new GetPersons());
     this.persons = this.store.select(state => state.uncharted).pipe(
       map(state => state.persons),
-      tap(persons => {
-        if (!!persons) {
-          this._fetching = false;
-        }
+      filter(persons => !!persons),
+      tap(() => {
+        this._fetching = false;
       })
     );
   }
