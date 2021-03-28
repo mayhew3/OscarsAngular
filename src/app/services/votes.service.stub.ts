@@ -18,7 +18,7 @@ export class VotesServiceStub {
               private systemVarsService: SystemVarsService) {
   }
 
-  getVotesForCurrentYear(): Observable<Vote[]> {
+  get votes(): Observable<Vote[]> {
     return of([]);
   }
 

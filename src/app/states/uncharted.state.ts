@@ -11,6 +11,7 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {GetPersons} from '../actions/person.action';
 import {GetCategories} from '../actions/categories.action';
+import {GetVotes} from '../actions/votes.action';
 
 export class UnchartedStateModel {
   persons: Person[];
@@ -87,6 +88,21 @@ export class UnchartedState {
         setState({
           ...state,
           categories: result
+        });
+      })
+    );
+  }
+
+  @Action(GetVotes)
+  getVotes({getState, setState}: StateContext<UnchartedStateModel>, action: GetVotes): Observable<any> {
+    const params = new HttpParams()
+      .set('year', action.year.toString());
+    return this.http.get<any[]>('/api/votes', {params}).pipe(
+      tap(result => {
+        const state = getState();
+        setState({
+          ...state,
+          votes: result
         });
       })
     );

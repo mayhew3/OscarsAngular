@@ -247,7 +247,7 @@ export class CategoryService implements OnDestroy {
 
   populatePersonScoresForCategories(persons: Person[], categories: Category[]): Observable<any> {
     return new Observable<any>(observer => {
-      this.votesService.getVotesForCurrentYear().subscribe(votes => {
+      this.votesService.votes.subscribe(votes => {
         _.forEach(persons, person => {
           let score = 0;
           let numVotes = 0;
@@ -275,7 +275,7 @@ export class CategoryService implements OnDestroy {
   }
 
   maxPosition(person: Person, persons: Person[]): Observable<number> {
-    return combineLatest([this.categories, this.votesService.getVotesForCurrentYear()]).pipe(
+    return combineLatest([this.categories, this.votesService.votes]).pipe(
       map(([categories, votes]) => {
         const categoriesWithoutWinners = _.filter(categories, category => !category.winners || category.winners.length === 0);
         const myVotes = _.map(categoriesWithoutWinners, category => {

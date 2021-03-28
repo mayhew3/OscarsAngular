@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
 import {Observable, of} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {catchError, filter, first, map, tap} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
@@ -10,6 +10,8 @@ import {Category} from '../interfaces/Category';
 import * as _ from 'underscore';
 import {DataService} from './data.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
+import {Store} from '@ngxs/store';
+import {GetVotes} from '../actions/votes.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,34 +25,43 @@ export class VotesService {
   isLoading = true;
   private readonly cache: Vote[];
 
+  votes: Observable<Vote[]>;
+
   constructor(private http: HttpClient,
               private systemVarsService: SystemVarsService,
-              private dataService: DataService) {
+              private dataService: DataService,
+              private store: Store) {
     this.cache = [];
+    this.systemVarsService.systemVars
+      .pipe(first())
+      .subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
+    this.votes = this.store.select(state => state.uncharted).pipe(
+      map(state => state.votes),
+      filter(votes => !!votes),
+      tap(() => {
+        this.isLoading = false;
+      })
+    );
   }
 
   stillLoading(): boolean {
     return this.isLoading;
   }
 
-  getVotesForCurrentYear(): Observable<Vote[]> {
-    return this.dataService.votes$;
-  }
-
   getVotesForCurrentYearAndCategory(category: Category): Observable<Vote[]> {
-    return this.getVotesForCurrentYear().pipe(
+    return this.votes.pipe(
       map(votes => _.where(votes, {category_id: category.id}))
     );
   }
 
   getVotesForCurrentYearAndPerson(person: Person): Observable<Vote[]> {
-    return this.getVotesForCurrentYear().pipe(
+    return this.votes.pipe(
       map(votes => _.where(votes, {person_id: person.id}))
     );
   }
 
   getVotesForCurrentYearAndPersonAndCategory(person: Person, category: Category): Observable<Vote> {
-    return this.getVotesForCurrentYear().pipe(
+    return this.votes.pipe(
       map(votes => {
         const allVotes = _.where(votes, {person_id: person.id, category_id: category.id});
         return allVotes.length === 1 ? allVotes[0] : undefined;
