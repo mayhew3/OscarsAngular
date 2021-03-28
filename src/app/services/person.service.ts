@@ -1,13 +1,14 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, Subject} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, concatMap, filter, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
 import {DataService} from './data.service';
 import {Store} from '@ngxs/store';
 import {GetPersons} from '../actions/person.action';
+import {MyAuthService} from './auth/my-auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,24 +27,25 @@ export class PersonService implements OnDestroy {
 
   persons: Observable<Person[]>;
 
+  me$ = this.auth.userEmail$.pipe(
+    concatMap(email => this.getPersonWithEmail(email)),
+    filter(person => !!person)
+  );
+
   constructor(private http: HttpClient,
               private arrayService: ArrayService,
               private dataService: DataService,
+              private auth: MyAuthService,
               private store: Store) {
     this._fetching = true;
     this.store.dispatch(new GetPersons());
     this.persons = this.store.select(state => state.persons).pipe(
+      map(state => state.persons),
       tap(persons => {
         if (persons.length > 0) {
           this._fetching = false;
         }
       })
-    );
-  }
-
-  get me$(): Observable<Person> {
-    return this.dataService.me$.pipe(
-      tap(me => this.isAdmin = (me.role === 'admin'))
     );
   }
 
