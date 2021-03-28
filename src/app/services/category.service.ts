@@ -24,6 +24,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CategoryService implements OnDestroy {
+
+  static singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
+  static songCategories = ['Music (Original Song)'];
+
   nomineesUrl = 'api/nominees';
   categoriesUrl = 'api/categories';
   cache: Category[];
@@ -44,6 +48,24 @@ export class CategoryService implements OnDestroy {
               private socket: SocketService,
               private dataService: DataService) {
     this.winnerListeners = [];
+  }
+
+  static isSingleLineCategory(categoryName: string): boolean {
+    return CategoryService.singleLineCategories.includes(categoryName);
+  }
+
+  static isSongCategory(categoryName: string): boolean {
+    return CategoryService.songCategories.includes(categoryName);
+  }
+
+  static getSubtitleText(category: Category, nominee: Nominee): string {
+    if (CategoryService.isSingleLineCategory(category.name)) {
+      return undefined;
+    } else if (nominee.nominee === nominee.context) {
+      return nominee.detail;
+    } else {
+      return nominee.context;
+    }
   }
 
   get categories(): Observable<Category[]> {
@@ -134,7 +156,7 @@ export class CategoryService implements OnDestroy {
   private removeWinnerFromCache(nomination_id: number): Observable<void> {
     return this.getCategoryForNomination(nomination_id).pipe(
       map(category => {
-        category.removeWinner(nomination_id);
+        this.removeWinner(category, nomination_id);
       })
     );
   }
@@ -224,7 +246,7 @@ export class CategoryService implements OnDestroy {
             if (personVote) {
               numVotes++;
               if (category.winners.length > 0) {
-                const existingWinner = category.getWinnerForNominee(personVote.nomination_id);
+                const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
                 if (!!existingWinner) {
                   score += category.points;
                 }
@@ -321,12 +343,29 @@ export class CategoryService implements OnDestroy {
     );
   }
 
+  // noinspection JSMethodCanBeStatic
+  getWinnerForNominee(category: Category, nomination_id: number): Winner {
+    return _.findWhere(category.winners, {nomination_id});
+  }
+
+  addWinner(category: Category, winner: Winner): void {
+    const existingWinner = this.getWinnerForNominee(category, winner.nomination_id);
+    if (!existingWinner) {
+      category.winners[winner.id] = winner;
+    }
+  }
+
+  removeWinner(category: Category, nomination_id: number): void {
+    const winner = this.getWinnerForNominee(category, nomination_id);
+    delete category.winners[winner.id];
+  }
+
   private updateWinners(category: Category, operation: string, winner: Winner): Observable<void> {
     if (operation === 'reset') {
       return this.resetWinners();
     } else {
       if (operation === 'add') {
-        return of(category.addWinner(winner));
+        return of(this.addWinner(category, winner));
       } else if (operation === 'delete') {
         return this.removeWinnerFromCache(winner.nomination_id);
       }

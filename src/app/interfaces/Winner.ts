@@ -1,4 +1,4 @@
-export class Winner {
+export interface Winner {
   id: number;
   category_id: number;
   nomination_id: number;

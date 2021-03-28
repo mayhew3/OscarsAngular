@@ -10,6 +10,7 @@ import {Category} from '../interfaces/Category';
 import {MyAuthService} from './auth/my-auth.service';
 import {Person} from '../interfaces/Person';
 import {MaxYear} from '../interfaces/MaxYear';
+import {Winner} from '../interfaces/Winner';
 
 @Injectable({
   providedIn: 'root'
@@ -142,6 +143,11 @@ export class DataService implements OnDestroy {
     );
   }
 
+  // noinspection JSMethodCanBeStatic
+  private getWinnerForNominee(category: Category, nomination_id: number): Winner {
+    return _.findWhere(category.winners, {nomination_id});
+  }
+
   private updatePersonScores(persons: Person[], categories: Category[], votes: Vote[]): void {
     _.forEach(persons, person => {
       let score = 0;
@@ -154,7 +160,7 @@ export class DataService implements OnDestroy {
         if (personVote) {
           numVotes++;
           if (category.winners.length > 0) {
-            const existingWinner = category.getWinnerForNominee(personVote.nomination_id);
+            const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
             if (!!existingWinner) {
               score += category.points;
             }

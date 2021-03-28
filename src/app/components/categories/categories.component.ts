@@ -125,7 +125,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   getSubtitleText(nominee: Nominee, category: Category): string {
-    return Nominee.getSubtitleText(category, nominee);
+    return CategoryService.getSubtitleText(category, nominee);
   }
 
   mostRecentWinDate(category: Category): Date {

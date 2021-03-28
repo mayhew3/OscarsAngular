@@ -1,6 +1,6 @@
 import {Odds} from './Odds';
 
-export class OddsBundle {
+export interface OddsBundle {
   id: number;
   event_id: number;
   odds: Odds[];

@@ -1,4 +1,4 @@
-export class Vote {
+export interface Vote {
   id: number;
   category_id: number;
   nomination_id: number;

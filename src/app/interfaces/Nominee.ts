@@ -1,9 +1,4 @@
-import {Category} from './Category';
-
-export class Nominee {
-  static singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
-  static songCategories = ['Music (Original Song)'];
-
+export interface Nominee {
   id: number;
   nominee: string;
   context: string;
@@ -19,23 +14,4 @@ export class Nominee {
   original_odds_user?: number;
   original_odds_numerator?: number;
   original_odds_denominator?: number;
-
-  static isSingleLineCategory(categoryName: string): boolean {
-    return Nominee.singleLineCategories.includes(categoryName);
-  }
-
-  static isSongCategory(categoryName: string): boolean {
-    return Nominee.songCategories.includes(categoryName);
-  }
-
-  static getSubtitleText(category: Category, nominee: Nominee): string {
-    if (Nominee.isSingleLineCategory(category.name)) {
-      return undefined;
-    } else if (nominee.nominee === nominee.context) {
-      return nominee.detail;
-    } else {
-      return nominee.context;
-    }
-  }
-
 }

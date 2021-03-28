@@ -152,7 +152,7 @@ export class NomineesComponent implements OnInit {
   }
 
   getSubtitleText(nominee: Nominee): string {
-    return Nominee.getSubtitleText(this.category, nominee);
+    return CategoryService.getSubtitleText(this.category, nominee);
   }
 
   getSongSubtitles(nominee: Nominee): string[] {
@@ -164,11 +164,11 @@ export class NomineesComponent implements OnInit {
   }
 
   showSubtitleText(nominee: Nominee): boolean {
-    return !!nominee.context && !Nominee.isSongCategory(this.category.name);
+    return !!nominee.context && !CategoryService.isSongCategory(this.category.name);
   }
 
   showSongSubtitle(nominee: Nominee): boolean {
-    return !!nominee.context && Nominee.isSongCategory(this.category.name);
+    return !!nominee.context && CategoryService.isSongCategory(this.category.name);
   }
 
   getVotedClass(nominee: Nominee): string {

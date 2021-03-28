@@ -1,4 +1,4 @@
-export class Odds {
+export interface Odds {
   id: number;
   odds: number;
   person_id: number;

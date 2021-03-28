@@ -1,3 +1,3 @@
-export class MaxYear {
+export interface MaxYear {
   maxYear: number;
 }

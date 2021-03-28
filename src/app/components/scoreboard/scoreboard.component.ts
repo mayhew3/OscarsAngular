@@ -261,7 +261,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   getSubtitleText(nominee: Nominee): string {
-    return Nominee.getSubtitleText(this.latestCategory, nominee);
+    return CategoryService.getSubtitleText(this.latestCategory, nominee);
   }
 
   meGotPointsForLastWinner(): Observable<boolean> {

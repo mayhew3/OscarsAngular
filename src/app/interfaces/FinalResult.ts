@@ -1,4 +1,4 @@
-export class FinalResult {
+export interface FinalResult {
   id: number;
   person_id: number;
   group_id: number;
