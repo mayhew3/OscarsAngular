@@ -12,6 +12,7 @@ import {tap} from 'rxjs/operators';
 import {GetPersons} from '../actions/person.action';
 import {GetCategories} from '../actions/categories.action';
 import {GetVotes} from '../actions/votes.action';
+import {GetMaxYear} from '../actions/maxYear.action';
 
 export class OscarsStateModel {
   persons: Person[];
@@ -88,6 +89,19 @@ export class OscarsState {
         setState({
           ...state,
           votes: result
+        });
+      })
+    );
+  }
+
+  @Action(GetMaxYear)
+  getMaxYear({getState, setState}: StateContext<OscarsStateModel>): Observable<any> {
+    return this.http.get<any[]>('/api/maxYear').pipe(
+      tap(result => {
+        const state = getState();
+        setState({
+          ...state,
+          maxYear: result[0]
         });
       })
     );

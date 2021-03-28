@@ -17,6 +17,8 @@ import {Vote} from '../interfaces/Vote';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Store} from '@ngxs/store';
 import {GetCategories} from '../actions/categories.action';
+import {GetMaxYear} from '../actions/maxYear.action';
+import {MaxYear} from '../interfaces/MaxYear';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -43,6 +45,7 @@ export class CategoryService implements OnDestroy {
   private readonly winnerListeners: Subscriber<any>[];
 
   categories: Observable<Category[]>;
+  maxYear: Observable<MaxYear>;
 
   constructor(private http: HttpClient,
               private personService: PersonService,
@@ -53,6 +56,7 @@ export class CategoryService implements OnDestroy {
               private dataService: DataService,
               private store: Store) {
     this.winnerListeners = [];
+    this.store.dispatch(new GetMaxYear());
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .pipe(first())
       .subscribe(([me, systemVars]) => {
@@ -64,6 +68,10 @@ export class CategoryService implements OnDestroy {
       tap(() => {
         this._fetching = false;
       })
+    );
+    this.maxYear = this.store.select(state => state.oscars).pipe(
+      map(state => state.maxYear),
+      filter(maxYear => !!maxYear)
     );
   }
 
@@ -321,7 +329,9 @@ export class CategoryService implements OnDestroy {
   // MAX YEAR
 
   getMaxYear(): Observable<number> {
-    return this.dataService.maxYear$;
+    return this.maxYear.pipe(
+      map(maxYear => maxYear.maxYear)
+    );
   }
 
   // DATA HELPERS
