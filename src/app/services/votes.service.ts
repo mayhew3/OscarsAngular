@@ -38,16 +38,22 @@ export class VotesService {
     this.systemVarsService.systemVars
       .pipe(first())
       .subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
+
+    const persons$ = this.personService.persons;
+    const categories$ = this.categoryService.categories;
+
     this.votes = this.store.select(state => state.oscars).pipe(
       map(state => state.votes),
       filter(votes => !!votes),
-      tap(votes => {
+      tap(() => {
         this.isLoading = false;
-        combineLatest([this.personService.persons, this.categoryService.categories]).subscribe(([persons, categories]) => {
-          this.updatePersonScores(persons, categories, votes);
-        });
       })
     );
+
+    combineLatest([persons$, categories$, this.votes])
+      .subscribe(([persons, categories, votes]) => {
+        this.updatePersonScores(persons, categories, votes);
+      });
   }
 
   stillLoading(): boolean {

@@ -13,6 +13,7 @@ import {GetPersons} from '../actions/person.action';
 import {GetCategories} from '../actions/categories.action';
 import {GetVotes} from '../actions/votes.action';
 import {GetMaxYear} from '../actions/maxYear.action';
+import * as _ from 'underscore';
 
 export class OscarsStateModel {
   persons: Person[];
@@ -71,6 +72,9 @@ export class OscarsState {
     return this.http.get<any[]>('/api/categories', {params}).pipe(
       tap(result => {
         const state = getState();
+        _.each(result, (category: Category) => {
+          _.each(category.winners, winner => winner.declared = new Date(winner.declared));
+        });
         setState({
           ...state,
           categories: result
