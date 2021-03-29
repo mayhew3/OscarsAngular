@@ -2,7 +2,6 @@ import {Category} from '../interfaces/Category';
 import {Action, State, StateContext} from '@ngxs/store';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {GetCategories} from '../actions/category.action';
 import {Injectable} from '@angular/core';
 import * as _ from 'underscore';
@@ -22,13 +21,13 @@ export class CategoryState {
   constructor(private http: HttpClient) {
   }
 
-  @Action(GetCategories)
+  @Action(GetCategories, {cancelUncompleted: true})
   getCategories({getState, setState}: StateContext<CategoryStateModel>, action: GetCategories): Observable<any> {
-    const params = new HttpParams()
-      .set('person_id', action.person_id.toString())
-      .set('year', action.year.toString());
-    return this.http.get<any[]>('/api/categories', {params}).pipe(
-      tap(result => {
+    return new Observable<any>(observer => {
+      const params = new HttpParams()
+        .set('person_id', action.person_id.toString())
+        .set('year', action.year.toString());
+      this.http.get<any[]>('/api/categories', {params}).subscribe(result => {
         const state = getState();
         _.each(result, (category: Category) => {
           _.each(category.winners, winner => winner.declared = new Date(winner.declared));
@@ -37,8 +36,9 @@ export class CategoryState {
           ...state,
           categories: result
         });
-      })
-    );
+        observer.next(undefined);
+      });
+    });
   }
 }
 
