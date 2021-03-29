@@ -1,6 +1,7 @@
 import {Action, State, StateContext} from '@ngxs/store';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
 import {GetSystemVars} from '../actions/systemVars.action';
@@ -17,20 +18,25 @@ export class SystemVarsStateModel {
 })
 @Injectable()
 export class SystemVarsState {
+
+  stateChanges = 0;
+
   constructor(private http: HttpClient) {
   }
 
-  @Action(GetSystemVars, {cancelUncompleted: true})
+  @Action(GetSystemVars)
   getSystemVars({getState, setState}: StateContext<SystemVarsStateModel>): Observable<any> {
-    return new Observable<any>(observer => {
-      this.http.get<any[]>('/api/systemVars').subscribe(result => {
+    return this.http.get<any[]>('/api/systemVars').pipe(
+      tap(result => {
         const state = getState();
-        observer.next(setState({
+        setState({
           ...state,
           systemVars: result[0]
-        }));
-      });
-    });
+        });
+        this.stateChanges++;
+        console.log('SYSTEMVARS State Change #' + this.stateChanges);
+      })
+    );
   }
 }
 

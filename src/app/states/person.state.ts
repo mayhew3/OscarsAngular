@@ -2,6 +2,7 @@ import {Person} from '../interfaces/Person';
 import {Action, State, StateContext} from '@ngxs/store';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {tap} from 'rxjs/operators';
 import {GetPersons} from '../actions/person.action';
 import {Injectable} from '@angular/core';
 
@@ -17,22 +18,24 @@ export class PersonStateModel {
 })
 @Injectable()
 export class PersonState {
+  stateChanges = 0;
+
   constructor(private http: HttpClient) {
   }
 
-  @Action(GetPersons, {cancelUncompleted: true})
+  @Action(GetPersons)
   getPersons({getState, setState}: StateContext<PersonStateModel>): Observable<any> {
-    return new Observable<any>(observer => {
-      this.http.get<any[]>('/api/persons').subscribe(result => {
-          const state = getState();
-          setState({
-            ...state,
-            persons: result
-          });
-          observer.next(result);
-        }
-      );
-    });
+    return this.http.get<any[]>('/api/persons').pipe(
+      tap(result => {
+        const state = getState();
+        setState({
+          ...state,
+          persons: result
+        });
+        this.stateChanges++;
+        console.log('PERSONS State Change #' + this.stateChanges);
+      })
+    );
   }
 }
 

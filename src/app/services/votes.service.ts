@@ -38,8 +38,7 @@ export class VotesService {
     this.cache = [];
     this.systemVarsService.systemVars.pipe(
       distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
-    )
-      .subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
+    ).subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
 
     const persons$ = this.personService.persons;
     const categories$ = this.categoryService.categories;
