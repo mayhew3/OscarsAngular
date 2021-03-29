@@ -12,7 +12,7 @@ import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Store} from '@ngxs/store';
-import {GetCategories} from '../actions/categories.action';
+import {GetCategories} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 
@@ -40,15 +40,15 @@ export class CategoryService implements OnDestroy {
 
   private readonly winnerListeners: Subscriber<any>[];
 
-  categories: Observable<Category[]> = this.store.select(state => state.oscars).pipe(
-    map(state => state.categories),
+  categories: Observable<Category[]> = this.store.select(state => state.categories).pipe(
+    map(categories => categories.categories),
     filter(categories => !!categories),
     tap(() => {
       this._fetching = false;
     })
   );
 
-  maxYear: Observable<MaxYear> = this.store.select(state => state.oscars).pipe(
+  maxYear: Observable<MaxYear> = this.store.select(state => state.maxYear).pipe(
     map(state => state.maxYear),
     filter(maxYear => !!maxYear)
   );

@@ -41,7 +41,7 @@ export class PersonService implements OnDestroy {
               private store: Store) {
     this._fetching = true;
     this.store.dispatch(new GetPersons());
-    this.persons = this.store.select(state => state.oscars).pipe(
+    this.persons = this.store.select(state => state.persons).pipe(
       map(state => state.persons),
       filter(persons => !!persons),
       tap(() => {
@@ -58,7 +58,7 @@ export class PersonService implements OnDestroy {
   }
 
   getNumberOfCachedPersons(): number {
-    return this.store.selectSnapshot(state => state.oscars.persons.length);
+    return this.store.selectSnapshot(state => state.persons.persons.length);
   }
 
   isMe(person: Person): Observable<boolean> {

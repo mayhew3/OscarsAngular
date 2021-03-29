@@ -29,7 +29,11 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
-import {OscarsState} from './states/oscars-state.service';
+import {PersonState} from './states/person.state';
+import {SystemVarsState} from './states/systemVars.state';
+import {CategoryState} from './states/category.state';
+import {MaxYearState} from './states/maxYear.state';
+import {VoteState} from './states/vote.state';
 
 @NgModule({
   declarations: [
@@ -59,7 +63,11 @@ import {OscarsState} from './states/oscars-state.service';
     NgbProgressbarModule,
     ReactiveFormsModule,
     NgxsModule.forRoot([
-      OscarsState
+      PersonState,
+      SystemVarsState,
+      CategoryState,
+      MaxYearState,
+      VoteState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

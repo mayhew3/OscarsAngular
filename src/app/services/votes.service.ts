@@ -44,8 +44,8 @@ export class VotesService {
     const persons$ = this.personService.persons;
     const categories$ = this.categoryService.categories;
 
-    this.votes = this.store.select(state => state.oscars).pipe(
-      map(state => state.votes),
+    this.votes = this.store.select(state => state.votes).pipe(
+      map(votesContainer => votesContainer.votes),
       filter(votes => !!votes),
       tap(() => {
         this.isLoading = false;
