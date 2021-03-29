@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
-import {distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 enum UserRole {

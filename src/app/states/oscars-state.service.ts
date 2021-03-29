@@ -8,7 +8,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {GetSystemVars} from '../actions/systemVars.action';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {first, tap} from 'rxjs/operators';
 import {GetPersons} from '../actions/person.action';
 import {GetCategories} from '../actions/categories.action';
 import {GetVotes} from '../actions/votes.action';

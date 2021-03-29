@@ -34,7 +34,7 @@ export class CategoryHopperComponent implements OnInit {
     this.categoryService.categories.subscribe(categories => {
       this.categoryCount = categories.length;
     });
-    this.categoryService.maybeRefreshCache();
+    // this.categoryService.maybeRefreshCache();
   }
 
   ngOnInit(): void {

@@ -90,7 +90,7 @@ export class AdminDashboardComponent implements OnInit {
         });
       });
     });
-    this.categoryService.maybeRefreshCache();
+    // this.categoryService.maybeRefreshCache();
   }
 
   toggleVotingLock(votingOpen: boolean): Observable<void> {

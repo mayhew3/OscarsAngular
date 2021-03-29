@@ -29,7 +29,10 @@ export class PersonService implements OnDestroy {
   me$ = this.auth.userEmail$.pipe(
     concatMap(email => this.getPersonWithEmail(email)),
     filter(person => !!person),
-    tap(me => this.isAdmin = (me.role === 'admin'))
+    tap(me => {
+      // console.log('me changed: ' + me.email);
+      this.isAdmin = (me.role === 'admin');
+    })
   );
 
   constructor(private http: HttpClient,

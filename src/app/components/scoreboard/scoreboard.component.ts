@@ -96,7 +96,7 @@ export class ScoreboardComponent implements OnInit {
         // this.updateScoreboard().subscribe();
       });
     });
-    this.categoryService.maybeRefreshCache();
+    // this.categoryService.maybeRefreshCache();
   }
 
   clearSortingOdds(): void {

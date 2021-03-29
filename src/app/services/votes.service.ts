@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
 import {combineLatest, Observable, of} from 'rxjs';
-import {catchError, filter, first, map, tap} from 'rxjs/operators';
+import {catchError, distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
@@ -14,6 +14,7 @@ import {GetVotes} from '../actions/votes.action';
 import {PersonService} from './person.service';
 import {CategoryService} from './category.service';
 import {Winner} from '../interfaces/Winner';
+import {SystemVars} from '../interfaces/SystemVars';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -35,8 +36,9 @@ export class VotesService {
               private categoryService: CategoryService,
               private store: Store) {
     this.cache = [];
-    this.systemVarsService.systemVars
-      .pipe(first())
+    this.systemVarsService.systemVars.pipe(
+      distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
+    )
       .subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
 
     const persons$ = this.personService.persons;
