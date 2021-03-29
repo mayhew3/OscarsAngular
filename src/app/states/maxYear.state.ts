@@ -20,7 +20,7 @@ export class MaxYearState {
   constructor(private http: HttpClient) {
   }
 
-  @Action(GetMaxYear)
+  @Action(GetMaxYear, {cancelUncompleted: true})
   getMaxYear({getState, setState}: StateContext<MaxYearStateModel>): Observable<any> {
     return new Observable<any>(observer => {
       this.http.get<any[]>('/api/maxYear').subscribe(result => {
@@ -29,7 +29,7 @@ export class MaxYearState {
             ...state,
             maxYear: result[0]
           });
-          observer.next(undefined);
+          observer.next(result);
         }
       );
     });

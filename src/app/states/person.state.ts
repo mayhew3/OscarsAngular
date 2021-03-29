@@ -20,7 +20,7 @@ export class PersonState {
   constructor(private http: HttpClient) {
   }
 
-  @Action(GetPersons)
+  @Action(GetPersons, {cancelUncompleted: true})
   getPersons({getState, setState}: StateContext<PersonStateModel>): Observable<any> {
     return new Observable<any>(observer => {
       this.http.get<any[]>('/api/persons').subscribe(result => {
@@ -29,7 +29,7 @@ export class PersonState {
             ...state,
             persons: result
           });
-          observer.next(undefined);
+          observer.next(result);
         }
       );
     });

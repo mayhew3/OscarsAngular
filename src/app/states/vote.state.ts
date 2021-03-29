@@ -20,7 +20,7 @@ export class VoteState {
   constructor(private http: HttpClient) {
   }
 
-  @Action(GetVotes)
+  @Action(GetVotes, {cancelUncompleted: true})
   getVotes({getState, setState}: StateContext<VoteStateModel>, action: GetVotes): Observable<any> {
     return new Observable<any>(observer => {
       const params = new HttpParams()
@@ -31,7 +31,7 @@ export class VoteState {
             ...state,
             votes: result
           });
-          observer.next(undefined);
+          observer.next(result);
         }
       );
     });

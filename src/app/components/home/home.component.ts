@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit {
   numVotesRemaining(): Observable<number> {
     const categoryCount$ = this.categoryCount();
     const votes$ = this.personService.me$.pipe(
-      first(),
       concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me))
     );
     return combineLatest([categoryCount$, votes$]).pipe(

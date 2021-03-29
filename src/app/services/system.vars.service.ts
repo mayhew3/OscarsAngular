@@ -49,7 +49,6 @@ export class SystemVarsService implements OnDestroy {
     this.http.get<SystemVars[]>(this.systemVarsUrl)
       .pipe(
         takeUntil(this._destroy$),
-        first(),
         catchError(this.handleError<SystemVars[]>('getSystemVars', [])),
       )
       .subscribe((systemVars: SystemVars[]) => {

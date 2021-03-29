@@ -20,16 +20,15 @@ export class SystemVarsState {
   constructor(private http: HttpClient) {
   }
 
-  @Action(GetSystemVars)
+  @Action(GetSystemVars, {cancelUncompleted: true})
   getSystemVars({getState, setState}: StateContext<SystemVarsStateModel>): Observable<any> {
     return new Observable<any>(observer => {
       this.http.get<any[]>('/api/systemVars').subscribe(result => {
         const state = getState();
-        setState({
+        observer.next(setState({
           ...state,
           systemVars: result[0]
-        });
-        observer.next(undefined);
+        }));
       });
     });
   }

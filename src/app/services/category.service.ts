@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, concatMap, filter, first, map, tap} from 'rxjs/operators';
+import {catchError, concatMap, distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -15,6 +15,7 @@ import {Store} from '@ngxs/store';
 import {GetCategories} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
+import {SystemVars} from '../interfaces/SystemVars';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -62,7 +63,6 @@ export class CategoryService implements OnDestroy {
     this.winnerListeners = [];
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
-      .pipe(first())
       .subscribe(([me, systemVars]) => {
         this.store.dispatch(new GetCategories(systemVars.curr_year, me.id));
       });
@@ -346,11 +346,10 @@ export class CategoryService implements OnDestroy {
 
     this.socket.removeListener('winner', this.updateWinnersInCacheAndNotify.bind(this));
     this.personService.me$
-      .pipe(first())
       .subscribe(person => {
         if (!!person) {
           this.systemVarsService.systemVars
-            .pipe(first())
+            .pipe(distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year))
             .subscribe(systemVars => {
               const options = {
                 params: {
@@ -360,8 +359,7 @@ export class CategoryService implements OnDestroy {
               };
               this.http.get<Category[]>(this.categoriesUrl, options)
                 .pipe(
-                  catchError(this.handleError<Category[]>('getCategories', [])),
-                  first()
+                  catchError(this.handleError<Category[]>('getCategories', []))
                 )
                 .subscribe(
                   (categories: Category[]) => {

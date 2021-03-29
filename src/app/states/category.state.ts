@@ -36,7 +36,7 @@ export class CategoryState {
           ...state,
           categories: result
         });
-        observer.next(undefined);
+        observer.next(result);
       });
     });
   }
