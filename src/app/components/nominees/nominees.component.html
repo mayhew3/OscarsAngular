@@ -64,8 +64,8 @@
 
               <div class="col-3" *ngIf="winnersMode()">
                 <div class="voterName"
-                     *ngFor="let voter of personsForNominee(nominee)"
-                     [ngClass]="getVoterClass(voter)">
+                     *ngFor="let voter of (personsForNominee(nominee) | async)"
+                     [ngClass]="getVoterClass(voter) | async">
                   {{voter.first_name}}
                 </div>
               </div>

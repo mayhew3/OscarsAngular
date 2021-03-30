@@ -1,15 +1,22 @@
 import {Category} from '../interfaces/Category';
 import {Action, State, StateContext} from '@ngxs/store';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {GetCategories} from '../actions/category.action';
+import {AddWinner, GetCategories} from '../actions/category.action';
 import {Injectable} from '@angular/core';
 import * as _ from 'underscore';
+import {Winner} from '../interfaces/Winner';
+import produce from 'immer';
+import {WritableDraft} from 'immer/dist/types/types-external';
 
 export class CategoryStateModel {
   categories: Category[];
 }
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @State<CategoryStateModel>({
   name: 'categories',
@@ -41,6 +48,20 @@ export class CategoryState {
         });
         this.stateChanges++;
         console.log('CATEGORIES State Change #' + this.stateChanges);
+      })
+    );
+  }
+
+  @Action(AddWinner)
+  addWinner({getState, setState}: StateContext<CategoryStateModel>, action: AddWinner): Observable<any> {
+    return this.http.post<Winner>('/api/winners', action, httpOptions).pipe(
+      tap(result => {
+        setState(
+          produce(draft => {
+            const category = _.find(draft.categories, c => c.id === action.category_id);
+            category.winners.push(result);
+          })
+        );
       })
     );
   }

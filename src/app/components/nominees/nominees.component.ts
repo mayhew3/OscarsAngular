@@ -116,7 +116,7 @@ export class NomineesComponent implements OnInit {
       });
     } else if (this.winnersMode() && this.personService.isAdmin) {
       this.processingPick = nominee;
-      this.winnersService.addOrDeleteWinner(nominee).subscribe();
+      this.winnersService.addOrDeleteWinner(nominee, this.category).subscribe();
     }
   }
 

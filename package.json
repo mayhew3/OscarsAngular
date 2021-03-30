@@ -37,6 +37,7 @@
     "express": "4.17.1",
     "express-jwt": "6.0.0",
     "fast-sort": "2.2.0",
+    "immer": "9.0.1",
     "jquery": "3.6.0",
     "jwks-rsa": "2.0.1",
     "moment": "2.29.1",
