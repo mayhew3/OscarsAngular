@@ -23,6 +23,8 @@ export class NomineesComponent implements OnInit {
   private processingPick: Nominee;
   @Input() activeContext: ActiveContext;
 
+  mode: string;
+
   // todo: allow multiple groups
   groupNumber = 1;
 
@@ -64,6 +66,9 @@ export class NomineesComponent implements OnInit {
               private systemVarsService: SystemVarsService) { }
 
   ngOnInit(): void {
+    this.route.url.subscribe(url => {
+      this.mode = url[0].path;
+    });
     this.route.params.subscribe(() => {
       this.personService.me$.subscribe(() => {
         if (this.winnersMode()) {
@@ -167,15 +172,15 @@ export class NomineesComponent implements OnInit {
   }
 
   getVotedClass(nominee: Nominee): Observable<string> {
-    return this.isVoted(nominee).pipe(
-      map(isVoted => {
+    return combineLatest([this.isVoted(nominee), this.isWinner(nominee)]).pipe(
+      map(([isVoted, isWinner]) => {
         const classes = [];
 
         if (this.processingPick && this.processingPick.id === nominee.id) {
           classes.push('processing');
         } else if (this.votingMode() && isVoted) {
           classes.push('votedOn');
-        } else if (this.winnersMode() && this.isWinner(nominee)) {
+        } else if (this.winnersMode() && isWinner) {
           classes.push('winner');
         }
 
@@ -195,15 +200,15 @@ export class NomineesComponent implements OnInit {
   }
 
   votingMode(): boolean {
-    return ActiveContext.Vote === this.activeContext;
+    return this.mode === 'votes';
   }
 
   winnersMode(): boolean {
-    return ActiveContext.Winner === this.activeContext;
+    return this.mode === 'winners';
   }
 
   oddsMode(): boolean {
-    return ActiveContext.OddsAssignment === this.activeContext;
+    return this.mode === 'odds';
   }
 
 }
