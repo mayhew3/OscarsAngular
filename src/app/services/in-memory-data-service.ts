@@ -5,8 +5,7 @@ import {MockCategoryList} from './data/categories.mock';
 import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';
 import {Vote} from '../interfaces/Vote';
-import {Event} from '../interfaces/Event';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {MockSystemVars} from './data/system.vars.mock';
 import {MockWinnerList} from './data/winners.mock';
 import {MockEvents} from './data/event.mock';
@@ -108,7 +107,7 @@ export class InMemoryDataService implements InMemoryDbService {
     if (requestInfo.collectionName === 'votes') {
       const existingVote = this.existingVote(requestInfo);
       if (existingVote) {
-        return this.updateVote(requestInfo, existingVote);
+        ArrayUtil.removeFromArray(this.votes, existingVote);
       }
     } else if (requestInfo.collectionName === 'winners') {
       this.addWinner(requestInfo);
@@ -347,13 +346,6 @@ export class InMemoryDataService implements InMemoryDbService {
     });
   }
 
-  private existingCategoryForWinner(nomination_id: number): Category {
-    const results = _.filter(this.categories, category => {
-      return !!_.findWhere(category.winners, {nomination_id});
-    });
-    return _.first(results);
-  }
-
   private existingCategoryForWinnerID(winner_id: number): Category {
     const results = _.filter(this.categories, category => {
       return !!_.findWhere(category.winners, {id: winner_id});
@@ -366,20 +358,6 @@ export class InMemoryDataService implements InMemoryDbService {
       return !!_.findWhere(category.nominees, {id: nomination_id});
     });
     return _.first(results);
-  }
-
-  private updateVote(requestInfo: RequestInfo, existingVote: Vote): Observable<Response> {
-    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
-    existingVote.nomination_id = jsonBody.nomination_id;
-
-    const options: ResponseOptions = {
-      body: existingVote,
-      status: STATUS.OK
-    };
-
-    const finishedOptions = InMemoryDataService.finishOptions(options, requestInfo);
-
-    return requestInfo.utils.createResponse$(() => finishedOptions);
   }
 
   private updateObject(jsonBody: any): void {

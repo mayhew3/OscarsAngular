@@ -6,7 +6,6 @@ import {CategoryService} from '../../services/category.service';
 import * as _ from 'underscore';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
-import {Vote} from '../../interfaces/Vote';
 import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
 import {PersonService} from '../../services/person.service';
@@ -45,10 +44,6 @@ export class NomineesComponent implements OnInit {
       const category_id = +params.category_id;
       return this.categoryService.getPreviousCategory(category_id);
     })
-  );
-
-  votedNominee$: Observable<Nominee> = this.category$.pipe(
-    map(category => _.findWhere(category.nominees, {id: category.voted_on}))
   );
 
   winningNominees$: Observable<Nominee[]> = this.category$.pipe(
@@ -92,17 +87,14 @@ export class NomineesComponent implements OnInit {
     this.personService.me$.subscribe(me => {
       if (this.votingMode()) {
         this.processingPick$.next(nominee);
-        this.votesService.addOrUpdateVote(nominee, me).subscribe((vote: Vote) => {
-          // todo: MA-40 - this sucks, better way to check for error response.
-          if (vote && vote.id) {
-            // this.votedNominee = nominee;
-            category.voted_on = nominee.id;
-          }
+        this.votesService.addOrUpdateVote(nominee, me).subscribe(() => {
           this.processingPick$.next(undefined);
         });
       } else if (this.winnersMode() && this.personService.isAdmin) {
         this.processingPick$.next(nominee);
-        this.winnersService.addOrDeleteWinner(nominee, category).subscribe(() => this.processingPick$.next(undefined));
+        this.winnersService.addOrDeleteWinner(nominee, category).subscribe(() => {
+          this.processingPick$.next(undefined);
+        });
       }
     });
   }
@@ -147,8 +139,15 @@ export class NomineesComponent implements OnInit {
   }
 
   isVoted(nominee: Nominee): Observable<boolean> {
-    return this.votedNominee$.pipe(
-      map(votedNominee => !!votedNominee && votedNominee.id === nominee.id)
+    return this.category$.pipe(
+      mergeMap(category => this.votesService.getMyVoteForCurrentYearAndCategory(category)),
+      map(vote => !!vote && vote.nomination_id === nominee.id)
+    );
+  }
+
+  isWinner(nominee: Nominee): Observable<boolean> {
+    return this.winningNominees$.pipe(
+      map(winningNominees => !!winningNominees && winningNominees.includes(nominee))
     );
   }
 
@@ -179,12 +178,6 @@ export class NomineesComponent implements OnInit {
 
         return classes.join(' ');
       })
-    );
-  }
-
-  isWinner(nominee: Nominee): Observable<boolean> {
-    return this.winningNominees$.pipe(
-      map(winningNominees => !!winningNominees && winningNominees.includes(nominee))
     );
   }
 

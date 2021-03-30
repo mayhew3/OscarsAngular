@@ -11,7 +11,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Person} from '../../interfaces/Person';
-import {map} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {PersonService} from '../../services/person.service';
 
@@ -134,16 +134,20 @@ export class CategoriesComponent implements OnInit {
       undefined;
   }
 
-  getVotedClass(category: Category): string {
-    if (this.votingMode() && category.voted_on) {
-      return 'votedOn';
-    } else {
-      const winnersForCurrentYear = category.winners;
-      if (this.winnersMode() && winnersForCurrentYear && winnersForCurrentYear.length > 0) {
-        return 'winner';
-      }
-    }
-    return '';
+  getVotedClass(category: Category): Observable<string> {
+    return this.votesService.getMyVoteForCurrentYearAndCategory(category).pipe(
+      map(vote => {
+        if (this.votingMode() && !!vote) {
+          return 'votedOn';
+        } else {
+          const winnersForCurrentYear = category.winners;
+          if (this.winnersMode() && winnersForCurrentYear && winnersForCurrentYear.length > 0) {
+            return 'winner';
+          }
+        }
+        return '';
+      })
+    );
   }
 
   showCategories(): Observable<boolean> {
@@ -283,7 +287,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   private getPick(person: Person, category: Category): Observable<Nominee> {
-    return this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category).pipe(
+    return this.votesService.getVoteForCurrentYearAndPersonAndCategory(person, category).pipe(
       map(myVote => {
         if (!!myVote) {
           return _.findWhere(category.nominees, {id: myVote.nomination_id});
