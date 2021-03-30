@@ -45,47 +45,10 @@ export class VotesService {
     this.systemVarsService.systemVars.pipe(
       distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
     ).subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
-
-    const persons$ = this.personService.persons;
-    const categories$ = this.categoryService.categories;
-
-    combineLatest([persons$, categories$, this.votes])
-      .subscribe(([persons, categories, votes]) => {
-        this.updatePersonScores(persons, categories, votes);
-      });
   }
 
   stillLoading(): boolean {
     return this.isLoading;
-  }
-
-  private updatePersonScores(persons: Person[], categories: Category[], votes: Vote[]): void {
-    _.forEach(persons, person => {
-      let score = 0;
-      let numVotes = 0;
-      _.forEach(categories, category => {
-        const personVote = _.findWhere(votes, {
-          person_id: person.id,
-          category_id: category.id
-        });
-        if (personVote) {
-          numVotes++;
-          if (category.winners.length > 0) {
-            const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
-            if (!!existingWinner) {
-              score += category.points;
-            }
-          }
-        }
-      });
-      person.score = score;
-      person.num_votes = numVotes;
-    });
-  }
-
-  // noinspection JSMethodCanBeStatic
-  private getWinnerForNominee(category: Category, nomination_id: number): Winner {
-    return _.findWhere(category.winners, {nomination_id});
   }
 
   // SCOREBOARD

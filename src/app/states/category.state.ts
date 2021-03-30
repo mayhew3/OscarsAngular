@@ -8,7 +8,6 @@ import {Injectable} from '@angular/core';
 import * as _ from 'underscore';
 import {Winner} from '../interfaces/Winner';
 import produce from 'immer';
-import {WritableDraft} from 'immer/dist/types/types-external';
 import {ArrayUtil} from '../utility/ArrayUtil';
 
 export class CategoryStateModel {

@@ -1,10 +1,16 @@
 import {Person} from '../interfaces/Person';
 import {Action, State, StateContext} from '@ngxs/store';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {GetPersons} from '../actions/person.action';
+import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {Injectable} from '@angular/core';
+import produce from 'immer';
+import _ from 'underscore';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 export class PersonStateModel {
   persons: Person[];
@@ -34,6 +40,24 @@ export class PersonState {
         });
         this.stateChanges++;
         console.log('PERSONS State Change #' + this.stateChanges);
+      })
+    );
+  }
+
+  @Action(ChangeOddsView)
+  changeOddsView({getState, setState}: StateContext<PersonStateModel>, action: ChangeOddsView): Observable<any> {
+    const data = {
+      id: action.person_id,
+      odds_filter: action.odds_filter
+    };
+    return this.http.put<any>('/api/persons', data, httpOptions).pipe(
+      tap(() => {
+        setState(
+          produce(draft => {
+            const existing = _.findWhere(draft.persons, {id: action.person_id});
+            existing.odds_filter = action.odds_filter;
+          })
+        );
       })
     );
   }

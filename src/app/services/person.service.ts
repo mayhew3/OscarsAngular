@@ -6,7 +6,7 @@ import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
 import {Store} from '@ngxs/store';
-import {GetPersons} from '../actions/person.action';
+import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {MyAuthService} from './auth/my-auth.service';
 
 const httpOptions = {
@@ -96,11 +96,8 @@ export class PersonService implements OnDestroy {
 
   // DATA HELPERS
 
-  updatePerson(person: Person): Observable<any> {
-    return this.http.put(this.personsUrl, person, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('updatePerson', person))
-      );
+  updatePerson(person: Person, oddsKey: string): Observable<any> {
+    return this.store.dispatch(new ChangeOddsView(person.id, oddsKey));
   }
 
   /**

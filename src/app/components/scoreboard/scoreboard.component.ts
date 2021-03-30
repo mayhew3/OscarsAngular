@@ -23,10 +23,12 @@ import {VotesService} from '../../services/votes.service';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
-  persons: Person[];
+  persons: Person[] = [];
   latestCategory: Category;
   me: Person;
   updatingOddsFilter = false;
+
+  scoreData = new Map<number, ScoreData>();
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
@@ -34,33 +36,31 @@ export class ScoreboardComponent implements OnInit {
               private oddsService: OddsService,
               private auth: MyAuthService,
               private socket: SocketService) {
-    this.persons = [];
   }
 
   ngOnInit(): void {
-    this.personService.getPersonsForGroup(1).subscribe(persons => {
-      this.persons = persons;
-      this.personService.me$.subscribe(person => {
-        this.me = person;
-        this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
+    this.initScoreData();
 
-        this.voteService.votes.subscribe(() => {
-          this.fastSortPersons();
-          this.socket.on('reconnect', () => {
-            console.log('Reconnect event triggered! Refreshing data!');
-            this.refreshData();
-          });
-        });
+    this.personService.me$.subscribe(person => {
+      this.me = person;
+      this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
 
-        this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-          this.clearSortingOdds();
-          // this.updateScoreboard().subscribe();
-        });
-        this.oddsService.subscribeToOddsEvents().subscribe(() => {
-          this.fastSortPersons();
+      this.voteService.votes.subscribe(() => {
+        this.socket.on('reconnect', () => {
+          console.log('Reconnect event triggered! Refreshing data!');
+          this.refreshData();
         });
 
       });
+
+      this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+        this.clearSortingOdds();
+        // this.updateScoreboard().subscribe();
+      });
+      this.oddsService.subscribeToOddsEvents().subscribe(() => {
+        this.fastSortPersons();
+      });
+
     });
   }
 
@@ -68,6 +68,34 @@ export class ScoreboardComponent implements OnInit {
     if (this.personService.isAdmin) {
       this.refreshData();
     }
+  }
+
+  initScoreData(): void {
+    combineLatest([this.categoryService.categories, this.voteService.votes, this.personService.getPersonsForGroup(1)])
+      .subscribe(([categories, votes, persons]) => {
+        this.persons = persons;
+        _.forEach(persons, person => {
+          let score = 0;
+          let numVotes = 0;
+          _.forEach(categories, category => {
+            const personVote = _.findWhere(votes, {
+              person_id: person.id,
+              category_id: category.id
+            });
+            if (personVote) {
+              numVotes++;
+              if (category.winners.length > 0) {
+                const existingWinner = _.findWhere(category.winners, {nomination_id: personVote.nomination_id});
+                if (!!existingWinner) {
+                  score += category.points;
+                }
+              }
+            }
+          });
+          this.scoreData.set(person.id, new ScoreData(person, score, numVotes));
+        });
+        this.fastSortPersons();
+      });
   }
 
   getOddsStyle(person: Person): string {
@@ -227,18 +255,6 @@ export class ScoreboardComponent implements OnInit {
   oddsDirectionClass(person: Person): string {
     return this.oddsDirection(person) > 0 ? 'oddsDiffGood' : 'oddsDiffBad';
   }
-/*
-
-  updateScoreboard(): Observable<any> {
-    return new Observable<any>(observer => {
-      this.categoryService.populatePersonScores(this.persons).subscribe(() => {
-        this.fastSortPersons();
-        this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
-        observer.next();
-      });
-    });
-  }
-*/
 
   getLastTimeAgo(): string {
     if (this.latestCategory) {
@@ -326,20 +342,28 @@ export class ScoreboardComponent implements OnInit {
     return _.map(winners, winner => this.personService.getFullName(winner));
   }
 
+  getScore(person: Person): ScoreData {
+    return this.scoreData.get(person.id);
+  }
+
   fastSortPersons(): void {
     // noinspection JSUnusedGlobalSymbols
-    _.forEach(this.persons, person => person.sortingOdds = this.getSortingOddsForPerson(person));
     fast_sort(this.persons)
       .by([
-        { desc: person => person.score},
-        { desc: person => person.sortingOdds},
+        { desc: person => this.getScore(person).score},
+        { desc: person => this.getSortingOddsForPerson(person)},
         { desc: person => this.isMe(person)},
         { asc: person => person.first_name},
       ]);
   }
 
+  get allScores(): ScoreData[] {
+    return Array.from(this.scoreData.values());
+  }
+
   getRank(person: Person): string {
-    const myRank = _.filter(this.persons, otherPerson => otherPerson.score > person.score).length + 1;
+    const myScore = this.getScore(person).score;
+    const myRank = _.filter(this.allScores, otherScoreData => otherScoreData.score > myScore).length + 1;
     return moment.localeData().ordinal(myRank);
   }
 
@@ -348,7 +372,8 @@ export class ScoreboardComponent implements OnInit {
   }
 
   anyoneIsHigherInRankings(person: Person): boolean {
-    return this.persons.filter(otherPerson => otherPerson.score > person.score).length > 0;
+    const myScore = this.getScore(person).score;
+    return this.allScores.filter(otherPerson => otherPerson.score > myScore).length > 0;
   }
 
   scorecardClass(person: Person): string {
@@ -396,20 +421,22 @@ export class ScoreboardComponent implements OnInit {
   }
 
   isMe(person: Person): boolean {
-    return person.id === this.me.id;
+    return !!this.me && person.id === this.me.id;
   }
 
   public getVoters(): Person[] {
     // noinspection TypeScriptValidateJSTypes
-    return _.filter(this.persons, person => !!person.num_votes);
+    return _.filter(this.persons, person => {
+      const score = this.getScore(person);
+      return !!score.score;
+    });
   }
 
   /* FILTER OPTIONS */
 
   changeOddsOption(oddsKey: string): void {
-    this.me.odds_filter = oddsKey;
     this.updatingOddsFilter = true;
-    this.personService.updatePerson(this.me).subscribe(() => {
+    this.personService.updatePerson(this.me, oddsKey).subscribe(() => {
       this.updatingOddsFilter = false;
     });
   }
@@ -424,5 +451,12 @@ export class ScoreboardComponent implements OnInit {
     return this.categoryService.getCategoriesWithWinners().pipe(
       map(categories => categories.length)
     );
+  }
+}
+
+class ScoreData {
+  constructor(public person: Person,
+              public score: number,
+              public num_votes: number) {
   }
 }
