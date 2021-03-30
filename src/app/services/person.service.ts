@@ -24,15 +24,14 @@ export class PersonService implements OnDestroy {
 
   isAdmin: boolean = null;
 
-  persons: Observable<Person[]>;
+  persons: Observable<Person[]> = this.store.select(state => state.persons).pipe(
+    map(state => state.persons),
+    filter(persons => !!persons)
+  );
 
   me$ = this.auth.userEmail$.pipe(
     mergeMap(email => this.getPersonWithEmail(email)),
-    filter(person => !!person),
-    tap(me => {
-      // console.log('me changed: ' + me.email);
-      this.isAdmin = (me.role === 'admin');
-    })
+    filter(person => !!person)
   );
 
   constructor(private http: HttpClient,
@@ -41,13 +40,8 @@ export class PersonService implements OnDestroy {
               private store: Store) {
     this._fetching = true;
     this.store.dispatch(new GetPersons());
-    this.persons = this.store.select(state => state.persons).pipe(
-      map(state => state.persons),
-      filter(persons => !!persons),
-      tap(() => {
-        this._fetching = false;
-      })
-    );
+    this.persons.subscribe(() => this._fetching = false);
+    this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
   }
 
   // REAL METHODS

@@ -12,7 +12,7 @@ import {WinnersService} from '../../services/winners.service';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {map, mergeMap} from 'rxjs/operators';
-import {combineLatest, Observable} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-nominees',
@@ -20,7 +20,7 @@ import {combineLatest, Observable} from 'rxjs';
   styleUrls: ['./nominees.component.scss']
 })
 export class NomineesComponent implements OnInit {
-  private processingPick: Nominee;
+  private processingPick$ = new BehaviorSubject<Nominee>(undefined);
   @Input() activeContext: ActiveContext;
 
   // todo: allow multiple groups
@@ -64,17 +64,11 @@ export class NomineesComponent implements OnInit {
               private systemVarsService: SystemVarsService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(() => {
-      this.personService.me$.subscribe(() => {
-        if (this.winnersMode()) {
-          this.personService.getPersonsForGroup(1).subscribe(() => {
-            this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-              this.processingPick = undefined;
-            });
-          });
-        }
+    if (this.winnersMode()) {
+      this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+        this.processingPick$.next( undefined);
       });
-    });
+    }
   }
 
   personsForNominee(nominee: Nominee, category: Category): Observable<Person[]> {
@@ -97,18 +91,18 @@ export class NomineesComponent implements OnInit {
   submitVoteOrWinner(nominee: Nominee, category: Category): void {
     this.personService.me$.subscribe(me => {
       if (this.votingMode()) {
-        this.processingPick = nominee;
+        this.processingPick$.next(nominee);
         this.votesService.addOrUpdateVote(nominee, me).subscribe((vote: Vote) => {
           // todo: MA-40 - this sucks, better way to check for error response.
           if (vote && vote.id) {
             // this.votedNominee = nominee;
             category.voted_on = nominee.id;
           }
-          this.processingPick = undefined;
+          this.processingPick$.next(undefined);
         });
       } else if (this.winnersMode() && this.personService.isAdmin) {
-        this.processingPick = nominee;
-        this.winnersService.addOrDeleteWinner(nominee, category).subscribe(() => this.processingPick = undefined);
+        this.processingPick$.next(nominee);
+        this.winnersService.addOrDeleteWinner(nominee, category).subscribe(() => this.processingPick$.next(undefined));
       }
     });
   }
@@ -167,11 +161,11 @@ export class NomineesComponent implements OnInit {
   }
 
   getVotedClass(nominee: Nominee): Observable<string> {
-    return combineLatest([this.isVoted(nominee), this.isWinner(nominee)]).pipe(
-      map(([isVoted, isWinner]) => {
+    return combineLatest([this.isVoted(nominee), this.isWinner(nominee), this.processingPick$.asObservable()]).pipe(
+      map(([isVoted, isWinner, processingPick]) => {
         const classes = [];
 
-        if (this.processingPick && this.processingPick.id === nominee.id) {
+        if (!!processingPick && processingPick.id === nominee.id) {
           classes.push('processing');
         } else if (this.votingMode() && isVoted) {
           classes.push('votedOn');
