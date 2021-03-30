@@ -6,7 +6,7 @@
       <div *ngIf="showOdds()"
            class="row align-items-center">
         <div class="col-3 align-items-center totalOdds">
-          {{totalOddsVegas() | number: '1.0-0'}}%
+          {{totalOddsVegas() | async | number: '1.0-0'}}%
         </div>
         <div class="col-3 align-items-center totalOdds">
           {{totalOdds('expert')}}%
@@ -16,7 +16,7 @@
         </div>
         <div class="col-3">
           <button class="btn btn-info"
-                  [disabled]="!hasChanges()"
+                  [disabled]="!(hasChanges() | async)"
                   (click)="submitOdds()">
             Submit
           </button>
@@ -26,8 +26,8 @@
       <div class="row flex-fill">
         <div class="col-12 justify-content-center">
           <button class="btn btn-success"
-                  *ngIf="prev"
-                  [routerLink]="['/', baseLink(), prev.id]">
+                  *ngIf="prev | async"
+                  [routerLink]="['/', baseLink(), (prev | async).id]">
             Prev
           </button>
 
@@ -35,8 +35,8 @@
                   [routerLink]="['/', baseLink()]">Up</button>
 
           <button class="btn btn-success"
-                  *ngIf="next"
-                  [routerLink]="['/', baseLink(), next.id]">
+                  *ngIf="next | async"
+                  [routerLink]="['/', baseLink(), (next | async).id]">
             Next
           </button>
         </div>
@@ -45,10 +45,10 @@
       <div class="row"
            *ngIf="votingMode()">
         <div class="col-12 text-right">
-          {{numVotesComplete()}}/{{this.categoryCount}}
+          {{numVotesComplete() | async}}/{{this.categoryCount | async}}
         </div>
         <div class="col-12">
-          <ngb-progressbar type="success" [value]="percentVotesComplete()"></ngb-progressbar>
+          <ngb-progressbar type="success" [value]="(numVotesComplete() | async) * 100 / (categoryCount | async)"></ngb-progressbar>
         </div>
       </div>
 

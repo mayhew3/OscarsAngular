@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {Nominee} from '../../interfaces/Nominee';
 import * as _ from 'underscore';
-import {forkJoin, Observable} from 'rxjs';
+import {combineLatest, forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
@@ -16,12 +16,15 @@ import {PersonService} from '../../services/person.service';
 })
 export class CategoryHopperComponent implements OnInit {
 
-  @Input() next: Category;
-  @Input() prev: Category;
-  @Input() nominees: Nominee[];
+  @Input() next: Observable<Category>;
+  @Input() prev: Observable<Category>;
+  @Input() category: Observable<Category>;
+  @Input() nominees: Observable<Nominee[]>;
   @Input() activeContext: ActiveContext;
   private readonly contextUrls: string[];
-  categoryCount: number;
+  categoryCount = this.categoryService.categories.pipe(
+    map(categories => categories.length)
+  );
 
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
@@ -30,11 +33,6 @@ export class CategoryHopperComponent implements OnInit {
     this.contextUrls[ActiveContext.Vote] = 'vote';
     this.contextUrls[ActiveContext.OddsAssignment] = 'odds';
     this.contextUrls[ActiveContext.Winner] = 'winners';
-
-    this.categoryService.categories.subscribe(categories => {
-      this.categoryCount = categories.length;
-    });
-    // this.categoryService.maybeRefreshCache();
   }
 
   ngOnInit(): void {
@@ -56,12 +54,6 @@ export class CategoryHopperComponent implements OnInit {
     );
   }
 
-  percentVotesComplete(): Observable<number> {
-    return this.numVotesComplete().pipe(
-      map(voteCount => !!this.categoryCount ? (voteCount * 100) / this.categoryCount : 0)
-    );
-  }
-
   showOdds(): boolean {
     return ActiveContext.OddsAssignment === this.activeContext;
   }
@@ -71,11 +63,16 @@ export class CategoryHopperComponent implements OnInit {
     return this.oddsCalc(odds_nums);
   }
 
-  totalOddsVegas(): number {
-    const odds_nums = _.map(this.nominees, (nominee) => this.vegasCalc(nominee.odds_numerator, nominee.odds_denominator));
-    return this.oddsCalc(odds_nums);
+  totalOddsVegas(): Observable<number> {
+    return this.nominees.pipe(
+      map(nominees => {
+        const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee.odds_numerator, nominee.odds_denominator));
+        return this.oddsCalc(odds_nums);
+      })
+    );
   }
 
+  // noinspection JSMethodCanBeStatic
   private vegasCalc(numerator?: number, denominator?: number): number {
     if (!numerator || !denominator) {
       return 0;
@@ -84,24 +81,30 @@ export class CategoryHopperComponent implements OnInit {
     }
   }
 
+  // noinspection JSMethodCanBeStatic
   private oddsCalc(odds_nums: number[]): number {
     const compacted = _.compact(odds_nums);
     const total_num = _.reduce(compacted, (memo, later) => memo + later);
     return total_num ? total_num : 0;
   }
 
-  private getChanges(): Nominee[] {
-    return _.filter(this.nominees, (nominee) =>
-      nominee.original_odds_expert !== nominee.odds_expert ||
-      nominee.original_odds_user !== nominee.odds_user ||
-      nominee.original_odds_numerator !== nominee.odds_numerator ||
-      nominee.original_odds_denominator !== nominee.odds_denominator
+  private getChanges(): Observable<Nominee[]> {
+    return this.category.pipe(
+      map(category => {
+        return _.filter(category.nominees, (nominee) =>
+          nominee.original_odds_expert !== nominee.odds_expert ||
+          nominee.original_odds_user !== nominee.odds_user ||
+          nominee.original_odds_numerator !== nominee.odds_numerator ||
+          nominee.original_odds_denominator !== nominee.odds_denominator
+        );
+      })
     );
   }
 
-  hasChanges(): boolean {
-    const filtered = this.getChanges();
-    return filtered.length > 0;
+  hasChanges(): Observable<boolean> {
+    return this.getChanges().pipe(
+      map(filtered => filtered.length > 0)
+    );
   }
 
   submitOdds(): void {
@@ -116,13 +119,17 @@ export class CategoryHopperComponent implements OnInit {
     });
   }
 
-  private clearOriginals(): void {
-    _.forEach(this.nominees, (nominee) => {
-      nominee.original_odds_expert = nominee.odds_expert;
-      nominee.original_odds_user = nominee.odds_user;
-      nominee.original_odds_numerator = nominee.odds_numerator;
-      nominee.original_odds_denominator = nominee.odds_denominator;
-    });
+  private clearOriginals(): Observable<void> {
+    return this.category.pipe(
+      map(category => {
+        _.forEach(category.nominees, (nominee) => {
+          nominee.original_odds_expert = nominee.odds_expert;
+          nominee.original_odds_user = nominee.odds_user;
+          nominee.original_odds_numerator = nominee.odds_numerator;
+          nominee.original_odds_denominator = nominee.odds_denominator;
+        });
+      })
+    );
   }
 
 }
