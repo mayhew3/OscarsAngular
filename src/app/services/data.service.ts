@@ -5,7 +5,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject} from 'rxjs';
 import * as _ from 'underscore';
 import {SystemVars} from '../interfaces/SystemVars';
-import {concatMap, filter, map} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import {Category} from '../interfaces/Category';
 import {MyAuthService} from './auth/my-auth.service';
 import {Person} from '../interfaces/Person';
@@ -24,7 +24,7 @@ export class DataService implements OnDestroy {
   private maxYear: DataCache<MaxYear>;
 
   me$ = this.auth.userEmail$.pipe(
-    concatMap(email => this.getPersonWithEmail(email)),
+    mergeMap(email => this.getPersonWithEmail(email)),
     filter(person => !!person)
   );
 

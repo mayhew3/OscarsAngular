@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
-import {concatMap, first, map} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {PersonService} from '../../services/person.service';
 import {Person} from '../../interfaces/Person';
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   numVotesRemaining(): Observable<number> {
     const categoryCount$ = this.categoryCount();
     const votes$ = this.personService.me$.pipe(
-      concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me))
+      mergeMap(me => this.votesService.getVotesForCurrentYearAndPerson(me))
     );
     return combineLatest([categoryCount$, votes$]).pipe(
       map(([categoryCount, votes]) => !!categoryCount ? categoryCount - votes.length : 0)

@@ -23,8 +23,6 @@ export class NomineesComponent implements OnInit {
   private processingPick: Nominee;
   @Input() activeContext: ActiveContext;
 
-  mode: string;
-
   // todo: allow multiple groups
   groupNumber = 1;
 
@@ -66,9 +64,6 @@ export class NomineesComponent implements OnInit {
               private systemVarsService: SystemVarsService) { }
 
   ngOnInit(): void {
-    this.route.url.subscribe(url => {
-      this.mode = url[0].path;
-    });
     this.route.params.subscribe(() => {
       this.personService.me$.subscribe(() => {
         if (this.winnersMode()) {
@@ -200,15 +195,15 @@ export class NomineesComponent implements OnInit {
   }
 
   votingMode(): boolean {
-    return this.mode === 'votes';
+    return ActiveContext.Vote === this.activeContext;
   }
 
   winnersMode(): boolean {
-    return this.mode === 'winners';
+    return ActiveContext.Winner === this.activeContext;
   }
 
   oddsMode(): boolean {
-    return this.mode === 'odds';
+    return ActiveContext.OddsAssignment === this.activeContext;
   }
 
 }

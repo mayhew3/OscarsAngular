@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, concatMap, distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
+import {catchError, distinctUntilChanged, filter, map, mergeMap, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -296,7 +296,7 @@ export class CategoryService implements OnDestroy {
     const category$ = this.getCategoryForNomination(msg.nomination_id);
 
     return combineLatest([year$, category$]).pipe(
-      concatMap(([year, category]) => {
+      mergeMap(([year, category]) => {
         console.log(`Received winner message: ${JSON.stringify(msg)}`);
         const winner: Winner = {
           id: msg.winner_id,

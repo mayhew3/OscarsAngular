@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, Subject} from 'rxjs';
-import {catchError, concatMap, filter, map, tap} from 'rxjs/operators';
+import {catchError, filter, map, mergeMap, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
@@ -27,7 +27,7 @@ export class PersonService implements OnDestroy {
   persons: Observable<Person[]>;
 
   me$ = this.auth.userEmail$.pipe(
-    concatMap(email => this.getPersonWithEmail(email)),
+    mergeMap(email => this.getPersonWithEmail(email)),
     filter(person => !!person),
     tap(me => {
       // console.log('me changed: ' + me.email);

@@ -6,7 +6,7 @@ import {forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
-import {concatMap, map} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
 
 @Component({
@@ -51,7 +51,7 @@ export class CategoryHopperComponent implements OnInit {
 
   numVotesComplete(): Observable<number> {
     return this.personService.me$.pipe(
-      concatMap(me => this.votesService.getVotesForCurrentYearAndPerson(me)),
+      mergeMap(me => this.votesService.getVotesForCurrentYearAndPerson(me)),
       map(votes => votes.length)
     );
   }
