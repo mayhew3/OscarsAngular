@@ -14,6 +14,7 @@ import {MockOdds} from './data/odds.mock';
 import {MockFinalResultsList} from './data/finalresults.mock';
 import {Category} from '../interfaces/Category';
 import {InMemoryCallbacksService} from './in-memory-callbacks.service';
+import {ArrayUtil} from '../utility/ArrayUtil';
 
 @Injectable({
   providedIn: 'root',
@@ -110,7 +111,14 @@ export class InMemoryDataService implements InMemoryDbService {
         return this.updateVote(requestInfo, existingVote);
       }
     } else if (requestInfo.collectionName === 'winners') {
-      this.addOrDeleteWinner(requestInfo);
+      this.addWinner(requestInfo);
+    }
+    return undefined;
+  }
+
+  delete(requestInfo: RequestInfo): Observable<Response> {
+    if (requestInfo.collectionName === 'winners') {
+      this.removeWinner(requestInfo);
     }
     return undefined;
   }
@@ -147,32 +155,42 @@ export class InMemoryDataService implements InMemoryDbService {
     }
   }
 
-  private addOrDeleteWinner(requestInfo: RequestInfo): void {
+  private addWinner(requestInfo: RequestInfo): void {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
-    const categoryForExistingWinner = this.existingCategoryForWinner(jsonBody.nomination_id);
 
     let socketMsg;
-    if (!!categoryForExistingWinner) {
-      const existingWinner = _.findWhere(categoryForExistingWinner.winners, {nomination_id: jsonBody.nomination_id});
-      categoryForExistingWinner.winners = _.without(categoryForExistingWinner.winners, existingWinner);
-      socketMsg = {
-        detail: 'delete',
-        nomination_id: jsonBody.nomination_id,
-        event_id: 1,
-        event_time: new Date()
-      };
-    } else {
-      const categoryForNominee = this.categoryForNominee(jsonBody.nomination_id);
-      categoryForNominee.winners.push(jsonBody);
-      socketMsg = {
-        detail: 'add',
-        nomination_id: jsonBody.nomination_id,
-        event_id: 1,
-        event_time: new Date(),
-        winner_id: 1234,
-        declared: new Date(),
-      };
-    }
+
+    const categoryForNominee = this.categoryForNominee(jsonBody.nomination_id);
+    jsonBody.id = this.genWinnerId();
+    categoryForNominee.winners.push(jsonBody);
+    socketMsg = {
+      detail: 'add',
+      nomination_id: jsonBody.nomination_id,
+      event_id: 1,
+      event_time: new Date(),
+      winner_id: 1234,
+      declared: new Date(),
+    };
+
+    const callbacks = this.getCallbacks('winner');
+    _.forEach(callbacks, callback => callback(socketMsg));
+
+    this.sendUpdatedOdds();
+  }
+
+  private removeWinner(requestInfo: RequestInfo): void {
+    const winner_id = requestInfo.id;
+
+    const categoryForExistingWinner = this.existingCategoryForWinnerID(winner_id);
+    const winner = _.findWhere(categoryForExistingWinner.winners, {id: winner_id});
+    ArrayUtil.removeFromArray(categoryForExistingWinner.winners, winner);
+
+    const socketMsg = {
+      detail: 'delete',
+      nomination_id: winner.nomination_id,
+      event_id: 1,
+      event_time: new Date()
+    };
 
     const callbacks = this.getCallbacks('winner');
     _.forEach(callbacks, callback => callback(socketMsg));
@@ -296,6 +314,15 @@ export class InMemoryDataService implements InMemoryDbService {
     return existingVote ? existingVote.nomination_id : undefined;
   }
 
+  genWinnerId(): number {
+    const winners = _.flatten(_.map(this.categories, c => c.winners));
+    if (winners.length === 0) {
+      return 1;
+    } else {
+      return _.max(_.map(winners, w => w.id)) + 1;
+    }
+  }
+
   private updateNomination(requestInfo: RequestInfo): Observable<Response> {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     this.updateObject(jsonBody);
@@ -323,6 +350,13 @@ export class InMemoryDataService implements InMemoryDbService {
   private existingCategoryForWinner(nomination_id: number): Category {
     const results = _.filter(this.categories, category => {
       return !!_.findWhere(category.winners, {nomination_id});
+    });
+    return _.first(results);
+  }
+
+  private existingCategoryForWinnerID(winner_id: number): Category {
+    const results = _.filter(this.categories, category => {
+      return !!_.findWhere(category.winners, {id: winner_id});
     });
     return _.first(results);
   }
@@ -360,4 +394,5 @@ export class InMemoryDataService implements InMemoryDbService {
       });
     });
   }
+
 }

@@ -3,12 +3,13 @@ import {Action, State, StateContext} from '@ngxs/store';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {AddWinner, GetCategories} from '../actions/category.action';
+import {AddWinner, GetCategories, RemoveWinner} from '../actions/category.action';
 import {Injectable} from '@angular/core';
 import * as _ from 'underscore';
 import {Winner} from '../interfaces/Winner';
 import produce from 'immer';
 import {WritableDraft} from 'immer/dist/types/types-external';
+import {ArrayUtil} from '../utility/ArrayUtil';
 
 export class CategoryStateModel {
   categories: Category[];
@@ -65,5 +66,21 @@ export class CategoryState {
       })
     );
   }
+
+  @Action(RemoveWinner)
+  removeWinner({getState, setState}: StateContext<CategoryStateModel>, action: RemoveWinner): Observable<any> {
+    return this.http.delete<Winner>(`/api/winners/${action.winner_id}`, httpOptions).pipe(
+      tap(() => {
+        setState(
+          produce(draft => {
+            const category = _.find(draft.categories, c => c.id === action.category_id);
+            const winner = _.findWhere(category.winners, {id: action.winner_id});
+            ArrayUtil.removeFromArray(category.winners, winner);
+          })
+        );
+      })
+    );
+  }
+
 }
 
