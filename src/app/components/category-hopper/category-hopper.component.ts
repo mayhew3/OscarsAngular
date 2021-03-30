@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {Nominee} from '../../interfaces/Nominee';
 import * as _ from 'underscore';
-import {combineLatest, forkJoin, Observable} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
@@ -19,9 +19,11 @@ export class CategoryHopperComponent implements OnInit {
   @Input() next: Observable<Category>;
   @Input() prev: Observable<Category>;
   @Input() category: Observable<Category>;
-  @Input() nominees: Observable<Nominee[]>;
   @Input() activeContext: ActiveContext;
+
+  nominees: Observable<Nominee[]>;
   private readonly contextUrls: string[];
+
   categoryCount = this.categoryService.categories.pipe(
     map(categories => categories.length)
   );
