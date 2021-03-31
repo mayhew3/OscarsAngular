@@ -9,9 +9,8 @@ import * as moment from 'moment';
 import {Winner} from '../../interfaces/Winner';
 import {Nominee} from '../../interfaces/Nominee';
 import {VotesService} from '../../services/votes.service';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Person} from '../../interfaces/Person';
-import {map, mergeMap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {PersonService} from '../../services/person.service';
 

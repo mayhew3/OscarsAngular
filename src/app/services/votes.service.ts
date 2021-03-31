@@ -13,7 +13,6 @@ import {Store} from '@ngxs/store';
 import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
 import {PersonService} from './person.service';
 import {CategoryService} from './category.service';
-import {Winner} from '../interfaces/Winner';
 import {SystemVars} from '../interfaces/SystemVars';
 
 @Injectable({
