@@ -12,6 +12,7 @@ import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'osc-nominees',
@@ -21,6 +22,8 @@ import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 export class NomineesComponent implements OnInit {
   private processingPick$ = new BehaviorSubject<Nominee>(undefined);
   @Input() activeContext: ActiveContext;
+
+  nomineeGroups = new Map<number, NomineeControls>();
 
   // todo: allow multiple groups
   groupNumber = 1;
@@ -64,6 +67,12 @@ export class NomineesComponent implements OnInit {
         this.processingPick$.next( undefined);
       });
     }
+  }
+
+  initGroups(): void {
+    this.category$.subscribe(category => {
+      _.each(category.nominees, n => this.nomineeGroups.set(n.id, new NomineeControls(n)));
+    });
   }
 
   personsForNominee(nominee: Nominee, category: Category): Observable<Person[]> {
@@ -193,4 +202,14 @@ export class NomineesComponent implements OnInit {
     return ActiveContext.OddsAssignment === this.activeContext;
   }
 
+}
+
+export class NomineeControls {
+  expert = new FormControl();
+  user = new FormControl();
+  numerator = new FormControl();
+  denominator = new FormControl();
+
+  constructor(public nominee: Nominee) {
+  }
 }

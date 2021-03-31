@@ -21,3 +21,17 @@ export class RemoveWinner {
               public winner_id: number) {
   }
 }
+
+export interface OddsChange {
+  nomination_id: number;
+  odds_expert: number;
+  odds_user: number;
+  odds_numerator: number;
+  odds_denominator: number;
+}
+
+export class UpdateOdds {
+  static readonly type = '[Category] Update Odds';
+  constructor(public changes: OddsChange[]) {
+  }
+}

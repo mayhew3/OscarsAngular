@@ -8,6 +8,7 @@ import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
 import {map, mergeMap} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
+import {NomineeControls} from '../nominees/nominees.component';
 
 @Component({
   selector: 'osc-category-hopper',
@@ -20,6 +21,7 @@ export class CategoryHopperComponent implements OnInit {
   @Input() prev: Observable<Category>;
   @Input() category: Observable<Category>;
   @Input() activeContext: ActiveContext;
+  @Input() nomineeGroups: NomineeControls[];
 
   nominees: Observable<Nominee[]>;
   private readonly contextUrls: string[];

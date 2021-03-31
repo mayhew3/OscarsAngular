@@ -14,6 +14,7 @@ import {MockFinalResultsList} from './data/finalresults.mock';
 import {Category} from '../interfaces/Category';
 import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
+import {Nominee} from '../interfaces/Nominee';
 
 @Injectable({
   providedIn: 'root',
@@ -111,6 +112,8 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     } else if (requestInfo.collectionName === 'winners') {
       this.addWinner(requestInfo);
+    } else if (requestInfo.collectionName === 'updateOdds') {
+      this.updateOdds(requestInfo);
     }
     return undefined;
   }
@@ -175,6 +178,19 @@ export class InMemoryDataService implements InMemoryDbService {
     _.forEach(callbacks, callback => callback(socketMsg));
 
     this.sendUpdatedOdds();
+  }
+
+  private updateOdds(requestInfo: RequestInfo): void {
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+    const changes = jsonBody.changes;
+
+    _.each(changes, change => {
+      const nominee = this.findNominee(change.nomination_id);
+      nominee.odds_numerator = change.odds_numerator;
+      nominee.odds_denominator = change.odds_denominator;
+      nominee.odds_expert = change.odds_expert;
+      nominee.odds_user = change.odds_user;
+    });
   }
 
   private removeWinner(requestInfo: RequestInfo): void {
@@ -351,6 +367,14 @@ export class InMemoryDataService implements InMemoryDbService {
       return !!_.findWhere(category.winners, {id: winner_id});
     });
     return _.first(results);
+  }
+
+  private findNominee(nomination_id: number): Nominee {
+    return _.chain(this.categories)
+      .map(category => category.nominees)
+      .flatten()
+      .findWhere({id: nomination_id})
+      .value();
   }
 
   private categoryForNominee(nomination_id: number): Category {

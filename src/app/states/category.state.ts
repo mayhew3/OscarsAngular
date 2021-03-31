@@ -3,7 +3,7 @@ import {Action, State, StateContext} from '@ngxs/store';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {AddWinner, GetCategories, RemoveWinner} from '../actions/category.action';
+import {AddWinner, GetCategories, RemoveWinner, UpdateOdds} from '../actions/category.action';
 import {Injectable} from '@angular/core';
 import * as _ from 'underscore';
 import {Winner} from '../interfaces/Winner';
@@ -82,5 +82,27 @@ export class CategoryState {
     );
   }
 
+  @Action(UpdateOdds)
+  updateOdds({getState, setState}: StateContext<CategoryStateModel>, action: UpdateOdds): Observable<any> {
+    return this.http.post('api/oddsChange', action, httpOptions).pipe(
+      tap(() => {
+        setState(
+          produce(draft => {
+            _.each(action.changes, change => {
+              const nominee = _.chain(draft.categories)
+                .map(c => c.nominees)
+                .flatten()
+                .findWhere({id: change.nomination_id})
+                .value();
+              nominee.odds_expert = change.odds_expert;
+              nominee.odds_user = change.odds_user;
+              nominee.odds_numerator = change.odds_numerator;
+              nominee.odds_denominator = change.odds_denominator;
+            });
+          })
+        );
+      })
+    );
+  }
 }
 
