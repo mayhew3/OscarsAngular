@@ -13,6 +13,7 @@ import {Person} from '../../interfaces/Person';
 import {map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {PersonService} from '../../services/person.service';
+import {ArrayUtil} from '../../utility/ArrayUtil';
 
 @Component({
   selector: 'osc-categories',
@@ -45,13 +46,14 @@ export class CategoriesComponent implements OnInit {
   get categoriesSorted$(): Observable<Category[]> {
     return this.categories$.pipe(
       map(categories => {
-        fast_sort(categories)
+        const sorted = ArrayUtil.cloneArray(categories);
+        fast_sort(sorted)
           .by([
             {desc: category => this.mostRecentWinDate(category)},
             {asc: category => category.points},
             {asc: category => category.name}
           ]);
-        return categories;
+        return sorted;
       }
     ));
   }

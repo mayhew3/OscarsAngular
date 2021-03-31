@@ -59,6 +59,7 @@ export class CategoryState {
         setState(
           produce(draft => {
             const category = _.find(draft.categories, c => c.id === action.category_id);
+            result.declared = new Date(result.declared);
             category.winners.push(result);
           })
         );
