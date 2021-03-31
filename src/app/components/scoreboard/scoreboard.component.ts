@@ -427,7 +427,7 @@ export class ScoreboardComponent implements OnInit {
     // noinspection TypeScriptValidateJSTypes
     return _.filter(this.persons, person => {
       const score = this.getScore(person);
-      return !!score.score;
+      return !!score.num_votes;
     });
   }
 

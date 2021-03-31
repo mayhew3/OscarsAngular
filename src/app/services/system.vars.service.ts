@@ -2,15 +2,11 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError, filter, first, map, takeUntil, tap} from 'rxjs/operators';
+import {catchError, filter, map, takeUntil} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
 import {Store} from '@ngxs/store';
-import {GetSystemVars, ToggleVotingLock} from '../actions/systemVars.action';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import {ChangeCurrentYear, GetSystemVars, ToggleVotingLock} from '../actions/systemVars.action';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +19,10 @@ export class SystemVarsService implements OnDestroy {
 
   private _destroy$ = new Subject();
 
-  systemVars: Observable<SystemVars>;
+  systemVars = this.store.select(state => state.systemVars).pipe(
+    map(state => state.systemVars),
+    filter(systemVars => !!systemVars)
+  );
 
   constructor(private http: HttpClient,
               private socket: SocketService,
@@ -31,13 +30,7 @@ export class SystemVarsService implements OnDestroy {
               private store: Store) {
     this._fetching = true;
     this.store.dispatch(new GetSystemVars());
-    this.systemVars = this.store.select(state => state.systemVars).pipe(
-      map(state => state.systemVars),
-      filter(systemVars => !!systemVars),
-      tap(() => {
-        this._fetching = false;
-      })
-    );
+    this.systemVars.subscribe(() => this._fetching = false);
   }
 
   ngOnDestroy(): void {
@@ -101,21 +94,7 @@ export class SystemVarsService implements OnDestroy {
   }
 
   changeCurrentYear(year: number): Observable<any> {
-    const outsideThis = this;
-    return new Observable<any>(observer => {
-      const targetVars = {
-        id: this._dataStore.systemVars.id,
-        voting_open: this._dataStore.systemVars.voting_open,
-        curr_year: year
-      };
-
-      this.http.put(this.systemVarsUrl, targetVars, httpOptions)
-        .pipe(catchError(this.handleError<any>('changeCurrentYear')))
-        .subscribe(() => {
-          outsideThis._dataStore.systemVars.curr_year = year;
-          observer.next();
-        });
-    });
+    return this.store.dispatch(new ChangeCurrentYear(year));
   }
 
   stillLoading(): boolean {

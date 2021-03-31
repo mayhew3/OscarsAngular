@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
-import {GetSystemVars, ToggleVotingLock} from '../actions/systemVars.action';
+import {ChangeCurrentYear, GetSystemVars, ToggleVotingLock} from '../actions/systemVars.action';
 import produce from 'immer';
 
 const httpOptions = {
@@ -26,12 +26,14 @@ export class SystemVarsState {
 
   stateChanges = 0;
 
+  readonly apiUrl = '/api/systemVars';
+
   constructor(private http: HttpClient) {
   }
 
   @Action(GetSystemVars)
   getSystemVars({getState, setState}: StateContext<SystemVarsStateModel>): Observable<any> {
-    return this.http.get<any[]>('/api/systemVars').pipe(
+    return this.http.get<any[]>(this.apiUrl).pipe(
       tap(result => {
         const state = getState();
         setState({
@@ -52,11 +54,29 @@ export class SystemVarsState {
       id: state.systemVars.id,
       voting_open: targetVotingOpen
     };
-    return this.http.put('/api/systemVars', data, httpOptions).pipe(
+    return this.http.put(this.apiUrl, data, httpOptions).pipe(
       tap(() => {
         setState(
           produce(draft => {
             draft.systemVars.voting_open = targetVotingOpen;
+          })
+        );
+      })
+    );
+  }
+
+  @Action(ChangeCurrentYear)
+  changeCurrentYear({getState, setState}: StateContext<SystemVarsStateModel>, action: ChangeCurrentYear): Observable<any> {
+    const state = getState();
+    const data = {
+      id: state.systemVars.id,
+      curr_year: action.year
+    };
+    return this.http.put(this.apiUrl, data, httpOptions).pipe(
+      tap(() => {
+        setState(
+          produce(draft => {
+            draft.systemVars.curr_year = action.year;
           })
         );
       })
