@@ -267,92 +267,53 @@ export class InMemoryDataService implements InMemoryDbService {
     };
   }
 
-  private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<any> {
-    return requestInfo.utils.createResponse$(() => {
-      console.log('HTTP GET override');
+  private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<Response> {
+    console.log('HTTP GET override');
 
-      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
+    const person_id = requestInfo.query.get('person_id')[0];
+    const year = requestInfo.query.get('year')[0];
 
-      const person_id = requestInfo.query.get('person_id')[0];
-      const year = requestInfo.query.get('year')[0];
+    const data = [];
 
-      const data = [];
-
-      _.forEach(requestInfo.collection, category => {
-        const yearNum = +year;
-        const personIDNum = +person_id;
-        const copyCategory: Category = {
-          id: category.id,
-          name: category.name,
-          points: category.points,
-          nominees: _.chain(category.nominees)
-            .where({year: yearNum})
-            .map(this.createNomineeCopy)
-            .value(),
-          voted_on: this.getVoteForCategory(category.id, personIDNum, yearNum),
-          winners: _.where(category.winners, {year: yearNum})
-        };
-        data.push(copyCategory);
-      });
-
-      const options: ResponseOptions = data ?
-        {
-          body: dataEncapsulation ? { data } : data,
-          status: STATUS.OK
-        } :
-        {
-          body: dataEncapsulation ? { } : data,
-          status: STATUS.OK
-        };
-      return InMemoryDataService.finishOptions(options, requestInfo);
+    _.forEach(requestInfo.collection, category => {
+      const yearNum = +year;
+      const personIDNum = +person_id;
+      const copyCategory: Category = {
+        id: category.id,
+        name: category.name,
+        points: category.points,
+        nominees: _.chain(category.nominees)
+          .where({year: yearNum})
+          .map(this.createNomineeCopy)
+          .value(),
+        voted_on: this.getVoteForCategory(category.id, personIDNum, yearNum),
+        winners: _.where(category.winners, {year: yearNum})
+      };
+      data.push(copyCategory);
     });
+
+    return this.packageUpResponse(data, requestInfo);
   }
 
-  private getMaxYear(requestInfo: RequestInfo): Observable<any> {
-    return requestInfo.utils.createResponse$(() => {
-      console.log('HTTP GET override');
+  private getMaxYear(requestInfo: RequestInfo): Observable<Response> {
+    console.log('HTTP GET override');
 
-      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
+    const maxYear = _.max(_.map(this.categories, category => _.max(_.map(category.nominees, nominee => nominee.year))));
+    const data = [{maxYear}];
 
-      const maxYear = _.max(_.map(this.categories, category => _.max(_.map(category.nominees, nominee => nominee.year))));
-      const data = [{maxYear}];
-
-      const options: ResponseOptions = data ?
-        {
-          body: dataEncapsulation ? { data } : data,
-          status: STATUS.OK
-        } :
-        {
-          body: dataEncapsulation ? { } : data,
-          status: STATUS.OK
-        };
-      return InMemoryDataService.finishOptions(options, requestInfo);
-    });
+    return this.packageUpResponse(data, requestInfo);
   }
 
   private getEventsSinceDate(requestInfo: RequestInfo): Observable<Response> {
-    return requestInfo.utils.createResponse$(() => {
-      console.log('HTTP GET override');
+    console.log('HTTP GET override');
 
-      const dataEncapsulation = requestInfo.utils.getConfig().dataEncapsulation;
+    const entries = requestInfo.query.entries();
+    const since_date = entries.next().value[1][0];
 
-      const entries = requestInfo.query.entries();
-      const since_date = entries.next().value[1][0];
+    const data = requestInfo.collection;
+    // const data = _.filter(requestInfo.collection, event => event.event_time > since_date);
 
-      const data = requestInfo.collection;
-      // const data = _.filter(requestInfo.collection, event => event.event_time > since_date);
-
-      const options: ResponseOptions = data ?
-        {
-          body: dataEncapsulation ? { data } : data,
-          status: STATUS.OK
-        } :
-        {
-          body: dataEncapsulation ? { } : data,
-          status: STATUS.OK
-        };
-      return InMemoryDataService.finishOptions(options, requestInfo);
-    });
+    return this.packageUpResponse(data, requestInfo);
   }
 
   private getVoteForCategory(category_id: number, person_id: number, year: number): number {
