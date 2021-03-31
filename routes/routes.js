@@ -36,6 +36,8 @@ module.exports = function(app) {
   privatePut('/nominees', nominees.updateNomination);
   privateGet('/odds', odds.getMostRecentOddsBundle);
 
+  privatePut('/oddsChange', odds.updateOddsForNominees);
+
   privateGet('/persons', persons.getPersons);
   privatePut('/persons', persons.updatePerson);
 
