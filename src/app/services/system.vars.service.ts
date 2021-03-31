@@ -78,6 +78,7 @@ export class SystemVarsService implements OnDestroy {
   }
 
   lockVotingInternal(): void {
+    // todo: first() if end up using this code.
     this.systemVars.subscribe(() => {
       this._dataStore.systemVars.voting_open = false;
     });

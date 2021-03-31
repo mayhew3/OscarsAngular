@@ -14,7 +14,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {SocketService} from '../../services/socket.service';
 import {combineLatest, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
 
 @Component({
@@ -41,17 +41,18 @@ export class ScoreboardComponent implements OnInit {
   ngOnInit(): void {
     this.initScoreData();
 
-    this.personService.me$.subscribe(person => {
-      this.me = person;
-      this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
-
-      this.voteService.votes.subscribe(() => {
+    this.voteService.votes
+      .pipe(first())
+      .subscribe(() => {
         this.socket.on('reconnect', () => {
           console.log('Reconnect event triggered! Refreshing data!');
           this.refreshData();
         });
-
       });
+
+    this.personService.me$.subscribe(person => {
+      this.me = person;
+      this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
 
       this.categoryService.subscribeToWinnerEvents().subscribe(() => {
         this.clearSortingOdds();

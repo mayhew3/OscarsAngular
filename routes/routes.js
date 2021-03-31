@@ -46,7 +46,7 @@ module.exports = function(app) {
 
   privatePost('/winners', winners.addWinner);
   privateDelete('/winners/:id', winners.deleteWinner);
-  privatePatch('/winners', winners.resetWinners);
+  privatePut('/resetWinners', winners.resetWinners);
 
   privateGet('/systemVars', systemVars.getSystemVars);
   privatePut('/systemVars', systemVars.updateSystemVars);

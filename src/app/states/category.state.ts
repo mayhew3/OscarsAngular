@@ -108,9 +108,7 @@ export class CategoryState {
 
   @Action(ResetWinners)
   resetWinners({getState, setState}: StateContext<CategoryStateModel>, action: ResetWinners): Observable<any> {
-    const params = new HttpParams()
-      .set('year', action.year.toString());
-    return this.http.put<Winner>(`/api/resetWinners/`, {params}, httpOptions).pipe(
+    return this.http.put<Winner>(`/api/resetWinners/`, {year: action.year}, httpOptions).pipe(
       tap(() => {
         setState(
           produce(draft => {

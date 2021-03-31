@@ -103,11 +103,13 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   resetWinners(): void {
-    this.systemVarsService.systemVars.subscribe(systemVars => {
-      const year = systemVars.curr_year;
-      this.winnersDeleting = true;
-      this.winnersService.resetWinners(year).subscribe();
-    });
+    this.systemVarsService.systemVars
+      .pipe(first())
+      .subscribe(systemVars => {
+        const year = systemVars.curr_year;
+        this.winnersDeleting = true;
+        this.winnersService.resetWinners(year).subscribe();
+      });
   }
 
   getWinnersButtonClass(): string {
