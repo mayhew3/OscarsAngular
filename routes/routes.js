@@ -42,7 +42,8 @@ module.exports = function(app) {
   privateGet('/votes', votes.getVotes);
   privatePost('/votes', votes.addOrUpdateVote);
 
-  privatePost('/winners', winners.addOrDeleteWinner);
+  privatePost('/winners', winners.addWinner);
+  privateDelete('/winners/:id', winners.deleteWinner);
   privatePatch('/winners', winners.resetWinners);
 
   privateGet('/systemVars', systemVars.getSystemVars);
@@ -67,6 +68,10 @@ module.exports = function(app) {
 
   function privatePatch(endpoint, callback) {
     router.patch(endpoint, authCheck, callback);
+  }
+
+  function privateDelete(endpoint, callback) {
+    router.delete(endpoint, authCheck, callback);
   }
 
   // error handlers

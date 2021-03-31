@@ -347,7 +347,6 @@ export class ScoreboardComponent implements OnInit {
   }
 
   fastSortPersons(): void {
-    // noinspection JSUnusedGlobalSymbols
     fast_sort(this.persons)
       .by([
         { desc: person => this.getScore(person).score},
