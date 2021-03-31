@@ -1,10 +1,15 @@
 import {Action, State, StateContext} from '@ngxs/store';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
-import {GetSystemVars} from '../actions/systemVars.action';
+import {GetSystemVars, ToggleVotingLock} from '../actions/systemVars.action';
+import produce from 'immer';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 export class SystemVarsStateModel {
   systemVars: SystemVars;
@@ -38,5 +43,25 @@ export class SystemVarsState {
       })
     );
   }
+
+  @Action(ToggleVotingLock)
+  toggleVotingLock({getState, setState}: StateContext<SystemVarsStateModel>): Observable<any> {
+    const state = getState();
+    const targetVotingOpen = !state.systemVars.voting_open;
+    const data = {
+      id: state.systemVars.id,
+      voting_open: targetVotingOpen
+    };
+    return this.http.put('/api/systemVars', data, httpOptions).pipe(
+      tap(() => {
+        setState(
+          produce(draft => {
+            draft.systemVars.voting_open = targetVotingOpen;
+          })
+        );
+      })
+    );
+  }
+
 }
 

@@ -9,7 +9,6 @@ exports.getSystemVars = function(request, response) {
 
 exports.updateSystemVars = async function(request, response) {
   let systemVar = request.body;
-  systemVar.voting_open = systemVar.voting_open ? 1 : 0;
 
   let result;
   try {

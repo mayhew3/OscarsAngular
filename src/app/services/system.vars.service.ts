@@ -6,7 +6,7 @@ import {catchError, filter, first, map, takeUntil, tap} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
 import {Store} from '@ngxs/store';
-import {GetSystemVars} from '../actions/systemVars.action';
+import {GetSystemVars, ToggleVotingLock} from '../actions/systemVars.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -97,18 +97,7 @@ export class SystemVarsService implements OnDestroy {
   }
 
   toggleVotingLock(): void {
-    if (!this._dataStore.systemVars) {
-      throw new Error('No system vars found.');
-    }
-    const targetVars = {
-      id: this._dataStore.systemVars.id,
-      voting_open: !this._dataStore.systemVars.voting_open,
-      curr_year: this._dataStore.systemVars.curr_year
-    };
-
-    this.http.put(this.systemVarsUrl, targetVars, httpOptions)
-      .pipe(catchError(this.handleError<any>('toggleVotingLock')))
-      .subscribe();
+    this.store.dispatch(new ToggleVotingLock());
   }
 
   changeCurrentYear(year: number): Observable<any> {

@@ -2,11 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
-import * as _ from 'underscore';
 import {WinnersService} from '../../services/winners.service';
 import {OddsService} from '../../services/odds.service';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
 import fast_sort from 'fast-sort';
 
@@ -93,13 +92,13 @@ export class AdminDashboardComponent implements OnInit {
     // this.categoryService.maybeRefreshCache();
   }
 
-  toggleVotingLock(votingOpen: boolean): Observable<void> {
-    return this.isVotingOpen().pipe(
-      map(isVotingOpen => {
+  toggleVotingLock(votingOpen: boolean): void {
+    this.isVotingOpen().pipe(first())
+      .subscribe(isVotingOpen => {
         if (votingOpen !== isVotingOpen) {
           this.systemVarsService.toggleVotingLock();
         }
-      })
+      }
     );
   }
 
