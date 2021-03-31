@@ -22,6 +22,12 @@ export class RemoveWinner {
   }
 }
 
+export class ResetWinners {
+  static readonly type = '[Category] Reset Winners';
+  constructor(public year: number) {
+  }
+}
+
 export interface OddsChange {
   nomination_id: number;
   odds_expert: number;

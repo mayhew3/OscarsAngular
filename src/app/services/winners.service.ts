@@ -7,7 +7,7 @@ import {Winner} from '../interfaces/Winner';
 import {Category} from '../interfaces/Category';
 import _ from 'underscore';
 import {Store} from '@ngxs/store';
-import {AddWinner, RemoveWinner} from '../actions/category.action';
+import {AddWinner, RemoveWinner, ResetWinners} from '../actions/category.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -36,11 +36,7 @@ export class WinnersService {
   }
 
   resetWinners(year: number): Observable<any> {
-    const data = {year};
-    return this.http.patch(this.winnersUrl, data, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('resetWinners', data))
-      );
+    return this.store.dispatch(new ResetWinners(year));
   }
 
 

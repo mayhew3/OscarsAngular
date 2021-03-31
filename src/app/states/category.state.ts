@@ -3,7 +3,7 @@ import {Action, State, StateContext} from '@ngxs/store';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {AddWinner, GetCategories, RemoveWinner, UpdateOdds} from '../actions/category.action';
+import {AddWinner, GetCategories, RemoveWinner, ResetWinners, UpdateOdds} from '../actions/category.action';
 import {Injectable} from '@angular/core';
 import * as _ from 'underscore';
 import {Winner} from '../interfaces/Winner';
@@ -104,5 +104,30 @@ export class CategoryState {
       })
     );
   }
+
+
+  @Action(ResetWinners)
+  resetWinners({getState, setState}: StateContext<CategoryStateModel>, action: ResetWinners): Observable<any> {
+    const params = new HttpParams()
+      .set('year', action.year.toString());
+    return this.http.put<Winner>(`/api/resetWinners/`, {params}, httpOptions).pipe(
+      tap(() => {
+        setState(
+          produce(draft => {
+            for (const category of draft.categories) {
+              const winners = ArrayUtil.cloneArray(category.winners);
+              for (const winner of winners) {
+                if (winner.year === action.year) {
+                  ArrayUtil.removeFromArray(category.winners, winner);
+                }
+              }
+            }
+          })
+        );
+      })
+    );
+  }
+
+
 }
 

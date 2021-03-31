@@ -57,6 +57,7 @@ export class InMemoryDataService implements InMemoryDbService {
       odds: this.odds,
       finalResults: this.finalResults,
       oddsChange: [],
+      resetWinners: [],
     };
   }
 
@@ -72,7 +73,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return this.callbackService.getCallbacks(channel);
   }
 
-  get(requestInfo: RequestInfo): Observable<ResponseOptions> {
+  get(requestInfo: RequestInfo): Observable<Response> {
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'categories') {
       return this.getCategoriesWithVotes(requestInfo);
@@ -84,25 +85,17 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   // noinspection JSUnusedGlobalSymbols
-  put(requestInfo: RequestInfo): Observable<ResponseOptions> {
+  put(requestInfo: RequestInfo): Observable<Response> {
     console.log('HTTP override: PUT');
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'nominees') {
       this.updateNomination(requestInfo);
-    } else if (requestInfo.collectionName === 'systemVars') {
+    } else if (collectionName === 'systemVars') {
       this.updateSystemVars(requestInfo);
-    } else if (requestInfo.collectionName === 'oddsChange') {
+    } else if (collectionName === 'oddsChange') {
       return this.updateOdds(requestInfo);
-    }
-    return undefined;
-  }
-
-  // noinspection JSUnusedGlobalSymbols
-  patch(requestInfo: RequestInfo): Observable<Response> {
-    console.log('HTTP override: PATCH');
-    const collectionName = requestInfo.collectionName;
-    if (collectionName === 'winners') {
-      this.deleteWinners();
+    } else if (collectionName === 'resetWinners') {
+      return this.deleteWinners(requestInfo);
     }
     return undefined;
   }
@@ -126,7 +119,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return undefined;
   }
 
-  private deleteWinners(): void {
+  private deleteWinners(requestInfo: RequestInfo): Observable<Response> {
     _.forEach(this.categories, category => category.winners = []);
 
     const socketMsg = {
@@ -138,6 +131,8 @@ export class InMemoryDataService implements InMemoryDbService {
     _.forEach(callbacks, callback => callback(socketMsg));
 
     this.sendUpdatedOdds();
+
+    return this.packageUpResponse({msg: 'Success!'}, requestInfo);
   }
 
   private updateSystemVars(requestInfo: RequestInfo): void {
@@ -197,7 +192,7 @@ export class InMemoryDataService implements InMemoryDbService {
     console.log(`Read-only: ${readOnly}, Writeable: ${writeable}`);
   }
 
-  private updateOdds(requestInfo: RequestInfo): Observable<ResponseOptions> {
+  private updateOdds(requestInfo: RequestInfo): Observable<Response> {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const changes = jsonBody.changes;
 
@@ -335,7 +330,7 @@ export class InMemoryDataService implements InMemoryDbService {
     });
   }
 
-  private getEventsSinceDate(requestInfo: RequestInfo): Observable<ResponseOptions> {
+  private getEventsSinceDate(requestInfo: RequestInfo): Observable<Response> {
     return requestInfo.utils.createResponse$(() => {
       console.log('HTTP GET override');
 
@@ -437,7 +432,7 @@ export class InMemoryDataService implements InMemoryDbService {
     });
   }
 
-  private packageUpResponse(body, requestInfo): Observable<ResponseOptions> {
+  private packageUpResponse(body, requestInfo): Observable<Response> {
     const options: ResponseOptions = {
       body,
       status: STATUS.OK
