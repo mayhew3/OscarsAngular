@@ -104,7 +104,7 @@ export class CategoryHopperComponent implements OnInit {
 
   submitOdds(): void {
     const changes = this.getChanges();
-    this.categoryService.updateOddsForNominees(changes).subscribe();
+    this.categoryService.updateOddsForNominees(changes).subscribe(() => this.clearOriginals());
   }
 
   // noinspection JSMethodCanBeStatic
@@ -126,17 +126,13 @@ export class CategoryHopperComponent implements OnInit {
       nomineeControl.denominator.dirty;
   }
 
-  private clearOriginals(): Observable<void> {
-    return this.category.pipe(
-      map(category => {
-        _.forEach(category.nominees, (nominee) => {
-          nominee.original_odds_expert = nominee.odds_expert;
-          nominee.original_odds_user = nominee.odds_user;
-          nominee.original_odds_numerator = nominee.odds_numerator;
-          nominee.original_odds_denominator = nominee.odds_denominator;
-        });
-      })
-    );
+  private clearOriginals(): void {
+    _.each(this.nomineeGroups, ng => {
+      ng.expert.reset(ng.expert.value);
+      ng.user.reset(ng.user.value);
+      ng.numerator.reset(ng.numerator.value);
+      ng.denominator.reset(ng.denominator.value);
+    });
   }
 
 }

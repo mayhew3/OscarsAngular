@@ -181,9 +181,27 @@ export class InMemoryDataService implements InMemoryDbService {
     this.sendUpdatedOdds();
   }
 
+  private logReadOnly(): void {
+    let readOnly = 0;
+    let writeable = 0;
+    _.chain(this.categories)
+      .map(c => c.nominees)
+      .flatten()
+      .each(n => {
+        if (Object.getOwnPropertyDescriptor(n, 'nominee').writable) {
+          writeable++;
+        } else {
+          readOnly++;
+        }
+      });
+    console.log(`Read-only: ${readOnly}, Writeable: ${writeable}`);
+  }
+
   private updateOdds(requestInfo: RequestInfo): Observable<ResponseOptions> {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const changes = jsonBody.changes;
+
+    this.logReadOnly();
 
     _.each(changes, change => {
       const nominee = this.findNominee(change.nomination_id);
@@ -238,6 +256,22 @@ export class InMemoryDataService implements InMemoryDbService {
     return _.uniq(fullList);
   }
 
+  // noinspection JSMethodCanBeStatic
+  private createNomineeCopy(nominee): any {
+    return {
+      id: nominee.id,
+      nominee: nominee.nominee,
+      context: nominee.context,
+      detail: nominee.detail,
+      category_id: nominee.category_id,
+      year: nominee.year,
+      odds_expert: nominee.odds_expert,
+      odds_user: nominee.odds_user,
+      odds_numerator: nominee.odds_numerator,
+      odds_denominator: nominee.odds_denominator,
+    };
+  }
+
   private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<any> {
     return requestInfo.utils.createResponse$(() => {
       console.log('HTTP GET override');
@@ -256,7 +290,10 @@ export class InMemoryDataService implements InMemoryDbService {
           id: category.id,
           name: category.name,
           points: category.points,
-          nominees: _.where(category.nominees, {year: yearNum}),
+          nominees: _.chain(category.nominees)
+            .where({year: yearNum})
+            .map(this.createNomineeCopy)
+            .value(),
           voted_on: this.getVoteForCategory(category.id, personIDNum, yearNum),
           winners: _.where(category.winners, {year: yearNum})
         };

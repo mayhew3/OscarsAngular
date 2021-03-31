@@ -210,11 +210,15 @@ export class NomineesComponent implements OnInit {
 }
 
 export class NomineeControls {
-  expert = new FormControl();
-  user = new FormControl();
-  numerator = new FormControl();
-  denominator = new FormControl();
+  expert: FormControl;
+  user: FormControl;
+  numerator: FormControl;
+  denominator: FormControl;
 
   constructor(public nominee: Nominee) {
+    this.expert = new FormControl(nominee.odds_expert);
+    this.user = new FormControl(nominee.odds_user);
+    this.numerator = new FormControl(nominee.odds_numerator);
+    this.denominator = new FormControl(nominee.odds_denominator);
   }
 }
