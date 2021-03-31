@@ -55,7 +55,8 @@ export class InMemoryDataService implements InMemoryDbService {
       winners: this.winners,
       events: this.events,
       odds: this.odds,
-      finalResults: this.finalResults
+      finalResults: this.finalResults,
+      oddsChange: [],
     };
   }
 
@@ -83,13 +84,15 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   // noinspection JSUnusedGlobalSymbols
-  put(requestInfo: RequestInfo): Observable<Response> {
+  put(requestInfo: RequestInfo): Observable<ResponseOptions> {
     console.log('HTTP override: PUT');
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'nominees') {
       this.updateNomination(requestInfo);
     } else if (requestInfo.collectionName === 'systemVars') {
       this.updateSystemVars(requestInfo);
+    } else if (requestInfo.collectionName === 'oddsChange') {
+      return this.updateOdds(requestInfo);
     }
     return undefined;
   }
@@ -112,8 +115,6 @@ export class InMemoryDataService implements InMemoryDbService {
       }
     } else if (requestInfo.collectionName === 'winners') {
       this.addWinner(requestInfo);
-    } else if (requestInfo.collectionName === 'updateOdds') {
-      this.updateOdds(requestInfo);
     }
     return undefined;
   }
@@ -180,7 +181,7 @@ export class InMemoryDataService implements InMemoryDbService {
     this.sendUpdatedOdds();
   }
 
-  private updateOdds(requestInfo: RequestInfo): void {
+  private updateOdds(requestInfo: RequestInfo): Observable<ResponseOptions> {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const changes = jsonBody.changes;
 
@@ -191,6 +192,8 @@ export class InMemoryDataService implements InMemoryDbService {
       nominee.odds_expert = change.odds_expert;
       nominee.odds_user = change.odds_user;
     });
+
+    return this.packageUpResponse({msg: 'Success!'}, requestInfo);
   }
 
   private removeWinner(requestInfo: RequestInfo): void {
@@ -395,6 +398,16 @@ export class InMemoryDataService implements InMemoryDbService {
         }
       });
     });
+  }
+
+  private packageUpResponse(body, requestInfo): Observable<ResponseOptions> {
+    const options: ResponseOptions = {
+      body,
+      status: STATUS.OK
+    };
+    const finishedOptions = InMemoryDataService.finishOptions(options, requestInfo);
+
+    return requestInfo.utils.createResponse$(() => finishedOptions);
   }
 
 }

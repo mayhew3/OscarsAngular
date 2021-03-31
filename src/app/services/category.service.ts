@@ -12,7 +12,7 @@ import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Store} from '@ngxs/store';
-import {GetCategories} from '../actions/category.action';
+import {GetCategories, OddsChange, UpdateOdds} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {SystemVars} from '../interfaces/SystemVars';
@@ -154,6 +154,10 @@ export class CategoryService implements OnDestroy {
       .pipe(
         catchError(this.handleError<any>('updateCategories', nominee))
       );
+  }
+
+  updateOddsForNominees(changes: OddsChange[]): Observable<any> {
+    return this.store.dispatch(new UpdateOdds(changes));
   }
 
   subscribeToWinnerEvents(): Observable<any> {

@@ -2,13 +2,14 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Category} from '../../interfaces/Category';
 import {Nominee} from '../../interfaces/Nominee';
 import * as _ from 'underscore';
-import {forkJoin, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
 import {map, mergeMap} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
 import {NomineeControls} from '../nominees/nominees.component';
+import {OddsChange} from '../../actions/category.action';
 
 @Component({
   selector: 'osc-category-hopper',
@@ -23,7 +24,6 @@ export class CategoryHopperComponent implements OnInit {
   @Input() activeContext: ActiveContext;
   @Input() nomineeGroups: NomineeControls[];
 
-  nominees: Observable<Nominee[]>;
   private readonly contextUrls: string[];
 
   categoryCount = this.categoryService.categories.pipe(
@@ -62,18 +62,14 @@ export class CategoryHopperComponent implements OnInit {
     return ActiveContext.OddsAssignment === this.activeContext;
   }
 
-  totalOdds(subtitle: string): number {
-    const odds_nums = _.map(this.nominees, (nominee) => nominee[`odds_${subtitle}`]);
+  totalOdds(subtitle: string, nominees: Nominee[]): number {
+    const odds_nums = _.map(nominees, (nominee) => nominee[`odds_${subtitle}`]);
     return this.oddsCalc(odds_nums);
   }
 
-  totalOddsVegas(): Observable<number> {
-    return this.nominees.pipe(
-      map(nominees => {
-        const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee.odds_numerator, nominee.odds_denominator));
-        return this.oddsCalc(odds_nums);
-      })
-    );
+  totalOddsVegas(nominees: Nominee[]): number {
+    const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee.odds_numerator, nominee.odds_denominator));
+    return this.oddsCalc(odds_nums);
   }
 
   // noinspection JSMethodCanBeStatic
@@ -92,35 +88,42 @@ export class CategoryHopperComponent implements OnInit {
     return total_num ? total_num : 0;
   }
 
-  private getChanges(): Observable<Nominee[]> {
-    return this.category.pipe(
-      map(category => {
-        return _.filter(category.nominees, (nominee) =>
-          nominee.original_odds_expert !== nominee.odds_expert ||
-          nominee.original_odds_user !== nominee.odds_user ||
-          nominee.original_odds_numerator !== nominee.odds_numerator ||
-          nominee.original_odds_denominator !== nominee.odds_denominator
-        );
-      })
-    );
+  private getChanges(): OddsChange[] {
+    const changes: OddsChange[] = [];
+    _.each(this.nomineeGroups, ng => {
+      if (this.isChanged(ng)) {
+        changes.push(this.createOddsChange(ng));
+      }
+    });
+    return changes;
   }
 
-  hasChanges(): Observable<boolean> {
-    return this.getChanges().pipe(
-      map(filtered => filtered.length > 0)
-    );
+  hasChanges(): boolean {
+    return _.filter(this.nomineeGroups, ng => this.isChanged(ng)).length > 0;
   }
 
   submitOdds(): void {
-    const requests: Observable<any>[] = [];
     const changes = this.getChanges();
-    const categoryService = this.categoryService;
-    _.forEach(changes, nominee => {
-      requests.push(categoryService.updateNominee(nominee));
-    });
-    forkJoin(requests).subscribe(() => {
-      this.clearOriginals();
-    });
+    this.categoryService.updateOddsForNominees(changes).subscribe();
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private createOddsChange(nomineeControls: NomineeControls): OddsChange {
+    return {
+      nomination_id: nomineeControls.nominee.id,
+      odds_expert: nomineeControls.expert.value,
+      odds_user: nomineeControls.user.value,
+      odds_numerator: nomineeControls.numerator.value,
+      odds_denominator: nomineeControls.denominator.value,
+    };
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private isChanged(nomineeControl: NomineeControls): boolean {
+    return nomineeControl.expert.dirty ||
+      nomineeControl.user.dirty ||
+      nomineeControl.numerator.dirty ||
+      nomineeControl.denominator.dirty;
   }
 
   private clearOriginals(): Observable<void> {

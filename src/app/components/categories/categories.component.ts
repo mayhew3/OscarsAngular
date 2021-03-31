@@ -59,7 +59,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   getRouterLink(category: Category): any[] {
-    if (this.personIsMe() || !this.winnersMode()) {
+    if (!this.winnersMode() || this.personIsMe()) {
       return [category.id];
     } else {
       return [];
@@ -300,7 +300,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   personIsMe(): boolean {
-    return this.me.id === this.person.id;
+    return !!this.me && !!this.person && this.me.id === this.person.id;
   }
 
   personPossessiveDisplayName(): string {

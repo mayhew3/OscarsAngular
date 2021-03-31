@@ -10,6 +10,10 @@ exports.getMostRecentOddsBundle = function(request, response) {
   }
 };
 
+exports.updateOddsForNominees = function(request, response) {
+
+}
+
 function handleFirstOdds(response) {
   model.OddsExecution.findAll({
     where: {

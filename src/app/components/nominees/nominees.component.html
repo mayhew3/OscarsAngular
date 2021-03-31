@@ -22,6 +22,7 @@
                        [prev]="prevCategory$"
                        [category]="category$"
                        [activeContext]="activeContext"
+                       [nomineeGroups]="nomineeGroupList"
                         class="container container-fluid">
   </osc-category-hopper>
 </nav>
@@ -73,7 +74,7 @@
               </div>
             </div>
 
-            <div class="row align-items-center inputRow" *ngIf="oddsMode() && nomineeGroups.get(nominee.id) as nomineeGroup">
+            <div class="row align-items-center inputRow" *ngIf="oddsMode()">
 
               <div class="col-3">
                 <div class="row">
@@ -82,7 +83,7 @@
                   <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [formControl]="nomineeGroup.numerator"
+                         [formControl]="nomineeGroups.get(nominee.id).numerator"
                          id="numeratorInput"/>
                 </div>
               </div>
@@ -94,7 +95,7 @@
                   <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [formControl]="nomineeGroup.denominator"
+                         [formControl]="nomineeGroups.get(nominee.id).denominator"
                          id="denominatorInput"/>
                 </div>
               </div>
@@ -106,7 +107,7 @@
                   <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [formControl]="nomineeGroup.expert"
+                         [formControl]="nomineeGroups.get(nominee.id).expert"
                          id="expertInput"/>
                 </div>
               </div>
@@ -118,7 +119,7 @@
                   <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [formControl]="nomineeGroup.user"
+                         [formControl]="nomineeGroups.get(nominee.id).user"
                          id="userInput"/>
                 </div>
               </div>

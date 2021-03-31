@@ -67,12 +67,17 @@ export class NomineesComponent implements OnInit {
         this.processingPick$.next( undefined);
       });
     }
+    this.initGroups();
   }
 
   initGroups(): void {
     this.category$.subscribe(category => {
       _.each(category.nominees, n => this.nomineeGroups.set(n.id, new NomineeControls(n)));
     });
+  }
+
+  get nomineeGroupList(): NomineeControls[] {
+    return Array.from(this.nomineeGroups.values());
   }
 
   personsForNominee(nominee: Nominee, category: Category): Observable<Person[]> {

@@ -1,22 +1,23 @@
 <div class="container container-fluid">
 
   <div class="row flex-fill">
-    <div class="col-12 justify-content-center">
+    <div class="col-12 justify-content-center"
+    *ngIf="(category | async).nominees as nominees">
 
       <div *ngIf="showOdds()"
            class="row align-items-center">
         <div class="col-3 align-items-center totalOdds">
-          {{totalOddsVegas() | async | number: '1.0-0'}}%
+          {{totalOddsVegas(nominees) | number: '1.0-0'}}%
         </div>
         <div class="col-3 align-items-center totalOdds">
-          {{totalOdds('expert')}}%
+          {{totalOdds('expert', nominees)}}%
         </div>
         <div class="col-3 align-items-center totalOdds">
-          {{totalOdds('user')}}%
+          {{totalOdds('user', nominees)}}%
         </div>
         <div class="col-3">
           <button class="btn btn-info"
-                  [disabled]="!(hasChanges() | async)"
+                  [disabled]="!hasChanges()"
                   (click)="submitOdds()">
             Submit
           </button>
