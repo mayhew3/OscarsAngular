@@ -1,6 +1,6 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, combineLatest, Observable, of, Subject, Subscriber} from 'rxjs';
+import {combineLatest, Observable, of} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {catchError, filter, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
@@ -23,23 +23,16 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService implements OnDestroy {
+export class CategoryService {
 
   static singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
   static songCategories = ['Music (Original Song)'];
 
   nomineesUrl = 'api/nominees';
   categoriesUrl = 'api/categories';
-  cache: Category[];
   listenersInitialized = false;
 
-  private _categories$ = new BehaviorSubject<Category[]>(undefined);
-  private _dataStore: {categories: Category[]} = {categories: undefined};
   private _fetching = false;
-
-  private _destroy$ = new Subject();
-
-  private readonly winnerListeners: Subscriber<any>[];
 
   categories: Observable<Category[]> = this.store.select(state => state.categories).pipe(
     map(categories => categories.categories),
@@ -60,7 +53,6 @@ export class CategoryService implements OnDestroy {
               private oddsService: OddsService,
               private socket: SocketService,
               private store: Store) {
-    this.winnerListeners = [];
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .subscribe(([me, systemVars]) => {
@@ -92,16 +84,6 @@ export class CategoryService implements OnDestroy {
 
   private static logMessage(channelName: string, msg: any): void {
     console.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
-  }
-
-  ngOnDestroy(): void {
-    this._destroy$.next();
-    this._destroy$.complete();
-  }
-
-  emptyCache(): void {
-    this._dataStore.categories = undefined;
-    this._categories$.next(undefined);
   }
 
   // REAL METHODS
@@ -189,22 +171,6 @@ export class CategoryService implements OnDestroy {
 
   updateOddsForNominees(changes: OddsChange[]): Observable<any> {
     return this.store.dispatch(new UpdateOdds(changes));
-  }
-
-  subscribeToWinnerEvents(): Observable<any> {
-    return new Observable<any>(observer => this.addWinnerSubscriber(observer));
-  }
-
-  private addWinnerSubscriber(subscriber: Subscriber<any>): void {
-    this.winnerListeners.push(subscriber);
-  }
-
-  private removeWinnerFromCache(nomination_id: number): Observable<void> {
-    return this.getCategoryForNomination(nomination_id).pipe(
-      map(category => {
-        this.removeWinner(category, nomination_id);
-      })
-    );
   }
 
   private getCategoryForNomination(nomination_id: number): Observable<Category> {
@@ -321,10 +287,6 @@ export class CategoryService implements OnDestroy {
     );
   }
 
-  private updateWinnersInCacheAndNotify(msg): void {
-
-  }
-
   // noinspection JSMethodCanBeStatic
   getWinnerForNominee(category: Category, nomination_id: number): Winner {
     return _.findWhere(category.winners, {nomination_id});
@@ -340,18 +302,6 @@ export class CategoryService implements OnDestroy {
   removeWinner(category: Category, nomination_id: number): void {
     const winner = this.getWinnerForNominee(category, nomination_id);
     delete category.winners[winner.id];
-  }
-
-  private updateWinners(category: Category, operation: string, winner: Winner): Observable<void> {
-    if (operation === 'reset') {
-      return this.resetWinners();
-    } else {
-      if (operation === 'add') {
-        return of(this.addWinner(category, winner));
-      } else if (operation === 'delete') {
-        return this.removeWinnerFromCache(winner.nomination_id);
-      }
-    }
   }
 
   /**

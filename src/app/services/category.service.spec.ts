@@ -1,3 +1,4 @@
+/* tslint:disable */
 import {TestBed} from '@angular/core/testing';
 /* tslint:disable quotemark */
 import {CategoryService} from './category.service';
@@ -43,11 +44,6 @@ describe('CategoryService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('nothing in cache initially', () => {
-    expect(service.cache).toBeTruthy();
-    expect(service.cache.length).toBe(0);
-  });
-
   it('updateNominee calls http put', () => {
     const mockNominee = {
       "odds_expert": 11,
@@ -78,15 +74,6 @@ describe('CategoryService', () => {
     it('getCategories calls http get if cache is empty', () => {
       service.categories.subscribe((categories) => {
         expect(categories).toBeTruthy();
-        expect(categories.length).toBe(3);
-      });
-    });
-
-    it('getCategories puts things in cache', () => {
-      service.categories.subscribe((categories) => {
-        expect(service.cache.length).toBeGreaterThan(0);
-        expect(categories.length).toBeGreaterThan(0);
-        expect(categories.length).toBe(service.cache.length);
         expect(categories.length).toBe(3);
       });
     });
