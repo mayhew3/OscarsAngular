@@ -14,40 +14,40 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
-  public finalResults: FinalResult[];
+
+  groupNumber = 1;
+
+  finalResults$ = this.finalResultsService.getFinalResultsForGroup(this.groupNumber);
 
   constructor(private finalResultsService: FinalResultsService,
               private personService: PersonService) { }
 
   ngOnInit(): void {
-    this.finalResultsService.getFinalResultsForGroup(1).subscribe(finalResults => {
-      this.finalResults = finalResults;
-    });
   }
 
-  getChampions(): FinalResult[][] {
-    // noinspection TypeScriptValidateJSTypes
-    const years = _.uniq(_.map(this.finalResults, finalResult => finalResult.year));
-    years.sort((year1, year2) => {
-      return year2 - year1;
-    });
+  getChampions(): Observable<FinalResult[][]> {
+    return this.finalResults$.pipe(
+      map(finalResults => {
+        // noinspection TypeScriptValidateJSTypes
+        const years = _.uniq(_.map(finalResults, finalResult => finalResult.year));
+        years.sort((year1, year2) => {
+          return year2 - year1;
+        });
 
-    const champions = [];
-    _.each(years, year => {
-      // noinspection TypeScriptValidateJSTypes
-      const yearChamps = _.filter(this.finalResults, finalResult => finalResult.year === year && finalResult.rank === 1);
-      champions.push(yearChamps);
-    });
+        const champions = [];
+        _.each(years, year => {
+          // noinspection TypeScriptValidateJSTypes
+          const yearChamps = _.filter(finalResults, finalResult => finalResult.year === year && finalResult.rank === 1);
+          champions.push(yearChamps);
+        });
 
-    return champions;
+        return champions;
+      })
+    );
   }
 
   getYearFromChampionList(champions: FinalResult[]): number {
     return champions[0].year;
-  }
-
-  stillLoading(): boolean {
-    return this.finalResultsService.stillLoading() || this.personService.stillLoading();
   }
 
   getPerson(person_id: number): Observable<Person> {
@@ -89,10 +89,10 @@ export class HistoryComponent implements OnInit {
   }
 
   getFinalResultForMe(champions: FinalResult[]): Observable<FinalResult> {
-    return this.personService.me$.pipe(
-      map(me => {
+    return combineLatest([this.personService.me$, this.finalResults$]).pipe(
+      map(([me, finalResults]) => {
         const year = this.getYearFromChampionList(champions);
-        return _.findWhere(this.finalResults, {year, person_id: me.id});
+        return _.findWhere(finalResults, {year, person_id: me.id});
       })
     );
   }

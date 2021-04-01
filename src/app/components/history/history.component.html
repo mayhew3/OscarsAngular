@@ -7,11 +7,9 @@
     </div>
   </div>
 
-  <p *ngIf="stillLoading()">Loading...</p>
-
-  <div class="row mt-2" *ngIf="!stillLoading()">
+  <div class="row mt-2">
     <div class="col-12"
-         *ngFor="let champions of getChampions()">
+         *ngFor="let champions of getChampions() | async">
       <div class="card scoreCard mainScoreCard"
            [ngClass]="getScoreCardClass(champions) | async">
         <div class="card-body py-1 px-3">
