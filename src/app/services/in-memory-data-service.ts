@@ -127,12 +127,21 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   private deleteWinners(requestInfo: RequestInfo): Observable<Response> {
-    _.forEach(this.categories, category => category.winners = []);
+    const year = this.getBody(requestInfo).year;
+
+    _.forEach(this.categories, category => {
+      const winners = ArrayUtil.cloneArray(category.winners);
+      _.forEach(winners, (winner: any) => {
+        if (winner.year === year) {
+          ArrayUtil.removeFromArray(winners, winner);
+        }
+      });
+    });
 
     const socketMsg = {
-      detail: 'reset',
       event_id: 1,
-      event_time: new Date()
+      event_time: new Date(),
+      year
     };
 
     this.broadcastToChannel('reset_winners', socketMsg);
@@ -397,6 +406,11 @@ export class InMemoryDataService implements InMemoryDbService {
         }
       });
     });
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private getBody(requestInfo): any {
+    return requestInfo.utils.getJsonBody(requestInfo.req);
   }
 
   private packageUpResponse(body, requestInfo): Observable<Response> {

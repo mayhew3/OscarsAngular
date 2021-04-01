@@ -51,7 +51,8 @@ exports.resetWinners = async function(request, response) {
 
   const msg = {
     event_id: event.id,
-    event_time: event_time
+    event_time: event_time,
+    year: year
   };
   socket.emitToAll('reset_winners', msg);
 

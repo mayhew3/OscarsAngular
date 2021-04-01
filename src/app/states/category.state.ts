@@ -52,6 +52,11 @@ export class CategoryState {
         ctx.dispatch(new RemoveWinner(msg.winner_id));
       });
 
+      this.socket.on('reset_winners', msg => {
+        CategoryState.logMessage('reset_winners', msg);
+        ctx.dispatch(new ResetWinners(msg.year));
+      });
+
       this.listenersInitialized = true;
     }
   }
@@ -128,23 +133,18 @@ export class CategoryState {
     );
   }
 
-
   @Action(ResetWinners)
-  resetWinners({getState, setState}: StateContext<CategoryStateModel>, action: ResetWinners): Observable<any> {
-    return this.http.put<Winner>(`/api/resetWinners/`, {year: action.year}, httpOptions).pipe(
-      tap(() => {
-        setState(
-          produce(draft => {
-            for (const category of draft.categories) {
-              const winners = ArrayUtil.cloneArray(category.winners);
-              for (const winner of winners) {
-                if (winner.year === action.year) {
-                  ArrayUtil.removeFromArray(category.winners, winner);
-                }
-              }
+  resetWinners({getState, setState}: StateContext<CategoryStateModel>, action: ResetWinners): void {
+    setState(
+      produce(draft => {
+        for (const category of draft.categories) {
+          const winners = ArrayUtil.cloneArray(category.winners);
+          for (const winner of winners) {
+            if (winner.year === action.year) {
+              ArrayUtil.removeFromArray(category.winners, winner);
             }
-          })
-        );
+          }
+        }
       })
     );
   }
