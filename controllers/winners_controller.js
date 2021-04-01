@@ -60,7 +60,7 @@ exports.resetWinners = async function(request, response) {
 };
 
 exports.deleteWinner = async function(request, response) {
-  const winner_id = request.params.id;
+  const winner_id = +request.params.id;
 
   let winner = await model.Winner.findOne({
     where: {

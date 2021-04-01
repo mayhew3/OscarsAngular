@@ -1,13 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Winner} from '../interfaces/Winner';
 import {Category} from '../interfaces/Category';
 import _ from 'underscore';
-import {Store} from '@ngxs/store';
-import {AddWinner, RemoveWinner, ResetWinners} from '../actions/category.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,8 +15,7 @@ const httpOptions = {
 export class WinnersService {
   winnersUrl = 'api/winners';
 
-  constructor(private http: HttpClient,
-              private store: Store) { }
+  constructor(private http: HttpClient) { }
 
   private existingWinner(nominee: Nominee, category: Category): Winner {
     return _.find(category.winners, w => w.nomination_id === nominee.id);
@@ -43,24 +38,6 @@ export class WinnersService {
 
   resetWinners(year: number): void {
     this.http.put<Winner>(`/api/resetWinners/`, {year}, httpOptions).subscribe();
-  }
-
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T> {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 
 }

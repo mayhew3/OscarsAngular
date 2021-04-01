@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
-import {combineLatest, Observable, of} from 'rxjs';
-import {catchError, distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
+import {combineLatest, Observable} from 'rxjs';
+import {distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
 import {Category} from '../interfaces/Category';
 import * as _ from 'underscore';
-import {ArrayUtil} from '../utility/ArrayUtil';
 import {Store} from '@ngxs/store';
 import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
 import {PersonService} from './person.service';
@@ -21,7 +20,6 @@ import {SystemVars} from '../interfaces/SystemVars';
 export class VotesService {
   votesUrl = 'api/votes';
   isLoading = true;
-  private readonly cache: Vote[];
 
   votes: Observable<Vote[]> = this.store.select(state => state.votes).pipe(
     map(votesContainer => votesContainer.votes),
@@ -40,7 +38,6 @@ export class VotesService {
               private personService: PersonService,
               private categoryService: CategoryService,
               private store: Store) {
-    this.cache = [];
     this.systemVarsService.systemVars.pipe(
       distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
     ).subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
@@ -132,33 +129,6 @@ export class VotesService {
     );
   }
 
-  refreshCacheForThisYear(): Observable<Vote[]> {
-    return new Observable<Vote[]>(observer => {
-      this.systemVarsService.systemVars.subscribe(systemVars => {
-        this.refreshCache(systemVars.curr_year).subscribe(votes => observer.next(votes));
-      });
-    });
-  }
-
-  refreshCache(year: number): Observable<Vote[]> {
-    const params = new HttpParams()
-      .set('year', year.toString());
-    return new Observable<Vote[]>((observer) => {
-      this.http.get<Vote[]>(this.votesUrl, {params})
-        .pipe(
-          catchError(this.handleError<Vote[]>('getVotes', []))
-        )
-        .subscribe(
-          (votes: Vote[]) => {
-            this.cache.length = 0;
-            ArrayUtil.addToArray(this.cache, votes);
-            observer.next(votes);
-          },
-          (err: Error) => observer.error(err)
-        );
-    });
-  }
-
   addOrUpdateVote(nominee: Nominee, person: Person): Observable<any> {
     return new Observable<any>(observer => {
       this.votes.pipe(first())
@@ -180,22 +150,5 @@ export class VotesService {
     });
   }
 
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T> {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
-  }
 
 }
