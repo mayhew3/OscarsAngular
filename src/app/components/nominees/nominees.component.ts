@@ -64,11 +64,6 @@ export class NomineesComponent implements OnInit {
               private socket: SocketService) { }
 
   ngOnInit(): void {
-    if (this.winnersMode()) {
-      this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-        this.processingPick$.next( undefined);
-      });
-    }
     this.initGroups();
   }
 

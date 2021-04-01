@@ -199,11 +199,6 @@ export class CategoryService implements OnDestroy {
     this.winnerListeners.push(subscriber);
   }
 
-  updateWinnerSubscribers(): void {
-    this.oddsService.clearOdds();
-    _.forEach(this.winnerListeners, listener => listener.next());
-  }
-
   private removeWinnerFromCache(nomination_id: number): Observable<void> {
     return this.getCategoryForNomination(nomination_id).pipe(
       map(category => {

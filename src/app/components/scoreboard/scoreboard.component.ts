@@ -5,16 +5,14 @@ import {CategoryService} from '../../services/category.service';
 import * as _ from 'underscore';
 import {OddsService} from '../../services/odds.service';
 import {OddsBundle} from '../../interfaces/OddsBundle';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import fast_sort from 'fast-sort';
 import {Category} from '../../interfaces/Category';
 import {Winner} from '../../interfaces/Winner';
 import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
-import {SocketService} from '../../services/socket.service';
 import {combineLatest, Observable} from 'rxjs';
-import {first, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
 
 @Component({
@@ -33,42 +31,21 @@ export class ScoreboardComponent implements OnInit {
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private voteService: VotesService,
-              private oddsService: OddsService,
-              private auth: MyAuthService,
-              private socket: SocketService) {
+              private oddsService: OddsService) {
   }
 
   ngOnInit(): void {
     this.initScoreData();
 
-    this.voteService.votes
-      .pipe(first())
-      .subscribe(() => {
-        this.socket.on('reconnect', () => {
-          console.log('Reconnect event triggered! Refreshing data!');
-          this.refreshData();
-        });
-      });
-
     this.personService.me$.subscribe(person => {
       this.me = person;
       this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
 
-      this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-        this.clearSortingOdds();
-        // this.updateScoreboard().subscribe();
-      });
       this.oddsService.subscribeToOddsEvents().subscribe(() => {
         this.fastSortPersons();
       });
 
     });
-  }
-
-  adminRefreshData(): void {
-    if (this.personService.isAdmin) {
-      this.refreshData();
-    }
   }
 
   initScoreData(): void {
@@ -115,21 +92,6 @@ export class ScoreboardComponent implements OnInit {
       }
     }
     return `hsl(25, 0%, 60%)`;
-  }
-
-  refreshData(): void {
-    this.categoryService.emptyCache();
-    this.categoryService.categories.subscribe(() => {
-      this.oddsService.refreshCache().subscribe(() => {
-        this.clearSortingOdds();
-        // this.updateScoreboard().subscribe();
-      });
-    });
-    // this.categoryService.maybeRefreshCache();
-  }
-
-  clearSortingOdds(): void {
-    _.forEach(this.persons, person => person.sortingOdds = -1);
   }
 
   getOdds(): OddsBundle {

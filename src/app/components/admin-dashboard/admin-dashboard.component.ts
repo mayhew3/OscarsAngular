@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 import {first, map} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
 import fast_sort from 'fast-sort';
+import {SocketService} from '../../services/socket.service';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -26,10 +27,11 @@ export class AdminDashboardComponent implements OnInit {
               private votesService: VotesService,
               private winnersService: WinnersService,
               private oddsService: OddsService,
+              private socket: SocketService,
               private personService: PersonService) { }
 
   ngOnInit(): void {
-    this.categoryService.subscribeToWinnerEvents().subscribe(() => {
+    this.socket.on('reset_winners', () => {
       this.winnersDeleting = false;
       this.winnersDeleted = true;
     });
@@ -73,16 +75,7 @@ export class AdminDashboardComponent implements OnInit {
 
   changeCurrentYear(year): void {
     this.reloadingData = true;
-    this.categoryService.emptyCache();
-
-    this.systemVarsService.changeCurrentYear(year).subscribe(() => {
-      this.categoryService.categories.subscribe(() => {
-        this.votesService.refreshCache(year).subscribe(() => {
-          this.reloadingData = false;
-        });
-      });
-    });
-    // this.categoryService.maybeRefreshCache();
+    this.systemVarsService.changeCurrentYear(year);
   }
 
   toggleVotingLock(votingOpen: boolean): void {

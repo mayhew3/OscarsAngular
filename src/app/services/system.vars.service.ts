@@ -65,8 +65,8 @@ export class SystemVarsService implements OnDestroy {
       });
   }
 
-  changeCurrentYear(year: number): Observable<any> {
-    return this.store.dispatch(new ChangeCurrentYear(year));
+  changeCurrentYear(year: number): void {
+    this.store.dispatch(new ChangeCurrentYear(year)).subscribe();
   }
 
   stillLoading(): boolean {
