@@ -7,6 +7,9 @@ export class SocketServiceMock {
   constructor(private inMemoryDB: InMemoryDataService) {
   }
 
+  init(): void {
+  }
+
   on(channel, callback): void {
     this.inMemoryDB.on(channel, callback);
   }

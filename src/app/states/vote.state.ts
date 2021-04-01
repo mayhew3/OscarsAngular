@@ -5,10 +5,8 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
 import {Injectable} from '@angular/core';
-import {Winner} from '../interfaces/Winner';
 import produce from 'immer';
 import * as _ from 'underscore';
-import {CategoryStateModel} from './category.state';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

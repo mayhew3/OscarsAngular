@@ -18,6 +18,7 @@ export class AppComponent {
               private socket: SocketService,
               private personService: PersonService) {
     personService.me$.subscribe();
+    socket.init();
   }
 
   stillLoading(): boolean {

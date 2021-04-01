@@ -10,8 +10,8 @@ import {Winner} from '../interfaces/Winner';
 import produce from 'immer';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
-import {SocketService} from '../services/socket.service';
 import {WritableDraft} from 'immer/dist/types/types-external';
+import {SocketService} from '../services/socket.service';
 
 export class CategoryStateModel {
   categories: Category[];
@@ -32,27 +32,26 @@ export class CategoryState {
   stateChanges = 0;
   listenersInitialized = false;
 
-  constructor(private http: HttpClient,
-              private socket: SocketService) {
+  constructor(private http: HttpClient) {
   }
 
   private static logMessage(channelName: string, msg: any): void {
     console.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
   }
 
-  maybeInitListeners(ctx: StateContext<CategoryStateModel>): void {
+  maybeInitListeners(ctx: StateContext<CategoryStateModel>, socket: SocketService): void {
     if (!this.listenersInitialized) {
-      this.socket.on('add_winner', msg => {
+      socket.on('add_winner', msg => {
         CategoryState.logMessage('add_winner', msg);
         ctx.dispatch(new AddWinner(msg.nomination_id, msg.winner_id, msg.declared));
       });
 
-      this.socket.on('remove_winner', msg => {
+      socket.on('remove_winner', msg => {
         CategoryState.logMessage('remove_winner', msg);
         ctx.dispatch(new RemoveWinner(msg.winner_id));
       });
 
-      this.socket.on('reset_winners', msg => {
+      socket.on('reset_winners', msg => {
         CategoryState.logMessage('reset_winners', msg);
         ctx.dispatch(new ResetWinners(msg.year));
       });
@@ -78,7 +77,7 @@ export class CategoryState {
         });
         this.stateChanges++;
 
-        this.maybeInitListeners(ctx);
+        this.maybeInitListeners(ctx, action.socket);
 
         console.log('CATEGORIES State Change #' + this.stateChanges);
       })

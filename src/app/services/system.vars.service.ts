@@ -33,7 +33,7 @@ export class SystemVarsService implements OnDestroy {
               private auth: MyAuthService,
               private store: Store) {
     this._fetching = true;
-    this.store.dispatch(new GetSystemVars());
+    this.store.dispatch(new GetSystemVars(this.socket));
     this.systemVars.subscribe(() => this._fetching = false);
   }
 

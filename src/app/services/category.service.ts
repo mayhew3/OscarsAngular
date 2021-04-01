@@ -62,7 +62,7 @@ export class CategoryService implements OnDestroy {
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id));
+        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket));
       });
 
     this.store.dispatch(new GetMaxYear());

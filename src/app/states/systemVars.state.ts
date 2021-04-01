@@ -30,23 +30,23 @@ export class SystemVarsState {
 
   readonly apiUrl = '/api/systemVars';
 
-  constructor(private http: HttpClient,
-              private socket: SocketService) {
+  constructor(private http: HttpClient) {
+    console.log('SystemVarsState initialized.');
   }
 
   private static logMessage(channelName: string, msg: any): void {
     console.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
   }
 
-  maybeInitListeners(ctx: StateContext<SystemVarsStateModel>): void {
+  maybeInitListeners(ctx: StateContext<SystemVarsStateModel>, socket: SocketService): void {
     if (!this.listenersInitialized) {
 
-      this.socket.on('voting_locked', msg => {
+      socket.on('voting_locked', msg => {
         SystemVarsState.logMessage('voting_locked', msg);
         ctx.dispatch(new VotingLock());
       });
 
-      this.socket.on('voting_unlocked', msg => {
+      socket.on('voting_unlocked', msg => {
         SystemVarsState.logMessage('voting_unlocked', msg);
         ctx.dispatch(new VotingUnlock());
       });
@@ -56,7 +56,7 @@ export class SystemVarsState {
   }
 
   @Action(GetSystemVars)
-  getSystemVars(ctx: StateContext<SystemVarsStateModel>): Observable<any> {
+  getSystemVars(ctx: StateContext<SystemVarsStateModel>, action: GetSystemVars): Observable<any> {
     return this.http.get<any[]>(this.apiUrl).pipe(
       tap(result => {
         const state = ctx.getState();
@@ -65,7 +65,7 @@ export class SystemVarsState {
           systemVars: result[0]
         });
         this.stateChanges++;
-        this.maybeInitListeners(ctx);
+        this.maybeInitListeners(ctx, action.socket);
         console.log('SYSTEMVARS State Change #' + this.stateChanges);
       })
     );

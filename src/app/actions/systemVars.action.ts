@@ -1,6 +1,9 @@
+import {SocketService} from '../services/socket.service';
 
 export class GetSystemVars {
   static readonly type = '[SystemVars] Get';
+  constructor(public socket: SocketService) {
+  }
 }
 
 export class VotingLock {
