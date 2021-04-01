@@ -42,7 +42,7 @@ export class FinalResultsService {
   }
 
   stillLoading(): boolean {
-    return this.finalResults.length === 0;
+    return !this.finalResults || this.finalResults.length === 0;
   }
 
 

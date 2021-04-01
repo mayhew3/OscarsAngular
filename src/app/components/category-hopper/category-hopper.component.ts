@@ -30,6 +30,8 @@ export class CategoryHopperComponent implements OnInit {
     map(categories => categories.length)
   );
 
+  nominees$: Observable<Nominee[]>;
+
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
               private personService: PersonService) {
@@ -40,7 +42,9 @@ export class CategoryHopperComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clearOriginals();
+    this.nominees$ = this.category.pipe(
+      map(category => category.nominees)
+    );
   }
 
   baseLink(): string {
@@ -62,14 +66,22 @@ export class CategoryHopperComponent implements OnInit {
     return ActiveContext.OddsAssignment === this.activeContext;
   }
 
-  totalOdds(subtitle: string, nominees: Nominee[]): number {
-    const odds_nums = _.map(nominees, (nominee) => nominee[`odds_${subtitle}`]);
-    return this.oddsCalc(odds_nums);
+  totalOdds(subtitle: string): Observable<number> {
+    return this.nominees$.pipe(
+      map(nominees => {
+        const odds_nums = _.map(nominees, (nominee) => +nominee[`odds_${subtitle}`]);
+        return this.oddsCalc(odds_nums);
+      })
+    );
   }
 
-  totalOddsVegas(nominees: Nominee[]): number {
-    const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee.odds_numerator, nominee.odds_denominator));
-    return this.oddsCalc(odds_nums);
+  totalOddsVegas(): Observable<number> {
+    return this.nominees$.pipe(
+      map(nominees => {
+        const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee.odds_numerator, nominee.odds_denominator));
+        return this.oddsCalc(odds_nums);
+      })
+    );
   }
 
   // noinspection JSMethodCanBeStatic
