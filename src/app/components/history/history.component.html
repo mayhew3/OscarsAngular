@@ -7,7 +7,8 @@
     </div>
   </div>
 
-  <div class="row mt-2">
+  <div class="row mt-2"
+       *ngIf="(getChampions() | async); else loading">
     <div class="col-12"
          *ngFor="let champions of getChampions() | async">
       <div class="card scoreCard mainScoreCard"
@@ -61,3 +62,5 @@
   </div>
 
 </div>
+
+<ng-template #loading>Loading...</ng-template>
