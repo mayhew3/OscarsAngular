@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, filter, first, map, mergeMap, tap} from 'rxjs/operators';
+import {catchError, filter, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -11,9 +11,10 @@ import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
 import {Store} from '@ngxs/store';
-import {AddWinner, GetCategories, OddsChange, RemoveWinner, UpdateOdds} from '../actions/category.action';
+import {AddWinner, GetCategories, OddsChange, RemoveWinner, ResetWinners, UpdateOdds} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
+import {VotingLock, VotingUnlock} from '../actions/systemVars.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,6 +31,7 @@ export class CategoryService implements OnDestroy {
   nomineesUrl = 'api/nominees';
   categoriesUrl = 'api/categories';
   cache: Category[];
+  listenersInitialized = false;
 
   private _categories$ = new BehaviorSubject<Category[]>(undefined);
   private _dataStore: {categories: Category[]} = {categories: undefined};
@@ -62,7 +64,9 @@ export class CategoryService implements OnDestroy {
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket));
+        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket)).subscribe(() => {
+          this.maybeInitListeners();
+        });
       });
 
     this.store.dispatch(new GetMaxYear());
@@ -84,6 +88,10 @@ export class CategoryService implements OnDestroy {
     } else {
       return nominee.context;
     }
+  }
+
+  private static logMessage(channelName: string, msg: any): void {
+    console.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
   }
 
   ngOnDestroy(): void {
@@ -138,6 +146,38 @@ export class CategoryService implements OnDestroy {
     return this.getCategory(category_id).pipe(
       map(category => !!category ? category.nominees : [])
     );
+  }
+
+  maybeInitListeners(): void {
+    if (!this.listenersInitialized) {
+
+      this.socket.on('add_winner', msg => {
+        CategoryService.logMessage('add_winner', msg);
+        this.store.dispatch(new AddWinner(msg.nomination_id, msg.winner_id, msg.declared));
+      });
+
+      this.socket.on('remove_winner', msg => {
+        CategoryService.logMessage('remove_winner', msg);
+        this.store.dispatch(new RemoveWinner(msg.winner_id));
+      });
+
+      this.socket.on('reset_winners', msg => {
+        CategoryService.logMessage('reset_winners', msg);
+        this.store.dispatch(new ResetWinners(msg.year));
+      });
+
+      this.socket.on('voting_locked', msg => {
+        CategoryService.logMessage('voting_locked', msg);
+        this.store.dispatch(new VotingLock());
+      });
+
+      this.socket.on('voting_unlocked', msg => {
+        CategoryService.logMessage('voting_unlocked', msg);
+        this.store.dispatch(new VotingUnlock());
+      });
+
+      this.listenersInitialized = true;
+    }
   }
 
   updateNominee(nominee: Nominee): Observable<any> {

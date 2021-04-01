@@ -9,9 +9,4 @@ export interface Nominee {
   odds_user?: number;
   odds_numerator?: number;
   odds_denominator?: number;
-
-  original_odds_expert?: number;
-  original_odds_user?: number;
-  original_odds_numerator?: number;
-  original_odds_denominator?: number;
 }

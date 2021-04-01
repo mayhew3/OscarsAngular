@@ -11,7 +11,6 @@ import produce from 'immer';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
 import {WritableDraft} from 'immer/dist/types/types-external';
-import {SocketService} from '../services/socket.service';
 
 export class CategoryStateModel {
   categories: Category[];
@@ -30,54 +29,26 @@ const httpOptions = {
 @Injectable()
 export class CategoryState {
   stateChanges = 0;
-  listenersInitialized = false;
 
   constructor(private http: HttpClient) {
   }
 
-  private static logMessage(channelName: string, msg: any): void {
-    console.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
-  }
-
-  maybeInitListeners(ctx: StateContext<CategoryStateModel>, socket: SocketService): void {
-    if (!this.listenersInitialized) {
-      socket.on('add_winner', msg => {
-        CategoryState.logMessage('add_winner', msg);
-        ctx.dispatch(new AddWinner(msg.nomination_id, msg.winner_id, msg.declared));
-      });
-
-      socket.on('remove_winner', msg => {
-        CategoryState.logMessage('remove_winner', msg);
-        ctx.dispatch(new RemoveWinner(msg.winner_id));
-      });
-
-      socket.on('reset_winners', msg => {
-        CategoryState.logMessage('reset_winners', msg);
-        ctx.dispatch(new ResetWinners(msg.year));
-      });
-
-      this.listenersInitialized = true;
-    }
-  }
-
   @Action(GetCategories)
-  getCategories(ctx: StateContext<CategoryStateModel>, action: GetCategories): Observable<any> {
+  getCategories({getState, setState}: StateContext<CategoryStateModel>, action: GetCategories): Observable<any> {
     const params = new HttpParams()
       .set('person_id', action.person_id.toString())
       .set('year', action.year.toString());
     return this.http.get<any[]>('/api/categories', {params}).pipe(
       tap(result => {
-        const state = ctx.getState();
+        const state = getState();
         _.each(result, (category: Category) => {
           _.each(category.winners, winner => winner.declared = new Date(winner.declared));
         });
-        ctx.setState({
+        setState({
           ...state,
           categories: result
         });
         this.stateChanges++;
-
-        this.maybeInitListeners(ctx, action.socket);
 
         console.log('CATEGORIES State Change #' + this.stateChanges);
       })

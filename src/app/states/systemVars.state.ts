@@ -6,7 +6,6 @@ import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
 import {ChangeCurrentYear, GetSystemVars, VotingLock, VotingUnlock} from '../actions/systemVars.action';
 import produce from 'immer';
-import {SocketService} from '../services/socket.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,47 +24,23 @@ export class SystemVarsStateModel {
 @Injectable()
 export class SystemVarsState {
 
-  listenersInitialized = false;
   stateChanges = 0;
 
   readonly apiUrl = '/api/systemVars';
 
   constructor(private http: HttpClient) {
-    console.log('SystemVarsState initialized.');
-  }
-
-  private static logMessage(channelName: string, msg: any): void {
-    console.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
-  }
-
-  maybeInitListeners(ctx: StateContext<SystemVarsStateModel>, socket: SocketService): void {
-    if (!this.listenersInitialized) {
-
-      socket.on('voting_locked', msg => {
-        SystemVarsState.logMessage('voting_locked', msg);
-        ctx.dispatch(new VotingLock());
-      });
-
-      socket.on('voting_unlocked', msg => {
-        SystemVarsState.logMessage('voting_unlocked', msg);
-        ctx.dispatch(new VotingUnlock());
-      });
-
-      this.listenersInitialized = true;
-    }
   }
 
   @Action(GetSystemVars)
-  getSystemVars(ctx: StateContext<SystemVarsStateModel>, action: GetSystemVars): Observable<any> {
+  getSystemVars({getState, setState}: StateContext<SystemVarsStateModel>): Observable<any> {
     return this.http.get<any[]>(this.apiUrl).pipe(
       tap(result => {
-        const state = ctx.getState();
-        ctx.setState({
+        const state = getState();
+        setState({
           ...state,
           systemVars: result[0]
         });
         this.stateChanges++;
-        this.maybeInitListeners(ctx, action.socket);
         console.log('SYSTEMVARS State Change #' + this.stateChanges);
       })
     );
