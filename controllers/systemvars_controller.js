@@ -14,7 +14,7 @@ exports.updateSystemVars = async function(request, response) {
   try {
     result = await model.SystemVars.findByPk(systemVar.id);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     response.send({msg: "Error finding system_var: " + error});
   }
 
@@ -23,7 +23,7 @@ exports.updateSystemVars = async function(request, response) {
   try {
     await result.update(systemVar);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     response.send({msg: "Error updating system_vars: " + JSON.stringify(systemVar)});
   }
 
