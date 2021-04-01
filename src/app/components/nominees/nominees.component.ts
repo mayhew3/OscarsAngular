@@ -98,9 +98,17 @@ export class NomineesComponent implements OnInit {
     this.personService.me$.subscribe(me => {
       if (this.votingMode()) {
         this.processingPick$.next(nominee);
-        this.votesService.addOrUpdateVote(nominee, me).subscribe(() => {
+        this.votesService.addOrUpdateVote(nominee, me);
+
+        const voteCallback = () => {
           this.processingPick$.next(undefined);
-        });
+          this.socket.removeListener('add_vote', voteCallback);
+          this.socket.removeListener('change_vote', voteCallback);
+        };
+
+        this.socket.on('add_vote', voteCallback);
+        this.socket.on('change_vote', voteCallback);
+
       } else if (this.winnersMode() && this.personService.isAdmin) {
         this.processingPick$.next(nominee);
         this.winnersService.addOrDeleteWinner(nominee, category);

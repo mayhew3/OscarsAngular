@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
 import {combineLatest, Observable} from 'rxjs';
 import {distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
@@ -13,6 +13,10 @@ import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
 import {PersonService} from './person.service';
 import {CategoryService} from './category.service';
 import {SystemVars} from '../interfaces/SystemVars';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -129,26 +133,15 @@ export class VotesService {
     );
   }
 
-  addOrUpdateVote(nominee: Nominee, person: Person): Observable<any> {
-    return new Observable<any>(observer => {
-      this.votes.pipe(first())
-        .subscribe(votes => {
-            const existing = _.findWhere(votes, {
-              category_id: nominee.category_id,
-              year: nominee.year,
-              person_id: person.id
-            });
-            if (!existing) {
-              this.store.dispatch(new AddVote(nominee.category_id, nominee.year, person.id, nominee.id, new Date()))
-                .subscribe(() => observer.next());
-            } else {
-              this.store.dispatch(new ChangeVote(nominee.category_id, nominee.year, person.id, nominee.id, new Date()))
-                .subscribe(() => observer.next());
-            }
-          }
-        );
-    });
+  addOrUpdateVote(nominee: Nominee, person: Person): void {
+    const data = {
+      category_id: nominee.category_id,
+      year: nominee.year,
+      person_id: person.id,
+      nomination_id: nominee.id,
+      submitted: new Date()
+    };
+    this.http.post<Vote>('/api/votes', data, httpOptions).subscribe();
   }
-
 
 }

@@ -15,6 +15,7 @@ import {AddWinner, GetCategories, OddsChange, RemoveWinner, ResetWinners, Update
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {VotingLock, VotingUnlock} from '../actions/systemVars.action';
+import {AddVote, ChangeVote} from '../actions/votes.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -146,6 +147,16 @@ export class CategoryService {
       this.socket.on('reset_winners', msg => {
         CategoryService.logMessage('reset_winners', msg);
         this.store.dispatch(new ResetWinners(msg.year));
+      });
+
+      this.socket.on('add_vote', msg => {
+        CategoryService.logMessage('add_vote', msg);
+        this.store.dispatch(new AddVote(msg.id, msg.category_id, msg.year, msg.person_id, msg.nomination_id));
+      });
+
+      this.socket.on('change_vote', msg => {
+        CategoryService.logMessage('change_vote', msg);
+        this.store.dispatch(new ChangeVote(msg.vote_id, msg.nomination_id));
       });
 
       this.socket.on('voting_locked', msg => {

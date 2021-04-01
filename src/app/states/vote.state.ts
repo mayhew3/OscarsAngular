@@ -7,6 +7,9 @@ import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
 import * as _ from 'underscore';
+import {WritableDraft} from 'immer/dist/types/types-external';
+import {Category} from '../interfaces/Category';
+import {Nominee} from '../interfaces/Nominee';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -48,47 +51,30 @@ export class VoteState {
 
 
   @Action(AddVote)
-  addVote({getState, setState}: StateContext<VoteStateModel>, action: AddVote): Observable<any> {
-    const data = {
+  addVote({getState, setState}: StateContext<VoteStateModel>, action: AddVote): void {
+    const data: Vote = {
+      id: action.vote_id,
       category_id: action.category_id,
       year: action.year,
       person_id: action.person_id,
       nomination_id: action.nomination_id,
-      submitted: action.submitted
     };
-    return this.http.post<Vote>('/api/votes', data, httpOptions).pipe(
-      tap(result => {
-        setState(
-          produce(draft => {
-            draft.votes.push(result);
-          })
-        );
+    setState(
+      produce(draft => {
+        draft.votes.push(data);
       })
     );
   }
 
   @Action(ChangeVote)
-  changeVote({getState, setState}: StateContext<VoteStateModel>, action: ChangeVote): Observable<any> {
-    const data = {
-      category_id: action.category_id,
-      year: action.year,
-      person_id: action.person_id,
-      nomination_id: action.nomination_id,
-      submitted: action.submitted
-    };
-    return this.http.post<Vote>('/api/votes', data, httpOptions).pipe(
-      tap(() => {
-        setState(
-          produce(draft => {
-            const existing = _.findWhere(draft.votes,
-              {
-                category_id: action.category_id,
-                person_id: action.person_id,
-                year: action.year
-              });
-            existing.nomination_id = action.nomination_id;
-          })
-        );
+  changeVote({getState, setState}: StateContext<VoteStateModel>, action: ChangeVote): void {
+    setState(
+      produce(draft => {
+        const existing: Vote = _.findWhere(draft.votes,
+          {
+            id: action.vote_id,
+          });
+        existing.nomination_id = action.nomination_id;
       })
     );
   }

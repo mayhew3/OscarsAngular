@@ -10,13 +10,13 @@ const globalChannels = [
   'add_vote',
   'change_vote',
   'voting_locked',
-  'voting_unlocked'
-];
-
-const personalChannels = [
+  'voting_unlocked',
   'add_winner',
   'remove_winner',
   'reset_winners'
+];
+
+const personalChannels = [
 ];
 
 let io;

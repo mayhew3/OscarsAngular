@@ -109,10 +109,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   post(requestInfo: RequestInfo): Observable<Response> {
     if (requestInfo.collectionName === 'votes') {
-      const existingVote = this.existingVote(requestInfo);
-      if (existingVote) {
-        ArrayUtil.removeFromArray(this.votes, existingVote);
-      }
+      return this.addOrChangeVote(requestInfo);
     } else if (requestInfo.collectionName === 'winners') {
       this.addWinner(requestInfo);
     }
@@ -168,6 +165,41 @@ export class InMemoryDataService implements InMemoryDbService {
       } else {
         this.broadcastToChannel('voting_unlocked', msg);
       }
+    }
+  }
+
+  private addOrChangeVote(requestInfo: RequestInfo): Observable<Response> {
+    const body = this.getBody(requestInfo);
+
+    const existing = _.findWhere(this.votes, {
+      category_id: body.category_id,
+      year: body.year,
+      person_id: body.person_id
+    });
+
+    if (!!existing) {
+      existing.nomination_id = body.nomination_id;
+      const msg = {
+        vote_id: existing.id,
+        nomination_id: body.nomination_id
+      };
+      this.broadcastToChannel('change_vote', msg);
+
+      return this.packageUpResponse({msg: 'Success!'}, requestInfo);
+
+    } else {
+      const vote_id = this.genVoteId();
+      const vote = {
+        id: vote_id,
+        category_id: body.category_id,
+        year: body.year,
+        person_id: body.person_id,
+        nomination_id: body.nomination_id
+      };
+      this.votes.push(vote);
+      this.broadcastToChannel('add_vote', vote);
+
+      return this.packageUpResponse(vote, requestInfo);
     }
   }
 
@@ -346,6 +378,14 @@ export class InMemoryDataService implements InMemoryDbService {
       return 1;
     } else {
       return _.max(_.map(winners, w => w.id)) + 1;
+    }
+  }
+
+  genVoteId(): number {
+    if (this.votes.length === 0) {
+      return 1;
+    } else {
+      return _.max(_.map(this.votes, w => w.id)) + 1;
     }
   }
 
