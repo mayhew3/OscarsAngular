@@ -146,7 +146,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const systemVars = this.systemVars[0];
 
-    if (systemVars.voting_open !== jsonBody.voting_open) {
+    if (jsonBody.voting_open !== undefined) {
       systemVars.voting_open = jsonBody.voting_open;
 
       const msg = {

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 
 import * as socketIo from 'socket.io-client';
-import {PersonService} from './person.service';
 import _ from 'underscore';
+import {ArrayUtil} from '../utility/ArrayUtil';
 
 @Injectable()
 export class SocketService {
@@ -16,7 +16,11 @@ export class SocketService {
       console.log(`Connect Error: ${JSON.stringify(msg)}`);
     });
     this.socket.on('connect', () => {
-      _.each(this.pendingListeners, (pendingListener: PendingListener) => this.on(pendingListener.channel, pendingListener.callback));
+      const listeners = ArrayUtil.cloneArray(this.pendingListeners);
+      _.each(listeners, (pendingListener: PendingListener) => {
+        this.on(pendingListener.channel, pendingListener.callback);
+        ArrayUtil.removeFromArray(this.pendingListeners, pendingListener);
+      });
     });
   }
 
