@@ -101,7 +101,7 @@ export class AdminDashboardComponent implements OnInit {
       .subscribe(systemVars => {
         const year = systemVars.curr_year;
         this.winnersDeleting = true;
-        this.winnersService.resetWinners(year).subscribe();
+        this.winnersService.resetWinners(year);
       });
   }
 

@@ -41,8 +41,8 @@ export class WinnersService {
     }
   }
 
-  resetWinners(year: number): Observable<any> {
-    return this.store.dispatch(new ResetWinners(year));
+  resetWinners(year: number): void {
+    this.http.put<Winner>(`/api/resetWinners/`, {year}, httpOptions).subscribe();
   }
 
 
