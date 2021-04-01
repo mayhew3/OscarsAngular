@@ -2,11 +2,15 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError, filter, map, takeUntil} from 'rxjs/operators';
+import {filter, first, map} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
 import {Store} from '@ngxs/store';
-import {ChangeCurrentYear, GetSystemVars, ToggleVotingLock} from '../actions/systemVars.action';
+import {ChangeCurrentYear, GetSystemVars, VotingLock, VotingUnlock} from '../actions/systemVars.action';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -38,33 +42,6 @@ export class SystemVarsService implements OnDestroy {
     this._destroy$.complete();
   }
 
-  private refreshCache(): void {
-    this.http.get<SystemVars[]>(this.systemVarsUrl)
-      .pipe(
-        takeUntil(this._destroy$),
-        catchError(this.handleError<SystemVars[]>('getSystemVars', [])),
-      )
-      .subscribe((systemVars: SystemVars[]) => {
-        if (systemVars.length !== 1) {
-          throw new Error('Should only have one row in system vars.');
-        }
-        this._dataStore.systemVars = systemVars[0];
-        this._fetching = false;
-        this.initListeners();
-      });
-  }
-
-  // todo: add to data init
-  initListeners(): void {
-    this.socket.on('voting', msg => {
-      if (!!msg.voting_open) {
-        this.unlockVotingInternal();
-      } else {
-        this.lockVotingInternal();
-      }
-    });
-  }
-
   canVote(): Observable<boolean> {
     return this.systemVars.pipe(
       map(systemVars => systemVars.voting_open)
@@ -77,21 +54,15 @@ export class SystemVarsService implements OnDestroy {
     );
   }
 
-  lockVotingInternal(): void {
-    // todo: first() if end up using this code.
-    this.systemVars.subscribe(() => {
-      this._dataStore.systemVars.voting_open = false;
-    });
-  }
-
-  unlockVotingInternal(): void {
-    this.systemVars.subscribe(() => {
-      this._dataStore.systemVars.voting_open = true;
-    });
-  }
-
   toggleVotingLock(): void {
-    this.store.dispatch(new ToggleVotingLock());
+    this.systemVars.pipe(first())
+      .subscribe(systemVars => {
+        const data = {
+          id: systemVars.id,
+          voting_open: !systemVars.voting_open
+        };
+        this.http.put('/api/systemVars', data, httpOptions).subscribe();
+      });
   }
 
   changeCurrentYear(year: number): Observable<any> {

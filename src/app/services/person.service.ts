@@ -25,6 +25,7 @@ export class PersonService implements OnDestroy {
   isAdmin: boolean = null;
 
   persons: Observable<Person[]> = this.store.select(state => state.persons).pipe(
+    filter(state => !!state),
     map(state => state.persons),
     filter(persons => !!persons)
   );

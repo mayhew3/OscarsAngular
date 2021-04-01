@@ -150,12 +150,15 @@ export class InMemoryDataService implements InMemoryDbService {
       systemVars.voting_open = jsonBody.voting_open;
 
       const msg = {
-        voting_open: systemVars.voting_open,
         event_id: 1,
         event_time: new Date()
       };
 
-      this.broadcastToChannel('voting', msg);
+      if (!systemVars.voting_open) {
+        this.broadcastToChannel('voting_locked', msg);
+      } else {
+        this.broadcastToChannel('voting_unlocked', msg);
+      }
     }
   }
 

@@ -36,11 +36,17 @@ exports.updateSystemVars = async function(request, response) {
     });
 
     const msg = {
-      voting_open: systemVar.voting_open,
       event_id: event.id,
       event_time: event_time
     };
-    socket.emitToAll('voting', msg);
+
+    if (!systemVar.voting_open) {
+      socket.emitToAll('voting_locked', msg);
+    } else {
+      socket.emitToAll('voting_unlocked', msg);
+    }
+
+
   }
 
   response.json({msg: 'Success'});

@@ -3,8 +3,12 @@ export class GetSystemVars {
   static readonly type = '[SystemVars] Get';
 }
 
-export class ToggleVotingLock {
-  static readonly type = '[SystemVars] Toggle Voting Lock';
+export class VotingLock {
+  static readonly type = '[SystemVars] Voting Lock';
+}
+
+export class VotingUnlock {
+  static readonly type = '[SystemVars] Voting Unlock';
 }
 
 export class ChangeCurrentYear {

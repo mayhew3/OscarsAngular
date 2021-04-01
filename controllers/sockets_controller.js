@@ -7,7 +7,10 @@ const existing_person_rooms = [];
 
 const globalChannels = [
   'odds',
-  'voting'
+  'add_vote',
+  'change_vote',
+  'voting_locked',
+  'voting_unlocked'
 ];
 
 const personalChannels = [

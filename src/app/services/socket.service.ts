@@ -1,27 +1,31 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 import * as socketIo from 'socket.io-client';
 import {PersonService} from './person.service';
+import _ from 'underscore';
 
 @Injectable()
 export class SocketService {
   private socket;
 
-  constructor(private personService: PersonService) {
-    personService.me$.subscribe(me => {
-      this.socket = socketIo({
-        query: {
-          person_id: me.id
-        }
-      });
-      this.socket.on('error', msg => {
-        console.log(`Connect Error: ${JSON.stringify(msg)}`);
-      });
+  pendingListeners: PendingListener[] = [];
+
+  constructor() {
+    this.socket = socketIo();
+    this.socket.on('error', msg => {
+      console.log(`Connect Error: ${JSON.stringify(msg)}`);
+    });
+    this.socket.on('connect', () => {
+      _.each(this.pendingListeners, (pendingListener: PendingListener) => this.on(pendingListener.channel, pendingListener.callback));
     });
   }
 
-  on(channel, callback): void {
-    this.socket.on(channel, callback);
+  on(channel, callback: (msg: any) => void): void {
+    if (!this.socket) {
+      this.pendingListeners.push(new PendingListener(channel, callback));
+    } else {
+      this.socket.on(channel, callback);
+    }
   }
 
   removeListener(channel, callback): void {
@@ -29,6 +33,12 @@ export class SocketService {
   }
 
   isConnected(): boolean {
-    return this.socket.connected;
+    return !!this.socket && this.socket.connected;
+  }
+}
+
+class PendingListener {
+  constructor(public channel: string,
+              public callback: (msg: any) => void) {
   }
 }
