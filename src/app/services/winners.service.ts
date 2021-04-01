@@ -26,12 +26,18 @@ export class WinnersService {
     return _.find(category.winners, w => w.nomination_id === nominee.id);
   }
 
-  addOrDeleteWinner(nominee: Nominee, category: Category): Observable<Winner> {
+  addOrDeleteWinner(nominee: Nominee, category: Category): void {
     const existing = this.existingWinner(nominee, category);
     if (!existing) {
-      return this.store.dispatch(new AddWinner(nominee.category_id, nominee.year, nominee.id, new Date()));
+      const data = {
+        category_id: category.id,
+        year: nominee.year,
+        nomination_id: nominee.id,
+        declared: new Date(),
+      };
+      this.http.post<any>(this.winnersUrl, data, httpOptions).subscribe();
     } else {
-      return this.store.dispatch(new RemoveWinner(existing.category_id, existing.id));
+      this.http.delete<Winner>(`/api/winners/${existing.id}`, httpOptions).subscribe();
     }
   }
 

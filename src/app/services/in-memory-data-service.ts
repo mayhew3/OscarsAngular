@@ -61,6 +61,8 @@ export class InMemoryDataService implements InMemoryDbService {
     };
   }
 
+  /* SOCKET METHODS */
+
   on(channel, callback): void {
     this.callbackService.on(channel, callback);
   }
@@ -71,6 +73,11 @@ export class InMemoryDataService implements InMemoryDbService {
 
   getCallbacks(channel): any[] {
     return this.callbackService.getCallbacks(channel);
+  }
+
+  broadcastToChannel(channel, msg): void {
+    const callbacks = this.getCallbacks(channel);
+    _.forEach(callbacks, callback => callback(msg));
   }
 
   get(requestInfo: RequestInfo): Observable<Response> {
@@ -127,8 +134,8 @@ export class InMemoryDataService implements InMemoryDbService {
       event_id: 1,
       event_time: new Date()
     };
-    const callbacks = this.getCallbacks('winner');
-    _.forEach(callbacks, callback => callback(socketMsg));
+
+    this.broadcastToChannel('reset_winners', socketMsg);
 
     this.sendUpdatedOdds();
 
@@ -148,8 +155,7 @@ export class InMemoryDataService implements InMemoryDbService {
         event_time: new Date()
       };
 
-      const callbacks = this.getCallbacks('voting');
-      _.forEach(callbacks, callback => callback(msg));
+      this.broadcastToChannel('voting', msg);
     }
   }
 
@@ -162,16 +168,14 @@ export class InMemoryDataService implements InMemoryDbService {
     jsonBody.id = this.genWinnerId();
     categoryForNominee.winners.push(jsonBody);
     socketMsg = {
-      detail: 'add',
       nomination_id: jsonBody.nomination_id,
       event_id: 1,
       event_time: new Date(),
-      winner_id: 1234,
+      winner_id: jsonBody.id,
       declared: new Date(),
     };
 
-    const callbacks = this.getCallbacks('winner');
-    _.forEach(callbacks, callback => callback(socketMsg));
+    this.broadcastToChannel('add_winner', socketMsg);
 
     this.sendUpdatedOdds();
   }
@@ -217,14 +221,13 @@ export class InMemoryDataService implements InMemoryDbService {
     ArrayUtil.removeFromArray(categoryForExistingWinner.winners, winner);
 
     const socketMsg = {
-      detail: 'delete',
       nomination_id: winner.nomination_id,
       event_id: 1,
-      event_time: new Date()
+      event_time: new Date(),
+      winner_id: winner.id
     };
 
-    const callbacks = this.getCallbacks('winner');
-    _.forEach(callbacks, callback => callback(socketMsg));
+    this.broadcastToChannel('remove_winner', socketMsg);
 
     this.sendUpdatedOdds();
   }
@@ -243,7 +246,7 @@ export class InMemoryDataService implements InMemoryDbService {
       event_id: 1,
       odds: odds_results,
     };
-    _.forEach(this.getCallbacks('odds'), callback => callback(odds_execution));
+    this.broadcastToChannel('odds', odds_execution);
   }
 
   private getVoters(): number[] {

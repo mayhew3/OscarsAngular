@@ -2,7 +2,7 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, Observable, of, Subject, Subscriber} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, distinctUntilChanged, filter, map, mergeMap, tap} from 'rxjs/operators';
+import {catchError, filter, first, map, mergeMap, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -10,12 +10,10 @@ import {OddsService} from './odds.service';
 import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
-import {ArrayUtil} from '../utility/ArrayUtil';
 import {Store} from '@ngxs/store';
-import {GetCategories, OddsChange, UpdateOdds} from '../actions/category.action';
+import {AddWinner, GetCategories, OddsChange, RemoveWinner, UpdateOdds} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
-import {SystemVars} from '../interfaces/SystemVars';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -91,13 +89,6 @@ export class CategoryService implements OnDestroy {
   ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
-  }
-
-  maybeRefreshCache(): void {
-    if (!this._dataStore.categories && !this._fetching) {
-      this._fetching = true;
-      this.refreshCache();
-    }
   }
 
   emptyCache(): void {
@@ -295,24 +286,8 @@ export class CategoryService implements OnDestroy {
     );
   }
 
-  private updateWinnersInCacheAndNotify(msg): Observable<void> {
-    const year$ = this.systemVarsService.getCurrentYear();
-    const category$ = this.getCategoryForNomination(msg.nomination_id);
+  private updateWinnersInCacheAndNotify(msg): void {
 
-    return combineLatest([year$, category$]).pipe(
-      mergeMap(([year, category]) => {
-        console.log(`Received winner message: ${JSON.stringify(msg)}`);
-        const winner: Winner = {
-          id: msg.winner_id,
-          category_id: category.id,
-          nomination_id: msg.nomination_id,
-          year,
-          declared: new Date(msg.declared)
-        };
-        return this.updateWinners(category, msg.detail, winner);
-      }),
-      map(() => this.updateWinnerSubscribers())
-    );
   }
 
   // noinspection JSMethodCanBeStatic
@@ -342,48 +317,6 @@ export class CategoryService implements OnDestroy {
         return this.removeWinnerFromCache(winner.nomination_id);
       }
     }
-  }
-
-  private refreshCache(): void {
-    this._dataStore.categories = [];
-    // callback function doesn't have 'this' in scope.
-
-    this.socket.removeListener('winner', this.updateWinnersInCacheAndNotify.bind(this));
-    this.personService.me$
-      .subscribe(person => {
-        if (!!person) {
-          this.systemVarsService.systemVars
-            .pipe(distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year))
-            .subscribe(systemVars => {
-              const options = {
-                params: {
-                  person_id: person.id.toString(),
-                  year: systemVars.curr_year.toString()
-                }
-              };
-              this.http.get<Category[]>(this.categoriesUrl, options)
-                .pipe(
-                  catchError(this.handleError<Category[]>('getCategories', []))
-                )
-                .subscribe(
-                  (categories: Category[]) => {
-                    _.forEach(categories, category => {
-                      _.forEach(category.winners, winner => winner.declared = new Date(winner.declared));
-                    });
-                    this._dataStore.categories.length = 0;
-                    ArrayUtil.addToArray(this._dataStore.categories, categories);
-                    this.socket.on('winner', this.updateWinnersInCacheAndNotify.bind(this));
-                    this._fetching = false;
-                    this.pushListChange();
-                  }
-                );
-            });
-        }
-      });
-  }
-
-  private pushListChange(): void {
-    this._categories$.next(this._dataStore.categories);
   }
 
   /**

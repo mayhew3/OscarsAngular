@@ -1,40 +1,29 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'underscore';
+import {ArrayUtil} from '../utility/ArrayUtil';
 
 @Injectable()
 export class InMemoryCallbacksService {
 
-  winnerCallbacks = [];
-  votingOpenCallbacks = [];
-  oddsCallbacks = [];
+  private _channelCallbacks = new Map<string, any[]>();
 
-  on(channel, callback) {
-    if (channel === 'winner') {
-      this.winnerCallbacks.push(callback);
-    } else if (channel === 'voting') {
-      this.votingOpenCallbacks.push(callback);
-    } else if (channel === 'odds') {
-      this.oddsCallbacks.push(callback);
-    }
+  on(channel, callback): void {
+    this.getCallbacks(channel).push(callback);
   }
 
-  removeCallback(channel, callback) {
-    if (channel === 'winner') {
-      this.winnerCallbacks = _.without(this.winnerCallbacks, callback);
-    } else if (channel === 'voting') {
-      this.votingOpenCallbacks = _.without(this.votingOpenCallbacks, callback);
-    } else if (channel === 'odds') {
-      this.oddsCallbacks = _.without(this.oddsCallbacks, callback);
-    }
+  removeCallback(channel, callback): void {
+    const callbacks = this._channelCallbacks.get(channel);
+    ArrayUtil.removeFromArray(callbacks, callback);
   }
 
-  getCallbacks(channel) {
-    if (channel === 'winner') {
-      return this.winnerCallbacks;
-    } else if (channel === 'voting') {
-      return this.votingOpenCallbacks;
-    } else if (channel === 'odds') {
-      return this.oddsCallbacks;
+  getCallbacks(channel): any[] {
+    const existing = this._channelCallbacks.get(channel);
+    if (!existing) {
+      const callbacks = [];
+      this._channelCallbacks.set(channel, callbacks);
+      return callbacks;
+    } else {
+      return existing;
     }
   }
 }

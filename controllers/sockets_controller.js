@@ -11,7 +11,9 @@ const globalChannels = [
 ];
 
 const personalChannels = [
-  'winner'
+  'add_winner',
+  'remove_winner',
+  'reset_winners'
 ];
 
 let io;

@@ -1,3 +1,4 @@
+import {Winner} from '../interfaces/Winner';
 
 export class GetCategories {
   static readonly type = '[Category] Get';
@@ -8,17 +9,15 @@ export class GetCategories {
 
 export class AddWinner {
   static readonly type = '[Category] Add Winner';
-  constructor(public category_id: number,
-              public year: number,
-              public nomination_id: number,
+  constructor(public nomination_id: number,
+              public winner_id: number,
               public declared: Date) {
   }
 }
 
 export class RemoveWinner {
   static readonly type = '[Category] Remove Winner';
-  constructor(public category_id: number,
-              public winner_id: number) {
+  constructor(public winner_id: number) {
   }
 }
 

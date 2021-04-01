@@ -18,14 +18,13 @@ exports.addWinner = async function(request, response) {
     });
 
     const msg = {
-      detail: 'add',
       nomination_id: nomination_id,
       event_id: event.id,
       event_time: event_time,
       winner_id: winner.id,
       declared: event_time
     };
-    socket.emitToAll('winner', msg);
+    socket.emitToAll('add_winner', msg);
 
     await response.json(winner);
 
@@ -51,11 +50,10 @@ exports.resetWinners = async function(request, response) {
   });
 
   const msg = {
-    detail: 'reset',
     event_id: event.id,
     event_time: event_time
   };
-  socket.emitToAll('winner', msg);
+  socket.emitToAll('reset_winners', msg);
 
   response.json({msg: 'Success!'});
 };
@@ -88,12 +86,12 @@ exports.deleteWinner = async function(request, response) {
   });
 
   const msg = {
-    detail: 'delete',
     nomination_id: nomination_id,
     event_id: event.id,
-    event_time: event_time
+    event_time: event_time,
+    winner_id: winner_id
   };
-  socket.emitToAll('winner', msg);
+  socket.emitToAll('remove_winner', msg);
 
   response.json({msg: 'Success'});
 }

@@ -67,23 +67,6 @@ describe('CategoryService', () => {
     httpMock.verify();
   });
 
-  it('getCategories doesn\'t call http get if there is a cache already', () => {
-    // do an initial call to fill the cache
-    service.maybeRefreshCache();
-
-    doFirstCategoriesRequest();
-
-    // subsequent calls to getCategories should just use the cache and do no HTTP request
-    service.categories.subscribe((categories) => {
-      expect(categories).toBeTruthy();
-      expect(categories.length).toBe(3);
-    });
-
-    httpMock.expectNone(req => req.url === service.categoriesUrl);
-
-    httpMock.verify();
-  });
-
   // everything that requires getCategories after this
 
   describe('CategoryService tests that require maybeUpdateCache', () => {

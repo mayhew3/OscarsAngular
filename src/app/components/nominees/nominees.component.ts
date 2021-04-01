@@ -13,6 +13,7 @@ import {SystemVarsService} from '../../services/system.vars.service';
 import {map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
+import {SocketService} from '../../services/socket.service';
 
 @Component({
   selector: 'osc-nominees',
@@ -59,7 +60,8 @@ export class NomineesComponent implements OnInit {
               private route: ActivatedRoute,
               private winnersService: WinnersService,
               private personService: PersonService,
-              private systemVarsService: SystemVarsService) { }
+              private systemVarsService: SystemVarsService,
+              private socket: SocketService) { }
 
   ngOnInit(): void {
     if (this.winnersMode()) {
@@ -106,9 +108,15 @@ export class NomineesComponent implements OnInit {
         });
       } else if (this.winnersMode() && this.personService.isAdmin) {
         this.processingPick$.next(nominee);
-        this.winnersService.addOrDeleteWinner(nominee, category).subscribe(() => {
+        this.winnersService.addOrDeleteWinner(nominee, category);
+
+        const winnerCallback = () => {
           this.processingPick$.next(undefined);
-        });
+          this.socket.removeListener('add_winner', winnerCallback);
+          this.socket.removeListener('remove_winner', winnerCallback);
+        };
+        this.socket.on('add_winner', winnerCallback);
+        this.socket.on('remove_winner', winnerCallback);
       }
     });
   }

@@ -57,13 +57,6 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  refreshAllData(): void {
-    this.categoryService.emptyCache();
-    this.categoryService.maybeRefreshCache();
-    this.votesService.refreshCacheForThisYear().subscribe();
-    this.oddsService.refreshCache().subscribe();
-  }
-
   stillLoading(): boolean {
     return this.systemVarsService.stillLoading();
   }
