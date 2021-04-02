@@ -36,14 +36,17 @@ module.exports = function(app) {
   privatePut('/nominees', nominees.updateNomination);
   privateGet('/odds', odds.getMostRecentOddsBundle);
 
+  privatePut('/oddsChange', odds.updateOddsForNominees);
+
   privateGet('/persons', persons.getPersons);
   privatePut('/persons', persons.updatePerson);
 
   privateGet('/votes', votes.getVotes);
   privatePost('/votes', votes.addOrUpdateVote);
 
-  privatePost('/winners', winners.addOrDeleteWinner);
-  privatePatch('/winners', winners.resetWinners);
+  privatePost('/winners', winners.addWinner);
+  privateDelete('/winners/:id', winners.deleteWinner);
+  privatePut('/resetWinners', winners.resetWinners);
 
   privateGet('/systemVars', systemVars.getSystemVars);
   privatePut('/systemVars', systemVars.updateSystemVars);
@@ -67,6 +70,10 @@ module.exports = function(app) {
 
   function privatePatch(endpoint, callback) {
     router.patch(endpoint, authCheck, callback);
+  }
+
+  function privateDelete(endpoint, callback) {
+    router.delete(endpoint, authCheck, callback);
   }
 
   // error handlers

@@ -17,7 +17,7 @@ export class PersonDetailComponent implements OnInit {
               private personService: PersonService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       const person_id = +params['person_id'];
       this.personService.getPerson(person_id).subscribe(person => {

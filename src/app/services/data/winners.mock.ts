@@ -1,5 +1,6 @@
 import {Winner} from '../../interfaces/Winner';
 /* tslint:disable quotemark */
+/* tslint:disable:object-literal-key-quotes */
 export const MockWinnerList: Winner[] = [
   {
     "id": 1,

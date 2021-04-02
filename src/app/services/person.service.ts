@@ -1,10 +1,13 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, ReplaySubject, Subject} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
-import {_} from 'underscore';
+import {Observable, of, Subject} from 'rxjs';
+import {catchError, filter, map, mergeMap, tap} from 'rxjs/operators';
+import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
+import {Store} from '@ngxs/store';
+import {ChangeOddsView, GetPersons} from '../actions/person.action';
+import {MyAuthService} from './auth/my-auth.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,14 +18,31 @@ const httpOptions = {
 })
 export class PersonService implements OnDestroy {
   personsUrl = 'api/persons';
-  private _persons$ = new ReplaySubject<Person[]>(1);
-  private _dataStore: {persons: Person[]} = {persons: []};
   private _fetching = false;
 
   private _destroy$ = new Subject();
 
+  isAdmin: boolean = null;
+
+  persons: Observable<Person[]> = this.store.select(state => state.persons).pipe(
+    filter(state => !!state),
+    map(state => state.persons),
+    filter(persons => !!persons)
+  );
+
+  me$ = this.auth.userEmail$.pipe(
+    mergeMap(email => this.getPersonWithEmail(email)),
+    filter(person => !!person)
+  );
+
   constructor(private http: HttpClient,
-              private arrayService: ArrayService) {
+              private arrayService: ArrayService,
+              private auth: MyAuthService,
+              private store: Store) {
+    this._fetching = true;
+    this.store.dispatch(new GetPersons());
+    this.persons.subscribe(() => this._fetching = false);
+    this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
   }
 
   // REAL METHODS
@@ -32,19 +52,14 @@ export class PersonService implements OnDestroy {
     this._destroy$.complete();
   }
 
-  get persons(): Observable<Person[]> {
-    return this._persons$.asObservable();
-  }
-
   getNumberOfCachedPersons(): number {
-    return this._dataStore.persons.length;
+    return this.store.selectSnapshot(state => state.persons.persons.length);
   }
 
-  maybeUpdateCache(): void {
-    if (this._dataStore.persons.length === 0 && !this._fetching) {
-      this._fetching = true;
-      this.refreshCache();
-    }
+  isMe(person: Person): Observable<boolean> {
+    return this.me$.pipe(
+      map(me => me.id === person.id)
+    );
   }
 
   getPersonsForGroup(group_id: number): Observable<Person[]> {
@@ -55,37 +70,20 @@ export class PersonService implements OnDestroy {
 
   getPerson(id: number): Observable<Person> {
     return this.persons.pipe(
-      map(persons => _.findWhere(persons, {id: id}))
+      map(persons => _.findWhere(persons, {id}))
     );
   }
 
   getPersonWithEmail(email: string): Observable<Person> {
     return this.persons.pipe(
       map(persons => {
-        return _.findWhere(persons, {email: email});
+        return _.findWhere(persons, {email});
       })
     );
   }
 
   stillLoading(): boolean {
-    return this._dataStore.persons.length === 0;
-  }
-
-  getPersonFromCache(id: number): Person {
-    return _.findWhere(this._dataStore.persons, {id: id});
-  }
-
-  hasDuplicateFirstName(person: Person): boolean {
-    const matching = _.filter(this._dataStore.persons, otherPerson => otherPerson.id !== person.id &&
-      otherPerson.first_name === person.first_name);
-    return matching.length > 0;
-  }
-
-  hasDuplicateFirstAndLastName(person: Person): boolean {
-    const matching = _.filter(this._dataStore.persons, otherPerson => otherPerson.id !== person.id &&
-      otherPerson.first_name === person.first_name &&
-      otherPerson.last_name === person.last_name);
-    return matching.length > 0;
+    return this._fetching;
   }
 
   getFullName(person: Person): string {
@@ -99,28 +97,8 @@ export class PersonService implements OnDestroy {
 
   // DATA HELPERS
 
-  private refreshCache(): void {
-    this.http.get<Person[]>(this.personsUrl)
-      .pipe(
-        catchError(this.handleError<Person[]>('getPersons', []))
-      )
-      .subscribe(
-        (persons: Person[]) => {
-          this._dataStore.persons = persons;
-          this.pushPersonListChange();
-        }
-      );
-  }
-
-  updatePerson(person: Person): Observable<any> {
-    return this.http.put(this.personsUrl, person, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('updatePerson', person))
-      );
-  }
-
-  private pushPersonListChange() {
-    this._persons$.next(this.arrayService.cloneArray(this._dataStore.persons));
+  updatePerson(person: Person, oddsKey: string): Observable<any> {
+    return this.store.dispatch(new ChangeOddsView(person.id, oddsKey));
   }
 
   /**
@@ -129,7 +107,7 @@ export class PersonService implements OnDestroy {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T> {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

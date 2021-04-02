@@ -7,11 +7,16 @@ const existing_person_rooms = [];
 
 const globalChannels = [
   'odds',
-  'voting'
+  'add_vote',
+  'change_vote',
+  'voting_locked',
+  'voting_unlocked',
+  'add_winner',
+  'remove_winner',
+  'reset_winners'
 ];
 
 const personalChannels = [
-  'winner'
 ];
 
 let io;
@@ -26,7 +31,7 @@ exports.initIO = function(in_io) {
 
     let person_id;
     if (!!person_id_str) {
-      person_id = parseInt(person_id_str);
+      person_id = +person_id_str;
       addClientForPerson(person_id, client);
     }
 

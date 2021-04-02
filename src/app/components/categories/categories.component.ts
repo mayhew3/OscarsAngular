@@ -4,13 +4,16 @@ import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {SystemVarsService} from '../../services/system.vars.service';
 import fast_sort from 'fast-sort';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import * as moment from 'moment';
 import {Winner} from '../../interfaces/Winner';
 import {Nominee} from '../../interfaces/Nominee';
 import {VotesService} from '../../services/votes.service';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import {Person} from '../../interfaces/Person';
+import {map} from 'rxjs/operators';
+import {combineLatest, Observable} from 'rxjs';
+import {PersonService} from '../../services/person.service';
+import {ArrayUtil} from '../../utility/ArrayUtil';
 
 @Component({
   selector: 'osc-categories',
@@ -18,7 +21,6 @@ import {Person} from '../../interfaces/Person';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  categories: Category[];
   me: Person;
   @Input() activeContext: ActiveContext;
   @Input() person: Person;
@@ -29,24 +31,35 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               public systemVarsService: SystemVarsService,
               private votesService: VotesService,
-              private auth: MyAuthService) { }
+              private personService: PersonService) { }
 
-  ngOnInit() {
-    this.auth.me$.subscribe(me => {
+  ngOnInit(): void {
+    this.personService.me$.subscribe(me => {
       this.me = me;
-      this.categoryService.getCategories()
-        .subscribe(categories => {
-          this.categories = categories;
-          this.fastSortCategories();
-          this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-            this.fastSortCategories();
-          });
-        });
     });
   }
 
+  get categories$(): Observable<Category[]> {
+    return this.categoryService.categories;
+  }
+
+  get categoriesSorted$(): Observable<Category[]> {
+    return this.categories$.pipe(
+      map(categories => {
+        const sorted = ArrayUtil.cloneArray(categories);
+        fast_sort(sorted)
+          .by([
+            {desc: category => this.mostRecentWinDate(category)},
+            {asc: category => category.points},
+            {asc: category => category.name}
+          ]);
+        return sorted;
+      }
+    ));
+  }
+
   getRouterLink(category: Category): any[] {
-    if (this.personIsMe() || !this.winnersMode()) {
+    if (!this.winnersMode() || this.personIsMe()) {
       return [category.id];
     } else {
       return [];
@@ -79,12 +92,16 @@ export class CategoriesComponent implements OnInit {
     return !!showVar ? '(hide)' : '(show)';
   }
 
-  getCategoriesWithNoWinner(): Category[] {
-    return _.filter(this.categories, category => category.winners.length === 0);
+  getCategoriesWithNoWinner$(): Observable<Category[]> {
+    return this.categoriesSorted$.pipe(
+      map(categories => _.filter(categories, category => category.winners.length === 0))
+    );
   }
 
-  getCategoriesWithAtLeastOneWinner(): Category[] {
-    return _.filter(this.categories, category => category.winners.length > 0);
+  getCategoriesWithAtLeastOneWinner$(): Observable<Category[]> {
+    return this.categoriesSorted$.pipe(
+      map(categories => _.filter(categories, category => category.winners.length > 0))
+    );
   }
 
   getTimeAgo(category: Category): string {
@@ -96,17 +113,20 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  getWinnerName(winner: Winner): string {
-    return this.categoryService.getNomineeFromWinner(winner).nominee;
+  getWinnerName(winner: Winner): Observable<string> {
+    return this.categoryService.getNomineeFromWinner(winner).pipe(
+      map(nominee => nominee.nominee)
+    );
   }
 
-  getWinnerSubtitle(winner: Winner, category: Category): string {
-    const nominee = this.categoryService.getNomineeFromWinner(winner);
-    return this.getSubtitleText(nominee, category);
+  getWinnerSubtitle(winner: Winner, category: Category): Observable<string> {
+    return this.categoryService.getNomineeFromWinner(winner).pipe(
+      map(nominee => this.getSubtitleText(nominee, category))
+    );
   }
 
   getSubtitleText(nominee: Nominee, category: Category): string {
-    return Nominee.getSubtitleText(category, nominee);
+    return CategoryService.getSubtitleText(category, nominee);
   }
 
   mostRecentWinDate(category: Category): Date {
@@ -115,38 +135,39 @@ export class CategoriesComponent implements OnInit {
       undefined;
   }
 
-  fastSortCategories(): void {
-    fast_sort(this.categories)
-      .by([
-        {desc: category => this.mostRecentWinDate(category)},
-        {asc: category => category.points},
-        {asc: category => category.name}
-      ]);
+  getVotedClass(category: Category): Observable<string> {
+    return this.votesService.getMyVoteForCurrentYearAndCategory(category).pipe(
+      map(vote => {
+        if (this.votingMode() && !!vote) {
+          return 'votedOn';
+        } else {
+          const winnersForCurrentYear = category.winners;
+          if (this.winnersMode() && winnersForCurrentYear && winnersForCurrentYear.length > 0) {
+            return 'winner';
+          }
+        }
+        return '';
+      })
+    );
   }
 
-  getVotedClass(category: Category): string {
-    if (this.votingMode() && category.voted_on) {
-      return 'votedOn';
-    } else {
-      const winnersForCurrentYear = category.winners;
-      if (this.winnersMode() && winnersForCurrentYear && winnersForCurrentYear.length > 0) {
-        return 'winner';
-      }
-    }
-    return '';
+  showCategories(): Observable<boolean> {
+    return this.systemVarsService.canVote().pipe(
+      map(canVote => !this.stillLoading() &&
+        (canVote || !this.votingMode()))
+    );
   }
 
-  showCategories(): boolean {
-    return !this.stillLoading() &&
-      (this.systemVarsService.canVote() || !this.votingMode());
+  showCategoriesWithNoWinners$(): Observable<boolean> {
+    return combineLatest([this.getCategoriesWithNoWinner$(), this.showCategories()]).pipe(
+      map(([categories, showCategories]) => categories.length > 0 && showCategories)
+    );
   }
 
-  showCategoriesWithNoWinners(): boolean {
-    return this.showCategories() && this.getCategoriesWithNoWinner().length > 0;
-  }
-
-  showCategoriesWithWinners(): boolean {
-    return this.showCategories() && this.getCategoriesWithAtLeastOneWinner().length > 0 && this.winnersMode();
+  showCategoriesWithWinners$(): Observable<boolean> {
+    return combineLatest([this.getCategoriesWithAtLeastOneWinner$(), this.showCategories()]).pipe(
+      map(([categories, showCategories]) => categories.length > 0 && showCategories)
+    );
   }
 
   getCategoryName(category: Category): string {
@@ -175,10 +196,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   stillLoading(): boolean {
-    return this.systemVarsService.stillLoading() || this.categoryService.stillLoading();
+    return false;
   }
 
-  showPersonPick(category: Category): boolean {
+  showPersonPick(category: Category): Observable<boolean> {
     return !!this.person && this.didPickWinner(this.person, category);
   }
 
@@ -186,81 +207,100 @@ export class CategoriesComponent implements OnInit {
     return this.personIsMe() && !this.didPickWinner(this.me, category);
   }
 
-  wePickedTheSame(category: Category): boolean {
+  wePickedTheSame(category: Category): Observable<boolean> {
     return this.pickedTheSame(this.me, this.person, category);
   }
 
-  personPickClass(person: Person, category: Category): string {
-    if (!this.hasAtLeastOneWinner(category)) {
-      if (this.me.id === person.id && !this.pickedTheSame(this.me, this.person, category)) {
-        return 'myDifferentPick';
-      } else {
-        return 'neutralPick';
-      }
-    } else {
-      if (this.didPickWinner(person, category)) {
-        return 'correctPick';
-      } else {
-        return 'incorrectPick';
-      }
-    }
+  personPickClass(person: Person, category: Category): Observable<string> {
+    return combineLatest([
+      this.pickedTheSame(this.me, this.person, category),
+      this.didPickWinner(person, category)
+    ]).pipe(
+      map(([pickedTheSame, didPickWinner]) => {
+        if (!this.hasAtLeastOneWinner(category)) {
+          if (this.me.id === person.id && !pickedTheSame) {
+            return 'myDifferentPick';
+          } else {
+            return 'neutralPick';
+          }
+        } else {
+          if (didPickWinner) {
+            return 'correctPick';
+          } else {
+            return 'incorrectPick';
+          }
+        }
+      })
+    );
   }
 
-  personPickHeaderClass(person: Person, category: Category): string {
-    if (!this.hasAtLeastOneWinner(category)) {
-      if (this.me.id === person.id && !this.pickedTheSame(this.me, this.person, category)) {
-        return 'myDifferentPickHeader';
-      } else {
-        return 'neutralPickHeader';
-      }
-    } else {
-      if (this.didPickWinner(person, category)) {
-        return 'correctPickHeader';
-      } else {
-        return 'incorrectPickHeader';
-      }
-    }
+  personPickHeaderClass(person: Person, category: Category): Observable<string> {
+    return combineLatest([
+      this.pickedTheSame(this.me, this.person, category),
+      this.didPickWinner(person, category)
+    ]).pipe(
+      map(([pickedTheSame, didPickWinner]) => {
+        if (!this.hasAtLeastOneWinner(category)) {
+          if (this.me.id === person.id && !pickedTheSame) {
+            return 'myDifferentPickHeader';
+          } else {
+            return 'neutralPickHeader';
+          }
+        } else {
+          if (didPickWinner) {
+            return 'correctPickHeader';
+          } else {
+            return 'incorrectPickHeader';
+          }
+        }
+      })
+    );
   }
 
-  private pickedTheSame(person1: Person, person2: Person, category: Category): boolean {
+  private pickedTheSame(person1: Person, person2: Person, category: Category): Observable<boolean> {
     const person1pick = this.getPick(person1, category);
     const person2pick = this.getPick(person2, category);
-    return !!person1pick && !!person2pick && person1pick.id === person2pick.id;
+    return combineLatest([person1pick, person2pick]).pipe(
+      map(([p1, p2]) => !!p1 && !!p2 && p1.id === p2.id)
+    );
   }
 
-  private didPickWinner(person: Person, category: Category): boolean {
-    const personPick = this.getPick(person, category);
-    const winning_ids = _.map(category.winners, winner => winner.nomination_id);
-    if (this.votingMode()) {
-      return !personPick;
-    } else {
-      return !!personPick && _.contains(winning_ids, personPick.id);
-    }
+  private didPickWinner(person: Person, category: Category): Observable<boolean> {
+    return this.getPick(person, category).pipe(
+      map(personPick => {
+        const winning_ids = _.map(category.winners, winner => winner.nomination_id);
+        if (this.votingMode()) {
+          return !personPick;
+        } else {
+          return !!personPick && _.contains(winning_ids, personPick.id);
+        }
+      })
+    );
   }
 
+  // noinspection JSMethodCanBeStatic
   private hasAtLeastOneWinner(category: Category): boolean {
     return category.winners.length > 0;
   }
 
-  getPersonPick(category: Category): Nominee {
+  getPersonPick(category: Category): Observable<Nominee> {
     return this.getPick(this.person, category);
   }
 
-  getMyPick(category: Category): Nominee {
-    return this.getPick(this.me, category);
-  }
-
-  private getPick(person: Person, category: Category): Nominee {
-    const myVote = this.votesService.getVotesForCurrentYearAndPersonAndCategory(person, category);
-    if (!!myVote) {
-      return _.findWhere(category.nominees, {id: myVote.nomination_id});
-    } else {
-      return undefined;
-    }
+  private getPick(person: Person, category: Category): Observable<Nominee> {
+    return this.votesService.getVoteForCurrentYearAndPersonAndCategory(person, category).pipe(
+      map(myVote => {
+        if (!!myVote) {
+          return _.findWhere(category.nominees, {id: myVote.nomination_id});
+        } else {
+          return undefined;
+        }
+      })
+    );
   }
 
   personIsMe(): boolean {
-    return this.me.id === this.person.id;
+    return !!this.me && !!this.person && this.me.id === this.person.id;
   }
 
   personPossessiveDisplayName(): string {
@@ -279,22 +319,26 @@ export class CategoriesComponent implements OnInit {
     return this.person.first_name + ' & ' + this.me.first_name;
   }
 
-  myPickName(category: Category): string {
-    const myPick = this.getMyPick(category);
-    return !!myPick ? myPick.nominee : '(no pick made)';
+  myPickName(category: Category): Observable<string> {
+    return this.pickName(this.me, category);
   }
 
-  personPickName(category: Category): string {
-    const yourPick = this.getPersonPick(category);
-    return !!yourPick ? yourPick.nominee : '(no pick made)';
+  personPickName(category: Category): Observable<string> {
+    return this.pickName(this.person, category);
+  }
+
+  pickName(person: Person, category: Category): Observable<string> {
+    return this.getPick(person, category).pipe(
+      map(pick => !!pick ? pick.nominee : '(no pick made)')
+    );
   }
 
   getMyWinnerScoreClass(category: Category): string {
     return this.gotPointsForWinner(category) ? 'winningScore' : 'losingScore';
   }
 
-  gotPointsForWinner(category: Category): boolean {
-    return this.categoryService.didPersonVoteCorrectlyFor(this.person, category);
+  gotPointsForWinner(category: Category): Observable<boolean> {
+    return this.votesService.didPersonVoteCorrectlyFor(this.person, category);
   }
 
 }

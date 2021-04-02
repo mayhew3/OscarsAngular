@@ -3,7 +3,7 @@
   <div class="container">
 
     <div class="row no-gutters">
-      <div class="col-9" (click)="adminRefreshData()">
+      <div class="col-9">
         <h1>Live Scoring</h1>
       </div>
 
@@ -31,46 +31,46 @@
       </div>
     </div>
 
-    <p *ngIf="stillLoading()">Loading...</p>
-
-    <p *ngIf="!stillLoading() && getVoters().length === 0">
+    <p *ngIf="(odds$ | async) && getVoters().length === 0">
       No players have voted yet!
     </p>
 
     <!-- PLAYER SCORES -->
 
-    <div class="row mt-2" *ngIf="!stillLoading()">
+    <div class="row mt-2" *ngIf="(odds$ | async) as odds; else loading">
       <div class="col-12"
-           *ngFor="let person of getVoters()">
+           *ngFor="let scoreData of getVoters()">
         <div class="card scoreCard fakeLink"
-             [ngClass]="scorecardClass(person)"
-             [routerLink]="['/person', person.id]">
+             [ngClass]="scorecardClass(scoreData)"
+             [routerLink]="['/person', scoreData.person.id]">
           <div class="card-body py-0 px-3">
             <div class="row no-gutters mainRow">
               <div class="col-5">
-                <span>{{getPersonName(person)}}</span>
+                <span>{{getPersonName(scoreData.person) | async}}</span>
               </div>
               <div class="col-4">
 
-                <div *ngIf="shouldShowOdds()">
+                <div *ngIf="shouldShowOdds() | async">
                   <span class="odds oddsSubtitle">Odds</span>
                   <span class="odds oddsValue"
-                        [ngStyle]="{ color: getOddsStyle(person)}">{{getOddsForPerson(person)}}
+                        [ngStyle]="{ color: getOddsStyle(scoreData)}">
+                    {{getOddsForPerson(scoreData)}}
                   </span>
-                  <span *ngIf="showOddsChange(person)"
+
+                  <span *ngIf="showOddsChange(scoreData)"
                         class="oddsDiff"
-                        [ngClass]="oddsDirectionClass(person)">
-                    {{oddsDirectionFormatted(person)}}
-                  </span>
+                        [ngClass]="oddsDirectionClass(scoreData)">
+                      {{oddsDirectionFormatted(scoreData)}}
+                      </span>
                 </div>
 
-                <div *ngIf="itsOver()"
+                <div *ngIf="(itsOver() | async)"
                      class="text-center oddsValue">
-                  <div *ngIf="anyoneIsHigherInRankings(person)">
-                    {{getRank(person)}}
+                  <div *ngIf="anyoneIsHigherInRankings(scoreData)">
+                    {{getRank(scoreData)}}
                   </div>
 
-                  <div *ngIf="!anyoneIsHigherInRankings(person)"
+                  <div *ngIf="!anyoneIsHigherInRankings(scoreData)"
                        class="text-center oddsValue goldOdds">
                     WINNER!
                   </div>
@@ -80,12 +80,12 @@
               <div class="col-3" style="justify-items: right">
                 <div class="row no-gutters">
                   <div class="col-12 px-0 scorePoints">
-                    <span *ngIf="gotPointsForLastWinner(person)"
+                    <span *ngIf="gotPointsForLastWinner(scoreData.person) | async"
                           class="scorePositive">
                       <i class="fas fa-angle-double-up"></i>
                     </span>
                     <span class="scoreText"
-                      [ngClass]="scoreNumberClass(person)">{{person.score}}</span>
+                      [ngClass]="scoreNumberClass(scoreData)">{{scoreData.score}}</span>
                   </div>
                 </div>
               </div>
@@ -101,12 +101,12 @@
 <!-- LAST WINNER FOOTER BAR -->
 
 <nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter"
-    *ngIf="!stillLoading()">
+    *ngIf="(odds$ | async)">
 
   <div class="container py-2">
     <div class="row flex-fill">
 
-      <div *ngIf="!latestCategory && !itsOver()"
+      <div *ngIf="!latestCategory && !(itsOver() | async)"
            routerLink="/winners"
            class="fakeLink">
         <div class="col-12 py-1">
@@ -114,7 +114,7 @@
         </div>
       </div>
 
-      <div *ngIf="itsOver()"
+      <div *ngIf="(itsOver() | async)"
            class="col-12 flex-fill">
         <div class="row py-1">
           <div class="col-12 py-1">
@@ -144,17 +144,17 @@
                   <div class="col-12 py-1">
                     <span class="footerTitle">{{latestCategory.name}}</span>
                     <span class="footerTieNotification"
-                          *ngIf="latestCategory.winners.length > 1"> (Tie!)</span>
+                          *ngIf="!!latestCategory.winners && latestCategory.winners.length > 1"> (Tie!)</span>
                   </div>
                 </div>
                 <div class="row my-2"
                      *ngFor="let winner of latestCategory.winners">
                   <div class="col-12">
-                    <span class="footerBig">{{getWinnerName(winner)}}</span>
+                    <span class="footerBig">{{getWinnerName(winner) | async}}</span>
                   </div>
                   <div class="col-12"
-                       *ngIf="!!getWinnerSubtitle(winner)">
-                    <span class="footerSmall">{{getWinnerSubtitle(winner)}}</span>
+                       *ngIf="!!(getWinnerSubtitle(winner) | async)">
+                    <span class="footerSmall">{{getWinnerSubtitle(winner) | async}}</span>
                   </div>
                 </div>
               </div>
@@ -166,12 +166,12 @@
           </div>
 
           <div class="col-12 text-right"
-               *ngIf="!itsOver()">
-            {{getWinnerCategoryCount()}}/{{getTotalCategoryCount()}}
+               *ngIf="!(itsOver() | async)">
+            {{getWinnerCategoryCount() | async}}/{{getTotalCategoryCount() | async}}
           </div>
           <div class="col-12"
-               *ngIf="!itsOver()">
-            <ngb-progressbar type="info" [value]="getWinnerCategoryCount()" [max]="getTotalCategoryCount()"></ngb-progressbar>
+               *ngIf="!(itsOver() | async)">
+            <ngb-progressbar type="info" [value]="getWinnerCategoryCount() | async" [max]="getTotalCategoryCount() | async"></ngb-progressbar>
           </div>
 
         </div>
@@ -180,3 +180,6 @@
     </div>
   </div>
 </nav>
+
+
+<ng-template #loading>Loading...</ng-template>

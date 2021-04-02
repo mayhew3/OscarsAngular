@@ -1,4 +1,4 @@
-export class Person {
+export interface Person {
   id: number;
   last_name: string;
   first_name: string;
@@ -7,7 +7,5 @@ export class Person {
   email: string;
   odds_filter: string;
   groups: number[];
-  score?: number;
   num_votes?: number;
-  sortingOdds?: number;
 }

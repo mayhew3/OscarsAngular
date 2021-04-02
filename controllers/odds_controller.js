@@ -10,6 +10,23 @@ exports.getMostRecentOddsBundle = function(request, response) {
   }
 };
 
+exports.updateOddsForNominees = async function(request, response) {
+  const changes = request.body.changes;
+
+  const updates = [];
+
+  for (const change of changes) {
+    const nomination_id = change.nomination_id;
+    delete change.nomination_id;
+    const nomination = await model.Nomination.findByPk(nomination_id);
+    updates.push(nomination.update(change));
+  }
+
+  Promise.all(updates).then(() => {
+    response.json({msg: 'Success!'});
+  });
+}
+
 function handleFirstOdds(response) {
   model.OddsExecution.findAll({
     where: {

@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav navbar-left">
         <li class="nav-item"
-            *ngIf="auth.isUser()">
+            *ngIf="(auth.isAuthenticated$ | async)">
           <a class="nav-link" routerLink="/">
             <span style="font-size: 1em; color: LightGreen;"
                   *ngIf="showHealthySocketStatus() && socketConnected()">
@@ -20,26 +20,26 @@
           </a>
         </li>
         <li class="nav-item"
-          *ngIf="!stillLoading() && auth.isUser() && systemVarsService.canVote()">
+          *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
           <a class="nav-link" routerLink="/vote">Vote</a>
         </li>
         <li class="nav-item"
-            *ngIf="!stillLoading() && auth.isUser() && !systemVarsService.canVote()">
+            *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && !(systemVarsService.canVote() | async)">
           <a class="nav-link" routerLink="/scores">Scores</a>
         </li>
         <li class="nav-item"
-            *ngIf="!stillLoading() && auth.isUser()">
+            *ngIf="!stillLoading() && (auth.isAuthenticated$ | async)">
           <a class="nav-link" routerLink="/history">Past</a>
         </li>
       </ul>
 
       <ul class="navbar-nav navbar-right">
         <li class="nav-item"
-            *ngIf="!auth.isAuthenticated()">
+            *ngIf="!(auth.isAuthenticated$ | async)">
           <a class="nav-link" (click)="auth.login()">Login</a>
         </li>
         <li class="nav-item"
-            *ngIf="auth.isAuthenticated()">
+            *ngIf="(auth.isAuthenticated$ | async)">
           <a class="nav-link fakeLink" (click)="auth.logout()">Logout</a>
         </li>
       </ul>

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {TestCategoryList} from './data/categories.test.mock';
 
@@ -17,7 +17,7 @@ export class CategoryServiceStub {
 
   // REAL METHODS
 
-  getCategories(): Observable<Category[]> {
+  get categories(): Observable<Category[]> {
     return this.maybeUpdateCache();
   }
 
@@ -25,6 +25,20 @@ export class CategoryServiceStub {
     return this.getDataWithCacheUpdate<Category>(() => {
       return this.getCategoryFromCache(id);
     });
+  }
+
+  getCategoryName(category: Category): string {
+    const parts = category.name.split(' (');
+    return parts[0];
+  }
+
+  getCategorySubtitle(category: Category): string {
+    const parts = category.name.split(' (');
+    if (parts.length > 1) {
+      return parts[1].replace(')', '');
+    } else {
+      return undefined;
+    }
   }
 
   getCategoryFromCache(id: number): Category {

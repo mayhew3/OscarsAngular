@@ -4,6 +4,7 @@ import {CategoryService} from './services/category.service';
 import {SocketService} from './services/socket.service';
 import {MyAuthService} from './services/auth/my-auth.service';
 import {PersonService} from './services/person.service';
+import {MessagingService} from './services/messaging.service';
 
 @Component({
   selector: 'osc-root',
@@ -16,20 +17,21 @@ export class AppComponent {
               public systemVarsService: SystemVarsService,
               private categoryService: CategoryService,
               private socket: SocketService,
-              private personService: PersonService) {
-    personService.maybeUpdateCache();
-    categoryService.getCategories().subscribe();
+              private personService: PersonService,
+              private messagingService: MessagingService) {
+    personService.me$.subscribe();
+    socket.init();
   }
 
-  stillLoading() {
+  stillLoading(): boolean {
     return this.systemVarsService.stillLoading();
   }
 
-  showHealthySocketStatus() {
-    return this.auth.isAdmin();
+  showHealthySocketStatus(): boolean {
+    return this.personService.isAdmin;
   }
 
-  socketConnected() {
+  socketConnected(): boolean {
     return this.socket.isConnected();
   }
 }

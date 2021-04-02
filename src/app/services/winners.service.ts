@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Winner} from '../interfaces/Winner';
+import {Category} from '../interfaces/Category';
+import _ from 'underscore';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,43 +17,27 @@ export class WinnersService {
 
   constructor(private http: HttpClient) { }
 
-  addOrDeleteWinner(nominee: Nominee): Observable<Winner> {
-    const data = {
-      category_id: nominee.category_id,
-      year: nominee.year,
-      nomination_id: nominee.id,
-      declared: new Date()
-    };
-    return this.http.post<Winner>(this.winnersUrl, data, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('addOrDeleteWinner', data))
-      );
+  private existingWinner(nominee: Nominee, category: Category): Winner {
+    return _.find(category.winners, w => w.nomination_id === nominee.id);
   }
 
-  resetWinners(year: number): Observable<any> {
-    const data = {year: year};
-    return this.http.patch(this.winnersUrl, data, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('resetWinners', data))
-      );
+  addOrDeleteWinner(nominee: Nominee, category: Category): void {
+    const existing = this.existingWinner(nominee, category);
+    if (!existing) {
+      const data = {
+        category_id: category.id,
+        year: nominee.year,
+        nomination_id: nominee.id,
+        declared: new Date(),
+      };
+      this.http.post<any>(this.winnersUrl, data, httpOptions).subscribe();
+    } else {
+      this.http.delete<Winner>(`/api/winners/${existing.id}`, httpOptions).subscribe();
+    }
   }
 
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+  resetWinners(year: number): void {
+    this.http.put<Winner>(`/api/resetWinners/`, {year}, httpOptions).subscribe();
   }
 
 }

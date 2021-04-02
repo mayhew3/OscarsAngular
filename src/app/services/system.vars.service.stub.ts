@@ -6,7 +6,7 @@ import {SystemVars} from '../interfaces/SystemVars';
   providedIn: 'root'
 })
 export class SystemVarsServiceStub {
-  getSystemVars(): Observable<SystemVars> {
+  get systemVars(): Observable<SystemVars> {
     return of({
       curr_year: 2018,
       voting_open: true,
@@ -19,6 +19,9 @@ export class SystemVarsServiceStub {
 
   public stillLoading(): boolean {
     return false;
+  }
+
+  maybeRefreshCache(): void {
   }
 
 }

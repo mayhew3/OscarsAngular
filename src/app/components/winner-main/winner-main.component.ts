@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActiveContext} from '../categories.context';
 import {MyAuthService} from '../../services/auth/my-auth.service';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'osc-winner-main',
@@ -11,8 +12,8 @@ export class WinnerMainComponent implements OnInit {
   public activeContext = ActiveContext.Winner;
   public person;
 
-  constructor(private auth: MyAuthService) {
-    this.auth.me$.subscribe(person => this.person = person);
+  constructor(private personService: PersonService) {
+    this.personService.me$.subscribe(person => this.person = person);
   }
 
   ngOnInit() {

@@ -1,5 +1,6 @@
 const model = require('./model');
 const _ = require('underscore');
+const socket = require('./sockets_controller');
 
 exports.getVotes = function(request, response) {
   model.Vote.findAll({
@@ -24,8 +25,10 @@ exports.addOrUpdateVote = function(request, response) {
       throw new Error("Multiple votes found!");
     } else if (votes.length === 1) {
       let vote = votes[0];
-      vote.update({nomination_id: request.body.nomination_id})
+      const nomination_id = request.body.nomination_id;
+      vote.update({nomination_id: nomination_id})
         .then(result => {
+          socket.emitToAll('change_vote', {vote_id: vote.id, nomination_id: nomination_id})
           return response.json(result);
         })
         .catch(err => {
@@ -36,6 +39,7 @@ exports.addOrUpdateVote = function(request, response) {
       model.Vote
         .create(request.body)
         .then(result => {
+          socket.emitToAll('add_vote', result)
           return response.json(result);
         })
         .catch(err => {

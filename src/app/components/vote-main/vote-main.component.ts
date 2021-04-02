@@ -11,7 +11,7 @@ export class VoteMainComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

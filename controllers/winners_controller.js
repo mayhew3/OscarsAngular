@@ -1,19 +1,36 @@
 const model = require('./model');
 const socket = require('./sockets_controller');
 
-exports.addOrDeleteWinner = async function(request, response) {
+exports.addWinner = async function(request, response) {
   const nomination_id = request.body.nomination_id;
 
-  let winner = await model.Winner.findOne({
-    where: {
-      nomination_id: request.body.nomination_id
-    }
-  });
+  try {
+    const winner = await model.Winner
+      .create(request.body);
 
-  if (!!winner) {
-    await deleteWinner(winner, response, nomination_id);
-  } else {
-    await addWinner(request, response, nomination_id);
+    const event_time = winner.declared;
+
+    const event = await model.Event.create({
+      type: 'winner',
+      detail: 'add',
+      event_time: event_time,
+      nomination_id: nomination_id
+    });
+
+    const msg = {
+      nomination_id: nomination_id,
+      event_id: event.id,
+      event_time: event_time,
+      winner_id: winner.id,
+      declared: event_time
+    };
+    socket.emitToAll('add_winner', msg);
+
+    await response.json(winner);
+
+  } catch (err) {
+    response.send(500, "Error submitting winner!");
+    throw new Error(err);
   }
 };
 
@@ -33,16 +50,26 @@ exports.resetWinners = async function(request, response) {
   });
 
   const msg = {
-    detail: 'reset',
     event_id: event.id,
-    event_time: event_time
+    event_time: event_time,
+    year: year
   };
-  socket.emitToAll('winner', msg);
+  socket.emitToAll('reset_winners', msg);
 
   response.json({msg: 'Success!'});
 };
 
-async function deleteWinner(winner, response, nomination_id) {
+exports.deleteWinner = async function(request, response) {
+  const winner_id = +request.params.id;
+
+  let winner = await model.Winner.findOne({
+    where: {
+      id: winner_id
+    }
+  });
+
+  const nomination_id = winner.nomination_id;
+
   try {
     await winner.destroy();
   } catch (err) {
@@ -60,44 +87,13 @@ async function deleteWinner(winner, response, nomination_id) {
   });
 
   const msg = {
-    detail: 'delete',
     nomination_id: nomination_id,
     event_id: event.id,
-    event_time: event_time
+    event_time: event_time,
+    winner_id: winner_id
   };
-  socket.emitToAll('winner', msg);
+  socket.emitToAll('remove_winner', msg);
 
   response.json({msg: 'Success'});
 }
 
-async function addWinner(request, response, nomination_id) {
-  let winner;
-  try {
-    winner = await model.Winner
-      .create(request.body);
-  } catch (err) {
-    response.send(500, "Error submitting winner!");
-    throw new Error(err);
-  }
-
-  const event_time = winner.declared;
-
-  const event = await model.Event.create({
-    type: 'winner',
-    detail: 'add',
-    event_time: event_time,
-    nomination_id: nomination_id
-  });
-
-  const msg = {
-    detail: 'add',
-    nomination_id: nomination_id,
-    event_id: event.id,
-    event_time: event_time,
-    winner_id: winner.id,
-    declared: event_time
-  };
-  socket.emitToAll('winner', msg);
-
-  response.json({msg: 'Success'});
-}

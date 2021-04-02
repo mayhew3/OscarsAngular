@@ -3,6 +3,11 @@ import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
 import {MyAuthService} from '../../services/auth/my-auth.service';
+import {map, mergeMap} from 'rxjs/operators';
+import {combineLatest, Observable} from 'rxjs';
+import {PersonService} from '../../services/person.service';
+import {Person} from '../../interfaces/Person';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'osc-home',
@@ -10,55 +15,48 @@ import {MyAuthService} from '../../services/auth/my-auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  authenticatingColor: ThemePalette = 'primary';
+  loadingColor: ThemePalette = 'accent';
   constructor(public auth: MyAuthService,
+              public personService: PersonService,
               public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
               public votesService: VotesService) {
-    this.categoryService.getCategories().subscribe();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  categoryCount(): number {
-    return this.categoryService.getCategoryCountNow();
+  get me$(): Observable<Person> {
+    return this.personService.me$;
   }
 
-  getFailedEmail(): string {
-    return this.auth.getFailedEmail();
+  categoryCount(): Observable<number> {
+    return this.categoryService.getCategoryCount();
   }
 
-  numVotesRemaining(): number {
-    const me = this.auth.getPersonNow();
-    if (!!me) {
-      const numVotes = this.votesService.getVotesForCurrentYearAndPerson(me).length;
-      return !!this.categoryCount() ? this.categoryCount() - numVotes : 0;
-    } else {
-      return 0;
-    }
+  get failedEmail(): boolean {
+    return this.auth.failedEmail;
   }
 
-  getOscarYear(): number {
+  numVotesRemaining(): Observable<number> {
+    const categoryCount$ = this.categoryCount();
+    const votes$ = this.personService.me$.pipe(
+      mergeMap(me => this.votesService.getVotesForCurrentYearAndPerson(me))
+    );
+    return combineLatest([categoryCount$, votes$]).pipe(
+      map(([categoryCount, votes]) => !!categoryCount ? categoryCount - votes.length : 0)
+    );
+  }
+
+  getOscarYear(): Observable<number> {
     return this.systemVarsService.getCurrentYear();
   }
 
-  isLoggedOut(): boolean {
-    return !this.auth.isLoggedIn();
-  }
-
-  stillLoading(): boolean {
-    return this.auth.stillLoading() ||
-      this.systemVarsService.stillLoading();
-  }
-
-  stillLoadingVotesAndCategories() {
-    return this.categoryService.stillLoading() ||
-      this.votesService.stillLoading();
-  }
-
-  hasVotesRemaining(): boolean {
-    return this.numVotesRemaining() > 0;
+  hasVotesRemaining(): Observable<boolean> {
+    return this.numVotesRemaining().pipe(
+      map(numVotes => numVotes > 0)
+    );
   }
 
 }

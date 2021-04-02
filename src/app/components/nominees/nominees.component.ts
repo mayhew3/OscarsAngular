@@ -1,19 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Nominee} from '../../interfaces/Nominee';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {ActiveContext} from '../categories.context';
 import {VotesService} from '../../services/votes.service';
-import {MyAuthService} from '../../services/auth/my-auth.service';
-import {Vote} from '../../interfaces/Vote';
 import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map, mergeMap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {SocketService} from '../../services/socket.service';
 
 @Component({
   selector: 'osc-nominees',
@@ -21,117 +21,125 @@ import {Observable} from 'rxjs';
   styleUrls: ['./nominees.component.scss']
 })
 export class NomineesComponent implements OnInit {
-  public category: Category;
-  public nextCategory: Category;
-  public previousCategory: Category;
-  public nominees: Nominee[];
-  public votedNominee: Nominee;
-  public winningNominees: Nominee[] = [];
-  private processingPick: Nominee;
-  private person: Person;
-  private persons: Person[];
+  private processingPick$ = new BehaviorSubject<Nominee>(undefined);
   @Input() activeContext: ActiveContext;
+
+  nomineeGroups = new Map<number, NomineeControls>();
+
+  // todo: allow multiple groups
+  groupNumber = 1;
+
+  category$: Observable<Category> = this.route.params.pipe(
+    mergeMap(params => {
+      const category_id = +params.category_id;
+      return this.categoryService.getCategory(category_id);
+    })
+  );
+
+  nextCategory$: Observable<Category> = this.route.params.pipe(
+    mergeMap(params => {
+      const category_id = +params.category_id;
+      return this.categoryService.getNextCategory(category_id);
+    })
+  );
+
+  prevCategory$: Observable<Category> = this.route.params.pipe(
+    mergeMap(params => {
+      const category_id = +params.category_id;
+      return this.categoryService.getPreviousCategory(category_id);
+    })
+  );
+
+  winningNominees$: Observable<Nominee[]> = this.category$.pipe(
+    map(category => _.map(category.winners, winner =>
+      _.findWhere(category.nominees, {id: winner.nomination_id})))
+  );
 
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
               private route: ActivatedRoute,
-              private auth: MyAuthService,
               private winnersService: WinnersService,
               private personService: PersonService,
-              private systemVarsService: SystemVarsService) { }
+              private systemVarsService: SystemVarsService,
+              private socket: SocketService) { }
 
-  ngOnInit() {
-    this.route.params.subscribe((params: Params) => {
-      const category_id = +params['category_id'];
-      this.auth.me$.subscribe(person => {
-        this.person = person;
-        this.categoryService.getNominees(category_id)
-          .subscribe(nominees => {
-            this.nominees = nominees;
-          });
-        this.categoryService.getCategory(category_id)
-          .subscribe(category => this.category = category);
-        this.categoryService.getNextCategory(category_id)
-          .subscribe(category => this.nextCategory = category);
-        this.categoryService.getPreviousCategory(category_id)
-          .subscribe(category => this.previousCategory = category);
+  ngOnInit(): void {
+    this.initGroups();
+  }
 
-        if (this.votingMode()) {
-          this.votedNominee = _.findWhere(this.nominees, {
-            id: this.category.voted_on
-          });
-        }
-        if (this.winnersMode()) {
-          this.updateLocalWinningNominees();
-          this.personService.getPersonsForGroup(1).subscribe(persons => {
-            this.persons = persons;
-            this.categoryService.subscribeToWinnerEvents().subscribe(() => {
-              this.updateLocalWinningNominees();
-              this.processingPick = undefined;
-            });
-          });
-        }
-      });
+  initGroups(): void {
+    this.category$.subscribe(category => {
+      _.each(category.nominees, n => this.nomineeGroups.set(n.id, new NomineeControls(n)));
     });
   }
 
-  getNominees(): Nominee[] {
-    return this.nominees ? this.nominees.sort((nominee1, nominee2) => {
-      return nominee1.nominee < nominee2.nominee ? -1 : 1;
-    }) : [];
+  get nomineeGroupList(): NomineeControls[] {
+    return Array.from(this.nomineeGroups.values());
   }
 
-  personsForNominee(nominee: Nominee): Person[] {
-    const votes = this.votesService.getVotesForCurrentYearAndCategory(this.category);
-    const votesForNominee = _.where(votes, {nomination_id: nominee.id});
-    return _.map(votesForNominee, vote => _.findWhere(this.persons, {id: vote.person_id}));
+  personsForNominee(nominee: Nominee, category: Category): Observable<Person[]> {
+    const votes$ = this.votesService.getVotesForCurrentYearAndCategory(category);
+    const persons$ = this.personService.getPersonsForGroup(this.groupNumber);
+    return combineLatest([votes$, persons$]).pipe(
+      map(([votes, persons]) => {
+        const votesForNominee = _.where(votes, {nomination_id: nominee.id});
+        return _.map(votesForNominee, vote => _.findWhere(persons, {id: vote.person_id}));
+      })
+    );
   }
 
-  private updateLocalWinningNominees(): void {
-    const winners = this.category.winners;
-    // noinspection TypeScriptValidateJSTypes
-    this.winningNominees = _.map(winners, winner => {
-      const nomination_id = winner.nomination_id;
-      return _.findWhere(this.nominees, {id: nomination_id});
+  getVoterClass(person: Person): Observable<string> {
+    return this.personService.isMe(person).pipe(
+      map(isMe => !!isMe ? 'itsMe' : '')
+    );
+  }
+
+  submitVoteOrWinner(nominee: Nominee, category: Category): void {
+    this.personService.me$.subscribe(me => {
+      if (this.votingMode()) {
+        this.processingPick$.next(nominee);
+        this.votesService.addOrUpdateVote(nominee, me);
+
+        const voteCallback = () => {
+          this.processingPick$.next(undefined);
+          this.socket.removeListener('add_vote', voteCallback);
+          this.socket.removeListener('change_vote', voteCallback);
+        };
+
+        this.socket.on('add_vote', voteCallback);
+        this.socket.on('change_vote', voteCallback);
+
+      } else if (this.winnersMode() && this.personService.isAdmin) {
+        this.processingPick$.next(nominee);
+        this.winnersService.addOrDeleteWinner(nominee, category);
+
+        const winnerCallback = () => {
+          this.processingPick$.next(undefined);
+          this.socket.removeListener('add_winner', winnerCallback);
+          this.socket.removeListener('remove_winner', winnerCallback);
+        };
+        this.socket.on('add_winner', winnerCallback);
+        this.socket.on('remove_winner', winnerCallback);
+      }
     });
   }
 
-  getVoterClass(person: Person): string {
-    return this.auth.isMe(person) ? 'itsMe' : '';
+  getHeaderText(category: Category): string {
+    return category ? this.categoryService.getCategoryName(category) : '';
   }
 
-  submitVoteOrWinner(nominee: Nominee): void {
-    if (this.votingMode()) {
-      this.processingPick = nominee;
-      this.votesService.addOrUpdateVote(nominee, this.person).subscribe((vote: Vote) => {
-        // todo: MA-40 - this sucks, better way to check for error response.
-        if (vote && vote.id) {
-          this.votedNominee = nominee;
-          this.category.voted_on = nominee.id;
-        }
-        this.processingPick = undefined;
-      });
-    } else if (this.winnersMode() && this.auth.isAdmin()) {
-      this.processingPick = nominee;
-      this.winnersService.addOrDeleteWinner(nominee).subscribe();
-    }
+  getHeaderSubtitle(category: Category): string {
+    return category ? this.categoryService.getCategorySubtitle(category) : '';
   }
 
-  getHeaderText(): string {
-    return this.category ? this.categoryService.getCategoryName(this.category) : '';
+  getHeaderPts(category: Category): string {
+    return category ? category.points.toString() : '';
   }
 
-  getHeaderSubtitle(): string {
-    return this.category ? this.categoryService.getCategorySubtitle(this.category) : '';
-  }
-
-  getHeaderPts(): string {
-    return this.category ? this.category.points.toString() : '';
-  }
-
-  showNominees(): boolean {
-    return !this.stillLoading() &&
-      (this.systemVarsService.canVote() || !this.votingMode());
+  showNominees(): Observable<boolean> {
+    return this.systemVarsService.canVote().pipe(
+      map(canVote => !this.stillLoading() && (canVote || !this.votingMode()))
+    );
   }
 
   showVotingClosedMessage(): boolean {
@@ -140,53 +148,62 @@ export class NomineesComponent implements OnInit {
   }
 
   stillLoading(): boolean {
-    return this.categoryService.stillLoading() || this.personService.stillLoading() || this.systemVarsService.stillLoading();
+    return false;
   }
 
   getMainLineText(nominee: Nominee): string {
     return nominee.nominee;
   }
 
-  getSubtitleText(nominee: Nominee): string {
-    return Nominee.getSubtitleText(this.category, nominee);
+  getSubtitleText(nominee: Nominee, category: Category): string {
+    return CategoryService.getSubtitleText(category, nominee);
   }
 
   getSongSubtitles(nominee: Nominee): string[] {
     return nominee.detail.split('; ');
   }
 
-  isVoted(nominee: Nominee): boolean {
-    return this.votedNominee && this.votedNominee.id === nominee.id;
+  isVoted(nominee: Nominee): Observable<boolean> {
+    return this.category$.pipe(
+      mergeMap(category => this.votesService.getMyVoteForCurrentYearAndCategory(category)),
+      map(vote => !!vote && vote.nomination_id === nominee.id)
+    );
   }
 
-  showSubtitleText(nominee: Nominee): boolean {
-    return !!nominee.context && !Nominee.isSongCategory(this.category.name);
+  isWinner(nominee: Nominee): Observable<boolean> {
+    return this.winningNominees$.pipe(
+      map(winningNominees => !!winningNominees && winningNominees.includes(nominee))
+    );
   }
 
-  showSongSubtitle(nominee: Nominee): boolean {
-    return !!nominee.context && Nominee.isSongCategory(this.category.name);
+  showSubtitleText(nominee: Nominee, category: Category): boolean {
+    return !!nominee.context && !CategoryService.isSongCategory(category.name);
   }
 
-  getVotedClass(nominee: Nominee): string {
-    const classes = [];
-
-    if (this.processingPick && this.processingPick.id === nominee.id) {
-      classes.push('processing');
-    } else if (this.votingMode() && this.isVoted(nominee)) {
-      classes.push('votedOn');
-    } else if (this.winnersMode() && this.isWinner(nominee)) {
-      classes.push('winner');
-    }
-
-    if (this.auth.isAdmin() || this.votingMode()) {
-      classes.push('fakeLink');
-    }
-
-    return classes.join(' ');
+  showSongSubtitle(nominee: Nominee, category: Category): boolean {
+    return !!nominee.context && CategoryService.isSongCategory(category.name);
   }
 
-  isWinner(nominee: Nominee): boolean {
-    return this.winningNominees && this.winningNominees.includes(nominee);
+  getVotedClass(nominee: Nominee): Observable<string> {
+    return combineLatest([this.isVoted(nominee), this.isWinner(nominee), this.processingPick$.asObservable()]).pipe(
+      map(([isVoted, isWinner, processingPick]) => {
+        const classes = [];
+
+        if (!!processingPick && processingPick.id === nominee.id) {
+          classes.push('processing');
+        } else if (this.votingMode() && isVoted) {
+          classes.push('votedOn');
+        } else if (this.winnersMode() && isWinner) {
+          classes.push('winner');
+        }
+
+        if (this.personService.isAdmin || this.votingMode()) {
+          classes.push('fakeLink');
+        }
+
+        return classes.join(' ');
+      })
+    );
   }
 
   votingMode(): boolean {
@@ -201,4 +218,18 @@ export class NomineesComponent implements OnInit {
     return ActiveContext.OddsAssignment === this.activeContext;
   }
 
+}
+
+export class NomineeControls {
+  expert: FormControl;
+  user: FormControl;
+  numerator: FormControl;
+  denominator: FormControl;
+
+  constructor(public nominee: Nominee) {
+    this.expert = new FormControl(nominee.odds_expert);
+    this.user = new FormControl(nominee.odds_user);
+    this.numerator = new FormControl(nominee.odds_numerator);
+    this.denominator = new FormControl(nominee.odds_denominator);
+  }
 }

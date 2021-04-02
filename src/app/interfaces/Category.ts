@@ -1,7 +1,7 @@
 import {Nominee} from './Nominee';
 import {Winner} from './Winner';
 
-export class Category {
+export interface Category {
   id: number;
   name: string;
   points: number;

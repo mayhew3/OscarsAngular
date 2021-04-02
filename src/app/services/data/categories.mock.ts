@@ -1,6 +1,6 @@
-import {Category} from '../../interfaces/Category';
 /* tslint:disable quotemark */
-export const MockCategoryList: Category[] = [
+/* tslint:disable:object-literal-key-quotes */
+export const MockCategoryList: any[] = [
   {
     "winners": [],
     "nominees": [

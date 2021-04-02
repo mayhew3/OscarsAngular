@@ -9,13 +9,12 @@ exports.getSystemVars = function(request, response) {
 
 exports.updateSystemVars = async function(request, response) {
   let systemVar = request.body;
-  systemVar.voting_open = systemVar.voting_open ? 1 : 0;
 
   let result;
   try {
     result = await model.SystemVars.findByPk(systemVar.id);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     response.send({msg: "Error finding system_var: " + error});
   }
 
@@ -24,7 +23,7 @@ exports.updateSystemVars = async function(request, response) {
   try {
     await result.update(systemVar);
   } catch (err) {
-    console.error(error);
+    console.error(err);
     response.send({msg: "Error updating system_vars: " + JSON.stringify(systemVar)});
   }
 
@@ -37,11 +36,17 @@ exports.updateSystemVars = async function(request, response) {
     });
 
     const msg = {
-      voting_open: systemVar.voting_open,
       event_id: event.id,
       event_time: event_time
     };
-    socket.emitToAll('voting', msg);
+
+    if (!systemVar.voting_open) {
+      socket.emitToAll('voting_locked', msg);
+    } else {
+      socket.emitToAll('voting_unlocked', msg);
+    }
+
+
   }
 
   response.json({msg: 'Success'});

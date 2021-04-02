@@ -1,11 +1,12 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {SystemVars} from '../interfaces/SystemVars';
-import {catchError, concatMap, map} from 'rxjs/operators';
+import {filter, first, map} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
-import {Person} from '../interfaces/Person';
+import {Store} from '@ngxs/store';
+import {ChangeCurrentYear, GetSystemVars, VotingLock, VotingUnlock} from '../actions/systemVars.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,103 +15,62 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class SystemVarsService {
+export class SystemVarsService implements OnDestroy {
   systemVarsUrl = 'api/systemVars';
-  private systemVars: SystemVars;
+  private _systemVars$ = new BehaviorSubject<SystemVars>(undefined);
+  private _dataStore: {systemVars: SystemVars} = {systemVars: undefined};
+  private _fetching = false;
+
+  private _destroy$ = new Subject();
+
+  systemVars = this.store.select(state => state.systemVars).pipe(
+    map(state => state.systemVars),
+    filter(systemVars => !!systemVars)
+  );
 
   constructor(private http: HttpClient,
               private socket: SocketService,
-              private auth: MyAuthService) {
-    this.getSystemVars().subscribe(() => {
-      this.socket.on('voting', msg => {
-        if (!!msg.voting_open) {
-          this.unlockVotingInternal();
-        } else {
-          this.lockVotingInternal();
-        }
-      });
-    });
+              private auth: MyAuthService,
+              private store: Store) {
+    this._fetching = true;
+    this.store.dispatch(new GetSystemVars(this.socket));
+    this.systemVars.subscribe(() => this._fetching = false);
   }
 
-  canVote(): boolean {
-    return !!this.systemVars && !!this.systemVars.voting_open;
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 
-  getCurrentYear(): number {
-    return this.systemVars ? this.systemVars.curr_year : undefined;
-  }
-
-  lockVotingInternal(): void {
-    this.getSystemVars().subscribe(() => {
-      this.systemVars.voting_open = false;
-    });
-  }
-
-  unlockVotingInternal(): void {
-    this.getSystemVars().subscribe(() => {
-      this.systemVars.voting_open = true;
-    });
-  }
-
-  toggleVotingLock(): void {
-    if (!this.systemVars) {
-      throw new Error('No system vars found.');
-    }
-    const targetVars = {
-      id: this.systemVars.id,
-      voting_open: !this.systemVars.voting_open,
-      curr_year: this.systemVars.curr_year
-    };
-
-    this.http.put(this.systemVarsUrl, targetVars, httpOptions)
-      .pipe(catchError(this.handleError<any>('toggleVotingLock')))
-      .subscribe();
-  }
-
-  changeCurrentYear(year: number): Observable<any> {
-    const outsideThis = this;
-    return new Observable<any>(observer => {
-      const targetVars = {
-        id: this.systemVars.id,
-        voting_open: this.systemVars.voting_open,
-        curr_year: year
-      };
-
-      this.http.put(this.systemVarsUrl, targetVars, httpOptions)
-        .pipe(catchError(this.handleError<any>('changeCurrentYear')))
-        .subscribe(() => {
-          outsideThis.systemVars.curr_year = year;
-          observer.next();
-        });
-    });
-  }
-
-  stillLoading(): boolean {
-    return this.systemVars === undefined;
-  }
-
-  getSystemVars(): Observable<SystemVars> {
-    return this.auth.me$.pipe(
-      concatMap((_) => this.getSystemVarsFromPerson())
+  canVote(): Observable<boolean> {
+    return this.systemVars.pipe(
+      map(systemVars => systemVars.voting_open)
     );
   }
 
-  private getSystemVarsFromPerson(): Observable<SystemVars> {
-    if (!!this.systemVars) {
-      return of(this.systemVars);
-    } else {
-      return this.http.get<SystemVars[]>(this.systemVarsUrl)
-        .pipe(
-          catchError(this.handleError<SystemVars[]>('getSystemVars', [])),
-          map((systemVars: SystemVars[]) => {
-            if (systemVars.length !== 1) {
-              throw new Error('Should only have one row in system vars.');
-            }
-            this.systemVars = systemVars[0];
-            return systemVars[0];
-          })
-        );
-    }
+  getCurrentYear(): Observable<number> {
+    return this.systemVars.pipe(
+      map(systemVars => systemVars.curr_year)
+    );
+  }
+
+  toggleVotingLock(): void {
+    this.systemVars.pipe(first())
+      .subscribe(systemVars => {
+        const data = {
+          id: systemVars.id,
+          voting_open: !systemVars.voting_open
+        };
+        this.http.put('/api/systemVars', data, httpOptions).subscribe();
+      });
+  }
+
+  changeCurrentYear(year: number): void {
+    this.store.dispatch(new ChangeCurrentYear(year)).subscribe();
+  }
+
+  stillLoading(): boolean {
+    return this._fetching;
   }
 
 
@@ -120,7 +80,7 @@ export class SystemVarsService {
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T> {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure

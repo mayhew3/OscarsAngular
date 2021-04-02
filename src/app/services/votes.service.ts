@@ -1,13 +1,18 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
-import {Observable, of} from 'rxjs';
-import {catchError} from 'rxjs/operators';
+import {combineLatest, Observable} from 'rxjs';
+import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
 import {Category} from '../interfaces/Category';
-import {_} from 'underscore';
+import * as _ from 'underscore';
+import {Store} from '@ngxs/store';
+import {GetVotes} from '../actions/votes.action';
+import {PersonService} from './person.service';
+import {CategoryService} from './category.service';
+import {SystemVars} from '../interfaces/SystemVars';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,126 +24,87 @@ const httpOptions = {
 export class VotesService {
   votesUrl = 'api/votes';
   isLoading = true;
-  private readonly cache: Vote[];
+
+  votes: Observable<Vote[]> = this.store.select(state => state.votes).pipe(
+    map(votesContainer => votesContainer.votes),
+    filter(votes => !!votes),
+    tap(() => {
+      this.isLoading = false;
+    })
+  );
+
+  myVotes$ = combineLatest([this.personService.me$, this.votes]).pipe(
+    map(([me, votes]) => _.where(votes, {person_id: me.id}))
+  );
 
   constructor(private http: HttpClient,
-              private systemVarsService: SystemVarsService) {
-    this.cache = [];
-    this.systemVarsService.getSystemVars().subscribe(systemVars => {
-      this.maybeUpdateCache(systemVars.curr_year).subscribe(() => {
-        this.isLoading = false;
-      });
-    });
+              private systemVarsService: SystemVarsService,
+              private personService: PersonService,
+              private categoryService: CategoryService,
+              private store: Store) {
+    this.systemVarsService.systemVars.pipe(
+      distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
+    ).subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
   }
 
   stillLoading(): boolean {
     return this.isLoading;
   }
 
-  // HELPERS
+  // SCOREBOARD
 
-  private static addToArray<T>(existingArray: T[], newArray: T[]) {
-    existingArray.push.apply(existingArray, newArray);
+  didPersonVoteCorrectlyFor(person: Person, category: Category): Observable<boolean> {
+    return this.getVotesForCurrentYearAndCategory(category).pipe(
+      map(votes => {
+        const personVote = _.findWhere(votes, {person_id: person.id});
+        if (!!personVote) {
+          const winningIds = _.map(category.winners, winner => winner.nomination_id);
+          return winningIds.includes(personVote.nomination_id);
+        }
+        return false;
+      })
+    );
   }
 
-  getVotesForCurrentYear(): Observable<Vote[]> {
-    return new Observable<Vote[]>(observer => {
-      this.systemVarsService.getSystemVars().subscribe(systemVars => {
-        this.maybeUpdateCache(systemVars.curr_year).subscribe(votes => {
-          observer.next(votes);
-        });
-      });
-    });
+  getVotesForCurrentYearAndCategory(category: Category): Observable<Vote[]> {
+    return this.votes.pipe(
+      map(votes => _.where(votes, {category_id: category.id}))
+    );
   }
 
-  getVotesForCurrentYearAndCategory(category: Category): Vote[] {
-    return _.where(this.cache, {category_id: category.id});
+  getVotesForCurrentYearAndPerson(person: Person): Observable<Vote[]> {
+    return this.votes.pipe(
+      map(votes => _.where(votes, {person_id: person.id}))
+    );
   }
 
-  getVotesForCurrentYearAndPerson(person: Person): Vote[] {
-    return _.where(this.cache, {person_id: person.id});
+  getMyVoteForCurrentYearAndCategory(category: Category): Observable<Vote> {
+    return this.myVotes$.pipe(
+      map(votes => {
+        const allVotes = _.where(votes, {category_id: category.id});
+        return allVotes.length === 1 ? allVotes[0] : undefined;
+      })
+    );
   }
 
-  getVotesForCurrentYearAndPersonAndCategory(person: Person, category: Category): Vote {
-    const allVotes = _.where(this.cache, {person_id: person.id, category_id: category.id});
-    return allVotes.length === 1 ? allVotes[0] : undefined;
+  getVoteForCurrentYearAndPersonAndCategory(person: Person, category: Category): Observable<Vote> {
+    return this.votes.pipe(
+      map(votes => {
+        const allVotes = _.where(votes, {person_id: person.id, category_id: category.id});
+        return allVotes.length === 1 ? allVotes[0] : undefined;
+      })
+    );
   }
 
-  private maybeUpdateCache(year: number): Observable<Vote[]> {
-    if (this.cache.length === 0) {
-      return this.refreshCache(year);
-    } else {
-      return of(this.cache);
-    }
-  }
-
-  refreshCacheForThisYear(): Observable<Vote[]> {
-    return new Observable<Vote[]>(observer => {
-      this.systemVarsService.getSystemVars().subscribe(systemVars => {
-        this.refreshCache(systemVars.curr_year).subscribe(votes => observer.next(votes));
-      });
-    });
-  }
-
-  refreshCache(year: number): Observable<Vote[]> {
-    const params = new HttpParams()
-      .set('year', year.toString());
-    return new Observable<Vote[]>((observer) => {
-      this.http.get<Vote[]>(this.votesUrl, {params: params})
-        .pipe(
-          catchError(this.handleError<Vote[]>('getVotes', []))
-        )
-        .subscribe(
-          (votes: Vote[]) => {
-            this.cache.length = 0;
-            VotesService.addToArray(this.cache, votes);
-            observer.next(votes);
-          },
-          (err: Error) => observer.error(err)
-        );
-    });
-  }
-
-  addOrUpdateVote(nominee: Nominee, person: Person): Observable<Vote> {
-    return new Observable<Vote>(observer => {
-      const data = {
-        category_id: nominee.category_id,
-        year: nominee.year,
-        person_id: person.id,
-        nomination_id: nominee.id
-      };
-      this.http.post(this.votesUrl, data, httpOptions)
-        .pipe(
-          catchError(this.handleError<any>('addOrUpdateVote', data))
-        )
-        .subscribe(vote => {
-          const existingVote = _.findWhere(this.cache, {id: vote.id});
-          if (!!existingVote) {
-            existingVote.nomination_id = nominee.id;
-          } else {
-            this.cache.push(vote);
-          }
-          observer.next(vote);
-        });
-    });
-  }
-
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
+  addOrUpdateVote(nominee: Nominee, person: Person): void {
+    const data = {
+      category_id: nominee.category_id,
+      year: nominee.year,
+      person_id: person.id,
+      nomination_id: nominee.id,
+      submitted: new Date()
     };
+    this.http.post<Vote>('/api/votes', data, httpOptions).subscribe();
   }
 
 }

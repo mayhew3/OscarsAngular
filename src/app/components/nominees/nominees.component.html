@@ -1,44 +1,47 @@
-<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between header">
+<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between header"
+     *ngIf="(category$ | async) as category">
   <div class="navbar-text">
     <div class="row">
       <div class="col-12 headerMain">
-        {{getHeaderText()}}
+        {{getHeaderText(category)}}
       </div>
     </div>
-    <div class="row" *ngIf="!!getHeaderSubtitle()">
+    <div class="row" *ngIf="!!getHeaderSubtitle(category)">
       <div class="col-12 headerSubtitle">
-        {{getHeaderSubtitle()}}
+        {{getHeaderSubtitle(category)}}
       </div>
     </div>
   </div>
   <div class="navbar-text headerScore">
-    {{getHeaderPts()}}
+    {{getHeaderPts(category)}}
   </div>
 </nav>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom justify-content-center hopper">
-  <osc-category-hopper [next]="nextCategory"
-                       [prev]="previousCategory"
-                       [nominees]="nominees"
+  <osc-category-hopper [next]="nextCategory$"
+                       [prev]="prevCategory$"
+                       [category]="category$"
                        [activeContext]="activeContext"
+                       [nomineeGroups]="nomineeGroupList"
                         class="container container-fluid">
   </osc-category-hopper>
 </nav>
 
 <div class="nom-body">
 
-  <div class="container">
+  <div class="container"
+       *ngIf="(category$ | async) as category">
 
     <p *ngIf="stillLoading()">Loading...</p>
     <p *ngIf="showVotingClosedMessage()">Voting is currently closed!</p>
 
     <div class="row" *ngIf="showNominees()">
       <div class="col-12 col-sm-6 col-lg-4"
-           *ngFor="let nominee of getNominees()">
+           *ngFor="let nominee of category.nominees">
 
         <div class="card nomineeCard"
-             [ngClass]="getVotedClass(nominee)"
-             (click)="submitVoteOrWinner(nominee)" >
+             [ngClass]="getVotedClass(nominee) | async"
+             (click)="submitVoteOrWinner(nominee, category)" >
           <div class="card-body nomineeCardBody">
 
             <div class="row align-items-center">
@@ -49,12 +52,12 @@
                     {{getMainLineText(nominee)}}
                   </div>
                 </div>
-                <div class="row" *ngIf="showSubtitleText(nominee)">
+                <div class="row" *ngIf="showSubtitleText(nominee, category)">
                   <div class="col-12 nomineeSubtitle py-1">
-                    {{getSubtitleText(nominee)}}
+                    {{getSubtitleText(nominee, category)}}
                   </div>
                 </div>
-                <div class="row" *ngIf="showSongSubtitle(nominee)">
+                <div class="row" *ngIf="showSongSubtitle(nominee, category)">
                   <div class="col-12 nomineeSubtitle py-1"
                        *ngFor="let subtitle of getSongSubtitles(nominee)">
                     {{subtitle}}
@@ -64,8 +67,8 @@
 
               <div class="col-3" *ngIf="winnersMode()">
                 <div class="voterName"
-                     *ngFor="let voter of personsForNominee(nominee)"
-                     [ngClass]="getVoterClass(voter)">
+                     *ngFor="let voter of (personsForNominee(nominee, category) | async)"
+                     [ngClass]="getVoterClass(voter) | async">
                   {{voter.first_name}}
                 </div>
               </div>
@@ -80,7 +83,7 @@
                   <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [(ngModel)]="nominee.odds_numerator"
+                         [formControl]="nomineeGroups.get(nominee.id).numerator"
                          id="numeratorInput"/>
                 </div>
               </div>
@@ -92,7 +95,7 @@
                   <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [(ngModel)]="nominee.odds_denominator"
+                         [formControl]="nomineeGroups.get(nominee.id).denominator"
                          id="denominatorInput"/>
                 </div>
               </div>
@@ -104,7 +107,7 @@
                   <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [(ngModel)]="nominee.odds_expert"
+                         [formControl]="nomineeGroups.get(nominee.id).expert"
                          id="expertInput"/>
                 </div>
               </div>
@@ -116,7 +119,7 @@
                   <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [(ngModel)]="nominee.odds_user"
+                         [formControl]="nomineeGroups.get(nominee.id).user"
                          id="userInput"/>
                 </div>
               </div>

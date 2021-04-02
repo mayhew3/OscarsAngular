@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FinalResult} from '../../interfaces/FinalResult';
 import {FinalResultsService} from '../../services/final-results.service';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import * as moment from 'moment';
+import {combineLatest, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'osc-history',
@@ -13,87 +14,104 @@ import * as moment from 'moment';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
-  public finalResults: FinalResult[];
+
+  groupNumber = 1;
+
+  finalResults$ = this.finalResultsService.getFinalResultsForGroup(this.groupNumber);
 
   constructor(private finalResultsService: FinalResultsService,
-              private personService: PersonService,
-              private auth: MyAuthService) { }
+              private personService: PersonService) { }
 
-  ngOnInit() {
-    this.finalResultsService.getFinalResultsForGroup(1).subscribe(finalResults => {
-      this.finalResults = finalResults;
-    });
+  ngOnInit(): void {
   }
 
-  getChampions(): FinalResult[][] {
-    // noinspection TypeScriptValidateJSTypes
-    const years = _.uniq(_.map(this.finalResults, finalResult => finalResult.year));
-    years.sort((year1, year2) => {
-      return year2 - year1;
-    });
+  getChampions(): Observable<FinalResult[][]> {
+    return this.finalResults$.pipe(
+      map(finalResults => {
+        // noinspection TypeScriptValidateJSTypes
+        const years = _.uniq(_.map(finalResults, finalResult => finalResult.year));
+        years.sort((year1, year2) => {
+          return year2 - year1;
+        });
 
-    const champions = [];
-    _.each(years, year => {
-      // noinspection TypeScriptValidateJSTypes
-      const yearChamps = _.filter(this.finalResults, finalResult => finalResult.year === year && finalResult.rank === 1);
-      champions.push(yearChamps);
-    });
+        const champions = [];
+        _.each(years, year => {
+          // noinspection TypeScriptValidateJSTypes
+          const yearChamps = _.filter(finalResults, finalResult => finalResult.year === year && finalResult.rank === 1);
+          champions.push(yearChamps);
+        });
 
-    return champions;
+        return champions;
+      })
+    );
   }
 
   getYearFromChampionList(champions: FinalResult[]): number {
     return champions[0].year;
   }
 
-  stillLoading(): boolean {
-    return this.finalResultsService.stillLoading() || this.personService.stillLoading();
+  getPerson(person_id: number): Observable<Person> {
+    return this.personService.getPerson(person_id);
   }
 
-  getPerson(person_id: number): Person {
-    return this.personService.getPersonFromCache(person_id);
+  getScoreCardClass(champions: FinalResult[]): Observable<string> {
+    return this.iAmOneOfThe(champions).pipe(
+      map(meChamp => !!meChamp ? 'myScoreCard myMainScoreCard' : 'otherScoreCard')
+    );
   }
 
-  getScoreCardClass(champions: FinalResult[]): string {
-    return this.iAmOneOfThe(champions) ? 'myScoreCard myMainScoreCard' : 'otherScoreCard';
+  getScoreScoreClass(champions: FinalResult[]): Observable<string> {
+    return this.iAmOneOfThe(champions).pipe(
+      map(meChamp => !!meChamp ? 'myScorePoints' : 'otherScorePoints')
+    );
   }
 
-  getScoreScoreClass(champions: FinalResult[]): string {
-    return this.iAmOneOfThe(champions) ? 'myScorePoints' : 'otherScorePoints';
-  }
-
-  iAmOneOfThe(champions: FinalResult[]): boolean {
+  iAmOneOfThe(champions: FinalResult[]): Observable<boolean> {
     const person_ids = _.map(champions, champion => champion.person_id);
-    const myPersonID = this.auth.getPersonID();
-    return _.contains(person_ids, myPersonID);
+    return this.personService.me$.pipe(
+      map(me => _.contains(person_ids, me.id))
+    );
   }
 
-  showMyRank(champions: FinalResult[]): boolean {
-    return !!this.getFinalResultForMe(champions) && !this.iAmOneOfThe(champions);
+  showMyRank(champions: FinalResult[]): Observable<boolean> {
+    return combineLatest([this.getFinalResultForMe(champions), this.iAmOneOfThe(champions)]).pipe(
+      map(([finalResult, meChamp]) => !!finalResult && !meChamp)
+    );
   }
 
-  getChampionsString(champions: FinalResult[]): string {
-    const names = _.map(champions, champion => this.getPerson(champion.person_id).first_name);
-    return names.join(', ');
+  getChampionsString(champions: FinalResult[]): Observable<string> {
+    return this.personService.persons.pipe(
+      map(persons => {
+        const names = _.map(champions, champion => _.findWhere(persons, {id: champion.person_id}).first_name);
+        return names.join(', ');
+      })
+    );
   }
 
-  getFinalResultForMe(champions: FinalResult[]): FinalResult {
-    const year = this.getYearFromChampionList(champions);
-    const person_id = this.auth.getPersonID();
-    return _.findWhere(this.finalResults, {year: year, person_id: person_id});
+  getFinalResultForMe(champions: FinalResult[]): Observable<FinalResult> {
+    return combineLatest([this.personService.me$, this.finalResults$]).pipe(
+      map(([me, finalResults]) => {
+        const year = this.getYearFromChampionList(champions);
+        return _.findWhere(finalResults, {year, person_id: me.id});
+      })
+    );
   }
 
-  getMyFirstName(): string {
-    return this.auth.getFirstName();
+  getMyFirstName(): Observable<string> {
+    return this.personService.me$.pipe(
+      map(me => me.first_name)
+    );
   }
 
-  getMyRank(champions: FinalResult[]): string {
-    const rank = this.getFinalResultForMe(champions).rank;
-    return moment.localeData().ordinal(rank);
+  getMyRank(champions: FinalResult[]): Observable<string> {
+    return this.getFinalResultForMe(champions).pipe(
+      map(finalResult => moment.localeData().ordinal(finalResult.rank))
+    );
   }
 
-  getMyScore(champions: FinalResult[]): number {
-    const score = this.getFinalResultForMe(champions).score;
-    return score;
+  getMyScore(champions: FinalResult[]): Observable<number> {
+    return this.getFinalResultForMe(champions).pipe(
+      map(finalResult => finalResult.score)
+    );
   }
 }

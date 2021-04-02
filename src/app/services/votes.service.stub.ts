@@ -7,7 +7,7 @@ import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
 import {Category} from '../interfaces/Category';
-import {_} from 'underscore';
+import * as _ from 'underscore';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class VotesServiceStub {
               private systemVarsService: SystemVarsService) {
   }
 
-  getVotesForCurrentYear(): Observable<Vote[]> {
+  get votes(): Observable<Vote[]> {
     return of([]);
   }
 

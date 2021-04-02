@@ -26,6 +26,18 @@ import {NgbDropdownModule, NgbProgressbarModule} from '@ng-bootstrap/ng-bootstra
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
 import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {NgxsModule} from '@ngxs/store';
+import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
+import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
+import {PersonState} from './states/person.state';
+import {SystemVarsState} from './states/systemVars.state';
+import {CategoryState} from './states/category.state';
+import {MaxYearState} from './states/maxYear.state';
+import {VoteState} from './states/vote.state';
+import {FinalResultState} from './states/final-result.state';
+import {OddsState} from './states/odds.state';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -53,7 +65,19 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
     environment.httpModules,
     NgbDropdownModule,
     NgbProgressbarModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
+    NgxsModule.forRoot([
+      PersonState,
+      SystemVarsState,
+      CategoryState,
+      MaxYearState,
+      VoteState,
+      FinalResultState,
+      OddsState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
     // use in-memory for CLI environment, regular http for prod and local server
     AuthModule.forRoot({
       domain: 'mayhew3.auth0.com',
@@ -66,6 +90,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
         allowedList: ['*'],
       },
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
     MyAuthService,

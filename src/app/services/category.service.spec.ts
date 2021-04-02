@@ -1,3 +1,4 @@
+/* tslint:disable */
 import {TestBed} from '@angular/core/testing';
 /* tslint:disable quotemark */
 import {CategoryService} from './category.service';
@@ -30,80 +31,17 @@ describe('CategoryService', () => {
     httpMock = TestBed.get(HttpTestingController);
   });
 
-  function doFirstCategoriesRequest() {
-    const testRequest = httpMock.expectOne(req => req.url === service.categoriesUrl);
-    expect(testRequest.request.method).toBe('GET');
-    expect(testRequest.request.params).toMatch('person_id=18&year=2018');
-    testRequest.flush(TestCategoryList);
-
-    httpMock.verify();
-  }
-
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('nothing in cache initially', () => {
-    expect(service.cache).toBeTruthy();
-    expect(service.cache.length).toBe(0);
-  });
-
-  it('updateNominee calls http put', () => {
-    const mockNominee = {
-      "odds_expert": 11,
-      "category_id": 17,
-      "year": 2017,
-      "context": "",
-      "detail": "",
-      "nominee": "My Nephew Emmett",
-      "id": 2365
-    };
-
-    service.updateNominee(mockNominee).subscribe();
-    const mockReq = httpMock.expectOne(service.nomineesUrl);
-    expect(mockReq.request.method).toBe('PUT');
-    expect(mockReq.request.body).toBe(mockNominee);
-
-    httpMock.verify();
-  });
-
-  it('getCategories doesn\'t call http get if there is a cache already', () => {
-    // do an initial call to fill the cache
-    service.getCategories().subscribe();
-
-    doFirstCategoriesRequest();
-
-    // subsequent calls to getCategories should just use the cache and do no HTTP request
-    service.getCategories().subscribe((categories) => {
-      expect(categories).toBeTruthy();
-      expect(categories.length).toBe(3);
-    });
-
-    httpMock.expectNone(req => req.url === service.categoriesUrl);
-
-    httpMock.verify();
   });
 
   // everything that requires getCategories after this
 
   describe('CategoryService tests that require maybeUpdateCache', () => {
 
-    afterEach(() => {
-      doFirstCategoriesRequest();
-    });
-
     it('getCategories calls http get if cache is empty', () => {
-      service.getCategories().subscribe((categories) => {
+      service.categories.subscribe((categories) => {
         expect(categories).toBeTruthy();
-        expect(categories.length).toBe(3);
-      });
-    });
-
-    it('getCategories puts things in cache', () => {
-      service.getCategories().subscribe((categories) => {
-        expect(service.cache.length).toBeGreaterThan(0);
-        expect(categories.length).toBeGreaterThan(0);
-        expect(categories.length).toBe(service.cache.length);
         expect(categories.length).toBe(3);
       });
     });

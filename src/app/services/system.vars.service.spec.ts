@@ -31,7 +31,7 @@ describe('System.VarsService', () => {
 
   it('getSystemVars doesnt call http get if there is a cache already', () => {
 
-    service.getSystemVars().subscribe(systemVars => {
+    service.systemVars.subscribe(systemVars => {
       expect(systemVars).toBeTruthy();
       expect(systemVars.curr_year).toEqual(2018);
       expect(systemVars.voting_open).toEqual(true);
