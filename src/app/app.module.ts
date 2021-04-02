@@ -36,6 +36,8 @@ import {MaxYearState} from './states/maxYear.state';
 import {VoteState} from './states/vote.state';
 import {FinalResultState} from './states/final-result.state';
 import {OddsState} from './states/odds.state';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,7 @@ import {OddsState} from './states/odds.state';
     environment.httpModules,
     NgbDropdownModule,
     NgbProgressbarModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     NgxsModule.forRoot([
       PersonState,
@@ -87,6 +90,7 @@ import {OddsState} from './states/odds.state';
         allowedList: ['*'],
       },
     }),
+    BrowserAnimationsModule,
   ],
   providers: [
     MyAuthService,

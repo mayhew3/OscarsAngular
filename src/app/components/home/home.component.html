@@ -1,102 +1,104 @@
 <div class="container p-3">
 
-  <p *ngIf="stillLoading() && (isLoggedIn$ | async)">Loading...</p>
+  <div *ngIf="!(auth.isLoading$ | async); else authenticating">
+    <div *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+      <div *ngIf="!failedEmail else invalidUser">
+        <div *ngIf="(me$ | async) else loading">
 
-  <p *ngIf="!(isLoggedIn$ | async)">Welcome to Mayhew's Oscars Voting site! Click the link above to sign in!</p>
+          <p>
+            Welcome to the Oscars {{getOscarYear() | async}}, {{(me$ | async)?.first_name}}!
+          </p>
 
-  <p *ngIf="!stillLoading() && !!failedEmail && (isLoggedIn$ | async)">
-    No user account found for google address. Could your invite be for a different gmail address?
-  </p>
+          <p *ngIf="!stillLoadingVotesAndCategories() && (hasVotesRemaining() | async)"
+             class="votesRemaining">
+            You have {{numVotesRemaining() | async}} categories left to vote on!
+          </p>
 
-  <p *ngIf="!stillLoading() && (isLoggedIn$ | async)">
-    Welcome to the Oscars {{getOscarYear() | async}}, {{(me$ | async)?.first_name}}!
-  </p>
+          <p *ngIf="!stillLoading() && (isLoggedIn$ | async) && systemVarsService.canVote()">
+            Live Scoring will be viewable on Sunday, February 9 at 5pm PT / 8pm ET, when the ballots will lock.
+            The new voting screen has been expanded to include the betting odds, expert picks, and metacritic user favorites, as
+            found on <a href="https://www.metacritic.com/feature/picks-for-who-will-win-2019-oscars" target="_blank">Metacritic</a>.
+          </p>
 
-  <p *ngIf="!stillLoadingVotesAndCategories() && (hasVotesRemaining() | async)"
-     class="votesRemaining">
-    You have {{numVotesRemaining() | async}} categories left to vote on!
-  </p>
+          <p *ngIf="!stillLoading() && (isLoggedIn$ | async) && !systemVarsService.canVote()">
+            Voting is currently closed, but you can head over to Live Scoring to see how the scores are progressing, or see the final scores.
+          </p>
 
-  <p *ngIf="!stillLoading() && (isLoggedIn$ | async) && systemVarsService.canVote()">
-    Live Scoring will be viewable on Sunday, February 9 at 5pm PT / 8pm ET, when the ballots will lock.
-    The new voting screen has been expanded to include the betting odds, expert picks, and metacritic user favorites, as
-    found on <a href="https://www.metacritic.com/feature/picks-for-who-will-win-2019-oscars" target="_blank">Metacritic</a>.
-  </p>
+          <br>
 
-  <p *ngIf="!stillLoading() && (isLoggedIn$ | async) && !systemVarsService.canVote()">
-    Voting is currently closed, but you can head over to Live Scoring to see how the scores are progressing, or see the final scores.
-  </p>
-
-  <br>
-
-  <div class="row">
-
-    <div class="col-12 col-sm-6 col-lg-4"
-         *ngIf="!stillLoading() && (isLoggedIn$ | async) && (systemVarsService.canVote() || personService.isAdmin)">
-      <div class="card navCard">
-        <div class="card-body fakeLink"
-             routerLink="vote">
           <div class="row">
-            <div class="col-10 navTitle">
-              <span>Submit Votes</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-12 col-sm-6 col-lg-4"
-         *ngIf="!stillLoading() && (isLoggedIn$ | async) && (!systemVarsService.canVote() || personService.isAdmin)">
-      <div class="card navCard">
-        <div class="card-body fakeLink"
-             routerLink="scores">
-          <div class="row">
-            <div class="col-10 navTitle">
-              <span>Live Scoring</span>
+            <div class="col-12 col-sm-6 col-lg-4"
+                 *ngIf="(systemVarsService.canVote() || personService.isAdmin)">
+              <div class="card navCard">
+                <div class="card-body fakeLink"
+                     routerLink="vote">
+                  <div class="row">
+                    <div class="col-10 navTitle">
+                      <span>Submit Votes</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-12 col-sm-6 col-lg-4"
-         *ngIf="!stillLoading() && (isLoggedIn$ | async) && (!systemVarsService.canVote() || personService.isAdmin)">
-      <div class="card navCard">
-        <div class="card-body fakeLink"
-             routerLink="winners">
-          <div class="row">
-            <div class="col-10 navTitle">
-              <span>View Winners</span>
+            <div class="col-12 col-sm-6 col-lg-4"
+                 *ngIf="(!systemVarsService.canVote() || personService.isAdmin)">
+              <div class="card navCard">
+                <div class="card-body fakeLink"
+                     routerLink="scores">
+                  <div class="row">
+                    <div class="col-10 navTitle">
+                      <span>Live Scoring</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-12 col-sm-6 col-lg-4"
-         *ngIf="!stillLoading() && (isLoggedIn$ | async)">
-      <div class="card navCard">
-        <div class="card-body fakeLink"
-             routerLink="history">
-          <div class="row">
-            <div class="col-10 navTitle">
-              <span>History</span>
+            <div class="col-12 col-sm-6 col-lg-4"
+                 *ngIf="(!systemVarsService.canVote() || personService.isAdmin)">
+              <div class="card navCard">
+                <div class="card-body fakeLink"
+                     routerLink="winners">
+                  <div class="row">
+                    <div class="col-10 navTitle">
+                      <span>View Winners</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="col-12 col-sm-6 col-lg-4"
-         *ngIf="!stillLoading() && personService.isAdmin">
-      <div class="card navCard fakeLink"
-           routerLink="admin">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-10 navTitle">
-              <span>Admin</span>
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="card navCard">
+                <div class="card-body fakeLink"
+                     routerLink="history">
+                  <div class="row">
+                    <div class="col-10 navTitle">
+                      <span>History</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <div class="col-12 col-sm-6 col-lg-4"
+                 *ngIf="personService.isAdmin">
+              <div class="card navCard fakeLink"
+                   routerLink="admin">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-10 navTitle">
+                      <span>Admin</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
+
         </div>
       </div>
     </div>
@@ -104,3 +106,23 @@
   </div>
 
 </div>
+
+<ng-template #invalidUser>
+  <p>No user account found for google address. Could your invite be for a different gmail address?</p>
+</ng-template>
+
+<ng-template #loggedOut>
+  <p>Welcome to Mayhew's Oscars Voting site! Click the link above to sign in!</p>
+</ng-template>
+
+<ng-template #loading>
+  <p>Loading from server...</p>
+  <mat-spinner [diameter]="50"
+               [color]="loadingColor"></mat-spinner>
+</ng-template>
+
+<ng-template #authenticating>
+  <p>Logging in...</p>
+  <mat-spinner [diameter]="50"
+               [color]="authenticatingColor"></mat-spinner>
+</ng-template>

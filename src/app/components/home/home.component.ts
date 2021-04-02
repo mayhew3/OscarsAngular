@@ -7,6 +7,7 @@ import {map, mergeMap} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {PersonService} from '../../services/person.service';
 import {Person} from '../../interfaces/Person';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'osc-home',
@@ -14,7 +15,8 @@ import {Person} from '../../interfaces/Person';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  authenticatingColor: ThemePalette = 'primary';
+  loadingColor: ThemePalette = 'accent';
   constructor(public auth: MyAuthService,
               public personService: PersonService,
               public systemVarsService: SystemVarsService,
