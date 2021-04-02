@@ -182,7 +182,8 @@ export class ScoreboardComponent implements OnInit {
     }
     const oddsValue = oddsForPerson.odds * 100;
     if (!oddsValue) {
-      throw new Error('Invalid float value: ' + oddsForPerson.odds);
+      const notOdds = !oddsForPerson;
+      throw new Error('Invalid float value: ' + oddsForPerson.odds + ', oddsValue: ' + oddsValue + ', notOdds: ' + notOdds);
     } else if (oddsValue === 100.0) {
       return 99.9;
     } else {
