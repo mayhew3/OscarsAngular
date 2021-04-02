@@ -174,7 +174,7 @@ export class ScoreboardComponent implements OnInit {
     }
 
     const oddsForPerson = scoreData.odds;
-    if (!oddsForPerson || !oddsForPerson.odds) {
+    if (!oddsForPerson || !oddsForPerson.odds || oddsForPerson.odds === 0) {
       return 0.001;
     }
     if (!!oddsForPerson.clinched && !this.shouldHideElimination()) {
