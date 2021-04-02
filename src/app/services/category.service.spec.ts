@@ -31,45 +31,13 @@ describe('CategoryService', () => {
     httpMock = TestBed.get(HttpTestingController);
   });
 
-  function doFirstCategoriesRequest() {
-    const testRequest = httpMock.expectOne(req => req.url === service.categoriesUrl);
-    expect(testRequest.request.method).toBe('GET');
-    expect(testRequest.request.params).toMatch('person_id=18&year=2018');
-    testRequest.flush(TestCategoryList);
-
-    httpMock.verify();
-  }
-
   it('should be created', () => {
     expect(service).toBeTruthy();
-  });
-
-  it('updateNominee calls http put', () => {
-    const mockNominee = {
-      "odds_expert": 11,
-      "category_id": 17,
-      "year": 2017,
-      "context": "",
-      "detail": "",
-      "nominee": "My Nephew Emmett",
-      "id": 2365
-    };
-
-    service.updateNominee(mockNominee).subscribe();
-    const mockReq = httpMock.expectOne(service.nomineesUrl);
-    expect(mockReq.request.method).toBe('PUT');
-    expect(mockReq.request.body).toBe(mockNominee);
-
-    httpMock.verify();
   });
 
   // everything that requires getCategories after this
 
   describe('CategoryService tests that require maybeUpdateCache', () => {
-
-    afterEach(() => {
-      doFirstCategoriesRequest();
-    });
 
     it('getCategories calls http get if cache is empty', () => {
       service.categories.subscribe((categories) => {

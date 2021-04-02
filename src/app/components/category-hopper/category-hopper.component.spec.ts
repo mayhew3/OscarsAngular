@@ -239,60 +239,6 @@ describe('CategoryHopperComponent', () => {
     });
   });
 
-  it('submitOdds calls updateNominee for one change', () => {
-    populateInputs(1);
-    const originalFirst = component.nominees[0].odds_expert;
-
-    component.nominees[0].odds_expert = 23;
-
-    const updateSpy = spyOn(service, 'updateNominee').and.callThrough();
-
-    component.submitOdds();
-
-    expect(updateSpy).toHaveBeenCalledTimes(1);
-
-    // reset to initial values for later test runs
-    component.nominees[0].odds_expert = originalFirst;
-  });
-
-  it('submitOdds calls updateNominee twice for two changes', () => {
-    populateInputs(1);
-    const originalFirst = component.nominees[0].odds_expert;
-    const originalSecond = component.nominees[1].odds_expert;
-
-    component.nominees[0].odds_expert = 23;
-    component.nominees[1].odds_expert = 3;
-
-    const updateSpy = spyOn(service, 'updateNominee').and.callThrough();
-
-    component.submitOdds();
-
-    expect(updateSpy).toHaveBeenCalledTimes(2);
-
-    // reset to initial values for later test runs
-    component.nominees[0].odds_expert = originalFirst;
-    component.nominees[1].odds_expert = originalSecond;
-  });
-
-  it('submitOdds calls updateNominee once for two changes on one nominee', () => {
-    populateInputs(1);
-    const originalFirst = component.nominees[0].odds_expert;
-    const originalSecond = component.nominees[0].odds_user;
-
-    component.nominees[0].odds_expert = 23;
-    component.nominees[0].odds_user = 3;
-
-    const updateSpy = spyOn(service, 'updateNominee').and.callThrough();
-
-    component.submitOdds();
-
-    expect(updateSpy).toHaveBeenCalledTimes(1);
-
-    // reset to initial values for later test runs
-    component.nominees[0].odds_expert = originalFirst;
-    component.nominees[0].odds_user = originalSecond;
-  });
-
   it('hasChanges is false after submitOdds is called', done => {
     populateInputs(1);
     const originalFirst = component.nominees[0].odds_expert;

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {combineLatest, Observable, of} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {combineLatest, Observable} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {catchError, filter, map, tap} from 'rxjs/operators';
+import {filter, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -11,16 +11,9 @@ import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
 import {Store} from '@ngxs/store';
-import {AddWinner, GetCategories, OddsChange, RemoveWinner, ResetWinners, UpdateOdds} from '../actions/category.action';
+import {GetCategories, OddsChange, UpdateOdds} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
-import {VotingLock, VotingUnlock} from '../actions/systemVars.action';
-import {AddVote, ChangeVote} from '../actions/votes.action';
-import {UpdatePlayerOdds} from '../actions/odds.action';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +23,6 @@ export class CategoryService {
   static singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
   static songCategories = ['Music (Original Song)'];
 
-  nomineesUrl = 'api/nominees';
-  categoriesUrl = 'api/categories';
   listenersInitialized = false;
 
   private _fetching = false;
@@ -58,9 +49,7 @@ export class CategoryService {
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket)).subscribe(() => {
-          this.maybeInitListeners();
-        });
+        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket)).subscribe();
       });
 
     this.store.dispatch(new GetMaxYear());
@@ -82,10 +71,6 @@ export class CategoryService {
     } else {
       return nominee.context;
     }
-  }
-
-  private static logMessage(channelName: string, msg: any): void {
-    console.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
   }
 
   // REAL METHODS
@@ -130,60 +115,6 @@ export class CategoryService {
     return this.getCategory(category_id).pipe(
       map(category => !!category ? category.nominees : [])
     );
-  }
-
-  maybeInitListeners(): void {
-    if (!this.listenersInitialized) {
-
-      this.socket.on('add_winner', msg => {
-        CategoryService.logMessage('add_winner', msg);
-        this.store.dispatch(new AddWinner(msg.nomination_id, msg.winner_id, msg.declared));
-      });
-
-      this.socket.on('remove_winner', msg => {
-        CategoryService.logMessage('remove_winner', msg);
-        this.store.dispatch(new RemoveWinner(msg.winner_id));
-      });
-
-      this.socket.on('reset_winners', msg => {
-        CategoryService.logMessage('reset_winners', msg);
-        this.store.dispatch(new ResetWinners(msg.year));
-      });
-
-      this.socket.on('add_vote', msg => {
-        CategoryService.logMessage('add_vote', msg);
-        this.store.dispatch(new AddVote(msg.id, msg.category_id, msg.year, msg.person_id, msg.nomination_id));
-      });
-
-      this.socket.on('change_vote', msg => {
-        CategoryService.logMessage('change_vote', msg);
-        this.store.dispatch(new ChangeVote(msg.vote_id, msg.nomination_id));
-      });
-
-      this.socket.on('voting_locked', msg => {
-        CategoryService.logMessage('voting_locked', msg);
-        this.store.dispatch(new VotingLock());
-      });
-
-      this.socket.on('voting_unlocked', msg => {
-        CategoryService.logMessage('voting_unlocked', msg);
-        this.store.dispatch(new VotingUnlock());
-      });
-
-      this.socket.on('odds', msg => {
-        CategoryService.logMessage('odds', msg);
-        this.store.dispatch(new UpdatePlayerOdds(msg));
-      });
-
-      this.listenersInitialized = true;
-    }
-  }
-
-  updateNominee(nominee: Nominee): Observable<any> {
-    return this.http.put(this.nomineesUrl, nominee, httpOptions)
-      .pipe(
-        catchError(this.handleError<any>('updateCategories', nominee))
-      );
   }
 
   updateOddsForNominees(changes: OddsChange[]): Observable<any> {
@@ -238,46 +169,6 @@ export class CategoryService {
   }
 
 
-/*
-
-  populatePersonScores(persons: Person[]): Observable<any> {
-    return new Observable<any>(observer => {
-      this.categories.subscribe(categories => {
-        this.populatePersonScoresForCategories(persons, categories).subscribe(() => observer.next());
-      });
-    });
-  }
-
-  populatePersonScoresForCategories(persons: Person[], categories: Category[]): Observable<any> {
-    return new Observable<any>(observer => {
-      this.votesService.votes.subscribe(votes => {
-        _.forEach(persons, person => {
-          let score = 0;
-          let numVotes = 0;
-          _.forEach(categories, category => {
-            const personVote = _.findWhere(votes, {
-              person_id: person.id,
-              category_id: category.id
-            });
-            if (personVote) {
-              numVotes++;
-              if (category.winners.length > 0) {
-                const existingWinner = this.getWinnerForNominee(category, personVote.nomination_id);
-                if (!!existingWinner) {
-                  score += category.points;
-                }
-              }
-            }
-          });
-          person.score = score;
-          person.num_votes = numVotes;
-        });
-        observer.next();
-      });
-    });
-  }
-*/
-
   // LOADING
 
   stillLoading(): boolean {
@@ -319,23 +210,6 @@ export class CategoryService {
   removeWinner(category: Category, nomination_id: number): void {
     const winner = this.getWinnerForNominee(category, nomination_id);
     delete category.winners[winner.id];
-  }
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T>  {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 
 }
