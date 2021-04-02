@@ -35,6 +35,7 @@ import {CategoryState} from './states/category.state';
 import {MaxYearState} from './states/maxYear.state';
 import {VoteState} from './states/vote.state';
 import {FinalResultState} from './states/final-result.state';
+import {OddsState} from './states/odds.state';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {FinalResultState} from './states/final-result.state';
       CategoryState,
       MaxYearState,
       VoteState,
-      FinalResultState
+      FinalResultState,
+      OddsState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

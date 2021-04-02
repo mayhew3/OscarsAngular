@@ -14,6 +14,8 @@ import {OddsFilter} from '../odds.filter';
 import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
+import {Vote} from '../../interfaces/Vote';
+import {Odds} from '../../interfaces/Odds';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -26,7 +28,10 @@ export class ScoreboardComponent implements OnInit {
   me: Person;
   updatingOddsFilter = false;
 
-  scoreData = new Map<number, ScoreData>();
+  scoreData: ScoreData[] = [];
+
+  odds$ = this.oddsService.odds$;
+  previousOdds$ = this.oddsService.previousOdds$;
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
@@ -40,17 +45,18 @@ export class ScoreboardComponent implements OnInit {
     this.personService.me$.subscribe(person => {
       this.me = person;
       this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
-
-      this.oddsService.subscribeToOddsEvents().subscribe(() => {
-        this.fastSortPersons();
-      });
-
     });
   }
 
   initScoreData(): void {
-    combineLatest([this.categoryService.categories, this.voteService.votes, this.personService.getPersonsForGroup(1)])
-      .subscribe(([categories, votes, persons]) => {
+    combineLatest([
+      this.categoryService.categories,
+      this.voteService.votes,
+      this.personService.getPersonsForGroup(1),
+      this.odds$,
+      this.previousOdds$,
+    ])
+      .subscribe(([categories, votes, persons, oddsBundle, previousOddsBundle]) => {
         this.persons = persons;
         _.forEach(persons, person => {
           let score = 0;
@@ -70,32 +76,56 @@ export class ScoreboardComponent implements OnInit {
               }
             }
           });
-          this.scoreData.set(person.id, new ScoreData(person, score, numVotes));
+          const maxPosition = this.maxPosition(person, persons, categories, votes);
+          const odds = _.find(oddsBundle.odds, o => o.person_id === person.id);
+          const previousOdds = !previousOddsBundle ? undefined : _.find(previousOddsBundle.odds, o => o.person_id === person.id);
+          this.scoreData.push(new ScoreData(person, score, numVotes, maxPosition, odds, previousOdds));
         });
         this.fastSortPersons();
       });
   }
 
-  getOddsStyle(person: Person): string {
-    if (!!person) {
-      try {
-        const numericOddsForPerson = this.getNumericOddsForPerson(person);
-        if (!!numericOddsForPerson) {
-          if (numericOddsForPerson === 100.0) {
-            return 'hsl(48, 100%, 56%)';
-          } else {
-            return `hsl(25, ${numericOddsForPerson}%, 60%)`;
-          }
-        }
-      } catch (err) {
-        return 'hsl(0, 90%, 60%)';
-      }
-    }
-    return `hsl(25, 0%, 60%)`;
+  maxPosition(person: Person, persons: Person[], categories: Category[], votes: Vote[]): number {
+    const categoriesWithoutWinners = _.filter(categories, category => !category.winners || category.winners.length === 0);
+    const myVotes = _.map(categoriesWithoutWinners, category => {
+      const allVotes = _.where(votes, {person_id: person.id, category_id: category.id});
+      return allVotes.length === 1 ? allVotes[0] : undefined;
+    });
+    const finalScores = _.map(persons, (otherPerson: Person) => {
+      const theirVotes: Vote[] = _.where(votes, {person_id: otherPerson.id});
+      const theirVotesThatMatch = _.filter(theirVotes, (vote: Vote) => {
+        const myVote = _.findWhere(myVotes, {category_id: vote.category_id});
+        return !!myVote && myVote.nomination_id === vote.nomination_id;
+      });
+      const theirScore = _.reduce(theirVotesThatMatch, (memo: number, theirVote: Vote) => {
+        const category = _.findWhere(categories, {id: theirVote.category_id});
+        return !!category ? memo + category.points : memo;
+      }, 0);
+      return {
+        person_id: otherPerson.id,
+        score: theirScore + otherPerson.score
+      };
+    });
+
+    const myScore = _.findWhere(finalScores, {person_id: person.id});
+    const scoresBetterThanMine = _.filter(finalScores, otherScore => otherScore.score > myScore.score);
+    return scoresBetterThanMine.length + 1;
   }
 
-  getOdds(): OddsBundle {
-    return this.oddsService.getOdds();
+  getOddsStyle(scoreData: ScoreData): string {
+    const numericOddsForPerson = this.getNumericOddsForPerson(scoreData);
+    try {
+      if (!!numericOddsForPerson) {
+        if (numericOddsForPerson === 100.0) {
+          return 'hsl(48, 100%, 56%)';
+        } else {
+          return `hsl(25, ${numericOddsForPerson}%, 60%)`;
+        }
+      }
+    } catch (err) {
+      return 'hsl(0, 90%, 60%)';
+    }
+    return `hsl(25, 0%, 60%)`;
   }
 
   shouldShowEliminationOdds(): boolean {
@@ -106,9 +136,9 @@ export class ScoreboardComponent implements OnInit {
     return this.me.odds_filter === 'hideElimination';
   }
 
-  getSortingOddsForPerson(person: Person): number {
+  getSortingOddsForPerson(scoreData: ScoreData): number {
+    const numericOdds = this.getNumericOddsForPerson(scoreData);
     try {
-      const numericOdds = this.getNumericOddsForPerson(person);
       if (numericOdds === undefined) {
         return -1;
       } else {
@@ -119,35 +149,30 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 
-  getNumericOddsForPerson(person: Person): number {
-    const isEliminated = this.voteService.isEliminated(person, this.persons);
+  isEliminated(scoreData: ScoreData): boolean {
+     return scoreData.maxPosition > 1;
+  }
+
+  getNumericOddsForPerson(scoreData: ScoreData): number {
+    const isEliminated = this.isEliminated(scoreData);
     if (isEliminated && !this.shouldHideElimination()) {
       return 0.0;
     }
 
-    const odds = this.getOdds();
-    if (odds) {
-      const oddsOdds = odds.odds;
-      if (!oddsOdds) {
-        throw new Error('No odds object found.');
-      }
-      const oddsForPerson = _.findWhere(oddsOdds, {person_id: person.id});
-      if (!oddsForPerson || !oddsForPerson.odds) {
-        return 0.001;
-      }
-      if (!!oddsForPerson.clinched && !this.shouldHideElimination()) {
-        return 100.0;
-      }
-      const oddsValue = oddsForPerson.odds * 100;
-      if (!oddsValue) {
-        throw new Error('Invalid float value: ' + oddsForPerson.odds);
-      } else if (oddsValue === 100.0) {
-        return 99.9;
-      } else {
-        return oddsValue;
-      }
+    const oddsForPerson = scoreData.odds;
+    if (!oddsForPerson || !oddsForPerson.odds) {
+      return 0.001;
+    }
+    if (!!oddsForPerson.clinched && !this.shouldHideElimination()) {
+      return 100.0;
+    }
+    const oddsValue = oddsForPerson.odds * 100;
+    if (!oddsValue) {
+      throw new Error('Invalid float value: ' + oddsForPerson.odds);
+    } else if (oddsValue === 100.0) {
+      return 99.9;
     } else {
-      return undefined;
+      return oddsValue;
     }
   }
 
@@ -159,11 +184,9 @@ export class ScoreboardComponent implements OnInit {
     );
   }
 
-  getOddsForPerson(person: Person): string {
-
+  getOddsForPerson(scoreData: ScoreData): string {
+    const numericOdds = this.getNumericOddsForPerson(scoreData);
     try {
-      const numericOdds = this.getNumericOddsForPerson(person);
-
       if (numericOdds === undefined) {
         return '...';
       } else if (numericOdds === 0.0) {
@@ -184,39 +207,35 @@ export class ScoreboardComponent implements OnInit {
     }
   }
 
-  oddsDirection(person: Person): number {
-    const currentOdds = this.oddsService.getOdds();
-    const previousOdds = this.oddsService.getPreviousOdds();
-
-    if (!!currentOdds && !!previousOdds) {
-      const currentOddsForPerson = _.findWhere(currentOdds.odds, {person_id: person.id});
-      const previousOddsForPerson = _.findWhere(previousOdds.odds, {person_id: person.id});
-
-      const currentValue = !currentOddsForPerson ? 0 : currentOddsForPerson.odds * 100;
-      const previousValue = !previousOddsForPerson ? 0 : previousOddsForPerson.odds * 100;
+  oddsDirection(scoreData: ScoreData): number {
+    if (!!scoreData.odds && !!scoreData.previousOdds) {
+      const currentValue = !scoreData.odds ? 0 : scoreData.odds.odds * 100;
+      const previousValue = !scoreData.previousOdds ? 0 : scoreData.previousOdds.odds * 100;
 
       return currentValue - previousValue;
     }
     return 0;
   }
 
-  showOddsChange(person: Person): boolean {
-    const diff = this.oddsDirection(person);
+  showOddsChange(scoreData: ScoreData): boolean {
+    const diff = this.oddsDirection(scoreData);
     return Math.abs(diff) >= 1;
   }
 
-  shouldShowOdds(): boolean {
-    return !this.itsOver() && this.me.odds_filter !== 'hide';
+  shouldShowOdds(): Observable<boolean> {
+    return this.itsOver().pipe(
+      map(itsOver => !itsOver && this.me.odds_filter !== 'hide')
+    );
   }
 
-  oddsDirectionFormatted(person: Person): string {
-    const diff = this.oddsDirection(person);
+  oddsDirectionFormatted(scoreData: ScoreData): string {
+    const diff = this.oddsDirection(scoreData);
     const formatted = diff.toFixed(0);
     return diff > 0 ? '+' + formatted : formatted;
   }
 
-  oddsDirectionClass(person: Person): string {
-    return this.oddsDirection(person) > 0 ? 'oddsDiffGood' : 'oddsDiffBad';
+  oddsDirectionClass(scoreData: ScoreData): string {
+    return this.oddsDirection(scoreData) > 0 ? 'oddsDiffGood' : 'oddsDiffBad';
   }
 
   getLastTimeAgo(): string {
@@ -296,26 +315,22 @@ export class ScoreboardComponent implements OnInit {
     );
   }
 
-  getPlayersInFirstPlace(): Person[] {
-    return _.filter(this.persons, person => !this.anyoneIsHigherInRankings(person));
+  getPlayersInFirstPlace(): ScoreData[] {
+    return _.filter(this.scoreData, scoreData => !this.anyoneIsHigherInRankings(scoreData));
   }
 
   getWinnerFullNames(): string[] {
     const winners = this.getPlayersInFirstPlace();
-    return _.map(winners, winner => this.personService.getFullName(winner));
-  }
-
-  getScore(person: Person): ScoreData {
-    return this.scoreData.get(person.id);
+    return _.map(winners, winner => this.personService.getFullName(winner.person));
   }
 
   fastSortPersons(): void {
-    fast_sort(this.persons)
+    fast_sort(this.scoreData)
       .by([
-        { desc: person => this.getScore(person).score},
-        { desc: person => this.getSortingOddsForPerson(person)},
-        { desc: person => this.isMe(person)},
-        { asc: person => person.first_name},
+        { desc: scoreData => scoreData.score},
+        { desc: scoreData => this.getSortingOddsForPerson(scoreData)},
+        { desc: scoreData => this.isMe(scoreData.person)},
+        { asc: scoreData => scoreData.person.first_name},
       ]);
   }
 
@@ -323,43 +338,39 @@ export class ScoreboardComponent implements OnInit {
     return Array.from(this.scoreData.values());
   }
 
-  getRank(person: Person): string {
-    const myScore = this.getScore(person).score;
+  getRank(scoreData: ScoreData): string {
+    const myScore = scoreData.score;
     const myRank = _.filter(this.allScores, otherScoreData => otherScoreData.score > myScore).length + 1;
     return moment.localeData().ordinal(myRank);
   }
 
-  stillLoading(): boolean {
-    return this.personService.stillLoading() || this.categoryService.stillLoading() || this.oddsService.stillLoading();
-  }
-
-  anyoneIsHigherInRankings(person: Person): boolean {
-    const myScore = this.getScore(person).score;
+  anyoneIsHigherInRankings(scoreData: ScoreData): boolean {
+    const myScore = scoreData.score;
     return this.allScores.filter(otherPerson => otherPerson.score > myScore).length > 0;
   }
 
-  scorecardClass(person: Person): string {
-    const isEliminated = this.voteService.isEliminated(person, this.persons);
-    if (this.isMe(person)) {
+  scorecardClass(scoreData: ScoreData): string {
+    const isEliminated = this.isEliminated(scoreData);
+    if (this.isMe(scoreData.person)) {
       return 'myScoreCard';
     } else if (!this.itsOver() && isEliminated && this.shouldShowEliminationOdds()) {
       return 'eliminatedScoreCard';
-    } else if (this.anyoneIsHigherInRankings(person)) {
+    } else if (this.anyoneIsHigherInRankings(scoreData)) {
       return 'loserScoreCard';
     } else {
       return 'otherScoreCard';
     }
   }
 
-  scoreNumberClass(person: Person): string {
-    const isEliminated = this.voteService.isEliminated(person, this.persons);
-    if (this.gotPointsForLastWinner(person) && !this.itsOver()) {
+  scoreNumberClass(scoreData: ScoreData): string {
+    const isEliminated = this.isEliminated(scoreData);
+    if (this.gotPointsForLastWinner(scoreData.person) && !this.itsOver()) {
       return 'winnerScorePoints';
-    } else if (this.isMe(person)) {
+    } else if (this.isMe(scoreData.person)) {
       return 'myScorePoints';
     } else if (!this.itsOver() && isEliminated && this.shouldShowEliminationOdds()) {
       return 'eliminatedScorePoints';
-    } else if (this.anyoneIsHigherInRankings(person)) {
+    } else if (this.anyoneIsHigherInRankings(scoreData)) {
       return 'loserScorePoints';
     } else {
       return 'otherScorePoints';
@@ -386,11 +397,10 @@ export class ScoreboardComponent implements OnInit {
     return !!this.me && person.id === this.me.id;
   }
 
-  public getVoters(): Person[] {
+  public getVoters(): ScoreData[] {
     // noinspection TypeScriptValidateJSTypes
-    return _.filter(this.persons, person => {
-      const score = this.getScore(person);
-      return !!score.num_votes;
+    return _.filter(this.scoreData, scoreData => {
+      return !!scoreData.num_votes;
     });
   }
 
@@ -419,6 +429,9 @@ export class ScoreboardComponent implements OnInit {
 class ScoreData {
   constructor(public person: Person,
               public score: number,
-              public num_votes: number) {
+              public num_votes: number,
+              public maxPosition: number,
+              public odds: Odds,
+              public previousOdds: Odds) {
   }
 }

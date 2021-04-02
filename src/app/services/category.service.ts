@@ -16,6 +16,7 @@ import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {VotingLock, VotingUnlock} from '../actions/systemVars.action';
 import {AddVote, ChangeVote} from '../actions/votes.action';
+import {UpdatePlayerOdds} from '../actions/odds.action';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -167,6 +168,11 @@ export class CategoryService {
       this.socket.on('voting_unlocked', msg => {
         CategoryService.logMessage('voting_unlocked', msg);
         this.store.dispatch(new VotingUnlock());
+      });
+
+      this.socket.on('odds', msg => {
+        CategoryService.logMessage('odds', msg);
+        this.store.dispatch(new UpdatePlayerOdds(msg));
       });
 
       this.listenersInitialized = true;

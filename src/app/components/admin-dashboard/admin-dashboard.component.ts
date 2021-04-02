@@ -3,7 +3,6 @@ import {SystemVarsService} from '../../services/system.vars.service';
 import {CategoryService} from '../../services/category.service';
 import {VotesService} from '../../services/votes.service';
 import {WinnersService} from '../../services/winners.service';
-import {OddsService} from '../../services/odds.service';
 import {Observable} from 'rxjs';
 import {first, map} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
@@ -26,7 +25,6 @@ export class AdminDashboardComponent implements OnInit {
               private categoryService: CategoryService,
               private votesService: VotesService,
               private winnersService: WinnersService,
-              private oddsService: OddsService,
               private socket: SocketService,
               private personService: PersonService) { }
 

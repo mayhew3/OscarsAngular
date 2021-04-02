@@ -4,72 +4,30 @@ import {Observable, Subscriber} from 'rxjs';
 import {OddsBundle} from '../interfaces/OddsBundle';
 import {SocketService} from './socket.service';
 import * as _ from 'underscore';
+import {Store} from '@ngxs/store';
+import {filter, map} from 'rxjs/operators';
+import {GetOdds} from '../actions/odds.action';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OddsService {
-  private odds: OddsBundle;
-  private previousOdds: OddsBundle;
 
-  private readonly oddsChangedCallbacks: Subscriber<any>[];
-  private loading = true;
+  odds$: Observable<OddsBundle> = this.store.select(state => state.odds).pipe(
+    filter(model => !!model),
+    map(model => model.oddsBundle),
+    filter(oddsBundle => !!oddsBundle)
+  );
+
+  previousOdds$: Observable<OddsBundle> = this.store.select(state => state.odds).pipe(
+    filter(model => !!model),
+    map(model => model.previousOddsBundle)
+  );
 
   constructor(private http: HttpClient,
-              private socket: SocketService) {
-    this.oddsChangedCallbacks = [];
-    this.refreshCache().subscribe(() => {
-      this.socket.on('odds', msg => {
-        this.odds = msg;
-        this.updateOddsSubscribers();
-      });
-    });
-  }
-
-  refreshCache(): Observable<any> {
-    return new Observable<any>(observer => {
-      this.loading = true;
-      this.clearOdds();
-      this.getOddsFromDatabase().subscribe(odds => {
-        this.loading = false;
-        this.odds = odds;
-        this.updateOddsSubscribers();
-        observer.next();
-      });
-    });
-  }
-
-  stillLoading(): boolean {
-    return this.loading;
-  }
-
-  subscribeToOddsEvents(): Observable<any> {
-    return new Observable<any>(observer => this.addOddsSubscriber(observer));
-  }
-
-  private addOddsSubscriber(subscriber: Subscriber<any>): void {
-    this.oddsChangedCallbacks.push(subscriber);
-  }
-
-  updateOddsSubscribers(): void {
-    _.forEach(this.oddsChangedCallbacks, callback => callback.next());
-  }
-
-  clearOdds(): void {
-    this.previousOdds = this.odds;
-    this.odds = undefined;
-  }
-
-  getOdds(): OddsBundle {
-    return this.odds;
-  }
-
-  getPreviousOdds(): OddsBundle {
-    return this.previousOdds;
-  }
-
-  getOddsFromDatabase(): Observable<OddsBundle> {
-    return this.http.get<OddsBundle>('api/odds');
+              private socket: SocketService,
+              private store: Store) {
+    this.store.dispatch(new GetOdds());
   }
 
 }
