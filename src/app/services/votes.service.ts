@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
 import {combineLatest, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, first, map, tap} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
 import {Category} from '../interfaces/Category';
 import * as _ from 'underscore';
 import {Store} from '@ngxs/store';
-import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
+import {GetVotes} from '../actions/votes.action';
 import {PersonService} from './person.service';
 import {CategoryService} from './category.service';
 import {SystemVars} from '../interfaces/SystemVars';
@@ -63,43 +63,6 @@ export class VotesService {
         }
         return false;
       })
-    );
-  }
-
-  maxPosition(person: Person, persons: Person[]): Observable<number> {
-    return combineLatest([this.categoryService.categories, this.votes]).pipe(
-      map(([categories, votes]) => {
-        const categoriesWithoutWinners = _.filter(categories, category => !category.winners || category.winners.length === 0);
-        const myVotes = _.map(categoriesWithoutWinners, category => {
-          const allVotes = _.where(votes, {person_id: person.id, category_id: category.id});
-          return allVotes.length === 1 ? allVotes[0] : undefined;
-        });
-        const finalScores = _.map(persons, (otherPerson: Person) => {
-          const theirVotes: Vote[] = _.where(votes, {person_id: otherPerson.id});
-          const theirVotesThatMatch = _.filter(theirVotes, (vote: Vote) => {
-            const myVote = _.findWhere(myVotes, {category_id: vote.category_id});
-            return !!myVote && myVote.nomination_id === vote.nomination_id;
-          });
-          const theirScore = _.reduce(theirVotesThatMatch, (memo: number, theirVote: Vote) => {
-            const category = _.findWhere(categories, {id: theirVote.category_id});
-            return !!category ? memo + category.points : memo;
-          }, 0);
-          return {
-            person_id: otherPerson.id,
-            score: theirScore + otherPerson.score
-          };
-        });
-
-        const myScore = _.findWhere(finalScores, {person_id: person.id});
-        const scoresBetterThanMine = _.filter(finalScores, otherScore => otherScore.score > myScore.score);
-        return scoresBetterThanMine.length + 1;
-      })
-    );
-  }
-
-  isEliminated(person: Person, persons: Person[]): Observable<boolean> {
-    return this.maxPosition(person, persons).pipe(
-      map(maxPosition => maxPosition > 1)
     );
   }
 

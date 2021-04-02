@@ -4,7 +4,6 @@ import {PersonService} from '../../services/person.service';
 import {CategoryService} from '../../services/category.service';
 import * as _ from 'underscore';
 import {OddsService} from '../../services/odds.service';
-import {OddsBundle} from '../../interfaces/OddsBundle';
 import fast_sort from 'fast-sort';
 import {Category} from '../../interfaces/Category';
 import {Winner} from '../../interfaces/Winner';
@@ -23,7 +22,6 @@ import {Odds} from '../../interfaces/Odds';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
-  persons: Person[] = [];
   latestCategory: Category;
   me: Person;
   updatingOddsFilter = false;
@@ -57,7 +55,6 @@ export class ScoreboardComponent implements OnInit {
       this.previousOdds$,
     ])
       .subscribe(([categories, votes, persons, oddsBundle, previousOddsBundle]) => {
-        this.persons = persons;
         _.forEach(persons, person => {
           let score = 0;
           let numVotes = 0;
