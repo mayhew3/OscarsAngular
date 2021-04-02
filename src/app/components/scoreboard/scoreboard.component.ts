@@ -15,6 +15,7 @@ import {map} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
 import {Vote} from '../../interfaces/Vote';
 import {Odds} from '../../interfaces/Odds';
+import {ArrayUtil} from '../../utility/ArrayUtil';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -55,6 +56,7 @@ export class ScoreboardComponent implements OnInit {
       this.previousOdds$,
     ])
       .subscribe(([categories, votes, persons, oddsBundle, previousOddsBundle]) => {
+        ArrayUtil.emptyArray(this.scoreData);
         _.forEach(persons, person => {
           let score = 0;
           let numVotes = 0;
