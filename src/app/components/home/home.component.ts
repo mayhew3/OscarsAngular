@@ -53,18 +53,6 @@ export class HomeComponent implements OnInit {
     return this.systemVarsService.getCurrentYear();
   }
 
-  get isLoggedIn$(): Observable<boolean> {
-    return this.auth.isAuthenticated$;
-  }
-
-  stillLoading(): boolean {
-    return false;
-  }
-
-  stillLoadingVotesAndCategories(): boolean {
-    return false;
-  }
-
   hasVotesRemaining(): Observable<boolean> {
     return this.numVotesRemaining().pipe(
       map(numVotes => numVotes > 0)
