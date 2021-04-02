@@ -6,6 +6,7 @@ import {Injectable} from '@angular/core';
 import {GetOdds, UpdatePlayerOdds} from '../actions/odds.action';
 import {OddsBundle} from '../interfaces/OddsBundle';
 import produce from 'immer';
+import _ from 'underscore';
 
 export class OddsStateModel {
   oddsBundle: OddsBundle;
@@ -34,6 +35,7 @@ export class OddsState {
     return this.http.get<any[]>(this.apiUrl).pipe(
       tap(result => {
         setState(produce(draft => {
+          _.each(result.odds, odd => odd.odds = +odd.odds);
           draft.previousOddsBundle = draft.oddsBundle;
           draft.oddsBundle = result;
         }));
