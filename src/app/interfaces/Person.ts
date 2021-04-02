@@ -7,6 +7,5 @@ export interface Person {
   email: string;
   odds_filter: string;
   groups: number[];
-  score?: number;
   num_votes?: number;
 }

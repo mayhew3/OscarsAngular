@@ -16,6 +16,7 @@ import {VotesService} from '../../services/votes.service';
 import {Vote} from '../../interfaces/Vote';
 import {Odds} from '../../interfaces/Odds';
 import {ArrayUtil} from '../../utility/ArrayUtil';
+import {SocketService} from '../../services/socket.service';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -27,6 +28,8 @@ export class ScoreboardComponent implements OnInit {
   me: Person;
   updatingOddsFilter = false;
 
+  oddsOutOfDate = false;
+
   scoreData: ScoreData[] = [];
 
   odds$ = this.oddsService.odds$;
@@ -35,16 +38,25 @@ export class ScoreboardComponent implements OnInit {
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private voteService: VotesService,
-              private oddsService: OddsService) {
+              private oddsService: OddsService,
+              private socket: SocketService) {
   }
 
   ngOnInit(): void {
+    this.initListeners();
     this.initScoreData();
 
     this.personService.me$.subscribe(person => {
       this.me = person;
       this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
     });
+  }
+
+  initListeners(): void {
+    this.socket.on('add_winner', () => this.oddsOutOfDate = true);
+    this.socket.on('remove_winner', () => this.oddsOutOfDate = true);
+    this.socket.on('reset_winners', () => this.oddsOutOfDate = true);
+    this.socket.on('odds', () => this.oddsOutOfDate = false);
   }
 
   initScoreData(): void {
@@ -75,23 +87,26 @@ export class ScoreboardComponent implements OnInit {
               }
             }
           });
-          const maxPosition = this.maxPosition(person, persons, categories, votes);
+
           const odds = _.find(oddsBundle.odds, o => o.person_id === person.id);
           const previousOdds = !previousOddsBundle ? undefined : _.find(previousOddsBundle.odds, o => o.person_id === person.id);
-          this.scoreData.push(new ScoreData(person, score, numVotes, maxPosition, odds, previousOdds));
+          this.scoreData.push(new ScoreData(person, score, numVotes, odds, previousOdds));
+        });
+        _.each(this.scoreData, sd => {
+          sd.maxPosition = this.maxPosition(sd.person, categories, votes);
         });
         this.fastSortPersons();
       });
   }
 
-  maxPosition(person: Person, persons: Person[], categories: Category[], votes: Vote[]): number {
+  maxPosition(person: Person, categories: Category[], votes: Vote[]): number {
     const categoriesWithoutWinners = _.filter(categories, category => !category.winners || category.winners.length === 0);
     const myVotes = _.map(categoriesWithoutWinners, category => {
       const allVotes = _.where(votes, {person_id: person.id, category_id: category.id});
       return allVotes.length === 1 ? allVotes[0] : undefined;
     });
-    const finalScores = _.map(persons, (otherPerson: Person) => {
-      const theirVotes: Vote[] = _.where(votes, {person_id: otherPerson.id});
+    const finalScores = _.map(this.scoreData, (otherPersonData: ScoreData) => {
+      const theirVotes: Vote[] = _.where(votes, {person_id: otherPersonData.person.id});
       const theirVotesThatMatch = _.filter(theirVotes, (vote: Vote) => {
         const myVote = _.findWhere(myVotes, {category_id: vote.category_id});
         return !!myVote && myVote.nomination_id === vote.nomination_id;
@@ -101,8 +116,8 @@ export class ScoreboardComponent implements OnInit {
         return !!category ? memo + category.points : memo;
       }, 0);
       return {
-        person_id: otherPerson.id,
-        score: theirScore + otherPerson.score
+        person_id: otherPersonData.person.id,
+        score: theirScore + otherPersonData.score
       };
     });
 
@@ -128,11 +143,11 @@ export class ScoreboardComponent implements OnInit {
   }
 
   shouldShowEliminationOdds(): boolean {
-    return this.me.odds_filter === 'show';
+    return !!this.me && this.me.odds_filter === 'show';
   }
 
   shouldHideElimination(): boolean {
-    return this.me.odds_filter === 'hideElimination';
+    return !!this.me && this.me.odds_filter === 'hideElimination';
   }
 
   getSortingOddsForPerson(scoreData: ScoreData): number {
@@ -186,7 +201,7 @@ export class ScoreboardComponent implements OnInit {
   getOddsForPerson(scoreData: ScoreData): string {
     const numericOdds = this.getNumericOddsForPerson(scoreData);
     try {
-      if (numericOdds === undefined) {
+      if (!!this.oddsOutOfDate) {
         return '...';
       } else if (numericOdds === 0.0) {
         return '0%';
@@ -426,10 +441,11 @@ export class ScoreboardComponent implements OnInit {
 }
 
 class ScoreData {
+  maxPosition: number;
+
   constructor(public person: Person,
               public score: number,
               public num_votes: number,
-              public maxPosition: number,
               public odds: Odds,
               public previousOdds: Odds) {
   }
