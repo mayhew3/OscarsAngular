@@ -16,7 +16,7 @@ export const updateSystemVars = async (request, response) => {
     response.send({msg: 'Error finding system_var: ' + err});
   }
 
-  const isVotingOpenChanged = result.voting_open !== systemVar.voting_open;
+  const isVotingOpenChanged = systemVar.voting_open !== undefined && result.voting_open !== systemVar.voting_open;
 
   try {
     await result.update(systemVar);
@@ -38,9 +38,9 @@ export const updateSystemVars = async (request, response) => {
       event_time
     };
 
-    if (!systemVar.voting_open) {
+    if (systemVar.voting_open === false) {
       socketServer.emitToAll('voting_locked', msg);
-    } else {
+    } else if (systemVar.voting_open === true) {
       socketServer.emitToAll('voting_unlocked', msg);
     }
 
