@@ -1,7 +1,7 @@
-const model = require('./model');
-const _ = require('underscore');
+import * as model from './model';
+import _ from 'underscore';
 
-exports.getCategories = function(request, response) {
+export const getCategories = function(request, response) {
   model.Category.findAll({
     order:
       [
@@ -58,7 +58,7 @@ exports.getCategories = function(request, response) {
   });
 };
 
-exports.updateNomination = function(request, response) {
+export const updateNomination = function(request, response) {
   let nomination = request.body;
 
   model.Nomination.findByPk(nomination.id).then(result => {
@@ -74,7 +74,7 @@ exports.updateNomination = function(request, response) {
   });
 };
 
-exports.getMostRecentYear = async function(request, response) {
+export const getMostRecentYear = async function(request, response) {
   const maxYear = await model.Nomination.max('year');
 
   response.json([{maxYear: maxYear}]);

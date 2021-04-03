@@ -1,8 +1,8 @@
-const model = require('./model');
+import * as model from './model';
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-exports.getRecentEvents = function(request, response) {
+export const getRecentEvents = function(request, response) {
   const sinceDate1 = +request.query.since_date;
   const sinceDate = new Date(sinceDate1);
   model.Event.findAll({
@@ -16,7 +16,7 @@ exports.getRecentEvents = function(request, response) {
   });
 };
 
-exports.addEvent = function(type, detail, nomination_id, prevResult, response) {
+export const addEvent = function(type, detail, nomination_id, prevResult, response) {
   model.Event.create({
     type: type,
     detail: detail,

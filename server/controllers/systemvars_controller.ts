@@ -1,13 +1,13 @@
-const model = require('./model');
+import * as model from './model';
 const socket = require('./sockets_controller');
 
-exports.getSystemVars = function(request, response) {
+export const getSystemVars = function(request, response) {
   model.SystemVars.findAll().then(systemVars => {
     return response.json(systemVars);
   });
 };
 
-exports.updateSystemVars = async function(request, response) {
+export const updateSystemVars = async function(request, response) {
   let systemVar = request.body;
 
   let result;
@@ -15,7 +15,7 @@ exports.updateSystemVars = async function(request, response) {
     result = await model.SystemVars.findByPk(systemVar.id);
   } catch (err) {
     console.error(err);
-    response.send({msg: "Error finding system_var: " + error});
+    response.send({msg: "Error finding system_var: " + err});
   }
 
   const isVotingOpenChanged = result.voting_open !== systemVar.voting_open;

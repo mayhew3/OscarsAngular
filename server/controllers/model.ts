@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 const sequelize = require('./sequelize');
 
-exports.Category = sequelize.sequelize.define("category", {
+export const Category = sequelize.sequelize.define("category", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   name: Sequelize.TEXT,
   points: Sequelize.INTEGER
@@ -11,7 +11,7 @@ exports.Category = sequelize.sequelize.define("category", {
   updatedAt: false
 });
 
-exports.Event = sequelize.sequelize.define("event", {
+export const Event = sequelize.sequelize.define("event", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   type: Sequelize.TEXT,
   detail: Sequelize.TEXT,
@@ -23,7 +23,7 @@ exports.Event = sequelize.sequelize.define("event", {
   updatedAt: false
 });
 
-exports.Nomination = sequelize.sequelize.define("nomination", {
+export const Nomination = sequelize.sequelize.define("nomination", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   nominee: Sequelize.TEXT,
   context: Sequelize.TEXT,
@@ -40,7 +40,7 @@ exports.Nomination = sequelize.sequelize.define("nomination", {
   updatedAt: false
 });
 
-exports.Person = sequelize.sequelize.define("person", {
+export const Person = sequelize.sequelize.define("person", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   first_name: Sequelize.TEXT,
   last_name: Sequelize.TEXT,
@@ -54,7 +54,7 @@ exports.Person = sequelize.sequelize.define("person", {
   updatedAt: false
 });
 
-exports.PersonGroupRole = sequelize.sequelize.define("person_group_role", {
+export const PersonGroupRole = sequelize.sequelize.define("person_group_role", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   person_group_id: Sequelize.INTEGER,
   person_id: Sequelize.INTEGER
@@ -64,7 +64,7 @@ exports.PersonGroupRole = sequelize.sequelize.define("person_group_role", {
   updatedAt: false
 });
 
-exports.Vote = sequelize.sequelize.define("vote", {
+export const Vote = sequelize.sequelize.define("vote", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   category_id: Sequelize.INTEGER,
   nomination_id: Sequelize.INTEGER,
@@ -76,7 +76,7 @@ exports.Vote = sequelize.sequelize.define("vote", {
   updatedAt: false
 });
 
-exports.Winner = sequelize.sequelize.define("winner", {
+export const Winner = sequelize.sequelize.define("winner", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   category_id: Sequelize.INTEGER,
   nomination_id: Sequelize.INTEGER,
@@ -88,7 +88,7 @@ exports.Winner = sequelize.sequelize.define("winner", {
   updatedAt: false
 });
 
-exports.SystemVars = sequelize.sequelize.define("system_vars", {
+export const SystemVars = sequelize.sequelize.define("system_vars", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   curr_year: Sequelize.INTEGER,
   voting_open: Sequelize.BOOLEAN
@@ -99,7 +99,7 @@ exports.SystemVars = sequelize.sequelize.define("system_vars", {
 });
 
 
-exports.OddsResult = sequelize.sequelize.define("odds_result", {
+export const OddsResult = sequelize.sequelize.define("odds_result", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   odds: Sequelize.INTEGER,
   person_id: Sequelize.INTEGER,
@@ -111,7 +111,7 @@ exports.OddsResult = sequelize.sequelize.define("odds_result", {
   updatedAt: false
 });
 
-exports.OddsExecution = sequelize.sequelize.define("odds_execution", {
+export const OddsExecution = sequelize.sequelize.define("odds_execution", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   event_id: Sequelize.INTEGER,
   time_finished: Sequelize.DATE
@@ -121,7 +121,7 @@ exports.OddsExecution = sequelize.sequelize.define("odds_execution", {
   updatedAt: false
 });
 
-exports.FinalResult = sequelize.sequelize.define("final_result", {
+export const FinalResult = sequelize.sequelize.define("final_result", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   person_id: Sequelize.INTEGER,
   group_year_id: Sequelize.INTEGER,
@@ -134,7 +134,7 @@ exports.FinalResult = sequelize.sequelize.define("final_result", {
   updatedAt: false
 });
 
-exports.GroupYear = sequelize.sequelize.define("group_year", {
+export const GroupYear = sequelize.sequelize.define("group_year", {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   person_group_id: Sequelize.INTEGER,
   year: Sequelize.INTEGER,

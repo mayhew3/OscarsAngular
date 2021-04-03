@@ -3,17 +3,18 @@
   "version": "1.0.0-0",
   "scripts": {
     "ng": "ng",
-    "start": "node ./bin/www",
+    "start": "node ./dist/out-tsc/server/www",
     "start-local": "ng serve",
     "server": "ng build && node ./bin/www",
     "debug": "ng build && node ./bin/www dev $NODE_DEBUG_OPTION",
     "build": "ng build",
-    "build-prod": "ng build --prod",
-    "build-node": "ng build --configuration=node-server",
+    "build-prod": "tsc --project tsconfig.server.json && ng build --prod",
+    "build-node": "tsc --project tsconfig.server.json && ng build --configuration=node-server",
+    "build-server-only": "tsc --project tsconfig.server.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --configuration=$NG_ENV"
+    "heroku-postbuild": "tsc --project tsconfig.server.json && ng build --configuration=$NG_ENV"
   },
   "private": true,
   "dependencies": {

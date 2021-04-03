@@ -1,7 +1,7 @@
-const model = require('./model');
-const _ = require('underscore');
+import * as model from './model';
+import _ from 'underscore';
 
-exports.getFinalResults = async function(request, response) {
+export const getFinalResults = async function(request, response) {
   const finalResults = await model.FinalResult.findAll({
     order:
     [
