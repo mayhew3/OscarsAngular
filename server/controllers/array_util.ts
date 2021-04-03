@@ -1,24 +1,24 @@
 import _ from 'underscore';
 
-export const addToArray = function(originalArray, newArray) {
+export const addToArray = (originalArray, newArray) => {
   originalArray.push.apply(originalArray, newArray);
 };
 
-export const removeFromArray = function(arr, element) {
+export const removeFromArray = (arr, element) => {
   const indexOf = arr.indexOf(element);
   if (indexOf < 0) {
-    console.debug("No element found!");
+    console.debug('No element found!');
     return;
   }
   arr.splice(indexOf, 1);
 };
 
-export const exists = function(object) {
-  return !_.isUndefined(object) && !_.isNull(object);
-};
+export const exists = object => !_.isUndefined(object) && !_.isNull(object);
 
-export const shallowCopy = function(sourceObj, destinationObj) {
-  for (let propertyName in sourceObj) {
+const shouldCopy = propertyValue => !_.isArray(propertyValue);
+
+export const shallowCopy = (sourceObj, destinationObj) => {
+  for (const propertyName in sourceObj) {
     if (sourceObj.hasOwnProperty(propertyName)) {
       const originalProp = sourceObj[propertyName];
       if (shouldCopy(originalProp)) {
@@ -27,7 +27,3 @@ export const shallowCopy = function(sourceObj, destinationObj) {
     }
   }
 };
-
-function shouldCopy(propertyValue) {
-  return !_.isArray(propertyValue);
-}
