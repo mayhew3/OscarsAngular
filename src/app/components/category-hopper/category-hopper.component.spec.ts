@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CategoryHopperComponent} from './category-hopper.component';
@@ -63,25 +64,25 @@ describe('CategoryHopperComponent', () => {
     service = TestBed.get(CategoryService);
   });
 
-  function populateInputs(categoryIndex: number): void {
+  const populateInputs = (categoryIndex: number): void => {
     component.category = getCategory(categoryIndex);
     component.next = getCategory(categoryIndex + 1);
     component.prev = getCategory(categoryIndex - 1);
     component.activeContext = ActiveContext.OddsAssignment;
 
     fixture.detectChanges();
-  }
+  };
 
-  function getCategory(categoryIndex): Observable<Category> {
+  const getCategory = (categoryIndex): Observable<Category> => {
     return categoryIndex >= TestCategoryList.length ? of(null) : of(TestCategoryList[categoryIndex]);
-  }
+  };
 
-  function findButtonWithText(subElement: DebugElement, textToFind: string): DebugElement {
+  const findButtonWithText = (subElement: DebugElement, textToFind: string): DebugElement => {
     const debugElements = subElement.queryAll(By.css('button'));
     return _.find(debugElements, (button) => {
       return button.nativeElement.innerHTML.includes(textToFind);
     });
-  }
+  };
 
 
 
@@ -185,7 +186,7 @@ describe('CategoryHopperComponent', () => {
 
   it('submit button disabled on init', () => {
     populateInputs(1);
-    // tslint:disable-next-line:whitespace
+    // eslint-disable-next-line
     expect(findButtonWithText(element,'Submit').nativeElement.disabled)
       .toBeTruthy('submit button is enabled');
   });

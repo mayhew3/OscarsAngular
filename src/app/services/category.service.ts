@@ -20,18 +20,15 @@ import {MaxYear} from '../interfaces/MaxYear';
 })
 export class CategoryService {
 
-  static singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)', 'Short Film (Live Action)', 'Animated Feature'];
+  static singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)',
+    'Short Film (Live Action)', 'Animated Feature'];
   static songCategories = ['Music (Original Song)'];
-
-  listenersInitialized = false;
-
-  private _fetching = false;
 
   categories: Observable<Category[]> = this.store.select(state => state.categories).pipe(
     map(categories => categories.categories),
     filter(categories => !!categories),
     tap(() => {
-      this._fetching = false;
+      this.fetching = false;
     })
   );
 
@@ -39,6 +36,8 @@ export class CategoryService {
     map(state => state.maxYear),
     filter(maxYear => !!maxYear)
   );
+
+  private fetching = false;
 
   constructor(private http: HttpClient,
               private personService: PersonService,
@@ -121,12 +120,6 @@ export class CategoryService {
     return this.store.dispatch(new UpdateOdds(changes));
   }
 
-  private getCategoryForNomination(nomination_id: number): Observable<Category> {
-    return this.categories.pipe(
-      map(categories => _.find(categories, category => !!_.findWhere(category.nominees, {id: nomination_id})))
-    );
-  }
-
   getCategoriesWithWinners(): Observable<Category[]> {
     return this.categories.pipe(
       map(categories => _.filter(categories, category => category.winners.length > 0))
@@ -172,7 +165,7 @@ export class CategoryService {
   // LOADING
 
   stillLoading(): boolean {
-    return this._fetching;
+    return this.fetching;
   }
 
   // MAX YEAR
@@ -210,6 +203,12 @@ export class CategoryService {
   removeWinner(category: Category, nomination_id: number): void {
     const winner = this.getWinnerForNominee(category, nomination_id);
     delete category.winners[winner.id];
+  }
+
+  private getCategoryForNomination(nomination_id: number): Observable<Category> {
+    return this.categories.pipe(
+      map(categories => _.find(categories, category => !!_.findWhere(category.nominees, {id: nomination_id})))
+    );
   }
 
 }

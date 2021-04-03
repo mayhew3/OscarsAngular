@@ -17,10 +17,6 @@ export class WinnersService {
 
   constructor(private http: HttpClient) { }
 
-  private existingWinner(nominee: Nominee, category: Category): Winner {
-    return _.find(category.winners, w => w.nomination_id === nominee.id);
-  }
-
   addOrDeleteWinner(nominee: Nominee, category: Category): void {
     const existing = this.existingWinner(nominee, category);
     if (!existing) {
@@ -38,6 +34,10 @@ export class WinnersService {
 
   resetWinners(year: number): void {
     this.http.put<Winner>(`/api/resetWinners/`, {year}, httpOptions).subscribe();
+  }
+
+  private existingWinner(nominee: Nominee, category: Category): Winner {
+    return _.find(category.winners, w => w.nomination_id === nominee.id);
   }
 
 }

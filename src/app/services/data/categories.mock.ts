@@ -1,5 +1,4 @@
-/* tslint:disable quotemark */
-/* tslint:disable:object-literal-key-quotes */
+/* eslint-disable */
 export const MockCategoryList: any[] = [
   {
     "winners": [],

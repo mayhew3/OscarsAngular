@@ -106,7 +106,7 @@
   <div class="container py-2">
     <div class="row flex-fill">
 
-      <div *ngIf="!latestCategory && !(itsOver() | async)"
+      <div *ngIf="!latestCategory && (itsOver() | async) === false"
            routerLink="/winners"
            class="fakeLink">
         <div class="col-12 py-1">
@@ -166,11 +166,11 @@
           </div>
 
           <div class="col-12 text-right"
-               *ngIf="!(itsOver() | async)">
+               *ngIf="(itsOver() | async) === false">
             {{getWinnerCategoryCount() | async}}/{{getTotalCategoryCount() | async}}
           </div>
           <div class="col-12"
-               *ngIf="!(itsOver() | async)">
+               *ngIf="(itsOver() | async) === false">
             <ngb-progressbar type="info" [value]="getWinnerCategoryCount() | async" [max]="getTotalCategoryCount() | async"></ngb-progressbar>
           </div>
 

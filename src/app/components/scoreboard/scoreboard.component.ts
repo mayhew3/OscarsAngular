@@ -414,9 +414,7 @@ export class ScoreboardComponent implements OnInit {
 
   public getVoters(): ScoreData[] {
     // noinspection TypeScriptValidateJSTypes
-    return _.filter(this.scoreData, scoreData => {
-      return !!scoreData.num_votes;
-    });
+    return _.filter(this.scoreData, scoreData => !!scoreData.num_votes);
   }
 
   /* FILTER OPTIONS */

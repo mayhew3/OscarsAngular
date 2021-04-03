@@ -24,7 +24,7 @@
           <a class="nav-link" routerLink="/vote">Vote</a>
         </li>
         <li class="nav-item"
-            *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && !(systemVarsService.canVote() | async)">
+            *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async) === false">
           <a class="nav-link" routerLink="/scores">Scores</a>
         </li>
         <li class="nav-item"
@@ -35,7 +35,7 @@
 
       <ul class="navbar-nav navbar-right">
         <li class="nav-item"
-            *ngIf="!(auth.isAuthenticated$ | async)">
+            *ngIf="(auth.isAuthenticated$ | async) === false">
           <a class="nav-link" (click)="auth.login()">Login</a>
         </li>
         <li class="nav-item"
