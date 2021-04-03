@@ -40,7 +40,8 @@
         "@typescript-eslint/naming-convention": "off",
         "camelcase": "off",
         "no-console": "warn",
-        "no-underscore-dangle": "warn"
+        "no-underscore-dangle": "warn",
+        "@typescript-eslint/explicit-function-return-type": "warn"
       }
     },
     {

@@ -1,10 +1,11 @@
 import _ from 'underscore';
 import {ArrayUtil} from '../../src/app/utility/ArrayUtil';
+import {Server, Socket} from 'socket.io';
 
 export class SocketServer {
 
-  clients = [];
-  persons = [];
+  clients: Socket[] = [];
+  persons: Person[] = [];
   existing_person_rooms = [];
 
   globalChannels = [
@@ -21,11 +22,11 @@ export class SocketServer {
   personalChannels = [
   ];
 
-  io;
+  io: Server;
 
-  initIO(in_io) {
+  initIO(in_io: Server): void {
     this.io = in_io;
-    this.io.on('connection', client => {
+    this.io.on('connection', (client: Socket) => {
       console.log('Connection established. Adding client.');
       this.clients.push(client);
 
@@ -51,13 +52,13 @@ export class SocketServer {
 
   };
 
-  addToPersonRooms(room_name) {
+  addToPersonRooms(room_name: string): void {
     if (!_.contains(this.existing_person_rooms, room_name)) {
       this.existing_person_rooms.push(room_name);
     }
   };
 
-  initAllRooms(client, person_id) {
+  initAllRooms(client, person_id): void {
     if (!!person_id) {
       // initPersonRoom(client, person_id);
     }
@@ -65,13 +66,13 @@ export class SocketServer {
     this.initGlobalChannels(client);
   }
 
-  initPersonRoom(client, person_id) {
+  initPersonRoom(client, person_id): void {
     const room_name = 'person_' + person_id;
     client.join(room_name);
     this.addToPersonRooms(room_name);
   }
 
-  initPersonalChannels(client) {
+  initPersonalChannels(client): void {
     _.each(this.personalChannels, channelName => {
       client.on(channelName, msg => {
         if (!msg.person_id) {
@@ -84,7 +85,7 @@ export class SocketServer {
     });
   }
 
-  initGlobalChannels(client) {
+  initGlobalChannels(client): void {
     _.each(this.globalChannels, channelName => {
       client.on(channelName, msg => {
         console.log(`Message received on channel ${channelName} to everyone.`);
@@ -95,20 +96,20 @@ export class SocketServer {
 
   /* API */
 
-  getNumberOfClients() {
+  getNumberOfClients(): number {
     return this.clients.length;
   };
 
-  emitToAll(channel, msg) {
+  emitToAll(channel, msg): void {
     this.io.emit(channel, msg);
   };
 
-  emitToPerson(person_id, channel, msg) {
+  emitToPerson(person_id, channel, msg): void {
     const clientsForPerson = this.getClientsForPerson(person_id);
     this.emitToClients(clientsForPerson, channel, msg);
   };
 
-  emitToAllExceptPerson(person_id, channel, msg) {
+  emitToAllExceptPerson(person_id, channel, msg): void {
     const clientsForEveryoneExceptPerson = this.getClientsForEveryoneExceptPerson(person_id);
     this.emitToClients(clientsForEveryoneExceptPerson, channel, msg);
   };
@@ -116,47 +117,65 @@ export class SocketServer {
 
   /* PRIVATE METHODS */
 
-  addClientForPerson(person_id, client) {
-    const existingArray = _.findWhere(this.persons, {person_id});
-    if (!existingArray) {
-      this.persons.push({
-        person_id,
-        clients: [client]
-      });
+  addClientForPerson(person_id: number, client: Socket): void {
+    let person = _.findWhere(this.persons, {id: person_id});
+    if (!person) {
+      person = new Person(person_id, client);
+      this.persons.push(person);
     } else {
-      existingArray.clients.push(client);
+      person.addClient(client);
     }
   }
 
-  removeClientForPerson(person_id, client) {
-    const existingArray = _.findWhere(this.persons, {person_id});
-    if (!existingArray) {
+  removeClientForPerson(person_id: number, client: Socket): void {
+    const person = _.findWhere(this.persons, {id: person_id});
+    if (!person) {
       console.log('Warning: Disconnect received for person_id that never connected: ' + person_id);
     } else {
-      ArrayUtil.removeFromArray(existingArray.clients, client);
+      person.removeClient(client);
     }
   }
 
-  getClientsForPerson(person_id) {
-    const existingArray = _.findWhere(this.persons, {person_id});
-    if (!existingArray) {
+  getClientsForPerson(person_id: number): Socket[] {
+    const person = _.findWhere(this.persons, {id: person_id});
+    if (!person) {
       return [];
     } else {
-      return existingArray.clients;
+      return person.getClients();
     }
   }
 
-  getClientsForEveryoneExceptPerson(person_id) {
-    const otherPersons = _.filter(this.persons, person => person_id !== person.person_id);
-    const clients = [];
-    _.each(otherPersons, person => ArrayUtil.addToArray(clients, person.clients));
+  getClientsForEveryoneExceptPerson(person_id: number): Socket[] {
+    const otherPersons = _.filter(this.persons, person => person_id !== person.id);
+    const clients: Socket[] = [];
+    _.each(otherPersons, person => ArrayUtil.addToArray(clients, person.getClients()));
     return clients;
   }
 
-  emitToClients(clients, channel, msg) {
+  emitToClients(clients: Socket[], channel: string, msg: any): void {
     _.each(clients, client => {
       client.emit(channel, msg);
     });
   }
 
+}
+
+class Person {
+  private clients: Socket[] = [];
+  constructor(public id: number,
+              private client: Socket) {
+    this.clients.push(client);
+  }
+
+  addClient(client: Socket): void {
+    this.clients.push(client);
+  }
+
+  removeClient(client: Socket): void {
+    ArrayUtil.removeFromArray(this.clients, client);
+  }
+
+  getClients(): Socket[] {
+    return ArrayUtil.cloneArray(this.clients);
+  }
 }
