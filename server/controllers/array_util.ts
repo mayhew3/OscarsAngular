@@ -1,10 +1,10 @@
-const _ = require('underscore');
+import _ from 'underscore';
 
-exports.addToArray = function(originalArray, newArray) {
+export const addToArray = function(originalArray, newArray) {
   originalArray.push.apply(originalArray, newArray);
 };
 
-exports.removeFromArray = function(arr, element) {
+export const removeFromArray = function(arr, element) {
   const indexOf = arr.indexOf(element);
   if (indexOf < 0) {
     console.debug("No element found!");
@@ -13,11 +13,11 @@ exports.removeFromArray = function(arr, element) {
   arr.splice(indexOf, 1);
 };
 
-exports.exists = function(object) {
+export const exists = function(object) {
   return !_.isUndefined(object) && !_.isNull(object);
 };
 
-exports.shallowCopy = function(sourceObj, destinationObj) {
+export const shallowCopy = function(sourceObj, destinationObj) {
   for (let propertyName in sourceObj) {
     if (sourceObj.hasOwnProperty(propertyName)) {
       const originalProp = sourceObj[propertyName];

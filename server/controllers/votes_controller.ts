@@ -1,8 +1,8 @@
-const model = require('./model');
-const _ = require('underscore');
+import * as model from './model';
+import _ from 'underscore';
 const socket = require('./sockets_controller');
 
-exports.getVotes = function(request, response) {
+export const getVotes = function(request, response) {
   model.Vote.findAll({
     where: {
       year: request.query.year
@@ -12,7 +12,7 @@ exports.getVotes = function(request, response) {
   });
 };
 
-exports.addOrUpdateVote = function(request, response) {
+export const addOrUpdateVote = function(request, response) {
   model.Vote.findAll({
     where: {
       category_id: request.body.category_id,

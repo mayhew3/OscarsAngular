@@ -1,8 +1,8 @@
-const model = require('./model');
+import * as model from './model';
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-exports.getMostRecentOddsBundle = function(request, response) {
+export const getMostRecentOddsBundle = function(request, response) {
   if (request.query.event_id) {
     handleOddsForEventID(request.query.event_id, response);
   } else {
@@ -10,7 +10,7 @@ exports.getMostRecentOddsBundle = function(request, response) {
   }
 };
 
-exports.updateOddsForNominees = async function(request, response) {
+export const updateOddsForNominees = async function(request, response) {
   const changes = request.body.changes;
 
   const updates = [];

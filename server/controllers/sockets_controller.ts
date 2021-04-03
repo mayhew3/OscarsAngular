@@ -1,5 +1,5 @@
 const arrayService = require('./array_util');
-const _ = require('underscore');
+import _ from 'underscore';
 
 const clients = [];
 const persons = [];
@@ -21,7 +21,7 @@ const personalChannels = [
 
 let io;
 
-exports.initIO = function(in_io) {
+export const initIO = function(in_io) {
   io = in_io;
   io.on('connection', function(client) {
     console.log('Connection established. Adding client.');
@@ -93,20 +93,20 @@ function initGlobalChannels(client) {
 
 /* API */
 
-exports.getNumberOfClients = function() {
+export const getNumberOfClients = function() {
   return clients.length;
 };
 
-exports.emitToAll = function(channel, msg) {
+export const emitToAll = function(channel, msg) {
   io.emit(channel, msg);
 };
 
-exports.emitToPerson = function(person_id, channel, msg) {
+export const emitToPerson = function(person_id, channel, msg) {
   const clientsForPerson = getClientsForPerson(person_id);
   emitToClients(clientsForPerson, channel, msg);
 };
 
-exports.emitToAllExceptPerson = function(person_id, channel, msg) {
+export const emitToAllExceptPerson = function(person_id, channel, msg) {
   const clientsForEveryoneExceptPerson = getClientsForEveryoneExceptPerson(person_id);
   emitToClients(clientsForEveryoneExceptPerson, channel, msg);
 };

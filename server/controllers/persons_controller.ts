@@ -1,7 +1,7 @@
-const model = require('./model');
-const _ = require('underscore');
+import * as model from './model';
+import _ from 'underscore';
 
-exports.getPersons = function(request, response) {
+export const getPersons = function(request, response) {
   model.Person.findAll().then(persons => {
     model.PersonGroupRole.findAll().then(personGroupRoles => {
       let outputObject = [];
@@ -20,7 +20,7 @@ exports.getPersons = function(request, response) {
   });
 };
 
-exports.updatePerson = async function(request, response) {
+export const updatePerson = async function(request, response) {
   let person = request.body;
 
   let result;

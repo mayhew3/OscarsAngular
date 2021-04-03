@@ -1,7 +1,7 @@
-const model = require('./model');
+import * as model from './model';
 const socket = require('./sockets_controller');
 
-exports.addWinner = async function(request, response) {
+export const addWinner = async function(request, response) {
   const nomination_id = request.body.nomination_id;
 
   try {
@@ -34,7 +34,7 @@ exports.addWinner = async function(request, response) {
   }
 };
 
-exports.resetWinners = async function(request, response) {
+export const resetWinners = async function(request, response) {
   const year = request.body.year;
 
   await model.Winner.destroy({
@@ -59,7 +59,7 @@ exports.resetWinners = async function(request, response) {
   response.json({msg: 'Success!'});
 };
 
-exports.deleteWinner = async function(request, response) {
+export const deleteWinner = async function(request, response) {
   const winner_id = +request.params.id;
 
   let winner = await model.Winner.findOne({
