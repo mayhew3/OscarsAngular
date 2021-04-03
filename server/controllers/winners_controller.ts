@@ -1,7 +1,7 @@
 import * as model from './model';
 const socket = require('./sockets_controller');
 
-export const addWinner = async function(request, response) {
+export const addWinner = async (request, response) => {
   const nomination_id = request.body.nomination_id;
 
   try {
@@ -13,14 +13,14 @@ export const addWinner = async function(request, response) {
     const event = await model.Event.create({
       type: 'winner',
       detail: 'add',
-      event_time: event_time,
-      nomination_id: nomination_id
+      event_time,
+      nomination_id
     });
 
     const msg = {
-      nomination_id: nomination_id,
+      nomination_id,
       event_id: event.id,
-      event_time: event_time,
+      event_time,
       winner_id: winner.id,
       declared: event_time
     };
@@ -29,40 +29,40 @@ export const addWinner = async function(request, response) {
     await response.json(winner);
 
   } catch (err) {
-    response.send(500, "Error submitting winner!");
+    response.send(500, 'Error submitting winner!');
     throw new Error(err);
   }
 };
 
-export const resetWinners = async function(request, response) {
+export const resetWinners = async (request, response) => {
   const year = request.body.year;
 
   await model.Winner.destroy({
-    where: {year: year}
+    where: {year}
   });
 
-  const event_time = new Date;
+  const event_time = new Date();
 
   const event = await model.Event.create({
     type: 'winner',
     detail: 'reset',
-    event_time: event_time
+    event_time
   });
 
   const msg = {
     event_id: event.id,
-    event_time: event_time,
-    year: year
+    event_time,
+    year
   };
   socket.emitToAll('reset_winners', msg);
 
   response.json({msg: 'Success!'});
 };
 
-export const deleteWinner = async function(request, response) {
+export const deleteWinner = async (request, response) => {
   const winner_id = +request.params.id;
 
-  let winner = await model.Winner.findOne({
+  const winner = await model.Winner.findOne({
     where: {
       id: winner_id
     }
@@ -73,27 +73,27 @@ export const deleteWinner = async function(request, response) {
   try {
     await winner.destroy();
   } catch (err) {
-    response.send(500, "Error deleting existing winner!");
+    response.send(500, 'Error deleting existing winner!');
     throw new Error(err);
   }
 
-  const event_time = new Date;
+  const event_time = new Date();
 
   const event = await model.Event.create({
     type: 'winner',
     detail: 'delete',
-    event_time: event_time,
-    nomination_id: nomination_id
+    event_time,
+    nomination_id
   });
 
   const msg = {
-    nomination_id: nomination_id,
+    nomination_id,
     event_id: event.id,
-    event_time: event_time,
-    winner_id: winner_id
+    event_time,
+    winner_id
   };
   socket.emitToAll('remove_winner', msg);
 
   response.json({msg: 'Success'});
-}
+};
 

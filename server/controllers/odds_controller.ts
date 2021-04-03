@@ -2,32 +2,18 @@ import * as model from './model';
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-export const getMostRecentOddsBundle = function(request, response) {
-  if (request.query.event_id) {
-    handleOddsForEventID(request.query.event_id, response);
-  } else {
-    handleFirstOdds(response);
-  }
+const attachOddsToExecution = (execution, response) => {
+  model.OddsResult.findAll({
+    where: {
+      odds_execution_id: execution.id
+    }
+  }).then(odds => {
+    execution.dataValues.odds = odds;
+    response.json(execution);
+  });
 };
 
-export const updateOddsForNominees = async function(request, response) {
-  const changes = request.body.changes;
-
-  const updates = [];
-
-  for (const change of changes) {
-    const nomination_id = change.nomination_id;
-    delete change.nomination_id;
-    const nomination = await model.Nomination.findByPk(nomination_id);
-    updates.push(nomination.update(change));
-  }
-
-  Promise.all(updates).then(() => {
-    response.json({msg: 'Success!'});
-  });
-}
-
-function handleFirstOdds(response) {
+const handleFirstOdds = response => {
   model.OddsExecution.findAll({
     where: {
       time_finished: {
@@ -46,9 +32,9 @@ function handleFirstOdds(response) {
       attachOddsToExecution(executions[0], response);
     }
   });
-}
+};
 
-function handleOddsForEventID(event_id, response) {
+const handleOddsForEventID = (event_id, response) => {
   model.OddsExecution.findAll({
     where: {
       event_id: {
@@ -71,15 +57,29 @@ function handleOddsForEventID(event_id, response) {
       attachOddsToExecution(executions[0], response);
     }
   });
-}
+};
 
-function attachOddsToExecution(execution, response) {
-  model.OddsResult.findAll({
-    where: {
-      odds_execution_id: execution.id
-    }
-  }).then(odds => {
-    execution.dataValues.odds = odds;
-    response.json(execution);
+export const getMostRecentOddsBundle = (request, response) => {
+  if (request.query.event_id) {
+    handleOddsForEventID(request.query.event_id, response);
+  } else {
+    handleFirstOdds(response);
+  }
+};
+
+export const updateOddsForNominees = async (request, response) => {
+  const changes = request.body.changes;
+
+  const updates = [];
+
+  for (const change of changes) {
+    const nomination_id = change.nomination_id;
+    delete change.nomination_id;
+    const nomination = await model.Nomination.findByPk(nomination_id);
+    updates.push(nomination.update(change));
+  }
+
+  Promise.all(updates).then(() => {
+    response.json({msg: 'Success!'});
   });
-}
+};

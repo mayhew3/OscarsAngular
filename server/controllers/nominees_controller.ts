@@ -1,7 +1,7 @@
 import * as model from './model';
 import _ from 'underscore';
 
-export const getCategories = function(request, response) {
+export const getCategories = (request, response) => {
   model.Category.findAll({
     order:
       [
@@ -15,7 +15,7 @@ export const getCategories = function(request, response) {
         year: currentYear
       }
     }).then(nominations => {
-      let outputObject = [];
+      const outputObject = [];
 
       model.Vote.findAll({
         where: {
@@ -30,16 +30,16 @@ export const getCategories = function(request, response) {
           }
         }).then(winners => {
 
-          _.forEach(categories, function (category) {
-            let cat_noms = _.where(nominations, {category_id: category.id});
-            let cat_votes = _.where(votes, {category_id: category.id});
-            let cat_winners = _.where(winners, {category_id: category.id});
+          _.forEach(categories, category => {
+            const cat_noms = _.where(nominations, {category_id: category.id});
+            const cat_votes = _.where(votes, {category_id: category.id});
+            const cat_winners = _.where(winners, {category_id: category.id});
 
             if (cat_votes.length > 1) {
-              throw new Error("Multiple votes found for category " + category.id);
+              throw new Error('Multiple votes found for category ' + category.id);
             }
 
-            let category_object = category.dataValues;
+            const category_object = category.dataValues;
 
             if (cat_votes.length > 0) {
               category_object.voted_on = cat_votes[0].dataValues.nomination_id;
@@ -58,24 +58,24 @@ export const getCategories = function(request, response) {
   });
 };
 
-export const updateNomination = function(request, response) {
-  let nomination = request.body;
+export const updateNomination = (request, response) => {
+  const nomination = request.body;
 
   model.Nomination.findByPk(nomination.id).then(result => {
     result.update(nomination).then(() => {
-      response.json({msg: "Success!"});
+      response.json({msg: 'Success!'});
     }).catch(error => {
       console.error(error);
-      response.send({msg: "Error updating nominee: " + JSON.stringify(nomination)})
+      response.send({msg: 'Error updating nominee: ' + JSON.stringify(nomination)});
     });
   }).catch(error => {
     console.error(error);
-    response.send({msg: "Error finding nomination: " + error});
+    response.send({msg: 'Error finding nomination: ' + error});
   });
 };
 
-export const getMostRecentYear = async function(request, response) {
+export const getMostRecentYear = async (request, response) => {
   const maxYear = await model.Nomination.max('year');
 
-  response.json([{maxYear: maxYear}]);
+  response.json([{maxYear}]);
 };
