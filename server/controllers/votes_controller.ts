@@ -1,5 +1,5 @@
 import * as model from './model';
-const socket = require('./sockets_controller');
+import {socketServer} from '../www';
 
 export const getVotes = (request, response) => {
   model.Vote.findAll({
@@ -25,7 +25,7 @@ export const addOrUpdateVote = (request, response) => {
       const nomination_id = request.body.nomination_id;
       vote.update({nomination_id})
         .then(result => {
-          socket.emitToAll('change_vote', {vote_id: vote.id, nomination_id});
+          socketServer.emitToAll('change_vote', {vote_id: vote.id, nomination_id});
           return response.json(result);
         })
         .catch(err => {
@@ -36,7 +36,7 @@ export const addOrUpdateVote = (request, response) => {
       model.Vote
         .create(request.body)
         .then(result => {
-          socket.emitToAll('add_vote', result);
+          socketServer.emitToAll('add_vote', result);
           return response.json(result);
         })
         .catch(err => {

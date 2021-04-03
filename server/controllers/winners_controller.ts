@@ -1,5 +1,5 @@
 import * as model from './model';
-const socket = require('./sockets_controller');
+import {socketServer} from '../www';
 
 export const addWinner = async (request, response) => {
   const nomination_id = request.body.nomination_id;
@@ -24,7 +24,7 @@ export const addWinner = async (request, response) => {
       winner_id: winner.id,
       declared: event_time
     };
-    socket.emitToAll('add_winner', msg);
+    socketServer.emitToAll('add_winner', msg);
 
     await response.json(winner);
 
@@ -54,7 +54,7 @@ export const resetWinners = async (request, response) => {
     event_time,
     year
   };
-  socket.emitToAll('reset_winners', msg);
+  socketServer.emitToAll('reset_winners', msg);
 
   response.json({msg: 'Success!'});
 };
@@ -92,7 +92,7 @@ export const deleteWinner = async (request, response) => {
     event_time,
     winner_id
   };
-  socket.emitToAll('remove_winner', msg);
+  socketServer.emitToAll('remove_winner', msg);
 
   response.json({msg: 'Success'});
 };
