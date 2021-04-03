@@ -1,5 +1,5 @@
 import {TestBed} from '@angular/core/testing';
-/* tslint:disable quotemark */
+/* eslint-disable  @typescript-eslint/quotes */
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {PersonService} from './person.service';
 import {TestPersonList} from './data/persons.test.mock';

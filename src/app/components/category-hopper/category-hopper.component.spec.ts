@@ -185,7 +185,7 @@ describe('CategoryHopperComponent', () => {
 
   it('submit button disabled on init', () => {
     populateInputs(1);
-    // tslint:disable-next-line:whitespace
+    // eslint-disable-next-line
     expect(findButtonWithText(element,'Submit').nativeElement.disabled)
       .toBeTruthy('submit button is enabled');
   });

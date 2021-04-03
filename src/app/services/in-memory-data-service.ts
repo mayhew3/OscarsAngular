@@ -21,7 +21,7 @@ import {Nominee} from '../interfaces/Nominee';
 })
 
 export class InMemoryDataService implements InMemoryDbService {
-  // tslint:disable-next-line
+  // eslint-disable-next-line
   categories = MockCategoryList;
   persons = MockPersonList;
   votes = MockVoteList;

@@ -1,6 +1,6 @@
-/* tslint:disable */
+/* eslint-disable */
 import {TestBed} from '@angular/core/testing';
-/* tslint:disable quotemark */
+/* eslint-disable  @typescript-eslint/quotes */
 import {CategoryService} from './category.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestCategoryList} from './data/categories.test.mock';

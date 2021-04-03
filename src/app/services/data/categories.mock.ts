@@ -1,5 +1,5 @@
-/* tslint:disable quotemark */
-/* tslint:disable:object-literal-key-quotes */
+/* eslint-disable  @typescript-eslint/quotes */
+/* eslint-disable quote-props */
 export const MockCategoryList: any[] = [
   {
     "winners": [],
