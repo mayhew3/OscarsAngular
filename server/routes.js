@@ -3,14 +3,14 @@ const jwt = require("express-jwt");
 const jwks = require("jwks-rsa");
 
 module.exports = function(app) {
-  let events = require('../controllers/events_controller');
-  let nominees = require('../controllers/nominees_controller');
-  let odds = require('../controllers/odds_controller');
-  let persons = require('../controllers/persons_controller');
-  let votes = require('../controllers/votes_controller');
-  let winners = require('../controllers/winners_controller');
-  let systemVars = require('../controllers/systemvars_controller');
-  let finalResults = require('../controllers/final_results_controller');
+  let events = require('./controllers/events_controller');
+  let nominees = require('./controllers/nominees_controller');
+  let odds = require('./controllers/odds_controller');
+  let persons = require('./controllers/persons_controller');
+  let votes = require('./controllers/votes_controller');
+  let winners = require('./controllers/winners_controller');
+  let systemVars = require('./controllers/systemvars_controller');
+  let finalResults = require('./controllers/final_results_controller');
 
   const authConfig = {
     domain: 'mayhew3.auth0.com',

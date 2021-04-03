@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const debug = require('debug')('OscarsAngular');
-const app = require('../app');
-const sockets = require('../controllers/sockets_controller');
+const app = require('./app');
+const sockets = require('./controllers/sockets_controller');
 
 app.set('port', process.env.PORT || 5000);
 

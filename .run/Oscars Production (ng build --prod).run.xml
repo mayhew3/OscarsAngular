@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Oscars Production (ng build --prod)" type="NodeJSConfigurationType" path-to-js-file="bin/www.js" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="Oscars Production (ng build --prod)" type="NodeJSConfigurationType" path-to-js-file="$PROJECT_DIR$/server/www.js" working-dir="$PROJECT_DIR$">
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
       <browser start="true" url="http://localhost:5000" />
     </EXTENSION>
