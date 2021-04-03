@@ -103,8 +103,8 @@ export class NomineesComponent implements OnInit {
 
         const voteCallback = () => {
           this.processingPick$.next(undefined);
-          this.socket.removeListener('add_vote', voteCallback);
-          this.socket.removeListener('change_vote', voteCallback);
+          this.socket.off('add_vote', voteCallback);
+          this.socket.off('change_vote', voteCallback);
         };
 
         this.socket.on('add_vote', voteCallback);
@@ -116,8 +116,8 @@ export class NomineesComponent implements OnInit {
 
         const winnerCallback = () => {
           this.processingPick$.next(undefined);
-          this.socket.removeListener('add_winner', winnerCallback);
-          this.socket.removeListener('remove_winner', winnerCallback);
+          this.socket.off('add_winner', winnerCallback);
+          this.socket.off('remove_winner', winnerCallback);
         };
         this.socket.on('add_winner', winnerCallback);
         this.socket.on('remove_winner', winnerCallback);

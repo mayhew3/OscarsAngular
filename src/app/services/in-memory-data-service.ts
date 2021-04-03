@@ -65,8 +65,8 @@ export class InMemoryDataService implements InMemoryDbService {
     this.callbackService.on(channel, callback);
   }
 
-  removeCallback(channel, callback): void {
-    this.callbackService.removeCallback(channel, callback);
+  off(channel, callback): void {
+    this.callbackService.off(channel, callback);
   }
 
   getCallbacks(channel): any[] {

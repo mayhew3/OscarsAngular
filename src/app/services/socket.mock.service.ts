@@ -14,8 +14,8 @@ export class SocketServiceMock {
     this.inMemoryDB.on(channel, callback);
   }
 
-  removeListener(channel, callback): void {
-    this.inMemoryDB.removeCallback(channel, callback);
+  off(channel, callback): void {
+    this.inMemoryDB.off(channel, callback);
   }
 
   emit(channel, msg): void {

@@ -42,7 +42,7 @@ export class SocketService {
     }
   }
 
-  removeListener(channel, callback): void {
+  off(channel, callback): void {
     this.socket.off(channel, callback);
   }
 
