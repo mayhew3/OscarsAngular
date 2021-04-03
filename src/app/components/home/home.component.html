@@ -1,6 +1,6 @@
 <div class="container p-3">
 
-  <div *ngIf="!(auth.isLoading$ | async); else authenticating">
+  <div *ngIf="(auth.isLoading$ | async) === false; else authenticating">
     <div *ngIf="auth.isAuthenticated$ | async; else loggedOut">
       <div *ngIf="!failedEmail else invalidUser">
         <div *ngIf="(me$ | async) else loading">
@@ -20,7 +20,7 @@
             found on <a href="https://www.metacritic.com/feature/picks-for-who-will-win-2019-oscars" target="_blank">Metacritic</a>.
           </p>
 
-          <p *ngIf="!(systemVarsService.canVote() | async)">
+          <p *ngIf="(systemVarsService.canVote() | async) === false">
             Voting is currently closed, but you can head over to Live Scoring to see how the scores are progressing, or see the final scores.
           </p>
 
@@ -43,7 +43,7 @@
             </div>
 
             <div class="col-12 col-sm-6 col-lg-4"
-                 *ngIf="(!(systemVarsService.canVote() | async) || personService.isAdmin)">
+                 *ngIf="((systemVarsService.canVote() | async) === false || personService.isAdmin)">
               <div class="card navCard">
                 <div class="card-body fakeLink"
                      routerLink="scores">
@@ -57,7 +57,7 @@
             </div>
 
             <div class="col-12 col-sm-6 col-lg-4"
-                 *ngIf="(!(systemVarsService.canVote() | async) || personService.isAdmin)">
+                 *ngIf="((systemVarsService.canVote() | async) === false || personService.isAdmin)">
               <div class="card navCard">
                 <div class="card-body fakeLink"
                      routerLink="winners">

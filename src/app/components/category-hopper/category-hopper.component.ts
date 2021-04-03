@@ -24,13 +24,13 @@ export class CategoryHopperComponent implements OnInit {
   @Input() activeContext: ActiveContext;
   @Input() nomineeGroups: NomineeControls[];
 
-  private readonly contextUrls: string[];
-
   categoryCount = this.categoryService.categories.pipe(
     map(categories => categories.length)
   );
 
   nominees$: Observable<Nominee[]>;
+
+  private readonly contextUrls: string[];
 
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,
@@ -84,6 +84,15 @@ export class CategoryHopperComponent implements OnInit {
     );
   }
 
+  hasChanges(): boolean {
+    return _.filter(this.nomineeGroups, ng => this.isChanged(ng)).length > 0;
+  }
+
+  submitOdds(): void {
+    const changes = this.getChanges();
+    this.categoryService.updateOddsForNominees(changes).subscribe(() => this.clearOriginals());
+  }
+
   // noinspection JSMethodCanBeStatic
   private vegasCalc(numerator?: number, denominator?: number): number {
     if (!numerator || !denominator) {
@@ -108,15 +117,6 @@ export class CategoryHopperComponent implements OnInit {
       }
     });
     return changes;
-  }
-
-  hasChanges(): boolean {
-    return _.filter(this.nomineeGroups, ng => this.isChanged(ng)).length > 0;
-  }
-
-  submitOdds(): void {
-    const changes = this.getChanges();
-    this.categoryService.updateOddsForNominees(changes).subscribe(() => this.clearOriginals());
   }
 
   // noinspection JSMethodCanBeStatic

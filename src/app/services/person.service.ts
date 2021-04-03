@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of, Subject} from 'rxjs';
-import {catchError, filter, map, mergeMap, tap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
@@ -9,20 +9,17 @@ import {Store} from '@ngxs/store';
 import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {MyAuthService} from './auth/my-auth.service';
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
 @Injectable({
   providedIn: 'root'
 })
 export class PersonService implements OnDestroy {
-  personsUrl = 'api/persons';
-  private _fetching = false;
-
-  private _destroy$ = new Subject();
 
   isAdmin: boolean = null;
+
+  me$ = this.auth.userEmail$.pipe(
+    mergeMap(email => this.getPersonWithEmail(email)),
+    filter(person => !!person)
+  );
 
   persons: Observable<Person[]> = this.store.select(state => state.persons).pipe(
     filter(state => !!state),
@@ -30,30 +27,25 @@ export class PersonService implements OnDestroy {
     filter(persons => !!persons)
   );
 
-  me$ = this.auth.userEmail$.pipe(
-    mergeMap(email => this.getPersonWithEmail(email)),
-    filter(person => !!person)
-  );
+  private fetching = false;
+
+  private destroy$ = new Subject();
 
   constructor(private http: HttpClient,
               private arrayService: ArrayService,
               private auth: MyAuthService,
               private store: Store) {
-    this._fetching = true;
+    this.fetching = true;
     this.store.dispatch(new GetPersons());
-    this.persons.subscribe(() => this._fetching = false);
+    this.persons.subscribe(() => this.fetching = false);
     this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
   }
 
   // REAL METHODS
 
   ngOnDestroy(): void {
-    this._destroy$.next();
-    this._destroy$.complete();
-  }
-
-  getNumberOfCachedPersons(): number {
-    return this.store.selectSnapshot(state => state.persons.persons.length);
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   isMe(person: Person): Observable<boolean> {
@@ -76,14 +68,12 @@ export class PersonService implements OnDestroy {
 
   getPersonWithEmail(email: string): Observable<Person> {
     return this.persons.pipe(
-      map(persons => {
-        return _.findWhere(persons, {email});
-      })
+      map(persons => _.findWhere(persons, {email}))
     );
   }
 
   stillLoading(): boolean {
-    return this._fetching;
+    return this.fetching;
   }
 
   getFullName(person: Person): string {
@@ -99,23 +89,6 @@ export class PersonService implements OnDestroy {
 
   updatePerson(person: Person, oddsKey: string): Observable<any> {
     return this.store.dispatch(new ChangeOddsView(person.id, oddsKey));
-  }
-
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   */
-  private handleError<T>(operation = 'operation', result?: T): (obs: Observable<T>) => Observable<T> {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 
 }

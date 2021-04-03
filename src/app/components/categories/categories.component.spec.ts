@@ -26,7 +26,7 @@ import {WinnerDetailComponent} from '../winner-detail/winner-detail.component';
 import {ScoreboardComponent} from '../scoreboard/scoreboard.component';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {AuthServiceStub} from '../../services/auth/auth.service.stub';
-
+/* eslint-disable */
 function getHTML(element: DebugElement): Element {
   return element.nativeElement.innerHTML;
 }

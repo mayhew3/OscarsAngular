@@ -7,9 +7,9 @@ import {MeService} from './me.service';
 
 @Injectable()
 export class SocketService {
-  private socket;
 
-  pendingListeners: PendingListener[] = [];
+  private pendingListeners: PendingListener[] = [];
+  private socket;
 
   constructor(private meService: MeService) {
   }

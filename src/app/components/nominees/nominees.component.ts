@@ -21,7 +21,6 @@ import {SocketService} from '../../services/socket.service';
   styleUrls: ['./nominees.component.scss']
 })
 export class NomineesComponent implements OnInit {
-  private processingPick$ = new BehaviorSubject<Nominee>(undefined);
   @Input() activeContext: ActiveContext;
 
   nomineeGroups = new Map<number, NomineeControls>();
@@ -54,6 +53,8 @@ export class NomineesComponent implements OnInit {
     map(category => _.map(category.winners, winner =>
       _.findWhere(category.nominees, {id: winner.nomination_id})))
   );
+
+  private processingPick$ = new BehaviorSubject<Nominee>(undefined);
 
   constructor(private categoryService: CategoryService,
               private votesService: VotesService,

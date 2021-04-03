@@ -36,7 +36,11 @@
             "prefix": "osc",
             "style": "camelCase"
           }
-        ]
+        ],
+        "@typescript-eslint/naming-convention": "off",
+        "camelcase": "off",
+        "no-console": "warn",
+        "no-underscore-dangle": "warn"
       }
     },
     {

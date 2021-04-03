@@ -21,10 +21,10 @@ import {ArrayUtil} from '../../utility/ArrayUtil';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  me: Person;
   @Input() activeContext: ActiveContext;
   @Input() person: Person;
 
+  me: Person;
   showWinnerless = true;
   showWinners = true;
 
@@ -257,48 +257,6 @@ export class CategoriesComponent implements OnInit {
     );
   }
 
-  private pickedTheSame(person1: Person, person2: Person, category: Category): Observable<boolean> {
-    const person1pick = this.getPick(person1, category);
-    const person2pick = this.getPick(person2, category);
-    return combineLatest([person1pick, person2pick]).pipe(
-      map(([p1, p2]) => !!p1 && !!p2 && p1.id === p2.id)
-    );
-  }
-
-  private didPickWinner(person: Person, category: Category): Observable<boolean> {
-    return this.getPick(person, category).pipe(
-      map(personPick => {
-        const winning_ids = _.map(category.winners, winner => winner.nomination_id);
-        if (this.votingMode()) {
-          return !personPick;
-        } else {
-          return !!personPick && _.contains(winning_ids, personPick.id);
-        }
-      })
-    );
-  }
-
-  // noinspection JSMethodCanBeStatic
-  private hasAtLeastOneWinner(category: Category): boolean {
-    return category.winners.length > 0;
-  }
-
-  getPersonPick(category: Category): Observable<Nominee> {
-    return this.getPick(this.person, category);
-  }
-
-  private getPick(person: Person, category: Category): Observable<Nominee> {
-    return this.votesService.getVoteForCurrentYearAndPersonAndCategory(person, category).pipe(
-      map(myVote => {
-        if (!!myVote) {
-          return _.findWhere(category.nominees, {id: myVote.nomination_id});
-        } else {
-          return undefined;
-        }
-      })
-    );
-  }
-
   personIsMe(): boolean {
     return !!this.me && !!this.person && this.me.id === this.person.id;
   }
@@ -339,6 +297,44 @@ export class CategoriesComponent implements OnInit {
 
   gotPointsForWinner(category: Category): Observable<boolean> {
     return this.votesService.didPersonVoteCorrectlyFor(this.person, category);
+  }
+
+  private pickedTheSame(person1: Person, person2: Person, category: Category): Observable<boolean> {
+    const person1pick = this.getPick(person1, category);
+    const person2pick = this.getPick(person2, category);
+    return combineLatest([person1pick, person2pick]).pipe(
+      map(([p1, p2]) => !!p1 && !!p2 && p1.id === p2.id)
+    );
+  }
+
+  private didPickWinner(person: Person, category: Category): Observable<boolean> {
+    return this.getPick(person, category).pipe(
+      map(personPick => {
+        const winning_ids = _.map(category.winners, winner => winner.nomination_id);
+        if (this.votingMode()) {
+          return !personPick;
+        } else {
+          return !!personPick && _.contains(winning_ids, personPick.id);
+        }
+      })
+    );
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private hasAtLeastOneWinner(category: Category): boolean {
+    return category.winners.length > 0;
+  }
+
+  private getPick(person: Person, category: Category): Observable<Nominee> {
+    return this.votesService.getVoteForCurrentYearAndPersonAndCategory(person, category).pipe(
+      map(myVote => {
+        if (!!myVote) {
+          return _.findWhere(category.nominees, {id: myVote.nomination_id});
+        } else {
+          return undefined;
+        }
+      })
+    );
   }
 
 }

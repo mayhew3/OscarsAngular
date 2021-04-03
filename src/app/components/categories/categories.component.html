@@ -115,7 +115,7 @@
               </div>
 
               <div class="row py-1 no-gutters"
-                   *ngIf="winnersMode() && !personIsMe() && !(wePickedTheSame(category) | async)">
+                   *ngIf="winnersMode() && !personIsMe() && (wePickedTheSame(category) | async) === false">
                 <!-- YOUR SIDE PICK -->
                 <div class="col-6">
                   <div class="row">
@@ -238,7 +238,7 @@
               </div>
 
               <div class="row py-1 no-gutters"
-                   *ngIf="winnersMode() && !personIsMe() && !(wePickedTheSame(category) | async)">
+                   *ngIf="winnersMode() && !personIsMe() && (wePickedTheSame(category) | async) === false">
                 <!-- YOUR SIDE PICK -->
                 <div class="col-6">
                   <div class="row">

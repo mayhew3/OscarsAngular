@@ -22,9 +22,7 @@ export class CategoryServiceStub {
   }
 
   getCategory(id: number): Observable<Category> {
-    return this.getDataWithCacheUpdate<Category>(() => {
-      return this.getCategoryFromCache(id);
-    });
+    return this.getDataWithCacheUpdate<Category>(() => this.getCategoryFromCache(id));
   }
 
   getCategoryName(category: Category): string {
@@ -42,12 +40,12 @@ export class CategoryServiceStub {
   }
 
   getCategoryFromCache(id: number): Category {
-    return _.findWhere(this.cache, {id: id});
+    return _.findWhere(this.cache, {id});
   }
 
   getNextCategory(id: number): Observable<Category> {
     return this.getDataWithCacheUpdate<Category>(() => {
-      const foundIndex = _.findIndex(this.cache, {id: id});
+      const foundIndex = _.findIndex(this.cache, {id});
       if (foundIndex === -1 || this.cache.length < (foundIndex + 1)) {
         return null;
       }
@@ -57,7 +55,7 @@ export class CategoryServiceStub {
 
   getPreviousCategory(id: number): Observable<Category> {
     return this.getDataWithCacheUpdate<Category>(() => {
-      const foundIndex = _.findIndex(this.cache, {id: id});
+      const foundIndex = _.findIndex(this.cache, {id});
       if (0 > (foundIndex - 1)) {
         return null;
       }

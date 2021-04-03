@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FinalResult} from '../../interfaces/FinalResult';
 import {FinalResultsService} from '../../services/final-results.service';
 import * as _ from 'underscore';
-import {Person} from '../../interfaces/Person';
 import {PersonService} from '../../services/person.service';
 import * as moment from 'moment';
 import {combineLatest, Observable} from 'rxjs';
@@ -30,9 +29,8 @@ export class HistoryComponent implements OnInit {
       map(finalResults => {
         // noinspection TypeScriptValidateJSTypes
         const years = _.uniq(_.map(finalResults, finalResult => finalResult.year));
-        years.sort((year1, year2) => {
-          return year2 - year1;
-        });
+        years.sort((year1, year2) =>
+          year2 - year1);
 
         const champions = [];
         _.each(years, year => {
@@ -48,10 +46,6 @@ export class HistoryComponent implements OnInit {
 
   getYearFromChampionList(champions: FinalResult[]): number {
     return champions[0].year;
-  }
-
-  getPerson(person_id: number): Observable<Person> {
-    return this.personService.getPerson(person_id);
   }
 
   getScoreCardClass(champions: FinalResult[]): Observable<string> {

@@ -4,7 +4,6 @@ import * as _ from 'underscore';
 import {MockCategoryList} from './data/categories.mock';
 import {MockPersonList} from './data/persons.mock';
 import {MockVoteList} from './data/votes.mock';
-import {Vote} from '../interfaces/Vote';
 import {Observable} from 'rxjs';
 import {MockSystemVars} from './data/system.vars.mock';
 import {MockWinnerList} from './data/winners.mock';
@@ -33,6 +32,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
   /////////// helpers ///////////////
 
+  constructor(private callbackService: InMemoryCallbacksService) {
+  }
+
   private static finishOptions(options: ResponseOptions, {headers, url}: RequestInfo): ResponseOptions {
     options.statusText = getStatusText(options.status);
     options.headers = headers;
@@ -40,11 +42,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return options;
   }
 
-  constructor(private callbackService: InMemoryCallbacksService) {
-  }
-
-
-  createDb(): {} {
+  createDb(): Record<string, unknown> {
     // Need an empty nominees list so the service knows the collection exists.
     return {
       categories: this.categories,
@@ -206,12 +204,10 @@ export class InMemoryDataService implements InMemoryDbService {
   private addWinner(requestInfo: RequestInfo): void {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
 
-    let socketMsg;
-
     const categoryForNominee = this.categoryForNominee(jsonBody.nomination_id);
     jsonBody.id = this.genWinnerId();
     categoryForNominee.winners.push(jsonBody);
-    socketMsg = {
+    const socketMsg = {
       nomination_id: jsonBody.nomination_id,
       event_id: 1,
       event_time: new Date(),
@@ -278,13 +274,11 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private sendUpdatedOdds(): void {
     const voters = this.getVoters();
-    const odds_results = _.map(voters, voter => {
-      return {
+    const odds_results = _.map(voters, voter => ({
         id: 1,
         person_id: voter,
         odds: Math.random(),
-      };
-    });
+      }));
     const odds_execution = {
       id: 1,
       event_id: 1,
@@ -372,7 +366,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return existingVote ? existingVote.nomination_id : undefined;
   }
 
-  genWinnerId(): number {
+  private genWinnerId(): number {
     const winners = _.flatten(_.map(this.categories, c => c.winners));
     if (winners.length === 0) {
       return 1;
@@ -381,7 +375,7 @@ export class InMemoryDataService implements InMemoryDbService {
     }
   }
 
-  genVoteId(): number {
+  private genVoteId(): number {
     if (this.votes.length === 0) {
       return 1;
     } else {
@@ -403,20 +397,8 @@ export class InMemoryDataService implements InMemoryDbService {
     return requestInfo.utils.createResponse$(() => finishedOptions);
   }
 
-  private existingVote(requestInfo: RequestInfo): Vote {
-    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
-
-    return _.findWhere(this.votes, {
-      category_id: jsonBody.category_id,
-      person_id: jsonBody.person_id,
-      year: jsonBody.year
-    });
-  }
-
   private existingCategoryForWinnerID(winner_id: number): Category {
-    const results = _.filter(this.categories, category => {
-      return !!_.findWhere(category.winners, {id: winner_id});
-    });
+    const results = _.filter(this.categories, category => !!_.findWhere(category.winners, {id: winner_id}));
     return _.first(results);
   }
 
@@ -429,9 +411,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   private categoryForNominee(nomination_id: number): Category {
-    const results = _.filter(this.categories, category => {
-      return !!_.findWhere(category.nominees, {id: nomination_id});
-    });
+    const results = _.filter(this.categories, category => !!_.findWhere(category.nominees, {id: nomination_id}));
     return _.first(results);
   }
 
