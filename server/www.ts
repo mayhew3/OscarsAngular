@@ -2,7 +2,7 @@
 import {Server} from 'socket.io';
 const debug = require('debug')('OscarsAngular');
 const app = require('./app');
-import {SocketServer} from './controllers/sockets_controller';
+import {SocketServer} from './controllers/SocketServer';
 
 app.set('port', process.env.PORT || 5000);
 
