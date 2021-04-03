@@ -2,15 +2,12 @@ const Sequelize = require('sequelize');
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
-const ssl = Boolean(process.env.DATABASE_SSL);
-let databaseUrl = process.env.DATABASE_URL;
-
-if (!databaseUrl) {
-  const argv = yargs(hideBin(process.argv)).argv;
-  const local_password = process.env.postgres_local_password;
-  const port = argv.port;
-  databaseUrl = `postgres://postgres:${local_password}@localhost:${port}/oscars`;
+if (process.env.DATABASE_SSL === undefined) {
+  throw new Error('Missing required environment variable: DATABASE_SSL');
 }
+
+const ssl = process.env.DATABASE_SSL === 'true';
+let databaseUrl = process.env.DATABASE_URL;
 
 const options = {
   dialect: 'postgres',
@@ -22,7 +19,7 @@ const options = {
   }
 };
 
-if (ssl) {
+if (ssl === true) {
   options.ssl = true;
   options.dialectOptions = {
     ssl: {
@@ -32,5 +29,13 @@ if (ssl) {
   };
 }
 
-exports.sequelize = new Sequelize(databaseUrl, options);
+if (!databaseUrl) {
+  const argv = yargs(hideBin(process.argv)).argv;
+  const local_password = process.env.postgres_local_password;
+  options.port = argv.port;
+  exports.sequelize = new Sequelize('oscars', 'postgres', local_password, options);
+} else {
+  exports.sequelize = new Sequelize(databaseUrl, options);
+}
+
 
