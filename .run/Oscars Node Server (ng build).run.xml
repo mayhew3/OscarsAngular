@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Oscars Node Server (ng build)" type="NodeJSConfigurationType" application-parameters="--enable-source-maps --trace-warnings --port 5436" path-to-js-file="dist/out-tsc/server/www.js" working-dir="$PROJECT_DIR$">
     <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
-      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" start="true" url="http://localhost:5000" />
+      <browser name="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" start="true" url="http://localhost:6666" />
     </EXTENSION>
     <method v="2">
       <option name="NpmBeforeRunTask" enabled="true">
