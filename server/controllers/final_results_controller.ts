@@ -1,7 +1,7 @@
 import * as model from './model';
 import _ from 'underscore';
 
-export const getFinalResults = async function(request, response) {
+export const getFinalResults = async (request, response) => {
   const finalResults = await model.FinalResult.findAll({
     order:
     [

@@ -1,18 +1,15 @@
 import * as model from './model';
-import _ from 'underscore';
-const socket = require('./sockets_controller');
+import {socketServer} from '../www';
 
-export const getVotes = function(request, response) {
+export const getVotes = (request, response) => {
   model.Vote.findAll({
     where: {
       year: request.query.year
     }
-  }).then(votes => {
-    return response.json(votes);
-  });
+  }).then(votes => response.json(votes));
 };
 
-export const addOrUpdateVote = function(request, response) {
+export const addOrUpdateVote = (request, response) => {
   model.Vote.findAll({
     where: {
       category_id: request.body.category_id,
@@ -21,29 +18,29 @@ export const addOrUpdateVote = function(request, response) {
     }
   }).then(votes => {
     if (votes.length > 1) {
-      response.send(500, "Multiple votes found!");
-      throw new Error("Multiple votes found!");
+      response.send(500, 'Multiple votes found!');
+      throw new Error('Multiple votes found!');
     } else if (votes.length === 1) {
-      let vote = votes[0];
+      const vote = votes[0];
       const nomination_id = request.body.nomination_id;
-      vote.update({nomination_id: nomination_id})
+      vote.update({nomination_id})
         .then(result => {
-          socket.emitToAll('change_vote', {vote_id: vote.id, nomination_id: nomination_id})
+          socketServer.emitToAll('change_vote', {vote_id: vote.id, nomination_id});
           return response.json(result);
         })
         .catch(err => {
-          response.send(500, "Error updating existing vote!");
+          response.send(500, 'Error updating existing vote!');
           throw new Error(err);
         });
     } else {
       model.Vote
         .create(request.body)
         .then(result => {
-          socket.emitToAll('add_vote', result)
+          socketServer.emitToAll('add_vote', result);
           return response.json(result);
         })
         .catch(err => {
-          response.send(500, "Error submitting vote!");
+          response.send(500, 'Error submitting vote!');
           throw new Error(err);
         });
     }

@@ -2,7 +2,7 @@ import * as model from './model';
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-export const getRecentEvents = function(request, response) {
+export const getRecentEvents = (request, response) => {
   const sinceDate1 = +request.query.since_date;
   const sinceDate = new Date(sinceDate1);
   model.Event.findAll({
@@ -11,17 +11,15 @@ export const getRecentEvents = function(request, response) {
         [Op.gt]: sinceDate
       }
     }
-  }).then(events => {
-    return response.json(events);
-  });
+  }).then(events => response.json(events));
 };
 
-export const addEvent = function(type, detail, nomination_id, prevResult, response) {
+export const addEvent = (type, detail, nomination_id, prevResult, response) => {
   model.Event.create({
-    type: type,
-    detail: detail,
-    event_time: new Date,
-    nomination_id: nomination_id
+    type,
+    detail,
+    event_time: new Date(),
+    nomination_id
   }).then(() => {
     response.json(prevResult);
   });

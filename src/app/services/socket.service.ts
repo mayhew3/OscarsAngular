@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import * as socketIo from 'socket.io-client';
+import {io, Socket} from 'socket.io-client';
 import _ from 'underscore';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {MeService} from './me.service';
@@ -9,16 +9,16 @@ import {MeService} from './me.service';
 export class SocketService {
 
   private pendingListeners: PendingListener[] = [];
-  private socket;
+  private socket: Socket;
 
   constructor(private meService: MeService) {
   }
 
   init(): void {
     this.meService.me$.subscribe(me => {
-      this.socket = socketIo({
+      this.socket = io({
         query: {
-          person_id: me.id
+          person_id: me.id.toString()
         }
       });
       this.socket.on('error', msg => {
@@ -42,8 +42,8 @@ export class SocketService {
     }
   }
 
-  removeListener(channel, callback): void {
-    this.socket.removeListener(channel, callback);
+  off(channel, callback): void {
+    this.socket.off(channel, callback);
   }
 
   isConnected(): boolean {

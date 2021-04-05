@@ -10,7 +10,7 @@ export class InMemoryCallbacksService {
     this.getCallbacks(channel).push(callback);
   }
 
-  removeCallback(channel, callback): void {
+  off(channel, callback): void {
     const callbacks = this.channelCallbacks.get(channel);
     ArrayUtil.removeFromArray(callbacks, callback);
   }

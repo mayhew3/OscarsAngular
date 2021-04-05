@@ -1,15 +1,15 @@
 import * as model from './model';
 import _ from 'underscore';
 
-export const getPersons = function(request, response) {
+export const getPersons = (request, response) => {
   model.Person.findAll().then(persons => {
     model.PersonGroupRole.findAll().then(personGroupRoles => {
-      let outputObject = [];
+      const outputObject = [];
 
-      _.forEach(persons, function(person) {
-        let person_groups = _.where(personGroupRoles, {person_id: person.id});
-        let person_group_ids = _.pluck(person_groups, 'person_group_id');
-        let person_object = person.dataValues;
+      _.forEach(persons, person => {
+        const person_groups = _.where(personGroupRoles, {person_id: person.id});
+        const person_group_ids = _.pluck(person_groups, 'person_group_id');
+        const person_object = person.dataValues;
         person_object.groups = person_group_ids;
 
         outputObject.push(person_object);
@@ -20,8 +20,8 @@ export const getPersons = function(request, response) {
   });
 };
 
-export const updatePerson = async function(request, response) {
-  let person = request.body;
+export const updatePerson = async (request, response) => {
+  const person = request.body;
 
   let result;
   try {
@@ -33,9 +33,9 @@ export const updatePerson = async function(request, response) {
 
   try {
     await result.update(person);
-    response.json({msg: "Success!"});
+    response.json({msg: 'Success!'});
   } catch(err) {
     console.error(err);
-    response.send({msg: "Error updating nominee: " + JSON.stringify(person)});
+    response.send({msg: 'Error updating nominee: ' + JSON.stringify(person)});
   }
 };
