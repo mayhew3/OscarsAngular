@@ -84,6 +84,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       clientId: environment.clientID,
       audience: 'https://oscars.v2.mayhew3.com/',
       redirectUri: AppModule.getCallbackUrl(),
+      useRefreshTokens: true,
+      cacheLocation: 'localstorage',
+      scope: 'offline_access',
+      leeway: 80,
 
       // Specify configuration for the interceptor
       httpInterceptor: {
