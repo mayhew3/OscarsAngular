@@ -29,7 +29,7 @@ export class OddsService {
               private socket: SocketService,
               private store: Store,
               private auth: MyAuthService) {
-    this.auth.isAuthenticated$.subscribe(() => this.store.dispatch(new GetOdds()));
+    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetOdds()));
   }
 
 }

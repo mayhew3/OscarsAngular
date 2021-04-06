@@ -7,6 +7,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 @Injectable()
 export class MyAuthService {
 
+  isAuthenticated$ = this.auth.isAuthenticated$;
   isLoading$ = this.auth.isLoading$;
 
   failedEmail = false;
@@ -14,7 +15,6 @@ export class MyAuthService {
   otherFailureMessage: string;
   private _user$ = new BehaviorSubject<any>(undefined);
   private _user = undefined;
-  private _isAuthenticated$ = this.auth.isAuthenticated$;
 
   constructor(private auth: AuthService) {
     this.auth.user$.pipe(
@@ -35,9 +35,10 @@ export class MyAuthService {
     });
   }
 
-  get isAuthenticated$(): Observable<boolean> {
-    return this._isAuthenticated$.pipe(
-      distinctUntilChanged()
+  get isPositivelyAuthenticated$(): Observable<boolean> {
+    return this.auth.isAuthenticated$.pipe(
+      filter(isAuthenticated => !!isAuthenticated),
+      first()
     );
   }
 

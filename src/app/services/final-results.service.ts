@@ -22,7 +22,7 @@ export class FinalResultsService {
   constructor(private http: HttpClient,
               private store: Store,
               private auth: MyAuthService) {
-    this.auth.isAuthenticated$.subscribe(() => this.store.dispatch(new GetFinalResults()));
+    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetFinalResults()));
   }
 
   public getFinalResultsForGroup(group_id: number): Observable<FinalResult[]> {

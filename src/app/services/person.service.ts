@@ -36,7 +36,7 @@ export class PersonService implements OnDestroy {
               private auth: MyAuthService,
               private store: Store) {
     this.fetching = true;
-    this.auth.isAuthenticated$.subscribe(() => this.store.dispatch(new GetPersons()));
+    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetPersons()));
     this.persons.subscribe(() => this.fetching = false);
     this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
   }
