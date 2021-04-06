@@ -4,7 +4,7 @@ const debug = require('debug')('OscarsAngular');
 const app = require('./app');
 import {SocketServer} from './controllers/SocketServer';
 
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 7024);
 
 const server = require('http').createServer(app);
 const io: Server = require('socket.io')(server);
