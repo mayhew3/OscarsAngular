@@ -53,7 +53,7 @@ export class CategoryService {
         this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket)).subscribe();
       });
 
-    this.auth.isAuthenticated$.subscribe(() => this.store.dispatch(new GetMaxYear()));
+    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetMaxYear()));
   }
 
   static isSingleLineCategory(categoryName: string): boolean {
