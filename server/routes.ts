@@ -1,21 +1,21 @@
-let express = require('express');
-const jwt = require("express-jwt");
-const jwks = require("jwks-rsa");
+const express = require('express');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
 
-module.exports = function(app) {
-  let events = require('./controllers/events_controller');
-  let nominees = require('./controllers/nominees_controller');
-  let odds = require('./controllers/odds_controller');
-  let persons = require('./controllers/persons_controller');
-  let votes = require('./controllers/votes_controller');
-  let winners = require('./controllers/winners_controller');
-  let systemVars = require('./controllers/systemvars_controller');
-  let finalResults = require('./controllers/final_results_controller');
+module.exports = app => {
+  const events = require('./controllers/events_controller');
+  const nominees = require('./controllers/nominees_controller');
+  const odds = require('./controllers/odds_controller');
+  const persons = require('./controllers/persons_controller');
+  const votes = require('./controllers/votes_controller');
+  const winners = require('./controllers/winners_controller');
+  const systemVars = require('./controllers/systemvars_controller');
+  const finalResults = require('./controllers/final_results_controller');
 
   const authConfig = {
     domain: 'mayhew3.auth0.com',
     audience: 'https://oscars.v2.mayhew3.com/'
-  }
+  };
 
   const authCheck = jwt({
     secret: jwks.expressJwtSecret({
@@ -29,7 +29,27 @@ module.exports = function(app) {
     algorithms: ['RS256']
   });
 
-  let router = express.Router();
+  const router = express.Router();
+
+  const privateGet: (endpoint: any, callback: any) => void = (endpoint, callback) => {
+    router.get(endpoint, authCheck, callback);
+  };
+
+  const privatePost: (endpoint: any, callback: any) => void = (endpoint, callback) => {
+    router.post(endpoint, authCheck, callback);
+  };
+
+  const privatePut: (endpoint: any, callback: any) => void = (endpoint, callback) => {
+    router.put(endpoint, authCheck, callback);
+  };
+
+  const privatePatch: (endpoint: any, callback: any) => void = (endpoint, callback) => {
+    router.patch(endpoint, authCheck, callback);
+  };
+
+  const privateDelete: (endpoint: any, callback: any) => void = (endpoint, callback) => {
+    router.delete(endpoint, authCheck, callback);
+  };
 
   privateGet('/categories', nominees.getCategories);
   privateGet('/events', events.getRecentEvents);
@@ -56,35 +76,15 @@ module.exports = function(app) {
 
   app.use('/api', router);
 
-  function privateGet(endpoint, callback) {
-    router.get(endpoint, authCheck, callback);
-  }
-
-  function privatePost(endpoint, callback) {
-    router.post(endpoint, authCheck, callback);
-  }
-
-  function privatePut(endpoint, callback) {
-    router.put(endpoint, authCheck, callback);
-  }
-
-  function privatePatch(endpoint, callback) {
-    router.patch(endpoint, authCheck, callback);
-  }
-
-  function privateDelete(endpoint, callback) {
-    router.delete(endpoint, authCheck, callback);
-  }
-
   // error handlers
 
   // development error handler
   // will print stacktrace
   if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
+    app.use((err, req, res, next) => {
       console.log(err.message);
       console.log(err.stack);
-      console.log("Status: " + err.status);
+      console.log('Status: ' + err.status);
       res.status(err.status || 500).json({
         message: err.message,
         error: err
@@ -94,10 +94,10 @@ module.exports = function(app) {
 
   // production error handler
   // no stacktraces leaked to user
-  app.use(function (err, req, res, next) {
+  app.use((err, req, res, next) => {
     console.log(err.message);
     console.log(err.stack);
-    console.log("Status: " + err.status);
+    console.log('Status: ' + err.status);
     res.status(err.status || 500).json({
       message: err.message,
       error: err
