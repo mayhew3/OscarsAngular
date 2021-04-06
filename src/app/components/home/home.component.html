@@ -1,6 +1,6 @@
 <div class="container p-3">
 
-  <div class="alert alert-danger" *ngIf="(auth.error$ | async) && !!personService.isAdmin">
+  <div class="alert alert-danger" *ngIf="(auth.error$ | async)">
     <strong>Auth0 Error:</strong> {{auth.error$ | async}}
   </div>
 

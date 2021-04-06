@@ -97,8 +97,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
   ],
   providers: [
-    MyAuthService,
-    SystemVarsService,
     environment.socketModule,
     InMemoryCallbacksService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
