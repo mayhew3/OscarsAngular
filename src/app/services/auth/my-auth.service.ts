@@ -9,6 +9,7 @@ export class MyAuthService {
 
   isAuthenticated$ = this.auth.isAuthenticated$;
   isLoading$ = this.auth.isLoading$;
+  error$ = this.auth.error$;
 
   failedEmail = false;
   otherFailure = false;
