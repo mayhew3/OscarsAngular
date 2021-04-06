@@ -7,6 +7,7 @@ import * as _ from 'underscore';
 import {Store} from '@ngxs/store';
 import {filter, map} from 'rxjs/operators';
 import {GetOdds} from '../actions/odds.action';
+import {MyAuthService} from './auth/my-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,9 @@ export class OddsService {
 
   constructor(private http: HttpClient,
               private socket: SocketService,
-              private store: Store) {
-    this.store.dispatch(new GetOdds());
+              private store: Store,
+              private auth: MyAuthService) {
+    this.auth.isAuthenticated$.subscribe(() => this.store.dispatch(new GetOdds()));
   }
 
 }

@@ -1,5 +1,9 @@
 <div class="container p-3">
 
+  <div class="alert alert-danger" *ngIf="(auth.error$ | async)">
+    <strong>Auth0 Error:</strong> {{auth.error$ | async}}
+  </div>
+
   <div *ngIf="(auth.isLoading$ | async) === false; else authenticating">
     <div *ngIf="auth.isAuthenticated$ | async; else loggedOut">
       <div *ngIf="!failedEmail else invalidUser">

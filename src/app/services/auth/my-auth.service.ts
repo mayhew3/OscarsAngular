@@ -1,6 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import {Injectable} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
-import {distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {distinctUntilChanged, filter, first, map} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable()
@@ -8,6 +9,7 @@ export class MyAuthService {
 
   isAuthenticated$ = this.auth.isAuthenticated$;
   isLoading$ = this.auth.isLoading$;
+  error$ = this.auth.error$;
 
   failedEmail = false;
   otherFailure = false;
@@ -32,6 +34,13 @@ export class MyAuthService {
         this.otherFailureMessage = error.message;
       }
     });
+  }
+
+  get isPositivelyAuthenticated$(): Observable<boolean> {
+    return this.auth.isAuthenticated$.pipe(
+      filter(isAuthenticated => !!isAuthenticated),
+      first()
+    );
   }
 
   private get user$(): Observable<any> {

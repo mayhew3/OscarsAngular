@@ -1,4 +1,3 @@
-import {Winner} from '../interfaces/Winner';
 import {SocketService} from '../services/socket.service';
 
 export class GetCategories {

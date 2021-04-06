@@ -83,7 +83,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       domain: 'mayhew3.auth0.com',
       clientId: environment.clientID,
       audience: 'https://oscars.v2.mayhew3.com/',
-      redirectUri: AppModule.getCallbackUrl(),
+      redirectUri: `${window.location.origin}`,
       useRefreshTokens: true,
       cacheLocation: 'localstorage',
       scope: 'offline_access',
@@ -98,24 +98,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     MyAuthService,
-    SystemVarsService,
     environment.socketModule,
     InMemoryCallbacksService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-  static getCallbackUrl(): string {
-    console.log('Environment doman: ' + environment.domain);
-    const protocol = window.location.protocol;
-    const path = window.location.hostname;
-    const port = window.location.port;
-    const portDisplay = port === '' ? '' : ':' + port;
-    // noinspection UnnecessaryLocalVariableJS
-    const fullPath = protocol + '//' + path + portDisplay + '/callback';
-    return fullPath;
-  }
-
-}
+export class AppModule {}

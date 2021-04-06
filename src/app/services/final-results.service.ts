@@ -6,6 +6,7 @@ import {filter, map} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Store} from '@ngxs/store';
 import {GetFinalResults} from '../actions/final-result.action';
+import {MyAuthService} from './auth/my-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,9 @@ export class FinalResultsService {
   );
 
   constructor(private http: HttpClient,
-              private store: Store) {
-    this.store.dispatch(new GetFinalResults());
+              private store: Store,
+              private auth: MyAuthService) {
+    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetFinalResults()));
   }
 
   public getFinalResultsForGroup(group_id: number): Observable<FinalResult[]> {

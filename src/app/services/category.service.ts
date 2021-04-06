@@ -14,6 +14,7 @@ import {Store} from '@ngxs/store';
 import {GetCategories, OddsChange, UpdateOdds} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
+import {MyAuthService} from './auth/my-auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -44,14 +45,15 @@ export class CategoryService {
               private systemVarsService: SystemVarsService,
               private oddsService: OddsService,
               private socket: SocketService,
-              private store: Store) {
+              private store: Store,
+              private auth: MyAuthService) {
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .subscribe(([me, systemVars]) => {
         this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket)).subscribe();
       });
 
-    this.store.dispatch(new GetMaxYear());
+    this.auth.isAuthenticated$.subscribe(() => this.store.dispatch(new GetMaxYear()));
   }
 
   static isSingleLineCategory(categoryName: string): boolean {
