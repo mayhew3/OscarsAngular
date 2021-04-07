@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable, of} from 'rxjs';
+import {ErrorNotificationComponent} from '../components/error-notification/error-notification.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,14 @@ export class ErrorNotificationService {
 
   handleAPIError<T>(result?: T) {
     return (error: any): Observable<T> => {
-      this.snackBar.open(`API Error: ${ErrorNotificationService.getMessage(error)}`);
+      this.snackBar.openFromComponent(ErrorNotificationComponent,  {
+        duration: 3000,
+        panelClass: ['redSnackBar'],
+        data: {
+          header: 'API Error',
+          message: ErrorNotificationService.getMessage(error)
+        }
+      });
       return of(result as T);
     };
   }

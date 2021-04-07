@@ -39,6 +39,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionProblemComponent } from './components/connection-problem/connection-problem.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ErrorNotificationComponent } from './components/error-notification/error-notification.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HistoryComponent,
     PersonDetailComponent,
     AdminDashboardComponent,
-    ConnectionProblemComponent
+    ConnectionProblemComponent,
+    ErrorNotificationComponent
   ],
   imports: [
     BrowserModule,
