@@ -5,6 +5,7 @@ import {SocketService} from './services/socket.service';
 import {MyAuthService} from './services/auth/my-auth.service';
 import {PersonService} from './services/person.service';
 import {MessagingService} from './services/messaging.service';
+import {InitSocketService} from './services/init-socket.service';
 
 @Component({
   selector: 'osc-root',
@@ -17,10 +18,10 @@ export class AppComponent {
               public systemVarsService: SystemVarsService,
               private categoryService: CategoryService,
               private socket: SocketService,
+              private initSocket: InitSocketService,
               private personService: PersonService,
               private messagingService: MessagingService) {
     personService.me$.subscribe();
-    socket.init();
   }
 
   stillLoading(): boolean {

@@ -8,6 +8,8 @@ import {InMemoryDataService} from '../app/services/in-memory-data-service';
 import {EnvironmentConfig} from './environment.interface';
 import {SocketService} from '../app/services/socket.service';
 import {SocketServiceMock} from '../app/services/socket.mock.service';
+import {InitSocketService} from '../app/services/init-socket.service';
+import {InitSocketMockService} from '../app/services/init-socket.mock.service';
 
 export const environment: EnvironmentConfig = {
   production: false,
@@ -16,6 +18,7 @@ export const environment: EnvironmentConfig = {
       InMemoryDataService, { dataEncapsulation: false, delay: 0 }
     )],
   socketModule: {provide: SocketService, useClass: SocketServiceMock},
+  initSocketModule: {provide: InitSocketService, useClass: InitSocketMockService},
   clientID: 'Re282m5GM0575vOJjhpguBptT8slmIb0',
   domain: 'mayhew3.auth0.com'
 };

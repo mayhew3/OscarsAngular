@@ -6,7 +6,7 @@ import {filter, map} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Store} from '@ngxs/store';
 import {GetFinalResults} from '../actions/final-result.action';
-import {MyAuthService} from './auth/my-auth.service';
+import {ConnectednessService} from './connectedness.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,12 @@ export class FinalResultsService {
 
   constructor(private http: HttpClient,
               private store: Store,
-              private auth: MyAuthService) {
-    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetFinalResults()));
+              private connectednessService: ConnectednessService) {
+    this.connectednessService.connectedToAll$.subscribe(([isAuthenticated, isConnected]) => {
+      if (isAuthenticated && isConnected) {
+        this.store.dispatch(new GetFinalResults());
+      }
+    });
   }
 
   public getFinalResultsForGroup(group_id: number): Observable<FinalResult[]> {

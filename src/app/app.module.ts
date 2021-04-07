@@ -15,7 +15,6 @@ import {OddsMainComponent} from './components/odds-main/odds-main.component';
 import {VoteMainComponent} from './components/vote-main/vote-main.component';
 import {VoteDetailComponent} from './components/vote-detail/vote-detail.component';
 import {OddsDetailComponent} from './components/odds-detail/odds-detail.component';
-import {SystemVarsService} from './services/system.vars.service';
 import {WinnerMainComponent} from './components/winner-main/winner-main.component';
 import {WinnerDetailComponent} from './components/winner-detail/winner-detail.component';
 import {ScoreboardComponent} from './components/scoreboard/scoreboard.component';
@@ -37,7 +36,7 @@ import {VoteState} from './states/vote.state';
 import {FinalResultState} from './states/final-result.state';
 import {OddsState} from './states/odds.state';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -99,6 +98,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     MyAuthService,
     environment.socketModule,
+    environment.initSocketModule,
     InMemoryCallbacksService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],

@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import {Injectable} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
-import {distinctUntilChanged, filter, first, map} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable()
@@ -38,8 +38,8 @@ export class MyAuthService {
 
   get isPositivelyAuthenticated$(): Observable<boolean> {
     return this.auth.isAuthenticated$.pipe(
-      filter(isAuthenticated => !!isAuthenticated),
-      first()
+      distinctUntilChanged(),
+      filter(isAuthenticated => !!isAuthenticated)
     );
   }
 

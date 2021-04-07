@@ -6,6 +6,7 @@ import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
 import {Store} from '@ngxs/store';
 import {ChangeCurrentYear, GetSystemVars} from '../actions/systemVars.action';
+import {ConnectednessService} from './connectedness.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,9 +29,10 @@ export class SystemVarsService implements OnDestroy {
   constructor(private http: HttpClient,
               private socket: SocketService,
               private auth: MyAuthService,
+              private connectednessService: ConnectednessService,
               private store: Store) {
     this.fetching = true;
-    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetSystemVars(this.socket)));
+    this.connectednessService.connectedToAll$.subscribe(() => this.store.dispatch(new GetSystemVars(this.socket)));
     this.systemVars.subscribe(() => this.fetching = false);
   }
 
