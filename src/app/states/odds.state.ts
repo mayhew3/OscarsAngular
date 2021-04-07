@@ -1,7 +1,7 @@
 import {Action, State, StateContext} from '@ngxs/store';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {GetOdds, UpdatePlayerOdds} from '../actions/odds.action';
 import {OddsBundle} from '../interfaces/OddsBundle';
@@ -32,7 +32,7 @@ export class OddsState {
 
   @Action(GetOdds)
   getOdds({setState}: StateContext<OddsStateModel>): Observable<any> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
+    return this.http.get<any[]>('/api/poop').pipe(
       tap(result => {
         setState(produce(draft => {
           draft.previousOddsBundle = draft.oddsBundle;

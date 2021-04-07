@@ -38,6 +38,7 @@ import {OddsState} from './states/odds.state';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionProblemComponent } from './components/connection-problem/connection-problem.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { ConnectionProblemComponent } from './components/connection-problem/conn
     environment.httpModules,
     NgbModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     NgxsModule.forRoot([
       PersonState,

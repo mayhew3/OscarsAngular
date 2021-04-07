@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {OddsBundle} from '../interfaces/OddsBundle';
 import {Store} from '@ngxs/store';
-import {filter, map} from 'rxjs/operators';
+import {catchError, filter, map} from 'rxjs/operators';
 import {GetOdds} from '../actions/odds.action';
 import {ConnectednessService} from './connectedness.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -25,12 +26,31 @@ export class OddsService {
 
   constructor(private http: HttpClient,
               private connectedService: ConnectednessService,
-              private store: Store) {
+              private store: Store,
+              private snackBar: MatSnackBar) {
     this.connectedService.connectedToAll$.subscribe(([isAuthenticated, isConnected]) => {
       if (isAuthenticated && isConnected) {
-        this.store.dispatch(new GetOdds());
+        this.store.dispatch(new GetOdds()).pipe(
+          catchError(this.handleError())
+        ).subscribe();
       }
     });
+  }
+
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   *
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(result?: T) {
+    return (error: any): Observable<T> => {
+
+      this.snackBar.open(error.body.error);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 
 }
