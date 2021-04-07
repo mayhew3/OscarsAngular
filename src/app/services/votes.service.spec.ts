@@ -7,10 +7,6 @@ import {TestCategoryList} from './data/categories.test.mock';
 import {TestPersonList} from './data/persons.test.mock';
 import {SystemVarsService} from './system.vars.service';
 import {SystemVarsServiceStub} from './system.vars.service.stub';
-import {CategoryService} from './category.service';
-import {CategoryServiceStub} from './category.service.stub';
-import {MockSystemVars} from './data/system.vars.mock';
-import {MockVoteList} from './data/votes.mock';
 
 describe('VotesService', () => {
   let service: VotesService;
@@ -51,7 +47,7 @@ describe('VotesService', () => {
       year: 2017
     };
 
-    service.addOrUpdateVote(TestCategoryList[1].nominees[1], TestPersonList[0]).subscribe();
+    service.addOrUpdateVote(TestCategoryList[1].nominees[1], TestPersonList[0]);
     const mockReq = httpMock.expectOne(service.votesUrl);
     expect(mockReq.request.method).toBe('POST');
     expect(mockReq.request.body).toEqual(mockVote);
