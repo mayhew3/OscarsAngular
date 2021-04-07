@@ -21,7 +21,7 @@ import {ScoreboardComponent} from './components/scoreboard/scoreboard.component'
 import {HistoryComponent} from './components/history/history.component';
 import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
 import {PersonDetailComponent} from './components/person-detail/person-detail.component';
-import {NgbDropdownModule, NgbProgressbarModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownModule, NgbModalModule, NgbModule, NgbProgressbarModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
 import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -37,6 +37,7 @@ import {FinalResultState} from './states/final-result.state';
 import {OddsState} from './states/odds.state';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ConnectionProblemComponent } from './components/connection-problem/connection-problem.component';
 
 @NgModule({
   declarations: [
@@ -55,15 +56,15 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ScoreboardComponent,
     HistoryComponent,
     PersonDetailComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    ConnectionProblemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     environment.httpModules,
-    NgbDropdownModule,
-    NgbProgressbarModule,
+    NgbModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     NgxsModule.forRoot([

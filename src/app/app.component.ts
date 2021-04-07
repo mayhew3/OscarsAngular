@@ -6,6 +6,8 @@ import {MyAuthService} from './services/auth/my-auth.service';
 import {PersonService} from './services/person.service';
 import {MessagingService} from './services/messaging.service';
 import {InitSocketService} from './services/init-socket.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ConnectionProblemComponent} from './components/connection-problem/connection-problem.component';
 
 @Component({
   selector: 'osc-root',
@@ -20,8 +22,25 @@ export class AppComponent {
               private socket: SocketService,
               private initSocket: InitSocketService,
               private personService: PersonService,
+              private modalService: NgbModal,
               private messagingService: MessagingService) {
     personService.me$.subscribe();
+    this.initDisconnectPopup();
+  }
+
+  initDisconnectPopup(): void {
+    this.socket.on('disconnect', () => {
+      const modalRef = this.modalService.open(ConnectionProblemComponent, {
+        size: 'lg',
+        backdrop: 'static',
+        keyboard: false
+      });
+      const closeModal: (() => void) = () => {
+        modalRef.close();
+        this.socket.off('connect', closeModal);
+      };
+      this.socket.on('connect', closeModal);
+    });
   }
 
   stillLoading(): boolean {
