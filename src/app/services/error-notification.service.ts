@@ -9,9 +9,18 @@ export class ErrorNotificationService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  handleError<T>(result?: T) {
+  private static getMessage(error: any): string {
+    if (!!error.message) {
+      return error.message;
+    } else if (!!error.body) {
+      return error.body.error;
+    } else {
+      return JSON.stringify(error);
+    }
+  }
+  handleAPIError<T>(result?: T) {
     return (error: any): Observable<T> => {
-      this.snackBar.open(error.body.error);
+      this.snackBar.open(`API Error: ${ErrorNotificationService.getMessage(error)}`);
       return of(result as T);
     };
   }
