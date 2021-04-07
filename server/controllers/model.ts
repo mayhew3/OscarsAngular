@@ -101,7 +101,7 @@ export const SystemVars = sequelize.sequelize.define('system_vars', {
 
 export const OddsResult = sequelize.sequelize.define('odds_result', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  odds: Sequelize.INTEGER,
+  odds: Sequelize.DECIMAL,
   person_id: Sequelize.INTEGER,
   clinched: Sequelize.BOOLEAN,
   odds_execution_id: Sequelize.INTEGER

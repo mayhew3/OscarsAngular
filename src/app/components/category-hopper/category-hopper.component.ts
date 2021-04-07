@@ -69,7 +69,7 @@ export class CategoryHopperComponent implements OnInit {
   totalOdds(subtitle: string): Observable<number> {
     return this.nominees$.pipe(
       map(nominees => {
-        const odds_nums = _.map(nominees, (nominee) => +nominee[`odds_${subtitle}`]);
+        const odds_nums = _.map(nominees, (nominee) => nominee[`odds_${subtitle}`]);
         return this.oddsCalc(odds_nums);
       })
     );

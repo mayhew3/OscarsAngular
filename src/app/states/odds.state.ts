@@ -35,7 +35,6 @@ export class OddsState {
     return this.http.get<any[]>(this.apiUrl).pipe(
       tap(result => {
         setState(produce(draft => {
-          _.each(result.odds, odd => odd.odds = +odd.odds);
           draft.previousOddsBundle = draft.oddsBundle;
           draft.oddsBundle = result;
         }));
