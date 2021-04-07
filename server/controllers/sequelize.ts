@@ -40,7 +40,7 @@ const options: Sequelize.Options = {
   hooks: {
     afterConnect(): Promise<void> | void {
       if (!typesUpdated) {
-        console.log('afterConnect called.');
+        console.log('Overriding Decimal type parsing.');
         const dTypes = {
           DECIMAL: CustomDecimal
         };
