@@ -32,7 +32,7 @@ export class OddsState {
 
   @Action(GetOdds)
   getOdds({setState}: StateContext<OddsStateModel>): Observable<any> {
-    return this.http.get<any[]>('/api/frumpkin').pipe(
+    return this.http.get<any[]>(this.apiUrl).pipe(
       tap(result => {
         setState(produce(draft => {
           draft.previousOddsBundle = draft.oddsBundle;
