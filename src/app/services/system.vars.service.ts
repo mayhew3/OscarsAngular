@@ -66,7 +66,9 @@ export class SystemVarsService implements OnDestroy {
           id: systemVars.id,
           voting_open: !systemVars.voting_open
         };
-        this.http.put('/api/systemVars', data, httpOptions).subscribe();
+        this.http.put(this.systemVarsUrl, data, httpOptions).pipe(
+          catchError(this.errorHandler.handleAPIError())
+        ).subscribe();
       });
   }
 

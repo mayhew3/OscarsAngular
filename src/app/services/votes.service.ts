@@ -111,7 +111,9 @@ export class VotesService {
       nomination_id: nominee.id,
       submitted: new Date()
     };
-    this.http.post<Vote>('/api/votes', data, httpOptions).subscribe();
+    this.http.post<Vote>('/api/votes', data, httpOptions).pipe(
+      catchError(this.errorHandler.handleAPIError())
+    ).subscribe();
   }
 
 }

@@ -4,6 +4,8 @@ import {Nominee} from '../interfaces/Nominee';
 import {Winner} from '../interfaces/Winner';
 import {Category} from '../interfaces/Category';
 import _ from 'underscore';
+import {catchError} from 'rxjs/operators';
+import {ErrorNotificationService} from './error-notification.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,7 +17,8 @@ const httpOptions = {
 export class WinnersService {
   winnersUrl = 'api/winners';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private errorHandler: ErrorNotificationService) { }
 
   addOrDeleteWinner(nominee: Nominee, category: Category): void {
     const existing = this.existingWinner(nominee, category);
@@ -28,12 +31,16 @@ export class WinnersService {
       };
       this.http.post<any>(this.winnersUrl, data, httpOptions).subscribe();
     } else {
-      this.http.delete<Winner>(`/api/winners/${existing.id}`, httpOptions).subscribe();
+      this.http.delete<Winner>(`/api/winners/${existing.id}`, httpOptions).pipe(
+        catchError(this.errorHandler.handleAPIError())
+      ).subscribe();
     }
   }
 
   resetWinners(year: number): void {
-    this.http.put<Winner>(`/api/resetWinners/`, {year}, httpOptions).subscribe();
+    this.http.put<Winner>(`/api/resetWinners/`, {year}, httpOptions).pipe(
+      catchError(this.errorHandler.handleAPIError())
+    ).subscribe();
   }
 
   private existingWinner(nominee: Nominee, category: Category): Winner {

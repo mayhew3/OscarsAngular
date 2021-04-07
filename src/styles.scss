@@ -24,5 +24,9 @@ h2 {
   color: white;
 }
 
+.cdk-overlay-container {
+  z-index: 99999999999999;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
