@@ -7,6 +7,7 @@ import {catchError, filter, map} from 'rxjs/operators';
 import {GetOdds} from '../actions/odds.action';
 import {ConnectednessService} from './connectedness.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ErrorNotificationService} from './error-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,8 @@ export class OddsService {
   constructor(private http: HttpClient,
               private connectedService: ConnectednessService,
               private store: Store,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private errorHandler: ErrorNotificationService) {
     this.connectedService.connectedToAll$.subscribe(([isAuthenticated, isConnected]) => {
       if (isAuthenticated && isConnected) {
         this.store.dispatch(new GetOdds()).pipe(
