@@ -14,7 +14,8 @@ const createConnection = (dbUrl?: string): Sequelize.Sequelize => {
     const argv = yargs(hideBin(process.argv)).argv;
     const local_password = process.env.postgres_local_password;
     options.port = argv.port;
-    return new Sequelize.Sequelize('oscars', 'postgres', local_password, options);
+    const dbName = argv.dbName;
+    return new Sequelize.Sequelize(dbName, 'postgres', local_password, options);
   } else {
     return new Sequelize.Sequelize(dbUrl, options);
   }
