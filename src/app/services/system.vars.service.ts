@@ -1,12 +1,13 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
-import {filter, first, map} from 'rxjs/operators';
+import {catchError, filter, first, map} from 'rxjs/operators';
 import {SocketService} from './socket.service';
 import {MyAuthService} from './auth/my-auth.service';
 import {Store} from '@ngxs/store';
 import {ChangeCurrentYear, GetSystemVars} from '../actions/systemVars.action';
 import {ConnectednessService} from './connectedness.service';
+import {ErrorNotificationService} from './error-notification.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,9 +31,14 @@ export class SystemVarsService implements OnDestroy {
               private socket: SocketService,
               private auth: MyAuthService,
               private connectednessService: ConnectednessService,
-              private store: Store) {
+              private store: Store,
+              private errorHandler: ErrorNotificationService) {
     this.fetching = true;
-    this.connectednessService.connectedToAll$.subscribe(() => this.store.dispatch(new GetSystemVars(this.socket)));
+    this.connectednessService.connectedToAll$.subscribe(() => {
+      this.store.dispatch(new GetSystemVars(this.socket)).pipe(
+        catchError(this.errorHandler.handleAPIError())
+      ).subscribe();
+    });
     this.systemVars.subscribe(() => this.fetching = false);
   }
 

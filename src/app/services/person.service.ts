@@ -1,13 +1,15 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
-import {filter, map, mergeMap} from 'rxjs/operators';
+import {catchError, filter, map, mergeMap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {ArrayService} from './array.service';
 import {Store} from '@ngxs/store';
 import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {MyAuthService} from './auth/my-auth.service';
+import {ConnectednessService} from './connectedness.service';
+import {ErrorNotificationService} from './error-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +36,14 @@ export class PersonService implements OnDestroy {
   constructor(private http: HttpClient,
               private arrayService: ArrayService,
               private auth: MyAuthService,
-              private store: Store) {
+              private store: Store,
+              private errorHandler: ErrorNotificationService) {
     this.fetching = true;
-    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetPersons()));
+    this.auth.isPositivelyAuthenticated$.subscribe(() => {
+      this.store.dispatch(new GetPersons()).pipe(
+        catchError(this.errorHandler.handleAPIError())
+      ).subscribe();
+    });
     this.persons.subscribe(() => this.fetching = false);
     this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
   }

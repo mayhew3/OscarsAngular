@@ -38,7 +38,7 @@ export class CategoryState {
     const params = new HttpParams()
       .set('person_id', action.person_id.toString())
       .set('year', action.year.toString());
-    return this.http.get<any[]>('/api/categories', {params}).pipe(
+    return this.http.get<any[]>('/api/schwoopy', {params}).pipe(
       tap(result => {
         const state = getState();
         _.each(result, (category: Category) => {

@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FinalResult} from '../interfaces/FinalResult';
 import {Observable} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import {catchError, filter, map} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Store} from '@ngxs/store';
 import {GetFinalResults} from '../actions/final-result.action';
 import {ConnectednessService} from './connectedness.service';
+import {ErrorNotificationService} from './error-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,13 @@ export class FinalResultsService {
 
   constructor(private http: HttpClient,
               private store: Store,
-              private connectednessService: ConnectednessService) {
+              private connectednessService: ConnectednessService,
+              private errorHandler: ErrorNotificationService) {
     this.connectednessService.connectedToAll$.subscribe(([isAuthenticated, isConnected]) => {
       if (isAuthenticated && isConnected) {
-        this.store.dispatch(new GetFinalResults());
+        this.store.dispatch(new GetFinalResults()).pipe(
+          catchError(this.errorHandler.handleAPIError())
+        ).subscribe();
       }
     });
   }

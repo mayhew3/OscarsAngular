@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {combineLatest, Observable} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {filter, map, tap} from 'rxjs/operators';
+import {catchError, filter, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -15,6 +15,7 @@ import {GetCategories, OddsChange, UpdateOdds} from '../actions/category.action'
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {ConnectednessService} from './connectedness.service';
+import {ErrorNotificationService} from './error-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -46,11 +47,14 @@ export class CategoryService {
               private oddsService: OddsService,
               private socket: SocketService,
               private store: Store,
-              private connectednessService: ConnectednessService) {
+              private connectednessService: ConnectednessService,
+              private errorHandler: ErrorNotificationService) {
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket)).subscribe();
+        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket)).pipe(
+          catchError(this.errorHandler.handleAPIError())
+        ).subscribe();
       });
 
     this.connectednessService.connectedToAll$.subscribe(([isAuthenticated, isConnected]) => {
