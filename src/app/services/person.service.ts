@@ -95,7 +95,9 @@ export class PersonService implements OnDestroy {
   // DATA HELPERS
 
   updatePerson(person: Person, oddsKey: string): Observable<any> {
-    return this.store.dispatch(new ChangeOddsView(person.id, oddsKey));
+    return this.store.dispatch(new ChangeOddsView(person.id, oddsKey)).pipe(
+      catchError(this.errorHandler.handleAPIError())
+    );
   }
 
 }

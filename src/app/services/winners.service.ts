@@ -15,7 +15,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class WinnersService {
-  winnersUrl = 'api/winners';
+  winnersUrl = '/api/winners';
 
   constructor(private http: HttpClient,
               private errorHandler: ErrorNotificationService) { }
@@ -29,9 +29,11 @@ export class WinnersService {
         nomination_id: nominee.id,
         declared: new Date(),
       };
-      this.http.post<any>(this.winnersUrl, data, httpOptions).subscribe();
+      this.http.post<any>(this.winnersUrl, data, httpOptions).pipe(
+        catchError(this.errorHandler.handleAPIError())
+      ).subscribe();
     } else {
-      this.http.delete<Winner>(`/api/winners/${existing.id}`, httpOptions).pipe(
+      this.http.delete<Winner>(`${this.winnersUrl}/${existing.id}`, httpOptions).pipe(
         catchError(this.errorHandler.handleAPIError())
       ).subscribe();
     }

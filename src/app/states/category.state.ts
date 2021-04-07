@@ -86,7 +86,7 @@ export class CategoryState {
 
   @Action(UpdateOdds)
   updateOdds({getState, setState}: StateContext<CategoryStateModel>, action: UpdateOdds): Observable<any> {
-    return this.http.put('api/oddsChange', action, httpOptions).pipe(
+    return this.http.put('/api/oddsChange', action, httpOptions).pipe(
       tap(() => {
         setState(
           produce(draft => {

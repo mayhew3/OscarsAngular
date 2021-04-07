@@ -24,7 +24,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VotesService {
-  votesUrl = 'api/votes';
+  votesUrl = '/api/votes';
   isLoading = true;
 
   votes: Observable<Vote[]> = this.store.select(state => state.votes).pipe(
@@ -111,7 +111,7 @@ export class VotesService {
       nomination_id: nominee.id,
       submitted: new Date()
     };
-    this.http.post<Vote>('/api/votes', data, httpOptions).pipe(
+    this.http.post<Vote>(this.votesUrl, data, httpOptions).pipe(
       catchError(this.errorHandler.handleAPIError())
     ).subscribe();
   }

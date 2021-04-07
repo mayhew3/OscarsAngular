@@ -127,7 +127,9 @@ export class CategoryService {
   }
 
   updateOddsForNominees(changes: OddsChange[]): Observable<any> {
-    return this.store.dispatch(new UpdateOdds(changes));
+    return this.store.dispatch(new UpdateOdds(changes)).pipe(
+      catchError(this.errorHandler.handleAPIError())
+    );
   }
 
   getCategoriesWithWinners(): Observable<Category[]> {
