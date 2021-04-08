@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {combineLatest, Observable} from 'rxjs';
 import {MyAuthService} from './auth/my-auth.service';
 import {SocketService} from './socket.service';
@@ -28,8 +28,24 @@ export class ApiService {
     );
   }
 
+  putAfterFullyConnected<T>(url: string, body: any): Observable<any> {
+    return this.connectedToAll$.pipe(
+      mergeMap(() => this.putWithError(url, body))
+    );
+  }
+
   private getWithError<T>(url: string, params?: HttpParams): Observable<any> {
     return this.http.get<T>(url, {params}).pipe(
+      catchError(this.errorHandler.handleAPIError())
+    );
+  }
+
+  private putWithError<T>(url: string, body: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.put<T>(url, body, httpOptions).pipe(
       catchError(this.errorHandler.handleAPIError())
     );
   }

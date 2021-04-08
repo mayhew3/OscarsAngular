@@ -1,6 +1,6 @@
 import {Category} from '../interfaces/Category';
 import {Action, State, StateContext} from '@ngxs/store';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {AddWinner, GetCategories, RemoveWinner, ResetWinners, UpdateOdds} from '../actions/category.action';
@@ -17,10 +17,6 @@ export class CategoryStateModel {
   categories: Category[];
 }
 
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
 @State<CategoryStateModel>({
   name: 'categories',
   defaults: {
@@ -31,8 +27,7 @@ const httpOptions = {
 export class CategoryState {
   stateChanges = 0;
 
-  constructor(private http: HttpClient,
-              private api: ApiService) {
+  constructor(private api: ApiService) {
   }
 
   @Action(GetCategories)
@@ -88,7 +83,7 @@ export class CategoryState {
 
   @Action(UpdateOdds)
   updateOdds({getState, setState}: StateContext<CategoryStateModel>, action: UpdateOdds): Observable<any> {
-    return this.http.put('/api/oddsChange', action, httpOptions).pipe(
+    return this.api.putAfterFullyConnected('/api/oddsChange', action).pipe(
       tap(() => {
         setState(
           produce(draft => {

@@ -1,5 +1,4 @@
 import {Action, State, StateContext} from '@ngxs/store';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
@@ -7,10 +6,6 @@ import {SystemVars} from '../interfaces/SystemVars';
 import {ChangeCurrentYear, GetSystemVars, VotingLock, VotingUnlock} from '../actions/systemVars.action';
 import produce from 'immer';
 import {ApiService} from '../services/api.service';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 export class SystemVarsStateModel {
   systemVars: SystemVars;
@@ -29,8 +24,7 @@ export class SystemVarsState {
 
   readonly apiUrl = '/api/systemVars';
 
-  constructor(private http: HttpClient,
-              private api: ApiService) {
+  constructor(private api: ApiService) {
   }
 
   @Action(GetSystemVars)
@@ -73,7 +67,7 @@ export class SystemVarsState {
       id: state.systemVars.id,
       curr_year: action.year
     };
-    return this.http.put(this.apiUrl, data, httpOptions).pipe(
+    return this.api.putAfterFullyConnected(this.apiUrl, data).pipe(
       tap(() => {
         setState(
           produce(draft => {

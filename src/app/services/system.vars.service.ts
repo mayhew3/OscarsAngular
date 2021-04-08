@@ -8,6 +8,7 @@ import {Store} from '@ngxs/store';
 import {ChangeCurrentYear, GetSystemVars} from '../actions/systemVars.action';
 import {ConnectednessService} from './connectedness.service';
 import {ErrorNotificationService} from './error-notification.service';
+import {ApiService} from './api.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -32,6 +33,7 @@ export class SystemVarsService implements OnDestroy {
               private auth: MyAuthService,
               private connectednessService: ConnectednessService,
               private store: Store,
+              private api: ApiService,
               private errorHandler: ErrorNotificationService) {
     this.fetching = true;
     this.connectednessService.connectedToAll$.subscribe(() => {
@@ -66,9 +68,7 @@ export class SystemVarsService implements OnDestroy {
           id: systemVars.id,
           voting_open: !systemVars.voting_open
         };
-        this.http.put(this.systemVarsUrl, data, httpOptions).pipe(
-          catchError(this.errorHandler.handleAPIError())
-        ).subscribe();
+        this.api.putAfterFullyConnected(this.systemVarsUrl, data).subscribe();
       });
   }
 

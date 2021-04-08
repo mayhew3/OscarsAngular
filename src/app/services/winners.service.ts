@@ -6,6 +6,7 @@ import {Category} from '../interfaces/Category';
 import _ from 'underscore';
 import {catchError} from 'rxjs/operators';
 import {ErrorNotificationService} from './error-notification.service';
+import {ApiService} from './api.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,6 +19,7 @@ export class WinnersService {
   winnersUrl = '/api/winners';
 
   constructor(private http: HttpClient,
+              private api: ApiService,
               private errorHandler: ErrorNotificationService) { }
 
   addOrDeleteWinner(nominee: Nominee, category: Category): void {
@@ -40,9 +42,7 @@ export class WinnersService {
   }
 
   resetWinners(year: number): void {
-    this.http.put<Winner>(`/api/resetWinners/`, {year}, httpOptions).pipe(
-      catchError(this.errorHandler.handleAPIError())
-    ).subscribe();
+    this.api.putAfterFullyConnected<Winner>(`/api/resetWinners/`, {year}).subscribe();
   }
 
   private existingWinner(nominee: Nominee, category: Category): Winner {
