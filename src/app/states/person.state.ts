@@ -7,6 +7,7 @@ import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
 import _ from 'underscore';
+import {ApiService} from '../services/api.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,13 +27,14 @@ export class PersonStateModel {
 export class PersonState {
   stateChanges = 0;
 
-  constructor(private http: HttpClient) {
+  constructor(private apiService: ApiService,
+              private http: HttpClient) {
   }
 
   @Action(GetPersons)
   getPersons({getState, setState}: StateContext<PersonStateModel>): Observable<any> {
-    return this.http.get<any[]>('/api/persons').pipe(
-      tap(result => {
+    return this.apiService.getAfterAuthenticate<Person[]>('/api/persons').pipe(
+      tap((result: Person[]) => {
         const state = getState();
         setState({
           ...state,

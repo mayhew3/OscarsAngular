@@ -11,6 +11,7 @@ import produce from 'immer';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
 import {WritableDraft} from 'immer/dist/types/types-external';
+import {ApiService} from '../services/api.service';
 
 export class CategoryStateModel {
   categories: Category[];
@@ -30,7 +31,8 @@ const httpOptions = {
 export class CategoryState {
   stateChanges = 0;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private api: ApiService) {
   }
 
   @Action(GetCategories)
@@ -38,7 +40,7 @@ export class CategoryState {
     const params = new HttpParams()
       .set('person_id', action.person_id.toString())
       .set('year', action.year.toString());
-    return this.http.get<any[]>('/api/categories', {params}).pipe(
+    return this.api.getAfterFullyConnected<any[]>('/api/categories', params).pipe(
       tap(result => {
         const state = getState();
         _.each(result, (category: Category) => {

@@ -6,6 +6,7 @@ import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
 import {ChangeCurrentYear, GetSystemVars, VotingLock, VotingUnlock} from '../actions/systemVars.action';
 import produce from 'immer';
+import {ApiService} from '../services/api.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,12 +29,13 @@ export class SystemVarsState {
 
   readonly apiUrl = '/api/systemVars';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private api: ApiService) {
   }
 
   @Action(GetSystemVars)
   getSystemVars({getState, setState}: StateContext<SystemVarsStateModel>): Observable<any> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
+    return this.api.getAfterFullyConnected<any[]>(this.apiUrl).pipe(
       tap(result => {
         const state = getState();
         setState({

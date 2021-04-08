@@ -39,11 +39,7 @@ export class PersonService implements OnDestroy {
               private store: Store,
               private errorHandler: ErrorNotificationService) {
     this.fetching = true;
-    this.auth.isPositivelyAuthenticated$.subscribe(() => {
-      this.store.dispatch(new GetPersons()).pipe(
-        catchError(this.errorHandler.handleAPIError())
-      ).subscribe();
-    });
+    this.store.dispatch(new GetPersons());
     this.persons.subscribe(() => this.fetching = false);
     this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
   }

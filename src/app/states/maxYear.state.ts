@@ -1,10 +1,10 @@
 import {Action, State, StateContext} from '@ngxs/store';
-import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {MaxYear} from '../interfaces/MaxYear';
 import {GetMaxYear} from '../actions/maxYear.action';
+import {ApiService} from '../services/api.service';
 
 export class MaxYearStateModel {
   maxYear: MaxYear;
@@ -20,12 +20,12 @@ export class MaxYearStateModel {
 export class MaxYearState {
   stateChanges = 0;
 
-  constructor(private http: HttpClient) {
+  constructor(private apiService: ApiService) {
   }
 
   @Action(GetMaxYear)
   getMaxYear({getState, setState}: StateContext<MaxYearStateModel>): Observable<any> {
-    return this.http.get<any[]>('/api/maxYear').pipe(
+    return this.apiService.getAfterFullyConnected<MaxYear[]>('/api/maxYear').pipe(
       tap(result => {
         const state = getState();
         setState({
