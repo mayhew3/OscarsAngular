@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
 import {combineLatest, Observable} from 'rxjs';
-import {catchError, distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
@@ -11,15 +10,8 @@ import * as _ from 'underscore';
 import {Store} from '@ngxs/store';
 import {GetVotes} from '../actions/votes.action';
 import {PersonService} from './person.service';
-import {CategoryService} from './category.service';
 import {SystemVars} from '../interfaces/SystemVars';
-import {ConnectednessService} from './connectedness.service';
-import {ErrorNotificationService} from './error-notification.service';
 import {ApiService} from './api.service';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -40,19 +32,14 @@ export class VotesService {
     map(([me, votes]) => _.where(votes, {person_id: me.id}))
   );
 
-  constructor(private http: HttpClient,
-              private systemVarsService: SystemVarsService,
+  constructor(private systemVarsService: SystemVarsService,
               private personService: PersonService,
-              private categoryService: CategoryService,
               private store: Store,
-              private api: ApiService,
-              private errorHandler: ErrorNotificationService) {
+              private api: ApiService) {
     this.systemVarsService.systemVars.pipe(
       distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
     ).subscribe(systemVars => {
-      this.store.dispatch(new GetVotes(systemVars.curr_year)).pipe(
-        catchError(this.errorHandler.handleAPIError())
-      ).subscribe();
+      this.store.dispatch(new GetVotes(systemVars.curr_year));
     });
   }
 

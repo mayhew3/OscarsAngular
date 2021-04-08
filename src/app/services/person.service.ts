@@ -1,15 +1,11 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
-import {catchError, filter, map, mergeMap} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
-import {ArrayService} from './array.service';
 import {Store} from '@ngxs/store';
 import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {MyAuthService} from './auth/my-auth.service';
-import {ConnectednessService} from './connectedness.service';
-import {ErrorNotificationService} from './error-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +29,8 @@ export class PersonService implements OnDestroy {
 
   private destroy$ = new Subject();
 
-  constructor(private http: HttpClient,
-              private arrayService: ArrayService,
-              private auth: MyAuthService,
-              private store: Store,
-              private errorHandler: ErrorNotificationService) {
+  constructor(private auth: MyAuthService,
+              private store: Store) {
     this.fetching = true;
     this.store.dispatch(new GetPersons());
     this.persons.subscribe(() => this.fetching = false);
@@ -91,9 +84,7 @@ export class PersonService implements OnDestroy {
   // DATA HELPERS
 
   updatePerson(person: Person, oddsKey: string): Observable<any> {
-    return this.store.dispatch(new ChangeOddsView(person.id, oddsKey)).pipe(
-      catchError(this.errorHandler.handleAPIError())
-    );
+    return this.store.dispatch(new ChangeOddsView(person.id, oddsKey));
   }
 
 }
