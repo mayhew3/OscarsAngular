@@ -16,6 +16,8 @@ export class ApiService {
               private socket: SocketService,
               private errorHandler: ErrorNotificationService) { }
 
+  // GET
+
   getAfterAuthenticate<T>(url: string, params?: HttpParams): Observable<any> {
     return this.auth.isPositivelyAuthenticated$.pipe(
       mergeMap(() => this.getWithError(url, params))
@@ -28,11 +30,43 @@ export class ApiService {
     );
   }
 
+  // PUT
+
   putAfterFullyConnected<T>(url: string, body: any): Observable<any> {
     return this.connectedToAll$.pipe(
       mergeMap(() => this.putWithError(url, body))
     );
   }
+
+  executePutAfterFullyConnected<T>(url: string, body: any): void {
+    this.putAfterFullyConnected(url, body).subscribe();
+  }
+
+  // POST
+
+  postAfterFullyConnected<T>(url: string, body: any): Observable<any> {
+    return this.connectedToAll$.pipe(
+      mergeMap(() => this.postWithError(url, body))
+    );
+  }
+
+  executePostAfterFullyConnected<T>(url: string, body: any): void {
+    this.postAfterFullyConnected(url, body).subscribe();
+  }
+
+  // DELETE
+
+  deleteAfterFullyConnected<T>(url: string, id: number): Observable<any> {
+    return this.connectedToAll$.pipe(
+      mergeMap(() => this.deleteWithError(url, id))
+    );
+  }
+
+  executeDeleteAfterFullyConnected<T>(url: string, id: number): void {
+    this.deleteAfterFullyConnected(url, id).subscribe();
+  }
+
+  /* HELPER METHODS */
 
   private getWithError<T>(url: string, params?: HttpParams): Observable<any> {
     return this.http.get<T>(url, {params}).pipe(
@@ -46,6 +80,26 @@ export class ApiService {
     };
 
     return this.http.put<T>(url, body, httpOptions).pipe(
+      catchError(this.errorHandler.handleAPIError())
+    );
+  }
+
+  private postWithError<T>(url: string, body: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.post<T>(url, body, httpOptions).pipe(
+      catchError(this.errorHandler.handleAPIError())
+    );
+  }
+
+  private deleteWithError<T>(url: string, id: number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.delete<T>(`${url}/${id}`, httpOptions).pipe(
       catchError(this.errorHandler.handleAPIError())
     );
   }

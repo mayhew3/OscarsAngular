@@ -15,6 +15,7 @@ import {CategoryService} from './category.service';
 import {SystemVars} from '../interfaces/SystemVars';
 import {ConnectednessService} from './connectedness.service';
 import {ErrorNotificationService} from './error-notification.service';
+import {ApiService} from './api.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -44,6 +45,7 @@ export class VotesService {
               private personService: PersonService,
               private categoryService: CategoryService,
               private store: Store,
+              private api: ApiService,
               private errorHandler: ErrorNotificationService) {
     this.systemVarsService.systemVars.pipe(
       distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
@@ -111,9 +113,7 @@ export class VotesService {
       nomination_id: nominee.id,
       submitted: new Date()
     };
-    this.http.post<Vote>(this.votesUrl, data, httpOptions).pipe(
-      catchError(this.errorHandler.handleAPIError())
-    ).subscribe();
+    this.api.executePostAfterFullyConnected<Vote>(this.votesUrl, data);
   }
 
 }

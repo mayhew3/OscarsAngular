@@ -1,16 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Nominee} from '../interfaces/Nominee';
 import {Winner} from '../interfaces/Winner';
 import {Category} from '../interfaces/Category';
 import _ from 'underscore';
-import {catchError} from 'rxjs/operators';
-import {ErrorNotificationService} from './error-notification.service';
 import {ApiService} from './api.service';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +11,7 @@ const httpOptions = {
 export class WinnersService {
   winnersUrl = '/api/winners';
 
-  constructor(private http: HttpClient,
-              private api: ApiService,
-              private errorHandler: ErrorNotificationService) { }
+  constructor(private api: ApiService) { }
 
   addOrDeleteWinner(nominee: Nominee, category: Category): void {
     const existing = this.existingWinner(nominee, category);
@@ -31,18 +22,14 @@ export class WinnersService {
         nomination_id: nominee.id,
         declared: new Date(),
       };
-      this.http.post<any>(this.winnersUrl, data, httpOptions).pipe(
-        catchError(this.errorHandler.handleAPIError())
-      ).subscribe();
+      this.api.executePostAfterFullyConnected<Winner>(this.winnersUrl, data);
     } else {
-      this.http.delete<Winner>(`${this.winnersUrl}/${existing.id}`, httpOptions).pipe(
-        catchError(this.errorHandler.handleAPIError())
-      ).subscribe();
+      this.api.executeDeleteAfterFullyConnected<Winner>(this.winnersUrl, existing.id);
     }
   }
 
   resetWinners(year: number): void {
-    this.api.putAfterFullyConnected<Winner>(`/api/resetWinners/`, {year}).subscribe();
+    this.api.executePutAfterFullyConnected<Winner>(`/api/resetWinners/`, {year});
   }
 
   private existingWinner(nominee: Nominee, category: Category): Winner {
