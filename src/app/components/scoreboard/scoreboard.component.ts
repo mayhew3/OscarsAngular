@@ -18,6 +18,7 @@ import {Odds} from '../../interfaces/Odds';
 import {ArrayUtil} from '../../utility/ArrayUtil';
 import {Select} from '@ngxs/store';
 import {OddsState} from '../../states/odds.state';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -30,6 +31,8 @@ export class ScoreboardComponent implements OnInit {
   latestCategory: Category;
   me: Person;
   updatingOddsFilter = false;
+
+  loadingColor: ThemePalette = 'accent';
 
   scoreData: ScoreData[] = [];
 
@@ -191,31 +194,25 @@ export class ScoreboardComponent implements OnInit {
     );
   }
 
-  getOddsForPerson(scoreData: ScoreData): Observable<string> {
-    return this.oddsOutOfDate$.pipe(
-      map(outOfDate => {
-        const numericOdds = this.getNumericOddsForPerson(scoreData);
-        try {
-          if (!!outOfDate) {
-            return '...';
-          } else if (numericOdds === 0.0) {
-            return '0%';
-          } else if (numericOdds === 100.0) {
-            return '100%';
-          } else if (numericOdds < 1.0) {
-            return '<1%';
-          } else if (numericOdds > 99.0) {
-            return '>99%';
-          } else if (numericOdds > 10) {
-            return numericOdds.toFixed(0) + '%';
-          } else {
-            return numericOdds.toFixed(1) + '%';
-          }
-        } catch (err) {
-          return 'err';
-        }
-      })
-    );
+  getOddsForPerson(scoreData: ScoreData): string {
+    const numericOdds = this.getNumericOddsForPerson(scoreData);
+    try {
+      if (numericOdds === 0.0) {
+        return '0%';
+      } else if (numericOdds === 100.0) {
+        return '100%';
+      } else if (numericOdds < 1.0) {
+        return '<1%';
+      } else if (numericOdds > 99.0) {
+        return '>99%';
+      } else if (numericOdds > 10) {
+        return numericOdds.toFixed(0) + '%';
+      } else {
+        return numericOdds.toFixed(1) + '%';
+      }
+    } catch (err) {
+      return 'err';
+    }
   }
 
   oddsDirection(scoreData: ScoreData): number {

@@ -87,6 +87,7 @@
 
 .odds {
   text-align: right;
+  line-height: 100%;
 }
 
 .finalPlace {
@@ -103,6 +104,7 @@
   color: $muted;
   font-weight: normal;
   font-size: 10pt;
+  margin-top: 2px;
 }
 
 .oddsDiff {
