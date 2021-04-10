@@ -1,16 +1,9 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {filter, first, map} from 'rxjs/operators';
-import {SocketService} from './socket.service';
-import {MyAuthService} from './auth/my-auth.service';
 import {Store} from '@ngxs/store';
 import {ChangeCurrentYear, GetSystemVars} from '../actions/systemVars.action';
-import {ConnectednessService} from './connectedness.service';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import {ApiService} from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +19,10 @@ export class SystemVarsService implements OnDestroy {
 
   private destroy$ = new Subject();
 
-  constructor(private http: HttpClient,
-              private socket: SocketService,
-              private auth: MyAuthService,
-              private connectednessService: ConnectednessService,
-              private store: Store) {
+  constructor(private store: Store,
+              private api: ApiService) {
     this.fetching = true;
-    this.connectednessService.connectedToAll$.subscribe(() => this.store.dispatch(new GetSystemVars(this.socket)));
+    this.store.dispatch(new GetSystemVars());
     this.systemVars.subscribe(() => this.fetching = false);
   }
 
@@ -60,12 +50,12 @@ export class SystemVarsService implements OnDestroy {
           id: systemVars.id,
           voting_open: !systemVars.voting_open
         };
-        this.http.put('/api/systemVars', data, httpOptions).subscribe();
+        this.api.executePutAfterFullyConnected(this.systemVarsUrl, data);
       });
   }
 
   changeCurrentYear(year: number): void {
-    this.store.dispatch(new ChangeCurrentYear(year)).subscribe();
+    this.store.dispatch(new ChangeCurrentYear(year));
   }
 
   stillLoading(): boolean {

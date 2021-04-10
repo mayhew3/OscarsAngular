@@ -1,20 +1,16 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {combineLatest, Observable} from 'rxjs';
 import {Category} from '../interfaces/Category';
 import {filter, map, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
-import {OddsService} from './odds.service';
-import {SocketService} from './socket.service';
 import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
 import {Store} from '@ngxs/store';
 import {GetCategories, OddsChange, UpdateOdds} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
-import {ConnectednessService} from './connectedness.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,24 +36,16 @@ export class CategoryService {
 
   private fetching = false;
 
-  constructor(private http: HttpClient,
-              private personService: PersonService,
+  constructor(private personService: PersonService,
               private systemVarsService: SystemVarsService,
-              private oddsService: OddsService,
-              private socket: SocketService,
-              private store: Store,
-              private connectednessService: ConnectednessService) {
+              private store: Store) {
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVars])
       .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, this.socket)).subscribe();
+        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id));
       });
 
-    this.connectednessService.connectedToAll$.subscribe(([isAuthenticated, isConnected]) => {
-      if (isAuthenticated && isConnected) {
-        this.store.dispatch(new GetMaxYear());
-      }
-    });
+    this.store.dispatch(new GetMaxYear());
   }
 
   static isSingleLineCategory(categoryName: string): boolean {

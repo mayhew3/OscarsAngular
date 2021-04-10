@@ -1,19 +1,13 @@
 import {Vote} from '../interfaces/Vote';
 import {Action, State, StateContext} from '@ngxs/store';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
 import * as _ from 'underscore';
-import {WritableDraft} from 'immer/dist/types/types-external';
-import {Category} from '../interfaces/Category';
-import {Nominee} from '../interfaces/Nominee';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import {ApiService} from '../services/api.service';
 
 export class VoteStateModel {
   votes: Vote[];
@@ -29,14 +23,14 @@ export class VoteStateModel {
 export class VoteState {
   stateChanges = 0;
 
-  constructor(private http: HttpClient) {
+  constructor(private api: ApiService) {
   }
 
   @Action(GetVotes)
   getVotes({getState, setState}: StateContext<VoteStateModel>, action: GetVotes): Observable<any> {
     const params = new HttpParams()
       .set('year', action.year.toString());
-    return this.http.get<any[]>('/api/votes', {params}).pipe(
+    return this.api.getAfterFullyConnected<any[]>('/api/votes', params).pipe(
       tap(result => {
         const state = getState();
         setState({

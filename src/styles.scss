@@ -19,5 +19,14 @@ h2 {
   cursor: pointer;
 }
 
+.redSnackBar {
+  background-color: darkred;
+  color: white;
+}
+
+.cdk-overlay-container {
+  z-index: 99999999999999;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

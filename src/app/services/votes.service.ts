@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Vote} from '../interfaces/Vote';
 import {combineLatest, Observable} from 'rxjs';
 import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
@@ -11,18 +10,14 @@ import * as _ from 'underscore';
 import {Store} from '@ngxs/store';
 import {GetVotes} from '../actions/votes.action';
 import {PersonService} from './person.service';
-import {CategoryService} from './category.service';
 import {SystemVars} from '../interfaces/SystemVars';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import {ApiService} from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VotesService {
-  votesUrl = 'api/votes';
+  votesUrl = '/api/votes';
   isLoading = true;
 
   votes: Observable<Vote[]> = this.store.select(state => state.votes).pipe(
@@ -37,14 +32,15 @@ export class VotesService {
     map(([me, votes]) => _.where(votes, {person_id: me.id}))
   );
 
-  constructor(private http: HttpClient,
-              private systemVarsService: SystemVarsService,
+  constructor(private systemVarsService: SystemVarsService,
               private personService: PersonService,
-              private categoryService: CategoryService,
-              private store: Store) {
+              private store: Store,
+              private api: ApiService) {
     this.systemVarsService.systemVars.pipe(
       distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
-    ).subscribe(systemVars => this.store.dispatch(new GetVotes(systemVars.curr_year)));
+    ).subscribe(systemVars => {
+      this.store.dispatch(new GetVotes(systemVars.curr_year));
+    });
   }
 
   stillLoading(): boolean {
@@ -104,7 +100,7 @@ export class VotesService {
       nomination_id: nominee.id,
       submitted: new Date()
     };
-    this.http.post<Vote>('/api/votes', data, httpOptions).subscribe();
+    this.api.executePostAfterFullyConnected<Vote>(this.votesUrl, data);
   }
 
 }

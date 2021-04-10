@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 module.exports = app => {
   const events = require('./controllers/events_controller');
   const nominees = require('./controllers/nominees_controller');
@@ -43,12 +44,13 @@ module.exports = app => {
     router.put(endpoint, authCheck, callback);
   };
 
-  const privatePatch: (endpoint: any, callback: any) => void = (endpoint, callback) => {
-    router.patch(endpoint, authCheck, callback);
-  };
-
   const privateDelete: (endpoint: any, callback: any) => void = (endpoint, callback) => {
     router.delete(endpoint, authCheck, callback);
+  };
+
+  // noinspection JSUnusedLocalSymbols
+  const privatePatch: (endpoint: any, callback: any) => void = (endpoint, callback) => {
+    router.patch(endpoint, authCheck, callback);
   };
 
   privateGet('/categories', nominees.getCategories);
@@ -74,26 +76,11 @@ module.exports = app => {
   privateGet('/finalResults', finalResults.getFinalResults);
   privateGet('/maxYear', nominees.getMostRecentYear);
 
-  app.use('/api', router);
-
   // error handlers
-
-  // development error handler
-  // will print stacktrace
-  if (app.get('env') === 'development') {
-    app.use((err, req, res, next) => {
-      console.log(err.message);
-      console.log(err.stack);
-      console.log('Status: ' + err.status);
-      res.status(err.status || 500).json({
-        message: err.message,
-        error: err
-      });
-    });
-  }
 
   // production error handler
   // no stacktraces leaked to user
+  // noinspection JSUnusedLocalSymbols
   app.use((err, req, res, next) => {
     console.log(err.message);
     console.log(err.stack);
@@ -103,5 +90,15 @@ module.exports = app => {
       error: err
     });
   });
+
+  // noinspection JSUnusedLocalSymbols
+  router.use((req, res, next) => {
+    console.log('Undefined API called!');
+    res.status(400).json({
+      message: `Invalid API called: ${req.path}`,
+    });
+  });
+
+  app.use('/api', router);
 
 };

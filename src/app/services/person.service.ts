@@ -1,10 +1,8 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Observable, Subject} from 'rxjs';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
-import {ArrayService} from './array.service';
 import {Store} from '@ngxs/store';
 import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {MyAuthService} from './auth/my-auth.service';
@@ -31,12 +29,10 @@ export class PersonService implements OnDestroy {
 
   private destroy$ = new Subject();
 
-  constructor(private http: HttpClient,
-              private arrayService: ArrayService,
-              private auth: MyAuthService,
+  constructor(private auth: MyAuthService,
               private store: Store) {
     this.fetching = true;
-    this.auth.isPositivelyAuthenticated$.subscribe(() => this.store.dispatch(new GetPersons()));
+    this.store.dispatch(new GetPersons());
     this.persons.subscribe(() => this.fetching = false);
     this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
   }

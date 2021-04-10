@@ -1,10 +1,7 @@
-import {SocketService} from '../services/socket.service';
-
 export class GetCategories {
   static readonly type = '[Category] Get';
   constructor(public year: number,
-              public person_id: number,
-              public socket: SocketService) {
+              public person_id: number) {
   }
 }
 

@@ -1,16 +1,12 @@
 import {Person} from '../interfaces/Person';
 import {Action, State, StateContext} from '@ngxs/store';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
 import _ from 'underscore';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import {ApiService} from '../services/api.service';
 
 export class PersonStateModel {
   persons: Person[];
@@ -26,13 +22,13 @@ export class PersonStateModel {
 export class PersonState {
   stateChanges = 0;
 
-  constructor(private http: HttpClient) {
+  constructor(private api: ApiService) {
   }
 
   @Action(GetPersons)
   getPersons({getState, setState}: StateContext<PersonStateModel>): Observable<any> {
-    return this.http.get<any[]>('/api/persons').pipe(
-      tap(result => {
+    return this.api.getAfterAuthenticate<Person[]>('/api/persons').pipe(
+      tap((result: Person[]) => {
         const state = getState();
         setState({
           ...state,
@@ -50,7 +46,7 @@ export class PersonState {
       id: action.person_id,
       odds_filter: action.odds_filter
     };
-    return this.http.put<any>('/api/persons', data, httpOptions).pipe(
+    return this.api.putAfterFullyConnected<any>('/api/persons', data).pipe(
       tap(() => {
         setState(
           produce(draft => {
