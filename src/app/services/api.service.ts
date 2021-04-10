@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {combineLatest, Observable} from 'rxjs';
 import {MyAuthService} from './auth/my-auth.service';
 import {SocketService} from './socket.service';
-import {catchError, distinctUntilChanged, filter, mergeMap} from 'rxjs/operators';
+import {catchError, distinctUntilChanged, filter, first, mergeMap} from 'rxjs/operators';
 import {ErrorNotificationService} from './error-notification.service';
 
 @Injectable({
@@ -34,6 +34,7 @@ export class ApiService {
 
   putAfterFullyConnected<T>(url: string, body: any): Observable<any> {
     return this.connectedToAll$.pipe(
+      first(),
       mergeMap(() => this.putWithError(url, body))
     );
   }
@@ -46,6 +47,7 @@ export class ApiService {
 
   postAfterFullyConnected<T>(url: string, body: any): Observable<any> {
     return this.connectedToAll$.pipe(
+      first(),
       mergeMap(() => this.postWithError(url, body))
     );
   }
@@ -58,6 +60,7 @@ export class ApiService {
 
   deleteAfterFullyConnected<T>(url: string, id: number): Observable<any> {
     return this.connectedToAll$.pipe(
+      first(),
       mergeMap(() => this.deleteWithError(url, id))
     );
   }

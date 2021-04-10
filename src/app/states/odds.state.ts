@@ -1,8 +1,8 @@
-import {Action, State, StateContext} from '@ngxs/store';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {GetOdds, UpdatePlayerOdds} from '../actions/odds.action';
+import {GetOdds, OddsInProgress, UpdatePlayerOdds} from '../actions/odds.action';
 import {OddsBundle} from '../interfaces/OddsBundle';
 import produce from 'immer';
 import {ApiService} from '../services/api.service';
@@ -10,13 +10,15 @@ import {ApiService} from '../services/api.service';
 export class OddsStateModel {
   oddsBundle: OddsBundle;
   previousOddsBundle: OddsBundle;
+  updating: boolean;
 }
 
 @State<OddsStateModel>({
   name: 'odds',
   defaults: {
     oddsBundle: undefined,
-    previousOddsBundle: undefined
+    previousOddsBundle: undefined,
+    updating: true
   }
 })
 @Injectable()
@@ -29,6 +31,11 @@ export class OddsState {
   constructor(private api: ApiService) {
   }
 
+  @Selector()
+  static updating(state: OddsStateModel): boolean {
+    return state.updating;
+  }
+
   @Action(GetOdds)
   getOdds({setState}: StateContext<OddsStateModel>): Observable<any> {
     return this.api.getAfterFullyConnected<any[]>(this.apiUrl).pipe(
@@ -36,6 +43,7 @@ export class OddsState {
         setState(produce(draft => {
           draft.previousOddsBundle = draft.oddsBundle;
           draft.oddsBundle = result;
+          draft.updating = false;
         }));
         this.stateChanges++;
         console.log('ODDS State Change #' + this.stateChanges);
@@ -44,13 +52,19 @@ export class OddsState {
   }
 
   @Action(UpdatePlayerOdds)
-  updatePlayerOdds({getState, setState}: StateContext<OddsStateModel>, action: UpdatePlayerOdds): void {
+  updatePlayerOdds({setState}: StateContext<OddsStateModel>, action: UpdatePlayerOdds): void {
     setState(produce(draft => {
       draft.previousOddsBundle = draft.oddsBundle;
       draft.oddsBundle = action.oddsBundle;
+      draft.updating = false;
     }));
-    this.stateChanges++;
-    console.log('ODDS State Change #' + this.stateChanges);
+  }
+
+  @Action(OddsInProgress)
+  oddsInProgress({setState}: StateContext<OddsStateModel>): void {
+    setState(produce(draft => {
+      draft.updating = true;
+    }));
   }
 
 }

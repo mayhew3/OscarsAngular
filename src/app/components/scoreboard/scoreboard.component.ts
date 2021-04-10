@@ -16,7 +16,9 @@ import {VotesService} from '../../services/votes.service';
 import {Vote} from '../../interfaces/Vote';
 import {Odds} from '../../interfaces/Odds';
 import {ArrayUtil} from '../../utility/ArrayUtil';
-import {SocketService} from '../../services/socket.service';
+import {Select} from '@ngxs/store';
+import {OddsState} from '../../states/odds.state';
+import {ThemePalette} from '@angular/material/core';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -24,11 +26,13 @@ import {SocketService} from '../../services/socket.service';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
+  @Select(OddsState.updating) oddsOutOfDate$: Observable<boolean>;
+
   latestCategory: Category;
   me: Person;
   updatingOddsFilter = false;
 
-  oddsOutOfDate = false;
+  loadingColor: ThemePalette = 'accent';
 
   scoreData: ScoreData[] = [];
 
@@ -38,25 +42,16 @@ export class ScoreboardComponent implements OnInit {
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private voteService: VotesService,
-              private oddsService: OddsService,
-              private socket: SocketService) {
+              private oddsService: OddsService) {
   }
 
   ngOnInit(): void {
-    this.initListeners();
     this.initScoreData();
 
     this.personService.me$.subscribe(person => {
       this.me = person;
       this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
     });
-  }
-
-  initListeners(): void {
-    this.socket.on('add_winner', () => this.oddsOutOfDate = true);
-    this.socket.on('remove_winner', () => this.oddsOutOfDate = true);
-    this.socket.on('reset_winners', () => this.oddsOutOfDate = true);
-    this.socket.on('odds', () => this.oddsOutOfDate = false);
   }
 
   initScoreData(): void {
@@ -202,9 +197,7 @@ export class ScoreboardComponent implements OnInit {
   getOddsForPerson(scoreData: ScoreData): string {
     const numericOdds = this.getNumericOddsForPerson(scoreData);
     try {
-      if (!!this.oddsOutOfDate) {
-        return '...';
-      } else if (numericOdds === 0.0) {
+      if (numericOdds === 0.0) {
         return '0%';
       } else if (numericOdds === 100.0) {
         return '100%';
@@ -339,13 +332,18 @@ export class ScoreboardComponent implements OnInit {
     return _.map(winners, winner => this.personService.getFullName(winner.person));
   }
 
+
   fastSortPersons(): void {
     fast_sort(this.scoreData)
       .by([
-        { desc: scoreData => scoreData.score},
-        { desc: scoreData => this.getSortingOddsForPerson(scoreData)},
-        { desc: scoreData => this.isMe(scoreData.person)},
-        { asc: scoreData => scoreData.person.first_name},
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        { desc: (scoreData: ScoreData) => scoreData.score},
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        { desc: (scoreData: ScoreData) => this.getSortingOddsForPerson(scoreData)},
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        { desc: (scoreData: ScoreData) => this.isMe(scoreData.person)},
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        { asc: (scoreData: ScoreData) => scoreData.person.first_name},
       ]);
   }
 

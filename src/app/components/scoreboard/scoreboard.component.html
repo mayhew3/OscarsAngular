@@ -50,18 +50,30 @@
               </div>
               <div class="col-4">
 
-                <div *ngIf="shouldShowOdds() | async">
-                  <span class="odds oddsSubtitle">Odds</span>
-                  <span class="odds oddsValue"
-                        [ngStyle]="{ color: getOddsStyle(scoreData)}">
-                    {{getOddsForPerson(scoreData)}}
-                  </span>
+                <div *ngIf="shouldShowOdds() | async" class="d-flex flex-row">
+                  <span class="odds oddsSubtitle v-100 align-middle">Odds</span>
 
-                  <span *ngIf="showOddsChange(scoreData)"
-                        class="oddsDiff"
-                        [ngClass]="oddsDirectionClass(scoreData)">
+                  <div *ngIf="(oddsOutOfDate$ | async) === false"
+                       class="d-flex flex-row">
+
+                    <span class="odds oddsValue"
+                          [ngStyle]="{ color: getOddsStyle(scoreData)}">
+                      {{getOddsForPerson(scoreData)}}
+                    </span>
+
+                    <span *ngIf="showOddsChange(scoreData)"
+                          class="oddsDiff"
+                          [ngClass]="oddsDirectionClass(scoreData)">
                       {{oddsDirectionFormatted(scoreData)}}
-                      </span>
+                    </span>
+
+                  </div>
+
+                  <mat-spinner *ngIf="(oddsOutOfDate$ | async) === true"
+                               class="ml-2"
+                               [diameter]="18"
+                               [color]="loadingColor"></mat-spinner>
+
                 </div>
 
                 <div *ngIf="(itsOver() | async)"
