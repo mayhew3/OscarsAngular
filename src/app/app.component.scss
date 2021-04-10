@@ -5,6 +5,7 @@
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .wideContainer {
@@ -12,4 +13,18 @@
   padding-right: 0;
   padding-top: 57px;
   background-color: $body-bg;
+}
+
+.centerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.textContainer {
+  background-color: $body-bg;
+  padding: 30px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 0.19rem black;
 }
