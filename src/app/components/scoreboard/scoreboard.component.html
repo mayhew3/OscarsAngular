@@ -54,7 +54,7 @@
                   <span class="odds oddsSubtitle">Odds</span>
                   <span class="odds oddsValue"
                         [ngStyle]="{ color: getOddsStyle(scoreData)}">
-                    {{getOddsForPerson(scoreData)}}
+                    {{getOddsForPerson(scoreData) | async}}
                   </span>
 
                   <span *ngIf="showOddsChange(scoreData)"

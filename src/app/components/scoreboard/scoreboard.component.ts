@@ -17,6 +17,8 @@ import {Vote} from '../../interfaces/Vote';
 import {Odds} from '../../interfaces/Odds';
 import {ArrayUtil} from '../../utility/ArrayUtil';
 import {SocketService} from '../../services/socket.service';
+import {Select, Store} from '@ngxs/store';
+import {OddsState} from '../../states/odds.state';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -24,11 +26,11 @@ import {SocketService} from '../../services/socket.service';
   styleUrls: ['./scoreboard.component.scss']
 })
 export class ScoreboardComponent implements OnInit {
+  @Select(OddsState.updating) oddsOutOfDate$: Observable<boolean>;
+
   latestCategory: Category;
   me: Person;
   updatingOddsFilter = false;
-
-  oddsOutOfDate = false;
 
   scoreData: ScoreData[] = [];
 
@@ -43,20 +45,12 @@ export class ScoreboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initListeners();
     this.initScoreData();
 
     this.personService.me$.subscribe(person => {
       this.me = person;
       this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
     });
-  }
-
-  initListeners(): void {
-    this.socket.on('add_winner', () => this.oddsOutOfDate = true);
-    this.socket.on('remove_winner', () => this.oddsOutOfDate = true);
-    this.socket.on('reset_winners', () => this.oddsOutOfDate = true);
-    this.socket.on('odds', () => this.oddsOutOfDate = false);
   }
 
   initScoreData(): void {
@@ -199,27 +193,31 @@ export class ScoreboardComponent implements OnInit {
     );
   }
 
-  getOddsForPerson(scoreData: ScoreData): string {
-    const numericOdds = this.getNumericOddsForPerson(scoreData);
-    try {
-      if (!!this.oddsOutOfDate) {
-        return '...';
-      } else if (numericOdds === 0.0) {
-        return '0%';
-      } else if (numericOdds === 100.0) {
-        return '100%';
-      } else if (numericOdds < 1.0) {
-        return '<1%';
-      } else if (numericOdds > 99.0) {
-        return '>99%';
-      } else if (numericOdds > 10) {
-        return numericOdds.toFixed(0) + '%';
-      } else {
-        return numericOdds.toFixed(1) + '%';
-      }
-    } catch (err) {
-      return 'err';
-    }
+  getOddsForPerson(scoreData: ScoreData): Observable<string> {
+    return this.oddsOutOfDate$.pipe(
+      map(outOfDate => {
+        const numericOdds = this.getNumericOddsForPerson(scoreData);
+        try {
+          if (!!outOfDate) {
+            return '...';
+          } else if (numericOdds === 0.0) {
+            return '0%';
+          } else if (numericOdds === 100.0) {
+            return '100%';
+          } else if (numericOdds < 1.0) {
+            return '<1%';
+          } else if (numericOdds > 99.0) {
+            return '>99%';
+          } else if (numericOdds > 10) {
+            return numericOdds.toFixed(0) + '%';
+          } else {
+            return numericOdds.toFixed(1) + '%';
+          }
+        } catch (err) {
+          return 'err';
+        }
+      })
+    );
   }
 
   oddsDirection(scoreData: ScoreData): number {

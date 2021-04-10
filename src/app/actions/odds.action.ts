@@ -9,3 +9,7 @@ export class UpdatePlayerOdds {
   constructor(public oddsBundle: OddsBundle) {
   }
 }
+
+export class OddsInProgress {
+  static readonly type = '[Odds] In Progress';
+}
