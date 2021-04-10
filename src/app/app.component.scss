@@ -1,5 +1,15 @@
+@import '../slate_variables';
+
+.oscarBackground {
+  background-image: url('../assets/crowd4.jpg');
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .wideContainer {
   padding-left: 0;
   padding-right: 0;
   padding-top: 57px;
+  background-color: $body-bg;
 }
