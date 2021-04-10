@@ -16,8 +16,7 @@ import {VotesService} from '../../services/votes.service';
 import {Vote} from '../../interfaces/Vote';
 import {Odds} from '../../interfaces/Odds';
 import {ArrayUtil} from '../../utility/ArrayUtil';
-import {SocketService} from '../../services/socket.service';
-import {Select, Store} from '@ngxs/store';
+import {Select} from '@ngxs/store';
 import {OddsState} from '../../states/odds.state';
 
 @Component({
@@ -40,8 +39,7 @@ export class ScoreboardComponent implements OnInit {
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private voteService: VotesService,
-              private oddsService: OddsService,
-              private socket: SocketService) {
+              private oddsService: OddsService) {
   }
 
   ngOnInit(): void {
@@ -337,13 +335,18 @@ export class ScoreboardComponent implements OnInit {
     return _.map(winners, winner => this.personService.getFullName(winner.person));
   }
 
+
   fastSortPersons(): void {
     fast_sort(this.scoreData)
       .by([
-        { desc: scoreData => scoreData.score},
-        { desc: scoreData => this.getSortingOddsForPerson(scoreData)},
-        { desc: scoreData => this.isMe(scoreData.person)},
-        { asc: scoreData => scoreData.person.first_name},
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        { desc: (scoreData: ScoreData) => scoreData.score},
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        { desc: (scoreData: ScoreData) => this.getSortingOddsForPerson(scoreData)},
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        { desc: (scoreData: ScoreData) => this.isMe(scoreData.person)},
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        { asc: (scoreData: ScoreData) => scoreData.person.first_name},
       ]);
   }
 
