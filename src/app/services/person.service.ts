@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {filter, map, mergeMap} from 'rxjs/operators';
+import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {Store} from '@ngxs/store';
@@ -13,9 +13,11 @@ import {MyAuthService} from './auth/my-auth.service';
 export class PersonService implements OnDestroy {
 
   isAdmin: boolean = null;
+  failedEmail = false;
 
   me$ = this.auth.userEmail$.pipe(
     mergeMap(email => this.getPersonWithEmail(email)),
+    tap(person => this.failedEmail = !person),
     filter(person => !!person)
   );
 

@@ -56,7 +56,7 @@
     <div class="h-100"
          *ngIf="auth.isAuthenticated$ | async; else loggedOut">
       <div class="h-100"
-           *ngIf="!auth.failedEmail else invalidUser">
+           *ngIf="(!failedEmail) else invalidUser">
         <div class="h-100"
              *ngIf="(me$ | async) else loading">
 
@@ -82,6 +82,8 @@
   <div class="centerContainer">
     <div class="textContainer">
       <p>No user account found for google address. Could your invite be for a different gmail address?</p>
+      <button class="btn btn-success"
+              (click)="auth.login()">Login</button>
     </div>
   </div>
 </ng-template>

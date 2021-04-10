@@ -53,6 +53,10 @@ export class AppComponent {
     return this.personService.me$;
   }
 
+  get failedEmail(): boolean {
+    return this.personService.failedEmail;
+  }
+
   stillLoading(): boolean {
     return this.systemVarsService.stillLoading();
   }
