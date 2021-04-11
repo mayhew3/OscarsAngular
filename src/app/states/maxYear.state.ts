@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 import {MaxYear} from '../interfaces/MaxYear';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {ApiService} from '../services/api.service';
+import {LoggerService} from '../services/logger.service';
 
 export class MaxYearStateModel {
   maxYear: MaxYear;
@@ -20,7 +21,8 @@ export class MaxYearStateModel {
 export class MaxYearState {
   stateChanges = 0;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,
+              private logger: LoggerService) {
   }
 
   @Action(GetMaxYear)
@@ -33,7 +35,7 @@ export class MaxYearState {
           maxYear: result[0]
         });
         this.stateChanges++;
-        console.log('MAXYEAR State Change #' + this.stateChanges);
+        this.logger.log('MAXYEAR State Change #' + this.stateChanges);
       })
     );
   }

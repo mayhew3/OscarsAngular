@@ -14,6 +14,7 @@ import {Category} from '../interfaces/Category';
 import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
+import {LoggerService} from './logger.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,8 @@ export class InMemoryDataService implements InMemoryDbService {
 
   /////////// helpers ///////////////
 
-  constructor(private callbackService: InMemoryCallbacksService) {
+  constructor(private callbackService: InMemoryCallbacksService,
+              private logger: LoggerService) {
   }
 
   private static finishOptions(options: ResponseOptions, {headers, url}: RequestInfo): ResponseOptions {
@@ -91,7 +93,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   // noinspection JSUnusedGlobalSymbols
   put(requestInfo: RequestInfo): Observable<Response> {
-    console.log('HTTP override: PUT');
+    this.logger.log('HTTP override: PUT');
     const collectionName = requestInfo.collectionName;
     if (collectionName === 'nominees') {
       this.updateNomination(requestInfo);
@@ -233,7 +235,7 @@ export class InMemoryDataService implements InMemoryDbService {
           readOnly++;
         }
       });
-    console.log(`Read-only: ${readOnly}, Writeable: ${writeable}`);
+    this.logger.log(`Read-only: ${readOnly}, Writeable: ${writeable}`);
   }
 
   private updateOdds(requestInfo: RequestInfo): Observable<Response> {
@@ -309,7 +311,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<Response> {
-    console.log('HTTP GET override');
+    this.logger.log('HTTP GET override');
 
     const person_id = requestInfo.query.get('person_id')[0];
     const year = requestInfo.query.get('year')[0];
@@ -337,7 +339,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   private getMaxYear(requestInfo: RequestInfo): Observable<Response> {
-    console.log('HTTP GET override');
+    this.logger.log('HTTP GET override');
 
     const maxYear = _.max(_.map(this.categories, category => _.max(_.map(category.nominees, nominee => nominee.year))));
     const data = [{maxYear}];
@@ -346,7 +348,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   private getEventsSinceDate(requestInfo: RequestInfo): Observable<Response> {
-    console.log('HTTP GET override');
+    this.logger.log('HTTP GET override');
 
     const entries = requestInfo.query.entries();
     const since_date = entries.next().value[1][0];

@@ -6,6 +6,7 @@ import {GetOdds, OddsInProgress, UpdatePlayerOdds} from '../actions/odds.action'
 import {OddsBundle} from '../interfaces/OddsBundle';
 import produce from 'immer';
 import {ApiService} from '../services/api.service';
+import {LoggerService} from '../services/logger.service';
 
 export class OddsStateModel {
   oddsBundle: OddsBundle;
@@ -28,7 +29,8 @@ export class OddsState {
 
   readonly apiUrl = '/api/odds';
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService,
+              private logger: LoggerService) {
   }
 
   @Selector()
@@ -46,7 +48,7 @@ export class OddsState {
           draft.updating = false;
         }));
         this.stateChanges++;
-        console.log('ODDS State Change #' + this.stateChanges);
+        this.logger.log('ODDS State Change #' + this.stateChanges);
       })
     );
   }

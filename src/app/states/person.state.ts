@@ -7,6 +7,7 @@ import {Injectable} from '@angular/core';
 import produce from 'immer';
 import _ from 'underscore';
 import {ApiService} from '../services/api.service';
+import {LoggerService} from '../services/logger.service';
 
 export class PersonStateModel {
   persons: Person[];
@@ -22,7 +23,8 @@ export class PersonStateModel {
 export class PersonState {
   stateChanges = 0;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService,
+              private logger: LoggerService) {
   }
 
   @Action(GetPersons)
@@ -35,7 +37,7 @@ export class PersonState {
           persons: result
         });
         this.stateChanges++;
-        console.log('PERSONS State Change #' + this.stateChanges);
+        this.logger.log('PERSONS State Change #' + this.stateChanges);
       })
     );
   }

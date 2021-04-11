@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import _ from 'underscore';
 
 export class ArrayUtil {

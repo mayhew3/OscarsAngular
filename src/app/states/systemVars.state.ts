@@ -6,6 +6,7 @@ import {SystemVars} from '../interfaces/SystemVars';
 import {ChangeCurrentYear, GetSystemVars, VotingLock, VotingUnlock} from '../actions/systemVars.action';
 import produce from 'immer';
 import {ApiService} from '../services/api.service';
+import {LoggerService} from '../services/logger.service';
 
 export class SystemVarsStateModel {
   systemVars: SystemVars;
@@ -24,7 +25,8 @@ export class SystemVarsState {
 
   readonly apiUrl = '/api/systemVars';
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService,
+              private logger: LoggerService) {
   }
 
   @Action(GetSystemVars)
@@ -37,7 +39,7 @@ export class SystemVarsState {
           systemVars: result[0]
         });
         this.stateChanges++;
-        console.log('SYSTEMVARS State Change #' + this.stateChanges);
+        this.logger.log('SYSTEMVARS State Change #' + this.stateChanges);
       })
     );
   }

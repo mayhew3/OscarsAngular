@@ -12,6 +12,7 @@ import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
 import {WritableDraft} from 'immer/dist/types/types-external';
 import {ApiService} from '../services/api.service';
+import {LoggerService} from '../services/logger.service';
 
 export class CategoryStateModel {
   categories: Category[];
@@ -27,7 +28,8 @@ export class CategoryStateModel {
 export class CategoryState {
   stateChanges = 0;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService,
+              private logger: LoggerService) {
   }
 
   @Action(GetCategories)
@@ -47,7 +49,7 @@ export class CategoryState {
         });
         this.stateChanges++;
 
-        console.log('CATEGORIES State Change #' + this.stateChanges);
+        this.logger.log('CATEGORIES State Change #' + this.stateChanges);
       })
     );
   }

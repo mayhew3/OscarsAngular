@@ -4,6 +4,7 @@ import {Socket} from 'socket.io-client';
 import _ from 'underscore';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {LoggerService} from './logger.service';
 
 @Injectable()
 export class SocketService {
@@ -12,16 +13,16 @@ export class SocketService {
   private socket: Socket;
   private connectedSubject = new BehaviorSubject<boolean>(false);
 
-  constructor() {
+  constructor(private logger: LoggerService) {
   }
 
   init(socket: Socket): void {
     this.socket = socket;
     this.socket.on('error', msg => {
-      console.log(`Connect Error: ${JSON.stringify(msg)}`);
+      this.logger.log(`Connect Error: ${JSON.stringify(msg)}`);
     });
     this.socket.on('connect', () => {
-      console.log('Connected to socket!');
+      this.logger.log('Connected to socket!');
       const listeners = ArrayUtil.cloneArray(this.pendingListeners);
       _.each(listeners, (pendingListener: PendingListener) => {
         this.on(pendingListener.channel, pendingListener.callback);

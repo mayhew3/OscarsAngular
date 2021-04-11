@@ -10,6 +10,7 @@ import {SocketService} from '../app/services/socket.service';
 import {SocketServiceMock} from '../app/services/socket.mock.service';
 import {InitSocketService} from '../app/services/init-socket.service';
 import {InitSocketMockService} from '../app/services/init-socket.mock.service';
+import {LoggerService} from '../app/services/logger.service';
 
 export const environment: EnvironmentConfig = {
   production: false,
@@ -18,6 +19,7 @@ export const environment: EnvironmentConfig = {
       InMemoryDataService, { dataEncapsulation: false, delay: 0 }
     )],
   socketModule: {provide: SocketService, useClass: SocketServiceMock},
+  loggerModule: {provide: LoggerService, useClass: LoggerService},
   initSocketModule: {provide: InitSocketService, useClass: InitSocketMockService},
   clientID: 'Re282m5GM0575vOJjhpguBptT8slmIb0',
   domain: 'mayhew3.auth0.com'

@@ -8,6 +8,7 @@ import {Injectable} from '@angular/core';
 import produce from 'immer';
 import * as _ from 'underscore';
 import {ApiService} from '../services/api.service';
+import {LoggerService} from '../services/logger.service';
 
 export class VoteStateModel {
   votes: Vote[];
@@ -23,7 +24,8 @@ export class VoteStateModel {
 export class VoteState {
   stateChanges = 0;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService,
+              private logger: LoggerService) {
   }
 
   @Action(GetVotes)
@@ -38,7 +40,7 @@ export class VoteState {
           votes: result
         });
         this.stateChanges++;
-        console.log('VOTES State Change #' + this.stateChanges);
+        this.logger.log('VOTES State Change #' + this.stateChanges);
       })
     );
   }

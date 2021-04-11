@@ -6,6 +6,7 @@ import {VotingLock, VotingUnlock} from '../actions/systemVars.action';
 import {OddsInProgress, UpdatePlayerOdds} from '../actions/odds.action';
 import {Store} from '@ngxs/store';
 import _ from 'underscore';
+import {LoggerService} from './logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class MessagingService {
   listenersInitialized = false;
 
   constructor(private socket: SocketService,
-              private store: Store) {
+              private store: Store,
+              private logger: LoggerService) {
     this.maybeInitListeners();
   }
 
@@ -24,7 +26,7 @@ export class MessagingService {
 
   private addListener(channelName: string, createActions: (msg: any) => any[]): void {
     this.socket.on(channelName, msg => {
-      console.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
+      this.logger.log(`Received ${channelName} message: ${JSON.stringify(msg)}`);
       const actions = createActions(msg);
       _.each(actions, action => this.store.dispatch(action));
     });
