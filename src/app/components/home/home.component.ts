@@ -35,10 +35,6 @@ export class HomeComponent implements OnInit {
     return this.categoryService.getCategoryCount();
   }
 
-  get failedEmail(): boolean {
-    return this.auth.failedEmail;
-  }
-
   numVotesRemaining(): Observable<number> {
     const categoryCount$ = this.categoryCount();
     const votes$ = this.personService.me$.pipe(
