@@ -79,7 +79,9 @@ import { ErrorNotificationComponent } from './components/error-notification/erro
       VoteState,
       FinalResultState,
       OddsState
-    ]),
+    ], {
+      developmentMode: !environment.production
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     // use in-memory for CLI environment, regular http for prod and local server
