@@ -1,5 +1,31 @@
+@import '../slate_variables';
+
+.oscarBackground {
+  background-image: url('../assets/crowd4.jpg');
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .wideContainer {
   padding-left: 0;
   padding-right: 0;
   padding-top: 57px;
+  background-color: $body-bg;
+}
+
+.centerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.textContainer {
+  text-align: center;
+  background-color: $body-bg;
+  padding: 30px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 0.19rem black;
 }

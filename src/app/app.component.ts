@@ -8,6 +8,9 @@ import {MessagingService} from './services/messaging.service';
 import {InitSocketService} from './services/init-socket.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ConnectionProblemComponent} from './components/connection-problem/connection-problem.component';
+import {ThemePalette} from '@angular/material/core';
+import {Observable} from 'rxjs';
+import {Person} from './interfaces/Person';
 
 @Component({
   selector: 'osc-root',
@@ -15,6 +18,9 @@ import {ConnectionProblemComponent} from './components/connection-problem/connec
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  authenticatingColor: ThemePalette = 'primary';
+  loadingColor: ThemePalette = 'accent';
 
   constructor(public auth: MyAuthService,
               public systemVarsService: SystemVarsService,
@@ -41,6 +47,14 @@ export class AppComponent {
       };
       this.socket.on('connect', closeModal);
     });
+  }
+
+  get me$(): Observable<Person> {
+    return this.personService.me$;
+  }
+
+  get failedEmail(): boolean {
+    return this.personService.failedEmail;
   }
 
   stillLoading(): boolean {

@@ -1,6 +1,7 @@
 <!-- src/app/app.component.html -->
 
-<nav class="navbar navbar-expand navbar-default navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand navbar-default navbar-dark bg-dark fixed-top"
+     *ngIf="(auth.isAuthenticated$ | async) && !auth.failedEmail && (me$ | async)">
   <div class="container">
 
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -20,7 +21,7 @@
           </a>
         </li>
         <li class="nav-item"
-          *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
+            *ngIf="!stillLoading() && (auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
           <a class="nav-link" routerLink="/vote">Vote</a>
         </li>
         <li class="nav-item"
@@ -48,6 +49,61 @@
   </div>
 </nav>
 
-<main class="container wideContainer">
-  <router-outlet></router-outlet>
-</main>
+<div class="oscarBackground h-100">
+
+  <div class="h-100"
+       *ngIf="(auth.isLoading$ | async) === false; else authenticating">
+    <div class="h-100"
+         *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+      <div class="h-100"
+           *ngIf="(!failedEmail) else invalidUser">
+        <div class="h-100"
+             *ngIf="(me$ | async) else loading">
+
+          <main class="container wideContainer">
+            <router-outlet></router-outlet>
+          </main>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #loggedOut>
+  <div class="centerContainer">
+    <button class="btn btn-success"
+            (click)="auth.login()">Login</button>
+  </div>
+</ng-template>
+
+<ng-template #invalidUser>
+  <div class="centerContainer">
+    <div class="textContainer">
+      <p>No user account found for google address. Could your invite be for a different gmail address?</p>
+      <button class="btn btn-success"
+              (click)="auth.login()">Login</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="centerContainer">
+    <div class="textContainer">
+      <p>Loading from server...</p>
+      <mat-spinner [diameter]="50"
+                   [color]="loadingColor"></mat-spinner>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #authenticating>
+  <div class="centerContainer">
+    <div class="textContainer">
+      <p>Logging in...</p>
+      <mat-spinner [diameter]="50"
+                   [color]="authenticatingColor"></mat-spinner>
+    </div>
+  </div>
+</ng-template>
