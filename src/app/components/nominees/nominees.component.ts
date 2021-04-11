@@ -139,17 +139,14 @@ export class NomineesComponent implements OnInit {
 
   showNominees(): Observable<boolean> {
     return this.systemVarsService.canVote().pipe(
-      map(canVote => !this.stillLoading() && (canVote || !this.votingMode()))
+      map(canVote => canVote || !this.votingMode())
     );
   }
 
-  showVotingClosedMessage(): boolean {
-    return !this.stillLoading() &&
-      this.votingMode() && !this.systemVarsService.canVote();
-  }
-
-  stillLoading(): boolean {
-    return false;
+  showVotingClosedMessage(): Observable<boolean> {
+    return this.systemVarsService.canVote().pipe(
+      map(canVote => this.votingMode() && canVote === false)
+    );
   }
 
   getMainLineText(nominee: Nominee): string {

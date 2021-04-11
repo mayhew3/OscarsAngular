@@ -88,10 +88,6 @@ export class CategoryServiceStub {
   deleteWinnerForCurrentYear(category: Category, nominee: Nominee) {
   }
 
-  stillLoading(): boolean {
-    return false;
-  }
-
   // DATA HELPERS
 
   getDataWithCacheUpdate<T>(getCallback): Observable<T> {

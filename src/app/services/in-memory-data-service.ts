@@ -15,6 +15,7 @@ import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
+import {Winner} from '../interfaces/Winner';
 
 @Injectable({
   providedIn: 'root',
@@ -295,7 +296,7 @@ export class InMemoryDataService implements InMemoryDbService {
   }
 
   // noinspection JSMethodCanBeStatic
-  private createNomineeCopy(nominee): any {
+  private createNomineeCopy(nominee): Nominee {
     return {
       id: nominee.id,
       nominee: nominee.nominee,
@@ -307,6 +308,17 @@ export class InMemoryDataService implements InMemoryDbService {
       odds_user: nominee.odds_user,
       odds_numerator: nominee.odds_numerator,
       odds_denominator: nominee.odds_denominator,
+    };
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private createWinnerCopy(winner): Winner {
+    return {
+      category_id: winner.category_id,
+      declared: winner.declared,
+      nomination_id: winner.nomination_id,
+      year: winner.year,
+      id: winner.id
     };
   }
 
@@ -330,7 +342,10 @@ export class InMemoryDataService implements InMemoryDbService {
           .map(this.createNomineeCopy)
           .value(),
         voted_on: this.getVoteForCategory(category.id, personIDNum, yearNum),
-        winners: _.where(category.winners, {year: yearNum})
+        winners: _.chain(category.winners)
+          .where({year: yearNum})
+          .map(this.createWinnerCopy)
+          .value()
       };
       data.push(copyCategory);
     });

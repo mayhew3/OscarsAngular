@@ -23,13 +23,13 @@ export class AppComponent {
   loadingColor: ThemePalette = 'accent';
 
   constructor(public auth: MyAuthService,
+              private messagingService: MessagingService,
               public systemVarsService: SystemVarsService,
               private categoryService: CategoryService,
               private socket: SocketService,
               private initSocket: InitSocketService,
               private personService: PersonService,
-              private modalService: NgbModal,
-              private messagingService: MessagingService) {
+              private modalService: NgbModal) {
     personService.me$.subscribe();
     this.initDisconnectPopup();
   }
@@ -55,10 +55,6 @@ export class AppComponent {
 
   get failedEmail(): boolean {
     return this.personService.failedEmail;
-  }
-
-  stillLoading(): boolean {
-    return this.systemVarsService.stillLoading();
   }
 
   showHealthySocketStatus(): boolean {

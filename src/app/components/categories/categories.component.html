@@ -17,9 +17,7 @@
     </div>
   </div>
 
-  <p *ngIf="stillLoading()">Loading...</p>
-  <p *ngIf="showVotingClosedMessage()">Voting is currently closed!</p>
-
+  <p *ngIf="showVotingClosedMessage() | async">Voting is currently closed!</p>
 
   <div class="row" *ngIf="showCategoriesWithWinners$() | async">
 

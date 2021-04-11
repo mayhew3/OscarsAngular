@@ -27,15 +27,11 @@ export class PersonService implements OnDestroy {
     filter(persons => !!persons)
   );
 
-  private fetching = false;
-
   private destroy$ = new Subject();
 
   constructor(private auth: MyAuthService,
               private store: Store) {
-    this.fetching = true;
     this.store.dispatch(new GetPersons());
-    this.persons.subscribe(() => this.fetching = false);
     this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
   }
 
@@ -68,10 +64,6 @@ export class PersonService implements OnDestroy {
     return this.persons.pipe(
       map(persons => _.findWhere(persons, {email}))
     );
-  }
-
-  stillLoading(): boolean {
-    return this.fetching;
   }
 
   getFullName(person: Person): string {

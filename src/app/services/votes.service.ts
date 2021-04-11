@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Vote} from '../interfaces/Vote';
 import {combineLatest, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
@@ -18,14 +18,10 @@ import {ApiService} from './api.service';
 })
 export class VotesService {
   votesUrl = '/api/votes';
-  isLoading = true;
 
   votes: Observable<Vote[]> = this.store.select(state => state.votes).pipe(
     map(votesContainer => votesContainer.votes),
-    filter(votes => !!votes),
-    tap(() => {
-      this.isLoading = false;
-    })
+    filter(votes => !!votes)
   );
 
   myVotes$ = combineLatest([this.personService.me$, this.votes]).pipe(
@@ -41,10 +37,6 @@ export class VotesService {
     ).subscribe(systemVars => {
       this.store.dispatch(new GetVotes(systemVars.curr_year));
     });
-  }
-
-  stillLoading(): boolean {
-    return this.isLoading;
   }
 
   // SCOREBOARD

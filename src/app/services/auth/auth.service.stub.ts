@@ -42,10 +42,6 @@ export class AuthServiceStub {
     return of(TestPersonList[0]);
   }
 
-  public stillLoading(): boolean {
-    return false;
-  }
-
   public isUser(): boolean {
     return true;
   }
