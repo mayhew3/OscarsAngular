@@ -9,14 +9,14 @@
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async)">
           <a class="nav-link" routerLink="/">
-                      <span style="font-size: 1em; color: LightGreen;"
-                            *ngIf="showHealthySocketStatus() && socketConnected()">
-                        <i class="fas fa-check-circle"></i>
-                      </span>
+            <span style="font-size: 1em; color: LightGreen;"
+                  *ngIf="showHealthySocketStatus() && socketConnected()">
+              <i class="fas fa-check-circle"></i>
+            </span>
             <span style="font-size: 1em; color: Tomato;"
                   *ngIf="!socketConnected()">
-                        <i class="fas fa-exclamation-triangle"></i>
-                      </span>
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
             Home
           </a>
         </li>
