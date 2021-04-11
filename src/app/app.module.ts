@@ -83,7 +83,9 @@ import { ErrorNotificationComponent } from './components/error-notification/erro
       developmentMode: !environment.production
     }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
-    NgxsLoggerPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot({
+      disabled: environment.production
+    }),
     // use in-memory for CLI environment, regular http for prod and local server
     AuthModule.forRoot({
       domain: 'mayhew3.auth0.com',
