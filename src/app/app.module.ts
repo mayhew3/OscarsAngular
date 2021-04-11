@@ -104,6 +104,7 @@ import { ErrorNotificationComponent } from './components/error-notification/erro
     MyAuthService,
     environment.socketModule,
     environment.initSocketModule,
+    environment.loggerModule,
     InMemoryCallbacksService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
   ],
