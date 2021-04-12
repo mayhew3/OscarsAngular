@@ -43,13 +43,13 @@
 .connectedStatus {
   color: lightgreen;
   animation-name: example;
-  animation-duration: 3s;
+  animation-duration: 2s;
   animation-iteration-count: infinite;
 }
 
 @keyframes example {
   0%   {color: lightgreen;}
-  50%  {color: color.scale(lightgreen, $alpha: -50%);}
+  50%  {color: color.scale(lightgreen, $alpha: -40%);}
   100% {color: lightgreen;}
 }
 
