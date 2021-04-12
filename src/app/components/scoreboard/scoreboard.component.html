@@ -46,7 +46,8 @@
           <div class="card-body py-0 px-3">
             <div class="row no-gutters mainRow">
               <div class="col-5">
-                <span>{{getPersonName(scoreData.person) | async}}</span>
+                <span [ngClass]="scoreData.person.connected ? 'connectedStatus' : 'disconnectedStatus'">o</span>
+                <span class="ml-1">{{getPersonName(scoreData.person) | async}}</span>
               </div>
               <div class="col-4">
 

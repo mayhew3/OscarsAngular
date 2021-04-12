@@ -39,6 +39,14 @@
   align-items: center;
 }
 
+.connectedStatus {
+  color: green;
+}
+
+.disconnectedStatus {
+  color: gray;
+}
+
 .scorePositive {
   font-size: 16pt;
   color: lighten(forestgreen, 20%);
