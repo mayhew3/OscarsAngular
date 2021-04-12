@@ -7,6 +7,7 @@ import {OddsInProgress, UpdatePlayerOdds} from '../actions/odds.action';
 import {Store} from '@ngxs/store';
 import _ from 'underscore';
 import {LoggerService} from './logger.service';
+import {PersonConnected, PersonDisconnected} from '../actions/person.action';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,8 @@ export class MessagingService {
       this.addSingleActionListener('voting_locked', () => new VotingLock());
       this.addSingleActionListener('voting_unlocked', () => new VotingUnlock());
       this.addSingleActionListener('odds', msg => new UpdatePlayerOdds(msg));
+      this.addSingleActionListener('person_connected', msg => new PersonConnected(msg.person_id));
+      this.addSingleActionListener('person_disconnected', msg => new PersonDisconnected(msg.person_id));
 
       this.listenersInitialized = true;
     }
