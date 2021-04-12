@@ -1,4 +1,4 @@
-@import '../slate_variables';
+@import '../darkly_variables';
 
 .oscarBackground {
   background-image: url('../assets/crowd4.jpg');
@@ -11,7 +11,6 @@
 .wideContainer {
   padding-left: 0;
   padding-right: 0;
-  padding-top: 57px;
   background-color: $body-bg;
 }
 
