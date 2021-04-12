@@ -74,6 +74,39 @@ export class PersonService implements OnDestroy {
     }
   }
 
+  getPersonName(person: Person): Observable<string> {
+    return this.persons.pipe(
+      map(persons => {
+        if (this.hasDuplicateFirstName(person, persons)) {
+          if (this.hasDuplicateFirstAndLastName(person, persons)) {
+            if (!!person.middle_name) {
+              return person.first_name + ' ' + person.middle_name.charAt(0);
+            } else {
+              return person.first_name + ' ' + person.last_name.charAt(0);
+            }
+          } else {
+            return person.first_name + ' ' + person.last_name.charAt(0);
+          }
+        } else {
+          return person.first_name;
+        }
+      })
+    );
+  }
+
+  hasDuplicateFirstName(person: Person, persons: Person[]): boolean {
+    const matching = _.filter(persons, otherPerson => otherPerson.id !== person.id &&
+      otherPerson.first_name === person.first_name);
+    return matching.length > 0;
+  }
+
+  hasDuplicateFirstAndLastName(person: Person, persons: Person[]): boolean {
+    const matching = _.filter(persons, otherPerson => otherPerson.id !== person.id &&
+      otherPerson.first_name === person.first_name &&
+      otherPerson.last_name === person.last_name);
+    return matching.length > 0;
+  }
+
 
   // DATA HELPERS
 
