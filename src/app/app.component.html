@@ -73,8 +73,8 @@
 
 <ng-template #loggedOut>
   <div class="centerContainer">
-    <button class="btn btn-success"
-            (click)="auth.login()">Login</button>
+    <button class="btn btn-lg btn-success signInButton px-5 py-3"
+            (click)="auth.login()">Sign In</button>
   </div>
 </ng-template>
 
@@ -82,8 +82,8 @@
   <div class="centerContainer">
     <div class="textContainer">
       <p>No user account found for google address. Could your invite be for a different gmail address?</p>
-      <button class="btn btn-success"
-              (click)="auth.login()">Login</button>
+      <button class="btn btn-lg btn-success signInButton p-2"
+              (click)="auth.login()">Sign In</button>
     </div>
   </div>
 </ng-template>

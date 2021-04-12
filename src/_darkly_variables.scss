@@ -1,3 +1,4 @@
+@use 'sass:color';
 // Darkly 4.5.2
 // Bootswatch
 
@@ -5,44 +6,46 @@
 // Color system
 //
 
-$white:    #fff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #ebebeb !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #888 !default;
-$gray-700: #444 !default;
-$gray-800: #303030 !default;
-$gray-900: #222 !default;
-$black:    #000 !default;
-
 $blue:    #375a7f !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #e83e8c !default;
 $red:     #e74c3c !default;
 $orange:  #fd7e14 !default;
-$yellow:  #f39c12 !default;
+$yellow:  yellow !default;
 $green:   #00bc8c !default;
 $teal:    #20c997 !default;
 $cyan:    #3498db !default;
 
-$primary:       $blue !default;
-$secondary:     $gray-700 !default;
-$success:       $green !default;
-$info:          $cyan !default;
-$warning:       $yellow !default;
-$danger:        $red !default;
-$light:         $gray-500 !default;
-$dark:          $gray-800 !default;
+$bodyBase: color.scale($purple, $lightness: -70%, $saturation: -55%) !default;
 
-$yiq-contrasted-threshold:  175 !default;
+$white:    #fff !default;
+$gray-100: color.scale($bodyBase, $lightness: 85%, $saturation: 80%) !default;
+$gray-200: color.scale($bodyBase, $lightness: 75%, $saturation: 70%) !default;
+$gray-300: color.scale($bodyBase, $lightness: 65%, $saturation: 60%) !default;
+$gray-400: color.scale($bodyBase, $lightness: 55%, $saturation: 50%) !default;
+$gray-500: color.scale($bodyBase, $lightness: 45%, $saturation: 40%) !default;
+$gray-600: color.scale($bodyBase, $lightness: 35%, $saturation: 30%) !default;
+$gray-700: color.scale($bodyBase, $lightness: 25%, $saturation: 20%) !default;
+$gray-800: color.scale($bodyBase, $lightness: 15%, $saturation: 10%) !default;
+$gray-900: $bodyBase !default;
+$black:    #000 !default;
 
 // Body
 
-$body-bg:                   $gray-900 !default;
+$body-bg:                   $bodyBase;
 $body-color:                $white !default;
+
+$primary:       color.scale($blue, $lightness: -40%) !default;
+$secondary:     color.scale($body-bg, $lightness: 30%) !default;
+$success:       color.scale($yellow, $lightness: 50%, $saturation: -20%) !default;
+$info:          $cyan !default;
+$warning:       $orange !default;
+$danger:        $red !default;
+$light:         $gray-500 !default;
+$dark:          color.scale($body-bg, $lightness: -25%, $saturation: -25%) !default;
+
+$yiq-contrasted-threshold:  175 !default;
 
 // Links
 

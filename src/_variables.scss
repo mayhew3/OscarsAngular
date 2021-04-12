@@ -1,4 +1,7 @@
+@use 'sass:color';
+@import "darkly_variables";
+
 $highlight: #E6D36C;
 $muted: #7799BB;
-$personal: #4f1561;
+$personal: color.scale($teal, $lightness: -50%);
 $silver: #D0D6DE;
