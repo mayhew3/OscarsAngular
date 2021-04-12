@@ -89,6 +89,8 @@ export class InMemoryDataService implements InMemoryDbService {
       return this.getEventsSinceDate(requestInfo);
     } else if (collectionName === 'maxYear') {
       return this.getMaxYear(requestInfo);
+    } else if (collectionName === 'persons') {
+      return this.getPersons(requestInfo);
     }
   }
 
@@ -322,9 +324,19 @@ export class InMemoryDataService implements InMemoryDbService {
     };
   }
 
-  private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<Response> {
-    this.logger.log('HTTP GET override');
+  private getPersons(requestInfo: RequestInfo): Observable<Response> {
+    const data = [];
 
+    _.forEach(this.persons, person => {
+      const personCopy = {...person};
+      personCopy.connected = personCopy.first_name.length % 2 === 1;
+      data.push(personCopy);
+    });
+
+    return this.packageUpResponse(data, requestInfo);
+  }
+
+  private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<Response> {
     const person_id = requestInfo.query.get('person_id')[0];
     const year = requestInfo.query.get('year')[0];
 
