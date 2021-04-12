@@ -1,0 +1,18 @@
+@use 'sass:color';
+@import '../../../slate_variables';
+@import '../../../variables';
+
+.normalText {
+  color: white;
+  font-size: 2rem;
+}
+
+.connectedText {
+  color: color.scale(green, $lightness: 30%);
+  font-weight: bold;
+}
+
+.disconnectedText {
+  color: color.scale(red, $lightness: 30%);
+  font-weight: bold;
+}

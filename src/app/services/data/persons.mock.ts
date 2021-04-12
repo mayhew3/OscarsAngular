@@ -1,7 +1,7 @@
 import {Person} from '../../interfaces/Person';
 /* eslint-disable  @typescript-eslint/quotes */
 /* eslint-disable quote-props */
-export const MockPersonList: Person[] = [
+export const MockPersonList: any[] = [
   {
     "role": "user",
     "odds_filter": "show",

@@ -2,7 +2,7 @@ import {Person} from '../interfaces/Person';
 import {Action, State, StateContext} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {ChangeOddsView, GetPersons} from '../actions/person.action';
+import {ChangeOddsView, GetPersons, PersonConnected, PersonDisconnected} from '../actions/person.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
 import _ from 'underscore';
@@ -59,5 +59,26 @@ export class PersonState {
       })
     );
   }
+
+  @Action(PersonConnected)
+  personConnected({getState, setState}: StateContext<PersonStateModel>, action: PersonConnected): void {
+    setState(
+      produce(draft => {
+        const existing = _.findWhere(draft.persons, {id: action.person_id});
+        existing.connected = true;
+      })
+    );
+  }
+
+  @Action(PersonDisconnected)
+  personDisconnected({getState, setState}: StateContext<PersonStateModel>, action: PersonDisconnected): void {
+    setState(
+      produce(draft => {
+        const existing = _.findWhere(draft.persons, {id: action.person_id});
+        existing.connected = false;
+      })
+    );
+  }
+
 }
 

@@ -16,7 +16,9 @@ export class SocketServer {
     'voting_unlocked',
     'add_winner',
     'remove_winner',
-    'reset_winners'
+    'reset_winners',
+    'person_connected',
+    'person_disconnected'
   ];
 
   personalChannels = [
@@ -35,7 +37,11 @@ export class SocketServer {
       let person_id;
       if (!!person_id_str) {
         person_id = +person_id_str;
+        const wasConnected = this.personIsConnected(person_id);
         this.addClientForPerson(person_id, client);
+        if (!wasConnected) {
+          this.emitToAll('person_connected', {person_id});
+        }
       }
 
       this.initAllRooms(client, person_id);
@@ -45,7 +51,11 @@ export class SocketServer {
         ArrayUtil.removeFromArray(this.clients, client);
 
         if (!!person_id) {
+          const wasConnected = this.personIsConnected(person_id);
           this.removeClientForPerson(person_id, client);
+          if (wasConnected && !this.personIsConnected(person_id)) {
+            this.emitToAll('person_disconnected', {person_id});
+          }
         }
       });
     });
@@ -114,6 +124,10 @@ export class SocketServer {
     this.emitToClients(clientsForEveryoneExceptPerson, channel, msg);
   };
 
+  getConnectedPersons(): number[] {
+    return _.map(this.persons, p => p.id);
+  }
+
 
   /* PRIVATE METHODS */
 
@@ -156,6 +170,10 @@ export class SocketServer {
     _.each(clients, client => {
       client.emit(channel, msg);
     });
+  }
+
+  personIsConnected(person_id: number): boolean {
+    return this.getClientsForPerson(person_id).length > 0;
   }
 
 }

@@ -40,6 +40,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ConnectionProblemComponent } from './components/connection-problem/connection-problem.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ErrorNotificationComponent } from './components/error-notification/error-notification.component';
+import { PersonConnectionSnackBarComponent } from './components/person-connection-snack-bar/person-connection-snack-bar.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ErrorNotificationComponent } from './components/error-notification/erro
     PersonDetailComponent,
     AdminDashboardComponent,
     ConnectionProblemComponent,
-    ErrorNotificationComponent
+    ErrorNotificationComponent,
+    PersonConnectionSnackBarComponent
   ],
   imports: [
     BrowserModule,

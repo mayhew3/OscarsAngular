@@ -19,6 +19,9 @@ import {ArrayUtil} from '../../utility/ArrayUtil';
 import {Select} from '@ngxs/store';
 import {OddsState} from '../../states/odds.state';
 import {ThemePalette} from '@angular/material/core';
+import {SocketService} from '../../services/socket.service';
+import {PersonConnectionSnackBarComponent} from '../person-connection-snack-bar/person-connection-snack-bar.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -42,7 +45,9 @@ export class ScoreboardComponent implements OnInit {
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private voteService: VotesService,
-              private oddsService: OddsService) {
+              private oddsService: OddsService,
+              private socket: SocketService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -51,6 +56,14 @@ export class ScoreboardComponent implements OnInit {
     this.personService.me$.subscribe(person => {
       this.me = person;
       this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
+    });
+
+    this.socket.on('person_connected', msg => {
+      this.showPersonSnackBar(msg.person_id, true);
+    });
+
+    this.socket.on('person_disconnected', msg => {
+      this.showPersonSnackBar(msg.person_id, false);
     });
   }
 
@@ -281,36 +294,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   getPersonName(person: Person): Observable<string> {
-    return this.personService.persons.pipe(
-      map(persons => {
-        if (this.hasDuplicateFirstName(person, persons)) {
-          if (this.hasDuplicateFirstAndLastName(person, persons)) {
-            if (!!person.middle_name) {
-              return person.first_name + ' ' + person.middle_name.charAt(0);
-            } else {
-              return person.first_name + ' ' + person.last_name.charAt(0);
-            }
-          } else {
-            return person.first_name + ' ' + person.last_name.charAt(0);
-          }
-        } else {
-          return person.first_name;
-        }
-      })
-    );
-  }
-
-  hasDuplicateFirstName(person: Person, persons: Person[]): boolean {
-    const matching = _.filter(persons, otherPerson => otherPerson.id !== person.id &&
-      otherPerson.first_name === person.first_name);
-    return matching.length > 0;
-  }
-
-  hasDuplicateFirstAndLastName(person: Person, persons: Person[]): boolean {
-    const matching = _.filter(persons, otherPerson => otherPerson.id !== person.id &&
-      otherPerson.first_name === person.first_name &&
-      otherPerson.last_name === person.last_name);
-    return matching.length > 0;
+    return this.personService.getPersonName(person);
   }
 
   getMyLastWinnerScoreClass(): string {
@@ -435,6 +419,22 @@ export class ScoreboardComponent implements OnInit {
       map(categories => categories.length)
     );
   }
+
+  private showPersonSnackBar(person_id: number, connected: boolean): void {
+    this.personService.getPerson(person_id).subscribe(person => {
+      this.snackBar.openFromComponent(PersonConnectionSnackBarComponent,  {
+        duration: 3000,
+        panelClass: ['playerConnectSnackBar'],
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        data: {
+          person,
+          connected
+        }
+      });
+    });
+  }
+
 }
 
 class ScoreData {
