@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import "../../../variables";
 
 .scoreboard-body {
@@ -40,7 +41,16 @@
 }
 
 .connectedStatus {
-  color: green;
+  color: lightgreen;
+  animation-name: example;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+  0%   {color: lightgreen;}
+  50%  {color: color.scale(lightgreen, $alpha: -50%);}
+  100% {color: lightgreen;}
 }
 
 .disconnectedStatus {
