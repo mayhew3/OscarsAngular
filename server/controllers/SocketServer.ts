@@ -114,6 +114,10 @@ export class SocketServer {
     this.emitToClients(clientsForEveryoneExceptPerson, channel, msg);
   };
 
+  getConnectedPersons(): number[] {
+    return _.map(this.persons, p => p.id);
+  }
+
 
   /* PRIVATE METHODS */
 

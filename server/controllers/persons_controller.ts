@@ -1,7 +1,10 @@
 import * as model from './model';
 import _ from 'underscore';
+import {socketServer} from '../www';
 
 export const getPersons = (request, response) => {
+  const connectedIds = socketServer.getConnectedPersons();
+
   model.Person.findAll().then(persons => {
     model.PersonGroupRole.findAll().then(personGroupRoles => {
       const outputObject = [];
@@ -11,6 +14,7 @@ export const getPersons = (request, response) => {
         const person_group_ids = _.pluck(person_groups, 'person_group_id');
         const person_object = person.dataValues;
         person_object.groups = person_group_ids;
+        person_object.connected = _.contains(connectedIds, person.id);
 
         outputObject.push(person_object);
       });
