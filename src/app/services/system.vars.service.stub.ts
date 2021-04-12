@@ -17,11 +17,4 @@ export class SystemVarsServiceStub {
     return true;
   }
 
-  public stillLoading(): boolean {
-    return false;
-  }
-
-  maybeRefreshCache(): void {
-  }
-
 }

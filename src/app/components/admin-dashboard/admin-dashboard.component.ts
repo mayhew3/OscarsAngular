@@ -57,10 +57,6 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  stillLoading(): boolean {
-    return this.systemVarsService.stillLoading();
-  }
-
   isVotingOpen(): Observable<boolean> {
     return this.systemVarsService.canVote();
   }

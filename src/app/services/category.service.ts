@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {combineLatest, Observable} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {filter, map, tap} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -23,18 +23,13 @@ export class CategoryService {
 
   categories: Observable<Category[]> = this.store.select(state => state.categories).pipe(
     map(categories => categories.categories),
-    filter(categories => !!categories),
-    tap(() => {
-      this.fetching = false;
-    })
+    filter(categories => !!categories)
   );
 
   maxYear: Observable<MaxYear> = this.store.select(state => state.maxYear).pipe(
     map(state => state.maxYear),
     filter(maxYear => !!maxYear)
   );
-
-  private fetching = false;
 
   constructor(private personService: PersonService,
               private systemVarsService: SystemVarsService,
@@ -153,13 +148,6 @@ export class CategoryService {
     } else {
       return undefined;
     }
-  }
-
-
-  // LOADING
-
-  stillLoading(): boolean {
-    return this.fetching;
   }
 
   // MAX YEAR

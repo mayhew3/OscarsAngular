@@ -49,8 +49,11 @@ export class CategoriesComponent implements OnInit {
         const sorted = ArrayUtil.cloneArray(categories);
         fast_sort(sorted)
           .by([
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             {desc: category => this.mostRecentWinDate(category)},
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             {asc: category => category.points},
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             {asc: category => category.name}
           ]);
         return sorted;
@@ -153,8 +156,7 @@ export class CategoriesComponent implements OnInit {
 
   showCategories(): Observable<boolean> {
     return this.systemVarsService.canVote().pipe(
-      map(canVote => !this.stillLoading() &&
-        (canVote || !this.votingMode()))
+      map(canVote => (canVote || !this.votingMode()))
     );
   }
 
@@ -178,9 +180,10 @@ export class CategoriesComponent implements OnInit {
     return this.categoryService.getCategorySubtitle(category);
   }
 
-  showVotingClosedMessage(): boolean {
-    return !this.stillLoading() &&
-      this.votingMode() && !this.systemVarsService.canVote();
+  showVotingClosedMessage(): Observable<boolean> {
+    return this.systemVarsService.canVote().pipe(
+      map(canVote => this.votingMode() && canVote === false)
+    );
   }
 
   votingMode(): boolean {
@@ -193,10 +196,6 @@ export class CategoriesComponent implements OnInit {
 
   winnersMode(): boolean {
     return ActiveContext.Winner === this.activeContext;
-  }
-
-  stillLoading(): boolean {
-    return false;
   }
 
   showPersonPick(category: Category): Observable<boolean> {
