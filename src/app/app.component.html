@@ -73,8 +73,14 @@
 
 <ng-template #loggedOut>
   <div class="centerContainer">
+    <div>
+    <img class="frontLogo"
+         src="assets/front_logo.svg">
+    </div>
+    <div>
     <button class="btn btn-lg btn-success signInButton px-5 py-3"
             (click)="auth.login()">Sign In</button>
+    </div>
   </div>
 </ng-template>
 

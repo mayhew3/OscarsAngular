@@ -9,6 +9,12 @@
   background-position: center;
 }
 
+.frontLogo {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+}
+
 .wideContainer {
   padding-left: 0;
   padding-right: 0;
@@ -17,7 +23,8 @@
 
 .centerContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
 }
