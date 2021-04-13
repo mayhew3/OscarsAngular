@@ -1,4 +1,5 @@
 @use 'sass:color';
+@import "../../../darkly_variables";
 @import "../../../variables";
 
 .nom-body {
@@ -47,7 +48,7 @@
 }
 
 .votedOn {
-  background-color: darkgreen;
+  background-color: color.scale($winningScoreColor, $lightness: -25%);
 }
 
 .processing {
@@ -64,7 +65,7 @@
 }
 
 .itsMe {
-  color: color.scale($personal, $lightness: 5%, $saturation: -5%);
+  color: color.scale($personal, $lightness: 65%, $saturation: -5%);
   font-weight: 600;
 }
 
@@ -88,7 +89,7 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 0.20rem 0.30rem;
   font-size: 1.10rem;
   font-weight: bold;
-  background-color: #3A3F44;
+  background-color: $gray-850;
   color: white;
 }
 
@@ -110,7 +111,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 3px;
   padding: 0;
   margin-left: 5px;
-  background-color: #3A3F44;
+  background-color: color.scale(black, $alpha: -85%);
 }
 
 .oddsBox span {

@@ -54,7 +54,7 @@
 }
 
 .votedOn {
-  background-color: darkgreen;
+  background-color: color.scale($winningScoreColor, $lightness: -35%);
 }
 
 .winner {
