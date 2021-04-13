@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row" *ngIf="isAdmin">
+  <div class="row mt-2" *ngIf="isAdmin">
 
     <div class="col-12 col-sm-6 col-lg-4">
       <div class="card navCard p-3">
@@ -39,7 +39,7 @@
 
     <div class="col-12 col-sm-6 col-lg-4">
       <div class="card navCard p-3">
-        <span>Change Year:</span><br>
+        <span>Change Year:</span>
         <div class="row">
           <div class="col-6"
                *ngFor="let year of (getPossibleYears(currentYear | async) | async)">

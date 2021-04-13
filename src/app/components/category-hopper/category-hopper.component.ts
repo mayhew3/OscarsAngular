@@ -55,6 +55,18 @@ export class CategoryHopperComponent implements OnInit {
     return ActiveContext.Vote === this.activeContext;
   }
 
+  nextDisabled(): Observable<boolean> {
+    return this.next.pipe(
+      map(next => !next)
+    );
+  }
+
+  prevDisabled(): Observable<boolean> {
+    return this.prev.pipe(
+      map(prev => !prev)
+    );
+  }
+
   numVotesComplete(): Observable<number> {
     return this.personService.me$.pipe(
       mergeMap(me => this.votesService.getVotesForCurrentYearAndPerson(me)),

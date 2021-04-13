@@ -1,4 +1,5 @@
-@import '../slate_variables';
+@use 'sass:color';
+@import '../darkly_variables';
 
 .oscarBackground {
   background-image: url('../assets/crowd4.jpg');
@@ -11,8 +12,7 @@
 .wideContainer {
   padding-left: 0;
   padding-right: 0;
-  padding-top: 57px;
-  background-color: $body-bg;
+  background-color: color.scale($body-bg, $alpha: -10%);
 }
 
 .centerContainer {
@@ -28,4 +28,11 @@
   padding: 30px;
   border-radius: 3px;
   box-shadow: 2px 2px 0.19rem black;
+}
+
+.signInButton {
+  font-size: 2.5rem;
+  font-weight: bold;
+  border-color: black;
+  border-width: 2px;
 }

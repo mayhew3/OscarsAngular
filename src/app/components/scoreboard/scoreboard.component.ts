@@ -346,17 +346,21 @@ export class ScoreboardComponent implements OnInit {
     return this.allScores.filter(otherPerson => otherPerson.score > myScore).length > 0;
   }
 
-  scorecardClass(scoreData: ScoreData): string {
-    const isEliminated = this.isEliminated(scoreData);
-    if (this.isMe(scoreData.person)) {
-      return 'myScoreCard';
-    } else if (!this.itsOver() && isEliminated && this.shouldShowEliminationOdds()) {
-      return 'eliminatedScoreCard';
-    } else if (this.anyoneIsHigherInRankings(scoreData)) {
-      return 'loserScoreCard';
-    } else {
-      return 'otherScoreCard';
-    }
+  scorecardClass(scoreData: ScoreData): Observable<string> {
+    return this.itsOver().pipe(
+      map(itsOver => {
+        const isEliminated = this.isEliminated(scoreData);
+        if (this.isMe(scoreData.person)) {
+          return 'myScoreCard';
+        } else if (!itsOver && isEliminated && this.shouldShowEliminationOdds()) {
+          return 'eliminatedScoreCard';
+        } else if (this.anyoneIsHigherInRankings(scoreData)) {
+          return 'loserScoreCard';
+        } else {
+          return 'otherScoreCard';
+        }
+      })
+    );
   }
 
   scoreNumberClass(scoreData: ScoreData): string {

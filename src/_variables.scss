@@ -1,4 +1,11 @@
+@use 'sass:color';
+@import "darkly_variables";
+
 $highlight: #E6D36C;
 $muted: #7799BB;
-$personal: #4f1561;
+$personal: color.scale($pink, $lightness: -50%, $saturation: -25%);
 $silver: #D0D6DE;
+$winnerColor: color.scale(darkblue, $saturation: -50%);
+$winnerText: cornflowerblue;
+$winningScoreColor: color.scale(forestgreen, $lightness: 10%, $saturation: -30%);
+$losingScoreColor: tomato;

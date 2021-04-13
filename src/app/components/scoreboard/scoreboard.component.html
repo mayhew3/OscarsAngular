@@ -41,7 +41,7 @@
       <div class="col-12"
            *ngFor="let scoreData of getVoters()">
         <div class="card scoreCard fakeLink"
-             [ngClass]="scorecardClass(scoreData)"
+             [ngClass]="scorecardClass(scoreData) | async"
              [routerLink]="['/person', scoreData.person.id]">
           <div class="card-body py-0 px-3">
             <div class="row no-gutters mainRow">
@@ -124,7 +124,7 @@
 
 <!-- LAST WINNER FOOTER BAR -->
 
-<nav class="navbar navbar-expand navbar-dark fixed-bottom justify-content-center hopper winnerFooter"
+<nav class="fixed-bottom justify-content-center hopper winnerFooter"
     *ngIf="(odds$ | async)">
 
   <div class="container py-2">

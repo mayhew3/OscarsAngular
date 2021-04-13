@@ -11,6 +11,6 @@
 }
 
 .votesRemaining {
-  color: lighten(forestgreen, 20%);
+  color: lighten($winningScoreColor, 20%);
   font-weight: bold;
 }
