@@ -28,6 +28,7 @@ $gray-500: color.scale($bodyBase, $lightness: 45%, $saturation: 40%) !default;
 $gray-600: color.scale($bodyBase, $lightness: 35%, $saturation: 30%) !default;
 $gray-700: color.scale($bodyBase, $lightness: 25%, $saturation: 20%) !default;
 $gray-800: color.scale($bodyBase, $lightness: 15%, $saturation: 10%) !default;
+$gray-850: color.scale($bodyBase, $lightness: 8%, $saturation: 5%) !default;
 $gray-900: $bodyBase !default;
 $black:    #000 !default;
 

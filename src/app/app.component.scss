@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import '../darkly_variables';
 
 .oscarBackground {
@@ -11,7 +12,7 @@
 .wideContainer {
   padding-left: 0;
   padding-right: 0;
-  background-color: $body-bg;
+  background-color: color.scale($body-bg, $alpha: -10%);
 }
 
 .centerContainer {
