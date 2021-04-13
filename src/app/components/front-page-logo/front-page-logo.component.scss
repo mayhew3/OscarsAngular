@@ -6,7 +6,7 @@
   width: 100%;
   max-width: 1000px;
   height: auto;
-  filter: drop-shadow(0 0 10px $black);
+  filter: drop-shadow(0 0 7px $black) drop-shadow(0 0 12px $black);
 }
 
 .imageTextContainer {
@@ -25,6 +25,6 @@
 .yearText {
   text-align: right;
   fill: #C9A646;
-  text-shadow: 1px 1px 0 white, 0 0 10px black;
+  text-shadow: 1px 1px 0 white, 0 0 5px black, 0 0 10px black;
   font-family: "Futura Bk BT", sans-serif;
 }
