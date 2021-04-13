@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import "../../../variables";
 
 .categoryCard {
@@ -14,26 +15,26 @@
 .categoryTitle {
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
-  color: lighten(cornflowerblue, 20%);
+  color: lighten($winnerText, 20%);
 }
 
 .categorySubtitle {
   font-size: 11pt;
   font-weight: bold;
-  color: fade_out(lighten(cornflowerblue, 20%), .3);
+  color: fade_out(lighten($winnerText, 20%), .3);
 }
 
 .categoryVotingTitle {
   font-size: 16pt;
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
-  color: lighten(cornflowerblue, 20%);
+  color: lighten($winnerText, 20%);
 }
 
 .categoryVotingSubtitle {
   font-size: 12pt;
   font-weight: bold;
-  color: fade_out(lighten(cornflowerblue, 20%), .3);
+  color: fade_out(lighten($winnerText, 20%), .3);
 }
 
 .categoryPoints {
@@ -57,7 +58,7 @@
 }
 
 .winner {
-  background-color: darkblue;
+  background-color: color.scale($winnerColor, $lightness: 10%);
 }
 
 .timeAgoDiv {
@@ -82,7 +83,7 @@
   font-weight: bolder;
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
-  color: lighten(cornflowerblue, 30%);
+  color: lighten($winnerText, 30%);
 }
 
 .winnerSubtitle {
@@ -90,22 +91,22 @@
   font-weight: bolder;
   font-family: "brandon-grotesque", sans-serif;
   font-variant-caps: small-caps;
-  color: fade_out(lighten(cornflowerblue, 30%), 0.3);
+  color: fade_out(lighten($winnerText, 30%), 0.3);
 }
 
 .winningScore {
-  -webkit-text-fill-color: fade_out(lighten(forestgreen, 20%), 0.25); /* Will override color (regardless of order) */
-  -webkit-text-stroke-color: lighten(forestgreen, 20%);
+  -webkit-text-fill-color: fade_out(lighten($winningScoreColor, 20%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten($winningScoreColor, 20%);
 }
 
 .losingScore {
-  -webkit-text-fill-color: fade_out(lighten(tomato, 5%), 0.25); /* Will override color (regardless of order) */
-  -webkit-text-stroke-color: lighten(tomato, 5%);
+  -webkit-text-fill-color: fade_out(lighten($losingScoreColor, 5%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten($losingScoreColor, 5%);
 }
 
 .neutralScore {
-  -webkit-text-fill-color: fade_out(lighten(cornflowerblue, 20%), 0.25); /* Will override color (regardless of order) */
-  -webkit-text-stroke-color: lighten(cornflowerblue, 20%);
+  -webkit-text-fill-color: fade_out(lighten($winnerText, 20%), 0.25); /* Will override color (regardless of order) */
+  -webkit-text-stroke-color: lighten($winnerText, 20%);
 }
 
 .pickHeader {
@@ -114,27 +115,27 @@
 }
 
 .incorrectPickHeader {
-  color: fade_out(lighten(tomato, 5%), 0.3);
+  color: fade_out(lighten($losingScoreColor, 5%), 0.3);
 }
 
 .incorrectPick {
-  color: lighten(tomato, 5%);
+  color: lighten($losingScoreColor, 5%);
 }
 
 .correctPickHeader {
-  color: fade_out(lighten(forestgreen, 20%), 0.3);
+  color: fade_out(lighten($winningScoreColor, 20%), 0.3);
 }
 
 .correctPick {
-  color: lighten(forestgreen, 20%);
+  color: lighten($winningScoreColor, 20%);
 }
 
 .neutralPickHeader {
-  color: fade_out(lighten(cornflowerblue, 20%), 0.3);
+  color: fade_out(lighten($winnerText, 20%), 0.3);
 }
 
 .neutralPick {
-  color: lighten(cornflowerblue, 20%);
+  color: lighten($winnerText, 20%);
 }
 
 .myDifferentPickHeader {

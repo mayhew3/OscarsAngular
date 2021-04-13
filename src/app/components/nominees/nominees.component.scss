@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import "../../../variables";
 
 .nom-body {
@@ -54,7 +55,7 @@
 }
 
 .winner {
-  background-color: darkblue;
+  background-color: color.scale($winnerColor, $lightness: 20%);
 }
 
 .voterName {
@@ -63,7 +64,7 @@
 }
 
 .itsMe {
-  color: lightpink;
+  color: color.scale($personal, $lightness: 5%, $saturation: -5%);
   font-weight: 600;
 }
 

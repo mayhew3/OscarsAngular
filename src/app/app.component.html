@@ -13,7 +13,7 @@
                   *ngIf="showHealthySocketStatus() && socketConnected()">
               <i class="fas fa-check-circle"></i>
             </span>
-            <span style="font-size: 1em; color: Tomato;"
+            <span style="font-size: 1em; color: $losingScoreColor;"
                   *ngIf="!socketConnected()">
               <i class="fas fa-exclamation-triangle"></i>
             </span>

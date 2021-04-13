@@ -17,7 +17,7 @@ $green:   #00bc8c !default;
 $teal:    #20c997 !default;
 $cyan:    #3498db !default;
 
-$bodyBase: color.scale($purple, $lightness: -70%, $saturation: -55%) !default;
+$bodyBase: color.scale($purple, $lightness: -72%, $saturation: -60%) !default;
 
 $white:    #fff !default;
 $gray-100: color.scale($bodyBase, $lightness: 85%, $saturation: 80%) !default;
