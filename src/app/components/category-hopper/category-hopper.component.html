@@ -3,7 +3,7 @@
   <div class="container">
 
     <div *ngIf="showOdds()"
-         class="d-flex flex-row w-100 justify-content-center">
+         class="d-flex flex-row w-100 justify-content-around">
       <div class="totalOdds">
         {{totalOddsVegas() | async | number: '1.0-0'}}%
       </div>
@@ -14,7 +14,7 @@
         {{totalOdds('user') | async}}%
       </div>
       <div>
-        <button class="btn btn-info"
+        <button class="btn btn-lg btn-info"
                 [disabled]="!hasChanges()"
                 (click)="submitOdds()">
           Submit
