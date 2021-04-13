@@ -24,14 +24,14 @@
 }
 
 .eliminatedScoreCard {
-  border-color: fade_out($gray-600, .7);
+  border-color: color.scale($gray-600, $alpha: -60%);
   color: fade_out($silver, .5);
-  background-color: fade_out($gray-850, .5);
+  background-color: color.scale($gray-850, $alpha: -30%);
 }
 
 .myScoreCard {
-  background-color: darken($personal, 5%);
-  border-color: lighten($personal, 50%);
+  background-color: $personal;
+  border-color: lighten($personal, 40%);
   color: white;
 }
 

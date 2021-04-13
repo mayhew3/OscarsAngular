@@ -41,7 +41,7 @@
       <div class="col-12"
            *ngFor="let scoreData of getVoters()">
         <div class="card scoreCard fakeLink"
-             [ngClass]="scorecardClass(scoreData)"
+             [ngClass]="scorecardClass(scoreData) | async"
              [routerLink]="['/person', scoreData.person.id]">
           <div class="card-body py-0 px-3">
             <div class="row no-gutters mainRow">
