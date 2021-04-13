@@ -41,6 +41,7 @@ import { ConnectionProblemComponent } from './components/connection-problem/conn
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ErrorNotificationComponent } from './components/error-notification/error-notification.component';
 import { PersonConnectionSnackBarComponent } from './components/person-connection-snack-bar/person-connection-snack-bar.component';
+import { FrontPageLogoComponent } from './components/front-page-logo/front-page-logo.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { PersonConnectionSnackBarComponent } from './components/person-connectio
     AdminDashboardComponent,
     ConnectionProblemComponent,
     ErrorNotificationComponent,
-    PersonConnectionSnackBarComponent
+    PersonConnectionSnackBarComponent,
+    FrontPageLogoComponent
   ],
   imports: [
     BrowserModule,

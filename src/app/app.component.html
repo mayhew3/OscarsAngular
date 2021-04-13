@@ -73,6 +73,7 @@
 
 <ng-template #loggedOut>
   <div class="centerContainer">
+    <osc-front-page-logo></osc-front-page-logo>
     <button class="btn btn-lg btn-success signInButton px-5 py-3"
             (click)="auth.login()">Sign In</button>
   </div>
@@ -80,6 +81,7 @@
 
 <ng-template #invalidUser>
   <div class="centerContainer">
+    <osc-front-page-logo></osc-front-page-logo>
     <div class="textContainer">
       <p>No user account found for google address. Could your invite be for a different gmail address?</p>
       <button class="btn btn-lg btn-success signInButton p-2"
@@ -90,6 +92,7 @@
 
 <ng-template #loading>
   <div class="centerContainer">
+    <osc-front-page-logo></osc-front-page-logo>
     <div class="textContainer">
       <p>Loading from server...</p>
       <mat-spinner [diameter]="50"
@@ -100,6 +103,7 @@
 
 <ng-template #authenticating>
   <div class="centerContainer">
+    <osc-front-page-logo></osc-front-page-logo>
     <div class="textContainer">
       <p>Logging in...</p>
       <mat-spinner [diameter]="50"
