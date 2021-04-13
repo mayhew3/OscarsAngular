@@ -1,0 +1,25 @@
+@use 'sass:color';
+@import '../../../darkly_variables';
+@import '../../../variables';
+
+.frontLogo {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  filter: drop-shadow(0 0 10px $black);
+}
+
+.imageTextContainer {
+  position: relative;
+  text-align: center;
+}
+
+.yearLabel {
+  position: absolute;
+  bottom: -10px;
+  right: 150px;
+  color: $oscarsGold;
+  font-size: 48pt;
+  text-shadow: 1px 1px 0 white, 0 0 10px black;
+  font-family: "Futura Bk BT", sans-serif;
+}
