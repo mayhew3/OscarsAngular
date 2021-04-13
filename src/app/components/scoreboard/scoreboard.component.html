@@ -13,7 +13,7 @@
         <div ngbDropdown placement="bottom-right"
              class="d-inline-block"
              *ngIf="!!me">
-          <button class="btn btn-small btn-primary"
+          <button class="btn btn-lg btn-primary"
                   [disabled]="updatingOddsFilter"
                   id="oddsFilterDropdown"
                   ngbDropdownToggle>
@@ -21,6 +21,7 @@
           </button>
           <div ngbDropdownMenu aria-labelledby="oddsFilterDropdown">
             <button *ngFor="let oddsOption of getOddsOptions()"
+                    class="btn btn-lg"
                     (click)="changeOddsOption(oddsOption)"
                     [ngClass]="getOddsFilterClass(oddsOption)"
                     ngbDropdownItem>
