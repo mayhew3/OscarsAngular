@@ -110,7 +110,7 @@
                       <i class="fas fa-angle-double-up"></i>
                     </span>
                     <span class="scoreText"
-                      [ngClass]="scoreNumberClass(scoreData)">{{scoreData.score}}</span>
+                      [ngClass]="scoreNumberClass(scoreData) | async">{{scoreData.score}}</span>
                   </div>
                 </div>
               </div>

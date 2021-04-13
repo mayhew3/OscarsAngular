@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {combineLatest, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
 import {Vote} from '../../interfaces/Vote';
 import {Odds} from '../../interfaces/Odds';
@@ -302,8 +302,11 @@ export class ScoreboardComponent implements OnInit {
   }
 
   gotPointsForLastWinner(person: Person): Observable<boolean> {
-    return this.voteService.didPersonVoteCorrectlyFor(person, this.latestCategory).pipe(
-      map(correctly => !this.itsOver() && !!this.latestCategory && correctly)
+    return combineLatest([
+      this.voteService.didPersonVoteCorrectlyFor(person, this.latestCategory),
+      this.itsOver()]
+    ).pipe(
+      map(([correctly, itsOver]) => !itsOver && !!this.latestCategory && correctly)
     );
   }
 
@@ -363,19 +366,23 @@ export class ScoreboardComponent implements OnInit {
     );
   }
 
-  scoreNumberClass(scoreData: ScoreData): string {
-    const isEliminated = this.isEliminated(scoreData);
-    if (this.gotPointsForLastWinner(scoreData.person) && !this.itsOver()) {
-      return 'winnerScorePoints';
-    } else if (this.isMe(scoreData.person)) {
-      return 'myScorePoints';
-    } else if (!this.itsOver() && isEliminated && this.shouldShowEliminationOdds()) {
-      return 'eliminatedScorePoints';
-    } else if (this.anyoneIsHigherInRankings(scoreData)) {
-      return 'loserScorePoints';
-    } else {
-      return 'otherScorePoints';
-    }
+  scoreNumberClass(scoreData: ScoreData): Observable<string> {
+    return combineLatest([this.itsOver(), this.gotPointsForLastWinner(scoreData.person)]).pipe(
+      map(([itsOver, gotPoints]) => {
+        const isEliminated = this.isEliminated(scoreData);
+        if (gotPoints && !itsOver) {
+          return 'winnerScorePoints';
+        } else if (this.isMe(scoreData.person)) {
+          return 'myScorePoints';
+        } else if (!itsOver && isEliminated && this.shouldShowEliminationOdds()) {
+          return 'eliminatedScorePoints';
+        } else if (this.anyoneIsHigherInRankings(scoreData)) {
+          return 'loserScorePoints';
+        } else {
+          return 'otherScorePoints';
+        }
+      })
+    );
   }
 
   getOddsOptions(): string[] {
