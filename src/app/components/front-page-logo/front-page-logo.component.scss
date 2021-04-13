@@ -17,14 +17,16 @@
 .yearLabel {
   position: absolute;
   bottom: -1.0%;
-  right: 14%;
-  width: 17%;
-  height: 20%;
+  right: 7%;
+  width: 21%;
+  height: 22%;
 }
 
 .yearText {
   text-align: right;
   fill: #C9A646;
   text-shadow: 1px 1px 0 white, 0 0 5px black, 0 0 10px black;
-  font-family: "Futura Bk BT", sans-serif;
+  font-family: futura-pt, sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
