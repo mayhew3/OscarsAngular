@@ -6,20 +6,23 @@ export const MockEvents: Event[] = [
     type: 'winner',
     detail: 'add',
     nomination_id: 2788,
-    event_time: new Date('2019-02-23 14:00:59')
+    event_time: new Date('2019-02-23 14:00:59'),
+    year: 2019
   },
   {
     id: 2,
     type: 'winner',
     detail: 'delete',
     nomination_id: 2788,
-    event_time: new Date('2019-02-23 15:00:59')
+    event_time: new Date('2019-02-23 15:00:59'),
+    year: 2019
   },
   {
     id: 3,
     type: 'winner',
     detail: 'add',
     nomination_id: 2786,
-    event_time: new Date('2019-02-23 16:00:59')
+    event_time: new Date('2019-02-23 16:00:59'),
+    year: 2019
   }
 ];

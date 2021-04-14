@@ -16,7 +16,8 @@ export const Event = sequelize.sequelize.define('event', {
   type: Sequelize.TEXT,
   detail: Sequelize.TEXT,
   nomination_id: Sequelize.INTEGER,
-  event_time: Sequelize.DATE
+  event_time: Sequelize.DATE,
+  year: Sequelize.INTEGER,
 }, {
   freezeTableName: true,
   createdAt: false,
