@@ -4,4 +4,5 @@ export interface Event {
   detail: string;
   nomination_id: number;
   event_time: Date;
+  year: number;
 }

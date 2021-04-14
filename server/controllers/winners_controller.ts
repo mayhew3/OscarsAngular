@@ -9,12 +9,14 @@ export const addWinner = async (request, response) => {
       .create(request.body);
 
     const event_time = winner.declared;
+    const year = winner.year;
 
     const event = await model.Event.create({
       type: 'winner',
       detail: 'add',
       event_time,
-      nomination_id
+      nomination_id,
+      year
     });
 
     const msg = {
@@ -46,7 +48,8 @@ export const resetWinners = async (request, response) => {
   const event = await model.Event.create({
     type: 'winner',
     detail: 'reset',
-    event_time
+    event_time,
+    year
   });
 
   const msg = {
@@ -68,6 +71,8 @@ export const deleteWinner = async (request, response) => {
     }
   });
 
+  const year = winner.year;
+
   const nomination_id = winner.nomination_id;
 
   try {
@@ -83,7 +88,8 @@ export const deleteWinner = async (request, response) => {
     type: 'winner',
     detail: 'delete',
     event_time,
-    nomination_id
+    nomination_id,
+    year
   });
 
   const msg = {

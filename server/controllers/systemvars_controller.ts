@@ -26,11 +26,13 @@ export const updateSystemVars = async (request, response) => {
   }
 
   if (isVotingOpenChanged) {
+    const year = result.curr_year;
     const event_time = new Date();
     const event = await model.Event.create({
       type: 'voting',
       detail: !!systemVar.voting_open ? 'open' : 'locked',
-      event_time
+      event_time,
+      year
     });
 
     const msg = {

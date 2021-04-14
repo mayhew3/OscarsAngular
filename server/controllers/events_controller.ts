@@ -13,14 +13,3 @@ export const getRecentEvents = (request, response) => {
     }
   }).then(events => response.json(events));
 };
-
-export const addEvent = (type, detail, nomination_id, prevResult, response) => {
-  model.Event.create({
-    type,
-    detail,
-    event_time: new Date(),
-    nomination_id
-  }).then(() => {
-    response.json(prevResult);
-  });
-};

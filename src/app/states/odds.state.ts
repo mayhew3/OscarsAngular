@@ -7,6 +7,7 @@ import {OddsBundle} from '../interfaces/OddsBundle';
 import produce from 'immer';
 import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
+import {HttpParams} from '@angular/common/http';
 
 export class OddsStateModel {
   oddsBundle: OddsBundle;
@@ -39,8 +40,10 @@ export class OddsState {
   }
 
   @Action(GetOdds)
-  getOdds({setState}: StateContext<OddsStateModel>): Observable<any> {
-    return this.api.getAfterFullyConnected<any[]>(this.apiUrl).pipe(
+  getOdds({setState}: StateContext<OddsStateModel>, action: GetOdds): Observable<any> {
+    const params = new HttpParams()
+      .set('year', action.year.toString());
+    return this.api.getAfterFullyConnected<any[]>(this.apiUrl, params).pipe(
       tap(result => {
         setState(produce(draft => {
           draft.previousOddsBundle = draft.oddsBundle;

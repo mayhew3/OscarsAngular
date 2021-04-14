@@ -4,6 +4,7 @@ import {OddsBundle} from '../interfaces/OddsBundle';
 import {Store} from '@ngxs/store';
 import {filter, map} from 'rxjs/operators';
 import {GetOdds} from '../actions/odds.action';
+import {SystemVarsService} from './system.vars.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,11 @@ export class OddsService {
     map(model => model.previousOddsBundle)
   );
 
-  constructor(private store: Store) {
-    this.store.dispatch(new GetOdds());
+  constructor(private store: Store,
+              private systemVarsService: SystemVarsService) {
+    this.systemVarsService.systemVars.subscribe(systemVars => {
+      this.store.dispatch(new GetOdds(systemVars.curr_year));
+    });
   }
 
 }
