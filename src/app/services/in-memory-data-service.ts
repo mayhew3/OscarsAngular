@@ -91,6 +91,8 @@ export class InMemoryDataService implements InMemoryDbService {
       return this.getMaxYear(requestInfo);
     } else if (collectionName === 'persons') {
       return this.getPersons(requestInfo);
+    } else if (collectionName === 'odds') {
+      return this.getMostRecentOddsBundle(requestInfo);
     }
   }
 
@@ -322,6 +324,15 @@ export class InMemoryDataService implements InMemoryDbService {
       year: winner.year,
       id: winner.id
     };
+  }
+
+  private getMostRecentOddsBundle(requestInfo: RequestInfo): Observable<Response> {
+    const year = +requestInfo.query.get('year')[0];
+    if (this.odds.year === year) {
+      return this.packageUpResponse(this.odds, requestInfo);
+    } else {
+      return this.packageUpResponse({}, requestInfo);
+    }
   }
 
   private getPersons(requestInfo: RequestInfo): Observable<Response> {

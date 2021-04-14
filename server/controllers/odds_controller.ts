@@ -13,12 +13,13 @@ const attachOddsToExecution = (execution, response) => {
   });
 };
 
-const handleFirstOdds = response => {
+const handleFirstOdds = (year: number, response: any) => {
   model.OddsExecution.findAll({
     where: {
       time_finished: {
         [Op.ne]: null
-      }
+      },
+      year
     },
     limit: 1,
     order:
@@ -34,7 +35,7 @@ const handleFirstOdds = response => {
   });
 };
 
-const handleOddsForEventID = (event_id, response) => {
+const handleOddsForEventID = (event_id: number, year: number, response) => {
   model.OddsExecution.findAll({
     where: {
       event_id: {
@@ -43,7 +44,8 @@ const handleOddsForEventID = (event_id, response) => {
       },
       time_finished: {
         [Op.ne]: null
-      }
+      },
+      year
     },
     limit: 1,
     order:
@@ -60,10 +62,11 @@ const handleOddsForEventID = (event_id, response) => {
 };
 
 export const getMostRecentOddsBundle = (request, response) => {
+  const year = +request.query.year;
   if (request.query.event_id) {
-    handleOddsForEventID(request.query.event_id, response);
+    handleOddsForEventID(+request.query.event_id, year, response);
   } else {
-    handleFirstOdds(response);
+    handleFirstOdds(year, response);
   }
 };
 

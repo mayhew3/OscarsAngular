@@ -115,7 +115,8 @@ export const OddsResult = sequelize.sequelize.define('odds_result', {
 export const OddsExecution = sequelize.sequelize.define('odds_execution', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   event_id: Sequelize.INTEGER,
-  time_finished: Sequelize.DATE
+  time_finished: Sequelize.DATE,
+  year: Sequelize.INTEGER,
 }, {
   freezeTableName: true,
   createdAt: false,

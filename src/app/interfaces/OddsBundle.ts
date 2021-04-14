@@ -4,4 +4,5 @@ export interface OddsBundle {
   id: number;
   event_id: number;
   odds: Odds[];
+  year: number;
 }

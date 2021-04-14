@@ -2,6 +2,8 @@ import {OddsBundle} from '../interfaces/OddsBundle';
 
 export class GetOdds {
   static readonly type = '[Odds] Get';
+  constructor(public year: number) {
+  }
 }
 
 export class UpdatePlayerOdds {
