@@ -37,7 +37,7 @@ export class MessagingService {
     if (!this.listenersInitialized) {
 
       this.addListener('add_winner', msg => [
-        new AddWinner(msg.nomination_id, msg.winner_id, msg.declared),
+        new AddWinner(msg.nomination_id, msg.winner_id, new Date(msg.declared)),
         new OddsInProgress()
       ]);
       this.addListener('remove_winner', msg => [
