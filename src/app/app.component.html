@@ -1,53 +1,7 @@
 <!-- src/app/app.component.html -->
 
-<nav class="navbar navbar-expand navbar-default navbar-dark bg-dark"
-     *ngIf="(auth.isAuthenticated$ | async) && !auth.failedEmail && (me$ | async)">
-  <div class="container">
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav navbar-left">
-        <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async)">
-          <a class="nav-link" routerLink="/">
-            <span style="font-size: 1em; color: LightGreen;"
-                  *ngIf="showHealthySocketStatus() && socketConnected()">
-              <i class="fas fa-check-circle"></i>
-            </span>
-            <span style="font-size: 1em; color: $losingScoreColor;"
-                  *ngIf="!socketConnected()">
-              <i class="fas fa-exclamation-triangle"></i>
-            </span>
-            Home
-          </a>
-        </li>
-        <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
-          <a class="nav-link" routerLink="/vote">Vote</a>
-        </li>
-        <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async) === false">
-          <a class="nav-link" routerLink="/scores">Scores</a>
-        </li>
-        <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async)">
-          <a class="nav-link" routerLink="/history">Past</a>
-        </li>
-      </ul>
-
-      <ul class="navbar-nav navbar-right">
-        <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async) === false">
-          <a class="nav-link" (click)="auth.login()">Login</a>
-        </li>
-        <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async)">
-          <a class="nav-link fakeLink" (click)="auth.logout()">Logout</a>
-        </li>
-      </ul>
-
-    </div>
-  </div>
-</nav>
+<osc-nav-bar *ngIf="(auth.isAuthenticated$ | async) && !auth.failedEmail && (me$ | async)">
+</osc-nav-bar>
 
 <div class="oscarBackground h-100">
 

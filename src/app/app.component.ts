@@ -57,12 +57,5 @@ export class AppComponent {
     return this.personService.failedEmail;
   }
 
-  showHealthySocketStatus(): boolean {
-    return this.personService.isAdmin;
-  }
-
-  socketConnected(): boolean {
-    return this.socket.isConnected();
-  }
 }
 

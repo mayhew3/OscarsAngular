@@ -42,6 +42,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ErrorNotificationComponent } from './components/error-notification/error-notification.component';
 import { PersonConnectionSnackBarComponent } from './components/person-connection-snack-bar/person-connection-snack-bar.component';
 import { FrontPageLogoComponent } from './components/front-page-logo/front-page-logo.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { FrontPageLogoComponent } from './components/front-page-logo/front-page-
     ConnectionProblemComponent,
     ErrorNotificationComponent,
     PersonConnectionSnackBarComponent,
-    FrontPageLogoComponent
+    FrontPageLogoComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
