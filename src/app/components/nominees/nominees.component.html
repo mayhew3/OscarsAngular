@@ -68,7 +68,7 @@
                 <div class="voterName"
                      *ngFor="let voter of (personsForNominee(nominee, category) | async)"
                      [ngClass]="getVoterClass(voter) | async">
-                  {{voter.first_name}}
+                  {{getPersonDisplayName(voter) | async}}
                 </div>
               </div>
             </div>
