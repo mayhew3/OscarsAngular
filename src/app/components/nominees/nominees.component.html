@@ -48,16 +48,16 @@
               <div class="col-9">
                 <div class="row">
                   <div class="col-12 nomineeName py-1">
-                    {{getMainLineText(nominee)}}
+                    {{getMainLineText(nominee, category)}}
                   </div>
                 </div>
-                <div class="row" *ngIf="showSubtitleText(nominee, category)">
+                <div class="row" *ngIf="showSubtitleText(nominee)">
                   <div class="col-12 nomineeSubtitle py-1">
                     {{getSubtitleText(nominee, category)}}
                   </div>
                 </div>
                 <div class="row" *ngIf="showSongSubtitle(nominee, category)">
-                  <div class="col-12 nomineeSubtitle py-1"
+                  <div class="col-12 songDetail py-1"
                        *ngFor="let subtitle of getSongSubtitles(nominee)">
                     {{subtitle}}
                   </div>

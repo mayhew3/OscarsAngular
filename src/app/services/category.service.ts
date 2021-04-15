@@ -58,7 +58,7 @@ export class CategoryService {
   static getSubtitleText(category: Category, nominee: Nominee): string {
     if (CategoryService.isSingleLineCategory(category.name)) {
       return undefined;
-    } else if (nominee.nominee === nominee.context) {
+    } else if (nominee.nominee === nominee.context || !nominee.context) {
       return nominee.detail;
     } else {
       return nominee.context;
