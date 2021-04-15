@@ -8,4 +8,6 @@ export interface Category {
   nominees: Nominee[];
   voted_on?: number;
   winners: Winner[];
+  start_year?: number;
+  end_year?: number;
 }

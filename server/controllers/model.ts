@@ -4,7 +4,9 @@ const sequelize = require('./sequelize');
 export const Category = sequelize.sequelize.define('category', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   name: Sequelize.TEXT,
-  points: Sequelize.INTEGER
+  points: Sequelize.INTEGER,
+  start_year: Sequelize.INTEGER,
+  end_year: Sequelize.INTEGER,
 }, {
   freezeTableName: true,
   createdAt: false,

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {combineLatest, Observable} from 'rxjs';
 import {Category} from '../interfaces/Category';
-import {filter, map} from 'rxjs/operators';
+import {filter, map, mergeMap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
 import {SystemVarsService} from './system.vars.service';
@@ -22,8 +22,12 @@ export class CategoryService {
   static songCategories = ['Music (Original Song)'];
 
   categories: Observable<Category[]> = this.store.select(state => state.categories).pipe(
-    map(categories => categories.categories),
-    filter(categories => !!categories)
+    map(model => model.categories),
+    filter(categories => !!categories),
+    mergeMap(categories =>
+      this.systemVarsService.systemVars.pipe(
+        map(systemVars => _.filter(categories, category => CategoryService.isInRange(systemVars.curr_year, category)))
+      ))
   );
 
   maxYear: Observable<MaxYear> = this.store.select(state => state.maxYear).pipe(
@@ -59,6 +63,12 @@ export class CategoryService {
     } else {
       return nominee.context;
     }
+  }
+
+  static isInRange(year: number, category: Category): boolean {
+    const withinStart = !category.start_year || category.start_year <= year;
+    const withinEnd = !category.end_year || category.end_year > year;
+    return withinStart && withinEnd;
   }
 
   // REAL METHODS

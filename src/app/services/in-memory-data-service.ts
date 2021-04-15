@@ -15,7 +15,6 @@ import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
-import {Winner} from '../interfaces/Winner';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +42,13 @@ export class InMemoryDataService implements InMemoryDbService {
     options.headers = headers;
     options.url = url;
     return options;
+  }
+
+  private static copyArrayWithYear(existing: any[], year: number): any[] {
+    return _.chain(existing)
+      .where({year})
+      .map(obj => ({...obj}))
+      .value();
   }
 
   createDb(): Record<string, unknown> {
@@ -299,33 +305,6 @@ export class InMemoryDataService implements InMemoryDbService {
     return _.uniq(fullList);
   }
 
-  // noinspection JSMethodCanBeStatic
-  private createNomineeCopy(nominee): Nominee {
-    return {
-      id: nominee.id,
-      nominee: nominee.nominee,
-      context: nominee.context,
-      detail: nominee.detail,
-      category_id: nominee.category_id,
-      year: nominee.year,
-      odds_expert: nominee.odds_expert,
-      odds_user: nominee.odds_user,
-      odds_numerator: nominee.odds_numerator,
-      odds_denominator: nominee.odds_denominator,
-    };
-  }
-
-  // noinspection JSMethodCanBeStatic
-  private createWinnerCopy(winner): Winner {
-    return {
-      category_id: winner.category_id,
-      declared: winner.declared,
-      nomination_id: winner.nomination_id,
-      year: winner.year,
-      id: winner.id
-    };
-  }
-
   private getMostRecentOddsBundle(requestInfo: RequestInfo): Observable<Response> {
     const year = +requestInfo.query.get('year')[0];
     if (this.odds.year === year) {
@@ -356,20 +335,10 @@ export class InMemoryDataService implements InMemoryDbService {
     _.forEach(requestInfo.collection, category => {
       const yearNum = +year;
       const personIDNum = +person_id;
-      const copyCategory: Category = {
-        id: category.id,
-        name: category.name,
-        points: category.points,
-        nominees: _.chain(category.nominees)
-          .where({year: yearNum})
-          .map(this.createNomineeCopy)
-          .value(),
-        voted_on: this.getVoteForCategory(category.id, personIDNum, yearNum),
-        winners: _.chain(category.winners)
-          .where({year: yearNum})
-          .map(this.createWinnerCopy)
-          .value()
-      };
+      const copyCategory: Category = {...category};
+      copyCategory.nominees = InMemoryDataService.copyArrayWithYear(category.nominees, yearNum);
+      copyCategory.voted_on = this.getVoteForCategory(category.id, personIDNum, yearNum);
+      copyCategory.winners = InMemoryDataService.copyArrayWithYear(category.winners, yearNum);
       data.push(copyCategory);
     });
 
