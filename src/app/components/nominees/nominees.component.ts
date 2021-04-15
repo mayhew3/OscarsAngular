@@ -153,8 +153,8 @@ export class NomineesComponent implements OnInit {
     );
   }
 
-  getMainLineText(nominee: Nominee): string {
-    return nominee.nominee;
+  getMainLineText(nominee: Nominee, category: Category): string {
+    return CategoryService.isSongCategory(category.name) ? `"${nominee.nominee}"` : nominee.nominee;
   }
 
   getSubtitleText(nominee: Nominee, category: Category): string {
@@ -178,12 +178,12 @@ export class NomineesComponent implements OnInit {
     );
   }
 
-  showSubtitleText(nominee: Nominee, category: Category): boolean {
-    return !!nominee.context && !CategoryService.isSongCategory(category.name);
+  showSubtitleText(nominee: Nominee): boolean {
+    return !!nominee.context && nominee.nominee !== nominee.context;
   }
 
   showSongSubtitle(nominee: Nominee, category: Category): boolean {
-    return !!nominee.context && CategoryService.isSongCategory(category.name);
+    return (!!nominee.context || !!nominee.detail) && CategoryService.isSongCategory(category.name);
   }
 
   getVotedClass(nominee: Nominee): Observable<string> {

@@ -3,2187 +3,2691 @@ import {Vote} from '../../interfaces/Vote';
 /* eslint-disable quote-props */
 export const MockVoteList: Vote[] = [
   {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2749,
-    "id": 5499,
-    "person_id": 32
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2777,
-    "id": 5500,
-    "person_id": 32
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5392,
-    "person_id": 26
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5393,
-    "person_id": 26
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5394,
-    "person_id": 26
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5395,
-    "person_id": 26
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5396,
-    "person_id": 26
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5397,
-    "person_id": 26
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5398,
-    "person_id": 26
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5399,
-    "person_id": 26
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5400,
-    "person_id": 26
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2726,
-    "id": 5401,
-    "person_id": 26
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2749,
-    "id": 5402,
-    "person_id": 26
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5403,
-    "person_id": 26
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5404,
-    "person_id": 26
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5405,
-    "person_id": 26
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2777,
-    "id": 5406,
-    "person_id": 26
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2793,
-    "id": 5407,
-    "person_id": 26
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5408,
-    "person_id": 26
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5409,
-    "person_id": 26
-  },
-  {
     "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2735,
-    "id": 5410,
-    "person_id": 26
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5411,
-    "person_id": 26
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5412,
-    "person_id": 26
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5413,
-    "person_id": 26
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5414,
-    "person_id": 26
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5391,
-    "person_id": 26
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5416,
-    "person_id": 32
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5417,
-    "person_id": 28
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5418,
-    "person_id": 28
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5419,
-    "person_id": 28
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5420,
-    "person_id": 28
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5421,
-    "person_id": 28
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5422,
-    "person_id": 28
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5423,
-    "person_id": 28
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5424,
-    "person_id": 28
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5425,
-    "person_id": 28
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5426,
-    "person_id": 28
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2726,
-    "id": 5427,
-    "person_id": 28
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2749,
-    "id": 5428,
-    "person_id": 28
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5429,
-    "person_id": 28
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5430,
-    "person_id": 28
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5431,
-    "person_id": 28
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2777,
-    "id": 5432,
-    "person_id": 28
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2794,
-    "id": 5433,
-    "person_id": 28
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5434,
-    "person_id": 28
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5435,
-    "person_id": 28
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2735,
-    "id": 5436,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 5704,
     "person_id": 28
   },
   {
     "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5437,
-    "person_id": 28
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5438,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5705,
     "person_id": 28
   },
   {
     "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5439,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5707,
     "person_id": 28
   },
   {
     "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5440,
+    "year": 2019,
+    "nomination_id": 2910,
+    "id": 5708,
+    "person_id": 28
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5709,
+    "person_id": 28
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5710,
+    "person_id": 28
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5711,
+    "person_id": 28
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5712,
+    "person_id": 28
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 5713,
+    "person_id": 28
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 5714,
+    "person_id": 28
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 5715,
+    "person_id": 28
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5716,
+    "person_id": 28
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5717,
+    "person_id": 28
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2925,
+    "id": 5718,
+    "person_id": 28
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5719,
+    "person_id": 28
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5720,
+    "person_id": 28
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2931,
+    "id": 5721,
+    "person_id": 28
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2935,
+    "id": 5722,
+    "person_id": 28
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 5723,
+    "person_id": 28
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 5724,
+    "person_id": 28
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 5725,
     "person_id": 28
   },
   {
     "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2769,
-    "id": 5441,
-    "person_id": 25
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5442,
-    "person_id": 25
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5443,
-    "person_id": 25
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5444,
-    "person_id": 25
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2756,
-    "id": 5445,
-    "person_id": 25
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2776,
-    "id": 5446,
-    "person_id": 25
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5447,
-    "person_id": 25
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5448,
-    "person_id": 25
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5449,
-    "person_id": 25
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 5726,
+    "person_id": 28
   },
   {
     "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5450,
-    "person_id": 25
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5451,
-    "person_id": 25
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2726,
-    "id": 5452,
-    "person_id": 25
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5453,
-    "person_id": 25
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2794,
-    "id": 5454,
-    "person_id": 25
+    "year": 2019,
+    "nomination_id": 2839,
+    "id": 5727,
+    "person_id": 28
   },
   {
     "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2739,
-    "id": 5455,
-    "person_id": 25
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5456,
-    "person_id": 25
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2705,
-    "id": 5457,
-    "person_id": 25
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2701,
-    "id": 5458,
-    "person_id": 25
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5459,
-    "person_id": 25
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2747,
-    "id": 5460,
-    "person_id": 25
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5461,
-    "person_id": 25
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5462,
-    "person_id": 25
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5463,
-    "person_id": 25
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5464,
-    "person_id": 25
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5465,
-    "person_id": 39
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5466,
-    "person_id": 39
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5467,
-    "person_id": 39
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5468,
-    "person_id": 39
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5469,
-    "person_id": 39
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5470,
-    "person_id": 39
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5471,
-    "person_id": 39
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5472,
-    "person_id": 39
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5473,
-    "person_id": 39
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5474,
-    "person_id": 39
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2727,
-    "id": 5475,
-    "person_id": 39
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2749,
-    "id": 5476,
-    "person_id": 39
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5477,
-    "person_id": 39
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5478,
-    "person_id": 39
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5479,
-    "person_id": 39
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2777,
-    "id": 5480,
-    "person_id": 39
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2793,
-    "id": 5481,
-    "person_id": 39
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5482,
-    "person_id": 39
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2803,
-    "id": 5483,
-    "person_id": 39
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2735,
-    "id": 5484,
-    "person_id": 39
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2740,
-    "id": 5485,
-    "person_id": 39
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5486,
-    "person_id": 39
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5487,
-    "person_id": 39
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5488,
-    "person_id": 39
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5489,
-    "person_id": 32
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5490,
-    "person_id": 32
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5491,
-    "person_id": 32
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5492,
-    "person_id": 32
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5493,
-    "person_id": 32
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5494,
-    "person_id": 32
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5496,
-    "person_id": 32
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5497,
-    "person_id": 32
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2775,
-    "id": 5501,
-    "person_id": 31
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5502,
-    "person_id": 31
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5503,
-    "person_id": 31
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5504,
-    "person_id": 31
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5505,
-    "person_id": 31
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5506,
-    "person_id": 31
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5507,
-    "person_id": 31
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5508,
-    "person_id": 31
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5509,
-    "person_id": 31
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5510,
-    "person_id": 31
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2727,
-    "id": 5511,
-    "person_id": 31
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2746,
-    "id": 5512,
-    "person_id": 31
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5513,
-    "person_id": 31
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5514,
-    "person_id": 31
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5495,
-    "person_id": 32
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2726,
-    "id": 5498,
-    "person_id": 32
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5515,
-    "person_id": 31
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2777,
-    "id": 5516,
-    "person_id": 31
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2792,
-    "id": 5517,
-    "person_id": 31
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5518,
-    "person_id": 31
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5519,
-    "person_id": 31
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2735,
-    "id": 5520,
-    "person_id": 31
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5521,
-    "person_id": 31
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5522,
-    "person_id": 31
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5523,
-    "person_id": 31
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5524,
-    "person_id": 31
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5527,
+    "year": 2019,
+    "nomination_id": 2860,
+    "id": 5728,
     "person_id": 41
   },
   {
     "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5529,
-    "person_id": 41
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5530,
-    "person_id": 41
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5531,
-    "person_id": 41
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5532,
-    "person_id": 41
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2792,
-    "id": 5619,
-    "person_id": 24
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2727,
-    "id": 5535,
+    "year": 2019,
+    "nomination_id": 2839,
+    "id": 5729,
     "person_id": 41
   },
   {
     "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5537,
-    "person_id": 41
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5538,
-    "person_id": 41
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5541,
-    "person_id": 41
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5542,
-    "person_id": 41
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5545,
-    "person_id": 41
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5547,
-    "person_id": 41
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5621,
-    "person_id": 24
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5533,
-    "person_id": 41
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5534,
-    "person_id": 41
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2735,
-    "id": 5540,
-    "person_id": 41
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5546,
-    "person_id": 41
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5623,
-    "person_id": 24
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5622,
-    "person_id": 7
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2774,
-    "id": 5549,
-    "person_id": 36
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2696,
-    "id": 5550,
-    "person_id": 36
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2707,
-    "id": 5551,
-    "person_id": 36
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2734,
-    "id": 5552,
-    "person_id": 36
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2715,
-    "id": 5553,
-    "person_id": 36
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2701,
-    "id": 5554,
-    "person_id": 36
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2710,
-    "id": 5555,
-    "person_id": 36
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2810,
-    "id": 5556,
-    "person_id": 36
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2815,
-    "id": 5557,
-    "person_id": 36
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2721,
-    "id": 5558,
-    "person_id": 36
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2729,
-    "id": 5559,
-    "person_id": 36
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2746,
-    "id": 5560,
-    "person_id": 36
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2756,
-    "id": 5561,
-    "person_id": 36
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2762,
-    "id": 5562,
-    "person_id": 36
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2765,
-    "id": 5563,
-    "person_id": 36
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2778,
-    "id": 5564,
-    "person_id": 36
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2791,
-    "id": 5565,
-    "person_id": 36
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2796,
-    "id": 5566,
-    "person_id": 36
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2803,
-    "id": 5567,
-    "person_id": 36
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2739,
-    "id": 5568,
-    "person_id": 36
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5569,
-    "person_id": 36
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2754,
-    "id": 5570,
-    "person_id": 36
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5571,
-    "person_id": 36
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2789,
-    "id": 5572,
-    "person_id": 36
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5525,
-    "person_id": 41
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5526,
-    "person_id": 41
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5528,
-    "person_id": 41
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2794,
-    "id": 5543,
-    "person_id": 41
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2776,
-    "id": 5544,
-    "person_id": 41
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2745,
-    "id": 5548,
-    "person_id": 41
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5539,
-    "person_id": 41
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2790,
-    "id": 5536,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5730,
     "person_id": 41
   },
   {
     "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5573,
-    "person_id": 37
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5574,
-    "person_id": 24
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5575,
-    "person_id": 37
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5576,
-    "person_id": 37
+    "year": 2019,
+    "nomination_id": 2898,
+    "id": 5731,
+    "person_id": 41
   },
   {
     "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5577,
-    "person_id": 37
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5578,
-    "person_id": 37
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5579,
-    "person_id": 24
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5580,
-    "person_id": 37
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5581,
-    "person_id": 37
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5582,
-    "person_id": 24
+    "year": 2019,
+    "nomination_id": 2854,
+    "id": 5732,
+    "person_id": 41
   },
   {
     "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5583,
-    "person_id": 37
+    "year": 2019,
+    "nomination_id": 2933,
+    "id": 5733,
+    "person_id": 41
   },
   {
     "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5584,
-    "person_id": 37
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5585,
-    "person_id": 24
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5586,
-    "person_id": 37
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5588,
-    "person_id": 24
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2727,
-    "id": 5587,
-    "person_id": 37
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2749,
-    "id": 5589,
-    "person_id": 37
+    "year": 2019,
+    "nomination_id": 2938,
+    "id": 5734,
+    "person_id": 41
   },
   {
     "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5590,
-    "person_id": 24
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5591,
-    "person_id": 37
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5592,
-    "person_id": 37
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5593,
-    "person_id": 24
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5594,
-    "person_id": 37
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5595,
-    "person_id": 24
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2777,
-    "id": 5596,
-    "person_id": 37
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2793,
-    "id": 5597,
-    "person_id": 37
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5598,
-    "person_id": 7
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5600,
-    "person_id": 37
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5601,
-    "person_id": 24
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2735,
-    "id": 5602,
-    "person_id": 37
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5603,
-    "person_id": 37
-  },
-  {
-    "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5604,
-    "person_id": 7
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5605,
-    "person_id": 37
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5606,
-    "person_id": 24
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5607,
-    "person_id": 37
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5735,
+    "person_id": 41
   },
   {
     "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5608,
-    "person_id": 7
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5609,
-    "person_id": 37
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5610,
-    "person_id": 7
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2726,
-    "id": 5611,
-    "person_id": 24
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2735,
-    "id": 5624,
-    "person_id": 24
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5599,
-    "person_id": 37
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5612,
-    "person_id": 7
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2749,
-    "id": 5613,
-    "person_id": 24
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5614,
-    "person_id": 24
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5615,
-    "person_id": 24
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5616,
-    "person_id": 24
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2777,
-    "id": 5617,
-    "person_id": 24
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2703,
-    "id": 5618,
-    "person_id": 7
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2711,
-    "id": 5620,
-    "person_id": 7
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2813,
-    "id": 5625,
-    "person_id": 7
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5626,
-    "person_id": 24
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5627,
-    "person_id": 7
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5628,
-    "person_id": 24
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2726,
-    "id": 5629,
-    "person_id": 7
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2746,
-    "id": 5630,
-    "person_id": 7
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5631,
-    "person_id": 24
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5632,
-    "person_id": 24
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5633,
-    "person_id": 7
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2758,
-    "id": 5634,
-    "person_id": 7
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5635,
-    "person_id": 7
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2776,
-    "id": 5636,
-    "person_id": 7
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2792,
-    "id": 5637,
-    "person_id": 7
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5638,
-    "person_id": 7
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5639,
-    "person_id": 7
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2739,
-    "id": 5640,
-    "person_id": 7
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2741,
-    "id": 5641,
-    "person_id": 7
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5642,
-    "person_id": 7
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5643,
-    "person_id": 7
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5644,
-    "person_id": 7
-  },
-  {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5645,
-    "person_id": 3
-  },
-  {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2727,
-    "id": 5646,
-    "person_id": 3
-  },
-  {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2746,
-    "id": 5647,
-    "person_id": 3
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5648,
-    "person_id": 3
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2759,
-    "id": 5649,
-    "person_id": 3
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5650,
-    "person_id": 3
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2777,
-    "id": 5651,
-    "person_id": 3
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2792,
-    "id": 5652,
-    "person_id": 3
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5653,
-    "person_id": 3
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5654,
-    "person_id": 3
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2739,
-    "id": 5655,
-    "person_id": 3
-  },
-  {
-    "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5656,
-    "person_id": 3
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5657,
-    "person_id": 3
-  },
-  {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5658,
-    "person_id": 3
-  },
-  {
-    "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2790,
-    "id": 5659,
-    "person_id": 3
-  },
-  {
-    "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5660,
-    "person_id": 3
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 5736,
+    "person_id": 41
   },
   {
     "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5661,
-    "person_id": 3
-  },
-  {
-    "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5662,
-    "person_id": 3
-  },
-  {
-    "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5663,
-    "person_id": 3
-  },
-  {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5664,
-    "person_id": 3
-  },
-  {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5665,
-    "person_id": 3
-  },
-  {
-    "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2713,
-    "id": 5666,
-    "person_id": 3
-  },
-  {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5667,
-    "person_id": 3
-  },
-  {
-    "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5668,
-    "person_id": 3
-  },
-  {
-    "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2739,
-    "id": 5669,
-    "person_id": 32
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5670,
-    "person_id": 32
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 5737,
+    "person_id": 41
   },
   {
     "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2803,
-    "id": 5671,
-    "person_id": 32
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5672,
-    "person_id": 32
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5673,
-    "person_id": 32
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5674,
-    "person_id": 32
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2794,
-    "id": 5675,
-    "person_id": 32
+    "year": 2019,
+    "nomination_id": 2928,
+    "id": 5739,
+    "person_id": 41
   },
   {
     "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5676,
-    "person_id": 32
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5740,
+    "person_id": 41
   },
   {
-    "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5677,
-    "person_id": 32
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5741,
+    "person_id": 41
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 5742,
+    "person_id": 41
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 5743,
+    "person_id": 41
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 5744,
+    "person_id": 41
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5745,
+    "person_id": 41
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5746,
+    "person_id": 41
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5747,
+    "person_id": 41
   },
   {
     "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2790,
-    "id": 5678,
+    "year": 2019,
+    "nomination_id": 2910,
+    "id": 5749,
+    "person_id": 41
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5751,
+    "person_id": 41
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5748,
+    "person_id": 41
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5738,
+    "person_id": 41
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2818,
+    "id": 5772,
+    "person_id": 22
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2827,
+    "id": 5773,
+    "person_id": 22
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2838,
+    "id": 5767,
+    "person_id": 22
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2900,
+    "id": 5763,
+    "person_id": 22
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2892,
+    "id": 5775,
+    "person_id": 22
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5757,
+    "person_id": 22
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2846,
+    "id": 5758,
+    "person_id": 22
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2851,
+    "id": 5774,
+    "person_id": 22
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 5752,
+    "person_id": 22
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2861,
+    "id": 5753,
+    "person_id": 22
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2867,
+    "id": 5759,
+    "person_id": 22
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5760,
+    "person_id": 22
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2883,
+    "id": 5761,
+    "person_id": 22
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2889,
+    "id": 5762,
+    "person_id": 22
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5755,
+    "person_id": 22
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2910,
+    "id": 5756,
+    "person_id": 22
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2919,
+    "id": 5764,
+    "person_id": 22
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2920,
+    "id": 5765,
+    "person_id": 22
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2824,
+    "id": 5768,
+    "person_id": 22
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5769,
+    "person_id": 22
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2925,
+    "id": 5766,
+    "person_id": 22
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2934,
+    "id": 5770,
+    "person_id": 22
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2936,
+    "id": 5771,
+    "person_id": 22
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 5776,
     "person_id": 32
   },
   {
     "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5679,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5777,
+    "person_id": 32
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5779,
+    "person_id": 32
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5781,
+    "person_id": 32
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5782,
+    "person_id": 32
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5784,
+    "person_id": 32
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 5785,
+    "person_id": 32
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 5786,
+    "person_id": 32
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5788,
+    "person_id": 32
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5789,
+    "person_id": 32
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2928,
+    "id": 5790,
+    "person_id": 32
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 5791,
+    "person_id": 32
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5792,
+    "person_id": 32
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5793,
+    "person_id": 32
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 5796,
+    "person_id": 32
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 5797,
     "person_id": 32
   },
   {
     "category_id": 5,
-    "year": 2018,
-    "nomination_id": 2773,
-    "id": 5680,
-    "person_id": 13
+    "year": 2019,
+    "nomination_id": 2899,
+    "id": 5799,
+    "person_id": 32
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 5800,
+    "person_id": 24
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5801,
+    "person_id": 24
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5803,
+    "person_id": 24
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 5798,
+    "person_id": 32
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2912,
+    "id": 5780,
+    "person_id": 32
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5783,
+    "person_id": 32
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 5787,
+    "person_id": 32
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2910,
+    "id": 5804,
+    "person_id": 24
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5805,
+    "person_id": 24
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5806,
+    "person_id": 24
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5807,
+    "person_id": 24
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5808,
+    "person_id": 24
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 5809,
+    "person_id": 24
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 5810,
+    "person_id": 24
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 5811,
+    "person_id": 24
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5812,
+    "person_id": 24
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5813,
+    "person_id": 24
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2928,
+    "id": 5814,
+    "person_id": 24
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 5815,
+    "person_id": 24
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5816,
+    "person_id": 24
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5817,
+    "person_id": 24
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2931,
+    "id": 5818,
+    "person_id": 24
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2939,
+    "id": 5819,
+    "person_id": 24
   },
   {
     "category_id": 1,
-    "year": 2018,
-    "nomination_id": 2698,
-    "id": 5681,
-    "person_id": 13
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 5820,
+    "person_id": 24
   },
   {
     "category_id": 2,
-    "year": 2018,
-    "nomination_id": 2706,
-    "id": 5682,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 5821,
+    "person_id": 24
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 5822,
+    "person_id": 24
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 5823,
+    "person_id": 24
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2899,
+    "id": 5824,
     "person_id": 13
   },
   {
     "category_id": 8,
-    "year": 2018,
-    "nomination_id": 2733,
-    "id": 5683,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 5825,
     "person_id": 13
   },
   {
-    "category_id": 3,
-    "year": 2018,
-    "nomination_id": 2719,
-    "id": 5684,
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 5826,
     "person_id": 13
   },
   {
-    "category_id": 20,
-    "year": 2018,
-    "nomination_id": 2700,
-    "id": 5685,
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 5827,
     "person_id": 13
   },
   {
     "category_id": 21,
-    "year": 2018,
-    "nomination_id": 2712,
-    "id": 5686,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5828,
     "person_id": 13
   },
   {
-    "category_id": 23,
-    "year": 2018,
-    "nomination_id": 2807,
-    "id": 5687,
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5829,
     "person_id": 13
   },
   {
     "category_id": 24,
-    "year": 2018,
-    "nomination_id": 2811,
-    "id": 5688,
+    "year": 2019,
+    "nomination_id": 2939,
+    "id": 5830,
     "person_id": 13
   },
   {
-    "category_id": 6,
-    "year": 2018,
-    "nomination_id": 2723,
-    "id": 5689,
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2931,
+    "id": 5831,
     "person_id": 13
   },
   {
-    "category_id": 7,
-    "year": 2018,
-    "nomination_id": 2726,
-    "id": 5690,
-    "person_id": 13
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 5833,
+    "person_id": 26
   },
   {
-    "category_id": 11,
-    "year": 2018,
-    "nomination_id": 2749,
-    "id": 5691,
-    "person_id": 13
-  },
-  {
-    "category_id": 13,
-    "year": 2018,
-    "nomination_id": 2757,
-    "id": 5692,
-    "person_id": 13
-  },
-  {
-    "category_id": 14,
-    "year": 2018,
-    "nomination_id": 2760,
-    "id": 5693,
-    "person_id": 13
-  },
-  {
-    "category_id": 15,
-    "year": 2018,
-    "nomination_id": 2766,
-    "id": 5694,
-    "person_id": 13
-  },
-  {
-    "category_id": 4,
-    "year": 2018,
-    "nomination_id": 2776,
-    "id": 5695,
-    "person_id": 13
-  },
-  {
-    "category_id": 18,
-    "year": 2018,
-    "nomination_id": 2793,
-    "id": 5696,
-    "person_id": 13
-  },
-  {
-    "category_id": 19,
-    "year": 2018,
-    "nomination_id": 2797,
-    "id": 5697,
-    "person_id": 13
-  },
-  {
-    "category_id": 22,
-    "year": 2018,
-    "nomination_id": 2801,
-    "id": 5698,
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 5834,
     "person_id": 13
   },
   {
     "category_id": 9,
-    "year": 2018,
-    "nomination_id": 2735,
-    "id": 5699,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 5835,
     "person_id": 13
   },
   {
     "category_id": 10,
-    "year": 2018,
-    "nomination_id": 2744,
-    "id": 5700,
-    "person_id": 13
-  },
-  {
-    "category_id": 12,
-    "year": 2018,
-    "nomination_id": 2753,
-    "id": 5701,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5836,
     "person_id": 13
   },
   {
     "category_id": 16,
-    "year": 2018,
-    "nomination_id": 2782,
-    "id": 5702,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5837,
     "person_id": 13
   },
   {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 5838,
+    "person_id": 26
+  },
+  {
     "category_id": 17,
-    "year": 2018,
-    "nomination_id": 2788,
-    "id": 5703,
+    "year": 2019,
+    "nomination_id": 2912,
+    "id": 5839,
     "person_id": 13
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5840,
+    "person_id": 13
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5841,
+    "person_id": 13
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 5842,
+    "person_id": 26
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5843,
+    "person_id": 13
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5844,
+    "person_id": 13
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 5845,
+    "person_id": 13
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 5846,
+    "person_id": 13
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 5847,
+    "person_id": 13
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5848,
+    "person_id": 13
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5849,
+    "person_id": 13
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 5850,
+    "person_id": 26
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2928,
+    "id": 5851,
+    "person_id": 13
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5852,
+    "person_id": 26
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5853,
+    "person_id": 26
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2939,
+    "id": 5854,
+    "person_id": 26
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2931,
+    "id": 5855,
+    "person_id": 26
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 5857,
+    "person_id": 26
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2859,
+    "id": 5858,
+    "person_id": 26
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5859,
+    "person_id": 26
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2869,
+    "id": 5860,
+    "person_id": 26
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5861,
+    "person_id": 26
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5862,
+    "person_id": 26
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 5863,
+    "person_id": 26
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2927,
+    "id": 5864,
+    "person_id": 26
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 5865,
+    "person_id": 26
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 5866,
+    "person_id": 26
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5867,
+    "person_id": 26
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5868,
+    "person_id": 26
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5869,
+    "person_id": 26
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2910,
+    "id": 5870,
+    "person_id": 26
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5871,
+    "person_id": 26
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2857,
+    "id": 5872,
+    "person_id": 36
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2865,
+    "id": 5873,
+    "person_id": 36
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2905,
+    "id": 5875,
+    "person_id": 36
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2913,
+    "id": 5876,
+    "person_id": 36
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2843,
+    "id": 5877,
+    "person_id": 36
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2847,
+    "id": 5878,
+    "person_id": 36
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2878,
+    "id": 5880,
+    "person_id": 36
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2882,
+    "id": 5881,
+    "person_id": 36
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2888,
+    "id": 5882,
+    "person_id": 36
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2904,
+    "id": 5883,
+    "person_id": 36
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2868,
+    "id": 5879,
+    "person_id": 36
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2919,
+    "id": 5884,
+    "person_id": 36
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2920,
+    "id": 5885,
+    "person_id": 36
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2927,
+    "id": 5886,
+    "person_id": 36
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2836,
+    "id": 5887,
+    "person_id": 36
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2821,
+    "id": 5888,
+    "person_id": 36
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2934,
+    "id": 5889,
+    "person_id": 36
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2935,
+    "id": 5890,
+    "person_id": 36
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2820,
+    "id": 5891,
+    "person_id": 36
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2829,
+    "id": 5892,
+    "person_id": 36
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2851,
+    "id": 5893,
+    "person_id": 36
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2895,
+    "id": 5894,
+    "person_id": 36
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2831,
+    "id": 5895,
+    "person_id": 36
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 5896,
+    "person_id": 31
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2865,
+    "id": 5897,
+    "person_id": 31
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5899,
+    "person_id": 31
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2912,
+    "id": 5900,
+    "person_id": 31
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5901,
+    "person_id": 31
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5902,
+    "person_id": 31
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5903,
+    "person_id": 31
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5904,
+    "person_id": 31
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 5905,
+    "person_id": 31
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 5906,
+    "person_id": 31
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2902,
+    "id": 5907,
+    "person_id": 31
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5908,
+    "person_id": 31
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5909,
+    "person_id": 31
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2928,
+    "id": 5910,
+    "person_id": 31
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 5911,
+    "person_id": 31
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5912,
+    "person_id": 31
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5913,
+    "person_id": 31
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2931,
+    "id": 5914,
+    "person_id": 31
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2939,
+    "id": 5915,
+    "person_id": 31
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 5916,
+    "person_id": 31
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 5917,
+    "person_id": 31
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2855,
+    "id": 5918,
+    "person_id": 31
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 5919,
+    "person_id": 31
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 5920,
+    "person_id": 39
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 5921,
+    "person_id": 39
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 5922,
+    "person_id": 39
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 5923,
+    "person_id": 39
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5924,
+    "person_id": 39
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5925,
+    "person_id": 39
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2847,
+    "id": 5932,
+    "person_id": 37
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2859,
+    "id": 5926,
+    "person_id": 37
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5927,
+    "person_id": 37
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2909,
+    "id": 5929,
+    "person_id": 37
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2913,
+    "id": 5930,
+    "person_id": 37
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2842,
+    "id": 5931,
+    "person_id": 37
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5933,
+    "person_id": 37
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2877,
+    "id": 5934,
+    "person_id": 37
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2939,
+    "id": 5935,
+    "person_id": 39
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2931,
+    "id": 5937,
+    "person_id": 39
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2883,
+    "id": 5936,
+    "person_id": 37
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2890,
+    "id": 5938,
+    "person_id": 37
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2901,
+    "id": 5939,
+    "person_id": 37
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2919,
+    "id": 5940,
+    "person_id": 37
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2922,
+    "id": 5941,
+    "person_id": 37
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2929,
+    "id": 5942,
+    "person_id": 37
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2836,
+    "id": 5943,
+    "person_id": 37
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2822,
+    "id": 5944,
+    "person_id": 37
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2831,
+    "id": 5946,
+    "person_id": 37
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2934,
+    "id": 5947,
+    "person_id": 37
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2860,
+    "id": 5948,
+    "person_id": 39
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2935,
+    "id": 5949,
+    "person_id": 37
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2820,
+    "id": 5950,
+    "person_id": 37
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2829,
+    "id": 5951,
+    "person_id": 37
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2851,
+    "id": 5952,
+    "person_id": 37
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2892,
+    "id": 5953,
+    "person_id": 37
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5954,
+    "person_id": 39
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5955,
+    "person_id": 39
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2912,
+    "id": 5956,
+    "person_id": 39
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5957,
+    "person_id": 39
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5958,
+    "person_id": 39
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2870,
+    "id": 5959,
+    "person_id": 39
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2877,
+    "id": 5960,
+    "person_id": 39
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 5961,
+    "person_id": 39
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2890,
+    "id": 5962,
+    "person_id": 39
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 5963,
+    "person_id": 39
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5964,
+    "person_id": 39
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5965,
+    "person_id": 39
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2928,
+    "id": 5966,
+    "person_id": 39
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 5967,
+    "person_id": 39
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2860,
+    "id": 5968,
+    "person_id": 25
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5969,
+    "person_id": 25
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5971,
+    "person_id": 25
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2912,
+    "id": 5972,
+    "person_id": 25
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5973,
+    "person_id": 25
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5974,
+    "person_id": 25
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5975,
+    "person_id": 25
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 5976,
+    "person_id": 25
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2882,
+    "id": 5977,
+    "person_id": 25
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2889,
+    "id": 5978,
+    "person_id": 25
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 5979,
+    "person_id": 25
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 5980,
+    "person_id": 25
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 5981,
+    "person_id": 25
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2927,
+    "id": 5982,
+    "person_id": 25
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2839,
+    "id": 5983,
+    "person_id": 25
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 5984,
+    "person_id": 25
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 5985,
+    "person_id": 25
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2933,
+    "id": 5986,
+    "person_id": 25
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2935,
+    "id": 5987,
+    "person_id": 25
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2818,
+    "id": 5988,
+    "person_id": 25
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2826,
+    "id": 5989,
+    "person_id": 25
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2855,
+    "id": 5990,
+    "person_id": 25
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2899,
+    "id": 5991,
+    "person_id": 25
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2935,
+    "id": 5795,
+    "person_id": 32
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2933,
+    "id": 5794,
+    "person_id": 32
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 5992,
+    "person_id": 29
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 5993,
+    "person_id": 29
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 5995,
+    "person_id": 29
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2910,
+    "id": 5996,
+    "person_id": 29
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 5997,
+    "person_id": 29
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 5998,
+    "person_id": 29
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 5999,
+    "person_id": 29
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 6000,
+    "person_id": 29
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 6001,
+    "person_id": 29
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 6002,
+    "person_id": 29
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2902,
+    "id": 6003,
+    "person_id": 29
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 6004,
+    "person_id": 29
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 6005,
+    "person_id": 29
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2927,
+    "id": 6006,
+    "person_id": 29
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 6007,
+    "person_id": 29
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 6008,
+    "person_id": 29
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 6009,
+    "person_id": 29
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2933,
+    "id": 6010,
+    "person_id": 29
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2935,
+    "id": 6011,
+    "person_id": 29
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 6012,
+    "person_id": 29
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 6013,
+    "person_id": 29
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 6014,
+    "person_id": 29
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 6015,
+    "person_id": 29
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 6016,
+    "person_id": 3
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 6017,
+    "person_id": 3
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 6019,
+    "person_id": 3
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2910,
+    "id": 6020,
+    "person_id": 3
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 6021,
+    "person_id": 3
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 6022,
+    "person_id": 7
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 6023,
+    "person_id": 3
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 6024,
+    "person_id": 7
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 6026,
+    "person_id": 7
+  },
+  {
+    "category_id": 9,
+    "year": 2019,
+    "nomination_id": 2856,
+    "id": 6065,
+    "person_id": 11
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2912,
+    "id": 6027,
+    "person_id": 7
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2867,
+    "id": 6028,
+    "person_id": 3
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2877,
+    "id": 6029,
+    "person_id": 3
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 6030,
+    "person_id": 7
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 6031,
+    "person_id": 7
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2890,
+    "id": 6032,
+    "person_id": 3
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2901,
+    "id": 6033,
+    "person_id": 3
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 6034,
+    "person_id": 3
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 6035,
+    "person_id": 3
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2925,
+    "id": 6036,
+    "person_id": 3
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2838,
+    "id": 6037,
+    "person_id": 3
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 6038,
+    "person_id": 3
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 6039,
+    "person_id": 3
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2933,
+    "id": 6040,
+    "person_id": 3
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2938,
+    "id": 6041,
+    "person_id": 3
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2818,
+    "id": 6042,
+    "person_id": 3
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 6043,
+    "person_id": 3
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2855,
+    "id": 6044,
+    "person_id": 3
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 6045,
+    "person_id": 3
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 6046,
+    "person_id": 3
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2870,
+    "id": 6047,
+    "person_id": 7
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 6048,
+    "person_id": 7
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2881,
+    "id": 6049,
+    "person_id": 7
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2887,
+    "id": 6050,
+    "person_id": 7
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 6051,
+    "person_id": 7
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 6052,
+    "person_id": 7
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 6053,
+    "person_id": 7
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2925,
+    "id": 6054,
+    "person_id": 7
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 6055,
+    "person_id": 7
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 6056,
+    "person_id": 7
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2832,
+    "id": 6057,
+    "person_id": 7
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2931,
+    "id": 6058,
+    "person_id": 7
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2939,
+    "id": 6059,
+    "person_id": 7
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 6060,
+    "person_id": 7
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 6061,
+    "person_id": 7
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 6062,
+    "person_id": 7
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 6063,
+    "person_id": 7
+  },
+  {
+    "category_id": 10,
+    "year": 2019,
+    "nomination_id": 2862,
+    "id": 6066,
+    "person_id": 11
+  },
+  {
+    "category_id": 16,
+    "year": 2019,
+    "nomination_id": 2906,
+    "id": 6068,
+    "person_id": 11
+  },
+  {
+    "category_id": 17,
+    "year": 2019,
+    "nomination_id": 2910,
+    "id": 6069,
+    "person_id": 11
+  },
+  {
+    "category_id": 6,
+    "year": 2019,
+    "nomination_id": 2844,
+    "id": 6070,
+    "person_id": 11
+  },
+  {
+    "category_id": 7,
+    "year": 2019,
+    "nomination_id": 2849,
+    "id": 6071,
+    "person_id": 11
+  },
+  {
+    "category_id": 11,
+    "year": 2019,
+    "nomination_id": 2866,
+    "id": 6072,
+    "person_id": 11
+  },
+  {
+    "category_id": 13,
+    "year": 2019,
+    "nomination_id": 2876,
+    "id": 6073,
+    "person_id": 11
+  },
+  {
+    "category_id": 14,
+    "year": 2019,
+    "nomination_id": 2884,
+    "id": 6074,
+    "person_id": 11
+  },
+  {
+    "category_id": 15,
+    "year": 2019,
+    "nomination_id": 2889,
+    "id": 6075,
+    "person_id": 11
+  },
+  {
+    "category_id": 4,
+    "year": 2019,
+    "nomination_id": 2903,
+    "id": 6076,
+    "person_id": 11
+  },
+  {
+    "category_id": 18,
+    "year": 2019,
+    "nomination_id": 2917,
+    "id": 6077,
+    "person_id": 11
+  },
+  {
+    "category_id": 19,
+    "year": 2019,
+    "nomination_id": 2923,
+    "id": 6078,
+    "person_id": 11
+  },
+  {
+    "category_id": 22,
+    "year": 2019,
+    "nomination_id": 2925,
+    "id": 6079,
+    "person_id": 11
+  },
+  {
+    "category_id": 3,
+    "year": 2019,
+    "nomination_id": 2840,
+    "id": 6080,
+    "person_id": 11
+  },
+  {
+    "category_id": 20,
+    "year": 2019,
+    "nomination_id": 2825,
+    "id": 6081,
+    "person_id": 11
+  },
+  {
+    "category_id": 21,
+    "year": 2019,
+    "nomination_id": 2835,
+    "id": 6082,
+    "person_id": 11
+  },
+  {
+    "category_id": 23,
+    "year": 2019,
+    "nomination_id": 2933,
+    "id": 6083,
+    "person_id": 11
+  },
+  {
+    "category_id": 24,
+    "year": 2019,
+    "nomination_id": 2935,
+    "id": 6084,
+    "person_id": 11
+  },
+  {
+    "category_id": 1,
+    "year": 2019,
+    "nomination_id": 2819,
+    "id": 6085,
+    "person_id": 11
+  },
+  {
+    "category_id": 2,
+    "year": 2019,
+    "nomination_id": 2830,
+    "id": 6086,
+    "person_id": 11
+  },
+  {
+    "category_id": 8,
+    "year": 2019,
+    "nomination_id": 2853,
+    "id": 6087,
+    "person_id": 11
+  },
+  {
+    "category_id": 5,
+    "year": 2019,
+    "nomination_id": 2897,
+    "id": 6064,
+    "person_id": 11
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5706,
+    "person_id": 28
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5750,
+    "person_id": 41
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2873,
+    "id": 5754,
+    "person_id": 22
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5778,
+    "person_id": 32
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5802,
+    "person_id": 24
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5832,
+    "person_id": 13
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5856,
+    "person_id": 26
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2871,
+    "id": 5874,
+    "person_id": 36
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2874,
+    "id": 5898,
+    "person_id": 31
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5928,
+    "person_id": 37
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5945,
+    "person_id": 39
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5970,
+    "person_id": 25
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 5994,
+    "person_id": 29
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 6018,
+    "person_id": 3
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 6025,
+    "person_id": 7
+  },
+  {
+    "category_id": 25,
+    "year": 2019,
+    "nomination_id": 2875,
+    "id": 6067,
+    "person_id": 11
   }
 ];

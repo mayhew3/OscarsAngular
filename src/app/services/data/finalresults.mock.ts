@@ -1,7 +1,7 @@
 import {FinalResult} from '../../interfaces/FinalResult';
 /* eslint-disable  @typescript-eslint/quotes */
 /* eslint-disable quote-props */
-export const MockFinalResultsList: any[] = [
+export const MockFinalResultsList: FinalResult[] = [
   {
     "score": 24,
     "correct_count": 10,
@@ -2133,6 +2133,150 @@ export const MockFinalResultsList: any[] = [
     "year": 2018,
     "rank": 6,
     "id": 237,
+    "person_id": 41
+  },
+  {
+    "score": 26,
+    "correct_count": 12,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 13,
+    "id": 238,
+    "person_id": 3
+  },
+  {
+    "score": 42,
+    "correct_count": 19,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 5,
+    "id": 239,
+    "person_id": 7
+  },
+  {
+    "score": 30,
+    "correct_count": 14,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 12,
+    "id": 240,
+    "person_id": 11
+  },
+  {
+    "score": 51,
+    "correct_count": 22,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 1,
+    "id": 241,
+    "person_id": 13
+  },
+  {
+    "score": 9,
+    "correct_count": 5,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 14,
+    "id": 242,
+    "person_id": 22
+  },
+  {
+    "score": 45,
+    "correct_count": 20,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 3,
+    "id": 243,
+    "person_id": 24
+  },
+  {
+    "score": 31,
+    "correct_count": 14,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 11,
+    "id": 244,
+    "person_id": 25
+  },
+  {
+    "score": 40,
+    "correct_count": 17,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 6,
+    "id": 245,
+    "person_id": 26
+  },
+  {
+    "score": 37,
+    "correct_count": 17,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 8,
+    "id": 246,
+    "person_id": 28
+  },
+  {
+    "score": 35,
+    "correct_count": 16,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 9,
+    "id": 247,
+    "person_id": 29
+  },
+  {
+    "score": 46,
+    "correct_count": 19,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 2,
+    "id": 248,
+    "person_id": 31
+  },
+  {
+    "score": 45,
+    "correct_count": 20,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 3,
+    "id": 249,
+    "person_id": 32
+  },
+  {
+    "score": 0,
+    "correct_count": 0,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 16,
+    "id": 250,
+    "person_id": 36
+  },
+  {
+    "score": 4,
+    "correct_count": 3,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 15,
+    "id": 251,
+    "person_id": 37
+  },
+  {
+    "score": 39,
+    "correct_count": 17,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 7,
+    "id": 252,
+    "person_id": 39
+  },
+  {
+    "score": 35,
+    "correct_count": 16,
+    "group_id": 1,
+    "year": 2019,
+    "rank": 9,
+    "id": 253,
     "person_id": 41
   }
 ];
