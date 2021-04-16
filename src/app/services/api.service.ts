@@ -1,20 +1,29 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {combineLatest, Observable} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {MyAuthService} from './auth/my-auth.service';
 import {SocketService} from './socket.service';
 import {catchError, distinctUntilChanged, filter, first, mergeMap} from 'rxjs/operators';
 import {ErrorNotificationService} from './error-notification.service';
+import {Person} from '../interfaces/Person';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
+  private emailVerifiedSubject = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient,
               private auth: MyAuthService,
               private socket: SocketService,
               private errorHandler: ErrorNotificationService) { }
+
+  // REGISTER AUTHENTICATION
+
+  meChanged(person: Person): void {
+    this.emailVerifiedSubject.next(!!person);
+  }
 
   // GET
 
@@ -107,9 +116,13 @@ export class ApiService {
     );
   }
 
+  private get emailVerified$(): Observable<boolean> {
+    return this.emailVerifiedSubject.asObservable();
+  }
+
   private get connectedToAll$(): Observable<[boolean, boolean]> {
     return combineLatest([
-      this.auth.isAuthenticated$.pipe(distinctUntilChanged()),
+      this.emailVerified$.pipe(distinctUntilChanged()),
       this.socket.isConnected$.pipe(distinctUntilChanged())
     ]).pipe(
       filter(([isAuthenticated, isConnected]) => !!isAuthenticated && !!isConnected)

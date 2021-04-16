@@ -6,6 +6,7 @@ import {Person} from '../interfaces/Person';
 import {Store} from '@ngxs/store';
 import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {MyAuthService} from './auth/my-auth.service';
+import {ApiService} from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,13 @@ export class PersonService implements OnDestroy {
   private destroy$ = new Subject();
 
   constructor(private auth: MyAuthService,
-              private store: Store) {
+              private store: Store,
+              private apiService: ApiService) {
     this.store.dispatch(new GetPersons());
-    this.me$.subscribe(me => this.isAdmin = (me.role === 'admin'));
+    this.me$.subscribe(me => {
+      this.isAdmin = (me.role === 'admin');
+      this.apiService.meChanged(me);
+    });
   }
 
   // REAL METHODS
