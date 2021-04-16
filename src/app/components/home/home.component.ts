@@ -8,6 +8,7 @@ import {combineLatest, Observable} from 'rxjs';
 import {PersonService} from '../../services/person.service';
 import {Person} from '../../interfaces/Person';
 import {ThemePalette} from '@angular/material/core';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'osc-home',
@@ -19,6 +20,7 @@ export class HomeComponent implements OnInit {
   loadingColor: ThemePalette = 'accent';
   constructor(public auth: MyAuthService,
               public personService: PersonService,
+              public apiService: ApiService,
               public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
               public votesService: VotesService) {

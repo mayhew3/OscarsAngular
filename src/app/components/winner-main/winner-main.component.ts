@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {ActiveContext} from '../categories.context';
-import {MyAuthService} from '../../services/auth/my-auth.service';
 import {PersonService} from '../../services/person.service';
 
 @Component({
@@ -8,15 +7,12 @@ import {PersonService} from '../../services/person.service';
   templateUrl: './winner-main.component.html',
   styleUrls: ['./winner-main.component.scss']
 })
-export class WinnerMainComponent implements OnInit {
+export class WinnerMainComponent {
   public activeContext = ActiveContext.Winner;
   public person;
 
   constructor(private personService: PersonService) {
     this.personService.me$.subscribe(person => this.person = person);
-  }
-
-  ngOnInit() {
   }
 
 }

@@ -105,7 +105,7 @@ export class NomineesComponent implements OnInit {
         this.processingPick$.next(nominee);
         this.votesService.addOrUpdateVote(nominee, me);
 
-        const voteCallback = () => {
+        const voteCallback: () => void = () => {
           this.processingPick$.next(undefined);
           this.socket.off('add_vote', voteCallback);
           this.socket.off('change_vote', voteCallback);
@@ -118,7 +118,7 @@ export class NomineesComponent implements OnInit {
         this.processingPick$.next(nominee);
         this.winnersService.addOrDeleteWinner(nominee, category);
 
-        const winnerCallback = () => {
+        const winnerCallback: () => void = () => {
           this.processingPick$.next(undefined);
           this.socket.off('add_winner', winnerCallback);
           this.socket.off('remove_winner', winnerCallback);

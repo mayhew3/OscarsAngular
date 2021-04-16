@@ -1,6 +1,6 @@
 <!-- src/app/app.component.html -->
 
-<osc-nav-bar *ngIf="(auth.isAuthenticated$ | async) && !auth.failedEmail && (me$ | async)">
+<osc-nav-bar *ngIf="(emailVerified$ | async)">
 </osc-nav-bar>
 
 <div class="oscarBackground h-100">
@@ -12,7 +12,7 @@
       <div class="h-100"
            *ngIf="(!failedEmail) else invalidUser">
         <div class="h-100"
-             *ngIf="(me$ | async) else loading">
+             *ngIf="(emailVerified$ | async) else loading">
 
           <main class="container wideContainer">
             <router-outlet></router-outlet>

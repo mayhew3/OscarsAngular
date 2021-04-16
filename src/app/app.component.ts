@@ -11,6 +11,7 @@ import {ConnectionProblemComponent} from './components/connection-problem/connec
 import {ThemePalette} from '@angular/material/core';
 import {Observable} from 'rxjs';
 import {Person} from './interfaces/Person';
+import {ApiService} from './services/api.service';
 
 @Component({
   selector: 'osc-root',
@@ -29,8 +30,8 @@ export class AppComponent {
               private socket: SocketService,
               private initSocket: InitSocketService,
               private personService: PersonService,
+              private apiService: ApiService,
               private modalService: NgbModal) {
-    personService.me$.subscribe();
     this.initDisconnectPopup();
   }
 
@@ -49,8 +50,8 @@ export class AppComponent {
     });
   }
 
-  get me$(): Observable<Person> {
-    return this.personService.me$;
+  get emailVerified$(): Observable<boolean> {
+    return this.apiService.emailVerified$;
   }
 
   get failedEmail(): boolean {

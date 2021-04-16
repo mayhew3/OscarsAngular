@@ -25,6 +25,10 @@ export class ApiService {
     this.emailVerifiedSubject.next(!!person);
   }
 
+  get emailVerified$(): Observable<boolean> {
+    return this.emailVerifiedSubject.asObservable();
+  }
+
   // GET
 
   getAfterAuthenticate<T>(url: string, params?: HttpParams): Observable<any> {
@@ -114,10 +118,6 @@ export class ApiService {
     return this.http.delete<T>(`${url}/${id}`, httpOptions).pipe(
       catchError(this.errorHandler.handleAPIError())
     );
-  }
-
-  private get emailVerified$(): Observable<boolean> {
-    return this.emailVerifiedSubject.asObservable();
   }
 
   private get connectedToAll$(): Observable<[boolean, boolean]> {
