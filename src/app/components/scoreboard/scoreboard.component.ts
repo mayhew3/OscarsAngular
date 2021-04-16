@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
 import {combineLatest, Observable} from 'rxjs';
-import {map, mergeMap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
 import {Vote} from '../../interfaces/Vote';
 import {Odds} from '../../interfaces/Odds';
@@ -34,6 +34,8 @@ export class ScoreboardComponent implements OnInit {
   latestCategory: Category;
   me: Person;
   updatingOddsFilter = false;
+
+  footerMinimized = false;
 
   loadingColor: ThemePalette = 'accent';
 
