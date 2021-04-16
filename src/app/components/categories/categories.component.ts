@@ -3,8 +3,7 @@ import {Category} from '../../interfaces/Category';
 import {CategoryService} from '../../services/category.service';
 import {ActiveContext} from '../categories.context';
 import {SystemVarsService} from '../../services/system.vars.service';
-import fast_sort from 'fast-sort';
-import * as _ from 'underscore';
+import _ from 'underscore';
 import * as moment from 'moment';
 import {Winner} from '../../interfaces/Winner';
 import {Nominee} from '../../interfaces/Nominee';
@@ -13,7 +12,6 @@ import {Person} from '../../interfaces/Person';
 import {map} from 'rxjs/operators';
 import {combineLatest, Observable} from 'rxjs';
 import {PersonService} from '../../services/person.service';
-import {ArrayUtil} from '../../utility/ArrayUtil';
 
 @Component({
   selector: 'osc-categories',
@@ -39,26 +37,8 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  get categories$(): Observable<Category[]> {
-    return this.categoryService.categories;
-  }
-
   get categoriesSorted$(): Observable<Category[]> {
-    return this.categories$.pipe(
-      map(categories => {
-        const sorted = ArrayUtil.cloneArray(categories);
-        fast_sort(sorted)
-          .by([
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            {desc: category => this.mostRecentWinDate(category)},
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            {asc: category => category.points},
-            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-            {asc: category => category.name}
-          ]);
-        return sorted;
-      }
-    ));
+    return this.categoryService.categoriesSorted$;
   }
 
   getRouterLink(category: Category): any[] {
@@ -133,9 +113,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   mostRecentWinDate(category: Category): Date {
-    return category.winners.length > 0 ?
-      _.max(_.map(category.winners, winner => winner.declared)) :
-      undefined;
+    return this.categoryService.mostRecentWinDate(category);
   }
 
   getVotedClass(category: Category): Observable<string> {

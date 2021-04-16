@@ -95,7 +95,7 @@ describe('CategoriesComponent', () => {
   }));
 
   it ('expect same number of cards as categories', done => {
-    component.categories$.subscribe(categories => {
+    component.categoriesSorted$.subscribe(categories => {
       const items = element.queryAll(By.css('.card'));
       expect(items.length)
         .toBeGreaterThan(0);
@@ -108,7 +108,7 @@ describe('CategoriesComponent', () => {
   });
 
   it ('expect category names and points displayed', done => {
-    component.categories$.subscribe(categories => {
+    component.categoriesSorted$.subscribe(categories => {
       const items = element.queryAll(By.css('.card-body'));
 
       for (let i = 0; i < items.length; i++) {

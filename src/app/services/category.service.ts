@@ -11,6 +11,8 @@ import {Store} from '@ngxs/store';
 import {GetCategories, OddsChange, UpdateOdds} from '../actions/category.action';
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
+import {ArrayUtil} from '../utility/ArrayUtil';
+import fast_sort from 'fast-sort';
 
 @Injectable({
   providedIn: 'root'
@@ -84,9 +86,33 @@ export class CategoryService {
     );
   }
 
+  get categoriesSorted$(): Observable<Category[]> {
+    return this.categories.pipe(
+      map(categories => {
+          const sorted = ArrayUtil.cloneArray(categories);
+          fast_sort(sorted)
+            .by([
+              // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+              {desc: category => this.mostRecentWinDate(category)},
+              // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+              {asc: category => category.points},
+              // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+              {asc: category => category.name}
+            ]);
+          return sorted;
+        }
+      ));
+  }
+
+  mostRecentWinDate(category: Category): Date {
+    return category.winners.length > 0 ?
+      _.max(_.map(category.winners, winner => winner.declared)) :
+      undefined;
+  }
+
   // noinspection DuplicatedCode
   getNextCategory(id: number): Observable<Category> {
-    return this.categories.pipe(
+    return this.categoriesSorted$.pipe(
       map(categories => {
         const foundIndex = _.findIndex(categories, {id});
         if (foundIndex === -1 || categories.length < (foundIndex + 1)) {
@@ -98,7 +124,7 @@ export class CategoryService {
   }
 
   getPreviousCategory(id: number): Observable<Category> {
-    return this.categories.pipe(
+    return this.categoriesSorted$.pipe(
       map(categories => {
         const foundIndex = _.findIndex(categories, {id});
         if (0 > (foundIndex - 1)) {
