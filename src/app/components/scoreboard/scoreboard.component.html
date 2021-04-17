@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <p *ngIf="(odds$ | async) && getVoters().length === 0">
+    <p *ngIf="(odds$ | async) && scoreboardService.getVoters().length === 0">
       No players have voted yet!
     </p>
 
@@ -40,7 +40,7 @@
 
     <div class="row mt-2" *ngIf="(odds$ | async) as odds; else loading">
       <div class="col-12"
-           *ngFor="let scoreData of getVoters()">
+           *ngFor="let scoreData of scoreboardService.getVoters()">
         <div class="card scoreCard fakeLink"
              [ngClass]="scorecardClass(scoreData) | async"
              [routerLink]="['/person', scoreData.person.id]">
@@ -147,7 +147,7 @@
           </div>
 
           <div class="col-12 py-1"
-               *ngFor="let winnerName of getWinnerFullNames()">
+               *ngFor="let winnerName of scoreboardService.getPlayersInFirstPlaceFullNames()">
             <span class="footerBig">{{winnerName}}!!</span>
           </div>
         </div>
