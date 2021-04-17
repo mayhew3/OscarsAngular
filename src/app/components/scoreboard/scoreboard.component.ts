@@ -14,7 +14,6 @@ import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
 import {Vote} from '../../interfaces/Vote';
-import {Odds} from '../../interfaces/Odds';
 import {ArrayUtil} from '../../utility/ArrayUtil';
 import {Select} from '@ngxs/store';
 import {OddsState} from '../../states/odds.state';
@@ -22,6 +21,7 @@ import {ThemePalette} from '@angular/material/core';
 import {SocketService} from '../../services/socket.service';
 import {PersonConnectionSnackBarComponent} from '../person-connection-snack-bar/person-connection-snack-bar.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ScoreData} from '../../interfaces/ScoreData';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -442,15 +442,4 @@ export class ScoreboardComponent implements OnInit {
     });
   }
 
-}
-
-class ScoreData {
-  maxPosition: number;
-
-  constructor(public person: Person,
-              public score: number,
-              public num_votes: number,
-              public odds: Odds,
-              public previousOdds: Odds) {
-  }
 }
