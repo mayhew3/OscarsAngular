@@ -202,11 +202,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   itsOver(): Observable<boolean> {
-    const winnerCategoryCount$ = this.getWinnerCategoryCount();
-    const totalCategoryCount$ = this.getTotalCategoryCount();
-    return combineLatest([winnerCategoryCount$, totalCategoryCount$]).pipe(
-      map(([winnerCategoryCount, totalCategoryCount]) => winnerCategoryCount === totalCategoryCount)
-    );
+    return this.categoryService.itsOver();
   }
 
   getOddsForPerson(scoreData: ScoreData): string {
@@ -428,9 +424,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   getWinnerCategoryCount(): Observable<number> {
-    return this.categoryService.getCategoriesWithWinners().pipe(
-      map(categories => categories.length)
-    );
+    return this.categoryService.getWinnerCategoryCount();
   }
 
   private showPersonSnackBar(person_id: number, connected: boolean): void {

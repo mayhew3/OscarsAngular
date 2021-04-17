@@ -10,19 +10,23 @@
       Welcome to the Oscars {{getOscarYear() | async}}, {{(me$ | async)?.first_name}}!
     </p>
 
-    <p *ngIf="(hasVotesRemaining() | async)"
+    <p *ngIf="(hasVotesRemaining() | async) && (systemVarsService.canVote() | async)"
        class="votesRemaining">
       You have {{numVotesRemaining() | async}} categories left to vote on!
     </p>
 
-    <p *ngIf="systemVarsService.canVote() | async">
+    <p *ngIf="(systemVarsService.canVote() | async) && (categoryService.itsOver() | async) === false">
       Live Scoring will be viewable on Sunday, February 9 at 5pm PT / 8pm ET, when the ballots will lock.
       The new voting screen has been expanded to include the betting odds, expert picks, and metacritic user favorites, as
       found on <a href="https://www.metacritic.com/feature/picks-for-who-will-win-2019-oscars" target="_blank">Metacritic</a>.
     </p>
 
-    <p *ngIf="(systemVarsService.canVote() | async) === false">
+    <p *ngIf="(systemVarsService.canVote() | async) === false && (categoryService.itsOver() | async) === false">
       Voting is currently closed, but you can head over to Live Scoring to see how the scores are progressing, or see the final scores.
+    </p>
+
+    <p *ngIf="(categoryService.itsOver() | async) !== false">
+      The Winners are in!
     </p>
 
     <br>

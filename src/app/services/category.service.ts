@@ -86,6 +86,20 @@ export class CategoryService {
     );
   }
 
+  getWinnerCategoryCount(): Observable<number> {
+    return this.getCategoriesWithWinners().pipe(
+      map(categories => categories.length)
+    );
+  }
+
+  itsOver(): Observable<boolean> {
+    const winnerCategoryCount$ = this.getWinnerCategoryCount();
+    const totalCategoryCount$ = this.getCategoryCount();
+    return combineLatest([winnerCategoryCount$, totalCategoryCount$]).pipe(
+      map(([winnerCategoryCount, totalCategoryCount]) => winnerCategoryCount === totalCategoryCount)
+    );
+  }
+
   get categoriesSorted$(): Observable<Category[]> {
     return this.categories.pipe(
       map(categories => {
