@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Vote} from '../interfaces/Vote';
 import {combineLatest, Observable} from 'rxjs';
-import {distinctUntilChanged, filter, map} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, mergeAll, mergeMap, reduce} from 'rxjs/operators';
 import {Nominee} from '../interfaces/Nominee';
 import {Person} from '../interfaces/Person';
 import {SystemVarsService} from './system.vars.service';
@@ -12,6 +12,8 @@ import {GetVotes} from '../actions/votes.action';
 import {PersonService} from './person.service';
 import {SystemVars} from '../interfaces/SystemVars';
 import {ApiService} from './api.service';
+import {CategoryService} from './category.service';
+import {is} from 'immer/dist/utils/common';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,7 @@ export class VotesService {
 
   constructor(private systemVarsService: SystemVarsService,
               private personService: PersonService,
+              private categoryService: CategoryService,
               private store: Store,
               private api: ApiService) {
     this.systemVarsService.systemVars.pipe(
@@ -63,6 +66,21 @@ export class VotesService {
   getVotesForCurrentYearAndPerson(person: Person): Observable<Vote[]> {
     return this.votes.pipe(
       map(votes => _.where(votes, {person_id: person.id}))
+    );
+  }
+
+  getNumCorrectVotesForCurrentYearAndPerson(person: Person): Observable<number> {
+    return this.getVotesForCurrentYearAndPerson(person).pipe(
+      map(votes => _.map(votes, vote => this.isCorrectVote(person, vote))),
+      mergeMap(isCorrectVotes$ => combineLatest(isCorrectVotes$).pipe(
+        map((isCorrectVotes: boolean[]) => _.filter(isCorrectVotes, isCorrectVote => !!isCorrectVote).length)
+      ))
+    );
+  }
+
+  isCorrectVote(person: Person, vote: Vote): Observable<boolean> {
+    return this.categoryService.getCategory(vote.category_id).pipe(
+      mergeMap(category => this.didPersonVoteCorrectlyFor(person, category))
     );
   }
 

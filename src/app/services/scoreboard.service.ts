@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ScoreData} from '../interfaces/ScoreData';
 import {PersonService} from './person.service';
 import {CategoryService} from './category.service';
 import {VotesService} from './votes.service';
 import {OddsService} from './odds.service';
-import {SocketService} from './socket.service';
 import {combineLatest} from 'rxjs';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import * as _ from 'underscore';

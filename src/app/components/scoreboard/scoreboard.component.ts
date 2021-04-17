@@ -38,12 +38,10 @@ export class ScoreboardComponent implements OnInit {
 
   loadingColor: ThemePalette = 'accent';
 
-  odds$ = this.oddsService.odds$;
-
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
               private voteService: VotesService,
-              private oddsService: OddsService,
+              public oddsService: OddsService,
               private socket: SocketService,
               public scoreboardService: ScoreboardService,
               private snackBar: MatSnackBar) {

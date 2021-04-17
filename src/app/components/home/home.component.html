@@ -25,9 +25,12 @@
       Voting is currently closed, but you can head over to Live Scoring to see how the scores are progressing, or see the final scores.
     </p>
 
-    <p *ngIf="(categoryService.itsOver() | async) !== false">
-      The Winners are in!
-    </p>
+    <div *ngIf="(categoryService.itsOver() | async) !== false">
+      <p>The champagne has been popped, the trophies handed out and our {{winnerPhrase}} decided!</p>
+      <p>Congrats to <span class="winnerHighlight">{{winnersString}}</span> for winning the Prediction Arena for the {{getOscarYear() | async}} films!
+      <span *ngIf="showWinnerDetail()">They got <span class="winnerHighlight">{{singleFirstPlaceNumCorrectVotes | async}}</span> correct out of <span class="winnerHighlight">{{singleFirstPlaceNumVotes | async}}</span>.</span>
+      </p>
+    </div>
 
     <br>
 
