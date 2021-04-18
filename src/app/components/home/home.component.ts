@@ -9,6 +9,7 @@ import {PersonService} from '../../services/person.service';
 import {Person} from '../../interfaces/Person';
 import {ThemePalette} from '@angular/material/core';
 import {ApiService} from '../../services/api.service';
+import {ScoreboardService} from '../../services/scoreboard.service';
 
 @Component({
   selector: 'osc-home',
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
               public apiService: ApiService,
               public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
+              public scoreboardService: ScoreboardService,
               public votesService: VotesService) {
   }
 
@@ -35,6 +37,30 @@ export class HomeComponent implements OnInit {
 
   categoryCount(): Observable<number> {
     return this.categoryService.getCategoryCount();
+  }
+
+  get winnersString(): string {
+    return this.scoreboardService.getPlayersInFirstPlaceFullNames().join(' and ');
+  }
+
+  get winnerPhrase(): string {
+    return this.scoreboardService.getPlayersInFirstPlace().length === 1 ? 'winner is' : 'winners are';
+  }
+
+  get singleFirstPlaceNumCorrectVotes(): Observable<number> {
+    const firstPlace = this.scoreboardService.getPlayersInFirstPlace()[0];
+    return this.votesService.getNumCorrectVotesForCurrentYearAndPerson(firstPlace.person);
+  }
+
+  get singleFirstPlaceNumVotes(): Observable<number> {
+    const firstPlace = this.scoreboardService.getPlayersInFirstPlace()[0];
+    return this.votesService.getVotesForCurrentYearAndPerson(firstPlace.person).pipe(
+      map(votes => votes.length)
+    );
+  }
+
+  showWinnerDetail(): boolean {
+    return this.scoreboardService.getPlayersInFirstPlace().length === 1;
   }
 
   numVotesRemaining(): Observable<number> {

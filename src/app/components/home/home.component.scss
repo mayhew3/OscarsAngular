@@ -14,3 +14,9 @@
   color: lighten($winningScoreColor, 20%);
   font-weight: bold;
 }
+
+.winnerHighlight {
+  color: $highlight;
+  font-weight: bold;
+  font-size: 16pt;
+}
