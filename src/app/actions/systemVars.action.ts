@@ -15,3 +15,11 @@ export class ChangeCurrentYear {
   constructor(public year: number) {
   }
 }
+
+export class ToggleHideWinners {
+  static readonly type = '[SystemVars] Toggle Hide Winners';
+}
+
+export class ToggleHideWinnerless {
+  static readonly type = '[SystemVars] Toggle Hide Winnerless';
+}

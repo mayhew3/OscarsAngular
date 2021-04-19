@@ -28,14 +28,14 @@ export class PersonState {
   }
 
   @Action(GetPersons)
-  getPersons({getState, setState}: StateContext<PersonStateModel>): Observable<any> {
+  getPersons({setState}: StateContext<PersonStateModel>): Observable<any> {
     return this.api.getAfterAuthenticate<Person[]>('/api/persons').pipe(
       tap((result: Person[]) => {
-        const state = getState();
-        setState({
-          ...state,
-          persons: result
-        });
+        setState(
+          produce(draft => {
+            draft.persons = result;
+          })
+        );
         this.stateChanges++;
         this.logger.log('PERSONS State Change #' + this.stateChanges);
       })

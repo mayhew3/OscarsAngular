@@ -3,7 +3,14 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
-import {ChangeCurrentYear, GetSystemVars, VotingLock, VotingUnlock} from '../actions/systemVars.action';
+import {
+  ChangeCurrentYear,
+  GetSystemVars,
+  ToggleHideWinnerless,
+  ToggleHideWinners,
+  VotingLock,
+  VotingUnlock
+} from '../actions/systemVars.action';
 import produce from 'immer';
 import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
@@ -30,14 +37,16 @@ export class SystemVarsState {
   }
 
   @Action(GetSystemVars)
-  getSystemVars({getState, setState}: StateContext<SystemVarsStateModel>): Observable<any> {
+  getSystemVars({setState}: StateContext<SystemVarsStateModel>): Observable<any> {
     return this.api.getAfterFullyConnected<any[]>(this.apiUrl).pipe(
       tap(result => {
-        const state = getState();
-        setState({
-          ...state,
-          systemVars: result[0]
-        });
+        setState(
+          produce(draft => {
+            draft.systemVars = result[0];
+            draft.systemVars.hide_winners = false;
+            draft.systemVars.hide_winnerless = false;
+          })
+        );
         this.stateChanges++;
         this.logger.log('SYSTEMVARS State Change #' + this.stateChanges);
       })
@@ -58,6 +67,24 @@ export class SystemVarsState {
     setState(
       produce(draft => {
         draft.systemVars.voting_open = true;
+      })
+    );
+  }
+
+  @Action(ToggleHideWinners)
+  toggleHideWinners({setState}: StateContext<SystemVarsStateModel>): void {
+    setState(
+      produce(draft => {
+        draft.systemVars.hide_winners = !draft.systemVars.hide_winners;
+      })
+    );
+  }
+
+  @Action(ToggleHideWinnerless)
+  toggleHideWinnerless({setState}: StateContext<SystemVarsStateModel>): void {
+    setState(
+      produce(draft => {
+        draft.systemVars.hide_winnerless = !draft.systemVars.hide_winnerless;
       })
     );
   }

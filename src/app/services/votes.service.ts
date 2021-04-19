@@ -35,9 +35,7 @@ export class VotesService {
               private categoryService: CategoryService,
               private store: Store,
               private api: ApiService) {
-    this.systemVarsService.systemVars.pipe(
-      distinctUntilChanged((sv1: SystemVars, sv2: SystemVars) => sv1.curr_year === sv2.curr_year)
-    ).subscribe(systemVars => {
+    this.systemVarsService.systemVarsYearChanges$.subscribe(systemVars => {
       this.store.dispatch(new GetVotes(systemVars.curr_year));
     });
   }

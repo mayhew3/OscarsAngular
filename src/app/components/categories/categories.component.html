@@ -25,11 +25,11 @@
     <div class="col-12">
       <span class="sectionHeader">WINNERS</span>&nbsp;
       <span class="fakeLink hideLink"
-            (click)="toggleShowWinners()">{{hideShowLink(showWinners)}}
+            (click)="toggleShowWinners()">{{hideShowLink(hideWinners)}}
       </span>
     </div>
 
-    <div *ngIf="showWinners" class="col-12">
+    <div *ngIf="!hideWinners" class="col-12">
       <div class="row">
         <div class="col-12"
              *ngFor="let category of getCategoriesWithAtLeastOneWinner$() | async">
@@ -160,12 +160,12 @@
          *ngIf="winnersMode()">
       <span class="sectionHeader">UPCOMING</span>&nbsp;
       <span class="fakeLink hideLink"
-            (click)="toggleShowWinnerless()">{{hideShowLink(showWinnerless)}}
+            (click)="toggleShowWinnerless()">{{hideShowLink(hideWinnerless)}}
       </span>
     </div>
 
     <div class="col-12"
-         *ngIf="showWinnerless">
+         *ngIf="!hideWinnerless">
       <div class="row">
         <div class="col-12"
              *ngFor="let category of getCategoriesWithNoWinner$() | async">

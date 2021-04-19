@@ -23,8 +23,8 @@ export class CategoriesComponent implements OnInit {
   @Input() person: Person;
 
   me: Person;
-  showWinnerless = true;
-  showWinners = true;
+  hideWinnerless = false;
+  hideWinners = false;
 
   constructor(private categoryService: CategoryService,
               public systemVarsService: SystemVarsService,
@@ -34,6 +34,10 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     this.personService.me$.subscribe(me => {
       this.me = me;
+    });
+    this.systemVarsService.systemVars.subscribe(systemVars => {
+      this.hideWinners = systemVars.hide_winners;
+      this.hideWinnerless = systemVars.hide_winnerless;
     });
   }
 
@@ -64,15 +68,15 @@ export class CategoriesComponent implements OnInit {
     }
   }
   toggleShowWinnerless(): void {
-    this.showWinnerless = !this.showWinnerless;
+    this.systemVarsService.toggleWinnerless();
   }
 
   toggleShowWinners(): void {
-    this.showWinners = !this.showWinners;
+    this.systemVarsService.toggleWinners();
   }
 
-  hideShowLink(showVar: boolean): string {
-    return !!showVar ? '(hide)' : '(show)';
+  hideShowLink(hideVar: boolean): string {
+    return !hideVar ? '(hide)' : '(show)';
   }
 
   getCategoriesWithNoWinner$(): Observable<Category[]> {
