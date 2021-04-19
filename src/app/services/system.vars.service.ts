@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {filter, first, map} from 'rxjs/operators';
+import {distinctUntilChanged, filter, first, map} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
 import {ChangeCurrentYear, GetSystemVars, ToggleHideWinnerless, ToggleHideWinners} from '../actions/systemVars.action';
 import {ApiService} from './api.service';
+import {SystemVars} from '../interfaces/SystemVars';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class SystemVarsService {
   systemVars = this.store.select(state => state.systemVars).pipe(
     map(state => state.systemVars),
     filter(systemVars => !!systemVars)
+  );
+
+  systemVarsYearChanges$ = this.systemVars.pipe(
+    distinctUntilChanged((s1: SystemVars, s2: SystemVars) => s1.curr_year !== s2.curr_year)
   );
 
   constructor(private store: Store,
@@ -27,7 +32,7 @@ export class SystemVarsService {
   }
 
   getCurrentYear(): Observable<number> {
-    return this.systemVars.pipe(
+    return this.systemVarsYearChanges$.pipe(
       map(systemVars => systemVars.curr_year)
     );
   }

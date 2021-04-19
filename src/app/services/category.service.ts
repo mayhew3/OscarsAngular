@@ -27,7 +27,7 @@ export class CategoryService {
     map(model => model.categories),
     filter(categories => !!categories),
     mergeMap(categories =>
-      this.systemVarsService.systemVars.pipe(
+      this.systemVarsService.systemVarsYearChanges$.pipe(
         map(systemVars => _.filter(categories, category => CategoryService.isInRange(systemVars.curr_year, category)))
       ))
   );
@@ -41,7 +41,7 @@ export class CategoryService {
               private systemVarsService: SystemVarsService,
               private store: Store) {
 
-    combineLatest([this.personService.me$, this.systemVarsService.systemVars])
+    combineLatest([this.personService.me$, this.systemVarsService.systemVarsYearChanges$])
       .subscribe(([me, systemVars]) => {
         this.store.dispatch(new GetCategories(systemVars.curr_year, me.id));
       });
