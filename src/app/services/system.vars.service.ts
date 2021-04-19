@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {filter, first, map} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
-import {ChangeCurrentYear, GetSystemVars} from '../actions/systemVars.action';
+import {ChangeCurrentYear, GetSystemVars, ToggleHideWinnerless, ToggleHideWinners} from '../actions/systemVars.action';
 import {ApiService} from './api.service';
 
 @Injectable({
@@ -41,6 +41,14 @@ export class SystemVarsService {
         };
         this.api.executePutAfterFullyConnected(this.systemVarsUrl, data);
       });
+  }
+
+  toggleWinners(): void {
+    this.store.dispatch(new ToggleHideWinners());
+  }
+
+  toggleWinnerless(): void {
+    this.store.dispatch(new ToggleHideWinnerless());
   }
 
   changeCurrentYear(year: number): void {
