@@ -17,7 +17,7 @@ export class SystemVarsService {
   );
 
   systemVarsYearChanges$ = this.systemVars.pipe(
-    distinctUntilChanged((s1: SystemVars, s2: SystemVars) => s1.curr_year !== s2.curr_year)
+    distinctUntilChanged((s1: SystemVars, s2: SystemVars) => s1.curr_year === s2.curr_year)
   );
 
   constructor(private store: Store,
