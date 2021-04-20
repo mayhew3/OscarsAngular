@@ -31,7 +31,22 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/bootstrap/dist/js/",
+                "output": "./bootstrap_js/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/jquery/dist/",
+                "output": "./jquery_js/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@popperjs/core/dist/umd/",
+                "output": "./popper_js/"
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
