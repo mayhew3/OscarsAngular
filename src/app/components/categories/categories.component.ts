@@ -184,8 +184,10 @@ export class CategoriesComponent implements OnInit {
     return !!this.person && this.didPickWinner(this.person, category);
   }
 
-  showMyPick(category: Category): boolean {
-    return this.personIsMe() && !this.didPickWinner(this.me, category);
+  showMyPick(category: Category): Observable<boolean> {
+    return this.didPickWinner(this.me, category).pipe(
+      map(didPickWinner => this.personIsMe() && !didPickWinner)
+    );
   }
 
   wePickedTheSame(category: Category): Observable<boolean> {
@@ -272,8 +274,10 @@ export class CategoriesComponent implements OnInit {
     );
   }
 
-  getMyWinnerScoreClass(category: Category): string {
-    return this.gotPointsForWinner(category) ? 'winningScore' : 'losingScore';
+  getMyWinnerScoreClass(category: Category): Observable<string> {
+    return this.gotPointsForWinner(category).pipe(
+      map(gotPoints => gotPoints ? 'winningScore' : 'losingScore')
+    );
   }
 
   gotPointsForWinner(category: Category): Observable<boolean> {
