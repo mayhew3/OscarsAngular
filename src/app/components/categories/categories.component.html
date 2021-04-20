@@ -80,7 +80,7 @@
                   <!-- YOUR PICK -->
 
                   <div class="row py-1"
-                       *ngIf="showMyPick(category)">
+                       *ngIf="showMyPick(category) | async">
                     <div class="col-12 pickHeader incorrectPickHeader">
                       Your Pick:
                     </div>
@@ -94,7 +94,7 @@
                 <!-- POINTS -->
 
                 <div class="col-2 categoryPoints"
-                     [ngClass]="getMyWinnerScoreClass(category)">
+                     [ngClass]="getMyWinnerScoreClass(category) | async">
                   <span>{{category.points}}</span>
                 </div>
               </div>
