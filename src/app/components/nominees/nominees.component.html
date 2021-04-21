@@ -45,7 +45,7 @@
 
             <div class="row align-items-center">
 
-              <div class="col-9">
+              <div class="col-12">
                 <div class="row">
                   <div class="col-12 nomineeName py-1">
                     {{getMainLineText(nominee, category)}}
@@ -64,12 +64,17 @@
                 </div>
               </div>
 
-              <div class="col-3" *ngIf="winnersMode()">
-                <div class="voterName"
-                     *ngFor="let voter of (personsForNominee(nominee, category) | async)"
-                     [ngClass]="getVoterClass(voter) | async">
-                  {{getPersonDisplayName(voter) | async}}
-                </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-12 text-right" *ngIf="winnersMode()">
+                <span class="voterName"
+                      *ngFor="let voter of (personsForNominee(nominee, category) | async)"
+                      [ngClass]="getVoterClass(voter) | async">
+                  <osc-dot [filled]="true"
+                           [size]="8"></osc-dot>
+                </span>
               </div>
             </div>
 

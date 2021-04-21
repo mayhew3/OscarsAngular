@@ -93,9 +93,13 @@ export class NomineesComponent implements OnInit {
     return this.personService.getPersonName(person);
   }
 
+  isMe(person: Person): Observable<boolean> {
+    return this.personService.isMe(person);
+  }
+
   getVoterClass(person: Person): Observable<string> {
-    return this.personService.isMe(person).pipe(
-      map(isMe => !!isMe ? 'itsMe' : '')
+    return this.isMe(person).pipe(
+      map(isMe => !!isMe ? 'itsMe' : 'itsNotMe')
     );
   }
 
