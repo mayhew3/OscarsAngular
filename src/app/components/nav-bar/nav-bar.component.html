@@ -1,10 +1,11 @@
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark py-0">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" routerLink="/">
       <img src="assets/navbar_logo.svg"
            width="150"
-           height="auto">
+           height="auto"
+           alt="Oscars Prediction Arena">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -13,16 +14,22 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto align-items-end">
         <li class="nav-item"
+            *ngIf="(auth.isAuthenticated$ | async)">
+          <a class="nav-link" routerLink="/" data-toggle="collapse" data-target=".navbar-collapse.show">
+            Home
+          </a>
+        </li>
+        <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
-          <a class="nav-link" routerLink="/vote">Vote</a>
+          <a class="nav-link" routerLink="/vote" data-toggle="collapse" data-target=".navbar-collapse.show">Vote</a>
         </li>
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async) === false">
-          <a class="nav-link" routerLink="/scores">Scores</a>
+          <a class="nav-link" routerLink="/scores" data-toggle="collapse" data-target=".navbar-collapse.show">Scores</a>
         </li>
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async)">
-          <a class="nav-link" routerLink="/history">Past</a>
+          <a class="nav-link" routerLink="/history" data-toggle="collapse" data-target=".navbar-collapse.show">Past</a>
         </li>
       </ul>
 
