@@ -11,7 +11,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto align-items-end">
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
           <a class="nav-link" routerLink="/vote">Vote</a>
@@ -26,7 +26,7 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav navbar-right">
+      <ul class="navbar-nav navbar-right align-items-end">
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async) === false">
           <a class="nav-link" (click)="auth.login()">Login</a>
