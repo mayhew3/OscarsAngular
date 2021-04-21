@@ -181,7 +181,9 @@ export class CategoriesComponent implements OnInit {
   }
 
   showPersonPick(category: Category): Observable<boolean> {
-    return !!this.person && this.didPickWinner(this.person, category);
+    return this.didPickWinner(this.person, category).pipe(
+      map(didPickWinner => !!this.person && !didPickWinner)
+    );
   }
 
   showMyPick(category: Category): Observable<boolean> {
