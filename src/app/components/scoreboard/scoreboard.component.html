@@ -4,7 +4,7 @@
 
     <div class="row no-gutters">
       <div class="col-9">
-        <h1>Live Scoring</h1>
+        <h1 class="m-0">Live Scoring</h1>
       </div>
 
       <!-- ODDS FILTER BUTTON -->
@@ -38,7 +38,7 @@
 
     <!-- PLAYER SCORES -->
 
-    <div class="row mt-2" *ngIf="(oddsService.odds$ | async) as odds; else loading">
+    <div class="row mt-1" *ngIf="(oddsService.odds$ | async) as odds; else loading">
       <div class="col-12"
            *ngFor="let scoreData of scoreboardService.getVoters()">
         <div class="card scoreCard fakeLink"
