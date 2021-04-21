@@ -34,7 +34,7 @@
 
     <p *ngIf="showVotingClosedMessage() | async">Voting is currently closed!</p>
 
-    <div class="row" *ngIf="showNominees()">
+    <div class="row" *ngIf="showNominees() | async">
       <div class="col-12 col-sm-6 col-lg-4"
            *ngFor="let nominee of category.nominees">
 
