@@ -10,7 +10,7 @@ import {Nominee} from '../../interfaces/Nominee';
 import {VotesService} from '../../services/votes.service';
 import {Person} from '../../interfaces/Person';
 import {map} from 'rxjs/operators';
-import {combineLatest, Observable} from 'rxjs';
+import {combineLatest, Observable, of} from 'rxjs';
 import {PersonService} from '../../services/person.service';
 
 @Component({
@@ -181,8 +181,11 @@ export class CategoriesComponent implements OnInit {
   }
 
   showPersonPick(category: Category): Observable<boolean> {
+    if (!this.person) {
+      return of(false);
+    }
     return this.didPickWinner(this.person, category).pipe(
-      map(didPickWinner => !!this.person && !didPickWinner)
+      map(didPickWinner => !didPickWinner)
     );
   }
 
@@ -283,7 +286,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   gotPointsForWinner(category: Category): Observable<boolean> {
-    return this.votesService.didPersonVoteCorrectlyFor(this.person, category);
+    const person = !this.person ? this.me : this.person;
+    return this.votesService.didPersonVoteCorrectlyFor(person, category);
   }
 
   private pickedTheSame(person1: Person, person2: Person, category: Category): Observable<boolean> {

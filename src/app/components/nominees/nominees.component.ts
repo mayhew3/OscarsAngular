@@ -93,13 +93,17 @@ export class NomineesComponent implements OnInit {
     return this.personService.getPersonName(person);
   }
 
+  isMe(person: Person): Observable<boolean> {
+    return this.personService.isMe(person);
+  }
+
   getVoterClass(person: Person): Observable<string> {
-    return this.personService.isMe(person).pipe(
-      map(isMe => !!isMe ? 'itsMe' : '')
+    return this.isMe(person).pipe(
+      map(isMe => !!isMe ? 'itsMe' : 'itsNotMe')
     );
   }
 
-  submitVoteOrWinner(nominee: Nominee, category: Category): void {
+  submitVote(nominee: Nominee): void {
     this.personService.me$.subscribe(me => {
       if (this.votingMode()) {
         this.processingPick$.next(nominee);
@@ -113,8 +117,13 @@ export class NomineesComponent implements OnInit {
 
         this.socket.on('add_vote', voteCallback);
         this.socket.on('change_vote', voteCallback);
+      }
+    });
+  }
 
-      } else if (this.winnersMode() && this.personService.isAdmin) {
+  submitWinner(nominee: Nominee, category: Category): void {
+    this.personService.me$.subscribe(me => {
+      if (this.winnersMode() && this.personService.isAdmin) {
         this.processingPick$.next(nominee);
         this.winnersService.addOrDeleteWinner(nominee, category);
 
@@ -179,7 +188,7 @@ export class NomineesComponent implements OnInit {
   }
 
   showSubtitleText(nominee: Nominee): boolean {
-    return !!nominee.context && nominee.nominee !== nominee.context;
+    return (!!nominee.context && nominee.nominee !== nominee.context) || !!nominee.detail;
   }
 
   showSongSubtitle(nominee: Nominee, category: Category): boolean {

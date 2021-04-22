@@ -43,6 +43,7 @@ import { ErrorNotificationComponent } from './components/error-notification/erro
 import { PersonConnectionSnackBarComponent } from './components/person-connection-snack-bar/person-connection-snack-bar.component';
 import { FrontPageLogoComponent } from './components/front-page-logo/front-page-logo.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { DotComponent } from './components/dot/dot.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     ErrorNotificationComponent,
     PersonConnectionSnackBarComponent,
     FrontPageLogoComponent,
-    NavBarComponent
+    NavBarComponent,
+    DotComponent
   ],
   imports: [
     BrowserModule,

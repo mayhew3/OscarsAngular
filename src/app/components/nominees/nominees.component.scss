@@ -69,11 +69,15 @@
 .voterName {
   font-size: 8pt;
   text-align: right;
+  margin-left: 2px;
 }
 
 .itsMe {
-  color: color.scale($personal, $lightness: 65%, $saturation: -5%);
-  font-weight: 600;
+  color: color.scale($personal, $lightness: 65%);
+}
+
+.itsNotMe {
+  color: color.scale(white, $alpha: -45%);
 }
 
 /* For Firefox */

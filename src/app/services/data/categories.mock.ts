@@ -12,10 +12,16 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
+        "odds_expert": 58,
+        "odds_denominator": 3,
         "category_id": 5,
-        "year": 2020,
-        "nominee": "The Father",
-        "id": 2963
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "odds_user": 26,
+        "id": 2897,
+        "detail": "Sam Mendes, Pippa Harris, Jayne-Ann Tenggren and Callum McDougall, Producers",
+        "odds_numerator": 1
       },
       {
         "category_id": 5,
@@ -26,12 +32,25 @@ export const MockCategoryList: Category[] = [
         "detail": "Peter Chernin, Jenno Topping and James Mangold, Producers"
       },
       {
+        "odds_expert": 2,
         "category_id": 5,
         "year": 2019,
-        "context": "The Irishman",
-        "nominee": "The Irishman",
-        "id": 2892,
-        "detail": "Martin Scorsese, Robert De Niro, Jane Rosenthal and Emma Tillinger Koskoff, Producers"
+        "context": "Jojo Rabbit",
+        "nominee": "Jojo Rabbit",
+        "id": 2893,
+        "detail": "Carthew Neal, Taika Waititi and Chelsea Winstanley, Producers"
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 5,
+        "year": 2019,
+        "context": "Joker",
+        "nominee": "Joker",
+        "odds_user": 13,
+        "id": 2894,
+        "detail": "Todd Phillips, Bradley Cooper and Emma Tillinger Koskoff, Producers",
+        "odds_numerator": 11
       },
       {
         "category_id": 5,
@@ -50,13 +69,16 @@ export const MockCategoryList: Category[] = [
         "detail": "Noah Baumbach and David Heyman, Producers"
       },
       {
-        "odds_expert": 2,
+        "odds_expert": 13,
+        "odds_denominator": 1,
         "category_id": 5,
         "year": 2019,
-        "context": "Jojo Rabbit",
-        "nominee": "Jojo Rabbit",
-        "id": 2893,
-        "detail": "Carthew Neal, Taika Waititi and Chelsea Winstanley, Producers"
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "odds_user": 18,
+        "id": 2898,
+        "detail": "David Heyman, Shannon McIntosh and Quentin Tarantino, Producers",
+        "odds_numerator": 7
       },
       {
         "odds_expert": 25,
@@ -71,82 +93,76 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 4
       },
       {
-        "odds_expert": 2,
-        "odds_denominator": 1,
         "category_id": 5,
         "year": 2019,
-        "context": "Joker",
-        "nominee": "Joker",
-        "odds_user": 13,
-        "id": 2894,
-        "detail": "Todd Phillips, Bradley Cooper and Emma Tillinger Koskoff, Producers",
-        "odds_numerator": 11
-      },
-      {
-        "odds_expert": 58,
-        "odds_denominator": 3,
-        "category_id": 5,
-        "year": 2019,
-        "context": "1917",
-        "nominee": "1917",
-        "odds_user": 26,
-        "id": 2897,
-        "detail": "Sam Mendes, Pippa Harris, Jayne-Ann Tenggren and Callum McDougall, Producers",
-        "odds_numerator": 1
-      },
-      {
-        "odds_expert": 13,
-        "odds_denominator": 1,
-        "category_id": 5,
-        "year": 2019,
-        "context": "Once Upon a Time...in Hollywood",
-        "nominee": "Once Upon a Time...in Hollywood",
-        "odds_user": 18,
-        "id": 2898,
-        "detail": "David Heyman, Shannon McIntosh and Quentin Tarantino, Producers",
-        "odds_numerator": 7
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 2892,
+        "detail": "Martin Scorsese, Robert De Niro, Jane Rosenthal and Emma Tillinger Koskoff, Producers"
       },
       {
         "category_id": 5,
         "year": 2020,
         "nominee": "Judas and the Black Messiah",
-        "id": 2964
+        "odds_user": 5,
+        "id": 2941
       },
       {
         "category_id": 5,
         "year": 2020,
         "nominee": "Mank",
-        "id": 2965
+        "odds_user": 5,
+        "id": 2942
       },
       {
+        "odds_expert": 6,
+        "odds_denominator": 1,
         "category_id": 5,
         "year": 2020,
         "nominee": "Minari",
-        "id": 2966
+        "odds_user": 10,
+        "id": 2943,
+        "odds_numerator": 16
       },
       {
+        "odds_expert": 74,
+        "odds_denominator": 6,
         "category_id": 5,
         "year": 2020,
         "nominee": "Nomadland",
-        "id": 2967
+        "odds_user": 67,
+        "id": 2944,
+        "odds_numerator": 1
       },
       {
+        "odds_expert": 2,
+        "odds_denominator": 1,
         "category_id": 5,
         "year": 2020,
         "nominee": "Promising Young Woman",
-        "id": 2968
+        "id": 2945,
+        "odds_numerator": 20
       },
       {
         "category_id": 5,
         "year": 2020,
         "nominee": "Sound of Metal",
-        "id": 2969
+        "id": 2946
       },
       {
         "category_id": 5,
         "year": 2020,
+        "nominee": "The Father",
+        "id": 2940
+      },
+      {
+        "odds_expert": 17,
+        "odds_denominator": 1,
+        "category_id": 5,
+        "year": 2020,
         "nominee": "The Trial of the Chicago 7",
-        "id": 2970
+        "id": 2947,
+        "odds_numerator": 5
       }
     ],
     "name": "Best Picture",
@@ -163,14 +179,6 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
-        "category_id": 1,
-        "year": 2019,
-        "context": "The Two Popes",
-        "nominee": "Jonathan Pryce ",
-        "id": 2820,
-        "detail": "The Two Popes"
-      },
-      {
         "odds_denominator": 1,
         "category_id": 1,
         "year": 2019,
@@ -180,6 +188,15 @@ export const MockCategoryList: Category[] = [
         "id": 2818,
         "detail": "Marriage Story",
         "odds_numerator": 10
+      },
+      {
+        "odds_expert": 4,
+        "category_id": 1,
+        "year": 2019,
+        "context": "Pain and Glory",
+        "nominee": "Antonio Banderas ",
+        "id": 2816,
+        "detail": "Pain and Glory"
       },
       {
         "odds_expert": 96,
@@ -194,13 +211,12 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 1
       },
       {
-        "odds_expert": 4,
         "category_id": 1,
         "year": 2019,
-        "context": "Pain and Glory",
-        "nominee": "Antonio Banderas ",
-        "id": 2816,
-        "detail": "Pain and Glory"
+        "context": "The Two Popes",
+        "nominee": "Jonathan Pryce ",
+        "id": 2820,
+        "detail": "The Two Popes"
       },
       {
         "odds_denominator": 1,
@@ -214,40 +230,52 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 25
       },
       {
-        "category_id": 1,
-        "year": 2020,
-        "context": "Sound of Metal",
-        "nominee": "Riz Ahmed",
-        "id": 2971
-      },
-      {
-        "category_id": 1,
-        "year": 2020,
-        "context": "Ma Rainey's Black Bottom",
-        "nominee": "Chadwick Boseman",
-        "id": 2972,
-        "detail": "Indicates a posthumous nomination"
-      },
-      {
+        "odds_expert": 4,
+        "odds_denominator": 1,
         "category_id": 1,
         "year": 2020,
         "context": "The Father",
         "nominee": "Anthony Hopkins",
-        "id": 2973
+        "odds_user": 12,
+        "id": 2950,
+        "odds_numerator": 6
       },
       {
+        "odds_expert": 94,
+        "odds_denominator": 12,
+        "category_id": 1,
+        "year": 2020,
+        "context": "Ma Rainey's Black Bottom",
+        "nominee": "Chadwick Boseman",
+        "odds_user": 64,
+        "id": 2949,
+        "detail": "Indicates a posthumous nomination",
+        "odds_numerator": 1
+      },
+      {
+        "odds_expert": 2,
         "category_id": 1,
         "year": 2020,
         "context": "Mank",
         "nominee": "Gary Oldman",
-        "id": 2974
+        "id": 2951
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 1,
+        "year": 2020,
+        "context": "Sound of Metal",
+        "nominee": "Riz Ahmed",
+        "odds_user": 13,
+        "id": 2948,
+        "odds_numerator": 16
       },
       {
         "category_id": 1,
         "year": 2020,
         "context": "Minari",
         "nominee": "Steven Yeun",
-        "id": 2975
+        "id": 2952
       }
     ],
     "name": "Actor",
@@ -266,11 +294,10 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 2,
         "year": 2019,
-        "context": "Little Women",
-        "nominee": "Saoirse Ronan ",
-        "odds_user": 10,
-        "id": 2828,
-        "detail": "Little Women"
+        "context": "Bombshell",
+        "nominee": "Charlize Theron ",
+        "id": 2829,
+        "detail": "Bombshell"
       },
       {
         "odds_expert": 2,
@@ -282,18 +309,6 @@ export const MockCategoryList: Category[] = [
         "id": 2826,
         "detail": "Harriet",
         "odds_numerator": 25
-      },
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 2,
-        "year": 2019,
-        "context": "Marriage Story",
-        "nominee": "Scarlett Johansson ",
-        "odds_user": 36,
-        "id": 2827,
-        "detail": "Marriage Story",
-        "odds_numerator": 11
       },
       {
         "odds_expert": 96,
@@ -310,45 +325,70 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 2,
         "year": 2019,
-        "context": "Bombshell",
-        "nominee": "Charlize Theron ",
-        "id": 2829,
-        "detail": "Bombshell"
+        "context": "Little Women",
+        "nominee": "Saoirse Ronan ",
+        "odds_user": 10,
+        "id": 2828,
+        "detail": "Little Women"
       },
       {
+        "odds_expert": 2,
+        "odds_denominator": 1,
         "category_id": 2,
-        "year": 2020,
-        "context": "Ma Rainey's Black Bottom",
-        "nominee": "Viola Davis",
-        "id": 3031
+        "year": 2019,
+        "context": "Marriage Story",
+        "nominee": "Scarlett Johansson ",
+        "odds_user": 36,
+        "id": 2827,
+        "detail": "Marriage Story",
+        "odds_numerator": 11
       },
       {
         "category_id": 2,
         "year": 2020,
         "context": "The United States vs. Billie Holiday",
         "nominee": "Andra Day",
-        "id": 3032
+        "id": 3009
+      },
+      {
+        "odds_expert": 38,
+        "odds_denominator": 4,
+        "category_id": 2,
+        "year": 2020,
+        "context": "Promising Young Woman",
+        "nominee": "Carey Mulligan",
+        "odds_user": 38,
+        "id": 3012,
+        "odds_numerator": 5
+      },
+      {
+        "odds_expert": 19,
+        "odds_denominator": 1,
+        "category_id": 2,
+        "year": 2020,
+        "context": "Nomadland",
+        "nominee": "Frances McDormand",
+        "odds_user": 37,
+        "id": 3011,
+        "odds_numerator": 4
       },
       {
         "category_id": 2,
         "year": 2020,
         "context": "Pieces of a Woman",
         "nominee": "Vanessa Kirby",
-        "id": 3033
+        "id": 3010
       },
       {
+        "odds_expert": 31,
+        "odds_denominator": 4,
         "category_id": 2,
         "year": 2020,
-        "context": "Nomadland",
-        "nominee": "Frances McDormand",
-        "id": 3034
-      },
-      {
-        "category_id": 2,
-        "year": 2020,
-        "context": "Promising Young Woman",
-        "nominee": "Carey Mulligan",
-        "id": 3035
+        "context": "Ma Rainey's Black Bottom",
+        "nominee": "Viola Davis",
+        "odds_user": 14,
+        "id": 3008,
+        "odds_numerator": 7
       }
     ],
     "name": "Actress",
@@ -365,12 +405,35 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
+        "odds_expert": 77,
+        "odds_denominator": 10,
+        "category_id": 8,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "odds_user": 34,
+        "id": 2853,
+        "detail": "Sam Mendes",
+        "odds_numerator": 1
+      },
+      {
         "category_id": 8,
         "year": 2019,
         "context": "Joker",
         "nominee": "Joker",
         "id": 2852,
         "detail": "Todd Phillips"
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 8,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "odds_user": 15,
+        "id": 2854,
+        "detail": "Quentin Tarantino",
+        "odds_numerator": 16
       },
       {
         "odds_expert": 17,
@@ -385,29 +448,6 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 11
       },
       {
-        "odds_expert": 77,
-        "odds_denominator": 10,
-        "category_id": 8,
-        "year": 2019,
-        "context": "1917",
-        "nominee": "1917",
-        "odds_user": 34,
-        "id": 2853,
-        "detail": "Sam Mendes",
-        "odds_numerator": 1
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 8,
-        "year": 2019,
-        "context": "Once Upon a Time...in Hollywood",
-        "nominee": "Once Upon a Time...in Hollywood",
-        "odds_user": 15,
-        "id": 2854,
-        "detail": "Quentin Tarantino",
-        "odds_numerator": 16
-      },
-      {
         "odds_expert": 4,
         "category_id": 8,
         "year": 2019,
@@ -417,39 +457,51 @@ export const MockCategoryList: Category[] = [
         "detail": "Martin Scorsese"
       },
       {
-        "category_id": 8,
-        "year": 2020,
-        "context": "Another Round",
-        "nominee": "Thomas Vinterberg",
-        "id": 3026
-      },
-      {
-        "category_id": 8,
-        "year": 2020,
-        "context": "Mank",
-        "nominee": "David Fincher",
-        "id": 3027
-      },
-      {
-        "category_id": 8,
-        "year": 2020,
-        "context": "Minari",
-        "nominee": "Lee Isaac Chung",
-        "id": 3028
-      },
-      {
+        "odds_expert": 100,
+        "odds_denominator": 25,
         "category_id": 8,
         "year": 2020,
         "context": "Nomadland",
         "nominee": "Chloé Zhao",
-        "id": 3029
+        "odds_user": 77,
+        "id": 3006,
+        "odds_numerator": 1
       },
       {
+        "odds_denominator": 1,
+        "category_id": 8,
+        "year": 2020,
+        "context": "Mank",
+        "nominee": "David Fincher",
+        "odds_user": 10,
+        "id": 3004,
+        "odds_numerator": 9
+      },
+      {
+        "odds_denominator": 1,
         "category_id": 8,
         "year": 2020,
         "context": "Promising Young Woman",
         "nominee": "Emerald Fennell",
-        "id": 3030
+        "id": 3007,
+        "odds_numerator": 20
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 8,
+        "year": 2020,
+        "context": "Minari",
+        "nominee": "Lee Isaac Chung",
+        "odds_user": 6,
+        "id": 3005,
+        "odds_numerator": 20
+      },
+      {
+        "category_id": 8,
+        "year": 2020,
+        "context": "Another Round",
+        "nominee": "Thomas Vinterberg",
+        "id": 3003
       }
     ],
     "name": "Directing",
@@ -494,18 +546,6 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 5
       },
       {
-        "odds_expert": 68,
-        "odds_denominator": 6,
-        "category_id": 3,
-        "year": 2019,
-        "context": "Toy Story 4",
-        "nominee": "Toy Story 4",
-        "odds_user": 60,
-        "id": 2840,
-        "detail": "Josh Cooley, Mark Nielsen and Jonas Rivera",
-        "odds_numerator": 5
-      },
-      {
         "odds_expert": 8,
         "odds_denominator": 1,
         "category_id": 3,
@@ -518,34 +558,57 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 11
       },
       {
+        "odds_expert": 68,
+        "odds_denominator": 6,
         "category_id": 3,
-        "year": 2020,
-        "nominee": "Onward",
-        "id": 2986
-      },
-      {
-        "category_id": 3,
-        "year": 2020,
-        "nominee": "Over the Moon",
-        "id": 2987
+        "year": 2019,
+        "context": "Toy Story 4",
+        "nominee": "Toy Story 4",
+        "odds_user": 60,
+        "id": 2840,
+        "detail": "Josh Cooley, Mark Nielsen and Jonas Rivera",
+        "odds_numerator": 5
       },
       {
         "category_id": 3,
         "year": 2020,
         "nominee": "A Shaun the Sheep Movie: Farmageddon",
-        "id": 2988
+        "id": 2965
       },
       {
+        "odds_denominator": 1,
+        "category_id": 3,
+        "year": 2020,
+        "nominee": "Onward",
+        "odds_user": 3,
+        "id": 2963,
+        "odds_numerator": 20
+      },
+      {
+        "category_id": 3,
+        "year": 2020,
+        "nominee": "Over the Moon",
+        "id": 2964
+      },
+      {
+        "odds_expert": 98,
+        "odds_denominator": 25,
         "category_id": 3,
         "year": 2020,
         "nominee": "Soul",
-        "id": 2989
+        "odds_user": 85,
+        "id": 2966,
+        "odds_numerator": 1
       },
       {
+        "odds_expert": 2,
+        "odds_denominator": 1,
         "category_id": 3,
         "year": 2020,
         "nominee": "Wolfwalkers",
-        "id": 2990
+        "odds_user": 10,
+        "id": 2967,
+        "odds_numerator": 8
       }
     ],
     "name": "Animated Feature Film",
@@ -562,34 +625,6 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
-        "category_id": 20,
-        "year": 2019,
-        "context": "A Beautiful Day in the Neighborhood",
-        "nominee": "Tom Hanks ",
-        "id": 2821,
-        "detail": "A Beautiful Day in the Neighborhood"
-      },
-      {
-        "odds_expert": 2,
-        "category_id": 20,
-        "year": 2019,
-        "context": "The Two Popes",
-        "nominee": "Anthony Hopkins ",
-        "id": 2822,
-        "detail": "The Two Popes"
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 20,
-        "year": 2019,
-        "context": "The Irishman",
-        "nominee": "Joe Pesci ",
-        "odds_user": 12,
-        "id": 2824,
-        "detail": "The Irishman",
-        "odds_numerator": 11
-      },
-      {
         "odds_denominator": 1,
         "category_id": 20,
         "year": 2019,
@@ -599,6 +634,15 @@ export const MockCategoryList: Category[] = [
         "id": 2823,
         "detail": "The Irishman",
         "odds_numerator": 25
+      },
+      {
+        "odds_expert": 2,
+        "category_id": 20,
+        "year": 2019,
+        "context": "The Two Popes",
+        "nominee": "Anthony Hopkins ",
+        "id": 2822,
+        "detail": "The Two Popes"
       },
       {
         "odds_expert": 98,
@@ -613,39 +657,71 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 1
       },
       {
+        "odds_denominator": 1,
         "category_id": 20,
-        "year": 2020,
-        "context": "The Trial of the Chicago 7",
-        "nominee": "Sacha Baron Cohen",
-        "id": 2976
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "Joe Pesci ",
+        "odds_user": 12,
+        "id": 2824,
+        "detail": "The Irishman",
+        "odds_numerator": 11
       },
       {
+        "category_id": 20,
+        "year": 2019,
+        "context": "A Beautiful Day in the Neighborhood",
+        "nominee": "Tom Hanks ",
+        "id": 2821,
+        "detail": "A Beautiful Day in the Neighborhood"
+      },
+      {
+        "odds_expert": 90,
+        "odds_denominator": 25,
         "category_id": 20,
         "year": 2020,
         "context": "Judas and the Black Messiah",
         "nominee": "Daniel Kaluuya",
-        "id": 2977
-      },
-      {
-        "category_id": 20,
-        "year": 2020,
-        "context": "One Night in Miami\u2026",
-        "nominee": "Leslie Odom Jr.",
-        "id": 2978
-      },
-      {
-        "category_id": 20,
-        "year": 2020,
-        "context": "Sound of Metal",
-        "nominee": "Paul Raci",
-        "id": 2979
+        "odds_user": 68,
+        "id": 2954,
+        "odds_numerator": 1
       },
       {
         "category_id": 20,
         "year": 2020,
         "context": "Judas and the Black Messiah",
         "nominee": "Lakeith Stanfield",
-        "id": 2980
+        "id": 2957
+      },
+      {
+        "odds_expert": 2,
+        "category_id": 20,
+        "year": 2020,
+        "context": "One Night in Miami\u2026",
+        "nominee": "Leslie Odom Jr.",
+        "id": 2955
+      },
+      {
+        "odds_expert": 6,
+        "odds_denominator": 1,
+        "category_id": 20,
+        "year": 2020,
+        "context": "Sound of Metal",
+        "nominee": "Paul Raci",
+        "odds_user": 8,
+        "id": 2956,
+        "odds_numerator": 12
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 20,
+        "year": 2020,
+        "context": "The Trial of the Chicago 7",
+        "nominee": "Sacha Baron Cohen",
+        "odds_user": 14,
+        "id": 2953,
+        "odds_numerator": 14
       }
     ],
     "name": "Supporting Actor",
@@ -661,6 +737,18 @@ export const MockCategoryList: Category[] = [
       "id": 348
     }],
     "nominees": [
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 21,
+        "year": 2019,
+        "context": "Little Women",
+        "nominee": "Florence Pugh ",
+        "odds_user": 12,
+        "id": 2834,
+        "detail": "Little Women",
+        "odds_numerator": 16
+      },
       {
         "category_id": 21,
         "year": 2019,
@@ -680,18 +768,6 @@ export const MockCategoryList: Category[] = [
         "id": 2832,
         "detail": "Marriage Story",
         "odds_numerator": 1
-      },
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 21,
-        "year": 2019,
-        "context": "Little Women",
-        "nominee": "Florence Pugh ",
-        "odds_user": 12,
-        "id": 2834,
-        "detail": "Little Women",
-        "odds_numerator": 16
       },
       {
         "odds_denominator": 1,
@@ -716,37 +792,49 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 21,
         "year": 2020,
-        "context": "Borat Subsequent Moviefilm",
-        "nominee": "Maria Bakalova",
-        "id": 3036
+        "context": "Mank",
+        "nominee": "Amanda Seyfried",
+        "id": 3016
       },
       {
+        "odds_expert": 8,
+        "odds_denominator": 1,
         "category_id": 21,
         "year": 2020,
         "context": "Hillbilly Elegy",
         "nominee": "Glenn Close",
-        "id": 3037
+        "id": 3014,
+        "odds_numerator": 9
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 21,
+        "year": 2020,
+        "context": "Borat Subsequent Moviefilm",
+        "nominee": "Maria Bakalova",
+        "odds_user": 23,
+        "id": 3013,
+        "odds_numerator": 4
       },
       {
         "category_id": 21,
         "year": 2020,
         "context": "The Father",
         "nominee": "Olivia Colman",
-        "id": 3038
+        "odds_user": 17,
+        "id": 3015
       },
       {
-        "category_id": 21,
-        "year": 2020,
-        "context": "Mank",
-        "nominee": "Amanda Seyfried",
-        "id": 3039
-      },
-      {
+        "odds_expert": 90,
+        "odds_denominator": 9,
         "category_id": 21,
         "year": 2020,
         "context": "Minari",
         "nominee": "Youn Yuh-jung",
-        "id": 3040
+        "odds_user": 39,
+        "id": 3017,
+        "odds_numerator": 2
       }
     ],
     "name": "Supporting Actress",
@@ -762,14 +850,6 @@ export const MockCategoryList: Category[] = [
       "id": 342
     }],
     "nominees": [
-      {
-        "category_id": 23,
-        "year": 2019,
-        "context": "The Two Popes",
-        "nominee": "The Two Popes",
-        "id": 2934,
-        "detail": "Written by Anthony McCarten"
-      },
       {
         "odds_expert": 62,
         "odds_denominator": 11,
@@ -792,18 +872,6 @@ export const MockCategoryList: Category[] = [
         "detail": "Written by Todd Phillips & Scott Silver"
       },
       {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 23,
-        "year": 2019,
-        "context": "The Irishman",
-        "nominee": "The Irishman",
-        "odds_user": 32,
-        "id": 2930,
-        "detail": "Screenplay by Steven Zaillian",
-        "odds_numerator": 7
-      },
-      {
         "odds_expert": 33,
         "odds_denominator": 1,
         "category_id": 23,
@@ -816,38 +884,70 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 2
       },
       {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 23,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "odds_user": 32,
+        "id": 2930,
+        "detail": "Screenplay by Steven Zaillian",
+        "odds_numerator": 7
+      },
+      {
+        "category_id": 23,
+        "year": 2019,
+        "context": "The Two Popes",
+        "nominee": "The Two Popes",
+        "id": 2934,
+        "detail": "Written by Anthony McCarten"
+      },
+      {
+        "odds_expert": 5,
+        "odds_denominator": 1,
         "category_id": 23,
         "year": 2020,
         "nominee": "Borat Subsequent Moviefilm",
-        "id": 3041,
-        "detail": "Screenplay by Sacha Baron Cohen, Peter Baynham, Jena Friedman, Anthony Hines, Lee Kern, Dan Mazer, Erica Rivinoja and Dan Swimer; Story by Baron Cohen, Hines, Nina Pedrad and Swimer; Based on the character by Baron Cohen"
+        "id": 3018,
+        "detail": "Screenplay by Sacha Baron Cohen, Peter Baynham, Jena Friedman, Anthony Hines, Lee Kern, Dan Mazer, Erica Rivinoja and Dan Swimer; Story by Baron Cohen, Hines, Nina Pedrad and Swimer; Based on the character by Baron Cohen",
+        "odds_numerator": 7
       },
       {
-        "category_id": 23,
-        "year": 2020,
-        "nominee": "The Father",
-        "id": 3042,
-        "detail": "Christopher Hampton and Florian Zeller, based on the play by Zeller"
-      },
-      {
+        "odds_expert": 73,
+        "odds_denominator": 11,
         "category_id": 23,
         "year": 2020,
         "nominee": "Nomadland",
-        "id": 3043,
-        "detail": "Chloé Zhao, based on the book by Jessica Bruder"
+        "odds_user": 60,
+        "id": 3020,
+        "detail": "Chloé Zhao, based on the book by Jessica Bruder",
+        "odds_numerator": 4
       },
       {
         "category_id": 23,
         "year": 2020,
         "nominee": "One Night in Miami\u2026",
-        "id": 3044,
+        "odds_user": 10,
+        "id": 3021,
         "detail": "Kemp Powers, based on his play"
+      },
+      {
+        "odds_expert": 23,
+        "odds_denominator": 4,
+        "category_id": 23,
+        "year": 2020,
+        "nominee": "The Father",
+        "odds_user": 19,
+        "id": 3019,
+        "detail": "Christopher Hampton and Florian Zeller, based on the play by Zeller",
+        "odds_numerator": 11
       },
       {
         "category_id": 23,
         "year": 2020,
         "nominee": "The White Tiger",
-        "id": 3045,
+        "id": 3022,
         "detail": "Ramin Bahrani, based on the novel by Aravind Adiga"
       }
     ],
@@ -867,18 +967,18 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 24,
         "year": 2019,
-        "context": "Knives Out",
-        "nominee": "Knives Out",
-        "id": 2935,
-        "detail": "Written by Rian Johnson"
-      },
-      {
-        "category_id": 24,
-        "year": 2019,
         "context": "1917",
         "nominee": "1917",
         "id": 2937,
         "detail": "Written by Sam Mendes & Krysty Wilson-Cairns"
+      },
+      {
+        "category_id": 24,
+        "year": 2019,
+        "context": "Knives Out",
+        "nominee": "Knives Out",
+        "id": 2935,
+        "detail": "Written by Rian Johnson"
       },
       {
         "odds_expert": 2,
@@ -893,18 +993,6 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 11
       },
       {
-        "odds_expert": 58,
-        "odds_denominator": 9,
-        "category_id": 24,
-        "year": 2019,
-        "context": "Parasite",
-        "nominee": "Parasite",
-        "odds_user": 32,
-        "id": 2939,
-        "detail": "Screenplay by Bong Joon Ho, Han Jin Won; Story by Bong Joon Ho",
-        "odds_numerator": 4
-      },
-      {
         "odds_expert": 40,
         "odds_denominator": 8,
         "category_id": 24,
@@ -917,39 +1005,62 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 13
       },
       {
+        "odds_expert": 58,
+        "odds_denominator": 9,
+        "category_id": 24,
+        "year": 2019,
+        "context": "Parasite",
+        "nominee": "Parasite",
+        "odds_user": 32,
+        "id": 2939,
+        "detail": "Screenplay by Bong Joon Ho, Han Jin Won; Story by Bong Joon Ho",
+        "odds_numerator": 4
+      },
+      {
         "category_id": 24,
         "year": 2020,
         "nominee": "Judas and the Black Messiah",
-        "id": 2981,
+        "id": 2958,
         "detail": "Screenplay by Will Berson and Shaka King; Story by Berson, King, Keith Lucas and Kenny Lucas"
       },
       {
+        "odds_denominator": 1,
         "category_id": 24,
         "year": 2020,
         "nominee": "Minari",
-        "id": 2982,
-        "detail": "Lee Isaac Chung"
+        "odds_user": 18,
+        "id": 2959,
+        "detail": "Lee Isaac Chung",
+        "odds_numerator": 14
       },
       {
+        "odds_expert": 89,
+        "odds_denominator": 4,
         "category_id": 24,
         "year": 2020,
         "nominee": "Promising Young Woman",
-        "id": 2983,
-        "detail": "Emerald Fennell"
+        "odds_user": 34,
+        "id": 2960,
+        "detail": "Emerald Fennell",
+        "odds_numerator": 1
       },
       {
         "category_id": 24,
         "year": 2020,
         "nominee": "Sound of Metal",
-        "id": 2984,
+        "id": 2961,
         "detail": "Screenplay by Abraham Marder and Darius Marder; Story by Derek Cianfrance and D. Marder"
       },
       {
+        "odds_expert": 11,
+        "odds_denominator": 4,
         "category_id": 24,
         "year": 2020,
         "nominee": "The Trial of the Chicago 7",
-        "id": 2985,
-        "detail": "Aaron Sorkin"
+        "odds_user": 30,
+        "id": 2962,
+        "detail": "Aaron Sorkin",
+        "odds_numerator": 11
       }
     ],
     "name": "Writing (Original Screenplay)",
@@ -974,12 +1085,16 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
+        "odds_expert": 97,
+        "odds_denominator": 50,
         "category_id": 6,
         "year": 2019,
-        "context": "The Irishman",
-        "nominee": "The Irishman",
-        "id": 2841,
-        "detail": "Rodrigo Prieto"
+        "context": "1917",
+        "nominee": "1917",
+        "odds_user": 62,
+        "id": 2844,
+        "detail": "Roger Deakins",
+        "odds_numerator": 1
       },
       {
         "odds_expert": 3,
@@ -994,16 +1109,22 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 22
       },
       {
-        "odds_expert": 97,
-        "odds_denominator": 50,
+        "odds_denominator": 1,
         "category_id": 6,
         "year": 2019,
-        "context": "1917",
-        "nominee": "1917",
-        "odds_user": 62,
-        "id": 2844,
-        "detail": "Roger Deakins",
-        "odds_numerator": 1
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 2845,
+        "detail": "Robert Richardson",
+        "odds_numerator": 16
+      },
+      {
+        "category_id": 6,
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 2841,
+        "detail": "Rodrigo Prieto"
       },
       {
         "odds_denominator": 1,
@@ -1017,49 +1138,51 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 22
       },
       {
-        "odds_denominator": 1,
-        "category_id": 6,
-        "year": 2019,
-        "context": "Once Upon a Time...in Hollywood",
-        "nominee": "Once Upon a Time...in Hollywood",
-        "id": 2845,
-        "detail": "Robert Richardson",
-        "odds_numerator": 16
-      },
-      {
         "category_id": 6,
         "year": 2020,
         "context": "Sean Bobbitt",
         "nominee": "Judas and the Black Messiah",
-        "id": 3011
+        "odds_user": 5,
+        "id": 2988
       },
       {
+        "odds_expert": 32,
+        "odds_denominator": 1,
         "category_id": 6,
         "year": 2020,
         "context": "Erik Messerschmidt",
         "nominee": "Mank",
-        "id": 3012
+        "odds_user": 30,
+        "id": 2989,
+        "odds_numerator": 3
       },
       {
+        "odds_expert": 2,
+        "odds_denominator": 1,
         "category_id": 6,
         "year": 2020,
         "context": "Dariusz Wolski",
         "nominee": "News of the World",
-        "id": 3013
+        "id": 2990,
+        "odds_numerator": 14
       },
       {
+        "odds_expert": 66,
+        "odds_denominator": 4,
         "category_id": 6,
         "year": 2020,
         "context": "Joshua James Richards",
         "nominee": "Nomadland",
-        "id": 3014
+        "odds_user": 57,
+        "id": 2991,
+        "odds_numerator": 1
       },
       {
         "category_id": 6,
         "year": 2020,
         "context": "Phedon Papamichael",
         "nominee": "The Trial of the Chicago 7",
-        "id": 3015
+        "id": 2992
       }
     ],
     "name": "Cinematography",
@@ -1075,14 +1198,6 @@ export const MockCategoryList: Category[] = [
       "id": 345
     }],
     "nominees": [
-      {
-        "category_id": 7,
-        "year": 2019,
-        "context": "The Irishman",
-        "nominee": "The Irishman",
-        "id": 2846,
-        "detail": "Sandy Powell and Christopher Peterson"
-      },
       {
         "odds_expert": 9,
         "odds_denominator": 4,
@@ -1129,33 +1244,53 @@ export const MockCategoryList: Category[] = [
       },
       {
         "category_id": 7,
-        "year": 2020,
-        "nominee": "Emma.",
-        "id": 3016
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 2846,
+        "detail": "Sandy Powell and Christopher Peterson"
       },
       {
+        "odds_expert": 13,
+        "odds_denominator": 3,
+        "category_id": 7,
+        "year": 2020,
+        "nominee": "Emma.",
+        "odds_user": 21,
+        "id": 2993,
+        "odds_numerator": 10
+      },
+      {
+        "odds_expert": 80,
+        "odds_denominator": 4,
         "category_id": 7,
         "year": 2020,
         "nominee": "Ma Rainey's Black Bottom",
-        "id": 3017
+        "odds_user": 43,
+        "id": 2994,
+        "odds_numerator": 1
       },
       {
+        "odds_expert": 8,
+        "odds_denominator": 1,
         "category_id": 7,
         "year": 2020,
         "nominee": "Mank",
-        "id": 3018
+        "odds_user": 26,
+        "id": 2995,
+        "odds_numerator": 10
       },
       {
         "category_id": 7,
         "year": 2020,
         "nominee": "Mulan",
-        "id": 3019
+        "id": 2996
       },
       {
         "category_id": 7,
         "year": 2020,
         "nominee": "Pinocchio",
-        "id": 3020
+        "id": 2997
       }
     ],
     "name": "Costume Design",
@@ -1171,6 +1306,18 @@ export const MockCategoryList: Category[] = [
       "id": 352
     }],
     "nominees": [
+      {
+        "odds_expert": 51,
+        "odds_denominator": 1,
+        "category_id": 11,
+        "year": 2019,
+        "context": "Ford v Ferrari",
+        "nominee": "Ford v Ferrari",
+        "odds_user": 27,
+        "id": 2866,
+        "detail": "Michael McCusker and Andrew Buckland",
+        "odds_numerator": 1
+      },
       {
         "category_id": 11,
         "year": 2019,
@@ -1188,15 +1335,15 @@ export const MockCategoryList: Category[] = [
         "detail": "Jeff Groth"
       },
       {
-        "odds_expert": 51,
+        "odds_expert": 34,
         "odds_denominator": 1,
         "category_id": 11,
         "year": 2019,
-        "context": "Ford v Ferrari",
-        "nominee": "Ford v Ferrari",
-        "odds_user": 27,
-        "id": 2866,
-        "detail": "Michael McCusker and Andrew Buckland",
+        "context": "Parasite",
+        "nominee": "Parasite",
+        "odds_user": 30,
+        "id": 2870,
+        "detail": "Yang Jinmo",
         "odds_numerator": 1
       },
       {
@@ -1212,46 +1359,46 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 11
       },
       {
-        "odds_expert": 34,
+        "odds_expert": 10,
         "odds_denominator": 1,
-        "category_id": 11,
-        "year": 2019,
-        "context": "Parasite",
-        "nominee": "Parasite",
-        "odds_user": 30,
-        "id": 2870,
-        "detail": "Yang Jinmo",
-        "odds_numerator": 1
-      },
-      {
-        "category_id": 11,
-        "year": 2020,
-        "nominee": "The Father",
-        "id": 3076
-      },
-      {
         "category_id": 11,
         "year": 2020,
         "nominee": "Nomadland",
-        "id": 3077
+        "odds_user": 29,
+        "id": 3054,
+        "odds_numerator": 9
       },
       {
         "category_id": 11,
         "year": 2020,
         "nominee": "Promising Young Woman",
-        "id": 3078
+        "id": 3055
       },
       {
+        "odds_expert": 45,
+        "odds_denominator": 11,
         "category_id": 11,
         "year": 2020,
         "nominee": "Sound of Metal",
-        "id": 3079
+        "odds_user": 32,
+        "id": 3056,
+        "odds_numerator": 10
       },
       {
         "category_id": 11,
         "year": 2020,
+        "nominee": "The Father",
+        "id": 3053
+      },
+      {
+        "odds_expert": 43,
+        "odds_denominator": 11,
+        "category_id": 11,
+        "year": 2020,
         "nominee": "The Trial of the Chicago 7",
-        "id": 3080
+        "odds_user": 19,
+        "id": 3057,
+        "odds_numerator": 10
       }
     ],
     "name": "Film Editing",
@@ -1268,6 +1415,14 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
+        "category_id": 13,
+        "year": 2019,
+        "context": "1917",
+        "nominee": "1917",
+        "id": 2880,
+        "detail": "Naomi Donne, Tristan Versluis and Rebecca Cole"
+      },
+      {
         "odds_expert": 89,
         "odds_denominator": 10,
         "category_id": 13,
@@ -1278,22 +1433,6 @@ export const MockCategoryList: Category[] = [
         "id": 2876,
         "detail": "Kazu Hiro, Anne Morgan and Vivian Baker",
         "odds_numerator": 1
-      },
-      {
-        "category_id": 13,
-        "year": 2019,
-        "context": "Maleficent: Mistress of Evil",
-        "nominee": "Maleficent: Mistress of Evil",
-        "id": 2879,
-        "detail": "Paul Gooch, Arjen Tuiten and David White"
-      },
-      {
-        "category_id": 13,
-        "year": 2019,
-        "context": "1917",
-        "nominee": "1917",
-        "id": 2880,
-        "detail": "Naomi Donne, Tristan Versluis and Rebecca Cole"
       },
       {
         "odds_expert": 6,
@@ -1318,33 +1457,54 @@ export const MockCategoryList: Category[] = [
       },
       {
         "category_id": 13,
-        "year": 2020,
-        "nominee": "Emma.",
-        "id": 3071
+        "year": 2019,
+        "context": "Maleficent: Mistress of Evil",
+        "nominee": "Maleficent: Mistress of Evil",
+        "id": 2879,
+        "detail": "Paul Gooch, Arjen Tuiten and David White"
       },
       {
+        "category_id": 13,
+        "year": 2020,
+        "nominee": "Emma.",
+        "odds_user": 16,
+        "id": 3048
+      },
+      {
+        "odds_expert": 3,
+        "odds_denominator": 1,
         "category_id": 13,
         "year": 2020,
         "nominee": "Hillbilly Elegy",
-        "id": 3072
+        "id": 3049,
+        "odds_numerator": 9
       },
       {
+        "odds_expert": 90,
+        "odds_denominator": 4,
         "category_id": 13,
         "year": 2020,
         "nominee": "Ma Rainey's Black Bottom",
-        "id": 3073
+        "odds_user": 49,
+        "id": 3050,
+        "odds_numerator": 1
       },
       {
+        "odds_expert": 5,
         "category_id": 13,
         "year": 2020,
         "nominee": "Mank",
-        "id": 3074
+        "odds_user": 22,
+        "id": 3051
       },
       {
+        "odds_expert": 3,
+        "odds_denominator": 1,
         "category_id": 13,
         "year": 2020,
         "nominee": "Pinocchio",
-        "id": 3075
+        "id": 3052,
+        "odds_numerator": 4
       }
     ],
     "name": "Makeup and Hairstyling",
@@ -1360,14 +1520,6 @@ export const MockCategoryList: Category[] = [
       "id": 356
     }],
     "nominees": [
-      {
-        "category_id": 14,
-        "year": 2019,
-        "context": "Marriage Story",
-        "nominee": "Marriage Story",
-        "id": 2883,
-        "detail": "Randy Newman"
-      },
       {
         "odds_expert": 8,
         "odds_denominator": 2,
@@ -1405,6 +1557,14 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 14,
         "year": 2019,
+        "context": "Marriage Story",
+        "nominee": "Marriage Story",
+        "id": 2883,
+        "detail": "Randy Newman"
+      },
+      {
+        "category_id": 14,
+        "year": 2019,
         "context": "Star Wars: The Rise of Skywalker",
         "nominee": "Star Wars: The Rise of Skywalker",
         "odds_user": 10,
@@ -1412,39 +1572,51 @@ export const MockCategoryList: Category[] = [
         "detail": "John Williams"
       },
       {
+        "odds_expert": 2,
         "category_id": 14,
         "year": 2020,
         "context": "Terence Blanchard",
         "nominee": "Da 5 Bloods",
-        "id": 3001
+        "id": 2978
       },
       {
+        "odds_expert": 2,
+        "odds_denominator": 1,
         "category_id": 14,
         "year": 2020,
         "context": "Trent Reznor and Atticus Ross",
         "nominee": "Mank",
-        "id": 3002
+        "odds_user": 13,
+        "id": 2979,
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 1,
         "category_id": 14,
         "year": 2020,
         "context": "Emile Mosseri",
         "nominee": "Minari",
-        "id": 3003
+        "odds_user": 10,
+        "id": 2980,
+        "odds_numerator": 14
       },
       {
         "category_id": 14,
         "year": 2020,
         "context": "James Newton Howard",
         "nominee": "News of the World",
-        "id": 3004
+        "id": 2981
       },
       {
+        "odds_expert": 95,
+        "odds_denominator": 12,
         "category_id": 14,
         "year": 2020,
         "context": "Trent Reznor, Atticus Ross and Jon Batiste",
         "nominee": "Soul",
-        "id": 3005
+        "odds_user": 69,
+        "id": 2982,
+        "odds_numerator": 1
       }
     ],
     "name": "Music (Original Score)",
@@ -1462,6 +1634,15 @@ export const MockCategoryList: Category[] = [
     "nominees": [
       {
         "odds_expert": 3,
+        "category_id": 15,
+        "year": 2019,
+        "context": "Breakthrough",
+        "nominee": "Breakthrough",
+        "id": 2888,
+        "detail": "\"I'm Standing With You\" "
+      },
+      {
+        "odds_expert": 3,
         "odds_denominator": 1,
         "category_id": 15,
         "year": 2019,
@@ -1471,24 +1652,6 @@ export const MockCategoryList: Category[] = [
         "id": 2889,
         "detail": "\"Into The Unknown\" ",
         "odds_numerator": 12
-      },
-      {
-        "odds_expert": 3,
-        "category_id": 15,
-        "year": 2019,
-        "context": "Breakthrough",
-        "nominee": "Breakthrough",
-        "id": 2888,
-        "detail": "\"I'm Standing With You\" "
-      },
-      {
-        "category_id": 15,
-        "year": 2019,
-        "context": "Toy Story 4",
-        "nominee": "Toy Story 4",
-        "odds_user": 14,
-        "id": 2886,
-        "detail": "\"I Can't Let You Throw Yourself Away\" "
       },
       {
         "odds_expert": 8,
@@ -1515,43 +1678,64 @@ export const MockCategoryList: Category[] = [
       },
       {
         "category_id": 15,
+        "year": 2019,
+        "context": "Toy Story 4",
+        "nominee": "Toy Story 4",
+        "odds_user": 14,
+        "id": 2886,
+        "detail": "\"I Can't Let You Throw Yourself Away\" "
+      },
+      {
+        "category_id": 15,
         "year": 2020,
         "context": "Judas and the Black Messiah",
         "nominee": "Fight for You",
-        "id": 3061,
-        "detail": "Music by D'Mile and H.E.R.; Lyrics by H.E.R. and Tiara Thomas"
+        "odds_user": 28,
+        "id": 3038,
+        "detail": "Music by D'Mile and H.E.R.; Lyric by H.E.R. and Tiara Thomas"
       },
       {
         "category_id": 15,
         "year": 2020,
         "context": "The Trial of the Chicago 7",
         "nominee": "Hear My Voice",
-        "id": 3062,
-        "detail": "Music by Daniel Pemberton; Lyrics by Celeste and Pemberton"
+        "odds_user": 15,
+        "id": 3039,
+        "detail": "Music by Daniel Pemberton; Lyric by Daniel Pemberton and Celeste Waite"
       },
       {
+        "odds_expert": 26,
+        "odds_denominator": 1,
         "category_id": 15,
         "year": 2020,
         "context": "Eurovision Song Contest: The Story of Fire Saga",
         "nominee": "Husavik",
-        "id": 3063,
-        "detail": "Music and lyrics by Rickard Göransson, Fat Max Gsus and Savan Kotecha"
+        "id": 3040,
+        "detail": "Music and lyric by Rickard Göransson, Fat Max Gsus and Savan Kotecha",
+        "odds_numerator": 3
       },
       {
+        "odds_expert": 10,
+        "odds_denominator": 4,
         "category_id": 15,
         "year": 2020,
         "context": "The Life Ahead",
         "nominee": "Io sì (Seen)",
-        "id": 3064,
-        "detail": "Music by Diane Warren; Lyrics by Laura Pausini and Warren"
+        "id": 3041,
+        "detail": "Music by Diane Warren; Lyric by Laura Pausini and Warren",
+        "odds_numerator": 9
       },
       {
+        "odds_expert": 62,
+        "odds_denominator": 11,
         "category_id": 15,
         "year": 2020,
         "context": "One Night in Miami...",
         "nominee": "Speak Now",
-        "id": 3065,
-        "detail": "Music and lyrics by Sam Ashworth and Leslie Odom Jr."
+        "odds_user": 35,
+        "id": 3042,
+        "detail": "Music and lyric by Sam Ashworth and Leslie Odom Jr.",
+        "odds_numerator": 8
       }
     ],
     "name": "Music (Original Song)",
@@ -1568,22 +1752,6 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
-        "category_id": 4,
-        "year": 2019,
-        "context": "The Irishman",
-        "nominee": "The Irishman",
-        "id": 2900,
-        "detail": "Production Design: Bob Shaw"
-      },
-      {
-        "category_id": 4,
-        "year": 2019,
-        "context": "Jojo Rabbit",
-        "nominee": "Jojo Rabbit",
-        "id": 2901,
-        "detail": "Production Design: Ra Vincent"
-      },
-      {
         "odds_expert": 24,
         "odds_denominator": 8,
         "category_id": 4,
@@ -1594,6 +1762,14 @@ export const MockCategoryList: Category[] = [
         "id": 2902,
         "detail": "Production Design: Dennis Gassner",
         "odds_numerator": 13
+      },
+      {
+        "category_id": 4,
+        "year": 2019,
+        "context": "Jojo Rabbit",
+        "nominee": "Jojo Rabbit",
+        "id": 2901,
+        "detail": "Production Design: Ra Vincent"
       },
       {
         "odds_expert": 65,
@@ -1621,33 +1797,52 @@ export const MockCategoryList: Category[] = [
       },
       {
         "category_id": 4,
-        "year": 2020,
-        "nominee": "The Father",
-        "id": 3066
+        "year": 2019,
+        "context": "The Irishman",
+        "nominee": "The Irishman",
+        "id": 2900,
+        "detail": "Production Design: Bob Shaw"
       },
       {
+        "odds_denominator": 2,
         "category_id": 4,
         "year": 2020,
         "nominee": "Ma Rainey's Black Bottom",
-        "id": 3067
+        "odds_user": 12,
+        "id": 3044,
+        "odds_numerator": 13
       },
       {
+        "odds_expert": 98,
+        "odds_denominator": 7,
         "category_id": 4,
         "year": 2020,
         "nominee": "Mank",
-        "id": 3068
+        "odds_user": 60,
+        "id": 3045,
+        "odds_numerator": 1
       },
       {
         "category_id": 4,
         "year": 2020,
         "nominee": "News of the World",
-        "id": 3069
+        "id": 3046
       },
       {
+        "odds_denominator": 1,
         "category_id": 4,
         "year": 2020,
         "nominee": "Tenet",
-        "id": 3070
+        "odds_user": 19,
+        "id": 3047,
+        "odds_numerator": 9
+      },
+      {
+        "odds_expert": 3,
+        "category_id": 4,
+        "year": 2020,
+        "nominee": "The Father",
+        "id": 3043
       }
     ],
     "start_year": 2011,
@@ -1662,31 +1857,42 @@ export const MockCategoryList: Category[] = [
         "category_id": 26,
         "year": 2020,
         "nominee": "Greyhound",
-        "id": 3006
+        "id": 2983
       },
       {
+        "odds_denominator": 1,
         "category_id": 26,
         "year": 2020,
         "nominee": "Mank",
-        "id": 3007
+        "odds_user": 7,
+        "id": 2984,
+        "odds_numerator": 10
       },
       {
         "category_id": 26,
         "year": 2020,
         "nominee": "News of the World",
-        "id": 3008
+        "id": 2985
       },
       {
+        "odds_expert": 3,
+        "odds_denominator": 1,
         "category_id": 26,
         "year": 2020,
         "nominee": "Soul",
-        "id": 3009
+        "odds_user": 13,
+        "id": 2986,
+        "odds_numerator": 12
       },
       {
+        "odds_expert": 98,
+        "odds_denominator": 25,
         "category_id": 26,
         "year": 2020,
         "nominee": "Sound of Metal",
-        "id": 3010
+        "odds_user": 74,
+        "id": 2987,
+        "odds_numerator": 1
       }
     ],
     "start_year": 2020,
@@ -1704,14 +1910,6 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
-        "category_id": 18,
-        "year": 2019,
-        "context": "Star Wars: The Rise of Skywalker",
-        "nominee": "Star Wars: The Rise of Skywalker",
-        "id": 2919,
-        "detail": "Matthew Wood and David Acord"
-      },
-      {
         "odds_expert": 85,
         "odds_denominator": 10,
         "category_id": 18,
@@ -1722,16 +1920,6 @@ export const MockCategoryList: Category[] = [
         "id": 2917,
         "detail": "Oliver Tarney and Rachael Tate",
         "odds_numerator": 3
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 18,
-        "year": 2019,
-        "context": "Once Upon a Time...in Hollywood",
-        "nominee": "Once Upon a Time...in Hollywood",
-        "id": 2918,
-        "detail": "Wylie Stateman",
-        "odds_numerator": 25
       },
       {
         "odds_expert": 15,
@@ -1753,6 +1941,24 @@ export const MockCategoryList: Category[] = [
         "odds_user": 13,
         "id": 2916,
         "detail": "Alan Robert Murray"
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 18,
+        "year": 2019,
+        "context": "Once Upon a Time...in Hollywood",
+        "nominee": "Once Upon a Time...in Hollywood",
+        "id": 2918,
+        "detail": "Wylie Stateman",
+        "odds_numerator": 25
+      },
+      {
+        "category_id": 18,
+        "year": 2019,
+        "context": "Star Wars: The Rise of Skywalker",
+        "nominee": "Star Wars: The Rise of Skywalker",
+        "id": 2919,
+        "detail": "Matthew Wood and David Acord"
       }
     ],
     "name": "Sound Editing",
@@ -1770,14 +1976,6 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
-        "category_id": 19,
-        "year": 2019,
-        "context": "Ad Astra",
-        "nominee": "Ad Astra",
-        "id": 2920,
-        "detail": "Gary Rydstrom, Tom Johnson and Mark Ulano"
-      },
-      {
         "odds_expert": 76,
         "odds_denominator": 3,
         "category_id": 19,
@@ -1788,6 +1986,14 @@ export const MockCategoryList: Category[] = [
         "id": 2923,
         "detail": "Mark Taylor and Stuart Wilson",
         "odds_numerator": 1
+      },
+      {
+        "category_id": 19,
+        "year": 2019,
+        "context": "Ad Astra",
+        "nominee": "Ad Astra",
+        "id": 2920,
+        "detail": "Gary Rydstrom, Tom Johnson and Mark Ulano"
       },
       {
         "odds_expert": 24,
@@ -1836,12 +2042,16 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
+        "odds_expert": 53,
+        "odds_denominator": 6,
         "category_id": 22,
         "year": 2019,
-        "context": "Star Wars: The Rise of Skywalker",
-        "nominee": "Star Wars: The Rise of Skywalker",
-        "id": 2929,
-        "detail": "Roger Guyett, Neal Scanlan, Patrick Tubach and Dominic Tuohy"
+        "context": "1917",
+        "nominee": "1917",
+        "odds_user": 22,
+        "id": 2928,
+        "detail": "Guillaume Rocheron, Greg Butler and Dominic Tuohy",
+        "odds_numerator": 4
       },
       {
         "odds_expert": 38,
@@ -1856,16 +2066,12 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 3
       },
       {
-        "odds_expert": 53,
-        "odds_denominator": 6,
         "category_id": 22,
         "year": 2019,
-        "context": "1917",
-        "nominee": "1917",
-        "odds_user": 22,
-        "id": 2928,
-        "detail": "Guillaume Rocheron, Greg Butler and Dominic Tuohy",
-        "odds_numerator": 4
+        "context": "Star Wars: The Rise of Skywalker",
+        "nominee": "Star Wars: The Rise of Skywalker",
+        "id": 2929,
+        "detail": "Roger Guyett, Neal Scanlan, Patrick Tubach and Dominic Tuohy"
       },
       {
         "odds_denominator": 1,
@@ -1891,31 +2097,42 @@ export const MockCategoryList: Category[] = [
         "category_id": 22,
         "year": 2020,
         "nominee": "Love and Monsters",
-        "id": 3021
+        "id": 2998
       },
       {
-        "category_id": 22,
-        "year": 2020,
-        "nominee": "The Midnight Sky",
-        "id": 3022
-      },
-      {
+        "odds_denominator": 1,
         "category_id": 22,
         "year": 2020,
         "nominee": "Mulan",
-        "id": 3023
+        "odds_user": 6,
+        "id": 3000,
+        "odds_numerator": 16
+      },
+      {
+        "odds_expert": 88,
+        "odds_denominator": 7,
+        "category_id": 22,
+        "year": 2020,
+        "nominee": "Tenet",
+        "odds_user": 84,
+        "id": 3002,
+        "odds_numerator": 2
+      },
+      {
+        "odds_expert": 13,
+        "odds_denominator": 2,
+        "category_id": 22,
+        "year": 2020,
+        "nominee": "The Midnight Sky",
+        "odds_user": 5,
+        "id": 2999,
+        "odds_numerator": 5
       },
       {
         "category_id": 22,
         "year": 2020,
         "nominee": "The One and Only Ivan",
-        "id": 3024
-      },
-      {
-        "category_id": 22,
-        "year": 2020,
-        "nominee": "Tenet",
-        "id": 3025
+        "id": 3001
       }
     ],
     "name": "Visual Effects",
@@ -1932,25 +2149,6 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
-        "category_id": 9,
-        "year": 2019,
-        "context": "The Cave",
-        "nominee": "The Cave",
-        "id": 2857,
-        "detail": "Feras Fayyad, Kirstine Barfod and Sigrid Dyekjær"
-      },
-      {
-        "odds_expert": 8,
-        "odds_denominator": 10,
-        "category_id": 9,
-        "year": 2019,
-        "context": "For Sama",
-        "nominee": "For Sama",
-        "id": 2859,
-        "detail": "Waad al-Kateab and Edward Watts",
-        "odds_numerator": 11
-      },
-      {
         "odds_expert": 76,
         "odds_denominator": 6,
         "category_id": 9,
@@ -1963,13 +2161,15 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 4
       },
       {
+        "odds_expert": 8,
+        "odds_denominator": 10,
         "category_id": 9,
         "year": 2019,
-        "context": "The Edge of Democracy",
-        "nominee": "The Edge of Democracy",
-        "odds_user": 18,
-        "id": 2858,
-        "detail": "Petra Costa, Joanna Natasegara, Shane Boris and Tiago Pavan"
+        "context": "For Sama",
+        "nominee": "For Sama",
+        "id": 2859,
+        "detail": "Waad al-Kateab and Edward Watts",
+        "odds_numerator": 11
       },
       {
         "odds_expert": 16,
@@ -1985,33 +2185,62 @@ export const MockCategoryList: Category[] = [
       },
       {
         "category_id": 9,
-        "year": 2020,
-        "nominee": "Collective",
-        "id": 2991
+        "year": 2019,
+        "context": "The Cave",
+        "nominee": "The Cave",
+        "id": 2857,
+        "detail": "Feras Fayyad, Kirstine Barfod and Sigrid Dyekjær"
       },
       {
         "category_id": 9,
+        "year": 2019,
+        "context": "The Edge of Democracy",
+        "nominee": "The Edge of Democracy",
+        "odds_user": 18,
+        "id": 2858,
+        "detail": "Petra Costa, Joanna Natasegara, Shane Boris and Tiago Pavan"
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 9,
+        "year": 2020,
+        "nominee": "Collective",
+        "odds_user": 23,
+        "id": 2968,
+        "odds_numerator": 9
+      },
+      {
+        "odds_expert": 10,
+        "category_id": 9,
         "year": 2020,
         "nominee": "Crip Camp",
-        "id": 2992
+        "id": 2969
+      },
+      {
+        "odds_expert": 71,
+        "odds_denominator": 9,
+        "category_id": 9,
+        "year": 2020,
+        "nominee": "My Octopus Teacher",
+        "odds_user": 25,
+        "id": 2971,
+        "odds_numerator": 2
       },
       {
         "category_id": 9,
         "year": 2020,
         "nominee": "The Mole Agent",
-        "id": 2993
+        "id": 2970
       },
       {
-        "category_id": 9,
-        "year": 2020,
-        "nominee": "My Octopus Teacher",
-        "id": 2994
-      },
-      {
+        "odds_expert": 19,
+        "odds_denominator": 2,
         "category_id": 9,
         "year": 2020,
         "nominee": "Time",
-        "id": 2995
+        "odds_user": 34,
+        "id": 2972,
+        "odds_numerator": 9
       }
     ],
     "name": "Documentary (Feature)",
@@ -2028,12 +2257,14 @@ export const MockCategoryList: Category[] = [
     }],
     "nominees": [
       {
+        "odds_denominator": 1,
         "category_id": 10,
         "year": 2019,
-        "context": "Walk Run Cha-cha",
-        "nominee": "Walk Run Cha-cha",
-        "id": 2865,
-        "detail": "Laura Nix and Colette Sandstedt"
+        "context": "In the Absence",
+        "nominee": "In the Absence",
+        "id": 2861,
+        "detail": "Yi Seung-Jun and Gary Byung-Seok Kam",
+        "odds_numerator": 8
       },
       {
         "odds_expert": 88,
@@ -2070,44 +2301,54 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 10
       },
       {
-        "odds_denominator": 1,
         "category_id": 10,
         "year": 2019,
-        "context": "In the Absence",
-        "nominee": "In the Absence",
-        "id": 2861,
-        "detail": "Yi Seung-Jun and Gary Byung-Seok Kam",
+        "context": "Walk Run Cha-cha",
+        "nominee": "Walk Run Cha-cha",
+        "id": 2865,
+        "detail": "Laura Nix and Colette Sandstedt"
+      },
+      {
+        "odds_expert": 38,
+        "odds_denominator": 4,
+        "category_id": 10,
+        "year": 2020,
+        "nominee": "A Concerto Is a Conversation",
+        "id": 3029,
+        "odds_numerator": 11
+      },
+      {
+        "odds_expert": 51,
+        "odds_denominator": 13,
+        "category_id": 10,
+        "year": 2020,
+        "nominee": "A Love Song for Latasha",
+        "odds_user": 25,
+        "id": 3032,
         "odds_numerator": 8
       },
       {
         "category_id": 10,
         "year": 2020,
         "nominee": "Colette",
-        "id": 3051
+        "odds_user": 26,
+        "id": 3028
       },
       {
-        "category_id": 10,
-        "year": 2020,
-        "nominee": "A Concerto Is a Conversation",
-        "id": 3052
-      },
-      {
+        "odds_expert": 10,
+        "odds_denominator": 2,
         "category_id": 10,
         "year": 2020,
         "nominee": "Do Not Split",
-        "id": 3053
+        "id": 3030,
+        "odds_numerator": 15
       },
       {
         "category_id": 10,
         "year": 2020,
         "nominee": "Hunger Ward",
-        "id": 3054
-      },
-      {
-        "category_id": 10,
-        "year": 2020,
-        "nominee": "A Love Song for Latasha",
-        "id": 3055
+        "odds_user": 19,
+        "id": 3031
       }
     ],
     "name": "Documentary (Short Subject)",
@@ -2182,39 +2423,51 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 1
       },
       {
+        "odds_expert": 95,
+        "odds_denominator": 10,
         "category_id": 25,
         "year": 2020,
         "context": "Denmark",
         "nominee": "Another Round",
-        "id": 3046
+        "odds_user": 72,
+        "id": 3023,
+        "odds_numerator": 1
       },
       {
         "category_id": 25,
         "year": 2020,
         "context": "Hong Kong",
         "nominee": "Better Days",
-        "id": 3047
+        "odds_user": 8,
+        "id": 3024
       },
       {
+        "odds_expert": 2,
+        "odds_denominator": 1,
         "category_id": 25,
         "year": 2020,
         "context": "Romania",
         "nominee": "Collective",
-        "id": 3048
+        "id": 3025,
+        "odds_numerator": 14
       },
       {
+        "odds_expert": 2,
+        "odds_denominator": 1,
         "category_id": 25,
         "year": 2020,
         "context": "Bosnia and Herzegovina",
         "nominee": "Quo Vadis, Aida?",
-        "id": 3050
+        "odds_user": 9,
+        "id": 3027,
+        "odds_numerator": 6
       },
       {
         "category_id": 25,
         "year": 2020,
         "context": "Tunisia",
         "nominee": "The Man Who Sold His Skin",
-        "id": 3049
+        "id": 3026
       }
     ],
     "start_year": 2019,
@@ -2252,18 +2505,6 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 8
       },
       {
-        "odds_expert": 6,
-        "odds_denominator": 1,
-        "category_id": 16,
-        "year": 2019,
-        "context": "Sister",
-        "nominee": "Sister",
-        "odds_user": 21,
-        "id": 2909,
-        "detail": "Siqi Song",
-        "odds_numerator": 12
-      },
-      {
         "odds_expert": 12,
         "odds_denominator": 8,
         "category_id": 16,
@@ -2286,34 +2527,59 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 12
       },
       {
+        "odds_expert": 6,
+        "odds_denominator": 1,
+        "category_id": 16,
+        "year": 2019,
+        "context": "Sister",
+        "nominee": "Sister",
+        "odds_user": 21,
+        "id": 2909,
+        "detail": "Siqi Song",
+        "odds_numerator": 12
+      },
+      {
+        "odds_expert": 5,
+        "odds_denominator": 1,
         "category_id": 16,
         "year": 2020,
         "nominee": "Burrow",
-        "id": 3056
+        "odds_user": 14,
+        "id": 3033,
+        "odds_numerator": 7
       },
       {
+        "odds_expert": 5,
         "category_id": 16,
         "year": 2020,
         "nominee": "Genius Loci",
-        "id": 3057
+        "id": 3034
       },
       {
+        "odds_expert": 82,
+        "odds_denominator": 11,
         "category_id": 16,
         "year": 2020,
         "nominee": "If Anything Happens I Love You",
-        "id": 3058
+        "odds_user": 47,
+        "id": 3035,
+        "odds_numerator": 4
       },
       {
+        "odds_expert": 8,
+        "odds_denominator": 2,
         "category_id": 16,
         "year": 2020,
         "nominee": "Opera",
-        "id": 3059
+        "odds_user": 14,
+        "id": 3036,
+        "odds_numerator": 9
       },
       {
         "category_id": 16,
         "year": 2020,
         "nominee": "Yes-People",
-        "id": 3060
+        "id": 3037
       }
     ],
     "name": "Short Film (Animated)",
@@ -2341,6 +2607,18 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 11
       },
       {
+        "odds_expert": 52,
+        "odds_denominator": 9,
+        "category_id": 17,
+        "year": 2019,
+        "context": "Brotherhood",
+        "nominee": "Brotherhood",
+        "odds_user": 33,
+        "id": 2910,
+        "detail": "Meryam Joobeur and Maria Gracia Turgeon",
+        "odds_numerator": 4
+      },
+      {
         "odds_expert": 6,
         "category_id": 17,
         "year": 2019,
@@ -2361,18 +2639,6 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 11
       },
       {
-        "odds_expert": 52,
-        "odds_denominator": 9,
-        "category_id": 17,
-        "year": 2019,
-        "context": "Brotherhood",
-        "nominee": "Brotherhood",
-        "odds_user": 33,
-        "id": 2910,
-        "detail": "Meryam Joobeur and Maria Gracia Turgeon",
-        "odds_numerator": 4
-      },
-      {
         "odds_expert": 33,
         "odds_denominator": 1,
         "category_id": 17,
@@ -2385,34 +2651,46 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 2
       },
       {
+        "odds_expert": 16,
+        "odds_denominator": 2,
         "category_id": 17,
         "year": 2020,
         "nominee": "Feeling Through",
-        "id": 2996
+        "id": 2973,
+        "odds_numerator": 13
       },
       {
+        "odds_expert": 32,
+        "odds_denominator": 6,
         "category_id": 17,
         "year": 2020,
         "nominee": "The Letter Room",
-        "id": 2997
+        "odds_user": 25,
+        "id": 2974,
+        "odds_numerator": 4
       },
       {
         "category_id": 17,
         "year": 2020,
         "nominee": "The Present",
-        "id": 2998
+        "odds_user": 17,
+        "id": 2975
       },
       {
+        "odds_expert": 51,
+        "odds_denominator": 8,
         "category_id": 17,
         "year": 2020,
         "nominee": "Two Distant Strangers",
-        "id": 2999
+        "odds_user": 31,
+        "id": 2976,
+        "odds_numerator": 13
       },
       {
         "category_id": 17,
         "year": 2020,
         "nominee": "White Eye",
-        "id": 3000
+        "id": 2977
       }
     ],
     "name": "Short Film (Live Action)",
