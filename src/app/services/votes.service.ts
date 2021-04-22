@@ -45,6 +45,9 @@ export class VotesService {
   didPersonVoteCorrectlyFor(person: Person, category: Category): Observable<boolean> {
     return this.getVotesForCurrentYearAndCategory(category).pipe(
       map(votes => {
+        if (!person) {
+          return false;
+        }
         const personVote = _.findWhere(votes, {person_id: person.id});
         if (!!personVote) {
           const winningIds = _.map(category.winners, winner => winner.nomination_id);
@@ -94,6 +97,9 @@ export class VotesService {
   getVoteForCurrentYearAndPersonAndCategory(person: Person, category: Category): Observable<Vote> {
     return this.votes.pipe(
       map(votes => {
+        if (!person) {
+          return undefined;
+        }
         const allVotes = _.where(votes, {person_id: person.id, category_id: category.id});
         return allVotes.length === 1 ? allVotes[0] : undefined;
       })

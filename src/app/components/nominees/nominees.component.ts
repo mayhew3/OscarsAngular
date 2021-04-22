@@ -103,7 +103,7 @@ export class NomineesComponent implements OnInit {
     );
   }
 
-  submitVoteOrWinner(nominee: Nominee, category: Category): void {
+  submitVote(nominee: Nominee): void {
     this.personService.me$.subscribe(me => {
       if (this.votingMode()) {
         this.processingPick$.next(nominee);
@@ -117,8 +117,13 @@ export class NomineesComponent implements OnInit {
 
         this.socket.on('add_vote', voteCallback);
         this.socket.on('change_vote', voteCallback);
+      }
+    });
+  }
 
-      } else if (this.winnersMode() && this.personService.isAdmin) {
+  submitWinner(nominee: Nominee, category: Category): void {
+    this.personService.me$.subscribe(me => {
+      if (this.winnersMode() && this.personService.isAdmin) {
         this.processingPick$.next(nominee);
         this.winnersService.addOrDeleteWinner(nominee, category);
 
