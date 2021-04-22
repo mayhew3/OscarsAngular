@@ -188,7 +188,7 @@ export class NomineesComponent implements OnInit {
   }
 
   showSubtitleText(nominee: Nominee): boolean {
-    return !!nominee.context && nominee.nominee !== nominee.context;
+    return (!!nominee.context && nominee.nominee !== nominee.context) || !!nominee.detail;
   }
 
   showSongSubtitle(nominee: Nominee, category: Category): boolean {
