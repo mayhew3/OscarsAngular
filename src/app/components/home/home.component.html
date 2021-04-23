@@ -16,7 +16,7 @@
     </p>
 
     <div *ngIf="(systemVarsService.canVote() | async) && (categoryService.itsOver() | async) === false">
-      <p>Live Scoring will be viewable on Sunday, April 25 at 5pm PT / 8pm ET, when the ballots will lock.</p>
+      <p>Live Scoring will be viewable on {{oscarDateFormatted}} your local time, when the ballots will lock.</p>
       <p><strong>New in 2021:</strong></p>
       <ul>
         <li>The Academy Awards have combined the Sound Editing and Sound Mixing categories into the <strong>Sound</strong>

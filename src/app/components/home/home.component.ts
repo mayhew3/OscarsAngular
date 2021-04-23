@@ -10,6 +10,7 @@ import {Person} from '../../interfaces/Person';
 import {ThemePalette} from '@angular/material/core';
 import {ApiService} from '../../services/api.service';
 import {ScoreboardService} from '../../services/scoreboard.service';
+import {oscarsStart} from '../../../shared/GlobalVars';
 
 @Component({
   selector: 'osc-home',
@@ -61,6 +62,10 @@ export class HomeComponent implements OnInit {
 
   showWinnerDetail(): boolean {
     return this.scoreboardService.getPlayersInFirstPlace().length === 1;
+  }
+
+  get oscarDateFormatted(): string {
+    return oscarsStart.local().format('dddd, MMMM Do YYYY, h:mm a'); // "Sunday, February 14th 2010, 3:25:50 pm"
   }
 
   numVotesRemaining(): Observable<number> {
