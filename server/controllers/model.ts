@@ -72,7 +72,8 @@ export const Vote = sequelize.sequelize.define('vote', {
   category_id: Sequelize.INTEGER,
   nomination_id: Sequelize.INTEGER,
   person_id: Sequelize.INTEGER,
-  year: Sequelize.INTEGER
+  year: Sequelize.INTEGER,
+  date_added: Sequelize.DATE
 }, {
   freezeTableName: true,
   createdAt: false,

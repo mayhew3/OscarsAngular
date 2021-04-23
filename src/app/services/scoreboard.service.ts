@@ -4,13 +4,14 @@ import {PersonService} from './person.service';
 import {CategoryService} from './category.service';
 import {VotesService} from './votes.service';
 import {OddsService} from './odds.service';
-import {combineLatest} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {Category} from '../interfaces/Category';
 import {Vote} from '../interfaces/Vote';
 import fast_sort from 'fast-sort';
+import {filter, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,8 @@ export class ScoreboardService {
 
   scoreData: ScoreData[] = [];
   me: Person;
+
+  private internalScoreData$ = new BehaviorSubject<ScoreData[]>(undefined);
 
   constructor(private personService: PersonService,
               private categoryService: CategoryService,
@@ -32,6 +35,11 @@ export class ScoreboardService {
     this.initScoreData();
   }
 
+  get scoreData$(): Observable<ScoreData[]> {
+    return this.internalScoreData$.pipe(
+      filter(scoreData => !!scoreData)
+    );
+  }
 
   initScoreData(): void {
     combineLatest([
@@ -46,8 +54,11 @@ export class ScoreboardService {
         _.forEach(persons, person => {
           let score = 0;
           let numVotes = 0;
+
+          const personVotes = _.filter(votes, vote => vote.person_id === person.id);
+
           _.forEach(categories, category => {
-            const personVote = _.findWhere(votes, {
+            const personVote = _.findWhere(personVotes, {
               person_id: person.id,
               category_id: category.id
             });
@@ -62,14 +73,21 @@ export class ScoreboardService {
             }
           });
 
+          const mostRecentVote = personVotes.length > 0 ? _.chain(personVotes)
+            .filter(vote => vote.person_id === person.id)
+            .map(vote => vote.date_added)
+            .max()
+            .value() : undefined;
+
           const odds = _.find(oddsBundle.odds, o => o.person_id === person.id);
           const previousOdds = !previousOddsBundle ? undefined : _.find(previousOddsBundle.odds, o => o.person_id === person.id);
-          this.scoreData.push(new ScoreData(person, score, numVotes, odds, previousOdds));
+          this.scoreData.push(new ScoreData(person, score, numVotes, odds, previousOdds, mostRecentVote));
         });
         _.each(this.scoreData, sd => {
           sd.maxPosition = this.maxPosition(sd.person, categories, votes);
         });
         this.fastSortPersons();
+        this.internalScoreData$.next(this.scoreData);
       });
   }
 

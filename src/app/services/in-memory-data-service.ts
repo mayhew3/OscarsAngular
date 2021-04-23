@@ -205,7 +205,8 @@ export class InMemoryDataService implements InMemoryDbService {
         category_id: body.category_id,
         year: body.year,
         person_id: body.person_id,
-        nomination_id: body.nomination_id
+        nomination_id: body.nomination_id,
+        date_added: new Date()
       };
       this.votes.push(vote);
       this.broadcastToChannel('add_vote', vote);

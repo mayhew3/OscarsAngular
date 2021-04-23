@@ -8,6 +8,11 @@ import {first, map} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
 import fast_sort from 'fast-sort';
 import {SocketService} from '../../services/socket.service';
+import {ScoreboardService} from '../../services/scoreboard.service';
+import {ScoreData} from '../../interfaces/ScoreData';
+import moment from 'moment';
+import _ from 'underscore';
+import {ArrayUtil} from '../../utility/ArrayUtil';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -21,17 +26,25 @@ export class AdminDashboardComponent implements OnInit {
   winnersDeleting = false;
   winnersDeleted = false;
 
+  sortedData: ScoreData[];
+
   constructor(private systemVarsService: SystemVarsService,
               private categoryService: CategoryService,
               private votesService: VotesService,
               private winnersService: WinnersService,
               private socket: SocketService,
-              private personService: PersonService) { }
+              private personService: PersonService,
+              private scoreboardService: ScoreboardService) { }
 
   ngOnInit(): void {
     this.socket.on('reset_winners', () => {
       this.winnersDeleting = false;
       this.winnersDeleted = true;
+    });
+
+    this.scoreboardService.scoreData$.subscribe(scoreData => {
+      this.sortedData = ArrayUtil.cloneArray(scoreData);
+      fast_sort(this.sortedData).desc(scoreDatum => scoreDatum.latestVoteDate);
     });
   }
 
@@ -41,6 +54,14 @@ export class AdminDashboardComponent implements OnInit {
 
   get currentYear(): Observable<number> {
     return this.systemVarsService.getCurrentYear();
+  }
+
+  personNameFormatted(scoreData: ScoreData): Observable<string> {
+    return this.personService.getPersonName(scoreData.person);
+  }
+
+  personVotedTimeAgo(scoreDate: ScoreData): string {
+    return !scoreDate.latestVoteDate ? '' : moment(scoreDate.latestVoteDate).fromNow();
   }
 
   getPossibleYears(currentYear: number): Observable<number[]> {
