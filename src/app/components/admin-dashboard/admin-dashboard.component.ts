@@ -43,7 +43,7 @@ export class AdminDashboardComponent implements OnInit {
     });
 
     this.scoreboardService.scoreData$.subscribe(scoreData => {
-      this.sortedData = ArrayUtil.cloneArray(scoreData);
+      this.sortedData = _.filter(scoreData, scoreDatum => scoreDatum.num_votes > 0);
       fast_sort(this.sortedData).desc(scoreDatum => scoreDatum.latestVoteDate);
     });
   }
