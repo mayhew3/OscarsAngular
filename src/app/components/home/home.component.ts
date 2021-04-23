@@ -64,6 +64,10 @@ export class HomeComponent implements OnInit {
     return this.scoreboardService.getPlayersInFirstPlace().length === 1;
   }
 
+  get oscarDate(): Date {
+    return oscarsStart.toDate();
+  }
+
   get oscarDateFormatted(): string {
     return oscarsStart.local().format('dddd, MMMM Do YYYY, h:mm a'); // "Sunday, February 14th 2010, 3:25:50 pm"
   }

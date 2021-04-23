@@ -44,6 +44,7 @@ import { PersonConnectionSnackBarComponent } from './components/person-connectio
 import { FrontPageLogoComponent } from './components/front-page-logo/front-page-logo.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { DotComponent } from './components/dot/dot.component';
+import { CountdownComponent } from './components/countdown/countdown.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { DotComponent } from './components/dot/dot.component';
     PersonConnectionSnackBarComponent,
     FrontPageLogoComponent,
     NavBarComponent,
-    DotComponent
+    DotComponent,
+    CountdownComponent
   ],
   imports: [
     BrowserModule,
