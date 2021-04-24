@@ -29,16 +29,17 @@ export class VoteState {
   }
 
   @Action(GetVotes)
-  getVotes({getState, setState}: StateContext<VoteStateModel>, action: GetVotes): Observable<any> {
+  getVotes({setState}: StateContext<VoteStateModel>, action: GetVotes): Observable<any> {
     const params = new HttpParams()
       .set('year', action.year.toString());
     return this.api.getAfterFullyConnected<any[]>('/api/votes', params).pipe(
       tap(result => {
-        const state = getState();
-        setState({
-          ...state,
-          votes: result
-        });
+        setState(
+          produce( draft => {
+            draft.votes = result;
+            _.each(draft.votes, vote => vote.date_added = new Date(vote.date_added));
+          })
+        );
         this.stateChanges++;
         this.logger.log('VOTES State Change #' + this.stateChanges);
       })
@@ -54,6 +55,7 @@ export class VoteState {
       year: action.year,
       person_id: action.person_id,
       nomination_id: action.nomination_id,
+      date_added: new Date()
     };
     setState(
       produce(draft => {

@@ -4,4 +4,5 @@ export interface Vote {
   nomination_id: number;
   person_id: number;
   year: number;
+  date_added: any;
 }

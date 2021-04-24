@@ -8,6 +8,7 @@ export class ScoreData {
               public score: number,
               public num_votes: number,
               public odds: Odds,
-              public previousOdds: Odds) {
+              public previousOdds: Odds,
+              public latestVoteDate: Date) {
   }
 }
