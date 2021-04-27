@@ -10,7 +10,7 @@ import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {map, mergeMap} from 'rxjs/operators';
+import {first, map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {SocketService} from '../../services/socket.service';
@@ -104,7 +104,7 @@ export class NomineesComponent implements OnInit {
   }
 
   submitVote(nominee: Nominee): void {
-    this.personService.me$.subscribe(me => {
+    this.personService.me$.pipe(first()).subscribe(me => {
       if (this.votingMode()) {
         this.processingPick$.next(nominee);
         this.votesService.addOrUpdateVote(nominee, me);
@@ -122,7 +122,7 @@ export class NomineesComponent implements OnInit {
   }
 
   submitWinner(nominee: Nominee, category: Category): void {
-    this.personService.me$.subscribe(me => {
+    this.personService.me$.pipe(first()).subscribe(() => {
       if (this.winnersMode() && this.personService.isAdmin) {
         this.processingPick$.next(nominee);
         this.winnersService.addOrDeleteWinner(nominee, category);
