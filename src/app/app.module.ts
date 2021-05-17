@@ -21,7 +21,7 @@ import {ScoreboardComponent} from './components/scoreboard/scoreboard.component'
 import {HistoryComponent} from './components/history/history.component';
 import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
 import {PersonDetailComponent} from './components/person-detail/person-detail.component';
-import {NgbDropdownModule, NgbModalModule, NgbModule, NgbProgressbarModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
 import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -37,14 +37,14 @@ import {FinalResultState} from './states/final-result.state';
 import {OddsState} from './states/odds.state';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ConnectionProblemComponent } from './components/connection-problem/connection-problem.component';
+import {ConnectionProblemComponent} from './components/connection-problem/connection-problem.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { ErrorNotificationComponent } from './components/error-notification/error-notification.component';
-import { PersonConnectionSnackBarComponent } from './components/person-connection-snack-bar/person-connection-snack-bar.component';
-import { FrontPageLogoComponent } from './components/front-page-logo/front-page-logo.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { DotComponent } from './components/dot/dot.component';
-import { CountdownComponent } from './components/countdown/countdown.component';
+import {ErrorNotificationComponent} from './components/error-notification/error-notification.component';
+import {PersonConnectionSnackBarComponent} from './components/person-connection-snack-bar/person-connection-snack-bar.component';
+import {FrontPageLogoComponent} from './components/front-page-logo/front-page-logo.component';
+import {NavBarComponent} from './components/nav-bar/nav-bar.component';
+import {DotComponent} from './components/dot/dot.component';
+import {CountdownComponent} from './components/countdown/countdown.component';
 
 @NgModule({
   declarations: [
