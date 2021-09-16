@@ -192,6 +192,9 @@ export class CategoryService {
   }
 
   getCategorySubtitle(category: Category): string {
+    if (!!category.sub_name) {
+      return category.sub_name;
+    }
     const parts = category.name.split(' (');
     if (parts.length > 1) {
       return parts[1].replace(')', '');
