@@ -66,7 +66,7 @@ export class CategoryService {
     if (CategoryService.isSingleLineCategory(category.name)) {
       return undefined;
     } else if (CategoryService.isTitleCategory(category.name)) {
-      return `"${nominee.detail}"`;
+      return !!nominee.detail ? `"${nominee.detail}"` : null;
     } else if (nominee.nominee === nominee.context || !nominee.context) {
       return nominee.detail;
     } else {
