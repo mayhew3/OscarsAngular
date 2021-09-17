@@ -163,7 +163,13 @@ export class NomineesComponent implements OnInit {
   }
 
   getMainLineText(nominee: Nominee, category: Category): string {
-    return CategoryService.isSongCategory(category.name) ? `"${nominee.nominee}"` : nominee.nominee;
+    if (CategoryService.isSongCategory(category.name)) {
+      return `"${nominee.nominee}"`;
+    } else if (CategoryService.isTitleCategory(category.name)) {
+      return `${nominee.nominee} (${nominee.context})`;
+    } else {
+      return nominee.nominee;
+    }
   }
 
   getSubtitleText(nominee: Nominee, category: Category): string {

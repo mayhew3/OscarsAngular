@@ -22,6 +22,7 @@ export class CategoryService {
   static singleLineCategories = ['Best Picture', 'Documentary Feature', 'Documentary Short', 'Short Film (Animated)',
     'Short Film (Live Action)', 'Animated Feature'];
   static songCategories = ['Music (Original Song)'];
+  static titleCategories = ['Writing', 'Directing'];
 
   categories: Observable<Category[]> = this.store.select(state => state.categories).pipe(
     map(model => model.categories),
@@ -57,9 +58,15 @@ export class CategoryService {
     return CategoryService.songCategories.includes(categoryName);
   }
 
+  static isTitleCategory(categoryName: string): boolean {
+    return CategoryService.titleCategories.includes(categoryName);
+  }
+
   static getSubtitleText(category: Category, nominee: Nominee): string {
     if (CategoryService.isSingleLineCategory(category.name)) {
       return undefined;
+    } else if (CategoryService.isTitleCategory(category.name)) {
+      return `"${nominee.detail}"`;
     } else if (nominee.nominee === nominee.context || !nominee.context) {
       return nominee.detail;
     } else {
