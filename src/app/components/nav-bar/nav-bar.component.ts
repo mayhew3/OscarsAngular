@@ -20,4 +20,8 @@ export class NavBarComponent implements OnInit {
     return activeCeremony;
   }
 
+  showPast(): boolean {
+    // @ts-ignore
+    return activeCeremony === 'Oscars';
+  }
 }

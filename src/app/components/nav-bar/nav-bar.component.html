@@ -32,7 +32,7 @@
           </a>
         </li>
         <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async)">
+            *ngIf="(auth.isAuthenticated$ | async) && showPast()">
           <a class="nav-link" routerLink="/history" data-toggle="collapse" data-target=".navbar-collapse.show">
             Past
           </a>
