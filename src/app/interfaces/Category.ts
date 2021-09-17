@@ -10,4 +10,5 @@ export interface Category {
   winners: Winner[];
   start_year?: number;
   end_year?: number;
+  sub_name?: string;
 }

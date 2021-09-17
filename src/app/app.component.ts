@@ -12,6 +12,8 @@ import {ThemePalette} from '@angular/material/core';
 import {Observable} from 'rxjs';
 import {Person} from './interfaces/Person';
 import {ApiService} from './services/api.service';
+import {Title} from '@angular/platform-browser';
+import {activeCeremony} from '../shared/GlobalVars';
 
 @Component({
   selector: 'osc-root',
@@ -31,8 +33,10 @@ export class AppComponent {
               private initSocket: InitSocketService,
               private personService: PersonService,
               private apiService: ApiService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              private titleService: Title) {
     this.initDisconnectPopup();
+    this.titleService.setTitle(activeCeremony);
   }
 
   initDisconnectPopup(): void {

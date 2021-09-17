@@ -7,6 +7,8 @@ export const Category = sequelize.sequelize.define('category', {
   points: Sequelize.INTEGER,
   start_year: Sequelize.INTEGER,
   end_year: Sequelize.INTEGER,
+  ceremony_id: Sequelize.INTEGER,
+  sub_name: Sequelize.TEXT,
 }, {
   freezeTableName: true,
   createdAt: false,

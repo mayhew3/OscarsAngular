@@ -3,6 +3,9 @@ import _ from 'underscore';
 
 export const getCategories = (request, response) => {
   model.Category.findAll({
+    where: {
+      ceremony_id: 2
+    },
     order:
       [
         ['points', 'DESC'],
