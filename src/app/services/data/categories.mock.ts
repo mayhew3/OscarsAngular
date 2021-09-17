@@ -6,1406 +6,1546 @@ export const MockCategoryList: Category[] = [
     "winners": [],
     "nominees": [
       {
-        "category_id": 52,
+        "category_id": 28,
         "year": 2021,
         "context": "ABC",
         "nominee": "Black-ish",
-        "id": 3506
+        "id": 3058
       },
       {
-        "category_id": 52,
+        "category_id": 28,
         "year": 2021,
         "context": "Netflix",
         "nominee": "Cobra Kai",
-        "id": 3507
+        "id": 3059
       },
       {
-        "category_id": 52,
+        "category_id": 28,
         "year": 2021,
         "context": "Netflix",
         "nominee": "Emily in Paris",
-        "id": 3508
+        "id": 3060
       },
       {
-        "category_id": 52,
+        "category_id": 28,
         "year": 2021,
         "context": "HBO Max",
         "nominee": "The Flight Attendant",
-        "id": 3509
+        "id": 3061
       },
       {
-        "category_id": 52,
+        "odds_expert": 2,
+        "category_id": 28,
         "year": 2021,
         "context": "HBO Max",
         "nominee": "Hacks",
-        "id": 3510
+        "odds_user": 14,
+        "id": 3062
       },
       {
-        "category_id": 52,
+        "category_id": 28,
         "year": 2021,
         "context": "Netflix",
         "nominee": "The Kominsky Method",
-        "id": 3511
+        "id": 3063
       },
       {
-        "category_id": 52,
+        "category_id": 28,
         "year": 2021,
         "context": "Hulu",
         "nominee": "Pen15",
-        "id": 3512
+        "odds_user": 5,
+        "id": 3064
       },
       {
-        "category_id": 52,
+        "odds_expert": 98,
+        "category_id": 28,
         "year": 2021,
         "context": "Apple TV+",
         "nominee": "Ted Lasso",
-        "id": 3513
+        "odds_user": 72,
+        "id": 3065
       }
     ],
     "name": "Comedy",
-    "id": 52,
+    "id": 28,
     "points": 5
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 58,
+        "category_id": 34,
         "year": 2021,
         "context": "Prime Video",
         "nominee": "The Boys",
-        "id": 3539
+        "odds_user": 13,
+        "id": 3091
       },
       {
-        "category_id": 58,
+        "category_id": 34,
         "year": 2021,
         "context": "Netflix",
         "nominee": "Bridgerton",
-        "id": 3540
+        "id": 3092
       },
       {
-        "category_id": 58,
+        "odds_expert": 91,
+        "category_id": 34,
         "year": 2021,
         "context": "Netflix",
         "nominee": "The Crown",
-        "id": 3541
+        "odds_user": 54,
+        "id": 3093
       },
       {
-        "category_id": 58,
+        "category_id": 34,
         "year": 2021,
         "context": "Hulu",
         "nominee": "The Handmaid\u2019s Tale",
-        "id": 3542
+        "id": 3094
       },
       {
-        "category_id": 58,
+        "category_id": 34,
         "year": 2021,
         "context": "HBO",
         "nominee": "Lovecraft Country",
-        "id": 3543
+        "id": 3095
       },
       {
-        "category_id": 58,
+        "category_id": 34,
         "year": 2021,
         "context": "Disney+",
         "nominee": "The Mandalorian",
-        "id": 3544
+        "odds_user": 12,
+        "id": 3096
       },
       {
-        "category_id": 58,
+        "category_id": 34,
         "year": 2021,
         "context": "FX",
         "nominee": "Pose",
-        "id": 3545
+        "id": 3097
       },
       {
-        "category_id": 58,
+        "category_id": 34,
         "year": 2021,
         "context": "NBC",
         "nominee": "This Is Us",
-        "id": 3546
+        "id": 3098
       }
     ],
     "name": "Drama",
-    "id": 58,
+    "id": 34,
     "points": 5
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 65,
+        "odds_expert": 15,
+        "category_id": 41,
         "year": 2021,
         "context": "HBO",
         "nominee": "I May Destroy You",
-        "id": 3652
+        "odds_user": 14,
+        "id": 3204
       },
       {
-        "category_id": 65,
+        "odds_expert": 29,
+        "category_id": 41,
         "year": 2021,
         "context": "HBO",
         "nominee": "Mare of Easttown",
-        "id": 3653
+        "odds_user": 29,
+        "id": 3205
       },
       {
-        "category_id": 65,
+        "odds_expert": 53,
+        "category_id": 41,
         "year": 2021,
         "context": "Netflix",
         "nominee": "The Queen\u2019s Gambit",
-        "id": 3654
+        "odds_user": 42,
+        "id": 3206
       },
       {
-        "category_id": 65,
+        "category_id": 41,
         "year": 2021,
         "context": "Prime Video",
         "nominee": "The Underground Railroad",
-        "id": 3655
+        "id": 3207
       },
       {
-        "category_id": 65,
+        "category_id": 41,
         "year": 2021,
         "context": "Disney+",
         "nominee": "WandaVision",
-        "id": 3656
+        "id": 3208
       }
     ],
     "name": "Limited or Anthology Series",
-    "id": 65,
+    "id": 41,
     "points": 5
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 59,
+        "category_id": 35,
         "year": 2021,
         "nominee": "Anthony Anderson",
-        "id": 3514,
+        "id": 3066,
         "detail": "Black-ish"
       },
       {
-        "category_id": 59,
+        "category_id": 35,
         "year": 2021,
         "nominee": "Michael Douglas",
-        "id": 3515,
+        "odds_user": 6,
+        "id": 3067,
         "detail": "The Kominsky Method"
       },
       {
-        "category_id": 59,
+        "category_id": 35,
         "year": 2021,
         "nominee": "William H. Macy",
-        "id": 3516,
+        "odds_user": 5,
+        "id": 3068,
         "detail": "Shameless"
       },
       {
-        "category_id": 59,
+        "odds_expert": 100,
+        "category_id": 35,
         "year": 2021,
         "nominee": "Jason Sudeikis",
-        "id": 3517,
+        "odds_user": 85,
+        "id": 3069,
         "detail": "Ted Lasso"
       },
       {
-        "category_id": 59,
+        "category_id": 35,
         "year": 2021,
         "nominee": "Kenan Thompson",
-        "id": 3518,
+        "id": 3070,
         "detail": "Kenan"
       }
     ],
     "sub_name": "Comedy",
     "name": "Lead Actor",
-    "id": 59,
+    "id": 35,
     "points": 4
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 60,
+        "category_id": 36,
         "year": 2021,
         "nominee": "Sterling K. Brown",
-        "id": 3547,
+        "id": 3099,
         "detail": "This Is Us"
       },
       {
-        "category_id": 60,
+        "category_id": 36,
         "year": 2021,
         "nominee": "Jonathan Majors",
-        "id": 3548,
+        "odds_user": 14,
+        "id": 3100,
         "detail": "Lovecraft Country"
       },
       {
-        "category_id": 60,
+        "odds_expert": 49,
+        "category_id": 36,
         "year": 2021,
         "nominee": "Josh O\u2019Connor",
-        "id": 3549,
+        "odds_user": 39,
+        "id": 3101,
         "detail": "The Crown"
       },
       {
-        "category_id": 60,
+        "category_id": 36,
         "year": 2021,
         "nominee": "Regé-Jean Page",
-        "id": 3550,
+        "id": 3102,
         "detail": "Bridgerton"
       },
       {
-        "category_id": 60,
+        "odds_expert": 47,
+        "category_id": 36,
         "year": 2021,
         "nominee": "Billy Porter",
-        "id": 3551,
+        "odds_user": 19,
+        "id": 3103,
         "detail": "Pose"
       },
       {
-        "category_id": 60,
+        "category_id": 36,
         "year": 2021,
         "nominee": "Matthew Rhys",
-        "id": 3552,
+        "id": 3104,
         "detail": "Perry Mason"
       }
     ],
     "sub_name": "Drama",
     "name": "Lead Actor",
-    "id": 60,
+    "id": 36,
     "points": 4
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 61,
+        "odds_expert": 54,
+        "category_id": 37,
         "year": 2021,
         "nominee": "Paul Bettany",
-        "id": 3635,
+        "odds_user": 34,
+        "id": 3187,
         "detail": "WandaVision"
       },
       {
-        "category_id": 61,
+        "odds_expert": 32,
+        "category_id": 37,
         "year": 2021,
         "nominee": "Hugh Grant",
-        "id": 3636,
+        "odds_user": 21,
+        "id": 3188,
         "detail": "The Undoing"
       },
       {
-        "category_id": 61,
+        "category_id": 37,
         "year": 2021,
         "nominee": "Ewan McGregor",
-        "id": 3637,
+        "id": 3189,
         "detail": "Halston"
       },
       {
-        "category_id": 61,
+        "category_id": 37,
         "year": 2021,
         "nominee": "Lin-Manuel Miranda",
-        "id": 3638,
+        "odds_user": 20,
+        "id": 3190,
         "detail": "Hamilton"
       },
       {
-        "category_id": 61,
+        "category_id": 37,
         "year": 2021,
         "nominee": "Leslie Odom Jr.",
-        "id": 3639,
+        "id": 3191,
         "detail": "Hamilton"
       }
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Lead Actor",
-    "id": 61,
+    "id": 37,
     "points": 4
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 62,
+        "category_id": 38,
         "year": 2021,
         "nominee": "Aidy Bryant",
-        "id": 3519,
+        "id": 3071,
         "detail": "Shrill"
       },
       {
-        "category_id": 62,
+        "odds_expert": 4,
+        "category_id": 38,
         "year": 2021,
         "nominee": "Kaley Cuoco",
-        "id": 3520,
+        "odds_user": 23,
+        "id": 3072,
         "detail": "The Flight Attendant"
       },
       {
-        "category_id": 62,
+        "category_id": 38,
         "year": 2021,
         "nominee": "Allison Janney",
-        "id": 3521,
+        "id": 3073,
         "detail": "Mom"
       },
       {
-        "category_id": 62,
+        "category_id": 38,
         "year": 2021,
         "nominee": "Tracee Ellis Ross",
-        "id": 3522,
+        "odds_user": 7,
+        "id": 3074,
         "detail": "Black-ish"
       },
       {
-        "category_id": 62,
+        "odds_expert": 96,
+        "category_id": 38,
         "year": 2021,
         "nominee": "Jean Smart",
-        "id": 3523,
+        "odds_user": 60,
+        "id": 3075,
         "detail": "Hacks"
       }
     ],
     "sub_name": "Comedy",
     "name": "Lead Actress",
-    "id": 62,
+    "id": 38,
     "points": 4
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 63,
+        "category_id": 39,
         "year": 2021,
         "nominee": "Uzo Aduba",
-        "id": 3553,
+        "id": 3105,
         "detail": "In Treatment"
       },
       {
-        "category_id": 63,
+        "odds_expert": 8,
+        "category_id": 39,
         "year": 2021,
         "nominee": "Olivia Colman",
-        "id": 3554,
+        "odds_user": 29,
+        "id": 3106,
         "detail": "The Crown"
       },
       {
-        "category_id": 63,
+        "odds_expert": 54,
+        "category_id": 39,
         "year": 2021,
         "nominee": "Emma Corrin",
-        "id": 3555,
+        "odds_user": 35,
+        "id": 3107,
         "detail": "The Crown"
       },
       {
-        "category_id": 63,
+        "category_id": 39,
         "year": 2021,
         "nominee": "Elisabeth Moss",
-        "id": 3556,
+        "odds_user": 14,
+        "id": 3108,
         "detail": "The Handmaid\u2019s Tale"
       },
       {
-        "category_id": 63,
+        "odds_expert": 33,
+        "category_id": 39,
         "year": 2021,
         "nominee": "Mj Rodriguez",
-        "id": 3557,
+        "id": 3109,
         "detail": "Pose"
       },
       {
-        "category_id": 63,
+        "category_id": 39,
         "year": 2021,
         "nominee": "Jurnee Smollett",
-        "id": 3558,
+        "id": 3110,
         "detail": "Lovecraft Country"
       }
     ],
     "sub_name": "Drama",
     "name": "Lead Actress",
-    "id": 63,
+    "id": 39,
     "points": 4
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 64,
+        "odds_expert": 8,
+        "category_id": 40,
         "year": 2021,
         "nominee": "Michaela Coel",
-        "id": 3606,
+        "odds_user": 13,
+        "id": 3158,
         "detail": "I May Destroy You"
       },
       {
-        "category_id": 64,
+        "category_id": 40,
         "year": 2021,
         "nominee": "Cynthia Erivo",
-        "id": 3607,
+        "id": 3159,
         "detail": "Genius: Aretha"
       },
       {
-        "category_id": 64,
+        "category_id": 40,
         "year": 2021,
         "nominee": "Elizabeth Olsen",
-        "id": 3608,
+        "id": 3160,
         "detail": "WandaVision"
       },
       {
-        "category_id": 64,
+        "odds_expert": 34,
+        "category_id": 40,
         "year": 2021,
         "nominee": "Anya Taylor-Joy",
-        "id": 3609,
+        "odds_user": 37,
+        "id": 3161,
         "detail": "The Queen\u2019s Gambit"
       },
       {
-        "category_id": 64,
+        "odds_expert": 55,
+        "category_id": 40,
         "year": 2021,
         "nominee": "Kate Winslet",
-        "id": 3610,
+        "odds_user": 37,
+        "id": 3162,
         "detail": "Mare of Easttown"
       }
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Lead Actress",
-    "id": 64,
+    "id": 40,
     "points": 4
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 54,
+        "category_id": 30,
         "year": 2021,
         "context": "CBS",
         "nominee": "B Positive",
-        "id": 3581,
+        "id": 3133,
         "detail": "Pilot"
       },
       {
-        "category_id": 54,
+        "odds_expert": 23,
+        "category_id": 30,
         "year": 2021,
         "context": "HBO Max",
         "nominee": "The Flight Attendant",
-        "id": 3582,
+        "id": 3134,
         "detail": "In Case Of Emergency"
       },
       {
-        "category_id": 54,
+        "odds_expert": 21,
+        "category_id": 30,
         "year": 2021,
         "context": "HBO Max",
         "nominee": "Hacks",
-        "id": 3583,
+        "odds_user": 20,
+        "id": 3135,
         "detail": "There Is No Line \u2013 Pilot"
       },
       {
-        "category_id": 54,
+        "category_id": 30,
         "year": 2021,
         "context": "CBS",
         "nominee": "Mom",
-        "id": 3584,
+        "id": 3136,
         "detail": "Scooby-Doo Checks And Salisbury Steak"
       },
       {
-        "category_id": 54,
+        "odds_expert": 44,
+        "category_id": 30,
         "year": 2021,
         "context": "Apple TV+",
         "nominee": "Ted Lasso",
-        "id": 3585,
+        "odds_user": 26,
+        "id": 3137,
         "detail": "Biscuits"
       },
       {
-        "category_id": 54,
+        "category_id": 30,
         "year": 2021,
         "context": "Apple TV+",
         "nominee": "Ted Lasso",
-        "id": 3586,
+        "id": 3138,
         "detail": "The Hope That Kills You"
       },
       {
-        "category_id": 54,
+        "category_id": 30,
         "year": 2021,
         "context": "Apple TV+",
         "nominee": "Ted Lasso",
-        "id": 3587,
+        "odds_user": 19,
+        "id": 3139,
         "detail": "Make Rebecca Great Again"
       }
     ],
     "sub_name": "Comedy",
     "name": "Directing",
-    "id": 54,
+    "id": 30,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 55,
+        "category_id": 31,
         "year": 2021,
         "context": "Netflix",
         "nominee": "Bridgerton",
-        "id": 3629,
+        "id": 3181,
         "detail": "Diamond Of The First Water"
       },
       {
-        "category_id": 55,
+        "odds_expert": 64,
+        "category_id": 31,
         "year": 2021,
         "context": "Netflix",
         "nominee": "The Crown",
-        "id": 3630,
+        "odds_user": 18,
+        "id": 3182,
         "detail": "Fairytale"
       },
       {
-        "category_id": 55,
+        "odds_expert": 10,
+        "category_id": 31,
         "year": 2021,
         "context": "Netflix",
         "nominee": "The Crown",
-        "id": 3631,
+        "odds_user": 28,
+        "id": 3183,
         "detail": "War"
       },
       {
-        "category_id": 55,
+        "odds_expert": 13,
+        "category_id": 31,
         "year": 2021,
         "context": "Hulu",
         "nominee": "The Handmaid\u2019s Tale",
-        "id": 3632,
+        "id": 3184,
         "detail": "The Wilderness"
       },
       {
-        "category_id": 55,
+        "category_id": 31,
         "year": 2021,
         "context": "Disney+",
         "nominee": "The Mandalorian",
-        "id": 3633,
+        "odds_user": 30,
+        "id": 3185,
         "detail": "Chapter 9: The Marshal"
       },
       {
-        "category_id": 55,
+        "category_id": 31,
         "year": 2021,
         "context": "FX Networks",
         "nominee": "Pose",
-        "id": 3634,
+        "id": 3186,
         "detail": "Series Finale"
       }
     ],
     "sub_name": "Drama",
     "name": "Directing",
-    "id": 55,
+    "id": 31,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 56,
+        "category_id": 32,
         "year": 2021,
         "context": "Disney+",
         "nominee": "Hamilton",
-        "id": 3594
+        "id": 3146
       },
       {
-        "category_id": 56,
+        "category_id": 32,
         "year": 2021,
         "context": "HBO",
         "nominee": "I May Destroy You",
-        "id": 3595,
+        "id": 3147,
         "detail": "Ego Death"
       },
       {
-        "category_id": 56,
+        "category_id": 32,
         "year": 2021,
         "context": "HBO",
         "nominee": "I May Destroy You",
-        "id": 3596,
+        "id": 3148,
         "detail": "Eyes Eyes Eyes Eyes"
       },
       {
-        "category_id": 56,
+        "category_id": 32,
         "year": 2021,
         "context": "HBO",
         "nominee": "Mare Of Easttown",
-        "id": 3597
+        "odds_user": 21,
+        "id": 3149
       },
       {
-        "category_id": 56,
+        "odds_expert": 87,
+        "category_id": 32,
         "year": 2021,
         "context": "Netflix",
         "nominee": "The Queen\u2019s Gambit",
-        "id": 3598
+        "odds_user": 33,
+        "id": 3150
       },
       {
-        "category_id": 56,
+        "category_id": 32,
         "year": 2021,
         "context": "Prime Video",
         "nominee": "The Underground Railroad",
-        "id": 3599
+        "id": 3151
       },
       {
-        "category_id": 56,
+        "category_id": 32,
         "year": 2021,
         "context": "Disney+",
         "nominee": "WandaVision",
-        "id": 3600
+        "odds_user": 15,
+        "id": 3152
       }
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Directing",
-    "id": 56,
+    "id": 32,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 66,
+        "category_id": 42,
         "year": 2021,
         "nominee": "Carl Clemons-Hopkins",
-        "id": 3524,
+        "id": 3076,
         "detail": "Hacks"
       },
       {
-        "category_id": 66,
+        "odds_expert": 42,
+        "category_id": 42,
         "year": 2021,
         "nominee": "Brett Goldstein",
-        "id": 3525,
+        "odds_user": 29,
+        "id": 3077,
         "detail": "Ted Lasso"
       },
       {
-        "category_id": 66,
+        "category_id": 42,
         "year": 2021,
         "nominee": "Brendan Hunt",
-        "id": 3526,
+        "id": 3078,
         "detail": "Ted Lasso"
       },
       {
-        "category_id": 66,
+        "category_id": 42,
         "year": 2021,
         "nominee": "Nick Mohammed",
-        "id": 3527,
+        "id": 3079,
         "detail": "Ted Lasso"
       },
       {
-        "category_id": 66,
+        "category_id": 42,
         "year": 2021,
         "nominee": "Paul Reiser",
-        "id": 3528,
+        "id": 3080,
         "detail": "The Kominsky Method"
       },
       {
-        "category_id": 66,
+        "category_id": 42,
         "year": 2021,
         "nominee": "Jeremy Swift",
-        "id": 3529,
+        "id": 3081,
         "detail": "Ted Lasso"
       },
       {
-        "category_id": 66,
+        "odds_expert": 35,
+        "category_id": 42,
         "year": 2021,
         "nominee": "Kenan Thompson",
-        "id": 3530,
+        "odds_user": 19,
+        "id": 3082,
         "detail": "Saturday Night Live"
       },
       {
-        "category_id": 66,
+        "odds_expert": 16,
+        "category_id": 42,
         "year": 2021,
         "nominee": "Bowen Yang",
-        "id": 3531,
+        "odds_user": 13,
+        "id": 3083,
         "detail": "Saturday Night Live"
       }
     ],
     "sub_name": "Comedy",
     "name": "Supporting Actor",
-    "id": 66,
+    "id": 42,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 67,
+        "odds_expert": 7,
+        "category_id": 43,
         "year": 2021,
         "nominee": "Giancarlo Esposito",
-        "id": 3559,
+        "odds_user": 20,
+        "id": 3111,
         "detail": "The Mandalorian"
       },
       {
-        "category_id": 67,
+        "category_id": 43,
         "year": 2021,
         "nominee": "O-T Fagbenle",
-        "id": 3560,
+        "id": 3112,
         "detail": "The Handmaid\u2019s Tale"
       },
       {
-        "category_id": 67,
+        "category_id": 43,
         "year": 2021,
         "nominee": "John Lithgow",
-        "id": 3561,
+        "id": 3113,
         "detail": "Perry Mason"
       },
       {
-        "category_id": 67,
+        "odds_expert": 7,
+        "category_id": 43,
         "year": 2021,
         "nominee": "Tobias Menzies",
-        "id": 3562,
+        "odds_user": 20,
+        "id": 3114,
         "detail": "The Crown"
       },
       {
-        "category_id": 67,
+        "category_id": 43,
         "year": 2021,
         "nominee": "Max Minghella",
-        "id": 3563,
+        "id": 3115,
         "detail": "The Handmaid\u2019s Tale"
       },
       {
-        "category_id": 67,
+        "category_id": 43,
         "year": 2021,
         "nominee": "Chris Sullivan",
-        "id": 3564,
+        "id": 3116,
         "detail": "This Is Us"
       },
       {
-        "category_id": 67,
+        "category_id": 43,
         "year": 2021,
         "nominee": "Bradley Whitford",
-        "id": 3565,
+        "id": 3117,
         "detail": "The Handmaid\u2019s Tale"
       },
       {
-        "category_id": 67,
+        "odds_expert": 84,
+        "category_id": 43,
         "year": 2021,
         "nominee": "Michael K. Williams",
-        "id": 3566,
+        "odds_user": 32,
+        "id": 3118,
         "detail": "Lovecraft Country"
       }
     ],
     "sub_name": "Drama",
     "name": "Supporting Actor",
-    "id": 67,
+    "id": 43,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 68,
+        "category_id": 44,
         "year": 2021,
         "nominee": "Thomas Brodie Sangster",
-        "id": 3611,
+        "odds_user": 18,
+        "id": 3163,
         "detail": "The Queen\u2019s Gambit"
       },
       {
-        "category_id": 68,
+        "category_id": 44,
         "year": 2021,
         "nominee": "Daveed Diggs",
-        "id": 3612,
+        "odds_user": 16,
+        "id": 3164,
         "detail": "Hamilton"
       },
       {
-        "category_id": 68,
+        "category_id": 44,
         "year": 2021,
         "nominee": "Paapa Essiedu",
-        "id": 3613,
+        "id": 3165,
         "detail": "I May Destroy You"
       },
       {
-        "category_id": 68,
+        "category_id": 44,
         "year": 2021,
         "nominee": "Jonathan Groff",
-        "id": 3614,
+        "id": 3166,
         "detail": "Hamilton"
       },
       {
-        "category_id": 68,
+        "odds_expert": 82,
+        "category_id": 44,
         "year": 2021,
         "nominee": "Evan Peters",
-        "id": 3615,
+        "odds_user": 44,
+        "id": 3167,
         "detail": "Mare Of Easttown"
       },
       {
-        "category_id": 68,
+        "category_id": 44,
         "year": 2021,
         "nominee": "Anthony Ramos",
-        "id": 3616,
+        "id": 3168,
         "detail": "Hamilton"
       }
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Supporting Actor",
-    "id": 68,
+    "id": 44,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 69,
+        "category_id": 45,
         "year": 2021,
         "nominee": "Aidy Bryant",
-        "id": 3532,
+        "id": 3084,
         "detail": "Saturday Night Live"
       },
       {
-        "category_id": 69,
+        "odds_expert": 9,
+        "category_id": 45,
         "year": 2021,
         "nominee": "Hannah Einbinder",
-        "id": 3533,
+        "odds_user": 16,
+        "id": 3085,
         "detail": "Hacks"
       },
       {
-        "category_id": 69,
+        "category_id": 45,
         "year": 2021,
         "nominee": "Kate McKinnon",
-        "id": 3534,
+        "id": 3086,
         "detail": "Saturday Night Live"
       },
       {
-        "category_id": 69,
+        "category_id": 45,
         "year": 2021,
         "nominee": "Rosie Perez",
-        "id": 3535,
+        "id": 3087,
         "detail": "The Flight Attendant"
       },
       {
-        "category_id": 69,
+        "category_id": 45,
         "year": 2021,
         "nominee": "Cecily Strong",
-        "id": 3536,
+        "id": 3088,
         "detail": "Saturday Night Live"
       },
       {
-        "category_id": 69,
+        "category_id": 45,
         "year": 2021,
         "nominee": "Juno Temple",
-        "id": 3537,
+        "odds_user": 20,
+        "id": 3089,
         "detail": "Ted Lasso"
       },
       {
-        "category_id": 69,
+        "odds_expert": 91,
+        "category_id": 45,
         "year": 2021,
         "nominee": "Hannah Waddingham",
-        "id": 3538,
+        "odds_user": 37,
+        "id": 3090,
         "detail": "Ted Lasso"
       }
     ],
     "sub_name": "Comedy",
     "name": "Supporting Actress",
-    "id": 69,
+    "id": 45,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 70,
+        "odds_expert": 96,
+        "category_id": 46,
         "year": 2021,
         "nominee": "Gillian Anderson",
-        "id": 3567,
+        "odds_user": 62,
+        "id": 3119,
         "detail": "The Crown"
       },
       {
-        "category_id": 70,
+        "category_id": 46,
         "year": 2021,
         "nominee": "Helena Bonham Carter",
-        "id": 3568,
+        "odds_user": 11,
+        "id": 3120,
         "detail": "The Crown"
       },
       {
-        "category_id": 70,
+        "category_id": 46,
         "year": 2021,
         "nominee": "Madeline Brewer",
-        "id": 3569,
+        "id": 3121,
         "detail": "The Handmaid\u2019s Tale"
       },
       {
-        "category_id": 70,
+        "category_id": 46,
         "year": 2021,
         "nominee": "Ann Dowd",
-        "id": 3570,
+        "id": 3122,
         "detail": "The Handmaid\u2019s Tale"
       },
       {
-        "category_id": 70,
+        "odds_expert": 4,
+        "category_id": 46,
         "year": 2021,
         "nominee": "Aunjanue Ellis",
-        "id": 3571,
+        "id": 3123,
         "detail": "Lovecraft Country"
       },
       {
-        "category_id": 70,
+        "category_id": 46,
         "year": 2021,
         "nominee": "Emerald Fennell",
-        "id": 3572,
+        "id": 3124,
         "detail": "The Crown"
       },
       {
-        "category_id": 70,
+        "category_id": 46,
         "year": 2021,
         "nominee": "Yvonne Strahovski",
-        "id": 3573,
+        "odds_user": 7,
+        "id": 3125,
         "detail": "The Handmaid\u2019s Tale"
       },
       {
-        "category_id": 70,
+        "category_id": 46,
         "year": 2021,
         "nominee": "Samira Wiley",
-        "id": 3574,
+        "id": 3126,
         "detail": "The Handmaid\u2019s Tale"
       }
     ],
     "sub_name": "Drama",
     "name": "Supporting Actress",
-    "id": 70,
+    "id": 46,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 71,
+        "category_id": 47,
         "year": 2021,
         "nominee": "Renée Elise Goldsberry",
-        "id": 3657,
+        "id": 3209,
         "detail": "Hamilton"
       },
       {
-        "category_id": 71,
+        "odds_expert": 71,
+        "category_id": 47,
         "year": 2021,
         "nominee": "Kathryn Hahn",
-        "id": 3658,
+        "odds_user": 42,
+        "id": 3210,
         "detail": "WandaVision"
       },
       {
-        "category_id": 71,
+        "category_id": 47,
         "year": 2021,
         "nominee": "Moses Ingram",
-        "id": 3659,
+        "id": 3211,
         "detail": "The Queen\u2019s Gambit"
       },
       {
-        "category_id": 71,
+        "odds_expert": 26,
+        "category_id": 47,
         "year": 2021,
         "nominee": "Julianne Nicholson",
-        "id": 3660,
+        "odds_user": 15,
+        "id": 3212,
         "detail": "Mare Of Easttown"
       },
       {
-        "category_id": 71,
+        "odds_expert": 3,
+        "category_id": 47,
         "year": 2021,
         "nominee": "Jean Smart",
-        "id": 3661,
+        "odds_user": 23,
+        "id": 3213,
         "detail": "Mare Of Easttown"
       },
       {
-        "category_id": 71,
+        "category_id": 47,
         "year": 2021,
         "nominee": "Phillipa Soo",
-        "id": 3662,
+        "id": 3214,
         "detail": "Hamilton"
       }
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Supporting Actress",
-    "id": 71,
+    "id": 47,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 73,
+        "odds_expert": 20,
+        "category_id": 49,
         "year": 2021,
         "context": "HBO",
         "nominee": "A Black Lady Sketch Show",
-        "id": 3645
+        "id": 3197
       },
       {
-        "category_id": 73,
+        "odds_expert": 80,
+        "category_id": 49,
         "year": 2021,
         "context": "NBC",
         "nominee": "Saturday Night Live",
-        "id": 3646
+        "id": 3198
       }
     ],
     "name": "Variety Sketch Series",
-    "id": 73,
+    "id": 49,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 74,
+        "odds_expert": 6,
+        "category_id": 50,
         "year": 2021,
         "context": "TBS",
         "nominee": "Conan",
-        "id": 3640
+        "odds_user": 23,
+        "id": 3192
       },
       {
-        "category_id": 74,
+        "category_id": 50,
         "year": 2021,
         "context": "Comedy Central",
         "nominee": "The Daily Show With Trevor Noah",
-        "id": 3641
+        "id": 3193
       },
       {
-        "category_id": 74,
+        "category_id": 50,
         "year": 2021,
         "context": "ABC",
         "nominee": "Jimmy Kimmel Live!",
-        "id": 3642
+        "id": 3194
       },
       {
-        "category_id": 74,
+        "odds_expert": 88,
+        "category_id": 50,
         "year": 2021,
         "context": "HBO",
         "nominee": "Last Week Tonight With John Oliver",
-        "id": 3643
+        "odds_user": 50,
+        "id": 3195
       },
       {
-        "category_id": 74,
+        "odds_expert": 6,
+        "category_id": 50,
         "year": 2021,
         "context": "CBS",
         "nominee": "The Late Show With Stephen Colbert",
-        "id": 3644
+        "odds_user": 13,
+        "id": 3196
       }
     ],
     "name": "Variety Talk Series",
-    "id": 74,
+    "id": 50,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 75,
+        "category_id": 51,
         "year": 2021,
         "context": "HBO Max",
         "nominee": "The Flight Attendant",
-        "id": 3575,
+        "id": 3127,
         "detail": "In Case Of Emergency"
       },
       {
-        "category_id": 75,
+        "category_id": 51,
         "year": 2021,
         "context": "Peacock",
         "nominee": "Girls5eva",
-        "id": 3576,
+        "id": 3128,
         "detail": "Pilot"
       },
       {
-        "category_id": 75,
+        "odds_expert": 26,
+        "category_id": 51,
         "year": 2021,
         "context": "HBO Max",
         "nominee": "Hacks",
-        "id": 3577,
+        "odds_user": 19,
+        "id": 3129,
         "detail": "There Is No Line \u2013 Pilot"
       },
       {
-        "category_id": 75,
+        "category_id": 51,
         "year": 2021,
         "context": "Hulu",
         "nominee": "Pen15",
-        "id": 3578,
+        "id": 3130,
         "detail": "Play"
       },
       {
-        "category_id": 75,
+        "odds_expert": 8,
+        "category_id": 51,
         "year": 2021,
         "context": "Apple TV+",
         "nominee": "Ted Lasso",
-        "id": 3579,
+        "odds_user": 36,
+        "id": 3131,
         "detail": "Make Rebecca Great Again"
       },
       {
-        "category_id": 75,
+        "odds_expert": 67,
+        "category_id": 51,
         "year": 2021,
         "context": "Apple TV+",
         "nominee": "Ted Lasso",
-        "id": 3580,
+        "odds_user": 28,
+        "id": 3132,
         "detail": "Pilot"
       }
     ],
     "sub_name": "Comedy",
     "name": "Writing",
-    "id": 75,
+    "id": 51,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 76,
+        "category_id": 52,
         "year": 2021,
         "context": "Prime Video",
         "nominee": "The Boys",
-        "id": 3622,
+        "id": 3174,
         "detail": "What I Know"
       },
       {
-        "category_id": 76,
+        "odds_expert": 82,
+        "category_id": 52,
         "year": 2021,
         "context": "Netflix",
         "nominee": "The Crown",
-        "id": 3623,
+        "odds_user": 39,
+        "id": 3175,
         "detail": "War"
       },
       {
-        "category_id": 76,
+        "category_id": 52,
         "year": 2021,
         "context": "Hulu",
         "nominee": "The Handmaid\u2019s Tale",
-        "id": 3624,
+        "id": 3176,
         "detail": "Home"
       },
       {
-        "category_id": 76,
+        "category_id": 52,
         "year": 2021,
         "context": "HBO",
         "nominee": "Lovecraft Country",
-        "id": 3625,
+        "id": 3177,
         "detail": "Sundown"
       },
       {
-        "category_id": 76,
+        "category_id": 52,
         "year": 2021,
         "context": "Disney+",
         "nominee": "The Mandalorian",
-        "id": 3626,
+        "odds_user": 13,
+        "id": 3178,
         "detail": "Chapter 13: The Jedi"
       },
       {
-        "category_id": 76,
+        "category_id": 52,
         "year": 2021,
         "context": "Disney+",
         "nominee": "The Mandalorian",
-        "id": 3627,
+        "id": 3179,
         "detail": "Chapter 16: The Rescue"
       },
       {
-        "category_id": 76,
+        "odds_expert": 13,
+        "category_id": 52,
         "year": 2021,
         "context": "FX Networks",
         "nominee": "Pose",
-        "id": 3628,
+        "odds_user": 12,
+        "id": 3180,
         "detail": "Series Finale"
       }
     ],
     "sub_name": "Drama",
     "name": "Writing",
-    "id": 76,
+    "id": 52,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 77,
+        "odds_expert": 74,
+        "category_id": 53,
         "year": 2021,
         "context": "HBO",
         "nominee": "I May Destroy You",
-        "id": 3588
+        "odds_user": 34,
+        "id": 3140
       },
       {
-        "category_id": 77,
+        "odds_expert": 10,
+        "category_id": 53,
         "year": 2021,
         "context": "HBO",
         "nominee": "Mare Of Easttown",
-        "id": 3589
+        "odds_user": 22,
+        "id": 3141
       },
       {
-        "category_id": 77,
+        "odds_expert": 16,
+        "category_id": 53,
         "year": 2021,
         "context": "Netflix",
         "nominee": "The Queen\u2019s Gambit",
-        "id": 3590
+        "odds_user": 27,
+        "id": 3142
       },
       {
-        "category_id": 77,
+        "category_id": 53,
         "year": 2021,
         "context": "Disney+",
         "nominee": "WandaVision",
-        "id": 3591,
+        "id": 3143,
         "detail": "All-New Halloween Spooktacular!"
       },
       {
-        "category_id": 77,
+        "category_id": 53,
         "year": 2021,
         "context": "Disney+",
         "nominee": "WandaVision",
-        "id": 3592,
+        "id": 3144,
         "detail": "Filmed Before A Live Studio Audience"
       },
       {
-        "category_id": 77,
+        "category_id": 53,
         "year": 2021,
         "context": "Disney+",
         "nominee": "WandaVision",
-        "id": 3593,
+        "id": 3145,
         "detail": "Previously On"
       }
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Writing",
-    "id": 77,
+    "id": 53,
     "points": 3
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 53,
+        "category_id": 29,
         "year": 2021,
         "context": "CBS",
         "nominee": "The Amazing Race",
-        "id": 3601
+        "odds_user": 13,
+        "id": 3153
       },
       {
-        "category_id": 53,
+        "odds_expert": 6,
+        "category_id": 29,
         "year": 2021,
         "context": "Netflix",
         "nominee": "Nailed It!",
-        "id": 3602
+        "id": 3154
       },
       {
-        "category_id": 53,
+        "odds_expert": 87,
+        "category_id": 29,
         "year": 2021,
         "context": "VH1",
         "nominee": "RuPaul\u2019s Drag Race",
-        "id": 3603
+        "odds_user": 55,
+        "id": 3155
       },
       {
-        "category_id": 53,
+        "category_id": 29,
         "year": 2021,
         "context": "Bravo",
         "nominee": "Top Chef",
-        "id": 3604
+        "odds_user": 12,
+        "id": 3156
       },
       {
-        "category_id": 53,
+        "category_id": 29,
         "year": 2021,
         "context": "NBC",
         "nominee": "The Voice",
-        "id": 3605
+        "id": 3157
       }
     ],
     "name": "Competition Program",
-    "id": 53,
+    "id": 29,
     "points": 2
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 72,
+        "category_id": 55,
         "year": 2021,
         "context": "Netflix",
-        "nominee": "Dolly Parton\u2019s Christmas On The Square",
-        "id": 3663
+        "nominee": "8:46 - Dave Chappelle",
+        "id": 3220
       },
       {
-        "category_id": 72,
+        "category_id": 55,
+        "year": 2021,
+        "context": "HBO Max",
+        "nominee": "A West Wing Special To Benefit When We All Vote",
+        "id": 3221
+      },
+      {
+        "odds_expert": 25,
+        "category_id": 55,
+        "year": 2021,
+        "context": "Netflix",
+        "nominee": "Bo Burnham: Inside",
+        "odds_user": 26,
+        "id": 3222
+      },
+      {
+        "odds_expert": 4,
+        "category_id": 55,
         "year": 2021,
         "context": "HBO",
-        "nominee": "Oslo",
-        "id": 3664
+        "nominee": "David Byrne's American Utopia",
+        "id": 3223
       },
       {
-        "category_id": 72,
+        "category_id": 55,
         "year": 2021,
-        "context": "Lifetime",
-        "nominee": "Robin Roberts Presents: Mahalia",
-        "id": 3665
+        "context": "HBO Max",
+        "nominee": "Friends: The Reunion",
+        "odds_user": 7,
+        "id": 3224
       },
       {
-        "category_id": 72,
+        "odds_expert": 71,
+        "category_id": 55,
         "year": 2021,
-        "context": "Prime Video",
-        "nominee": "Sylvie\u2019s Love",
-        "id": 3666
-      },
-      {
-        "category_id": 72,
-        "year": 2021,
-        "context": "Prime Video",
-        "nominee": "Uncle Frank",
-        "id": 3667
+        "context": "Disney+",
+        "nominee": "Hamilton",
+        "odds_user": 26,
+        "id": 3230
       }
     ],
-    "name": "Television Movie",
-    "id": 72,
+    "sub_name": "Pre-Recorded",
+    "name": "Variety Special",
+    "id": 55,
     "points": 2
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 57,
+        "odds_expert": 67,
+        "category_id": 56,
         "year": 2021,
-        "context": "HBO",
-        "nominee": "Last Week Tonight With John Oliver",
-        "id": 3617,
-        "detail": "Trump & Election Results / F*ck 2020"
+        "context": "Multiple Platforms",
+        "nominee": "Celebrating America - An Inauguration Night Special",
+        "id": 3225
       },
       {
-        "category_id": 57,
+        "category_id": 56,
         "year": 2021,
-        "context": "NBC",
-        "nominee": "Late Night With Seth Meyers",
-        "id": 3618,
-        "detail": "Episode 1085a"
+        "context": "Showtime",
+        "nominee": "Stephen Colbert's Election Night 2020: Democracy's Last Stand Building Back America Great Again Better 2020",
+        "id": 3226
       },
       {
-        "category_id": 57,
+        "category_id": 56,
         "year": 2021,
         "context": "CBS",
-        "nominee": "The Late Show With Stephen Colbert",
-        "id": 3619,
-        "detail": "Live Show Following Capitol Insurrection"
+        "nominee": "The 63rd Annual Grammy Awards",
+        "id": 3227
       },
       {
-        "category_id": 57,
+        "odds_expert": 17,
+        "category_id": 56,
         "year": 2021,
-        "context": "HBO",
-        "nominee": "Real Time With Bill Maher",
-        "id": 3620,
-        "detail": "Episode 1835"
+        "context": "ABC",
+        "nominee": "The Oscars",
+        "id": 3228
       },
       {
-        "category_id": 57,
+        "category_id": 56,
         "year": 2021,
-        "context": "NBC",
-        "nominee": "Saturday Night Live",
-        "id": 3621,
-        "detail": "Host: Dave Chappelle"
+        "context": "CBS",
+        "nominee": "The Pepsi Super Bowl LV Halftime Show Starring The Weeknd",
+        "id": 3229
       }
     ],
-    "sub_name": "Variety Series",
-    "name": "Directing",
-    "id": 57,
+    "sub_name": "Live",
+    "name": "Variety Special",
+    "id": 56,
     "points": 1
   },
   {
     "winners": [],
     "nominees": [
       {
-        "category_id": 78,
+        "category_id": 54,
         "year": 2021,
         "context": "Peacock",
         "nominee": "The Amber Ruffin Show",
-        "id": 3647
+        "id": 3199
       },
       {
-        "category_id": 78,
+        "category_id": 54,
         "year": 2021,
         "context": "HBO",
         "nominee": "A Black Lady Sketch Show",
-        "id": 3648
+        "odds_user": 12,
+        "id": 3200
       },
       {
-        "category_id": 78,
+        "odds_expert": 85,
+        "category_id": 54,
         "year": 2021,
         "context": "HBO",
         "nominee": "Last Week Tonight With John Oliver",
-        "id": 3649
+        "odds_user": 52,
+        "id": 3201
       },
       {
-        "category_id": 78,
+        "category_id": 54,
         "year": 2021,
         "context": "CBS",
         "nominee": "The Late Show With Stephen Colbert",
-        "id": 3650
+        "id": 3202
       },
       {
-        "category_id": 78,
+        "odds_expert": 8,
+        "category_id": 54,
         "year": 2021,
         "context": "NBC",
         "nominee": "Saturday Night Live",
-        "id": 3651
+        "odds_user": 23,
+        "id": 3203
       }
     ],
     "sub_name": "Variety Series",
     "name": "Writing",
-    "id": 78,
+    "id": 54,
     "points": 1
   }
 ];
