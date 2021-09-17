@@ -7,7 +7,7 @@
   <div *ngIf="(apiService.emailVerified$ | async) else loading">
 
     <p>
-      Welcome to the Oscars Prediction Arena for {{getOscarYear() | async}} films, {{(me$ | async)?.first_name}}!
+      Welcome to the {{ceremonyName}} Prediction Arena for {{getCeremonyYear() | async}} {{ceremonyContent}}, {{(me$ | async)?.first_name}}!
     </p>
 
     <p *ngIf="(hasVotesRemaining() | async) && (systemVarsService.canVote() | async)"
@@ -17,18 +17,12 @@
 
     <div *ngIf="(systemVarsService.canVote() | async) && (categoryService.itsOver() | async) === false">
       <p>Live Scoring will be viewable on {{oscarDateFormatted}} your local time, when the ballots will lock.</p>
-      <p><strong>New in 2021:</strong></p>
-      <ul>
-        <li>The Academy Awards have combined the Sound Editing and Sound Mixing categories into the <strong>Sound</strong>
-          category, reducing the number of categories from 24 to 23.</li>
-        <li>Visual site updates</li>
-        <li>Platform and stability updates</li>
-      </ul>
-      <p>And as with last year, your voting screen includes betting odds, expert picks, and metacritic user favorites, as
-        found on <a href="https://www.metacritic.com/feature/picks-for-who-will-win-2021-oscars" target="_blank">Metacritic</a>.</p>
+      <p><strong>New this month! You can vote on the Emmy Awards!</strong></p>
+      <p>And as with the Oscars, your voting screen includes expert picks and metacritic user favorites, as
+        found on <a href="{{ceremonyOddsUrl}}" target="_blank">Metacritic</a>.</p>
 
       <div class="text-center">
-        Oscars Start in:
+        {{ceremonyName}} Start in:
         <osc-countdown [dDay]="oscarDate"></osc-countdown>
       </div>
 
@@ -40,7 +34,7 @@
 
     <div *ngIf="(categoryService.itsOver() | async) !== false">
       <p>The champagne has been popped, the trophies handed out and our {{winnerPhrase}} decided!</p>
-      <p>Congrats to <span class="winnerHighlight">{{winnersString}}</span> for winning the Prediction Arena for the {{getOscarYear() | async}} films!
+      <p>Congrats to <span class="winnerHighlight">{{winnersString}}</span> for winning the Prediction Arena for the {{getCeremonyYear() | async}} films!
       <span *ngIf="showWinnerDetail()">They got <span class="winnerHighlight">{{singleFirstPlaceNumCorrectVotes | async}}</span> correct out of <span class="winnerHighlight">{{singleFirstPlaceNumVotes | async}}</span>.</span>
       </p>
     </div>

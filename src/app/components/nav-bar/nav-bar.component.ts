@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {SystemVarsService} from '../../services/system.vars.service';
+import {activeCeremony} from '../../../shared/GlobalVars';
 
 @Component({
   selector: 'osc-nav-bar',
@@ -13,6 +14,10 @@ export class NavBarComponent implements OnInit {
               public systemVarsService: SystemVarsService) { }
 
   ngOnInit(): void {
+  }
+
+  get ceremonyName(): string {
+    return activeCeremony;
   }
 
 }

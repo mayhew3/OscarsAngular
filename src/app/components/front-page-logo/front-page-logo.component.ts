@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
+import {activeCeremony} from '../../../shared/GlobalVars';
 
 @Component({
   selector: 'osc-front-page-logo',
@@ -11,6 +12,10 @@ export class FrontPageLogoComponent implements OnInit {
   constructor(public systemVarsService: SystemVarsService) { }
 
   ngOnInit(): void {
+  }
+
+  get ceremonyName(): string {
+    return activeCeremony;
   }
 
 }

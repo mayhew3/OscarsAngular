@@ -10,7 +10,7 @@ import {Person} from '../../interfaces/Person';
 import {ThemePalette} from '@angular/material/core';
 import {ApiService} from '../../services/api.service';
 import {ScoreboardService} from '../../services/scoreboard.service';
-import {oscarsStart} from '../../../shared/GlobalVars';
+import {activeCeremony, oddsUrl, oscarsStart} from '../../../shared/GlobalVars';
 
 @Component({
   selector: 'osc-home',
@@ -82,7 +82,20 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  getOscarYear(): Observable<number> {
+  get ceremonyName(): string {
+    return activeCeremony;
+  }
+
+  get ceremonyContent(): string {
+    // @ts-ignore
+    return activeCeremony === 'Oscars' ? 'films' : 'shows';
+  }
+
+  get ceremonyOddsUrl(): string {
+    return oddsUrl;
+  }
+
+  getCeremonyYear(): Observable<number> {
     return this.systemVarsService.getCurrentYear();
   }
 
