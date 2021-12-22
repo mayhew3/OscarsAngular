@@ -12,7 +12,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto align-items-end">
+      <ul class="navbar-nav me-auto align-items-end">
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async)">
           <a class="nav-link" routerLink="/" data-bs-toggle="collapse" data-target=".navbar-collapse.show">
@@ -39,7 +39,7 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav navbar-right align-items-end">
+      <ul class="navbar-nav align-items-end">
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async) === false">
           <a class="nav-link" (click)="auth.login()">Login</a>
