@@ -15,6 +15,8 @@ import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
+import {MockCategoryEmmysList} from './data/categories.emmys.mock';
+import {MockVoteEmmysList} from './data/votes.emmys.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +24,9 @@ import {LoggerService} from './logger.service';
 
 export class InMemoryDataService implements InMemoryDbService {
   // eslint-disable-next-line
-  categories = MockCategoryList;
+  categories = MockCategoryEmmysList;
   persons = MockPersonList;
-  votes = MockVoteList;
+  votes = MockVoteEmmysList;
   systemVars = MockSystemVars;
   winners = MockWinnerList;
   events = MockEvents;
