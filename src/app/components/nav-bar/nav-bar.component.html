@@ -7,7 +7,7 @@
            height="auto"
            alt="{{ceremonyName}} Prediction Arena">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -15,25 +15,25 @@
       <ul class="navbar-nav mr-auto align-items-end">
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async)">
-          <a class="nav-link" routerLink="/" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/" data-bs-toggle="collapse" data-target=".navbar-collapse.show">
             Home
           </a>
         </li>
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
-          <a class="nav-link" routerLink="/vote" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/vote" data-bs-toggle="collapse" data-target=".navbar-collapse.show">
             Vote
           </a>
         </li>
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async) === false">
-          <a class="nav-link" routerLink="/scores" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/scores" data-bs-toggle="collapse" data-target=".navbar-collapse.show">
             Scores
           </a>
         </li>
         <li class="nav-item"
             *ngIf="(auth.isAuthenticated$ | async) && showPast()">
-          <a class="nav-link" routerLink="/history" data-toggle="collapse" data-target=".navbar-collapse.show">
+          <a class="nav-link" routerLink="/history" data-bs-toggle="collapse" data-target=".navbar-collapse.show">
             Past
           </a>
         </li>
