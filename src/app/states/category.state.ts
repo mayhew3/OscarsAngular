@@ -84,20 +84,17 @@ export class CategoryState {
   }
 
   @Action(UpdateOdds)
-  updateOdds({getState, setState}: StateContext<CategoryStateModel>, action: UpdateOdds): Observable<any> {
-    return this.api.putAfterFullyConnected('/api/oddsChange', action).pipe(
-      tap(() => {
-        setState(
-          produce(draft => {
-            _.each(action.changes, change => {
-              const nominee = this.findNomination(draft.categories, change.nomination_id);
-              nominee.odds_expert = change.odds_expert;
-              nominee.odds_user = change.odds_user;
-              nominee.odds_numerator = change.odds_numerator;
-              nominee.odds_denominator = change.odds_denominator;
-            });
-          })
-        );
+  async updateOdds({getState, setState}: StateContext<CategoryStateModel>, action: UpdateOdds): Promise<any> {
+    await this.api.putAfterFullyConnected('/api/oddsChange', action);
+    setState(
+      produce(draft => {
+        _.each(action.changes, change => {
+          const nominee = this.findNomination(draft.categories, change.nomination_id);
+          nominee.odds_expert = change.odds_expert;
+          nominee.odds_user = change.odds_user;
+          nominee.odds_numerator = change.odds_numerator;
+          nominee.odds_denominator = change.odds_denominator;
+        });
       })
     );
   }

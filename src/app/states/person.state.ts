@@ -43,19 +43,16 @@ export class PersonState {
   }
 
   @Action(ChangeOddsView)
-  changeOddsView({getState, setState}: StateContext<PersonStateModel>, action: ChangeOddsView): Observable<any> {
+  async changeOddsView({getState, setState}: StateContext<PersonStateModel>, action: ChangeOddsView): Promise<any> {
     const data = {
       id: action.person_id,
       odds_filter: action.odds_filter
     };
-    return this.api.putAfterFullyConnected<any>('/api/persons', data).pipe(
-      tap(() => {
-        setState(
-          produce(draft => {
-            const existing = _.findWhere(draft.persons, {id: action.person_id});
-            existing.odds_filter = action.odds_filter;
-          })
-        );
+    await this.api.putAfterFullyConnected<any>('/api/persons', data);
+    setState(
+      produce(draft => {
+        const existing = _.findWhere(draft.persons, {id: action.person_id});
+        existing.odds_filter = action.odds_filter;
       })
     );
   }

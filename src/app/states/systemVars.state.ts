@@ -90,19 +90,16 @@ export class SystemVarsState {
   }
 
   @Action(ChangeCurrentYear)
-  changeCurrentYear({getState, setState}: StateContext<SystemVarsStateModel>, action: ChangeCurrentYear): Observable<any> {
+  async changeCurrentYear({getState, setState}: StateContext<SystemVarsStateModel>, action: ChangeCurrentYear): Promise<any> {
     const state = getState();
     const data = {
       id: state.systemVars.id,
       curr_year: action.year
     };
-    return this.api.putAfterFullyConnected(this.apiUrl, data).pipe(
-      tap(() => {
-        setState(
-          produce(draft => {
-            draft.systemVars.curr_year = action.year;
-          })
-        );
+    await this.api.putAfterFullyConnected(this.apiUrl, data);
+    setState(
+      produce(draft => {
+        draft.systemVars.curr_year = action.year;
       })
     );
   }

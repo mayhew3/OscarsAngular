@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {BehaviorSubject, combineLatest, firstValueFrom, Observable} from 'rxjs';
 import {MyAuthService} from './auth/my-auth.service';
 import {SocketService} from './socket.service';
-import {catchError, distinctUntilChanged, filter, first, mergeMap} from 'rxjs/operators';
+import {catchError, distinctUntilChanged, filter, mergeMap} from 'rxjs/operators';
 import {ErrorNotificationService} from './error-notification.service';
 import {Person} from '../interfaces/Person';
 
@@ -21,12 +21,21 @@ export class ApiService {
 
   // REGISTER AUTHENTICATION
 
-  meChanged(person: Person): void {
-    this.emailVerifiedSubject.next(!!person);
-  }
-
   get emailVerified$(): Observable<boolean> {
     return this.emailVerifiedSubject.asObservable();
+  }
+
+  private get connectedToAll$(): Observable<[boolean, boolean]> {
+    return combineLatest([
+      this.emailVerified$.pipe(distinctUntilChanged()),
+      this.socket.isConnected$.pipe(distinctUntilChanged())
+    ]).pipe(
+      filter(([isAuthenticated, isConnected]) => !!isAuthenticated && !!isConnected)
+    );
+  }
+
+  meChanged(person: Person): void {
+    this.emailVerifiedSubject.next(!!person);
   }
 
   // GET
@@ -45,41 +54,35 @@ export class ApiService {
 
   // PUT
 
-  putAfterFullyConnected<T>(url: string, body: any): Observable<any> {
-    return this.connectedToAll$.pipe(
-      first(),
-      mergeMap(() => this.putWithError(url, body))
-    );
+  async putAfterFullyConnected<T>(url: string, body: any): Promise<any> {
+    await this.waitForConnectedToAll();
+    return this.putWithError(url, body);
   }
 
-  executePutAfterFullyConnected<T>(url: string, body: any): void {
-    this.putAfterFullyConnected(url, body).subscribe();
+  async executePutAfterFullyConnected<T>(url: string, body: any): Promise<void> {
+    await this.putAfterFullyConnected(url, body);
   }
 
   // POST
 
-  postAfterFullyConnected<T>(url: string, body: any): Observable<any> {
-    return this.connectedToAll$.pipe(
-      first(),
-      mergeMap(() => this.postWithError(url, body))
-    );
+  async postAfterFullyConnected<T>(url: string, body: any): Promise<any> {
+    await this.waitForConnectedToAll();
+    return this.postWithError(url, body);
   }
 
-  executePostAfterFullyConnected<T>(url: string, body: any): void {
-    this.postAfterFullyConnected(url, body).subscribe();
+  async executePostAfterFullyConnected<T>(url: string, body: any): Promise<void> {
+    await this.postAfterFullyConnected(url, body);
   }
 
   // DELETE
 
-  deleteAfterFullyConnected<T>(url: string, id: number): Observable<any> {
-    return this.connectedToAll$.pipe(
-      first(),
-      mergeMap(() => this.deleteWithError(url, id))
-    );
+  async deleteAfterFullyConnected<T>(url: string, id: number): Promise<any> {
+    await this.waitForConnectedToAll();
+    return this.deleteWithError(url, id);
   }
 
-  executeDeleteAfterFullyConnected<T>(url: string, id: number): void {
-    this.deleteAfterFullyConnected(url, id).subscribe();
+  async executeDeleteAfterFullyConnected<T>(url: string, id: number): Promise<void> {
+    await this.deleteAfterFullyConnected(url, id);
   }
 
   /* HELPER METHODS */
@@ -90,43 +93,32 @@ export class ApiService {
     );
   }
 
-  private putWithError<T>(url: string, body: any): Observable<any> {
+  private async putWithError<T>(url: string, body: any): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    return this.http.put<T>(url, body, httpOptions).pipe(
-      catchError(this.errorHandler.handleAPIError())
-    );
+    await firstValueFrom(this.http.put<T>(url, body, httpOptions));
   }
 
-  private postWithError<T>(url: string, body: any): Observable<any> {
+  private async postWithError<T>(url: string, body: any): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    return this.http.post<T>(url, body, httpOptions).pipe(
-      catchError(this.errorHandler.handleAPIError())
-    );
+    await firstValueFrom(this.http.post<T>(url, body, httpOptions));
   }
 
-  private deleteWithError<T>(url: string, id: number): Observable<any> {
+  private async deleteWithError<T>(url: string, id: number): Promise<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    return this.http.delete<T>(`${url}/${id}`, httpOptions).pipe(
-      catchError(this.errorHandler.handleAPIError())
-    );
+    await firstValueFrom(this.http.delete<T>(`${url}/${id}`, httpOptions));
   }
 
-  private get connectedToAll$(): Observable<[boolean, boolean]> {
-    return combineLatest([
-      this.emailVerified$.pipe(distinctUntilChanged()),
-      this.socket.isConnected$.pipe(distinctUntilChanged())
-    ]).pipe(
-      filter(([isAuthenticated, isConnected]) => !!isAuthenticated && !!isConnected)
-    );
+  private waitForConnectedToAll(): Promise<[boolean, boolean]> {
+    return firstValueFrom(this.connectedToAll$);
   }
 
 }
