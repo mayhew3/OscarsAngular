@@ -40,14 +40,14 @@ export class ApiService {
 
   // GET
 
-  async getAfterAuthenticate<T>(url: string, params?: HttpParams): Promise<any> {
+  async getAfterAuthenticate<T>(url: string, params?: HttpParams): Promise<T> {
     await this.waitForAuthentication();
-    return await this.getWithError(url, params);
+    return await this.getWithError<T>(url, params);
   }
 
-  async getAfterFullyConnected<T>(url: string, params?: HttpParams): Promise<any> {
+  async getAfterFullyConnected<T>(url: string, params?: HttpParams): Promise<T> {
     await this.waitForConnectedToAll();
-    return await this.getWithError(url, params);
+    return await this.getWithError<T>(url, params);
   }
 
   // PUT

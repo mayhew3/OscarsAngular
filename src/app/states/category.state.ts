@@ -35,7 +35,7 @@ export class CategoryState {
     const params = new HttpParams()
       .set('person_id', action.person_id.toString())
       .set('year', action.year.toString());
-    const result = await this.api.getAfterFullyConnected<any[]>('/api/categories', params);
+    const result = await this.api.getAfterFullyConnected<Category[]>('/api/categories', params);
     const state = getState();
     _.each(result, (category: Category) => {
       _.each(category.winners, winner => winner.declared = new Date(winner.declared));

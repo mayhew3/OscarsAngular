@@ -43,7 +43,7 @@ export class SystemVarsService {
       id: systemVars.id,
       voting_open: !systemVars.voting_open
     };
-    this.api.executePutAfterFullyConnected(this.systemVarsUrl, data);
+    await this.api.executePutAfterFullyConnected(this.systemVarsUrl, data);
   }
 
   toggleWinners(): void {

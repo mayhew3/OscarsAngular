@@ -41,7 +41,7 @@ export class OddsState {
   async getOdds({setState}: StateContext<OddsStateModel>, action: GetOdds): Promise<any> {
     const params = new HttpParams()
       .set('year', action.year.toString());
-    const result = await this.api.getAfterFullyConnected<any[]>(this.apiUrl, params);
+    const result = await this.api.getAfterFullyConnected<OddsBundle>(this.apiUrl, params);
     setState(produce(draft => {
       draft.previousOddsBundle = draft.oddsBundle;
       draft.oddsBundle = result;

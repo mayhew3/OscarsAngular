@@ -36,7 +36,7 @@ export class SystemVarsState {
 
   @Action(GetSystemVars)
   async getSystemVars({setState}: StateContext<SystemVarsStateModel>): Promise<any> {
-    const result = await this.api.getAfterFullyConnected<any[]>(this.apiUrl);
+    const result = await this.api.getAfterFullyConnected<SystemVars[]>(this.apiUrl);
     setState(
       produce(draft => {
         draft.systemVars = result[0];

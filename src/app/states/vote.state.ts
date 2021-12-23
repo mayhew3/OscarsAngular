@@ -30,7 +30,7 @@ export class VoteState {
   async getVotes({setState}: StateContext<VoteStateModel>, action: GetVotes): Promise<any> {
     const params = new HttpParams()
       .set('year', action.year.toString());
-    const result = await this.api.getAfterFullyConnected<any[]>('/api/votes', params);
+    const result = await this.api.getAfterFullyConnected<Vote[]>('/api/votes', params);
     setState(
       produce( draft => {
         draft.votes = result;
