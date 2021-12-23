@@ -11,7 +11,7 @@ import {ApiService} from './api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService implements OnDestroy {
+export class PersonService {
 
   isAdmin: boolean = null;
   failedEmail = false;
@@ -28,8 +28,6 @@ export class PersonService implements OnDestroy {
     filter(persons => !!persons)
   );
 
-  private destroy$ = new Subject();
-
   constructor(private auth: MyAuthService,
               private store: Store,
               private apiService: ApiService) {
@@ -41,11 +39,6 @@ export class PersonService implements OnDestroy {
   }
 
   // REAL METHODS
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   isMe(person: Person): Observable<boolean> {
     return this.me$.pipe(
