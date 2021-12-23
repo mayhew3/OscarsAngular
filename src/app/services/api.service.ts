@@ -86,7 +86,12 @@ export class ApiService {
   /* HELPER METHODS */
 
   private async getWithError<T>(url: string, params?: HttpParams): Promise<any> {
-    return await firstValueFrom(this.http.get<T>(url, {params}));
+    try {
+      return await firstValueFrom(this.http.get<T>(url, {params}));
+    } catch (err) {
+      this.errorHandler.handleAPIErrorPromise(err);
+      throw err;
+    }
   }
 
   private async putWithError<T>(url: string, body: any): Promise<any> {
@@ -94,7 +99,12 @@ export class ApiService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    await firstValueFrom(this.http.put<T>(url, body, httpOptions));
+    try {
+      await firstValueFrom(this.http.put<T>(url, body, httpOptions));
+    } catch (err) {
+      this.errorHandler.handleAPIErrorPromise(err);
+      throw err;
+    }
   }
 
   private async postWithError<T>(url: string, body: any): Promise<any> {
@@ -102,7 +112,12 @@ export class ApiService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    await firstValueFrom(this.http.post<T>(url, body, httpOptions));
+    try {
+      await firstValueFrom(this.http.post<T>(url, body, httpOptions));
+    } catch (err) {
+      this.errorHandler.handleAPIErrorPromise(err);
+      throw err;
+    }
   }
 
   private async deleteWithError<T>(url: string, id: number): Promise<any> {
@@ -110,7 +125,12 @@ export class ApiService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    await firstValueFrom(this.http.delete<T>(`${url}/${id}`, httpOptions));
+    try {
+      await firstValueFrom(this.http.delete<T>(`${url}/${id}`, httpOptions));
+    } catch (err) {
+      this.errorHandler.handleAPIErrorPromise(err);
+      throw err;
+    }
   }
 
   private waitForConnectedToAll(): Promise<[boolean, boolean]> {

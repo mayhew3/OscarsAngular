@@ -37,11 +37,15 @@ export class ErrorNotificationService {
     }
   }
 
-  handleAPIError<T>(result?: T) {
+  handleAPIError<T>(result?: T): (error: any) => Observable<T> {
     return (error: any): Observable<T> => {
       this.addToMessageQueue('API Error', ErrorNotificationService.getMessage(error));
       return of(result as T);
     };
+  }
+
+  handleAPIErrorPromise<T>(error: any): void {
+    this.addToMessageQueue('API Error', ErrorNotificationService.getMessage(error));
   }
 
   private addToMessageQueue(header: string, message: string): void {
