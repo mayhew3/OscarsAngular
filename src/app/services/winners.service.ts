@@ -13,7 +13,7 @@ export class WinnersService {
 
   constructor(private api: ApiService) { }
 
-  addOrDeleteWinner(nominee: Nominee, category: Category): void {
+  async addOrDeleteWinner(nominee: Nominee, category: Category): Promise<void> {
     const existing = this.existingWinner(nominee, category);
     if (!existing) {
       const data = {
@@ -22,14 +22,14 @@ export class WinnersService {
         nomination_id: nominee.id,
         declared: new Date(),
       };
-      this.api.executePostAfterFullyConnected<Winner>(this.winnersUrl, data);
+      await this.api.executePostAfterFullyConnected<Winner>(this.winnersUrl, data);
     } else {
-      this.api.executeDeleteAfterFullyConnected<Winner>(this.winnersUrl, existing.id);
+      await this.api.executeDeleteAfterFullyConnected<Winner>(this.winnersUrl, existing.id);
     }
   }
 
-  resetWinners(year: number): void {
-    this.api.executePutAfterFullyConnected<Winner>(`/api/resetWinners/`, {year});
+  async resetWinners(year: number): Promise<void> {
+    await this.api.executePutAfterFullyConnected<Winner>(`/api/resetWinners/`, {year});
   }
 
   private existingWinner(nominee: Nominee, category: Category): Winner {

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {distinctUntilChanged, filter, first, map} from 'rxjs/operators';
+import {firstValueFrom, Observable} from 'rxjs';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
 import {ChangeCurrentYear, GetSystemVars, ToggleHideWinnerless, ToggleHideWinners} from '../actions/systemVars.action';
 import {ApiService} from './api.service';
@@ -37,15 +37,13 @@ export class SystemVarsService {
     );
   }
 
-  toggleVotingLock(): void {
-    this.systemVars.pipe(first())
-      .subscribe(systemVars => {
-        const data = {
-          id: systemVars.id,
-          voting_open: !systemVars.voting_open
-        };
-        this.api.executePutAfterFullyConnected(this.systemVarsUrl, data);
-      });
+  async toggleVotingLock(): Promise<void> {
+    const systemVars = await firstValueFrom(this.systemVars);
+    const data = {
+      id: systemVars.id,
+      voting_open: !systemVars.voting_open
+    };
+    await this.api.executePutAfterFullyConnected(this.systemVarsUrl, data);
   }
 
   toggleWinners(): void {

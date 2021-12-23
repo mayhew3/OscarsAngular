@@ -1,6 +1,4 @@
 import {Action, State, StateContext} from '@ngxs/store';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
 import {
@@ -37,20 +35,17 @@ export class SystemVarsState {
   }
 
   @Action(GetSystemVars)
-  getSystemVars({setState}: StateContext<SystemVarsStateModel>): Observable<any> {
-    return this.api.getAfterFullyConnected<any[]>(this.apiUrl).pipe(
-      tap(result => {
-        setState(
-          produce(draft => {
-            draft.systemVars = result[0];
-            draft.systemVars.hide_winners = false;
-            draft.systemVars.hide_winnerless = false;
-          })
-        );
-        this.stateChanges++;
-        this.logger.log('SYSTEMVARS State Change #' + this.stateChanges);
+  async getSystemVars({setState}: StateContext<SystemVarsStateModel>): Promise<any> {
+    const result = await this.api.getAfterFullyConnected<SystemVars[]>(this.apiUrl);
+    setState(
+      produce(draft => {
+        draft.systemVars = result[0];
+        draft.systemVars.hide_winners = false;
+        draft.systemVars.hide_winnerless = false;
       })
     );
+    this.stateChanges++;
+    this.logger.log('SYSTEMVARS State Change #' + this.stateChanges);
   }
 
   @Action(VotingLock)
@@ -90,19 +85,16 @@ export class SystemVarsState {
   }
 
   @Action(ChangeCurrentYear)
-  changeCurrentYear({getState, setState}: StateContext<SystemVarsStateModel>, action: ChangeCurrentYear): Observable<any> {
+  async changeCurrentYear({getState, setState}: StateContext<SystemVarsStateModel>, action: ChangeCurrentYear): Promise<any> {
     const state = getState();
     const data = {
       id: state.systemVars.id,
       curr_year: action.year
     };
-    return this.api.putAfterFullyConnected(this.apiUrl, data).pipe(
-      tap(() => {
-        setState(
-          produce(draft => {
-            draft.systemVars.curr_year = action.year;
-          })
-        );
+    await this.api.putAfterFullyConnected(this.apiUrl, data);
+    setState(
+      produce(draft => {
+        draft.systemVars.curr_year = action.year;
       })
     );
   }

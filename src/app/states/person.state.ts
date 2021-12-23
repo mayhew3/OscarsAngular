@@ -1,7 +1,5 @@
 import {Person} from '../interfaces/Person';
 import {Action, State, StateContext} from '@ngxs/store';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {ChangeOddsView, GetPersons, PersonConnected, PersonDisconnected} from '../actions/person.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
@@ -28,34 +26,28 @@ export class PersonState {
   }
 
   @Action(GetPersons)
-  getPersons({setState}: StateContext<PersonStateModel>): Observable<any> {
-    return this.api.getAfterAuthenticate<Person[]>('/api/persons').pipe(
-      tap((result: Person[]) => {
-        setState(
-          produce(draft => {
-            draft.persons = result;
-          })
-        );
-        this.stateChanges++;
-        this.logger.log('PERSONS State Change #' + this.stateChanges);
+  async getPersons({setState}: StateContext<PersonStateModel>): Promise<any> {
+    const result = await this.api.getAfterAuthenticate<Person[]>('/api/persons');
+    setState(
+      produce(draft => {
+        draft.persons = result;
       })
     );
+    this.stateChanges++;
+    this.logger.log('PERSONS State Change #' + this.stateChanges);
   }
 
   @Action(ChangeOddsView)
-  changeOddsView({getState, setState}: StateContext<PersonStateModel>, action: ChangeOddsView): Observable<any> {
+  async changeOddsView({getState, setState}: StateContext<PersonStateModel>, action: ChangeOddsView): Promise<any> {
     const data = {
       id: action.person_id,
       odds_filter: action.odds_filter
     };
-    return this.api.putAfterFullyConnected<any>('/api/persons', data).pipe(
-      tap(() => {
-        setState(
-          produce(draft => {
-            const existing = _.findWhere(draft.persons, {id: action.person_id});
-            existing.odds_filter = action.odds_filter;
-          })
-        );
+    await this.api.putAfterFullyConnected<any>('/api/persons', data);
+    setState(
+      produce(draft => {
+        const existing = _.findWhere(draft.persons, {id: action.person_id});
+        existing.odds_filter = action.odds_filter;
       })
     );
   }

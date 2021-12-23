@@ -10,8 +10,8 @@ import {Person} from '../../interfaces/Person';
 import {WinnersService} from '../../services/winners.service';
 import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {first, map, mergeMap} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
+import {map, mergeMap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, firstValueFrom, Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {SocketService} from '../../services/socket.service';
 
@@ -64,6 +64,10 @@ export class NomineesComponent implements OnInit {
               private systemVarsService: SystemVarsService,
               private socket: SocketService) { }
 
+  get nomineeGroupList(): NomineeControls[] {
+    return Array.from(this.nomineeGroups.values());
+  }
+
   ngOnInit(): void {
     this.initGroups();
   }
@@ -72,10 +76,6 @@ export class NomineesComponent implements OnInit {
     this.category$.subscribe(category => {
       _.each(category.nominees, n => this.nomineeGroups.set(n.id, new NomineeControls(n)));
     });
-  }
-
-  get nomineeGroupList(): NomineeControls[] {
-    return Array.from(this.nomineeGroups.values());
   }
 
   personsForNominee(nominee: Nominee, category: Category): Observable<Person[]> {
@@ -103,39 +103,37 @@ export class NomineesComponent implements OnInit {
     );
   }
 
-  submitVote(nominee: Nominee): void {
-    this.personService.me$.pipe(first()).subscribe(me => {
-      if (this.votingMode()) {
-        this.processingPick$.next(nominee);
-        this.votesService.addOrUpdateVote(nominee, me);
+  async submitVote(nominee: Nominee): Promise<void> {
+    const me = await firstValueFrom(this.personService.me$);
+    if (this.votingMode()) {
+      this.processingPick$.next(nominee);
+      this.votesService.addOrUpdateVote(nominee, me);
 
-        const voteCallback: () => void = () => {
-          this.processingPick$.next(undefined);
-          this.socket.off('add_vote', voteCallback);
-          this.socket.off('change_vote', voteCallback);
-        };
+      const voteCallback: () => void = () => {
+        this.processingPick$.next(undefined);
+        this.socket.off('add_vote', voteCallback);
+        this.socket.off('change_vote', voteCallback);
+      };
 
-        this.socket.on('add_vote', voteCallback);
-        this.socket.on('change_vote', voteCallback);
-      }
-    });
+      this.socket.on('add_vote', voteCallback);
+      this.socket.on('change_vote', voteCallback);
+    }
   }
 
-  submitWinner(nominee: Nominee, category: Category): void {
-    this.personService.me$.pipe(first()).subscribe(() => {
-      if (this.winnersMode() && this.personService.isAdmin) {
-        this.processingPick$.next(nominee);
-        this.winnersService.addOrDeleteWinner(nominee, category);
+  async submitWinner(nominee: Nominee, category: Category): Promise<void> {
+    await firstValueFrom(this.personService.me$);
+    if (this.winnersMode() && this.personService.isAdmin) {
+      this.processingPick$.next(nominee);
+      this.winnersService.addOrDeleteWinner(nominee, category);
 
-        const winnerCallback: () => void = () => {
-          this.processingPick$.next(undefined);
-          this.socket.off('add_winner', winnerCallback);
-          this.socket.off('remove_winner', winnerCallback);
-        };
-        this.socket.on('add_winner', winnerCallback);
-        this.socket.on('remove_winner', winnerCallback);
-      }
-    });
+      const winnerCallback: () => void = () => {
+        this.processingPick$.next(undefined);
+        this.socket.off('add_winner', winnerCallback);
+        this.socket.off('remove_winner', winnerCallback);
+      };
+      this.socket.on('add_winner', winnerCallback);
+      this.socket.on('remove_winner', winnerCallback);
+    }
   }
 
   getHeaderText(category: Category): string {

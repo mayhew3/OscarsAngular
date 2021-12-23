@@ -1,8 +1,6 @@
 import {Category} from '../interfaces/Category';
 import {Action, State, StateContext} from '@ngxs/store';
 import {HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {AddWinner, GetCategories, RemoveWinner, ResetWinners, UpdateOdds} from '../actions/category.action';
 import {Injectable} from '@angular/core';
 import * as _ from 'underscore';
@@ -33,25 +31,22 @@ export class CategoryState {
   }
 
   @Action(GetCategories)
-  getCategories({getState, setState}: StateContext<CategoryStateModel>, action: GetCategories): Observable<any> {
+  async getCategories({getState, setState}: StateContext<CategoryStateModel>, action: GetCategories): Promise<any> {
     const params = new HttpParams()
       .set('person_id', action.person_id.toString())
       .set('year', action.year.toString());
-    return this.api.getAfterFullyConnected<any[]>('/api/categories', params).pipe(
-      tap(result => {
-        const state = getState();
-        _.each(result, (category: Category) => {
-          _.each(category.winners, winner => winner.declared = new Date(winner.declared));
-        });
-        setState({
-          ...state,
-          categories: result
-        });
-        this.stateChanges++;
+    const result = await this.api.getAfterFullyConnected<Category[]>('/api/categories', params);
+    const state = getState();
+    _.each(result, (category: Category) => {
+      _.each(category.winners, winner => winner.declared = new Date(winner.declared));
+    });
+    setState({
+      ...state,
+      categories: result
+    });
+    this.stateChanges++;
 
-        this.logger.log('CATEGORIES State Change #' + this.stateChanges);
-      })
-    );
+    this.logger.log('CATEGORIES State Change #' + this.stateChanges);
   }
 
   @Action(AddWinner)
@@ -84,20 +79,17 @@ export class CategoryState {
   }
 
   @Action(UpdateOdds)
-  updateOdds({getState, setState}: StateContext<CategoryStateModel>, action: UpdateOdds): Observable<any> {
-    return this.api.putAfterFullyConnected('/api/oddsChange', action).pipe(
-      tap(() => {
-        setState(
-          produce(draft => {
-            _.each(action.changes, change => {
-              const nominee = this.findNomination(draft.categories, change.nomination_id);
-              nominee.odds_expert = change.odds_expert;
-              nominee.odds_user = change.odds_user;
-              nominee.odds_numerator = change.odds_numerator;
-              nominee.odds_denominator = change.odds_denominator;
-            });
-          })
-        );
+  async updateOdds({getState, setState}: StateContext<CategoryStateModel>, action: UpdateOdds): Promise<any> {
+    await this.api.putAfterFullyConnected('/api/oddsChange', action);
+    setState(
+      produce(draft => {
+        _.each(action.changes, change => {
+          const nominee = this.findNomination(draft.categories, change.nomination_id);
+          nominee.odds_expert = change.odds_expert;
+          nominee.odds_user = change.odds_user;
+          nominee.odds_numerator = change.odds_numerator;
+          nominee.odds_denominator = change.odds_denominator;
+        });
       })
     );
   }
