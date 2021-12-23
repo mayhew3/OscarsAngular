@@ -1,7 +1,5 @@
 import {Person} from '../interfaces/Person';
 import {Action, State, StateContext} from '@ngxs/store';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {ChangeOddsView, GetPersons, PersonConnected, PersonDisconnected} from '../actions/person.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
@@ -28,18 +26,15 @@ export class PersonState {
   }
 
   @Action(GetPersons)
-  getPersons({setState}: StateContext<PersonStateModel>): Observable<any> {
-    return this.api.getAfterAuthenticate<Person[]>('/api/persons').pipe(
-      tap((result: Person[]) => {
-        setState(
-          produce(draft => {
-            draft.persons = result;
-          })
-        );
-        this.stateChanges++;
-        this.logger.log('PERSONS State Change #' + this.stateChanges);
+  async getPersons({setState}: StateContext<PersonStateModel>): Promise<any> {
+    const result = await this.api.getAfterAuthenticate<Person[]>('/api/persons');
+    setState(
+      produce(draft => {
+        draft.persons = result;
       })
     );
+    this.stateChanges++;
+    this.logger.log('PERSONS State Change #' + this.stateChanges);
   }
 
   @Action(ChangeOddsView)

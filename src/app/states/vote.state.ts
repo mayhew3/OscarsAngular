@@ -1,8 +1,6 @@
 import {Vote} from '../interfaces/Vote';
 import {Action, State, StateContext} from '@ngxs/store';
 import {HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
@@ -29,21 +27,18 @@ export class VoteState {
   }
 
   @Action(GetVotes)
-  getVotes({setState}: StateContext<VoteStateModel>, action: GetVotes): Observable<any> {
+  async getVotes({setState}: StateContext<VoteStateModel>, action: GetVotes): Promise<any> {
     const params = new HttpParams()
       .set('year', action.year.toString());
-    return this.api.getAfterFullyConnected<any[]>('/api/votes', params).pipe(
-      tap(result => {
-        setState(
-          produce( draft => {
-            draft.votes = result;
-            _.each(draft.votes, vote => vote.date_added = new Date(vote.date_added));
-          })
-        );
-        this.stateChanges++;
-        this.logger.log('VOTES State Change #' + this.stateChanges);
+    const result = await this.api.getAfterFullyConnected<any[]>('/api/votes', params);
+    setState(
+      produce( draft => {
+        draft.votes = result;
+        _.each(draft.votes, vote => vote.date_added = new Date(vote.date_added));
       })
     );
+    this.stateChanges++;
+    this.logger.log('VOTES State Change #' + this.stateChanges);
   }
 
 

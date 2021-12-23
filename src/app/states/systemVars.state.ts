@@ -1,6 +1,4 @@
 import {Action, State, StateContext} from '@ngxs/store';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
 import {
@@ -37,20 +35,17 @@ export class SystemVarsState {
   }
 
   @Action(GetSystemVars)
-  getSystemVars({setState}: StateContext<SystemVarsStateModel>): Observable<any> {
-    return this.api.getAfterFullyConnected<any[]>(this.apiUrl).pipe(
-      tap(result => {
-        setState(
-          produce(draft => {
-            draft.systemVars = result[0];
-            draft.systemVars.hide_winners = false;
-            draft.systemVars.hide_winnerless = false;
-          })
-        );
-        this.stateChanges++;
-        this.logger.log('SYSTEMVARS State Change #' + this.stateChanges);
+  async getSystemVars({setState}: StateContext<SystemVarsStateModel>): Promise<any> {
+    const result = await this.api.getAfterFullyConnected<any[]>(this.apiUrl);
+    setState(
+      produce(draft => {
+        draft.systemVars = result[0];
+        draft.systemVars.hide_winners = false;
+        draft.systemVars.hide_winnerless = false;
       })
     );
+    this.stateChanges++;
+    this.logger.log('SYSTEMVARS State Change #' + this.stateChanges);
   }
 
   @Action(VotingLock)

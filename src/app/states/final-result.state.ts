@@ -1,6 +1,4 @@
 import {Action, State, StateContext} from '@ngxs/store';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {GetFinalResults} from '../actions/final-result.action';
 import {FinalResult} from '../interfaces/FinalResult';
@@ -26,18 +24,15 @@ export class FinalResultState {
   }
 
   @Action(GetFinalResults)
-  getFinalResults({getState, setState}: StateContext<FinalResultStateModel>): Observable<any> {
-    return this.api.getAfterFullyConnected<any[]>('/api/finalResults').pipe(
-      tap(result => {
-        const state = getState();
-        setState({
-          ...state,
-          finalResults: result
-        });
-        this.stateChanges++;
-        this.logger.log('FINALRESULTS State Change #' + this.stateChanges);
-      })
-    );
+  async getFinalResults({getState, setState}: StateContext<FinalResultStateModel>): Promise<any> {
+    const result = await this.api.getAfterFullyConnected<any[]>('/api/finalResults');
+    const state = getState();
+    setState({
+      ...state,
+      finalResults: result
+    });
+    this.stateChanges++;
+    this.logger.log('FINALRESULTS State Change #' + this.stateChanges);
   }
 
 }

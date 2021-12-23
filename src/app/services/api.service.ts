@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, combineLatest, firstValueFrom, Observable} from 'rxjs';
 import {MyAuthService} from './auth/my-auth.service';
 import {SocketService} from './socket.service';
-import {catchError, distinctUntilChanged, filter, mergeMap} from 'rxjs/operators';
+import {distinctUntilChanged, filter} from 'rxjs/operators';
 import {ErrorNotificationService} from './error-notification.service';
 import {Person} from '../interfaces/Person';
 
@@ -40,16 +40,14 @@ export class ApiService {
 
   // GET
 
-  getAfterAuthenticate<T>(url: string, params?: HttpParams): Observable<any> {
-    return this.auth.isPositivelyAuthenticated$.pipe(
-      mergeMap(() => this.getWithError(url, params))
-    );
+  async getAfterAuthenticate<T>(url: string, params?: HttpParams): Promise<any> {
+    await this.waitForAuthentication();
+    return await this.getWithError(url, params);
   }
 
-  getAfterFullyConnected<T>(url: string, params?: HttpParams): Observable<any> {
-    return this.connectedToAll$.pipe(
-      mergeMap(() => this.getWithError(url, params))
-    );
+  async getAfterFullyConnected<T>(url: string, params?: HttpParams): Promise<any> {
+    await this.waitForConnectedToAll();
+    return await this.getWithError(url, params);
   }
 
   // PUT
@@ -87,10 +85,8 @@ export class ApiService {
 
   /* HELPER METHODS */
 
-  private getWithError<T>(url: string, params?: HttpParams): Observable<any> {
-    return this.http.get<T>(url, {params}).pipe(
-      catchError(this.errorHandler.handleAPIError())
-    );
+  private async getWithError<T>(url: string, params?: HttpParams): Promise<any> {
+    return await firstValueFrom(this.http.get<T>(url, {params}));
   }
 
   private async putWithError<T>(url: string, body: any): Promise<any> {
@@ -119,6 +115,10 @@ export class ApiService {
 
   private waitForConnectedToAll(): Promise<[boolean, boolean]> {
     return firstValueFrom(this.connectedToAll$);
+  }
+
+  private waitForAuthentication(): Promise<boolean> {
+    return firstValueFrom(this.auth.isPositivelyAuthenticated$);
   }
 
 }

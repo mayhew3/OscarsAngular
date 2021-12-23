@@ -1,6 +1,4 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {GetOdds, OddsInProgress, UpdatePlayerOdds} from '../actions/odds.action';
 import {OddsBundle} from '../interfaces/OddsBundle';
@@ -40,20 +38,17 @@ export class OddsState {
   }
 
   @Action(GetOdds)
-  getOdds({setState}: StateContext<OddsStateModel>, action: GetOdds): Observable<any> {
+  async getOdds({setState}: StateContext<OddsStateModel>, action: GetOdds): Promise<any> {
     const params = new HttpParams()
       .set('year', action.year.toString());
-    return this.api.getAfterFullyConnected<any[]>(this.apiUrl, params).pipe(
-      tap(result => {
-        setState(produce(draft => {
-          draft.previousOddsBundle = draft.oddsBundle;
-          draft.oddsBundle = result;
-          draft.updating = false;
-        }));
-        this.stateChanges++;
-        this.logger.log('ODDS State Change #' + this.stateChanges);
-      })
-    );
+    const result = await this.api.getAfterFullyConnected<any[]>(this.apiUrl, params);
+    setState(produce(draft => {
+      draft.previousOddsBundle = draft.oddsBundle;
+      draft.oddsBundle = result;
+      draft.updating = false;
+    }));
+    this.stateChanges++;
+    this.logger.log('ODDS State Change #' + this.stateChanges);
   }
 
   @Action(UpdatePlayerOdds)
