@@ -4,7 +4,6 @@ import {GetFinalResults} from '../actions/final-result.action';
 import {FinalResult} from '../interfaces/FinalResult';
 import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
-import {Category} from '../interfaces/Category';
 
 export class FinalResultStateModel {
   finalResults: FinalResult[];

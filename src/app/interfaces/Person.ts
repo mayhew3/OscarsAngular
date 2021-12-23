@@ -7,6 +7,6 @@ export interface Person {
   email: string;
   odds_filter: string;
   groups: number[];
-  connected: boolean;
+  connected?: boolean;
   num_votes?: number;
 }
