@@ -2,6 +2,9 @@
 @import "darkly_variables";
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "darkly_bootswatch";
+/* Importing Datepicker SCSS file. */
+@import "../node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
 
 h1 {
   font-weight: bolder;
