@@ -3,6 +3,8 @@ import {types} from 'util';
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
+// WTF?? TS2510 turns up NOTHING on Google. Can't find any detail on what this means.
+// @ts-ignore
 class CustomDecimal extends (Sequelize.DataTypes.DECIMAL as Sequelize.DataTypes.NumberDataTypeConstructor) {
   static parse(value: string): number {
     return +value;
