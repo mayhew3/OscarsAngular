@@ -1,7 +1,7 @@
 import * as model from './model';
 import _ from 'underscore';
 
-export const getCategories = (request, response) => {
+export const getCategories = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   model.Category.findAll({
     where: {
       ceremony_id: 2
@@ -61,7 +61,7 @@ export const getCategories = (request, response) => {
   });
 };
 
-export const updateNomination = (request, response) => {
+export const updateNomination = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const nomination = request.body;
 
   model.Nomination.findByPk(nomination.id).then(result => {
@@ -77,7 +77,7 @@ export const updateNomination = (request, response) => {
   });
 };
 
-export const getMostRecentYear = async (request, response) => {
+export const getMostRecentYear = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const maxYear = await model.Nomination.max('year');
 
   response.json([{maxYear}]);

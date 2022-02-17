@@ -1,4 +1,5 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {OddsResult} from './OddsResult';
 
 @Entity()
 export class OddsExecution {
@@ -14,5 +15,8 @@ export class OddsExecution {
 
   @Column()
   year: number;
+
+  // non-db fields
+  odds: OddsResult[];
 
 }
