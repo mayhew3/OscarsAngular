@@ -1,16 +1,21 @@
-import * as model from './model';
 import {socketServer} from '../www';
 
-export const getSystemVars = (request, response) => {
-  model.SystemVars.findAll().then(systemVars => response.json(systemVars));
+import {TypeORMManager} from '../typeorm/TypeORMManager';
+import {getRepository} from 'typeorm';
+import {Event} from '../typeorm/Event';
+import {SystemVars} from '../typeorm/SystemVars';
+
+export const getSystemVars = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+  const systemVars = await getRepository(SystemVars).find();
+  response.json(systemVars);
 };
 
-export const updateSystemVars = async (request, response) => {
+export const updateSystemVars = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const systemVar = request.body;
 
   let result;
   try {
-    result = await model.SystemVars.findByPk(systemVar.id);
+    result = await getRepository(SystemVars).findOne(systemVar.id);
   } catch (err) {
     console.error(err);
     response.send({msg: 'Error finding system_var: ' + err});
@@ -28,12 +33,12 @@ export const updateSystemVars = async (request, response) => {
   if (isVotingOpenChanged) {
     const year = result.curr_year;
     const event_time = new Date();
-    const event = await model.Event.create({
+    const event = await TypeORMManager.createAndCommit({
       type: 'voting',
       detail: !!systemVar.voting_open ? 'open' : 'locked',
       event_time,
       year
-    });
+    }, Event);
 
     const msg = {
       event_id: event.id,

@@ -1,23 +1,25 @@
-import * as model from './model';
 import {socketServer} from '../www';
+import {TypeORMManager} from '../typeorm/TypeORMManager';
+import {Winner} from '../typeorm/Winner';
+import {Event} from '../typeorm/Event';
+import {getRepository} from 'typeorm';
 
-export const addWinner = async (request, response) => {
+export const addWinner = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const nomination_id = request.body.nomination_id;
 
   try {
-    const winner = await model.Winner
-      .create(request.body);
+    const winner = await TypeORMManager.createAndCommit(request.body, Winner);
 
     const event_time = winner.declared;
     const year = winner.year;
 
-    const event = await model.Event.create({
+    const event = await TypeORMManager.createAndCommit({
       type: 'winner',
       detail: 'add',
       event_time,
       nomination_id,
       year
-    });
+    }, Event);
 
     const msg = {
       nomination_id,
@@ -36,21 +38,19 @@ export const addWinner = async (request, response) => {
   }
 };
 
-export const resetWinners = async (request, response) => {
+export const resetWinners = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const year = request.body.year;
 
-  await model.Winner.destroy({
-    where: {year}
-  });
+  await getRepository(Winner).delete({year});
 
   const event_time = new Date();
 
-  const event = await model.Event.create({
+  const event = await TypeORMManager.createAndCommit({
     type: 'winner',
     detail: 'reset',
     event_time,
     year
-  });
+  }, Event);
 
   const msg = {
     event_id: event.id,
@@ -62,10 +62,11 @@ export const resetWinners = async (request, response) => {
   response.json({msg: 'Success!'});
 };
 
-export const deleteWinner = async (request, response) => {
+export const deleteWinner = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const winner_id = +request.params.id;
 
-  const winner = await model.Winner.findOne({
+  const winnerRepository = getRepository(Winner);
+  const winner = await winnerRepository.findOne({
     where: {
       id: winner_id
     }
@@ -76,7 +77,7 @@ export const deleteWinner = async (request, response) => {
   const nomination_id = winner.nomination_id;
 
   try {
-    await winner.destroy();
+    await winnerRepository.remove(winner);
   } catch (err) {
     response.send(500, 'Error deleting existing winner!');
     throw new Error(err);
@@ -84,13 +85,13 @@ export const deleteWinner = async (request, response) => {
 
   const event_time = new Date();
 
-  const event = await model.Event.create({
+  const event = await TypeORMManager.createAndCommit({
     type: 'winner',
     detail: 'delete',
     event_time,
     nomination_id,
     year
-  });
+  }, Event);
 
   const msg = {
     nomination_id,
