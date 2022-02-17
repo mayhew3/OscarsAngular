@@ -77,9 +77,9 @@ export const updateNomination = async (request: Record<string, any>, response: R
 export const getMostRecentYear = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const maxYear = await getConnection()
     .createQueryBuilder()
-    .select('MAX(nomination.year)')
-    .from(Nomination, 'nomination')
-    .getOne();
+    .select('MAX(n.year) as my')
+    .from(Nomination, 'n')
+    .getRawOne();
 
-  response.json([{maxYear}]);
+  response.json([{maxYear: maxYear.my}]);
 };

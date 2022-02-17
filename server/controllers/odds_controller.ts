@@ -31,6 +31,7 @@ const handleFirstOdds = async (year: number, response: Record<string, any>): Pro
   }
 };
 
+// todo: remove if unneeded
 const handleOddsForEventID = async (event_id: number, year: number, response: Record<string, any>): Promise<void> => {
 
   const executions = await getConnection()
@@ -55,7 +56,8 @@ const handleOddsForEventID = async (event_id: number, year: number, response: Re
 export const getMostRecentOddsBundle = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const year = +request.query.year;
   if (request.query.event_id) {
-    await handleOddsForEventID(+request.query.event_id, year, response);
+    throw new Error('Unexpected parameter: event_id');
+    // await handleOddsForEventID(+request.query.event_id, year, response);
   } else {
     await handleFirstOdds(year, response);
   }
