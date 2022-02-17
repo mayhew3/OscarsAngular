@@ -1,76 +1,70 @@
-import * as model from './model';
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+import {Nomination} from '../typeorm/Nomination';
+import {getConnection, getRepository, IsNull, Not} from 'typeorm';
+import {OddsExecution} from '../typeorm/OddsExecution';
+import {OddsResult} from '../typeorm/OddsResult';
 
-const attachOddsToExecution = (execution, response) => {
-  model.OddsResult.findAll({
+const attachOddsToExecution = async (execution: OddsExecution, response: Record<string, any>): Promise<void> => {
+  execution.odds = await getRepository(OddsResult).find({
     where: {
       odds_execution_id: execution.id
     }
-  }).then(odds => {
-    execution.dataValues.odds = odds;
-    response.json(execution);
   });
+  response.json(execution);
 };
 
-const handleFirstOdds = (year: number, response: any) => {
-  model.OddsExecution.findAll({
+const handleFirstOdds = async (year: number, response: Record<string, any>): Promise<void> => {
+  const executions = await getRepository(OddsExecution).find({
     where: {
-      time_finished: {
-        [Op.ne]: null
-      },
+      time_finished: Not(IsNull()),
       year
     },
-    limit: 1,
-    order:
-      [
-        ['time_finished', 'DESC']
-      ]
-  }).then(executions => {
-    if (executions.length === 0) {
-      response.json({});
-    } else {
-      attachOddsToExecution(executions[0], response);
+    take: 1,
+    order: {
+      time_finished: 'DESC'
     }
   });
-};
 
-const handleOddsForEventID = (event_id: number, year: number, response) => {
-  model.OddsExecution.findAll({
-    where: {
-      event_id: {
-        [Op.ne]: null,
-        [Op.gte]: event_id
-      },
-      time_finished: {
-        [Op.ne]: null
-      },
-      year
-    },
-    limit: 1,
-    order:
-      [
-        ['event_id', 'DESC']
-      ]
-  }).then(executions => {
-    if (executions.length === 0) {
-      response.json({});
-    } else {
-      attachOddsToExecution(executions[0], response);
-    }
-  });
-};
-
-export const getMostRecentOddsBundle = (request, response) => {
-  const year = +request.query.year;
-  if (request.query.event_id) {
-    handleOddsForEventID(+request.query.event_id, year, response);
+  if (executions.length === 0) {
+    response.json({});
   } else {
-    handleFirstOdds(year, response);
+    await attachOddsToExecution(executions[0], response);
   }
 };
 
-export const updateOddsForNominees = async (request, response) => {
+// todo: remove if unneeded
+// noinspection JSUnusedLocalSymbols
+const handleOddsForEventID = async (event_id: number, year: number, response: Record<string, any>): Promise<void> => {
+
+  const executions = await getConnection()
+    .createQueryBuilder()
+    .select('odds_execution')
+    .from(OddsExecution, 'odds_execution')
+    .where('odds_execution.event_id IS NOT NULL')
+    .andWhere('odds_execution.event_id > :event_id', {event_id})
+    .andWhere('odds_execution.time_finished IS NOT NULL')
+    .andWhere('odds_execution.year = :year', {year})
+    .getMany()
+  ;
+
+  if (executions.length === 0) {
+    response.json({});
+  } else {
+    await attachOddsToExecution(executions[0], response);
+  }
+
+};
+
+export const getMostRecentOddsBundle = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+  const year = +request.query.year;
+  if (request.query.event_id) {
+    throw new Error('Unexpected parameter: event_id');
+    // await handleOddsForEventID(+request.query.event_id, year, response);
+  } else {
+    await handleFirstOdds(year, response);
+  }
+};
+
+export const updateOddsForNominees = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const changes = request.body.changes;
 
   const updates = [];
@@ -78,8 +72,8 @@ export const updateOddsForNominees = async (request, response) => {
   for (const change of changes) {
     const nomination_id = change.nomination_id;
     delete change.nomination_id;
-    const nomination = await model.Nomination.findByPk(nomination_id);
-    updates.push(nomination.update(change));
+    const nominationRepository = getRepository(Nomination);
+    updates.push(nominationRepository.update(nomination_id, change));
   }
 
   Promise.all(updates).then(() => {
