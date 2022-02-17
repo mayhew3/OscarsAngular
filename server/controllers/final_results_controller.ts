@@ -1,22 +1,24 @@
-import * as model from './model';
 import _ from 'underscore';
+import {getRepository} from 'typeorm';
+import {FinalResult} from '../typeorm/FinalResult';
+import {GroupYear} from '../typeorm/GroupYear';
 
 export const getFinalResults = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
-  const finalResults = await model.FinalResult.findAll({
+  const finalResults = await getRepository(FinalResult).find({
     order:
-    [
-      ['group_year_id', 'DESC'],
-      ['score', 'DESC']
-    ]
+      {
+        group_year_id: 'DESC',
+        score: 'DESC'
+      }
   });
 
-  const groupYears = await model.GroupYear.findAll();
+  const groupYears = await getRepository(GroupYear).find();
 
   const outputObject = [];
 
   _.forEach(finalResults, finalResult => {
     const groupYear = _.findWhere(groupYears, {id: finalResult.group_year_id});
-    const result_obj = finalResult.dataValues;
+    const result_obj = JSON.parse(JSON.stringify(finalResult));
 
     delete result_obj.group_year_id;
 

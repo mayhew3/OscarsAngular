@@ -47,7 +47,7 @@ const handleOddsForEventID = async (event_id: number, year: number, response: Re
   if (executions.length === 0) {
     response.json({});
   } else {
-    attachOddsToExecution(executions[0], response);
+    await attachOddsToExecution(executions[0], response);
   }
 
 };
@@ -55,9 +55,9 @@ const handleOddsForEventID = async (event_id: number, year: number, response: Re
 export const getMostRecentOddsBundle = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const year = +request.query.year;
   if (request.query.event_id) {
-    handleOddsForEventID(+request.query.event_id, year, response);
+    await handleOddsForEventID(+request.query.event_id, year, response);
   } else {
-    handleFirstOdds(year, response);
+    await handleFirstOdds(year, response);
   }
 };
 
