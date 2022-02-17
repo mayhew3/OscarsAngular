@@ -32,6 +32,7 @@ const handleFirstOdds = async (year: number, response: Record<string, any>): Pro
 };
 
 // todo: remove if unneeded
+// noinspection JSUnusedLocalSymbols
 const handleOddsForEventID = async (event_id: number, year: number, response: Record<string, any>): Promise<void> => {
 
   const executions = await getConnection()
