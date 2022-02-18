@@ -1,4 +1,5 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {GroupYear} from './GroupYear';
 
 @Entity()
 export class CeremonyYear {
@@ -18,4 +19,5 @@ export class CeremonyYear {
   @Column('timestamptz')
   voting_closed: Date;
 
+  groupYears: GroupYear[];
 }

@@ -1,4 +1,5 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {CeremonyYear} from './CeremonyYear';
 
 @Entity()
 export class Ceremony {
@@ -9,4 +10,5 @@ export class Ceremony {
   @Column()
   name: string;
 
+  ceremonyYears: CeremonyYear[];
 }
