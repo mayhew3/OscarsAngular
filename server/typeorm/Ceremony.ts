@@ -1,18 +1,12 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 
 @Entity()
-export class GroupYear {
+export class Ceremony {
 
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  person_group_id: number;
-
-  @Column()
-  year: number;
-
-  @Column()
-  ceremony_year_id: number;
+  name: string;
 
 }
