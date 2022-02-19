@@ -15,7 +15,7 @@ import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
 import {MockCategoryEmmysList} from './data/categories.emmys.mock';
 import {MockVoteEmmysList} from './data/votes.emmys.mock';
-import {MockCeremonies} from './data/ceremony.years.mock';
+import {MockCeremonies} from './data/ceremonies.mock';
 import {MockPersonGroups} from './data/person.groups.mock';
 
 @Injectable({
