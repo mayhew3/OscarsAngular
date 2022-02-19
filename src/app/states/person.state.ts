@@ -6,15 +6,19 @@ import produce from 'immer';
 import _ from 'underscore';
 import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
+import {PersonGroup} from '../interfaces/PersonGroup';
+import {GetPersonGroups} from '../actions/person.group.action';
 
 export class PersonStateModel {
   persons: Person[];
+  personGroups: PersonGroup[];
 }
 
 @State<PersonStateModel>({
   name: 'persons',
   defaults: {
-    persons: undefined
+    persons: undefined,
+    personGroups: undefined
   }
 })
 @Injectable()
@@ -31,6 +35,18 @@ export class PersonState {
     setState(
       produce(draft => {
         draft.persons = result;
+      })
+    );
+    this.stateChanges++;
+    this.logger.log('PERSONS State Change #' + this.stateChanges);
+  }
+
+  @Action(GetPersonGroups)
+  async getPersonGroups({setState}: StateContext<PersonStateModel>): Promise<any> {
+    const result = await this.api.getAfterAuthenticate<PersonGroup[]>('/api/personGroups');
+    setState(
+      produce(draft => {
+        draft.personGroups = result;
       })
     );
     this.stateChanges++;

@@ -12,6 +12,7 @@ import {ScoreboardService} from '../../services/scoreboard.service';
 import {ScoreData} from '../../interfaces/ScoreData';
 import moment from 'moment';
 import _ from 'underscore';
+import {CeremonyService} from '../../services/ceremony.service';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -33,7 +34,8 @@ export class AdminDashboardComponent implements OnInit {
               private winnersService: WinnersService,
               private socket: SocketService,
               private personService: PersonService,
-              private scoreboardService: ScoreboardService) { }
+              private scoreboardService: ScoreboardService,
+              private ceremonyService: CeremonyService) { }
 
   get isAdmin(): boolean {
     return this.personService.isAdmin;

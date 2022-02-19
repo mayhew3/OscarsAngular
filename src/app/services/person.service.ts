@@ -7,6 +7,8 @@ import {Store} from '@ngxs/store';
 import {ChangeOddsView, GetPersons} from '../actions/person.action';
 import {MyAuthService} from './auth/my-auth.service';
 import {ApiService} from './api.service';
+import {GetPersonGroups} from '../actions/person.group.action';
+import {PersonGroup} from '../interfaces/PersonGroup';
 
 @Injectable({
   providedIn: 'root'
@@ -28,10 +30,17 @@ export class PersonService {
     filter(persons => !!persons)
   );
 
+  personGroups: Observable<PersonGroup[]> = this.store.select(state => state.personGroups).pipe(
+    filter(state => !!state),
+    map(state => state.personGroups),
+    filter(personGroups => !!personGroups)
+  );
+
   constructor(private auth: MyAuthService,
               private store: Store,
               private apiService: ApiService) {
     this.store.dispatch(new GetPersons());
+    this.store.dispatch(new GetPersonGroups());
     this.me$.subscribe(me => {
       this.isAdmin = (me.role === 'admin');
       this.apiService.meChanged(me);

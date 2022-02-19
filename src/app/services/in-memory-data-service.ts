@@ -15,7 +15,8 @@ import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
 import {MockCategoryEmmysList} from './data/categories.emmys.mock';
 import {MockVoteEmmysList} from './data/votes.emmys.mock';
-import {MockCeremonyYears} from './data/ceremony.years.mock';
+import {MockCeremonies} from './data/ceremony.years.mock';
+import {MockPersonGroups} from './data/person.groups.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,8 @@ export class InMemoryDataService implements InMemoryDbService {
   events = MockEvents;
   odds = MockOdds;
   finalResults = MockFinalResultsList;
-  ceremonies = MockCeremonyYears;
+  ceremonies = MockCeremonies;
+  personGroups = MockPersonGroups;
 
   /////////// helpers ///////////////
 
@@ -68,6 +70,7 @@ export class InMemoryDataService implements InMemoryDbService {
       oddsChange: [],
       resetWinners: [],
       ceremonies: this.ceremonies,
+      personGroups: this.personGroups,
     };
   }
 

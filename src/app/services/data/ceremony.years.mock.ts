@@ -1,7 +1,7 @@
 /* eslint-disable */
 import {Ceremony} from '../../interfaces/Ceremony';
 
-export const MockCeremonyYears: Ceremony[] = [
+export const MockCeremonies: Ceremony[] = [
   {
     "ceremonyYears": [
       {

@@ -6,15 +6,16 @@ import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
 import {CeremonyYear} from '../interfaces/CeremonyYear';
 import {GetCeremonyYears} from '../actions/ceremony.action';
+import {Ceremony} from '../interfaces/Ceremony';
 
 export class CeremonyStateModel {
-  ceremonyYears: CeremonyYear[];
+  ceremonies: Ceremony[];
 }
 
 @State<CeremonyStateModel>({
   name: 'ceremonies',
   defaults: {
-    ceremonyYears: undefined
+    ceremonies: undefined
   }
 })
 @Injectable()
@@ -27,16 +28,17 @@ export class CeremonyState {
 
   @Action(GetCeremonyYears)
   async getVotes({setState}: StateContext<CeremonyStateModel>): Promise<any> {
-    const result = await this.api.getAfterFullyConnected<CeremonyYear[]>('/api/ceremonies');
+    const result = await this.api.getAfterFullyConnected<Ceremony[]>('/api/ceremonies');
     setState(
       produce( draft => {
-        draft.ceremonyYears = result;
-        _.each(draft.ceremonyYears, ceremonyYear => {
-          ceremonyYear.date_added = new Date(ceremonyYear.date_added);
-          ceremonyYear.ceremony_date = new Date(ceremonyYear.ceremony_date);
-          if (!!ceremonyYear.voting_closed) {
-            ceremonyYear.voting_closed = new Date(ceremonyYear.voting_closed);
-          }
+        draft.ceremonies = result;
+        _.each(draft.ceremonies, ceremony => {
+          _.each(ceremony.ceremonyYears, ceremonyYear => {
+            ceremonyYear.ceremony_date = new Date(ceremonyYear.ceremony_date);
+            if (!!ceremonyYear.voting_closed) {
+              ceremonyYear.voting_closed = new Date(ceremonyYear.voting_closed);
+            }
+          });
         });
       })
     );
