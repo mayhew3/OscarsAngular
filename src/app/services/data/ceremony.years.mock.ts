@@ -180,43 +180,25 @@ export const MockCeremonies: Ceremony[] = [
         "id": 11
       },
       {
-        "ceremony_date": "2021-04-26T17:00:00",
-        "groupYears": [{
-          "person_group_id": 1,
-          "year": 2020,
-          "ceremony_year_id": 16,
-          "id": 29
-        }],
-        "year": 2020,
-        "voting_closed": "2021-04-26T17:00:00",
+        "ceremony_date": "2017-02-26T17:00:00",
+        "groupYears": [
+          {
+            "person_group_id": 1,
+            "year": 2016,
+            "ceremony_year_id": 12,
+            "id": 23
+          },
+          {
+            "person_group_id": 2,
+            "year": 2016,
+            "ceremony_year_id": 12,
+            "id": 24
+          }
+        ],
+        "year": 2016,
+        "voting_closed": "2017-02-26T17:00:00",
         "ceremony_id": 1,
-        "id": 16
-      },
-      {
-        "ceremony_date": "2020-02-09T17:00:00",
-        "groupYears": [{
-          "person_group_id": 1,
-          "year": 2019,
-          "ceremony_year_id": 15,
-          "id": 28
-        }],
-        "year": 2019,
-        "voting_closed": "2020-02-09T17:00:00",
-        "ceremony_id": 1,
-        "id": 15
-      },
-      {
-        "ceremony_date": "2019-02-24T17:00:00",
-        "groupYears": [{
-          "person_group_id": 1,
-          "year": 2018,
-          "ceremony_year_id": 14,
-          "id": 27
-        }],
-        "year": 2018,
-        "voting_closed": "2019-02-24T17:00:00",
-        "ceremony_id": 1,
-        "id": 14
+        "id": 12
       },
       {
         "ceremony_date": "2018-03-04T17:00:00",
@@ -240,25 +222,43 @@ export const MockCeremonies: Ceremony[] = [
         "id": 13
       },
       {
-        "ceremony_date": "2017-02-26T17:00:00",
-        "groupYears": [
-          {
-            "person_group_id": 1,
-            "year": 2016,
-            "ceremony_year_id": 12,
-            "id": 23
-          },
-          {
-            "person_group_id": 2,
-            "year": 2016,
-            "ceremony_year_id": 12,
-            "id": 24
-          }
-        ],
-        "year": 2016,
-        "voting_closed": "2017-02-26T17:00:00",
+        "ceremony_date": "2019-02-24T17:00:00",
+        "groupYears": [{
+          "person_group_id": 1,
+          "year": 2018,
+          "ceremony_year_id": 14,
+          "id": 27
+        }],
+        "year": 2018,
+        "voting_closed": "2019-02-24T17:00:00",
         "ceremony_id": 1,
-        "id": 12
+        "id": 14
+      },
+      {
+        "ceremony_date": "2020-02-09T17:00:00",
+        "groupYears": [{
+          "person_group_id": 1,
+          "year": 2019,
+          "ceremony_year_id": 15,
+          "id": 28
+        }],
+        "year": 2019,
+        "voting_closed": "2020-02-09T17:00:00",
+        "ceremony_id": 1,
+        "id": 15
+      },
+      {
+        "ceremony_date": "2021-04-26T17:00:00",
+        "groupYears": [{
+          "person_group_id": 1,
+          "year": 2020,
+          "ceremony_year_id": 16,
+          "id": 29
+        }],
+        "year": 2020,
+        "voting_closed": "2021-04-26T17:00:00",
+        "ceremony_id": 1,
+        "id": 16
       }
     ],
     "name": "Oscars",
