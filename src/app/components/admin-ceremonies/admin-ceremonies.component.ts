@@ -25,12 +25,17 @@ export class AdminCeremoniesComponent implements OnInit {
 
   get ceremonyYearsView(): Observable<CeremonyDisplay[]> {
     return this.ceremonyService.ceremonies.pipe(
-      map(ceremonies => _.flatten(_.map(ceremonies, ceremony => _.map(ceremony.ceremonyYears, ceremonyYear => ({
-            year: ceremonyYear.year,
-            ceremonyName: ceremony.name,
-            numGroups: ceremonyYear.groupYears.length
-          })
-      ))))
+      map(ceremonies => _.flatten(_.map(ceremonies, ceremony => {
+          return _.map(ceremony.ceremonyYears, ceremonyYear => {
+              return ({
+                year: ceremonyYear.year,
+                ceremonyName: ceremony.name,
+                numGroups: ceremonyYear.groupYears.length
+              });
+            }
+          );
+        }
+      )))
     );
   }
 
