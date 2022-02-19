@@ -63,6 +63,7 @@ module.exports = app => {
 
   privateGet('/persons', persons.getPersons);
   privatePut('/persons', persons.updatePerson);
+  privateGet('/personGroups', persons.getPersonGroups);
 
   privateGet('/votes', votes.getVotes);
   privatePost('/votes', votes.addOrUpdateVote);

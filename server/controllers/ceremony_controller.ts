@@ -4,11 +4,9 @@ import {getRepository} from 'typeorm';
 import {Ceremony} from '../typeorm/Ceremony';
 import {CeremonyYear} from '../typeorm/CeremonyYear';
 import {GroupYear} from '../typeorm/GroupYear';
-import {PersonGroup} from '../typeorm/PersonGroup';
 
 export const getCeremonyYears = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const ceremonies = await getRepository(Ceremony).find();
-  const personGroups = await getRepository(PersonGroup).find();
   const ceremonyYears = await getRepository(CeremonyYear).find();
   const groupYears = await getRepository(GroupYear).find();
 
@@ -20,8 +18,5 @@ export const getCeremonyYears = async (request: Record<string, any>, response: R
     }
   }
 
-  response.json({
-    ceremonies,
-    personGroups
-  });
+  response.json(ceremonies);
 };

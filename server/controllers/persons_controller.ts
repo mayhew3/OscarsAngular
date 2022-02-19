@@ -3,6 +3,7 @@ import {socketServer} from '../www';
 import {getRepository} from 'typeorm';
 import {Person} from '../typeorm/Person';
 import {PersonGroupRole} from '../typeorm/PersonGroupRole';
+import {PersonGroup} from '../typeorm/PersonGroup';
 
 
 export const getPersons = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
@@ -23,6 +24,12 @@ export const getPersons = async (request: Record<string, any>, response: Record<
   });
 
   response.json(outputObject);
+};
+
+export const getPersonGroups = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+  const personGroups = await getRepository(PersonGroup).find();
+
+  response.json(personGroups);
 };
 
 export const updatePerson = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
