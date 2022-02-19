@@ -14,6 +14,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2005,
         "voting_closed": "2006-02-27T17:00:00",
+        "nominationCount": 109,
         "ceremony_id": 1,
         "id": 1
       },
@@ -27,6 +28,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2006,
         "voting_closed": "2007-02-27T17:00:00",
+        "nominationCount": 113,
         "ceremony_id": 1,
         "id": 2
       },
@@ -40,6 +42,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2007,
         "voting_closed": "2008-02-27T17:00:00",
+        "nominationCount": 113,
         "ceremony_id": 1,
         "id": 3
       },
@@ -53,6 +56,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2008,
         "voting_closed": "2009-02-27T17:00:00",
+        "nominationCount": 111,
         "ceremony_id": 1,
         "id": 4
       },
@@ -66,6 +70,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2009,
         "voting_closed": "2010-02-27T17:00:00",
+        "nominationCount": 121,
         "ceremony_id": 1,
         "id": 5
       },
@@ -79,6 +84,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2010,
         "voting_closed": "2011-02-27T17:00:00",
+        "nominationCount": 120,
         "ceremony_id": 1,
         "id": 6
       },
@@ -92,6 +98,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2011,
         "voting_closed": "2012-02-27T17:00:00",
+        "nominationCount": 119,
         "ceremony_id": 1,
         "id": 7
       },
@@ -113,6 +120,7 @@ export const MockCeremonies: Ceremony[] = [
         ],
         "year": 2012,
         "voting_closed": "2013-02-27T17:00:00",
+        "nominationCount": 122,
         "ceremony_id": 1,
         "id": 8
       },
@@ -134,6 +142,7 @@ export const MockCeremonies: Ceremony[] = [
         ],
         "year": 2013,
         "voting_closed": "2014-02-27T17:00:00",
+        "nominationCount": 121,
         "ceremony_id": 1,
         "id": 9
       },
@@ -155,6 +164,7 @@ export const MockCeremonies: Ceremony[] = [
         ],
         "year": 2014,
         "voting_closed": "2015-02-27T17:00:00",
+        "nominationCount": 121,
         "ceremony_id": 1,
         "id": 10
       },
@@ -176,6 +186,7 @@ export const MockCeremonies: Ceremony[] = [
         ],
         "year": 2015,
         "voting_closed": "2016-02-27T17:00:00",
+        "nominationCount": 121,
         "ceremony_id": 1,
         "id": 11
       },
@@ -197,6 +208,7 @@ export const MockCeremonies: Ceremony[] = [
         ],
         "year": 2016,
         "voting_closed": "2017-02-26T17:00:00",
+        "nominationCount": 122,
         "ceremony_id": 1,
         "id": 12
       },
@@ -218,6 +230,7 @@ export const MockCeremonies: Ceremony[] = [
         ],
         "year": 2017,
         "voting_closed": "2018-03-04T17:00:00",
+        "nominationCount": 122,
         "ceremony_id": 1,
         "id": 13
       },
@@ -231,6 +244,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2018,
         "voting_closed": "2019-02-24T17:00:00",
+        "nominationCount": 121,
         "ceremony_id": 1,
         "id": 14
       },
@@ -244,6 +258,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2019,
         "voting_closed": "2020-02-09T17:00:00",
+        "nominationCount": 124,
         "ceremony_id": 1,
         "id": 15
       },
@@ -257,6 +272,7 @@ export const MockCeremonies: Ceremony[] = [
         }],
         "year": 2020,
         "voting_closed": "2021-04-26T17:00:00",
+        "nominationCount": 118,
         "ceremony_id": 1,
         "id": 16
       }
@@ -274,6 +290,7 @@ export const MockCeremonies: Ceremony[] = [
         "id": 30
       }],
       "year": 2021,
+      "nominationCount": 163,
       "ceremony_id": 2,
       "id": 17
     }],

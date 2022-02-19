@@ -20,4 +20,5 @@ export class CeremonyYear {
   voting_closed: Date;
 
   groupYears: GroupYear[];
+  nominationCount: number;
 }

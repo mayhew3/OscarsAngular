@@ -7,4 +7,5 @@ export interface CeremonyYear {
   voting_closed?: any;
   ceremony_id: number;
   groupYears: GroupYear[];
+  nominationCount: number;
 }
