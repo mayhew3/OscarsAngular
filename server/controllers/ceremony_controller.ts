@@ -20,7 +20,8 @@ export const getCeremonyYears = async (request: Record<string, any>, response: R
     for (const ceremonyYear of ceremony.ceremonyYears) {
       ceremonyYear.groupYears = _.where(groupYears, {ceremony_year_id: ceremonyYear.id});
       const myCategories = _.where(categories, {ceremony_id: ceremony.id});
-      const myNominations = _.filter(nominations, nomination => !!_.findWhere(myCategories, {id: nomination.category_id}));
+      const myNominations = _.filter(nominations, nomination => nomination.year === ceremonyYear.year &&
+        !!_.findWhere(myCategories, {id: nomination.category_id}));
       ceremonyYear.nominationCount = myNominations.length;
     }
   }
