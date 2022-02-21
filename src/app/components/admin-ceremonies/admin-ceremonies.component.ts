@@ -15,40 +15,35 @@ import {AdminAddCeremonyPopupComponent} from '../admin-add-ceremony-popup/admin-
 })
 export class AdminCeremoniesComponent implements OnInit {
 
+  ceremonyYearsView: CeremonyDisplay[];
 
   constructor(public ceremonyService: CeremonyService,
               private personService: PersonService,
               private ngxModalService: BsModalService) { }
 
   ngOnInit(): void {
+    this.ceremonyService.ceremonies.subscribe(ceremonies => {
+        const unsorted = _.flatten(_.map(ceremonies, ceremony => {
+            return _.map(ceremony.ceremonyYears, ceremonyYear => {
+                return ({
+                  year: ceremonyYear.year,
+                  ceremonyName: ceremony.name,
+                  numGroups: ceremonyYear.groupYears.length,
+                  nominationCount: ceremonyYear.nominationCount,
+                  ceremonyDate: ceremonyYear.ceremony_date,
+                });
+              }
+            );
+          }
+        ));
+        fast_sort(unsorted).desc(categoryYear => categoryYear.ceremonyDate);
+        this.ceremonyYearsView = unsorted;
+      }
+    );
   }
 
   get isAdmin(): boolean {
     return this.personService.isAdmin;
-  }
-
-  get ceremonyYearsView(): Observable<CeremonyDisplay[]> {
-    /* todo: cache ceremonies locally, because this seems to get called a lot */
-    return this.ceremonyService.ceremonies.pipe(
-      map(ceremonies => {
-          const unsorted = _.flatten(_.map(ceremonies, ceremony => {
-              return _.map(ceremony.ceremonyYears, ceremonyYear => {
-                  return ({
-                    year: ceremonyYear.year,
-                    ceremonyName: ceremony.name,
-                    numGroups: ceremonyYear.groupYears.length,
-                    nominationCount: ceremonyYear.nominationCount,
-                    ceremonyDate: ceremonyYear.ceremony_date,
-                  });
-                }
-              );
-            }
-          ));
-          fast_sort(unsorted).desc(categoryYear => categoryYear.ceremonyDate);
-          return unsorted;
-        }
-      )
-    );
   }
 
   openAddCeremonyPopup(): void {
