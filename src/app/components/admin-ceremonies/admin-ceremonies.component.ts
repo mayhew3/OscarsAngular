@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import _ from 'underscore';
 import fast_sort from 'fast-sort';
 import {map} from 'rxjs/operators';
+import {BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
+import {AdminAddCeremonyPopupComponent} from '../admin-add-ceremony-popup/admin-add-ceremony-popup.component';
 
 @Component({
   selector: 'osc-admin-ceremonies',
@@ -15,7 +17,8 @@ export class AdminCeremoniesComponent implements OnInit {
 
 
   constructor(public ceremonyService: CeremonyService,
-              private personService: PersonService) { }
+              private personService: PersonService,
+              private ngxModalService: BsModalService) { }
 
   ngOnInit(): void {
   }
@@ -45,6 +48,13 @@ export class AdminCeremoniesComponent implements OnInit {
         }
       )
     );
+  }
+
+  openAddCeremonyPopup(): void {
+    const initialState: ModalOptions = {
+      class: 'modal-sm'
+    };
+    this.ngxModalService.show(AdminAddCeremonyPopupComponent, initialState);
   }
 
 }

@@ -43,7 +43,7 @@ export class VoteState {
 
 
   @Action(AddVote)
-  addVote({getState, setState}: StateContext<VoteStateModel>, action: AddVote): void {
+  addVote({setState}: StateContext<VoteStateModel>, action: AddVote): void {
     const data: Vote = {
       id: action.vote_id,
       category_id: action.category_id,
@@ -60,7 +60,7 @@ export class VoteState {
   }
 
   @Action(ChangeVote)
-  changeVote({getState, setState}: StateContext<VoteStateModel>, action: ChangeVote): void {
+  changeVote({setState}: StateContext<VoteStateModel>, action: ChangeVote): void {
     setState(
       produce(draft => {
         const existing: Vote = _.findWhere(draft.votes,
