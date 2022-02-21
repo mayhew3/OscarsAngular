@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CeremonyService} from '../../services/ceremony.service';
 import {PersonService} from '../../services/person.service';
-import {Observable} from 'rxjs';
 import _ from 'underscore';
 import fast_sort from 'fast-sort';
-import {map} from 'rxjs/operators';
 import {BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
 import {AdminAddCeremonyPopupComponent} from '../admin-add-ceremony-popup/admin-add-ceremony-popup.component';
 

@@ -47,7 +47,7 @@
                name="dp"
                (bsValueChange)="validateModel()"
                [(ngModel)]="ceremony_date"
-               [bsConfig]="{withTimepicker: true, showWeekNumbers: false, containerClass: 'theme-blue', dateInputFormat: 'M/D/YYYY, h:mm a'}"
+               [bsConfig]="bsConfig"
                bsDatepicker
                #dp="bsDatepicker">
         <div class="input-group-text">

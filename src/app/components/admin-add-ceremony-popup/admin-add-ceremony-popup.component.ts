@@ -8,6 +8,7 @@ import {CeremonyYear} from '../../interfaces/CeremonyYear';
 import moment from 'moment';
 import {ArrayUtil} from '../../utility/ArrayUtil';
 import {Observable} from 'rxjs';
+import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'osc-admin-add-ceremony-popup',
@@ -21,6 +22,13 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
   year: number;
 
   validDate = false;
+
+  bsConfig: Partial<BsDatepickerConfig> = {
+    withTimepicker: true,
+    showWeekNumbers: false,
+    containerClass: 'theme-blue',
+    dateInputFormat: 'M/D/YYYY, h:mm a',
+  };
 
   constructor(public activeModal: BsModalRef,
               private ceremoniesService: CeremonyService) { }
