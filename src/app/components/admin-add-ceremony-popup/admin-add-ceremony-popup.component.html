@@ -3,7 +3,7 @@
 </div>
 
 <div class="modal-body">
-  <div class="row" *ngIf="!!ceremony_date && !!ceremony_time">
+  <div class="row" *ngIf="!!ceremony_date">
 
     <!-- Ceremony Picker -->
     <div class="col-6">
@@ -32,7 +32,7 @@
     <div class="col-6">
       <label class="col-form-label" for="year">Year:</label>
       <input id="year"
-             class="form-control darkInput"
+             class="form-control"
              (change)="yearChanged($event)"
              [value]="year">
     </div>
@@ -41,13 +41,13 @@
     <div class="col-12">
       <label class="col-form-label" for="dp">Date:</label>
       <div class="input-group">
-        <input class="form-control darkInput py-0"
+        <input class="form-control py-0"
                placeholder="yyyy-mm-dd"
                id="dp"
                name="dp"
                (bsValueChange)="validateModel()"
                [(ngModel)]="ceremony_date"
-               [bsConfig]="{withTimepicker: true, showWeekNumbers: false, containerClass: 'theme-blue'}"
+               [bsConfig]="{withTimepicker: true, showWeekNumbers: false, containerClass: 'theme-blue', dateInputFormat: 'M/D/YYYY, h:mm a'}"
                bsDatepicker
                #dp="bsDatepicker">
         <div class="input-group-text">
