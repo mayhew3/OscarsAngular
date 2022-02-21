@@ -28,6 +28,7 @@ export class AdminCeremoniesComponent implements OnInit {
   }
 
   get ceremonyYearsView(): Observable<CeremonyDisplay[]> {
+    /* todo: cache ceremonies locally, because this seems to get called a lot */
     return this.ceremonyService.ceremonies.pipe(
       map(ceremonies => {
           const unsorted = _.flatten(_.map(ceremonies, ceremony => {

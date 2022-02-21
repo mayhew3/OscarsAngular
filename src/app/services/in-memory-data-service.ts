@@ -249,7 +249,6 @@ export class InMemoryDataService implements InMemoryDbService {
     const ceremony = this.ceremonyWithId(jsonBody.ceremony_id);
 
     jsonBody.id = this.genCeremonyYearId();
-    jsonBody.voting_closed = false;
     jsonBody.nominationCount = 0;
     jsonBody.groupYears = [];
     ceremony.ceremonyYears.push(jsonBody);

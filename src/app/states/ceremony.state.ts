@@ -50,6 +50,10 @@ export class CeremonyState {
     setState(
       produce( draft => {
         const ceremony = _.findWhere(draft.ceremonies, {id: action.ceremonyYear.ceremony_id});
+        action.ceremonyYear.ceremony_date = new Date(action.ceremonyYear.ceremony_date);
+        if (!!action.ceremonyYear.voting_closed) {
+          action.ceremonyYear.voting_closed = new Date(action.ceremonyYear.voting_closed);
+        }
         ceremony.ceremonyYears.push(action.ceremonyYear);
       })
     );
