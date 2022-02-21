@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 import _ from 'underscore';
 import {Ceremony} from '../interfaces/Ceremony';
 import {ApiService} from './api.service';
+import {GroupYear} from '../interfaces/GroupYear';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +32,14 @@ export class CeremonyService {
   }
 
   async addCeremonyYear(ceremony_date: Date,
-                  ceremony_id: number,
-                  year: number): Promise<void> {
+                        ceremony_id: number,
+                        year: number,
+                        groupYears: Partial<GroupYear>[]): Promise<void> {
     const data = {
       ceremony_date,
       ceremony_id,
-      year
+      year,
+      groupYears
     };
     await this.api.postAfterFullyConnected(this.ceremoniesUrl, data);
   }

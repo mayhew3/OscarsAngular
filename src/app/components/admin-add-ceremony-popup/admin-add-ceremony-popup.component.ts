@@ -12,6 +12,7 @@ import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {PersonService} from '../../services/person.service';
 import {PersonGroup} from '../../interfaces/PersonGroup';
 import {combineLatest} from 'rxjs';
+import {GroupYear} from '../../interfaces/GroupYear';
 
 @Component({
   selector: 'osc-admin-add-ceremony-popup',
@@ -106,7 +107,13 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
   }
 
   async saveAndClose(): Promise<void> {
-    await this.ceremoniesService.addCeremonyYear(this.ceremony_date, this.selectedCeremony.id, this.year);
+    const groupYears: Partial<GroupYear>[] = _.map(_.filter(this.groupButtons, {checked: true}), groupButton => {
+      return {
+        year: this.year,
+        person_group_id: groupButton.personGroup.id,
+      };
+    });
+    await this.ceremoniesService.addCeremonyYear(this.ceremony_date, this.selectedCeremony.id, this.year, groupYears);
     this.activeModal.hide();
   }
 

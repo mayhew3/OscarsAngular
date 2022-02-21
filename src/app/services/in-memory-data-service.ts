@@ -18,6 +18,7 @@ import {MockVoteEmmysList} from './data/votes.emmys.mock';
 import {MockCeremonies} from './data/ceremonies.mock';
 import {MockPersonGroups} from './data/person.groups.mock';
 import {Ceremony} from '../interfaces/Ceremony';
+import {GroupYear} from '../interfaces/GroupYear';
 
 @Injectable({
   providedIn: 'root',
@@ -248,6 +249,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
     const ceremonyYear = JSON.parse(JSON.stringify(jsonBody));
 
+    const groupYearObjs: Partial<GroupYear>[] = ceremonyYear.groupYears;
+    delete ceremonyYear.groupYears;
+
     const ceremony = this.ceremonyWithId(ceremonyYear.ceremony_id);
 
     ceremonyYear.id = this.genCeremonyYearId();
@@ -255,9 +259,24 @@ export class InMemoryDataService implements InMemoryDbService {
     ceremonyYear.groupYears = [];
     ceremony.ceremonyYears.push(ceremonyYear);
 
+    for (const groupYearObj of groupYearObjs) {
+      const groupYear = this.addGroupYear(ceremonyYear.id, groupYearObj.year, groupYearObj.person_group_id);
+      ceremonyYear.groupYears.push(groupYear);
+    }
+
     this.broadcastToChannel('add_ceremony_year', ceremonyYear);
 
     return this.packageUpResponse({msg: 'Success!'}, requestInfo);
+  }
+
+  private addGroupYear(ceremony_year_id, year, person_group_id): GroupYear {
+    const id = this.genGroupYearId();
+    return {
+      id,
+      year,
+      person_group_id,
+      ceremony_year_id
+    };
   }
 
   private logReadOnly(): void {
@@ -417,6 +436,16 @@ export class InMemoryDataService implements InMemoryDbService {
       return 1;
     } else {
       return _.max(_.map(ceremonyYears, cy => cy.id)) + 1;
+    }
+  }
+
+  private genGroupYearId(): number {
+    const ceremonyYears = _.flatten(_.map(this.ceremonies, c => c.ceremonyYears));
+    const groupYears = _.flatten(_.map(ceremonyYears, cy => cy.groupYears));
+    if (groupYears.length === 0) {
+      return 1;
+    } else {
+      return _.max(_.map(groupYears, gy => gy.id)) + 1;
     }
   }
 
