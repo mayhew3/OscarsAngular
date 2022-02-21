@@ -11,6 +11,7 @@ import {Observable} from 'rxjs';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
 import {PersonService} from '../../services/person.service';
 import {PersonGroup} from '../../interfaces/PersonGroup';
+import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'osc-admin-add-ceremony-popup',
@@ -40,30 +41,32 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeFields();
-    this.initializeGroups();
   }
 
   initializeFields(): void {
-    this.ceremoniesService.ceremonies.subscribe(ceremonies => {
+    combineLatest([this.ceremoniesService.ceremonies, this.personService.personGroups]).subscribe(([ceremonies, personGroups]) => {
+
       const mostRecentPerCeremony: CeremonyYear[] = [];
       for (const ceremony of ceremonies) {
         const ceremonyYears = ArrayUtil.cloneArray(ceremony.ceremonyYears);
         fast_sort(ceremonyYears).desc(cy => cy.ceremony_date);
         mostRecentPerCeremony.push(ceremonyYears[0]);
       }
+
       fast_sort(mostRecentPerCeremony).asc(cy => cy.ceremony_date);
       const lastCeremonyYearOfNextUp = mostRecentPerCeremony[0];
       this.selectedCeremony = _.findWhere(ceremonies, {id: lastCeremonyYearOfNextUp.ceremony_id});
       this.ceremony_date = moment(lastCeremonyYearOfNextUp.ceremony_date).add(1, 'year').toDate();
       this.year = lastCeremonyYearOfNextUp.year + 1;
+
+      this.groupButtons = _.map(personGroups, personGroup => {
+        const existing = _.findWhere(lastCeremonyYearOfNextUp.groupYears, {person_group_id: personGroup.id});
+        return {personGroup, checked: !!existing};
+      });
+
       this.validateModel();
     });
-  }
 
-  initializeGroups(): void {
-    this.personService.personGroups.subscribe(personGroups => {
-      this.groupButtons = _.map(personGroups, personGroup => ({personGroup, checked: false}));
-    });
   }
 
   get ceremonies(): Observable<Ceremony[]> {
