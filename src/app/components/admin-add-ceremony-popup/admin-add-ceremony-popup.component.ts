@@ -9,6 +9,8 @@ import moment from 'moment';
 import {ArrayUtil} from '../../utility/ArrayUtil';
 import {Observable} from 'rxjs';
 import {BsDatepickerConfig} from 'ngx-bootstrap/datepicker';
+import {PersonService} from '../../services/person.service';
+import {PersonGroup} from '../../interfaces/PersonGroup';
 
 @Component({
   selector: 'osc-admin-add-ceremony-popup',
@@ -21,6 +23,8 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
   selectedCeremony: Ceremony;
   year: number;
 
+  groupButtons?: GroupButton[];
+
   validDate = false;
 
   bsConfig: Partial<BsDatepickerConfig> = {
@@ -31,10 +35,12 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
   };
 
   constructor(public activeModal: BsModalRef,
-              private ceremoniesService: CeremonyService) { }
+              private ceremoniesService: CeremonyService,
+              private personService: PersonService) { }
 
   ngOnInit(): void {
     this.initializeFields();
+    this.initializeGroups();
   }
 
   initializeFields(): void {
@@ -51,6 +57,12 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
       this.ceremony_date = moment(lastCeremonyYearOfNextUp.ceremony_date).add(1, 'year').toDate();
       this.year = lastCeremonyYearOfNextUp.year + 1;
       this.validateModel();
+    });
+  }
+
+  initializeGroups(): void {
+    this.personService.personGroups.subscribe(personGroups => {
+      this.groupButtons = _.map(personGroups, personGroup => ({personGroup, checked: false}));
     });
   }
 
@@ -99,4 +111,9 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
     this.activeModal.hide();
   }
 
+}
+
+interface GroupButton {
+  personGroup: PersonGroup;
+  checked: boolean;
 }

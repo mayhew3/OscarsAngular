@@ -13,7 +13,7 @@ import {AdminAddCeremonyPopupComponent} from '../admin-add-ceremony-popup/admin-
 })
 export class AdminCeremoniesComponent implements OnInit {
 
-  ceremonyYearsView: CeremonyDisplay[];
+  ceremonyYearsView?: CeremonyDisplay[];
 
   constructor(public ceremonyService: CeremonyService,
               private personService: PersonService,

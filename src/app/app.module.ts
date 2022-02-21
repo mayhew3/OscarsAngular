@@ -52,6 +52,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { CalendarIconComponent } from './components/calendar-icon/calendar-icon.component';
 import {TimepickerModule} from 'ngx-bootstrap/timepicker';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import {TimepickerModule} from 'ngx-bootstrap/timepicker';
       },
     }),
     BrowserAnimationsModule,
+    ButtonsModule,
   ],
   providers: [
     MyAuthService,

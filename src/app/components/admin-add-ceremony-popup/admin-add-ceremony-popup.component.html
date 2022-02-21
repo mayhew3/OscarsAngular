@@ -61,6 +61,17 @@
     </div>
 
     <!-- Group Select (todo) -->
+    <div class="col-12 py-2">
+      <label for="groupsGroup">Groups:</label>
+      <div class="btn-group-vertical" role="group" id="groupsGroup">
+        <label class="btn btn-primary"
+               *ngFor="let groupButton of groupButtons"
+               [(ngModel)]="groupButton.checked"
+               btnCheckbox
+               tabindex="0"
+               role="button">{{groupButton.personGroup.title}}</label>
+      </div>
+    </div>
 
   </div>
 </div>
