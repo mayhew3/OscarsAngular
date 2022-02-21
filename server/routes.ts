@@ -79,6 +79,7 @@ module.exports = app => {
   privateGet('/maxYear', nominees.getMostRecentYear);
 
   privateGet('/ceremonies', ceremonies.getCeremonyYears);
+  privatePost('/ceremonies', ceremonies.addCeremonyYear);
 
   // error handlers
 

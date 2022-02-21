@@ -63,7 +63,7 @@ export class ApiService {
 
   // POST
 
-  async postAfterFullyConnected<T>(url: string, body: any): Promise<any> {
+  async postAfterFullyConnected<T>(url: string, body: any): Promise<T> {
     await this.waitForConnectedToAll();
     return this.postWithError(url, body);
   }

@@ -4,8 +4,7 @@ import produce from 'immer';
 import * as _ from 'underscore';
 import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
-import {CeremonyYear} from '../interfaces/CeremonyYear';
-import {GetCeremonyYears} from '../actions/ceremony.action';
+import {AddCeremonyYear, GetCeremonyYears} from '../actions/ceremony.action';
 import {Ceremony} from '../interfaces/Ceremony';
 
 export class CeremonyStateModel {
@@ -27,7 +26,7 @@ export class CeremonyState {
   }
 
   @Action(GetCeremonyYears)
-  async getVotes({setState}: StateContext<CeremonyStateModel>): Promise<any> {
+  async getCeremonies({setState}: StateContext<CeremonyStateModel>): Promise<any> {
     const result = await this.api.getAfterFullyConnected<Ceremony[]>('/api/ceremonies');
     setState(
       produce( draft => {
@@ -40,6 +39,22 @@ export class CeremonyState {
             }
           });
         });
+      })
+    );
+    this.stateChanges++;
+    this.logger.log('CEREMONIES State Change #' + this.stateChanges);
+  }
+
+  @Action(AddCeremonyYear)
+  async addCeremony({setState}: StateContext<CeremonyStateModel>, action: AddCeremonyYear): Promise<any> {
+    setState(
+      produce( draft => {
+        const ceremony = _.findWhere(draft.ceremonies, {id: action.ceremonyYear.ceremony_id});
+        action.ceremonyYear.ceremony_date = new Date(action.ceremonyYear.ceremony_date);
+        if (!!action.ceremonyYear.voting_closed) {
+          action.ceremonyYear.voting_closed = new Date(action.ceremonyYear.voting_closed);
+        }
+        ceremony.ceremonyYears.push(action.ceremonyYear);
       })
     );
     this.stateChanges++;

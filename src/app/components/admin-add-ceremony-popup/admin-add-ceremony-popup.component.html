@@ -1,0 +1,88 @@
+<div class="modal-header">
+  <h3>Add Ceremony</h3>
+</div>
+
+<div class="modal-body">
+  <div class="row" *ngIf="!!ceremony_date">
+
+    <!-- Ceremony Picker -->
+    <div class="col-6">
+      <label class="col-form-label" for="ceremonyDropdown">Ceremony:</label>
+      <div ngbDropdown
+           *ngIf="!!(ceremonies | async) && !!selectedCeremony">
+        <button class="btn btn-primary"
+                id="ceremonyDropdown"
+                name="ceremonyDropdown"
+                ngbDropdownToggle>
+          {{selectedCeremony.name}}
+        </button>
+        <div ngbDropdownMenu
+             [attr.aria-labelledby]="'dropdownCeremony'">
+          <button class="btn"
+                  *ngFor="let ceremony of (ceremonies | async)"
+                  ngbDropdownItem
+                  (click)="selectCeremony(ceremony)">
+            {{ceremony.name}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ceremony Year -->
+    <div class="col-6">
+      <label class="col-form-label" for="year">Year:</label>
+      <input id="year"
+             class="form-control"
+             (change)="yearChanged($event)"
+             [value]="year">
+    </div>
+
+    <!-- Ceremony Date -->
+    <div class="col-12">
+      <label class="col-form-label" for="dp">Date:</label>
+      <div class="input-group">
+        <input class="form-control py-0"
+               placeholder="yyyy-mm-dd"
+               id="dp"
+               name="dp"
+               (bsValueChange)="validateModel()"
+               [(ngModel)]="ceremony_date"
+               [bsConfig]="bsConfig"
+               bsDatepicker
+               #dp="bsDatepicker">
+        <div class="input-group-text">
+          <button class="btn py-0"
+                  (click)="dp.toggle()"
+                  type="button">
+            <osc-calendar-icon></osc-calendar-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group Select (todo) -->
+    <div class="col-12 py-2">
+      <label for="groupsGroup">Groups:</label>
+      <div class="btn-group-vertical" role="group" id="groupsGroup">
+        <label class="btn btn-primary"
+               *ngFor="let groupButton of groupButtons"
+               [(ngModel)]="groupButton.checked"
+               btnCheckbox
+               tabindex="0"
+               role="button">{{groupButton.personGroup.title}}</label>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal-footer">
+  <button type="button"
+          class="btn btn-default"
+          (click)="dismiss()">Cancel</button>
+  <button type="button"
+          class="btn btn-primary"
+          [disabled]="disableAdd()"
+          (click)="saveAndClose()">Add</button>
+</div>

@@ -6,6 +6,8 @@ import {CeremonyYear} from '../typeorm/CeremonyYear';
 import {GroupYear} from '../typeorm/GroupYear';
 import {Nomination} from '../typeorm/Nomination';
 import {Category} from '../typeorm/Category';
+import {TypeORMManager} from '../typeorm/TypeORMManager';
+import {socketServer} from '../www';
 
 export const getCeremonyYears = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const ceremonies = await getRepository(Ceremony).find();
@@ -27,4 +29,26 @@ export const getCeremonyYears = async (request: Record<string, any>, response: R
   }
 
   response.json(ceremonies);
+};
+
+export const addCeremonyYear = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+  const ceremonyYearObj = request.body;
+
+  const groupYearObjs: Partial<GroupYear>[] = ceremonyYearObj.groupYears;
+  delete ceremonyYearObj.groupYears;
+
+  const ceremonyYear = await TypeORMManager.createAndCommit(ceremonyYearObj, CeremonyYear);
+
+  ceremonyYear.nominationCount = 0;
+  ceremonyYear.groupYears = [];
+
+  for (const groupYearObj of groupYearObjs) {
+    groupYearObj.ceremony_year_id = ceremonyYear.id;
+    const groupYear = await getRepository(GroupYear).save(groupYearObj);
+    ceremonyYear.groupYears.push(groupYear);
+  }
+
+  socketServer.emitToAll('add_ceremony_year', ceremonyYear);
+
+  response.json(ceremonyYear);
 };

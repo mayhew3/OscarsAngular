@@ -17,6 +17,8 @@ import {MockCategoryEmmysList} from './data/categories.emmys.mock';
 import {MockVoteEmmysList} from './data/votes.emmys.mock';
 import {MockCeremonies} from './data/ceremonies.mock';
 import {MockPersonGroups} from './data/person.groups.mock';
+import {Ceremony} from '../interfaces/Ceremony';
+import {GroupYear} from '../interfaces/GroupYear';
 
 @Injectable({
   providedIn: 'root',
@@ -129,6 +131,8 @@ export class InMemoryDataService implements InMemoryDbService {
       return this.addOrChangeVote(requestInfo);
     } else if (requestInfo.collectionName === 'winners') {
       this.addWinner(requestInfo);
+    } else if (requestInfo.collectionName === 'ceremonies') {
+      return this.addCeremonyYear(requestInfo);
     }
     return undefined;
   }
@@ -238,6 +242,41 @@ export class InMemoryDataService implements InMemoryDbService {
     this.broadcastToChannel('add_winner', socketMsg);
 
     this.sendUpdatedOdds();
+  }
+
+  private addCeremonyYear(requestInfo: RequestInfo): Observable<Response> {
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+
+    const ceremonyYear = JSON.parse(JSON.stringify(jsonBody));
+
+    const groupYearObjs: Partial<GroupYear>[] = ceremonyYear.groupYears;
+    delete ceremonyYear.groupYears;
+
+    const ceremony = this.ceremonyWithId(ceremonyYear.ceremony_id);
+
+    ceremonyYear.id = this.genCeremonyYearId();
+    ceremonyYear.nominationCount = 0;
+    ceremonyYear.groupYears = [];
+    ceremony.ceremonyYears.push(ceremonyYear);
+
+    for (const groupYearObj of groupYearObjs) {
+      const groupYear = this.addGroupYear(ceremonyYear.id, groupYearObj.year, groupYearObj.person_group_id);
+      ceremonyYear.groupYears.push(groupYear);
+    }
+
+    this.broadcastToChannel('add_ceremony_year', ceremonyYear);
+
+    return this.packageUpResponse({msg: 'Success!'}, requestInfo);
+  }
+
+  private addGroupYear(ceremony_year_id, year, person_group_id): GroupYear {
+    const id = this.genGroupYearId();
+    return {
+      id,
+      year,
+      person_group_id,
+      ceremony_year_id
+    };
   }
 
   private logReadOnly(): void {
@@ -391,6 +430,25 @@ export class InMemoryDataService implements InMemoryDbService {
     }
   }
 
+  private genCeremonyYearId(): number {
+    const ceremonyYears = _.flatten(_.map(this.ceremonies, c => c.ceremonyYears));
+    if (ceremonyYears.length === 0) {
+      return 1;
+    } else {
+      return _.max(_.map(ceremonyYears, cy => cy.id)) + 1;
+    }
+  }
+
+  private genGroupYearId(): number {
+    const ceremonyYears = _.flatten(_.map(this.ceremonies, c => c.ceremonyYears));
+    const groupYears = _.flatten(_.map(ceremonyYears, cy => cy.groupYears));
+    if (groupYears.length === 0) {
+      return 1;
+    } else {
+      return _.max(_.map(groupYears, gy => gy.id)) + 1;
+    }
+  }
+
   private genVoteId(): number {
     if (this.votes.length === 0) {
       return 1;
@@ -429,6 +487,10 @@ export class InMemoryDataService implements InMemoryDbService {
   private categoryForNominee(nomination_id: number): Category {
     const results = _.filter(this.categories, category => !!_.findWhere(category.nominees, {id: nomination_id}));
     return _.first(results);
+  }
+
+  private ceremonyWithId(ceremony_id: number): Ceremony {
+    return _.findWhere(this.ceremonies, {id: ceremony_id});
   }
 
   private updateObject(jsonBody: any): void {

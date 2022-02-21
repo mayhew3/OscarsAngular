@@ -24,7 +24,7 @@ export const updateSystemVars = async (request: Record<string, any>, response: R
   const isVotingOpenChanged = systemVar.voting_open !== undefined && result.voting_open !== systemVar.voting_open;
 
   try {
-    await result.update(systemVar);
+    await getRepository(SystemVars).update(systemVar.id, systemVar);
   } catch (err) {
     console.error(err);
     response.send({msg: 'Error updating system_vars: ' + JSON.stringify(systemVar)});

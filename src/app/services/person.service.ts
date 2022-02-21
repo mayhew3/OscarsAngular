@@ -30,7 +30,7 @@ export class PersonService {
     filter(persons => !!persons)
   );
 
-  personGroups: Observable<PersonGroup[]> = this.store.select(state => state.personGroups).pipe(
+  personGroups: Observable<PersonGroup[]> = this.store.select(state => state.persons).pipe(
     filter(state => !!state),
     map(state => state.personGroups),
     filter(personGroups => !!personGroups)

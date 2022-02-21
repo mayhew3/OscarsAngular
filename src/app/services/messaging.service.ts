@@ -8,6 +8,7 @@ import {Store} from '@ngxs/store';
 import _ from 'underscore';
 import {LoggerService} from './logger.service';
 import {PersonConnected, PersonDisconnected} from '../actions/person.action';
+import {AddCeremonyYear} from '../actions/ceremony.action';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,7 @@ export class MessagingService {
       this.addSingleActionListener('odds', msg => new UpdatePlayerOdds(msg));
       this.addSingleActionListener('person_connected', msg => new PersonConnected(msg.person_id));
       this.addSingleActionListener('person_disconnected', msg => new PersonDisconnected(msg.person_id));
+      this.addSingleActionListener('add_ceremony_year', msg => new AddCeremonyYear(msg));
 
       this.listenersInitialized = true;
     }

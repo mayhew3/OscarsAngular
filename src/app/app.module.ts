@@ -47,6 +47,12 @@ import {DotComponent} from './components/dot/dot.component';
 import {CountdownComponent} from './components/countdown/countdown.component';
 import {CeremonyState} from './states/ceremony.state';
 import { AdminCeremoniesComponent } from './components/admin-ceremonies/admin-ceremonies.component';
+import { AdminAddCeremonyPopupComponent } from './components/admin-add-ceremony-popup/admin-add-ceremony-popup.component';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import { CalendarIconComponent } from './components/calendar-icon/calendar-icon.component';
+import {TimepickerModule} from 'ngx-bootstrap/timepicker';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -73,7 +79,9 @@ import { AdminCeremoniesComponent } from './components/admin-ceremonies/admin-ce
     NavBarComponent,
     DotComponent,
     CountdownComponent,
-    AdminCeremoniesComponent
+    AdminCeremoniesComponent,
+    AdminAddCeremonyPopupComponent,
+    CalendarIconComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +92,9 @@ import { AdminCeremoniesComponent } from './components/admin-ceremonies/admin-ce
     MatProgressSpinnerModule,
     MatSnackBarModule,
     ReactiveFormsModule,
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     NgxsModule.forRoot([
       PersonState,
       SystemVarsState,
@@ -117,6 +128,7 @@ import { AdminCeremoniesComponent } from './components/admin-ceremonies/admin-ce
       },
     }),
     BrowserAnimationsModule,
+    ButtonsModule,
   ],
   providers: [
     MyAuthService,
