@@ -46,6 +46,7 @@
     "jwks-rsa": "^2.0.1",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
+    "ngx-bootstrap": "^8.0.0-RC.4",
     "path": "^0.12.7",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",

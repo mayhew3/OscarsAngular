@@ -45,6 +45,8 @@ import {FrontPageLogoComponent} from './components/front-page-logo/front-page-lo
 import {NavBarComponent} from './components/nav-bar/nav-bar.component';
 import {DotComponent} from './components/dot/dot.component';
 import {CountdownComponent} from './components/countdown/countdown.component';
+import {CeremonyState} from './states/ceremony.state';
+import { AdminCeremoniesComponent } from './components/admin-ceremonies/admin-ceremonies.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,8 @@ import {CountdownComponent} from './components/countdown/countdown.component';
     FrontPageLogoComponent,
     NavBarComponent,
     DotComponent,
-    CountdownComponent
+    CountdownComponent,
+    AdminCeremoniesComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +91,8 @@ import {CountdownComponent} from './components/countdown/countdown.component';
       MaxYearState,
       VoteState,
       FinalResultState,
-      OddsState
+      OddsState,
+      CeremonyState
     ], {
       developmentMode: !environment.production
     }),

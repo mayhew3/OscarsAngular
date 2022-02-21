@@ -38,6 +38,7 @@
           }
         ],
         "@typescript-eslint/naming-convention": "off",
+        "arrow-body-style": "off",
         "camelcase": "off",
         "no-console": "warn",
         "no-underscore-dangle": "warn",

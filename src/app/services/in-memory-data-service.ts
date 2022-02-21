@@ -1,9 +1,7 @@
 import {getStatusText, InMemoryDbService, RequestInfo, ResponseOptions, STATUS} from 'angular-in-memory-web-api';
 import {Injectable} from '@angular/core';
 import * as _ from 'underscore';
-import {MockCategoryList} from './data/categories.mock';
 import {MockPersonList} from './data/persons.mock';
-import {MockVoteList} from './data/votes.mock';
 import {Observable} from 'rxjs';
 import {MockSystemVars} from './data/system.vars.mock';
 import {MockWinnerList} from './data/winners.mock';
@@ -17,6 +15,8 @@ import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
 import {MockCategoryEmmysList} from './data/categories.emmys.mock';
 import {MockVoteEmmysList} from './data/votes.emmys.mock';
+import {MockCeremonies} from './data/ceremonies.mock';
+import {MockPersonGroups} from './data/person.groups.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +32,8 @@ export class InMemoryDataService implements InMemoryDbService {
   events = MockEvents;
   odds = MockOdds;
   finalResults = MockFinalResultsList;
+  ceremonies = MockCeremonies;
+  personGroups = MockPersonGroups;
 
   /////////// helpers ///////////////
 
@@ -67,6 +69,8 @@ export class InMemoryDataService implements InMemoryDbService {
       finalResults: this.finalResults,
       oddsChange: [],
       resetWinners: [],
+      ceremonies: this.ceremonies,
+      personGroups: this.personGroups,
     };
   }
 

@@ -12,6 +12,9 @@ import {PersonGroupRole} from './PersonGroupRole';
 import {SystemVars} from './SystemVars';
 import {Vote} from './Vote';
 import {Winner} from './Winner';
+import {PersonGroup} from './PersonGroup';
+import {Ceremony} from './Ceremony';
+import {CeremonyYear} from './CeremonyYear';
 
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
@@ -34,6 +37,8 @@ export class TypeORMManager {
       type: 'postgres',
       entities: [
         Category,
+        Ceremony,
+        CeremonyYear,
         Event,
         FinalResult,
         GroupYear,
@@ -41,6 +46,7 @@ export class TypeORMManager {
         OddsExecution,
         OddsResult,
         Person,
+        PersonGroup,
         PersonGroupRole,
         SystemVars,
         Vote,

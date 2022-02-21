@@ -12,6 +12,7 @@ module.exports = app => {
   const winners = require('./controllers/winners_controller');
   const systemVars = require('./controllers/systemvars_controller');
   const finalResults = require('./controllers/final_results_controller');
+  const ceremonies = require('./controllers/ceremony_controller');
 
   const authConfig = {
     domain: 'mayhew3.auth0.com',
@@ -62,6 +63,7 @@ module.exports = app => {
 
   privateGet('/persons', persons.getPersons);
   privatePut('/persons', persons.updatePerson);
+  privateGet('/personGroups', persons.getPersonGroups);
 
   privateGet('/votes', votes.getVotes);
   privatePost('/votes', votes.addOrUpdateVote);
@@ -75,6 +77,8 @@ module.exports = app => {
 
   privateGet('/finalResults', finalResults.getFinalResults);
   privateGet('/maxYear', nominees.getMostRecentYear);
+
+  privateGet('/ceremonies', ceremonies.getCeremonyYears);
 
   // error handlers
 

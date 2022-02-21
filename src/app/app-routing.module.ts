@@ -13,6 +13,7 @@ import {HistoryComponent} from './components/history/history.component';
 import {PersonDetailComponent} from './components/person-detail/person-detail.component';
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
 import { AuthGuard } from '@auth0/auth0-angular';
+import {AdminCeremoniesComponent} from './components/admin-ceremonies/admin-ceremonies.component';
 
 export const routes: Routes = [
   {
@@ -72,6 +73,11 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'admin/ceremonies',
+    component: AdminCeremoniesComponent,
     canActivate: [AuthGuard],
   },
 ];
