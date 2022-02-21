@@ -3,7 +3,7 @@
 </div>
 
 <div class="modal-body">
-  <div class="row" *ngIf="!!ceremony_date">
+  <div class="row" *ngIf="!!ceremony_date && !!ceremony_time">
 
     <!-- Ceremony Picker -->
     <div class="col-6">
@@ -45,8 +45,9 @@
                placeholder="yyyy-mm-dd"
                id="dp"
                name="dp"
-               (change)="validateModel()"
+               (bsValueChange)="validateModel()"
                [(ngModel)]="ceremony_date"
+               [bsConfig]="{withTimepicker: true, showWeekNumbers: false, containerClass: 'theme-blue'}"
                bsDatepicker
                #dp="bsDatepicker">
         <div class="input-group-text">
@@ -58,8 +59,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Ceremony Time (todo) -->
 
     <!-- Group Select (todo) -->
 

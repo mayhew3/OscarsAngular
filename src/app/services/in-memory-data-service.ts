@@ -131,7 +131,7 @@ export class InMemoryDataService implements InMemoryDbService {
     } else if (requestInfo.collectionName === 'winners') {
       this.addWinner(requestInfo);
     } else if (requestInfo.collectionName === 'ceremonies') {
-      this.addCeremonyYear(requestInfo);
+      return this.addCeremonyYear(requestInfo);
     }
     return undefined;
   }
@@ -243,19 +243,21 @@ export class InMemoryDataService implements InMemoryDbService {
     this.sendUpdatedOdds();
   }
 
-  private addCeremonyYear(requestInfo: RequestInfo): void {
+  private addCeremonyYear(requestInfo: RequestInfo): Observable<Response> {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
 
-    const ceremony = this.ceremonyWithId(jsonBody.ceremony_id);
+    const ceremonyYear = JSON.parse(JSON.stringify(jsonBody));
 
-    jsonBody.id = this.genCeremonyYearId();
-    jsonBody.nominationCount = 0;
-    jsonBody.groupYears = [];
-    ceremony.ceremonyYears.push(jsonBody);
+    const ceremony = this.ceremonyWithId(ceremonyYear.ceremony_id);
 
-    this.broadcastToChannel('add_ceremony_year', jsonBody);
+    ceremonyYear.id = this.genCeremonyYearId();
+    ceremonyYear.nominationCount = 0;
+    ceremonyYear.groupYears = [];
+    ceremony.ceremonyYears.push(ceremonyYear);
 
-    this.sendUpdatedOdds();
+    this.broadcastToChannel('add_ceremony_year', ceremonyYear);
+
+    return this.packageUpResponse({msg: 'Success!'}, requestInfo);
   }
 
   private logReadOnly(): void {

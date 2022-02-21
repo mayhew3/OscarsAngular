@@ -51,6 +51,7 @@ import { AdminAddCeremonyPopupComponent } from './components/admin-add-ceremony-
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { CalendarIconComponent } from './components/calendar-icon/calendar-icon.component';
+import {TimepickerModule} from 'ngx-bootstrap/timepicker';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,8 @@ import { CalendarIconComponent } from './components/calendar-icon/calendar-icon.
     MatSnackBarModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     NgxsModule.forRoot([
       PersonState,
       SystemVarsState,
@@ -124,7 +127,6 @@ import { CalendarIconComponent } from './components/calendar-icon/calendar-icon.
       },
     }),
     BrowserAnimationsModule,
-    BsDatepickerModule,
   ],
   providers: [
     MyAuthService,
