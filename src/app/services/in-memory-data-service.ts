@@ -17,6 +17,7 @@ import {MockCategoryEmmysList} from './data/categories.emmys.mock';
 import {MockVoteEmmysList} from './data/votes.emmys.mock';
 import {MockCeremonies} from './data/ceremonies.mock';
 import {MockPersonGroups} from './data/person.groups.mock';
+import {Ceremony} from '../interfaces/Ceremony';
 
 @Injectable({
   providedIn: 'root',
@@ -129,6 +130,8 @@ export class InMemoryDataService implements InMemoryDbService {
       return this.addOrChangeVote(requestInfo);
     } else if (requestInfo.collectionName === 'winners') {
       this.addWinner(requestInfo);
+    } else if (requestInfo.collectionName === 'ceremonies') {
+      this.addCeremonyYear(requestInfo);
     }
     return undefined;
   }
@@ -236,6 +239,22 @@ export class InMemoryDataService implements InMemoryDbService {
     };
 
     this.broadcastToChannel('add_winner', socketMsg);
+
+    this.sendUpdatedOdds();
+  }
+
+  private addCeremonyYear(requestInfo: RequestInfo): void {
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+
+    const ceremony = this.ceremonyWithId(jsonBody.ceremony_id);
+
+    jsonBody.id = this.genCeremonyYearId();
+    jsonBody.voting_closed = false;
+    jsonBody.nominationCount = 0;
+    jsonBody.groupYears = [];
+    ceremony.ceremonyYears.push(jsonBody);
+
+    this.broadcastToChannel('add_ceremony_year', jsonBody);
 
     this.sendUpdatedOdds();
   }
@@ -391,6 +410,15 @@ export class InMemoryDataService implements InMemoryDbService {
     }
   }
 
+  private genCeremonyYearId(): number {
+    const ceremonyYears = _.flatten(_.map(this.ceremonies, c => c.ceremonyYears));
+    if (ceremonyYears.length === 0) {
+      return 1;
+    } else {
+      return _.max(_.map(ceremonyYears, cy => cy.id)) + 1;
+    }
+  }
+
   private genVoteId(): number {
     if (this.votes.length === 0) {
       return 1;
@@ -429,6 +457,10 @@ export class InMemoryDataService implements InMemoryDbService {
   private categoryForNominee(nomination_id: number): Category {
     const results = _.filter(this.categories, category => !!_.findWhere(category.nominees, {id: nomination_id}));
     return _.first(results);
+  }
+
+  private ceremonyWithId(ceremony_id: number): Ceremony {
+    return _.findWhere(this.ceremonies, {id: ceremony_id});
   }
 
   private updateObject(jsonBody: any): void {

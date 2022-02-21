@@ -82,8 +82,9 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
     this.validDate = this.isValidDate();
   }
 
-  saveAndClose(): void {
-    this.ceremoniesService.addCeremonyYear(this.ceremony_date, this.selectedCeremony.id);
+  async saveAndClose(): Promise<void> {
+    await this.ceremoniesService.addCeremonyYear(this.ceremony_date, this.selectedCeremony.id, this.year);
+    this.activeModal.hide();
   }
 
   dismiss(): void {

@@ -30,12 +30,14 @@ export class CeremonyService {
     );
   }
 
-  addCeremonyYear(ceremony_date: Date,
-                  ceremony_id: number): void {
+  async addCeremonyYear(ceremony_date: Date,
+                  ceremony_id: number,
+                  year: number): Promise<void> {
     const data = {
       ceremony_date,
-      ceremony_id
+      ceremony_id,
+      year
     };
-    this.api.postAfterFullyConnected(this.ceremoniesUrl, data);
+    await this.api.postAfterFullyConnected(this.ceremoniesUrl, data);
   }
 }

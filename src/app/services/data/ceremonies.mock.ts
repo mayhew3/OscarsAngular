@@ -282,7 +282,7 @@ export const MockCeremonies: Ceremony[] = [
   },
   {
     "ceremonyYears": [{
-      "ceremony_date": "2022-09-19T17:00:00",
+      "ceremony_date": "2021-09-19T17:00:00",
       "groupYears": [{
         "person_group_id": 3,
         "year": 2021,
