@@ -6,6 +6,7 @@ import {CeremonyYear} from '../typeorm/CeremonyYear';
 import {GroupYear} from '../typeorm/GroupYear';
 import {Nomination} from '../typeorm/Nomination';
 import {Category} from '../typeorm/Category';
+import {TypeORMManager} from '../typeorm/TypeORMManager';
 
 export const getCeremonyYears = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const ceremonies = await getRepository(Ceremony).find();
@@ -27,4 +28,12 @@ export const getCeremonyYears = async (request: Record<string, any>, response: R
   }
 
   response.json(ceremonies);
+};
+
+export const addCeremonyYear = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+  const ceremonyYearObj = request.body;
+
+  const ceremonyYear = await TypeORMManager.createAndCommit(ceremonyYearObj, CeremonyYear);
+
+  response.json(ceremonyYear);
 };
