@@ -1,8 +1,9 @@
 @use 'sass:color';
-@import '../darkly_variables';
+@import '../darkly_variables_oscars';
 
 .oscarBackground {
-  background-image: url('../assets/emmys_audience1.jpg');
+  //background-image: url('../assets/emmys_audience1.jpg');
+  background-image: url('../assets/crowd4.jpg');
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
