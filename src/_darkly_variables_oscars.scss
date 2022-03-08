@@ -19,6 +19,8 @@ $cyan:    #3498db !default;
 
 $bodyBase: color.scale($purple, $lightness: -72%, $saturation: -60%) !default;
 
+$background-image: '../assets/crowd4.jpg';
+
 $white:    #fff !default;
 $gray-100: color.scale($bodyBase, $lightness: 85%, $saturation: 80%) !default;
 $gray-200: color.scale($bodyBase, $lightness: 75%, $saturation: 70%) !default;
