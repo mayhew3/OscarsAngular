@@ -23,7 +23,12 @@ export class VotesService {
 
   votes: Observable<Vote[]> = this.store.select(state => state.votes).pipe(
     map(votesContainer => votesContainer.votes),
-    filter(votes => !!votes)
+    filter(votes => !!votes),
+    mergeMap(votes =>
+      this.categoryService.categories.pipe(
+        map(categories => _.filter(votes, vote => !!_.findWhere(categories, {id: vote.category_id})))
+      )
+    )
   );
 
   myVotes$ = combineLatest([this.personService.me$, this.votes]).pipe(
