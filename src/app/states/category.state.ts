@@ -34,7 +34,8 @@ export class CategoryState {
   async getCategories({getState, setState}: StateContext<CategoryStateModel>, action: GetCategories): Promise<any> {
     const params = new HttpParams()
       .set('person_id', action.person_id.toString())
-      .set('year', action.year.toString());
+      .set('year', action.year.toString())
+      .set('ceremony_id', action.ceremony_id.toString());
     const result = await this.api.getAfterFullyConnected<Category[]>('/api/categories', params);
     const state = getState();
     _.each(result, (category: Category) => {

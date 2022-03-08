@@ -10,7 +10,7 @@ import {Person} from '../../interfaces/Person';
 import {ThemePalette} from '@angular/material/core';
 import {ApiService} from '../../services/api.service';
 import {ScoreboardService} from '../../services/scoreboard.service';
-import {activeCeremony, oddsUrl, oscarsStart} from '../../../shared/GlobalVars';
+import {activeCeremony, oddsUrl, ceremonyStart} from '../../../shared/GlobalVars';
 
 @Component({
   selector: 'osc-home',
@@ -65,11 +65,11 @@ export class HomeComponent implements OnInit {
   }
 
   get oscarDate(): Date {
-    return oscarsStart.toDate();
+    return ceremonyStart.toDate();
   }
 
   get oscarDateFormatted(): string {
-    return oscarsStart.local().format('dddd, MMMM Do YYYY, h:mm a'); // "Sunday, February 14th 2010, 3:25:50 pm"
+    return ceremonyStart.local().format('dddd, MMMM Do YYYY, h:mm a'); // "Sunday, February 14th 2010, 3:25:50 pm"
   }
 
   numVotesRemaining(): Observable<number> {

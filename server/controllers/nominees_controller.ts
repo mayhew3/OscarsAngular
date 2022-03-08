@@ -4,11 +4,12 @@ import {Nomination} from '../typeorm/Nomination';
 import {Category} from '../typeorm/Category';
 import {Vote} from '../typeorm/Vote';
 import {Winner} from '../typeorm/Winner';
+import {activeCeremonyId} from '../../src/shared/GlobalVars';
 
 export const getCategories = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const categories = await getRepository(Category).find({
     where: {
-      ceremony_id: 2
+      ceremony_id: activeCeremonyId
     },
     order:
       {

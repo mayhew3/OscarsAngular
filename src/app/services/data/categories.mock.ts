@@ -3,7 +3,2304 @@ import {Category} from '../../interfaces/Category';
 
 export const MockCategoryList: Category[] = [
   {
+    "winners": [{
+      "declared": "2021-04-25 20:06:15.131",
+      "category_id": 5,
+      "year": 2020,
+      "nomination_id": 2944,
+      "id": 734
+    }],
+    "nominees": [
+      {
+        "category_id": 5,
+        "year": 2020,
+        "nominee": "The Father",
+        "id": 2940
+      },
+      {
+        "category_id": 5,
+        "year": 2020,
+        "nominee": "Judas and the Black Messiah",
+        "odds_user": 5,
+        "id": 2941
+      },
+      {
+        "category_id": 5,
+        "year": 2020,
+        "nominee": "Mank",
+        "odds_user": 5,
+        "id": 2942
+      },
+      {
+        "odds_expert": 6,
+        "odds_denominator": 1,
+        "category_id": 5,
+        "year": 2020,
+        "nominee": "Minari",
+        "odds_user": 10,
+        "id": 2943,
+        "odds_numerator": 16
+      },
+      {
+        "odds_expert": 74,
+        "odds_denominator": 6,
+        "category_id": 5,
+        "year": 2020,
+        "nominee": "Nomadland",
+        "odds_user": 67,
+        "id": 2944,
+        "odds_numerator": 1
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 5,
+        "year": 2020,
+        "nominee": "Promising Young Woman",
+        "id": 2945,
+        "odds_numerator": 20
+      },
+      {
+        "category_id": 5,
+        "year": 2020,
+        "nominee": "Sound of Metal",
+        "id": 2946
+      },
+      {
+        "odds_expert": 17,
+        "odds_denominator": 1,
+        "category_id": 5,
+        "year": 2020,
+        "nominee": "The Trial of the Chicago 7",
+        "id": 2947,
+        "odds_numerator": 5
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "Belfast",
+        "id": 3944
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "Coda",
+        "id": 3945
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "Don't Look Up",
+        "id": 3946
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "Drive My Car",
+        "id": 3947
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 3948
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "King Richard",
+        "id": 3949
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "Licorice Pizza",
+        "id": 3950
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "Nightmare Alley",
+        "id": 3951
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "The Power of the Dog",
+        "id": 3952
+      },
+      {
+        "category_id": 5,
+        "year": 2021,
+        "nominee": "West Side Story",
+        "id": 3953
+      }
+    ],
+    "name": "Best Picture",
+    "ceremony_id": 1,
+    "id": 5,
+    "points": 5
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 20:15:35.616",
+      "category_id": 1,
+      "year": 2020,
+      "nomination_id": 2950,
+      "id": 748
+    }],
+    "nominees": [
+      {
+        "odds_denominator": 1,
+        "category_id": 1,
+        "year": 2020,
+        "context": "Sound of Metal",
+        "nominee": "Riz Ahmed",
+        "odds_user": 13,
+        "id": 2948,
+        "odds_numerator": 16
+      },
+      {
+        "odds_expert": 94,
+        "odds_denominator": 12,
+        "category_id": 1,
+        "year": 2020,
+        "context": "Ma Rainey's Black Bottom",
+        "nominee": "Chadwick Boseman",
+        "odds_user": 64,
+        "id": 2949,
+        "detail": "Indicates a posthumous nomination",
+        "odds_numerator": 1
+      },
+      {
+        "odds_expert": 4,
+        "odds_denominator": 1,
+        "category_id": 1,
+        "year": 2020,
+        "context": "The Father",
+        "nominee": "Anthony Hopkins",
+        "odds_user": 12,
+        "id": 2950,
+        "odds_numerator": 6
+      },
+      {
+        "odds_expert": 2,
+        "category_id": 1,
+        "year": 2020,
+        "context": "Mank",
+        "nominee": "Gary Oldman",
+        "id": 2951
+      },
+      {
+        "category_id": 1,
+        "year": 2020,
+        "context": "Minari",
+        "nominee": "Steven Yeun",
+        "id": 2952
+      },
+      {
+        "category_id": 1,
+        "year": 2021,
+        "context": "Tick, Tick... Boom!",
+        "nominee": "Andrew Garfield",
+        "id": 3954,
+        "detail": "Tick, Tick... Boom!"
+      },
+      {
+        "category_id": 1,
+        "year": 2021,
+        "context": "The Power of the Dog",
+        "nominee": "Benedict Cumberbatch",
+        "id": 3955,
+        "detail": "The Power of the Dog"
+      },
+      {
+        "category_id": 1,
+        "year": 2021,
+        "context": "The Tragedy of Macbeth",
+        "nominee": "Denzel Washington",
+        "id": 3956,
+        "detail": "The Tragedy of Macbeth"
+      },
+      {
+        "category_id": 1,
+        "year": 2021,
+        "context": "Being the Ricardos",
+        "nominee": "Javier Bardem",
+        "id": 3957,
+        "detail": "Being the Ricardos"
+      },
+      {
+        "category_id": 1,
+        "year": 2021,
+        "context": "King Richard",
+        "nominee": "Will Smith",
+        "id": 3958,
+        "detail": "King Richard"
+      }
+    ],
+    "name": "Actor",
+    "ceremony_id": 1,
+    "id": 1,
+    "points": 4
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 20:12:59.352",
+      "category_id": 2,
+      "year": 2020,
+      "nomination_id": 3011,
+      "id": 741
+    }],
+    "nominees": [
+      {
+        "odds_expert": 31,
+        "odds_denominator": 4,
+        "category_id": 2,
+        "year": 2020,
+        "context": "Ma Rainey's Black Bottom",
+        "nominee": "Viola Davis",
+        "odds_user": 14,
+        "id": 3008,
+        "odds_numerator": 7
+      },
+      {
+        "category_id": 2,
+        "year": 2020,
+        "context": "The United States vs. Billie Holiday",
+        "nominee": "Andra Day",
+        "id": 3009
+      },
+      {
+        "category_id": 2,
+        "year": 2020,
+        "context": "Pieces of a Woman",
+        "nominee": "Vanessa Kirby",
+        "id": 3010
+      },
+      {
+        "odds_expert": 19,
+        "odds_denominator": 1,
+        "category_id": 2,
+        "year": 2020,
+        "context": "Nomadland",
+        "nominee": "Frances McDormand",
+        "odds_user": 37,
+        "id": 3011,
+        "odds_numerator": 4
+      },
+      {
+        "odds_expert": 38,
+        "odds_denominator": 4,
+        "category_id": 2,
+        "year": 2020,
+        "context": "Promising Young Woman",
+        "nominee": "Carey Mulligan",
+        "odds_user": 38,
+        "id": 3012,
+        "odds_numerator": 5
+      },
+      {
+        "category_id": 2,
+        "year": 2021,
+        "context": "The Eyes of Tammy Faye",
+        "nominee": "Jessica Chastain",
+        "id": 3964,
+        "detail": "The Eyes of Tammy Faye"
+      },
+      {
+        "category_id": 2,
+        "year": 2021,
+        "context": "Spencer",
+        "nominee": "Kristen Stewart",
+        "id": 3965,
+        "detail": "Spencer"
+      },
+      {
+        "category_id": 2,
+        "year": 2021,
+        "context": "Being the Ricardos",
+        "nominee": "Nicole Kidman",
+        "id": 3966,
+        "detail": "Being the Ricardos"
+      },
+      {
+        "category_id": 2,
+        "year": 2021,
+        "context": "The Lost Daughter",
+        "nominee": "Olivia Colman",
+        "id": 3967,
+        "detail": "The Lost Daughter"
+      },
+      {
+        "category_id": 2,
+        "year": 2021,
+        "context": "Parallel Mothers",
+        "nominee": "Penélope Cruz",
+        "id": 3968,
+        "detail": "Parallel Mothers"
+      }
+    ],
+    "name": "Actress",
+    "ceremony_id": 1,
+    "id": 2,
+    "points": 4
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 17:59:51.822",
+      "category_id": 8,
+      "year": 2020,
+      "nomination_id": 3006,
+      "id": 504
+    }],
+    "nominees": [
+      {
+        "category_id": 8,
+        "year": 2020,
+        "context": "Another Round",
+        "nominee": "Thomas Vinterberg",
+        "id": 3003
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 8,
+        "year": 2020,
+        "context": "Mank",
+        "nominee": "David Fincher",
+        "odds_user": 10,
+        "id": 3004,
+        "odds_numerator": 9
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 8,
+        "year": 2020,
+        "context": "Minari",
+        "nominee": "Lee Isaac Chung",
+        "odds_user": 6,
+        "id": 3005,
+        "odds_numerator": 20
+      },
+      {
+        "odds_expert": 100,
+        "odds_denominator": 25,
+        "category_id": 8,
+        "year": 2020,
+        "context": "Nomadland",
+        "nominee": "Chloé Zhao",
+        "odds_user": 77,
+        "id": 3006,
+        "odds_numerator": 1
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 8,
+        "year": 2020,
+        "context": "Promising Young Woman",
+        "nominee": "Emerald Fennell",
+        "id": 3007,
+        "odds_numerator": 20
+      },
+      {
+        "category_id": 8,
+        "year": 2021,
+        "context": "The Power of the Dog",
+        "nominee": "Jane Campion",
+        "id": 3974,
+        "detail": "The Power of the Dog"
+      },
+      {
+        "category_id": 8,
+        "year": 2021,
+        "context": "Belfast",
+        "nominee": "Kenneth Branagh",
+        "id": 3975,
+        "detail": "Belfast"
+      },
+      {
+        "category_id": 8,
+        "year": 2021,
+        "context": "Licorice Pizza",
+        "nominee": "Paul Thomas Anderson",
+        "id": 3976,
+        "detail": "Licorice Pizza"
+      },
+      {
+        "category_id": 8,
+        "year": 2021,
+        "context": "Drive My Car",
+        "nominee": "Ryusuke Hamaguchi",
+        "id": 3977,
+        "detail": "Drive My Car"
+      },
+      {
+        "category_id": 8,
+        "year": 2021,
+        "context": "West Side Story",
+        "nominee": "Steven Spielberg",
+        "id": 3978,
+        "detail": "West Side Story"
+      }
+    ],
+    "name": "Directing",
+    "ceremony_id": 1,
+    "id": 8,
+    "points": 4
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 18:26:58.125",
+      "category_id": 3,
+      "year": 2020,
+      "nomination_id": 2966,
+      "id": 542
+    }],
+    "nominees": [
+      {
+        "odds_denominator": 1,
+        "category_id": 3,
+        "year": 2020,
+        "nominee": "Onward",
+        "odds_user": 3,
+        "id": 2963,
+        "odds_numerator": 20
+      },
+      {
+        "category_id": 3,
+        "year": 2020,
+        "nominee": "Over the Moon",
+        "id": 2964
+      },
+      {
+        "category_id": 3,
+        "year": 2020,
+        "nominee": "A Shaun the Sheep Movie: Farmageddon",
+        "id": 2965
+      },
+      {
+        "odds_expert": 98,
+        "odds_denominator": 25,
+        "category_id": 3,
+        "year": 2020,
+        "nominee": "Soul",
+        "odds_user": 85,
+        "id": 2966,
+        "odds_numerator": 1
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 3,
+        "year": 2020,
+        "nominee": "Wolfwalkers",
+        "odds_user": 10,
+        "id": 2967,
+        "odds_numerator": 8
+      },
+      {
+        "category_id": 3,
+        "year": 2021,
+        "nominee": "Luca",
+        "id": 3979,
+        "detail": "Enrico Casarosa and Andrea Warren"
+      },
+      {
+        "category_id": 3,
+        "year": 2021,
+        "nominee": "Raya and the Last Dragon",
+        "id": 3980,
+        "detail": "Don Hall, Carlos López Estrada, Osnat Shurer and Peter Del Vecho"
+      },
+      {
+        "category_id": 3,
+        "year": 2021,
+        "nominee": "Encanto",
+        "id": 3981,
+        "detail": "Jared Bush, Byron Howard, Yvett Merino and Clark Spencer"
+      },
+      {
+        "category_id": 3,
+        "year": 2021,
+        "nominee": "Flee",
+        "id": 3982,
+        "detail": "Jonas Poher Rasmussen, Monica Hellström, Signe Byrge Sørensen and Charlotte De La Gournerie"
+      },
+      {
+        "category_id": 3,
+        "year": 2021,
+        "nominee": "The Mitchells vs. The Machines",
+        "id": 3983,
+        "detail": "Mike Rianda, Phil Lord, Christopher Miller and Kurt Albrecht"
+      }
+    ],
+    "name": "Animated Feature Film",
+    "ceremony_id": 1,
+    "id": 3,
+    "points": 3
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 17:30:52.696",
+      "category_id": 20,
+      "year": 2020,
+      "nomination_id": 2954,
+      "id": 405
+    }],
+    "nominees": [
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 20,
+        "year": 2020,
+        "context": "The Trial of the Chicago 7",
+        "nominee": "Sacha Baron Cohen",
+        "odds_user": 14,
+        "id": 2953,
+        "odds_numerator": 14
+      },
+      {
+        "odds_expert": 90,
+        "odds_denominator": 25,
+        "category_id": 20,
+        "year": 2020,
+        "context": "Judas and the Black Messiah",
+        "nominee": "Daniel Kaluuya",
+        "odds_user": 68,
+        "id": 2954,
+        "odds_numerator": 1
+      },
+      {
+        "odds_expert": 2,
+        "category_id": 20,
+        "year": 2020,
+        "context": "One Night in Miami\u2026",
+        "nominee": "Leslie Odom Jr.",
+        "id": 2955
+      },
+      {
+        "odds_expert": 6,
+        "odds_denominator": 1,
+        "category_id": 20,
+        "year": 2020,
+        "context": "Sound of Metal",
+        "nominee": "Paul Raci",
+        "odds_user": 8,
+        "id": 2956,
+        "odds_numerator": 12
+      },
+      {
+        "category_id": 20,
+        "year": 2020,
+        "context": "Judas and the Black Messiah",
+        "nominee": "Lakeith Stanfield",
+        "id": 2957
+      },
+      {
+        "category_id": 20,
+        "year": 2021,
+        "context": "Belfast",
+        "nominee": "Ciarán Hinds",
+        "id": 3959,
+        "detail": "Belfast"
+      },
+      {
+        "category_id": 20,
+        "year": 2021,
+        "context": "The Power of the Dog",
+        "nominee": "Jesse Plemons",
+        "id": 3960,
+        "detail": "The Power of the Dog"
+      },
+      {
+        "category_id": 20,
+        "year": 2021,
+        "context": "Being the Ricardos",
+        "nominee": "J. K. Simmons",
+        "id": 3961,
+        "detail": "Being the Ricardos"
+      },
+      {
+        "category_id": 20,
+        "year": 2021,
+        "context": "The Power of the Dog",
+        "nominee": "Kodi Smit-McPhee",
+        "id": 3962,
+        "detail": "The Power of the Dog"
+      },
+      {
+        "category_id": 20,
+        "year": 2021,
+        "context": "Coda",
+        "nominee": "Troy Kotsur",
+        "id": 3963,
+        "detail": "Coda"
+      }
+    ],
+    "name": "Supporting Actor",
+    "ceremony_id": 1,
+    "id": 20,
+    "points": 3
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 18:55:02.082",
+      "category_id": 21,
+      "year": 2020,
+      "nomination_id": 3017,
+      "id": 600
+    }],
+    "nominees": [
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 21,
+        "year": 2020,
+        "context": "Borat Subsequent Moviefilm",
+        "nominee": "Maria Bakalova",
+        "odds_user": 23,
+        "id": 3013,
+        "odds_numerator": 4
+      },
+      {
+        "odds_expert": 8,
+        "odds_denominator": 1,
+        "category_id": 21,
+        "year": 2020,
+        "context": "Hillbilly Elegy",
+        "nominee": "Glenn Close",
+        "id": 3014,
+        "odds_numerator": 9
+      },
+      {
+        "category_id": 21,
+        "year": 2020,
+        "context": "The Father",
+        "nominee": "Olivia Colman",
+        "odds_user": 17,
+        "id": 3015
+      },
+      {
+        "category_id": 21,
+        "year": 2020,
+        "context": "Mank",
+        "nominee": "Amanda Seyfried",
+        "id": 3016
+      },
+      {
+        "odds_expert": 90,
+        "odds_denominator": 9,
+        "category_id": 21,
+        "year": 2020,
+        "context": "Minari",
+        "nominee": "Youn Yuh-jung",
+        "odds_user": 39,
+        "id": 3017,
+        "odds_numerator": 2
+      },
+      {
+        "category_id": 21,
+        "year": 2021,
+        "context": "West Side Story",
+        "nominee": "Ariana DeBose",
+        "id": 3969,
+        "detail": "West Side Story"
+      },
+      {
+        "category_id": 21,
+        "year": 2021,
+        "context": "King Richard",
+        "nominee": "Aunjanue Ellis",
+        "id": 3970,
+        "detail": "King Richard"
+      },
+      {
+        "category_id": 21,
+        "year": 2021,
+        "context": "The Lost Daughter",
+        "nominee": "Jessie Buckley",
+        "id": 3971,
+        "detail": "The Lost Daughter"
+      },
+      {
+        "category_id": 21,
+        "year": 2021,
+        "context": "Belfast",
+        "nominee": "Judi Dench",
+        "id": 3972,
+        "detail": "Belfast"
+      },
+      {
+        "category_id": 21,
+        "year": 2021,
+        "context": "The Power of the Dog",
+        "nominee": "Kirsten Dunst",
+        "id": 3973,
+        "detail": "The Power of the Dog"
+      }
+    ],
+    "name": "Supporting Actress",
+    "ceremony_id": 1,
+    "id": 21,
+    "points": 3
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 17:12:34.705",
+      "category_id": 23,
+      "year": 2020,
+      "nomination_id": 3019,
+      "id": 366
+    }],
+    "nominees": [
+      {
+        "odds_expert": 5,
+        "odds_denominator": 1,
+        "category_id": 23,
+        "year": 2020,
+        "nominee": "Borat Subsequent Moviefilm",
+        "id": 3018,
+        "detail": "Screenplay by Sacha Baron Cohen, Peter Baynham, Jena Friedman, Anthony Hines, Lee Kern, Dan Mazer, Erica Rivinoja and Dan Swimer; Story by Baron Cohen, Hines, Nina Pedrad and Swimer; Based on the character by Baron Cohen",
+        "odds_numerator": 7
+      },
+      {
+        "odds_expert": 23,
+        "odds_denominator": 4,
+        "category_id": 23,
+        "year": 2020,
+        "nominee": "The Father",
+        "odds_user": 19,
+        "id": 3019,
+        "detail": "Christopher Hampton and Florian Zeller, based on the play by Zeller",
+        "odds_numerator": 11
+      },
+      {
+        "odds_expert": 73,
+        "odds_denominator": 11,
+        "category_id": 23,
+        "year": 2020,
+        "nominee": "Nomadland",
+        "odds_user": 60,
+        "id": 3020,
+        "detail": "Chloé Zhao, based on the book by Jessica Bruder",
+        "odds_numerator": 4
+      },
+      {
+        "category_id": 23,
+        "year": 2020,
+        "nominee": "One Night in Miami\u2026",
+        "odds_user": 10,
+        "id": 3021,
+        "detail": "Kemp Powers, based on his play"
+      },
+      {
+        "category_id": 23,
+        "year": 2020,
+        "nominee": "The White Tiger",
+        "id": 3022,
+        "detail": "Ramin Bahrani, based on the novel by Aravind Adiga"
+      },
+      {
+        "category_id": 23,
+        "year": 2021,
+        "nominee": "The Power of the Dog",
+        "id": 4009,
+        "detail": "Jane Campion"
+      },
+      {
+        "category_id": 23,
+        "year": 2021,
+        "nominee": "The Lost Daughter",
+        "id": 4010,
+        "detail": "Maggie Gyllenhaal"
+      },
+      {
+        "category_id": 23,
+        "year": 2021,
+        "nominee": "Coda",
+        "id": 4011,
+        "detail": "Sian Heder"
+      },
+      {
+        "category_id": 23,
+        "year": 2021,
+        "nominee": "Drive My Car",
+        "id": 4012,
+        "detail": "Ryusuke Hamaguchi and Takamasa Ōe"
+      },
+      {
+        "category_id": 23,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 4013,
+        "detail": "Jon Spaihts, Denis Villeneuve and Eric Roth"
+      }
+    ],
+    "name": "Writing (Adapted Screenplay)",
+    "ceremony_id": 1,
+    "id": 23,
+    "points": 3
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 17:07:56.125",
+      "category_id": 24,
+      "year": 2020,
+      "nomination_id": 2960,
+      "id": 362
+    }],
+    "nominees": [
+      {
+        "category_id": 24,
+        "year": 2020,
+        "nominee": "Judas and the Black Messiah",
+        "id": 2958,
+        "detail": "Screenplay by Will Berson and Shaka King; Story by Berson, King, Keith Lucas and Kenny Lucas"
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 24,
+        "year": 2020,
+        "nominee": "Minari",
+        "odds_user": 18,
+        "id": 2959,
+        "detail": "Lee Isaac Chung",
+        "odds_numerator": 14
+      },
+      {
+        "odds_expert": 89,
+        "odds_denominator": 4,
+        "category_id": 24,
+        "year": 2020,
+        "nominee": "Promising Young Woman",
+        "odds_user": 34,
+        "id": 2960,
+        "detail": "Emerald Fennell",
+        "odds_numerator": 1
+      },
+      {
+        "category_id": 24,
+        "year": 2020,
+        "nominee": "Sound of Metal",
+        "id": 2961,
+        "detail": "Screenplay by Abraham Marder and Darius Marder; Story by Derek Cianfrance and D. Marder"
+      },
+      {
+        "odds_expert": 11,
+        "odds_denominator": 4,
+        "category_id": 24,
+        "year": 2020,
+        "nominee": "The Trial of the Chicago 7",
+        "odds_user": 30,
+        "id": 2962,
+        "detail": "Aaron Sorkin",
+        "odds_numerator": 11
+      },
+      {
+        "category_id": 24,
+        "year": 2021,
+        "nominee": "Belfast",
+        "id": 4004,
+        "detail": "Kenneth Branagh"
+      },
+      {
+        "category_id": 24,
+        "year": 2021,
+        "nominee": "Licorice Pizza",
+        "id": 4005,
+        "detail": "Paul Thomas Anderson"
+      },
+      {
+        "category_id": 24,
+        "year": 2021,
+        "nominee": "King Richard",
+        "id": 4006,
+        "detail": "Zach Baylin"
+      },
+      {
+        "category_id": 24,
+        "year": 2021,
+        "nominee": "Don't Look Up",
+        "id": 4007,
+        "detail": "Adam McKay and David Sirota"
+      },
+      {
+        "category_id": 24,
+        "year": 2021,
+        "nominee": "The Worst Person in the World",
+        "id": 4008,
+        "detail": "Eskil Vogt and Joachim Trier"
+      }
+    ],
+    "name": "Writing (Original Screenplay)",
+    "ceremony_id": 1,
+    "id": 24,
+    "points": 3
+  },
+  {
     "winners": [],
+    "nominees": [],
+    "name": "Art Direction",
+    "ceremony_id": 1,
+    "id": 27,
+    "end_year": 2011,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 19:08:02.315",
+      "category_id": 6,
+      "year": 2020,
+      "nomination_id": 2989,
+      "id": 626
+    }],
+    "nominees": [
+      {
+        "category_id": 6,
+        "year": 2020,
+        "context": "Sean Bobbitt",
+        "nominee": "Judas and the Black Messiah",
+        "odds_user": 5,
+        "id": 2988
+      },
+      {
+        "odds_expert": 32,
+        "odds_denominator": 1,
+        "category_id": 6,
+        "year": 2020,
+        "context": "Erik Messerschmidt",
+        "nominee": "Mank",
+        "odds_user": 30,
+        "id": 2989,
+        "odds_numerator": 3
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 6,
+        "year": 2020,
+        "context": "Dariusz Wolski",
+        "nominee": "News of the World",
+        "id": 2990,
+        "odds_numerator": 14
+      },
+      {
+        "odds_expert": 66,
+        "odds_denominator": 4,
+        "category_id": 6,
+        "year": 2020,
+        "context": "Joshua James Richards",
+        "nominee": "Nomadland",
+        "odds_user": 57,
+        "id": 2991,
+        "odds_numerator": 1
+      },
+      {
+        "category_id": 6,
+        "year": 2020,
+        "context": "Phedon Papamichael",
+        "nominee": "The Trial of the Chicago 7",
+        "id": 2992
+      },
+      {
+        "category_id": 6,
+        "year": 2021,
+        "nominee": "The Power of the Dog",
+        "id": 3989,
+        "detail": "Ari Wegner"
+      },
+      {
+        "category_id": 6,
+        "year": 2021,
+        "nominee": "The Tragedy of Macbeth",
+        "id": 3990,
+        "detail": "Bruno Delbonnel"
+      },
+      {
+        "category_id": 6,
+        "year": 2021,
+        "nominee": "Nightmare Alley",
+        "id": 3991,
+        "detail": "Dan Laustsen"
+      },
+      {
+        "category_id": 6,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 3992,
+        "detail": "Greig Fraser"
+      },
+      {
+        "category_id": 6,
+        "year": 2021,
+        "nominee": "West Side Story",
+        "id": 3993,
+        "detail": "Janusz Kamiński"
+      }
+    ],
+    "name": "Cinematography",
+    "ceremony_id": 1,
+    "id": 6,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 17:46:13.442",
+      "category_id": 7,
+      "year": 2020,
+      "nomination_id": 2994,
+      "id": 463
+    }],
+    "nominees": [
+      {
+        "odds_expert": 13,
+        "odds_denominator": 3,
+        "category_id": 7,
+        "year": 2020,
+        "nominee": "Emma.",
+        "odds_user": 21,
+        "id": 2993,
+        "odds_numerator": 10
+      },
+      {
+        "odds_expert": 80,
+        "odds_denominator": 4,
+        "category_id": 7,
+        "year": 2020,
+        "nominee": "Ma Rainey's Black Bottom",
+        "odds_user": 43,
+        "id": 2994,
+        "odds_numerator": 1
+      },
+      {
+        "odds_expert": 8,
+        "odds_denominator": 1,
+        "category_id": 7,
+        "year": 2020,
+        "nominee": "Mank",
+        "odds_user": 26,
+        "id": 2995,
+        "odds_numerator": 10
+      },
+      {
+        "category_id": 7,
+        "year": 2020,
+        "nominee": "Mulan",
+        "id": 2996
+      },
+      {
+        "category_id": 7,
+        "year": 2020,
+        "nominee": "Pinocchio",
+        "id": 2997
+      },
+      {
+        "category_id": 7,
+        "year": 2021,
+        "nominee": "Cruella",
+        "id": 4014,
+        "detail": "Jenny Beavan"
+      },
+      {
+        "category_id": 7,
+        "year": 2021,
+        "nominee": "Nightmare Alley",
+        "id": 4015,
+        "detail": "Luis Sequeira"
+      },
+      {
+        "category_id": 7,
+        "year": 2021,
+        "nominee": "West Side Story",
+        "id": 4016,
+        "detail": "Paul Tazewell"
+      },
+      {
+        "category_id": 7,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 4017,
+        "detail": "Jacqueline West and Bob Morgan"
+      },
+      {
+        "category_id": 7,
+        "year": 2021,
+        "nominee": "Cyrano",
+        "id": 4018,
+        "detail": "Massimo Cantini Parrini and Jacqueline Durran"
+      }
+    ],
+    "name": "Costume Design",
+    "ceremony_id": 1,
+    "id": 7,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 19:19:13.068",
+      "category_id": 11,
+      "year": 2020,
+      "nomination_id": 3056,
+      "id": 679
+    }],
+    "nominees": [
+      {
+        "category_id": 11,
+        "year": 2020,
+        "nominee": "The Father",
+        "id": 3053
+      },
+      {
+        "odds_expert": 10,
+        "odds_denominator": 1,
+        "category_id": 11,
+        "year": 2020,
+        "nominee": "Nomadland",
+        "odds_user": 29,
+        "id": 3054,
+        "odds_numerator": 9
+      },
+      {
+        "category_id": 11,
+        "year": 2020,
+        "nominee": "Promising Young Woman",
+        "id": 3055
+      },
+      {
+        "odds_expert": 45,
+        "odds_denominator": 11,
+        "category_id": 11,
+        "year": 2020,
+        "nominee": "Sound of Metal",
+        "odds_user": 32,
+        "id": 3056,
+        "odds_numerator": 10
+      },
+      {
+        "odds_expert": 43,
+        "odds_denominator": 11,
+        "category_id": 11,
+        "year": 2020,
+        "nominee": "The Trial of the Chicago 7",
+        "odds_user": 19,
+        "id": 3057,
+        "odds_numerator": 10
+      },
+      {
+        "category_id": 11,
+        "year": 2021,
+        "nominee": "Don't Look Up",
+        "id": 4049,
+        "detail": "Hank Corwin"
+      },
+      {
+        "category_id": 11,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 4050,
+        "detail": "Joe Walker"
+      },
+      {
+        "category_id": 11,
+        "year": 2021,
+        "nominee": "King Richard",
+        "id": 4051,
+        "detail": "Pamela Martin"
+      },
+      {
+        "category_id": 11,
+        "year": 2021,
+        "nominee": "The Power of the Dog",
+        "id": 4052,
+        "detail": "Peter Sciberras"
+      },
+      {
+        "category_id": 11,
+        "year": 2021,
+        "nominee": "Tick, Tick... Boom!",
+        "id": 4053,
+        "detail": "Myron Kerstein and Andrew Weisblum"
+      }
+    ],
+    "name": "Film Editing",
+    "ceremony_id": 1,
+    "id": 11,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 17:42:02.678",
+      "category_id": 13,
+      "year": 2020,
+      "nomination_id": 3050,
+      "id": 426
+    }],
+    "nominees": [
+      {
+        "category_id": 13,
+        "year": 2020,
+        "nominee": "Emma.",
+        "odds_user": 16,
+        "id": 3048
+      },
+      {
+        "odds_expert": 3,
+        "odds_denominator": 1,
+        "category_id": 13,
+        "year": 2020,
+        "nominee": "Hillbilly Elegy",
+        "id": 3049,
+        "odds_numerator": 9
+      },
+      {
+        "odds_expert": 90,
+        "odds_denominator": 4,
+        "category_id": 13,
+        "year": 2020,
+        "nominee": "Ma Rainey's Black Bottom",
+        "odds_user": 49,
+        "id": 3050,
+        "odds_numerator": 1
+      },
+      {
+        "odds_expert": 5,
+        "category_id": 13,
+        "year": 2020,
+        "nominee": "Mank",
+        "odds_user": 22,
+        "id": 3051
+      },
+      {
+        "odds_expert": 3,
+        "odds_denominator": 1,
+        "category_id": 13,
+        "year": 2020,
+        "nominee": "Pinocchio",
+        "id": 3052,
+        "odds_numerator": 4
+      },
+      {
+        "category_id": 13,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 4019,
+        "detail": "Donald Mowat, Love Larson and Eva von Bahr"
+      },
+      {
+        "category_id": 13,
+        "year": 2021,
+        "nominee": "House of Gucci",
+        "id": 4020,
+        "detail": "Göran Lundström, Anna-Carin Lock and Frederic Aspiras"
+      },
+      {
+        "category_id": 13,
+        "year": 2021,
+        "nominee": "Coming 2 America",
+        "id": 4021,
+        "detail": "Mike Marino, Stacey Morris and Carla Farmer"
+      },
+      {
+        "category_id": 13,
+        "year": 2021,
+        "nominee": "Cruella",
+        "id": 4022,
+        "detail": "Nadia Stacey, Naomi Donne and Julia Vernon"
+      },
+      {
+        "category_id": 13,
+        "year": 2021,
+        "nominee": "The Eyes of Tammy Faye",
+        "id": 4023,
+        "detail": "Stephanie Ingram, Linda Dowds and Justin Raleigh"
+      }
+    ],
+    "name": "Makeup and Hairstyling",
+    "ceremony_id": 1,
+    "id": 13,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 19:33:05.996",
+      "category_id": 14,
+      "year": 2020,
+      "nomination_id": 2982,
+      "id": 692
+    }],
+    "nominees": [
+      {
+        "odds_expert": 2,
+        "category_id": 14,
+        "year": 2020,
+        "context": "Terence Blanchard",
+        "nominee": "Da 5 Bloods",
+        "id": 2978
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 14,
+        "year": 2020,
+        "context": "Trent Reznor and Atticus Ross",
+        "nominee": "Mank",
+        "odds_user": 13,
+        "id": 2979,
+        "odds_numerator": 7
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 14,
+        "year": 2020,
+        "context": "Emile Mosseri",
+        "nominee": "Minari",
+        "odds_user": 10,
+        "id": 2980,
+        "odds_numerator": 14
+      },
+      {
+        "category_id": 14,
+        "year": 2020,
+        "context": "James Newton Howard",
+        "nominee": "News of the World",
+        "id": 2981
+      },
+      {
+        "odds_expert": 95,
+        "odds_denominator": 12,
+        "category_id": 14,
+        "year": 2020,
+        "context": "Trent Reznor, Atticus Ross and Jon Batiste",
+        "nominee": "Soul",
+        "odds_user": 69,
+        "id": 2982,
+        "odds_numerator": 1
+      },
+      {
+        "category_id": 14,
+        "year": 2021,
+        "nominee": "Parallel Mothers",
+        "id": 3994,
+        "detail": "Alberto Iglesias"
+      },
+      {
+        "category_id": 14,
+        "year": 2021,
+        "nominee": "Encanto",
+        "id": 3995,
+        "detail": "Germaine Franco"
+      },
+      {
+        "category_id": 14,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 3996,
+        "detail": "Hans Zimmer"
+      },
+      {
+        "category_id": 14,
+        "year": 2021,
+        "nominee": "The Power of the Dog",
+        "id": 3997,
+        "detail": "Jonny Greenwood"
+      },
+      {
+        "category_id": 14,
+        "year": 2021,
+        "nominee": "Don't Look Up",
+        "id": 3998,
+        "detail": "Nicholas Britell"
+      }
+    ],
+    "name": "Music (Original Score)",
+    "ceremony_id": 1,
+    "id": 14,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 19:39:13.203",
+      "category_id": 15,
+      "year": 2020,
+      "nomination_id": 3038,
+      "id": 697
+    }],
+    "nominees": [
+      {
+        "category_id": 15,
+        "year": 2020,
+        "context": "Judas and the Black Messiah",
+        "nominee": "Fight for You",
+        "odds_user": 28,
+        "id": 3038,
+        "detail": "Music by D'Mile and H.E.R.; Lyric by H.E.R. and Tiara Thomas"
+      },
+      {
+        "category_id": 15,
+        "year": 2020,
+        "context": "The Trial of the Chicago 7",
+        "nominee": "Hear My Voice",
+        "odds_user": 15,
+        "id": 3039,
+        "detail": "Music by Daniel Pemberton; Lyric by Daniel Pemberton and Celeste Waite"
+      },
+      {
+        "odds_expert": 26,
+        "odds_denominator": 1,
+        "category_id": 15,
+        "year": 2020,
+        "context": "Eurovision Song Contest: The Story of Fire Saga",
+        "nominee": "Husavik",
+        "id": 3040,
+        "detail": "Music and lyric by Rickard Göransson, Fat Max Gsus and Savan Kotecha",
+        "odds_numerator": 3
+      },
+      {
+        "odds_expert": 10,
+        "odds_denominator": 4,
+        "category_id": 15,
+        "year": 2020,
+        "context": "The Life Ahead",
+        "nominee": "Io sì (Seen)",
+        "id": 3041,
+        "detail": "Music by Diane Warren; Lyric by Laura Pausini and Warren",
+        "odds_numerator": 9
+      },
+      {
+        "odds_expert": 62,
+        "odds_denominator": 11,
+        "category_id": 15,
+        "year": 2020,
+        "context": "One Night in Miami...",
+        "nominee": "Speak Now",
+        "odds_user": 35,
+        "id": 3042,
+        "detail": "Music and lyric by Sam Ashworth and Leslie Odom Jr.",
+        "odds_numerator": 8
+      },
+      {
+        "category_id": 15,
+        "year": 2021,
+        "context": "Four Good Days",
+        "nominee": "Somehow You Do",
+        "id": 3999,
+        "detail": "Diane Warren"
+      },
+      {
+        "category_id": 15,
+        "year": 2021,
+        "context": "Encanto",
+        "nominee": "Dos Oruguitas",
+        "id": 4000,
+        "detail": "Lin-Manuel Miranda"
+      },
+      {
+        "category_id": 15,
+        "year": 2021,
+        "context": "Belfast",
+        "nominee": "Down to Joy",
+        "id": 4001,
+        "detail": "Van Morrison"
+      },
+      {
+        "category_id": 15,
+        "year": 2021,
+        "context": "King Richard",
+        "nominee": "Be Alive",
+        "id": 4002,
+        "detail": "Beyoncé and DIXSON"
+      },
+      {
+        "category_id": 15,
+        "year": 2021,
+        "context": "No Time to Die",
+        "nominee": "No Time to Die",
+        "id": 4003,
+        "detail": "Billie Eilish and Finneas O'Connell"
+      }
+    ],
+    "name": "Music (Original Song)",
+    "ceremony_id": 1,
+    "id": 15,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 19:05:19.568",
+      "category_id": 4,
+      "year": 2020,
+      "nomination_id": 3045,
+      "id": 619
+    }],
+    "nominees": [
+      {
+        "odds_expert": 3,
+        "category_id": 4,
+        "year": 2020,
+        "nominee": "The Father",
+        "id": 3043
+      },
+      {
+        "odds_denominator": 2,
+        "category_id": 4,
+        "year": 2020,
+        "nominee": "Ma Rainey's Black Bottom",
+        "odds_user": 12,
+        "id": 3044,
+        "odds_numerator": 13
+      },
+      {
+        "odds_expert": 98,
+        "odds_denominator": 7,
+        "category_id": 4,
+        "year": 2020,
+        "nominee": "Mank",
+        "odds_user": 60,
+        "id": 3045,
+        "odds_numerator": 1
+      },
+      {
+        "category_id": 4,
+        "year": 2020,
+        "nominee": "News of the World",
+        "id": 3046
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 4,
+        "year": 2020,
+        "nominee": "Tenet",
+        "odds_user": 19,
+        "id": 3047,
+        "odds_numerator": 9
+      },
+      {
+        "category_id": 4,
+        "year": 2021,
+        "nominee": "West Side Story",
+        "id": 3984,
+        "detail": "Adam Stockhausen and Rena DeAngelo"
+      },
+      {
+        "category_id": 4,
+        "year": 2021,
+        "nominee": "The Power of the Dog",
+        "id": 3985,
+        "detail": "Grant Major and Amber Richards"
+      },
+      {
+        "category_id": 4,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 3986,
+        "detail": "Patrice Vermette and Zsuzsanna Sipos"
+      },
+      {
+        "category_id": 4,
+        "year": 2021,
+        "nominee": "The Tragedy of Macbeth",
+        "id": 3987,
+        "detail": "Stefan Dechant and Nancy Haigh"
+      },
+      {
+        "category_id": 4,
+        "year": 2021,
+        "nominee": "Nightmare Alley",
+        "id": 3988,
+        "detail": "Tamara Deverell and Shane Vieau"
+      }
+    ],
+    "start_year": 2011,
+    "name": "Production Design",
+    "ceremony_id": 1,
+    "id": 4,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 18:08:33.91",
+      "category_id": 26,
+      "year": 2020,
+      "nomination_id": 2987,
+      "id": 513
+    }],
+    "nominees": [
+      {
+        "category_id": 26,
+        "year": 2020,
+        "nominee": "Greyhound",
+        "id": 2983
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 26,
+        "year": 2020,
+        "nominee": "Mank",
+        "odds_user": 7,
+        "id": 2984,
+        "odds_numerator": 10
+      },
+      {
+        "category_id": 26,
+        "year": 2020,
+        "nominee": "News of the World",
+        "id": 2985
+      },
+      {
+        "odds_expert": 3,
+        "odds_denominator": 1,
+        "category_id": 26,
+        "year": 2020,
+        "nominee": "Soul",
+        "odds_user": 13,
+        "id": 2986,
+        "odds_numerator": 12
+      },
+      {
+        "odds_expert": 98,
+        "odds_denominator": 25,
+        "category_id": 26,
+        "year": 2020,
+        "nominee": "Sound of Metal",
+        "odds_user": 74,
+        "id": 2987,
+        "odds_numerator": 1
+      },
+      {
+        "category_id": 26,
+        "year": 2021,
+        "nominee": "The Power of the Dog",
+        "id": 4054,
+        "detail": "Richard Flynn, Robert Mackenzie and Tara Webb"
+      },
+      {
+        "category_id": 26,
+        "year": 2021,
+        "nominee": "Belfast",
+        "id": 4055,
+        "detail": "Denise Yarde, Simon Chase, James Mather and Niv Adiri"
+      },
+      {
+        "category_id": 26,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 4056,
+        "detail": "Mac Ruth, Mark A. Mangini, Theo Green, Doug Hemphill and Ron Bartlett"
+      },
+      {
+        "category_id": 26,
+        "year": 2021,
+        "nominee": "No Time to Die",
+        "id": 4057,
+        "detail": "Simon Hayes, Oliver Tarney, James Harrison, Paul Massey and Mark Taylor"
+      },
+      {
+        "category_id": 26,
+        "year": 2021,
+        "nominee": "West Side Story",
+        "id": 4058,
+        "detail": "Tod A. Maitland, Gary Rydstrom, Brian Chumney, Andy Nelson and Shawn Murphy"
+      }
+    ],
+    "start_year": 2020,
+    "name": "Sound",
+    "ceremony_id": 1,
+    "id": 26,
+    "points": 2
+  },
+  {
+    "winners": [],
+    "nominees": [],
+    "name": "Sound Editing",
+    "ceremony_id": 1,
+    "id": 18,
+    "end_year": 2020,
+    "points": 2
+  },
+  {
+    "winners": [],
+    "nominees": [],
+    "name": "Sound Mixing",
+    "ceremony_id": 1,
+    "id": 19,
+    "end_year": 2020,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 18:52:06.503",
+      "category_id": 22,
+      "year": 2020,
+      "nomination_id": 3002,
+      "id": 586
+    }],
+    "nominees": [
+      {
+        "category_id": 22,
+        "year": 2020,
+        "nominee": "Love and Monsters",
+        "id": 2998
+      },
+      {
+        "odds_expert": 13,
+        "odds_denominator": 2,
+        "category_id": 22,
+        "year": 2020,
+        "nominee": "The Midnight Sky",
+        "odds_user": 5,
+        "id": 2999,
+        "odds_numerator": 5
+      },
+      {
+        "odds_denominator": 1,
+        "category_id": 22,
+        "year": 2020,
+        "nominee": "Mulan",
+        "odds_user": 6,
+        "id": 3000,
+        "odds_numerator": 16
+      },
+      {
+        "category_id": 22,
+        "year": 2020,
+        "nominee": "The One and Only Ivan",
+        "id": 3001
+      },
+      {
+        "odds_expert": 88,
+        "odds_denominator": 7,
+        "category_id": 22,
+        "year": 2020,
+        "nominee": "Tenet",
+        "odds_user": 84,
+        "id": 3002,
+        "odds_numerator": 2
+      },
+      {
+        "category_id": 22,
+        "year": 2021,
+        "nominee": "No Time to Die",
+        "id": 4059,
+        "detail": "Charlie Noble, Joel Green, Jonathan Fawkner and Chris Corbould"
+      },
+      {
+        "category_id": 22,
+        "year": 2021,
+        "nominee": "Shang-Chi and the Legend of the Ten Rings",
+        "id": 4060,
+        "detail": "Christopher Townsend, Joe Farrell, Sean Noel Walker and Dan Oliver"
+      },
+      {
+        "category_id": 22,
+        "year": 2021,
+        "nominee": "Spider-Man: No Way Home",
+        "id": 4061,
+        "detail": "Kelly Port, Chris Waegner, Scott Edelstein and Daniel Sudick"
+      },
+      {
+        "category_id": 22,
+        "year": 2021,
+        "nominee": "Dune",
+        "id": 4062,
+        "detail": "Paul Lambert, Tristan Myles, Brian Connor and Gerd Nefzer"
+      },
+      {
+        "category_id": 22,
+        "year": 2021,
+        "nominee": "Free Guy",
+        "id": 4063,
+        "detail": "Swen Gillberg, Bryan Grill, Nikos Kalaitzidis and Daniel Sudick"
+      }
+    ],
+    "name": "Visual Effects",
+    "ceremony_id": 1,
+    "id": 22,
+    "points": 2
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 18:41:38.412",
+      "category_id": 9,
+      "year": 2020,
+      "nomination_id": 2971,
+      "id": 584
+    }],
+    "nominees": [
+      {
+        "odds_denominator": 1,
+        "category_id": 9,
+        "year": 2020,
+        "nominee": "Collective",
+        "odds_user": 23,
+        "id": 2968,
+        "odds_numerator": 9
+      },
+      {
+        "odds_expert": 10,
+        "category_id": 9,
+        "year": 2020,
+        "nominee": "Crip Camp",
+        "id": 2969
+      },
+      {
+        "category_id": 9,
+        "year": 2020,
+        "nominee": "The Mole Agent",
+        "id": 2970
+      },
+      {
+        "odds_expert": 71,
+        "odds_denominator": 9,
+        "category_id": 9,
+        "year": 2020,
+        "nominee": "My Octopus Teacher",
+        "odds_user": 25,
+        "id": 2971,
+        "odds_numerator": 2
+      },
+      {
+        "odds_expert": 19,
+        "odds_denominator": 2,
+        "category_id": 9,
+        "year": 2020,
+        "nominee": "Time",
+        "odds_user": 34,
+        "id": 2972,
+        "odds_numerator": 9
+      },
+      {
+        "category_id": 9,
+        "year": 2021,
+        "nominee": "Writing with Fire",
+        "id": 4024,
+        "detail": "Rintu Thomas and Sushmit Ghosh"
+      },
+      {
+        "category_id": 9,
+        "year": 2021,
+        "nominee": "Attica",
+        "id": 4025,
+        "detail": "Stanley Nelson Jr. and Traci A. Curry"
+      },
+      {
+        "category_id": 9,
+        "year": 2021,
+        "nominee": "Ascension",
+        "id": 4026,
+        "detail": "Jessica Kingdon, Kira Simon-Kennedy and Nathan Truesdell"
+      },
+      {
+        "category_id": 9,
+        "year": 2021,
+        "nominee": "Flee",
+        "id": 4027,
+        "detail": "Jonas Poher Rasmussen, Monica Hellström, Signe Byrge Sørensen and Charlotte De La Gournerie"
+      },
+      {
+        "category_id": 9,
+        "year": 2021,
+        "nominee": "Summer of Soul (...Or, When the Revolution Could Not Be Televised)",
+        "id": 4028,
+        "detail": "Questlove, Joseph Patel, Robert Fyvolent and David Dinerstein"
+      }
+    ],
+    "name": "Documentary (Feature)",
+    "ceremony_id": 1,
+    "id": 9,
+    "points": 1
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 18:35:04.932",
+      "category_id": 10,
+      "year": 2020,
+      "nomination_id": 3028,
+      "id": 569
+    }],
+    "nominees": [
+      {
+        "category_id": 10,
+        "year": 2020,
+        "nominee": "Colette",
+        "odds_user": 26,
+        "id": 3028
+      },
+      {
+        "odds_expert": 38,
+        "odds_denominator": 4,
+        "category_id": 10,
+        "year": 2020,
+        "nominee": "A Concerto Is a Conversation",
+        "id": 3029,
+        "odds_numerator": 11
+      },
+      {
+        "odds_expert": 10,
+        "odds_denominator": 2,
+        "category_id": 10,
+        "year": 2020,
+        "nominee": "Do Not Split",
+        "id": 3030,
+        "odds_numerator": 15
+      },
+      {
+        "category_id": 10,
+        "year": 2020,
+        "nominee": "Hunger Ward",
+        "odds_user": 19,
+        "id": 3031
+      },
+      {
+        "odds_expert": 51,
+        "odds_denominator": 13,
+        "category_id": 10,
+        "year": 2020,
+        "nominee": "A Love Song for Latasha",
+        "odds_user": 25,
+        "id": 3032,
+        "odds_numerator": 8
+      },
+      {
+        "category_id": 10,
+        "year": 2021,
+        "nominee": "The Queen of Basketball",
+        "id": 4029,
+        "detail": "Ben Proudfoot"
+      },
+      {
+        "category_id": 10,
+        "year": 2021,
+        "nominee": "When We Were Bullies",
+        "id": 4030,
+        "detail": "Jay Rosenblatt"
+      },
+      {
+        "category_id": 10,
+        "year": 2021,
+        "nominee": "Three Songs for Benazir",
+        "id": 4031,
+        "detail": "Elizabeth Mirzaei and Gulistan Mirzaei"
+      },
+      {
+        "category_id": 10,
+        "year": 2021,
+        "nominee": "Audible",
+        "id": 4032,
+        "detail": "Matthew Ogens and Geoff McLean"
+      },
+      {
+        "category_id": 10,
+        "year": 2021,
+        "nominee": "Lead Me Home",
+        "id": 4033,
+        "detail": "Pedro Kos and Jon Shenk"
+      }
+    ],
+    "name": "Documentary (Short Subject)",
+    "ceremony_id": 1,
+    "id": 10,
+    "points": 1
+  },
+  {
+    "winners": [],
+    "nominees": [],
+    "name": "Foreign Language Film",
+    "ceremony_id": 1,
+    "id": 12,
+    "end_year": 2019,
+    "points": 1
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 17:22:47.091",
+      "category_id": 25,
+      "year": 2020,
+      "nomination_id": 3023,
+      "id": 379
+    }],
+    "nominees": [
+      {
+        "odds_expert": 95,
+        "odds_denominator": 10,
+        "category_id": 25,
+        "year": 2020,
+        "context": "Denmark",
+        "nominee": "Another Round",
+        "odds_user": 72,
+        "id": 3023,
+        "odds_numerator": 1
+      },
+      {
+        "category_id": 25,
+        "year": 2020,
+        "context": "Hong Kong",
+        "nominee": "Better Days",
+        "odds_user": 8,
+        "id": 3024
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 25,
+        "year": 2020,
+        "context": "Romania",
+        "nominee": "Collective",
+        "id": 3025,
+        "odds_numerator": 14
+      },
+      {
+        "category_id": 25,
+        "year": 2020,
+        "context": "Tunisia",
+        "nominee": "The Man Who Sold His Skin",
+        "id": 3026
+      },
+      {
+        "odds_expert": 2,
+        "odds_denominator": 1,
+        "category_id": 25,
+        "year": 2020,
+        "context": "Bosnia and Herzegovina",
+        "nominee": "Quo Vadis, Aida?",
+        "odds_user": 9,
+        "id": 3027,
+        "odds_numerator": 6
+      },
+      {
+        "category_id": 25,
+        "year": 2021,
+        "context": "Japan",
+        "nominee": "Drive My Car",
+        "id": 4034
+      },
+      {
+        "category_id": 25,
+        "year": 2021,
+        "context": "Denmark",
+        "nominee": "Flee",
+        "id": 4035
+      },
+      {
+        "category_id": 25,
+        "year": 2021,
+        "context": "Bhutan",
+        "nominee": "Lunana: A Yak in the Classroom",
+        "id": 4036
+      },
+      {
+        "category_id": 25,
+        "year": 2021,
+        "context": "Italy",
+        "nominee": "The Hand of God",
+        "id": 4037
+      },
+      {
+        "category_id": 25,
+        "year": 2021,
+        "context": "Norway",
+        "nominee": "The Worst Person in the World",
+        "id": 4038
+      }
+    ],
+    "start_year": 2019,
+    "name": "International Feature Film",
+    "ceremony_id": 1,
+    "id": 25,
+    "points": 1
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 18:21:03.134",
+      "category_id": 16,
+      "year": 2020,
+      "nomination_id": 3035,
+      "id": 538
+    }],
+    "nominees": [
+      {
+        "odds_expert": 5,
+        "odds_denominator": 1,
+        "category_id": 16,
+        "year": 2020,
+        "nominee": "Burrow",
+        "odds_user": 14,
+        "id": 3033,
+        "odds_numerator": 7
+      },
+      {
+        "odds_expert": 5,
+        "category_id": 16,
+        "year": 2020,
+        "nominee": "Genius Loci",
+        "id": 3034
+      },
+      {
+        "odds_expert": 82,
+        "odds_denominator": 11,
+        "category_id": 16,
+        "year": 2020,
+        "nominee": "If Anything Happens I Love You",
+        "odds_user": 47,
+        "id": 3035,
+        "odds_numerator": 4
+      },
+      {
+        "odds_expert": 8,
+        "odds_denominator": 2,
+        "category_id": 16,
+        "year": 2020,
+        "nominee": "Opera",
+        "odds_user": 14,
+        "id": 3036,
+        "odds_numerator": 9
+      },
+      {
+        "category_id": 16,
+        "year": 2020,
+        "nominee": "Yes-People",
+        "id": 3037
+      },
+      {
+        "category_id": 16,
+        "year": 2021,
+        "nominee": "Boxballet",
+        "id": 4039,
+        "detail": "Anton Dyakov"
+      },
+      {
+        "category_id": 16,
+        "year": 2021,
+        "nominee": "The Windshield Wiper",
+        "id": 4040,
+        "detail": "Alberto Mielgo and Leo Sanchez"
+      },
+      {
+        "category_id": 16,
+        "year": 2021,
+        "nominee": "Robin Robin",
+        "id": 4041,
+        "detail": "Dan Ojari and Michael Please"
+      },
+      {
+        "category_id": 16,
+        "year": 2021,
+        "nominee": "Beast",
+        "id": 4042,
+        "detail": "Hugo Covarrubias and Tevo Díaz"
+      },
+      {
+        "category_id": 16,
+        "year": 2021,
+        "nominee": "Affairs of the Art",
+        "id": 4043,
+        "detail": "Joanna Quinn and Les Mills"
+      }
+    ],
+    "name": "Short Film (Animated)",
+    "ceremony_id": 1,
+    "id": 16,
+    "points": 1
+  },
+  {
+    "winners": [{
+      "declared": "2021-04-25 18:12:44.224",
+      "category_id": 17,
+      "year": 2020,
+      "nomination_id": 2976,
+      "id": 522
+    }],
+    "nominees": [
+      {
+        "odds_expert": 16,
+        "odds_denominator": 2,
+        "category_id": 17,
+        "year": 2020,
+        "nominee": "Feeling Through",
+        "id": 2973,
+        "odds_numerator": 13
+      },
+      {
+        "odds_expert": 32,
+        "odds_denominator": 6,
+        "category_id": 17,
+        "year": 2020,
+        "nominee": "The Letter Room",
+        "odds_user": 25,
+        "id": 2974,
+        "odds_numerator": 4
+      },
+      {
+        "category_id": 17,
+        "year": 2020,
+        "nominee": "The Present",
+        "odds_user": 17,
+        "id": 2975
+      },
+      {
+        "odds_expert": 51,
+        "odds_denominator": 8,
+        "category_id": 17,
+        "year": 2020,
+        "nominee": "Two Distant Strangers",
+        "odds_user": 31,
+        "id": 2976,
+        "odds_numerator": 13
+      },
+      {
+        "category_id": 17,
+        "year": 2020,
+        "nominee": "White Eye",
+        "id": 2977
+      },
+      {
+        "category_id": 17,
+        "year": 2021,
+        "nominee": "The Long Goodbye",
+        "id": 4044,
+        "detail": "Aneil Karia and Riz Ahmed"
+      },
+      {
+        "category_id": 17,
+        "year": 2021,
+        "nominee": "Please Hold",
+        "id": 4045,
+        "detail": "K.D. Dávila and Levin Menekse"
+      },
+      {
+        "category_id": 17,
+        "year": 2021,
+        "nominee": "Ala Kachuu - Take and Run",
+        "id": 4046,
+        "detail": "Maria Brendle and Nadine Lüchinger"
+      },
+      {
+        "category_id": 17,
+        "year": 2021,
+        "nominee": "On My Mind",
+        "id": 4047,
+        "detail": "Martin Strange-Hansen and Kim Magnusson"
+      },
+      {
+        "category_id": 17,
+        "year": 2021,
+        "nominee": "The Dress",
+        "id": 4048,
+        "detail": "Tadeusz Łysiak and Maciej Slesicki"
+      }
+    ],
+    "name": "Short Film (Live Action)",
+    "ceremony_id": 1,
+    "id": 17,
+    "points": 1
+  },
+  {
+    "winners": [{
+      "declared": "2021-09-19 20:03:52.77",
+      "category_id": 28,
+      "year": 2021,
+      "nomination_id": 3065,
+      "id": 777
+    }],
     "nominees": [
       {
         "category_id": 28,
@@ -68,11 +2365,18 @@ export const MockCategoryList: Category[] = [
       }
     ],
     "name": "Comedy",
+    "ceremony_id": 2,
     "id": 28,
     "points": 5
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 20:07:27.914",
+      "category_id": 34,
+      "year": 2021,
+      "nomination_id": 3093,
+      "id": 778
+    }],
     "nominees": [
       {
         "category_id": 34,
@@ -136,11 +2440,18 @@ export const MockCategoryList: Category[] = [
       }
     ],
     "name": "Drama",
+    "ceremony_id": 2,
     "id": 34,
     "points": 5
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 20:11:58.878",
+      "category_id": 41,
+      "year": 2021,
+      "nomination_id": 3206,
+      "id": 779
+    }],
     "nominees": [
       {
         "odds_expert": 15,
@@ -185,11 +2496,18 @@ export const MockCategoryList: Category[] = [
       }
     ],
     "name": "Limited or Anthology Series",
+    "ceremony_id": 2,
     "id": 41,
     "points": 5
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 18:43:29.529",
+      "category_id": 35,
+      "year": 2021,
+      "nomination_id": 3069,
+      "id": 767
+    }],
     "nominees": [
       {
         "category_id": 35,
@@ -233,11 +2551,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Comedy",
     "name": "Lead Actor",
+    "ceremony_id": 2,
     "id": 35,
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 19:40:08.576",
+      "category_id": 36,
+      "year": 2021,
+      "nomination_id": 3101,
+      "id": 774
+    }],
     "nominees": [
       {
         "category_id": 36,
@@ -289,11 +2614,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Drama",
     "name": "Lead Actor",
+    "ceremony_id": 2,
     "id": 36,
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 19:28:28.454",
+      "category_id": 37,
+      "year": 2021,
+      "nomination_id": 3189,
+      "id": 772
+    }],
     "nominees": [
       {
         "odds_expert": 54,
@@ -338,11 +2670,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Lead Actor",
+    "ceremony_id": 2,
     "id": 37,
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 18:37:28.682",
+      "category_id": 38,
+      "year": 2021,
+      "nomination_id": 3075,
+      "id": 766
+    }],
     "nominees": [
       {
         "category_id": 38,
@@ -387,11 +2726,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Comedy",
     "name": "Lead Actress",
+    "ceremony_id": 2,
     "id": 38,
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 19:37:23.336",
+      "category_id": 39,
+      "year": 2021,
+      "nomination_id": 3106,
+      "id": 773
+    }],
     "nominees": [
       {
         "category_id": 39,
@@ -444,11 +2790,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Drama",
     "name": "Lead Actress",
+    "ceremony_id": 2,
     "id": 39,
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 19:24:52.157",
+      "category_id": 40,
+      "year": 2021,
+      "nomination_id": 3162,
+      "id": 771
+    }],
     "nominees": [
       {
         "odds_expert": 8,
@@ -494,11 +2847,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Lead Actress",
+    "ceremony_id": 2,
     "id": 40,
     "points": 4
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 18:24:57.131",
+      "category_id": 30,
+      "year": 2021,
+      "nomination_id": 3135,
+      "id": 765
+    }],
     "nominees": [
       {
         "category_id": 30,
@@ -565,11 +2925,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Comedy",
     "name": "Directing",
+    "ceremony_id": 2,
     "id": 30,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 17:42:35.617",
+      "category_id": 31,
+      "year": 2021,
+      "nomination_id": 3183,
+      "id": 758
+    }],
     "nominees": [
       {
         "category_id": 31,
@@ -628,11 +2995,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Drama",
     "name": "Directing",
+    "ceremony_id": 2,
     "id": 31,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 19:09:39.493",
+      "category_id": 32,
+      "year": 2021,
+      "nomination_id": 3150,
+      "id": 769
+    }],
     "nominees": [
       {
         "category_id": 32,
@@ -692,11 +3066,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Directing",
+    "ceremony_id": 2,
     "id": 32,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 17:13:18.603",
+      "category_id": 42,
+      "year": 2021,
+      "nomination_id": 3077,
+      "id": 754
+    }],
     "nominees": [
       {
         "category_id": 42,
@@ -763,11 +3144,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Comedy",
     "name": "Supporting Actor",
+    "ceremony_id": 2,
     "id": 42,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 17:54:25.654",
+      "category_id": 43,
+      "year": 2021,
+      "nomination_id": 3114,
+      "id": 760
+    }],
     "nominees": [
       {
         "odds_expert": 7,
@@ -834,11 +3222,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Drama",
     "name": "Supporting Actor",
+    "ceremony_id": 2,
     "id": 43,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 17:29:27.118",
+      "category_id": 44,
+      "year": 2021,
+      "nomination_id": 3167,
+      "id": 756
+    }],
     "nominees": [
       {
         "category_id": 44,
@@ -889,11 +3284,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Supporting Actor",
+    "ceremony_id": 2,
     "id": 44,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 17:08:47.979",
+      "category_id": 45,
+      "year": 2021,
+      "nomination_id": 3090,
+      "id": 753
+    }],
     "nominees": [
       {
         "category_id": 45,
@@ -952,11 +3354,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Comedy",
     "name": "Supporting Actress",
+    "ceremony_id": 2,
     "id": 45,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 17:50:33.788",
+      "category_id": 46,
+      "year": 2021,
+      "nomination_id": 3119,
+      "id": 759
+    }],
     "nominees": [
       {
         "odds_expert": 96,
@@ -1022,11 +3431,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Drama",
     "name": "Supporting Actress",
+    "ceremony_id": 2,
     "id": 46,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 17:25:29.279",
+      "category_id": 47,
+      "year": 2021,
+      "nomination_id": 3212,
+      "id": 755
+    }],
     "nominees": [
       {
         "category_id": 47,
@@ -1079,11 +3495,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Supporting Actress",
+    "ceremony_id": 2,
     "id": 47,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 18:08:17.578",
+      "category_id": 49,
+      "year": 2021,
+      "nomination_id": 3198,
+      "id": 763
+    }],
     "nominees": [
       {
         "odds_expert": 20,
@@ -1103,11 +3526,18 @@ export const MockCategoryList: Category[] = [
       }
     ],
     "name": "Variety Sketch Series",
+    "ceremony_id": 2,
     "id": 49,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 18:04:56.975",
+      "category_id": 50,
+      "year": 2021,
+      "nomination_id": 3195,
+      "id": 762
+    }],
     "nominees": [
       {
         "odds_expert": 6,
@@ -1152,11 +3582,18 @@ export const MockCategoryList: Category[] = [
       }
     ],
     "name": "Variety Talk Series",
+    "ceremony_id": 2,
     "id": 50,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 18:20:28.17",
+      "category_id": 51,
+      "year": 2021,
+      "nomination_id": 3129,
+      "id": 764
+    }],
     "nominees": [
       {
         "category_id": 51,
@@ -1215,11 +3652,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Comedy",
     "name": "Writing",
+    "ceremony_id": 2,
     "id": 51,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 17:38:44.182",
+      "category_id": 52,
+      "year": 2021,
+      "nomination_id": 3175,
+      "id": 757
+    }],
     "nominees": [
       {
         "category_id": 52,
@@ -1285,11 +3729,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Drama",
     "name": "Writing",
+    "ceremony_id": 2,
     "id": 52,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 19:16:33.933",
+      "category_id": 53,
+      "year": 2021,
+      "nomination_id": 3140,
+      "id": 770
+    }],
     "nominees": [
       {
         "odds_expert": 74,
@@ -1345,11 +3796,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Limited Series/Movie",
     "name": "Writing",
+    "ceremony_id": 2,
     "id": 53,
     "points": 3
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 18:52:42.741",
+      "category_id": 29,
+      "year": 2021,
+      "nomination_id": 3155,
+      "id": 768
+    }],
     "nominees": [
       {
         "category_id": 29,
@@ -1393,11 +3851,18 @@ export const MockCategoryList: Category[] = [
       }
     ],
     "name": "Competition Program",
+    "ceremony_id": 2,
     "id": 29,
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 19:53:31.39",
+      "category_id": 55,
+      "year": 2021,
+      "nomination_id": 3230,
+      "id": 776
+    }],
     "nominees": [
       {
         "category_id": 55,
@@ -1450,11 +3915,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Pre-Recorded",
     "name": "Variety Special",
+    "ceremony_id": 2,
     "id": 55,
     "points": 2
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 19:48:16.04",
+      "category_id": 56,
+      "year": 2021,
+      "nomination_id": 3226,
+      "id": 775
+    }],
     "nominees": [
       {
         "odds_expert": 67,
@@ -1496,11 +3968,18 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Live",
     "name": "Variety Special",
+    "ceremony_id": 2,
     "id": 56,
     "points": 1
   },
   {
-    "winners": [],
+    "winners": [{
+      "declared": "2021-09-19 18:02:05.137",
+      "category_id": 54,
+      "year": 2021,
+      "nomination_id": 3201,
+      "id": 761
+    }],
     "nominees": [
       {
         "category_id": 54,
@@ -1545,6 +4024,7 @@ export const MockCategoryList: Category[] = [
     ],
     "sub_name": "Variety Series",
     "name": "Writing",
+    "ceremony_id": 2,
     "id": 54,
     "points": 1
   }
