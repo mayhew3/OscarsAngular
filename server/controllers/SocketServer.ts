@@ -6,7 +6,7 @@ export class SocketServer {
 
   clients: Socket[] = [];
   persons: Person[] = [];
-  existing_person_rooms = [];
+  existing_person_rooms: string[] = [];
 
   globalChannels = [
     'odds',
@@ -24,10 +24,10 @@ export class SocketServer {
   personalChannels = [
   ];
 
-  io: Server;
+  constructor(private io: Server) {
+  }
 
-  initIO(in_io: Server): void {
-    this.io = in_io;
+  initIO(): void {
     this.io.on('connection', (client: Socket) => {
       console.log('Connection established. Adding client.');
       this.clients.push(client);
@@ -87,10 +87,11 @@ export class SocketServer {
       client.on(channelName, msg => {
         if (!msg.person_id) {
           console.error('No person id on message for channel \'' + channelName + '\'');
+        } else {
+          console.log('Message received on channel \'' + channelName + '\' to person ' + msg.person_id);
+          const room_name = 'person_' + msg.person_id;
+          client.to(room_name).emit(channelName, msg);
         }
-        console.log('Message received on channel \'' + channelName + '\' to person ' + msg.person_id);
-        const room_name = 'person_' + msg.person_id;
-        client.to(room_name).emit(channelName, msg);
       });
     });
   }

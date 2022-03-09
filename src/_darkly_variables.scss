@@ -1,23 +1,5 @@
 @use 'sass:color';
-// Darkly 4.5.2
-// Bootswatch
-
-//
-// Color system
-//
-
-$blue:    #375a7f !default;
-$indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
-$red:     #e74c3c !default;
-$orange:  #fd7e14 !default;
-$yellow:  yellow !default;
-$green:   #00bc8c !default;
-$teal:    #20c997 !default;
-$cyan:    #3498db !default;
-
-$bodyBase: color.scale($cyan, $lightness: -72%, $saturation: -60%) !default;
+@import 'darkly_variables_emmys';
 
 $white:    #fff !default;
 $gray-100: color.scale($bodyBase, $lightness: 85%, $saturation: 80%) !default;

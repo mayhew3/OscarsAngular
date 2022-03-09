@@ -2,7 +2,7 @@
 @import '../darkly_variables';
 
 .oscarBackground {
-  background-image: url('../assets/emmys_audience1.jpg');
+  background-image: url($background-image);
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;

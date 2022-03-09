@@ -13,12 +13,12 @@ import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
-import {MockCategoryEmmysList} from './data/categories.emmys.mock';
 import {MockVoteEmmysList} from './data/votes.emmys.mock';
 import {MockCeremonies} from './data/ceremonies.mock';
 import {MockPersonGroups} from './data/person.groups.mock';
 import {Ceremony} from '../interfaces/Ceremony';
 import {GroupYear} from '../interfaces/GroupYear';
+import {MockCategoryList} from './data/categories.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,7 @@ import {GroupYear} from '../interfaces/GroupYear';
 
 export class InMemoryDataService implements InMemoryDbService {
   // eslint-disable-next-line
-  categories = MockCategoryEmmysList;
+  categories = MockCategoryList;
   persons = MockPersonList;
   votes = MockVoteEmmysList;
   systemVars = MockSystemVars;
@@ -375,10 +375,13 @@ export class InMemoryDataService implements InMemoryDbService {
   private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<Response> {
     const person_id = requestInfo.query.get('person_id')[0];
     const year = requestInfo.query.get('year')[0];
+    const ceremony_id = +requestInfo.query.get('ceremony_id')[0];
 
     const data = [];
 
-    _.forEach(requestInfo.collection, category => {
+    const filteredCategories = _.where(this.categories, {ceremony_id});
+
+    _.forEach(filteredCategories, category => {
       const yearNum = +year;
       const personIDNum = +person_id;
       const copyCategory: Category = {...category};
@@ -404,6 +407,7 @@ export class InMemoryDataService implements InMemoryDbService {
     this.logger.log('HTTP GET override');
 
     const entries = requestInfo.query.entries();
+    // noinspection JSUnusedLocalSymbols
     const since_date = entries.next().value[1][0];
 
     const data = requestInfo.collection;

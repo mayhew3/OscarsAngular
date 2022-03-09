@@ -1,9 +1,10 @@
 import {Nomination} from '../typeorm/Nomination';
-import {getConnection, getRepository, IsNull, Not} from 'typeorm';
+import {getConnection, getRepository, IsNull, Not, UpdateResult} from 'typeorm';
 import {OddsExecution} from '../typeorm/OddsExecution';
 import {OddsResult} from '../typeorm/OddsResult';
+import {Request, Response, NextFunction} from 'express/ts4.0';
 
-const attachOddsToExecution = async (execution: OddsExecution, response: Record<string, any>): Promise<void> => {
+const attachOddsToExecution = async (execution: OddsExecution, response: Response): Promise<void> => {
   execution.odds = await getRepository(OddsResult).find({
     where: {
       odds_execution_id: execution.id
@@ -12,7 +13,7 @@ const attachOddsToExecution = async (execution: OddsExecution, response: Record<
   response.json(execution);
 };
 
-const handleFirstOdds = async (year: number, response: Record<string, any>): Promise<void> => {
+const handleFirstOdds = async (year: number, response: Response): Promise<void> => {
   const executions = await getRepository(OddsExecution).find({
     where: {
       time_finished: Not(IsNull()),
@@ -33,7 +34,7 @@ const handleFirstOdds = async (year: number, response: Record<string, any>): Pro
 
 // todo: remove if unneeded
 // noinspection JSUnusedLocalSymbols
-const handleOddsForEventID = async (event_id: number, year: number, response: Record<string, any>): Promise<void> => {
+const handleOddsForEventID = async (event_id: number, year: number, response: Response): Promise<void> => {
 
   const executions = await getConnection()
     .createQueryBuilder()
@@ -54,26 +55,28 @@ const handleOddsForEventID = async (event_id: number, year: number, response: Re
 
 };
 
-export const getMostRecentOddsBundle = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const getMostRecentOddsBundle = async (request: Request, response: Response,
+                                              next: NextFunction): Promise<void> => {
   const year = +request.query.year;
   if (request.query.event_id) {
-    throw new Error('Unexpected parameter: event_id');
+    return next(new Error('Unexpected parameter: event_id'));
     // await handleOddsForEventID(+request.query.event_id, year, response);
   } else {
     await handleFirstOdds(year, response);
   }
 };
 
-export const updateOddsForNominees = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
-  const changes = request.body.changes;
+export const updateOddsForNominees = async (request: Request, response: Response): Promise<void> => {
+  const changes: any[] = request.body.changes;
 
-  const updates = [];
+  const updates: Promise<UpdateResult>[] = [];
 
   for (const change of changes) {
     const nomination_id = change.nomination_id;
     delete change.nomination_id;
     const nominationRepository = getRepository(Nomination);
-    updates.push(nominationRepository.update(nomination_id, change));
+    const nominee = nominationRepository.update(nomination_id, change);
+    updates.push(nominee);
   }
 
   Promise.all(updates).then(() => {

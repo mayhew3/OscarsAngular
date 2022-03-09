@@ -13,6 +13,7 @@ import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import fast_sort from 'fast-sort';
+import {activeCeremonyId} from '../../shared/GlobalVars';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,7 @@ export class CategoryService {
 
     combineLatest([this.personService.me$, this.systemVarsService.systemVarsYearChanges$])
       .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id));
+        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, activeCeremonyId));
       });
 
     this.store.dispatch(new GetMaxYear());

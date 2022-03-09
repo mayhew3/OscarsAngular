@@ -11,4 +11,5 @@ export interface Category {
   start_year?: number;
   end_year?: number;
   sub_name?: string;
+  ceremony_id: number;
 }

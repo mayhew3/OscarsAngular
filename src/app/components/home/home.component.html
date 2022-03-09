@@ -18,7 +18,7 @@
     <div *ngIf="(systemVarsService.canVote() | async) && (categoryService.itsOver() | async) === false">
       <p>Live Scoring will be viewable on {{oscarDateFormatted}} your local time, when the ballots will lock.</p>
       <p><strong>New this month! You can vote on the Emmy Awards!</strong></p>
-      <p>And as with the Oscars, your voting screen includes expert picks and metacritic user favorites, as
+      <p *ngIf="!!ceremonyOddsUrl">And as with the Oscars, your voting screen includes expert picks and metacritic user favorites, as
         found on <a href="{{ceremonyOddsUrl}}" target="_blank">Metacritic</a>.</p>
 
       <div class="text-center">

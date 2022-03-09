@@ -4,21 +4,21 @@ import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {getRepository} from 'typeorm';
 import {Event} from '../typeorm/Event';
 import {SystemVars} from '../typeorm/SystemVars';
+import {NextFunction, Request, Response} from 'express/ts4.0';
 
-export const getSystemVars = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const getSystemVars = async (request: Request, response: Response): Promise<void> => {
   const systemVars = await getRepository(SystemVars).find();
   response.json(systemVars);
 };
 
-export const updateSystemVars = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const updateSystemVars = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
   const systemVar = request.body;
 
   let result;
   try {
     result = await getRepository(SystemVars).findOne(systemVar.id);
   } catch (err) {
-    console.error(err);
-    response.send({msg: 'Error finding system_var: ' + err});
+    next(err);
   }
 
   const isVotingOpenChanged = systemVar.voting_open !== undefined && result.voting_open !== systemVar.voting_open;
@@ -26,8 +26,7 @@ export const updateSystemVars = async (request: Record<string, any>, response: R
   try {
     await getRepository(SystemVars).update(systemVar.id, systemVar);
   } catch (err) {
-    console.error(err);
-    response.send({msg: 'Error updating system_vars: ' + JSON.stringify(systemVar)});
+    next(err);
   }
 
   if (isVotingOpenChanged) {

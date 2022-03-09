@@ -1,0 +1,6 @@
+@use 'sass:color';
+@import 'darkly_variables_common';
+
+$bodyBase: color.scale($cyan, $lightness: -72%, $saturation: -60%) !default;
+
+$background-image: '../assets/emmys_audience1.jpg';

@@ -37,11 +37,17 @@ export class ArrayUtil {
   }
 
   static sum(numbers: number[]): number {
-    return _.reduce(numbers, (m, n) => m + n);
+    if (numbers.length === 0) {
+      return 0;
+    }
+    return _.reduce(numbers, (m, n) => m + n)!;
   }
 
-  static average(numbers: number[]): number {
-    const total = _.reduce(numbers, (m, n) => m + n);
+  static average(numbers: number[]): number | undefined {
+    if (numbers.length === 0) {
+      return undefined;
+    }
+    const total = _.reduce(numbers, (m, n) => m + n)!;
     return total / numbers.length;
   }
 }
