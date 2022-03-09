@@ -20,6 +20,11 @@ export class NavBarComponent implements OnInit {
     return activeCeremony;
   }
 
+  get bannerImage(): string {
+    // @ts-ignore
+    return activeCeremony === 'Oscars' ? 'navbar_logo' : 'navbar_logo_emmys';
+  }
+
   showPast(): boolean {
     // @ts-ignore
     return activeCeremony === 'Oscars';
