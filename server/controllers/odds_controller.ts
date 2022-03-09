@@ -57,13 +57,11 @@ const handleOddsForEventID = async (event_id: number, year: number, response: Re
 
 export const getMostRecentOddsBundle = async (request: Request, response: Response,
                                               next: NextFunction): Promise<void> => {
-  const year = +request.query.year;
-  if (request.query.event_id) {
-    return next(new Error('Unexpected parameter: event_id'));
-    // await handleOddsForEventID(+request.query.event_id, year, response);
-  } else {
-    await handleFirstOdds(year, response);
+  if (!request.query.year) {
+    return next(new Error('No year attached to request!'));
   }
+  const year = +request.query.year;
+  await handleFirstOdds(year, response);
 };
 
 export const updateOddsForNominees = async (request: Request, response: Response): Promise<void> => {

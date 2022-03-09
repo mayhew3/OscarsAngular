@@ -33,6 +33,10 @@ module.exports = app => {
 
   const router = express.Router();
 
+  const publicGet: (endpoint: any, callback: any) => void = (endpoint, callback) => {
+    router.get(endpoint, callback);
+  };
+
   const privateGet: (endpoint: any, callback: any) => void = (endpoint, callback) => {
     router.get(endpoint, authCheck, callback);
   };
@@ -73,7 +77,7 @@ module.exports = app => {
   privateDelete('/winners/:id', winners.deleteWinner);
   privatePut('/resetWinners', winners.resetWinners);
 
-  privateGet('/systemVars', systemVars.getSystemVars);
+  publicGet('/systemVars', systemVars.getSystemVars);
   privatePut('/systemVars', systemVars.updateSystemVars);
 
   privateGet('/finalResults', finalResults.getFinalResults);

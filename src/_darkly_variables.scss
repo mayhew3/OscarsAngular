@@ -1,5 +1,5 @@
 @use 'sass:color';
-@import 'darkly_variables_emmys';
+@import 'darkly_variables_oscars';
 
 $white:    #fff !default;
 $gray-100: color.scale($bodyBase, $lightness: 85%, $saturation: 80%) !default;

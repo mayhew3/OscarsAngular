@@ -9,6 +9,12 @@ import {Category as CategoryObj} from '../../src/app/interfaces/Category';
 import {Request, Response, NextFunction} from 'express/ts4.0';
 
 export const getCategories = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+  if (!request.query.year) {
+    return next(new Error('No year attached to request!'));
+  }
+  if (!request.query.person_id) {
+    return next(new Error('No person_id attached to request!'));
+  }
   const categories = await getRepository(Category).find({
     where: {
       ceremony_id: activeCeremonyId
