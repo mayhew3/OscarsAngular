@@ -6,8 +6,9 @@ import {Vote} from '../typeorm/Vote';
 import {Winner} from '../typeorm/Winner';
 import {activeCeremonyId} from '../../src/shared/GlobalVars';
 import {Category as CategoryObj} from '../../src/app/interfaces/Category';
+import {Request, Response, NextFunction} from 'express/ts4.0';
 
-export const getCategories = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const getCategories = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
   const categories = await getRepository(Category).find({
     where: {
       ceremony_id: activeCeremonyId
@@ -46,7 +47,7 @@ export const getCategories = async (request: Record<string, any>, response: Reco
     const cat_winners = _.where(winners, {category_id: category.id});
 
     if (cat_votes.length > 1) {
-      throw new Error('Multiple votes found for category ' + category.id);
+      return next(new Error('Multiple votes found for category ' + category.id));
     }
 
     const category_object: CategoryObj = JSON.parse(JSON.stringify(category));
@@ -64,19 +65,18 @@ export const getCategories = async (request: Record<string, any>, response: Reco
   response.json(outputObject);
 };
 
-export const updateNomination = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const updateNomination = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
   const nomination = request.body;
 
   try {
     await getRepository(Nomination).update(nomination.id, nomination);
     response.json({msg: 'Success!'});
   } catch(error) {
-    console.error(error);
-    response.send({msg: 'Error finding nomination: ' + error});
+    next(error);
   }
 };
 
-export const getMostRecentYear = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const getMostRecentYear = async (request: Request, response: Response): Promise<void> => {
   const maxYear = await getConnection()
     .createQueryBuilder()
     .select('MAX(n.year) as my')

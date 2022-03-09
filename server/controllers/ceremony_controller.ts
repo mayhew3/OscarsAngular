@@ -8,8 +8,9 @@ import {Nomination} from '../typeorm/Nomination';
 import {Category} from '../typeorm/Category';
 import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {socketServer} from '../www';
+import {Request, Response} from 'express/ts4.0';
 
-export const getCeremonyYears = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const getCeremonyYears = async (request: Request, response: Response): Promise<void> => {
   const ceremonies = await getRepository(Ceremony).find();
   const ceremonyYears = await getRepository(CeremonyYear).find();
   const groupYears = await getRepository(GroupYear).find();
@@ -31,7 +32,7 @@ export const getCeremonyYears = async (request: Record<string, any>, response: R
   response.json(ceremonies);
 };
 
-export const addCeremonyYear = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const addCeremonyYear = async (request: Request, response: Response): Promise<void> => {
   const ceremonyYearObj = request.body;
 
   const groupYearObjs: Partial<GroupYear>[] = ceremonyYearObj.groupYears;

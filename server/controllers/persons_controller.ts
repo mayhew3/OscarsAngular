@@ -5,9 +5,10 @@ import {Person} from '../typeorm/Person';
 import {PersonGroupRole} from '../typeorm/PersonGroupRole';
 import {PersonGroup} from '../typeorm/PersonGroup';
 import {Person as PersonObj} from '../../src/app/interfaces/Person';
+import {NextFunction, Request, Response} from 'express/ts4.0';
 
 
-export const getPersons = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const getPersons = async (request: Request, response: Response): Promise<void> => {
   const connectedIds = socketServer.getConnectedPersons();
 
   const persons = await getRepository(Person).find();
@@ -27,20 +28,19 @@ export const getPersons = async (request: Record<string, any>, response: Record<
   response.json(outputObject);
 };
 
-export const getPersonGroups = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const getPersonGroups = async (request: Request, response: Response): Promise<void> => {
   const personGroups = await getRepository(PersonGroup).find();
 
   response.json(personGroups);
 };
 
-export const updatePerson = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const updatePerson = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
   const person = request.body;
 
   try {
     await getRepository(Person).update(person.id, person);
     response.json({msg: 'Success!'});
   } catch(err) {
-    console.error(err);
-    response.send({msg: 'Error updating nominee: ' + JSON.stringify(person)});
+    next(err);
   }
 };
