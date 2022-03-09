@@ -22,7 +22,7 @@ export const getFinalResults = async (request: Record<string, any>, response: Re
     if (!groupYear) {
       throw new Error('No group year found with ID ' + finalResult.group_year_id);
     }
-    const result_obj: FinalResultObj & FinalResult = JSON.parse(JSON.stringify(finalResult));
+    const result_obj: FinalResultObj = JSON.parse(JSON.stringify(finalResult));
 
     delete result_obj.group_year_id;
 

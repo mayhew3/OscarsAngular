@@ -69,6 +69,7 @@ module.exports = app => {
   privatePost('/votes', votes.addOrUpdateVote);
 
   privatePost('/winners', winners.addWinner);
+  // app.get('/api/winners', winners.addWinner);
   privateDelete('/winners/:id', winners.deleteWinner);
   privatePut('/resetWinners', winners.resetWinners);
 
@@ -88,7 +89,7 @@ module.exports = app => {
   // production error handler
   // no stacktraces leaked to user
   // noinspection JSUnusedLocalSymbols
-  app.use((err, req, res, next) => {
+  router.use((err, req, res, next) => {
     console.log(err.message);
     console.log(err.stack);
     console.log('Status: ' + err.status);
@@ -96,6 +97,7 @@ module.exports = app => {
       message: err.message,
       error: err
     });
+    next(err);
   });
 
   // noinspection JSUnusedLocalSymbols
@@ -104,6 +106,7 @@ module.exports = app => {
     res.status(400).json({
       message: `Invalid API called: ${req.path}`,
     });
+    next();
   });
 
 };

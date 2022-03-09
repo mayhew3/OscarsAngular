@@ -10,8 +10,8 @@ app.set('port', process.env.PORT || 7024);
 const server = require('http').createServer(app);
 const io: Server = require('socket.io')(server);
 
-export const socketServer = new SocketServer();
-socketServer.initIO(io);
+export const socketServer = new SocketServer(io);
+socketServer.initIO();
 
 typeORM.init().then(() => {
   server.listen(app.get('port'), () => {

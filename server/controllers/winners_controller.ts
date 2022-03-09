@@ -5,7 +5,7 @@ import {Event} from '../typeorm/Event';
 import {getRepository} from 'typeorm';
 import {Response} from 'express';
 
-export const addWinner = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const addWinner = async (request: Record<string, any>, response: Record<string, any>, next: (err: any) => void): Promise<void> => {
   const nomination_id = request.body.nomination_id;
 
   try {
@@ -33,9 +33,8 @@ export const addWinner = async (request: Record<string, any>, response: Record<s
 
     await response.json(winner);
 
-  } catch (err) {
-    response.send(500, 'Error submitting winner!');
-    throw new Error(err);
+  } catch (err: any) {
+    next(err);
   }
 };
 
@@ -63,7 +62,7 @@ export const resetWinners = async (request: Record<string, any>, response: Recor
   response.json({msg: 'Success!'});
 };
 
-export const deleteWinner = async (request: Record<string, any>, response: Response): Promise<void> => {
+export const deleteWinner = async (request: Record<string, any>, response: Response, next: (err: Error) => void): Promise<void> => {
   const winner_id = +request.params.id;
 
   const winnerRepository = getRepository(Winner);
@@ -74,7 +73,7 @@ export const deleteWinner = async (request: Record<string, any>, response: Respo
   });
 
   if (!winner) {
-    throw new Error('No winner found with ID ' + winner_id);
+    return next(new Error('No winner found with ID ' + winner_id));
   }
 
   const year = winner.year;

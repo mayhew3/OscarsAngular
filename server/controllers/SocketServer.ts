@@ -24,10 +24,10 @@ export class SocketServer {
   personalChannels = [
   ];
 
-  io?: Server;
+  constructor(private io: Server) {
+  }
 
-  initIO(in_io: Server): void {
-    this.io = in_io;
+  initIO(): void {
     this.io.on('connection', (client: Socket) => {
       console.log('Connection established. Adding client.');
       this.clients.push(client);
