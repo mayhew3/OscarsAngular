@@ -5,6 +5,7 @@ import {Category} from '../typeorm/Category';
 import {Vote} from '../typeorm/Vote';
 import {Winner} from '../typeorm/Winner';
 import {activeCeremonyId} from '../../src/shared/GlobalVars';
+import {Category as CategoryObj} from '../../src/app/interfaces/Category';
 
 export const getCategories = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const categories = await getRepository(Category).find({
@@ -24,7 +25,7 @@ export const getCategories = async (request: Record<string, any>, response: Reco
       year: currentYear
     }
   });
-  const outputObject = [];
+  const outputObject: CategoryObj[] = [];
 
   const votes = await getRepository(Vote).find({
     where: {
@@ -48,7 +49,7 @@ export const getCategories = async (request: Record<string, any>, response: Reco
       throw new Error('Multiple votes found for category ' + category.id);
     }
 
-    const category_object = JSON.parse(JSON.stringify(category));
+    const category_object: CategoryObj = JSON.parse(JSON.stringify(category));
 
     if (cat_votes.length > 0) {
       category_object.voted_on = cat_votes[0].nomination_id;

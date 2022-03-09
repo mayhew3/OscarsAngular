@@ -3,6 +3,7 @@ import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {Winner} from '../typeorm/Winner';
 import {Event} from '../typeorm/Event';
 import {getRepository} from 'typeorm';
+import {Response} from 'express';
 
 export const addWinner = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
   const nomination_id = request.body.nomination_id;
@@ -62,7 +63,7 @@ export const resetWinners = async (request: Record<string, any>, response: Recor
   response.json({msg: 'Success!'});
 };
 
-export const deleteWinner = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
+export const deleteWinner = async (request: Record<string, any>, response: Response): Promise<void> => {
   const winner_id = +request.params.id;
 
   const winnerRepository = getRepository(Winner);
@@ -72,16 +73,15 @@ export const deleteWinner = async (request: Record<string, any>, response: Recor
     }
   });
 
+  if (!winner) {
+    throw new Error('No winner found with ID ' + winner_id);
+  }
+
   const year = winner.year;
 
   const nomination_id = winner.nomination_id;
 
-  try {
-    await winnerRepository.remove(winner);
-  } catch (err) {
-    response.send(500, 'Error deleting existing winner!');
-    throw new Error(err);
-  }
+  await winnerRepository.remove(winner);
 
   const event_time = new Date();
 

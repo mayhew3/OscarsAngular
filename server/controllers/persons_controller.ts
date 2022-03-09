@@ -4,6 +4,7 @@ import {getRepository} from 'typeorm';
 import {Person} from '../typeorm/Person';
 import {PersonGroupRole} from '../typeorm/PersonGroupRole';
 import {PersonGroup} from '../typeorm/PersonGroup';
+import {Person as PersonObj} from '../../src/app/interfaces/Person';
 
 
 export const getPersons = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
@@ -11,12 +12,12 @@ export const getPersons = async (request: Record<string, any>, response: Record<
 
   const persons = await getRepository(Person).find();
   const personGroupRoles = await getRepository(PersonGroupRole).find();
-  const outputObject = [];
+  const outputObject: PersonObj[] = [];
 
   _.forEach(persons, person => {
     const person_groups = _.where(personGroupRoles, {person_id: person.id});
     const person_group_ids = _.pluck(person_groups, 'person_group_id');
-    const person_object = JSON.parse(JSON.stringify(person));
+    const person_object: PersonObj = JSON.parse(JSON.stringify(person));
     person_object.groups = person_group_ids;
     person_object.connected = _.contains(connectedIds, person.id);
 

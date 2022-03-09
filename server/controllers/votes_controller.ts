@@ -44,7 +44,7 @@ export const addOrUpdateVote = async (request: Record<string, any>, response: Re
       const result = await TypeORMManager.createAndCommit(request.body, Vote);
       socketServer.emitToAll('add_vote', result);
       return response.json(result);
-    } catch (err) {
+    } catch (err: any) {
       response.send(500, 'Error submitting vote!');
       throw new Error(err);
     }

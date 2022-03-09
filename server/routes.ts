@@ -81,6 +81,8 @@ module.exports = app => {
   privateGet('/ceremonies', ceremonies.getCeremonyYears);
   privatePost('/ceremonies', ceremonies.addCeremonyYear);
 
+  app.use('/api', router);
+
   // error handlers
 
   // production error handler
@@ -103,7 +105,5 @@ module.exports = app => {
       message: `Invalid API called: ${req.path}`,
     });
   });
-
-  app.use('/api', router);
 
 };

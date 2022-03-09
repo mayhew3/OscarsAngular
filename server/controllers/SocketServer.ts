@@ -6,7 +6,7 @@ export class SocketServer {
 
   clients: Socket[] = [];
   persons: Person[] = [];
-  existing_person_rooms = [];
+  existing_person_rooms: string[] = [];
 
   globalChannels = [
     'odds',
@@ -24,7 +24,7 @@ export class SocketServer {
   personalChannels = [
   ];
 
-  io: Server;
+  io?: Server;
 
   initIO(in_io: Server): void {
     this.io = in_io;

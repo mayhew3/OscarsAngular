@@ -1,5 +1,5 @@
 import {Nomination} from '../typeorm/Nomination';
-import {getConnection, getRepository, IsNull, Not} from 'typeorm';
+import {getConnection, getRepository, IsNull, Not, UpdateResult} from 'typeorm';
 import {OddsExecution} from '../typeorm/OddsExecution';
 import {OddsResult} from '../typeorm/OddsResult';
 
@@ -65,15 +65,16 @@ export const getMostRecentOddsBundle = async (request: Record<string, any>, resp
 };
 
 export const updateOddsForNominees = async (request: Record<string, any>, response: Record<string, any>): Promise<void> => {
-  const changes = request.body.changes;
+  const changes: any[] = request.body.changes;
 
-  const updates = [];
+  const updates: Promise<UpdateResult>[] = [];
 
   for (const change of changes) {
     const nomination_id = change.nomination_id;
     delete change.nomination_id;
     const nominationRepository = getRepository(Nomination);
-    updates.push(nominationRepository.update(nomination_id, change));
+    const nominee = nominationRepository.update(nomination_id, change);
+    updates.push(nominee);
   }
 
   Promise.all(updates).then(() => {
