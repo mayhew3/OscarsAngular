@@ -50,7 +50,17 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/styles_emmys.scss",
+                "bundleName": "emmys",
+                "inject": false
+              },
+              {
+                "input": "src/styles_oscars.scss",
+                "bundleName": "oscars",
+                "inject": false
+              }
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [

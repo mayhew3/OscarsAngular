@@ -1,13 +1,5 @@
 @use 'sass:color';
-@import '../darkly_variables';
-
-.oscarBackground {
-  background-image: url($background-image);
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-}
+@import '../variables';
 
 .frontLogo {
   width: 100%;
@@ -16,26 +8,12 @@
   filter: drop-shadow(1px 1px 10px $black);
 }
 
-.wideContainer {
-  padding-left: 0;
-  padding-right: 0;
-  background-color: color.scale($body-bg, $alpha: -10%);
-}
-
 .centerContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   height: 100%;
-}
-
-.textContainer {
-  text-align: center;
-  background-color: $body-bg;
-  padding: 30px;
-  border-radius: 3px;
-  box-shadow: 2px 2px 0.19rem black;
 }
 
 .signInButton {

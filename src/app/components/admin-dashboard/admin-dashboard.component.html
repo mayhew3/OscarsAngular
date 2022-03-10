@@ -82,6 +82,19 @@
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4">
+      <div class="card navCard">
+        <div class="card-body fakeLink"
+             (click)="toggleStyle()">
+          <div class="row">
+            <div class="col-10 navTitle">
+              <span>Toggle Ceremony</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-4">
       <div class="row"
            *ngFor="let scoreDatum of sortedData">
         <div class="col-4">

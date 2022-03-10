@@ -1,0 +1,61 @@
+@use 'sass:color';
+@import "darkly_variables_oscars";
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "darkly_bootswatch";
+
+.darkInput {
+  color: #e1e8ef;
+  background-color: $gray-900;
+  box-shadow: inset 1px 1px 2px #000;
+  border-color: $gray-700;
+}
+
+.oscarBackground {
+  background-image: url($background-image);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.wideContainer {
+  padding-left: 0;
+  padding-right: 0;
+  background-color: color.scale($body-bg, $alpha: -10%);
+}
+
+.textContainer {
+  text-align: center;
+  background-color: $body-bg;
+  padding: 30px;
+  border-radius: 3px;
+  box-shadow: 2px 2px 0.19rem black;
+}
+
+.cardInput {
+  padding: 0.20rem 0.30rem;
+  font-size: 1.10rem;
+  font-weight: bold;
+  background-color: $gray-850;
+  color: white;
+}
+
+.eliminatedScoreCard {
+  border-color: color.scale($gray-600, $alpha: -60%);
+  color: fade_out($silver, .5);
+  background-color: color.scale($gray-850, $alpha: -30%);
+}
+
+.loserScoreCard {
+  border-color: $gray-600;
+  color: $silver;
+  background-color: $gray-850;
+}
+
+.oddsSubtitle {
+  color: color.scale($body-color, $alpha: -60%);
+  font-weight: normal;
+  font-size: 10pt;
+  margin-top: 2px;
+}
+
