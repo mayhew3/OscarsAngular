@@ -1,11 +1,13 @@
 
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark py-0">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">
-      <img src="assets/{{bannerImage}}.svg"
+    <a class="navbar-brand"
+       routerLink="/"
+       *ngIf="!!(ceremonyName | async)">
+      <img src="assets/{{bannerImage | async}}.svg"
            width="150"
            height="auto"
-           alt="{{ceremonyName}} Prediction Arena">
+           alt="{{ceremonyName | async}} Prediction Arena">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -32,7 +34,7 @@
           </a>
         </li>
         <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async) && showPast()">
+            *ngIf="(auth.isAuthenticated$ | async) && (showPast() | async) === true">
           <a class="nav-link" routerLink="/history" data-bs-toggle="collapse" data-target=".navbar-collapse.show">
             Past
           </a>

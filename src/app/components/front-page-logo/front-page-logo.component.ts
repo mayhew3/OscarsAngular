@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {activeCeremony} from '../../../shared/GlobalVars';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
@@ -16,17 +15,20 @@ export class FrontPageLogoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get ceremonyName(): string {
-    return activeCeremony;
+  get ceremonyName(): Observable<string> {
+    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
+      map(systemVars => systemVars.ceremony_name)
+    );
   }
 
-  get frontPageLogo(): string {
-    // @ts-ignore
-    return activeCeremony === 'Oscars' ? 'front_logo' : 'front_logo_emmys';
+  get frontPageLogo(): Observable<string> {
+    return this.ceremonyName.pipe(
+      map(ceremonyName => ceremonyName === 'Oscars' ? 'front_logo' : 'front_logo_emmys')
+    );
   }
 
   get ceremonyYear(): Observable<number> {
-    return this.systemVarsService.systemVars.pipe(
+    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
       map(systemVars => systemVars.curr_year)
     );
   }

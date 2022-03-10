@@ -11,13 +11,13 @@ import {SystemVars} from '../interfaces/SystemVars';
 })
 export class SystemVarsService {
   systemVarsUrl = '/api/systemVars';
-  systemVars = this.store.select(state => state.systemVars).pipe(
+  systemVars: Observable<SystemVars> = this.store.select(state => state.systemVars).pipe(
     map(state => state.systemVars),
     filter(systemVars => !!systemVars)
   );
 
-  systemVarsYearChanges$ = this.systemVars.pipe(
-    distinctUntilChanged((s1: SystemVars, s2: SystemVars) => s1.curr_year === s2.curr_year)
+  systemVarsCeremonyYearChanges$ = this.systemVars.pipe(
+    distinctUntilChanged((s1: SystemVars, s2: SystemVars) => s1.curr_year === s2.curr_year && s1.ceremony_name === s2.ceremony_name)
   );
 
   constructor(private store: Store,
@@ -32,7 +32,7 @@ export class SystemVarsService {
   }
 
   getCurrentYear(): Observable<number> {
-    return this.systemVarsYearChanges$.pipe(
+    return this.systemVarsCeremonyYearChanges$.pipe(
       map(systemVars => systemVars.curr_year)
     );
   }

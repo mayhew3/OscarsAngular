@@ -24,7 +24,7 @@ export class OddsService {
 
   constructor(private store: Store,
               private systemVarsService: SystemVarsService) {
-    this.systemVarsService.systemVarsYearChanges$.subscribe(systemVars => {
+    this.systemVarsService.systemVarsCeremonyYearChanges$.subscribe(systemVars => {
       this.store.dispatch(new GetOdds(systemVars.curr_year));
     });
   }

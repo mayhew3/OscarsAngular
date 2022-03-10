@@ -1,8 +1,8 @@
 <div class="imageTextContainer">
-  <div *ngIf="!!(ceremonyYear | async)">
+  <div *ngIf="!!(ceremonyYear | async) && !!(ceremonyName | async)">
     <img class="frontLogo"
-         src="assets/{{frontPageLogo}}.svg"
-         alt="{{ceremonyName}} Prediction Arena {{ceremonyYear}}">
+         src="assets/{{frontPageLogo | async}}.svg"
+         alt="{{ceremonyName | async}} Prediction Arena {{ceremonyYear | async}}">
     <div class="yearLabel">
       <svg viewBox="0 0 40 20">
         <text x="0" y="15" class="yearText">{{ceremonyYear | async}}</text>

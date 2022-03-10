@@ -375,11 +375,13 @@ export class InMemoryDataService implements InMemoryDbService {
   private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<Response> {
     const person_id = requestInfo.query.get('person_id')[0];
     const year = requestInfo.query.get('year')[0];
-    const ceremony_id = +requestInfo.query.get('ceremony_id')[0];
+    const ceremony_name = requestInfo.query.get('ceremony_name')[0];
+
+    const ceremony = this.ceremonyWithName(ceremony_name);
 
     const data = [];
 
-    const filteredCategories = _.where(this.categories, {ceremony_id});
+    const filteredCategories = _.where(this.categories, {ceremony_id: ceremony.id});
 
     _.forEach(filteredCategories, category => {
       const yearNum = +year;
@@ -495,6 +497,10 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private ceremonyWithId(ceremony_id: number): Ceremony {
     return _.findWhere(this.ceremonies, {id: ceremony_id});
+  }
+
+  private ceremonyWithName(ceremony_name: string): Ceremony {
+    return _.findWhere(this.ceremonies, {name: ceremony_name});
   }
 
   private updateObject(jsonBody: any): void {

@@ -12,7 +12,6 @@ import {ThemePalette} from '@angular/material/core';
 import {Observable} from 'rxjs';
 import {ApiService} from './services/api.service';
 import {Title} from '@angular/platform-browser';
-import {activeCeremony} from '../shared/GlobalVars';
 import {CeremonyStyleService} from './services/ceremony-style.service';
 
 @Component({
@@ -33,11 +32,11 @@ export class AppComponent {
               private initSocket: InitSocketService,
               private personService: PersonService,
               private apiService: ApiService,
+              private ceremonyStyleService: CeremonyStyleService,
               private modalService: NgbModal,
-              private titleService: Title,
-              private ceremonyStyleService: CeremonyStyleService) {
+              private titleService: Title) {
     this.initDisconnectPopup();
-    this.titleService.setTitle(activeCeremony);
+    this.systemVarsService.systemVars.subscribe(systemVars => this.titleService.setTitle(systemVars.ceremony_name));
   }
 
   initDisconnectPopup(): void {
