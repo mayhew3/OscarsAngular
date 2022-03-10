@@ -39,6 +39,16 @@
       </p>
     </div>
 
+    <div *ngIf="personService.isAdmin">
+      To upgrade to new ceremony:
+      <ul>
+        <li>Copy specific favicon over</li>
+        <li>Change import in _darkly_variables.scss</li>
+        <li>Use Java Utility to download nominees</li>
+        <li>Use Admin page to make new ceremony active</li>
+      </ul>
+    </div>
+
     <br>
 
     <div class="row">
