@@ -10,7 +10,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ConnectionProblemComponent} from './components/connection-problem/connection-problem.component';
 import {ThemePalette} from '@angular/material/core';
 import {Observable} from 'rxjs';
-import {Person} from './interfaces/Person';
+import _ from 'underscore';
 import {ApiService} from './services/api.service';
 import {Title} from '@angular/platform-browser';
 import {activeCeremony} from '../shared/GlobalVars';
@@ -25,6 +25,9 @@ export class AppComponent implements OnInit {
 
   authenticatingColor: ThemePalette = 'primary';
   loadingColor: ThemePalette = 'accent';
+
+  currStyle = 'oscars';
+  styles = ['oscars', 'emmys'];
 
   constructor(public auth: MyAuthService,
               private messagingService: MessagingService,
@@ -42,7 +45,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadStyle('oscars.css');
+    this.loadStyle(`${this.currStyle}.css`);
+  }
+
+  toggleStyle(): void {
+    const others = _.without(this.styles, this.currStyle);
+    this.currStyle = others[0];
+    this.loadStyle(`${this.currStyle}.css`);
   }
 
   loadStyle(styleName: string): void {
