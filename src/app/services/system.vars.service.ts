@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {firstValueFrom, Observable} from 'rxjs';
 import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
-import {ChangeCurrentYear, GetSystemVars, ToggleHideWinnerless, ToggleHideWinners} from '../actions/systemVars.action';
+import {GetSystemVars, ToggleHideWinnerless, ToggleHideWinners} from '../actions/systemVars.action';
 import {ApiService} from './api.service';
 import {SystemVars} from '../interfaces/SystemVars';
 
@@ -54,8 +54,15 @@ export class SystemVarsService {
     this.store.dispatch(new ToggleHideWinnerless());
   }
 
+  async changeActiveCeremonyYear(ceremony_year_id: number): Promise<void> {
+    const data = {
+      ceremony_year_id
+    };
+    await this.api.putAfterFullyConnected(this.systemVarsUrl, data);
+  }
+
   changeCurrentYear(year: number): void {
-    this.store.dispatch(new ChangeCurrentYear(year));
+    // this.store.dispatch(new ChangeActiveCeremonyYear(year));
   }
 
 

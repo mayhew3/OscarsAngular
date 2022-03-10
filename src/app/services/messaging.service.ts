@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {SocketService} from './socket.service';
 import {AddWinner, RemoveWinner, ResetWinners} from '../actions/category.action';
 import {AddVote, ChangeVote} from '../actions/votes.action';
-import {VotingLock, VotingUnlock} from '../actions/systemVars.action';
+import {ChangeActiveCeremonyYear, VotingLock, VotingUnlock} from '../actions/systemVars.action';
 import {OddsInProgress, UpdatePlayerOdds} from '../actions/odds.action';
 import {Store} from '@ngxs/store';
 import _ from 'underscore';
@@ -58,6 +58,7 @@ export class MessagingService {
       this.addSingleActionListener('person_connected', msg => new PersonConnected(msg.person_id));
       this.addSingleActionListener('person_disconnected', msg => new PersonDisconnected(msg.person_id));
       this.addSingleActionListener('add_ceremony_year', msg => new AddCeremonyYear(msg));
+      this.addSingleActionListener('active_ceremony_changed', msg => new ChangeActiveCeremonyYear(msg.ceremony_year_id, msg.year, msg.ceremony_name));
 
       this.listenersInitialized = true;
     }

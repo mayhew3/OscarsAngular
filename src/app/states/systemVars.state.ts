@@ -2,7 +2,7 @@ import {Action, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
 import {
-  ChangeCurrentYear,
+  ChangeActiveCeremonyYear,
   GetSystemVars,
   ToggleHideWinnerless,
   ToggleHideWinners,
@@ -84,17 +84,13 @@ export class SystemVarsState {
     );
   }
 
-  @Action(ChangeCurrentYear)
-  async changeCurrentYear({getState, setState}: StateContext<SystemVarsStateModel>, action: ChangeCurrentYear): Promise<any> {
-    const state = getState();
-    const data = {
-      id: state.systemVars.id,
-      curr_year: action.year
-    };
-    await this.api.putAfterFullyConnected(this.apiUrl, data);
+  @Action(ChangeActiveCeremonyYear)
+  async changeCurrentYear({setState}: StateContext<SystemVarsStateModel>, action: ChangeActiveCeremonyYear): Promise<any> {
     setState(
       produce(draft => {
         draft.systemVars.curr_year = action.year;
+        draft.systemVars.ceremony_year_id = action.ceremony_year_id;
+        draft.systemVars.ceremony_name = action.ceremony_name;
       })
     );
   }
