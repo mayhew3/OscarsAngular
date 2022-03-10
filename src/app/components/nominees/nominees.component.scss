@@ -1,5 +1,4 @@
 @use 'sass:color';
-@import "../../../darkly_variables";
 @import "../../../variables";
 
 .nom-body {
@@ -94,14 +93,6 @@ input[type=number]::-webkit-outer-spin-button {
 .cardLabel {
   padding-top: 0;
   line-height: 1;
-}
-
-.cardInput {
-  padding: 0.20rem 0.30rem;
-  font-size: 1.10rem;
-  font-weight: bold;
-  background-color: $gray-850;
-  color: white;
 }
 
 .inputRow {

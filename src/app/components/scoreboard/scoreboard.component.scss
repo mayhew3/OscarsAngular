@@ -17,18 +17,6 @@
   background-color: darken($highlight, 53%);
 }
 
-.loserScoreCard {
-  border-color: $gray-600;
-  color: $silver;
-  background-color: $gray-850;
-}
-
-.eliminatedScoreCard {
-  border-color: color.scale($gray-600, $alpha: -60%);
-  color: fade_out($silver, .5);
-  background-color: color.scale($gray-850, $alpha: -30%);
-}
-
 .myScoreCard {
   background-color: $personal;
   border-color: lighten($personal, 40%);
@@ -116,13 +104,6 @@
   font-weight: bold;
   font-size: 14pt;
   margin-left: 4pt;
-}
-
-.oddsSubtitle {
-  color: color.scale($body-color, $alpha: -60%);
-  font-weight: normal;
-  font-size: 10pt;
-  margin-top: 2px;
 }
 
 .oddsDiff {

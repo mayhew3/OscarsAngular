@@ -1,5 +1,16 @@
 @use 'sass:color';
-@import "darkly_variables";
+
+$blue:    #375a7f !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #e74c3c !default;
+$orange:  #fd7e14 !default;
+$yellow:  yellow !default;
+$green:   #00bc8c !default;
+$teal:    #20c997 !default;
+$cyan:    #3498db !default;
+$black:    #000 !default;
 
 $highlight: #E6D36C;
 $muted: #7799BB;
