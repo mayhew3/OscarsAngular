@@ -55,6 +55,11 @@
                 "input": "src/styles_emmys.scss",
                 "bundleName": "emmys",
                 "inject": false
+              },
+              {
+                "input": "src/styles_oscars.scss",
+                "bundleName": "oscars",
+                "inject": false
               }
             ],
             "scripts": [],

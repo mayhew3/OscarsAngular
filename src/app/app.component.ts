@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadStyle('emmys.css');
+    this.loadStyle('oscars.css');
   }
 
   loadStyle(styleName: string): void {
