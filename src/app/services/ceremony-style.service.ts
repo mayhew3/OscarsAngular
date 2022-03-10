@@ -1,6 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import _ from 'underscore';
+import {SystemVarsService} from './system.vars.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,12 @@ export class CeremonyStyleService {
   currStyle = 'oscars';
   styles = ['oscars', 'emmys'];
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
-    this.loadStyle(`${this.currStyle}.css`);
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private systemVarsService: SystemVarsService) {
+    this.systemVarsService.systemVarsCeremonyYearChanges$.subscribe(systemVars => {
+      const name = systemVars.ceremony_name.toLowerCase();
+      this.loadStyle(`${name}.css`);
+    });
   }
 
   toggleStyle(): void {
