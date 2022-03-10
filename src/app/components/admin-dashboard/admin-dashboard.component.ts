@@ -13,6 +13,7 @@ import {ScoreData} from '../../interfaces/ScoreData';
 import moment from 'moment';
 import _ from 'underscore';
 import {CeremonyService} from '../../services/ceremony.service';
+import {CeremonyStyleService} from '../../services/ceremony-style.service';
 
 @Component({
   selector: 'osc-admin-dashboard',
@@ -35,10 +36,15 @@ export class AdminDashboardComponent implements OnInit {
               private socket: SocketService,
               private personService: PersonService,
               private scoreboardService: ScoreboardService,
-              private ceremonyService: CeremonyService) { }
+              private ceremonyService: CeremonyService,
+              private ceremonyStyleService: CeremonyStyleService) { }
 
   get isAdmin(): boolean {
     return this.personService.isAdmin;
+  }
+
+  toggleStyle(): void {
+    this.ceremonyStyleService.toggleStyle();
   }
 
   get currentYear(): Observable<number> {

@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {SystemVarsService} from './services/system.vars.service';
 import {CategoryService} from './services/category.service';
 import {SocketService} from './services/socket.service';
@@ -10,24 +10,20 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ConnectionProblemComponent} from './components/connection-problem/connection-problem.component';
 import {ThemePalette} from '@angular/material/core';
 import {Observable} from 'rxjs';
-import _ from 'underscore';
 import {ApiService} from './services/api.service';
 import {Title} from '@angular/platform-browser';
 import {activeCeremony} from '../shared/GlobalVars';
-import {DOCUMENT} from '@angular/common';
+import {CeremonyStyleService} from './services/ceremony-style.service';
 
 @Component({
   selector: 'osc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
   authenticatingColor: ThemePalette = 'primary';
   loadingColor: ThemePalette = 'accent';
-
-  currStyle = 'oscars';
-  styles = ['oscars', 'emmys'];
 
   constructor(public auth: MyAuthService,
               private messagingService: MessagingService,
@@ -39,37 +35,9 @@ export class AppComponent implements OnInit {
               private apiService: ApiService,
               private modalService: NgbModal,
               private titleService: Title,
-              @Inject(DOCUMENT) private document: Document) {
+              private ceremonyStyleService: CeremonyStyleService) {
     this.initDisconnectPopup();
     this.titleService.setTitle(activeCeremony);
-  }
-
-  ngOnInit(): void {
-    this.loadStyle(`${this.currStyle}.css`);
-  }
-
-  toggleStyle(): void {
-    const others = _.without(this.styles, this.currStyle);
-    this.currStyle = others[0];
-    this.loadStyle(`${this.currStyle}.css`);
-  }
-
-  loadStyle(styleName: string): void {
-    const head = this.document.getElementsByTagName('head')[0];
-
-    const themeLink = this.document.getElementById(
-      'client-theme'
-    ) as HTMLLinkElement;
-    if (themeLink) {
-      themeLink.href = styleName;
-    } else {
-      const style = this.document.createElement('link');
-      style.id = 'client-theme';
-      style.rel = 'stylesheet';
-      style.href = `${styleName}`;
-
-      head.appendChild(style);
-    }
   }
 
   initDisconnectPopup(): void {
