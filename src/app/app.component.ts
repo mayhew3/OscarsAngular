@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {SystemVarsService} from './services/system.vars.service';
 import {CategoryService} from './services/category.service';
 import {SocketService} from './services/socket.service';
@@ -14,13 +14,14 @@ import {Person} from './interfaces/Person';
 import {ApiService} from './services/api.service';
 import {Title} from '@angular/platform-browser';
 import {activeCeremony} from '../shared/GlobalVars';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'osc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   authenticatingColor: ThemePalette = 'primary';
   loadingColor: ThemePalette = 'accent';
@@ -34,9 +35,32 @@ export class AppComponent {
               private personService: PersonService,
               private apiService: ApiService,
               private modalService: NgbModal,
-              private titleService: Title) {
+              private titleService: Title,
+              @Inject(DOCUMENT) private document: Document) {
     this.initDisconnectPopup();
     this.titleService.setTitle(activeCeremony);
+  }
+
+  ngOnInit(): void {
+    this.loadStyle('emmys.css');
+  }
+
+  loadStyle(styleName: string): void {
+    const head = this.document.getElementsByTagName('head')[0];
+
+    const themeLink = this.document.getElementById(
+      'client-theme'
+    ) as HTMLLinkElement;
+    if (themeLink) {
+      themeLink.href = styleName;
+    } else {
+      const style = this.document.createElement('link');
+      style.id = 'client-theme';
+      style.rel = 'stylesheet';
+      style.href = `${styleName}`;
+
+      head.appendChild(style);
+    }
   }
 
   initDisconnectPopup(): void {
