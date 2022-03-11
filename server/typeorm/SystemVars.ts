@@ -12,4 +12,7 @@ export class SystemVars {
   @Column()
   voting_open: boolean;
 
+  @Column()
+  ceremony_year_id: number;
+
 }

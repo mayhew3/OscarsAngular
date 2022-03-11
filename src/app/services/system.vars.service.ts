@@ -55,7 +55,9 @@ export class SystemVarsService {
   }
 
   async changeActiveCeremonyYear(ceremony_year_id: number): Promise<void> {
+    const systemVars = await firstValueFrom(this.systemVars);
     const data = {
+      id: systemVars.id,
       ceremony_year_id
     };
     await this.api.putAfterFullyConnected(this.systemVarsUrl, data);
