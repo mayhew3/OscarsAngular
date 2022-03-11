@@ -91,6 +91,8 @@ export class SystemVarsState {
         draft.systemVars.curr_year = action.year;
         draft.systemVars.ceremony_year_id = action.ceremony_year_id;
         draft.systemVars.ceremony_name = action.ceremony_name;
+        draft.systemVars.voting_open = action.voting_open;
+        draft.systemVars.ceremony_start = new Date(action.ceremony_start);
       })
     );
   }

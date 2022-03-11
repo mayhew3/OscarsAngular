@@ -58,9 +58,9 @@ export const updateSystemVars = async (request: Request, response: Response, nex
     await getRepository(SystemVars).update(systemVar.id, systemVar);
 
     if (ceremonyYearChanged) {
-      const ceremonyYear = await getRepository(CeremonyYear).findOne(result.ceremony_year_id);
+      const ceremonyYear = await getRepository(CeremonyYear).findOne(systemVar.ceremony_year_id);
       if (!ceremonyYear) {
-        throw new Error('No ceremonyYear found with id: ' + result.ceremony_year_id);
+        throw new Error('No ceremonyYear found with id: ' + systemVar.ceremony_year_id);
       }
       const ceremony = await getRepository(Ceremony).findOne(ceremonyYear.ceremony_id);
       if (!ceremony) {
@@ -68,9 +68,11 @@ export const updateSystemVars = async (request: Request, response: Response, nex
       }
 
       const msg = {
-        ceremony_year_id: result.ceremony_year_id,
+        ceremony_year_id: systemVar.ceremony_year_id,
         year: ceremonyYear.year,
-        ceremony_name: ceremony.name
+        ceremony_name: ceremony.name,
+        voting_open: !ceremonyYear.voting_closed,
+        ceremony_start: ceremonyYear.ceremony_date
       };
 
       socketServer.emitToAll('active_ceremony_changed', msg);
