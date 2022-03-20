@@ -275,6 +275,19 @@ export const MockCeremonies: Ceremony[] = [
         "nominationCount": 118,
         "ceremony_id": 1,
         "id": 16
+      },
+      {
+        "ceremony_date": "2022-03-27T16:00:00",
+        "groupYears": [{
+          "person_group_id": 1,
+          "year": 2021,
+          "ceremony_year_id": 18,
+          "id": 31
+        }],
+        "year": 2021,
+        "nominationCount": 120,
+        "ceremony_id": 1,
+        "id": 18
       }
     ],
     "name": "Oscars",
@@ -290,6 +303,7 @@ export const MockCeremonies: Ceremony[] = [
         "id": 30
       }],
       "year": 2021,
+      "voting_closed": "2021-09-19T16:55:00",
       "nominationCount": 163,
       "ceremony_id": 2,
       "id": 17

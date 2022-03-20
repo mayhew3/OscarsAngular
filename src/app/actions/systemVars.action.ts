@@ -15,6 +15,7 @@ export class ChangeActiveCeremonyYear {
   constructor(public ceremony_year_id: number,
               public year: number,
               public ceremony_name: string,
+              public ceremony_id: number,
               public voting_open: boolean,
               public ceremony_start: string) {
   }

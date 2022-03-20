@@ -33,6 +33,7 @@ export const getSystemVars = async (request: Request, response: Response, next: 
       ceremony_year_id: systemVars.ceremony_year_id,
       curr_year: ceremonyYear.year,
       ceremony_name: ceremony.name,
+      ceremony_id: ceremony.id,
       ceremony_start: ceremonyYear.ceremony_date
     };
 
@@ -71,6 +72,7 @@ export const updateSystemVars = async (request: Request, response: Response, nex
         ceremony_year_id: systemVar.ceremony_year_id,
         year: ceremonyYear.year,
         ceremony_name: ceremony.name,
+        ceremony_id: ceremony.id,
         voting_open: !ceremonyYear.voting_closed,
         ceremony_start: ceremonyYear.ceremony_date
       };

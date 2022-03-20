@@ -2,7 +2,6 @@ import {Connection, ConnectionOptions, createConnection, DeepPartial, getReposit
 import {EntityTarget} from 'typeorm/common/EntityTarget';
 import {Category} from './Category';
 import {Event} from './Event';
-import {FinalResult} from './FinalResult';
 import {GroupYear} from './GroupYear';
 import {Nomination} from './Nomination';
 import {OddsExecution} from './OddsExecution';
@@ -40,7 +39,6 @@ export class TypeORMManager {
         Ceremony,
         CeremonyYear,
         Event,
-        FinalResult,
         GroupYear,
         Nomination,
         OddsExecution,

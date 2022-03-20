@@ -3,11 +3,14 @@ import {Store} from '@ngxs/store';
 import {filter, map} from 'rxjs/operators';
 import {GetCeremonyYears} from '../actions/ceremony.action';
 import {CeremonyYear} from '../interfaces/CeremonyYear';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import _ from 'underscore';
 import {Ceremony} from '../interfaces/Ceremony';
 import {ApiService} from './api.service';
 import {GroupYear} from '../interfaces/GroupYear';
+import {Person} from '../interfaces/Person';
+import {FinalResultsService} from './final-results.service';
+import {groupNumber} from '../../shared/GlobalVars';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +24,25 @@ export class CeremonyService {
   );
 
   constructor(private store: Store,
-              private api: ApiService) {
+              private api: ApiService,
+              private finalResultsService: FinalResultsService) {
     this.store.dispatch(new GetCeremonyYears());
   }
 
   get ceremonyYearsFlattened(): Observable<CeremonyYear[]> {
     return this.ceremonies.pipe(
       map(ceremonies => _.flatten(_.map(ceremonies, ceremony => ceremony.ceremonyYears)))
+    );
+  }
+
+  hasPastCeremonies(me: Person, ceremony_id: number): Observable<boolean> {
+    const myGroups = [groupNumber];
+    return this.finalResultsService.finalResults$.pipe(
+      map(finalResults => {
+        const eligibleResults = _.filter(finalResults, finalResult => _.contains(myGroups, finalResult.group_id) &&
+          finalResult.ceremony_id === ceremony_id);
+        return eligibleResults.length > 0;
+      })
     );
   }
 

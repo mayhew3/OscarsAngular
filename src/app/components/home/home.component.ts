@@ -12,6 +12,7 @@ import {ApiService} from '../../services/api.service';
 import {ScoreboardService} from '../../services/scoreboard.service';
 import {oddsUrl} from '../../../shared/GlobalVars';
 import moment from 'moment';
+import {CeremonyService} from '../../services/ceremony.service';
 
 @Component({
   selector: 'osc-home',
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
               public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
               public scoreboardService: ScoreboardService,
+              private ceremonyService: CeremonyService,
               public votesService: VotesService) {
   }
 
@@ -68,6 +70,12 @@ export class HomeComponent implements OnInit {
   get ceremonyDate(): Observable<Date> {
     return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
       map(systemVars => moment(systemVars.ceremony_start).toDate())
+    );
+  }
+
+  showPast(): Observable<boolean> {
+    return combineLatest([this.personService.me$, this.systemVarsService.systemVarsCeremonyYearChanges$]).pipe(
+      mergeMap(([me, systemVars]) => this.ceremonyService.hasPastCeremonies(me, systemVars.ceremony_id))
     );
   }
 

@@ -58,7 +58,7 @@ export class MessagingService {
       this.addSingleActionListener('person_connected', msg => new PersonConnected(msg.person_id));
       this.addSingleActionListener('person_disconnected', msg => new PersonDisconnected(msg.person_id));
       this.addSingleActionListener('add_ceremony_year', msg => new AddCeremonyYear(msg));
-      this.addSingleActionListener('active_ceremony_changed', msg => new ChangeActiveCeremonyYear(msg.ceremony_year_id, msg.year, msg.ceremony_name, msg.voting_open, msg.ceremony_start));
+      this.addSingleActionListener('active_ceremony_changed', msg => new ChangeActiveCeremonyYear(msg.ceremony_year_id, msg.year, msg.ceremony_name, msg.ceremony_id, msg.voting_open, msg.ceremony_start));
 
       this.listenersInitialized = true;
     }

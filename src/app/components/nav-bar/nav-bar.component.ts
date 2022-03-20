@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map, mergeMap} from 'rxjs/operators';
+import {combineLatest, Observable, of} from 'rxjs';
+import {CeremonyService} from '../../services/ceremony.service';
+import {PersonService} from '../../services/person.service';
 
 @Component({
   selector: 'osc-nav-bar',
@@ -12,7 +14,9 @@ import {Observable} from 'rxjs';
 export class NavBarComponent implements OnInit {
 
   constructor(public auth: MyAuthService,
-              public systemVarsService: SystemVarsService) { }
+              public systemVarsService: SystemVarsService,
+              private ceremonyService: CeremonyService,
+              private personService: PersonService) { }
 
   ngOnInit(): void {
   }
@@ -30,8 +34,8 @@ export class NavBarComponent implements OnInit {
   }
 
   showPast(): Observable<boolean> {
-    return this.ceremonyName.pipe(
-      map(ceremonyName => ceremonyName === 'Oscars')
+    return combineLatest([this.personService.me$, this.systemVarsService.systemVarsCeremonyYearChanges$]).pipe(
+      mergeMap(([me, systemVars]) => this.ceremonyService.hasPastCeremonies(me, systemVars.ceremony_id))
     );
   }
 }
