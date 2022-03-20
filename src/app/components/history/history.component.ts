@@ -35,8 +35,11 @@ export class HistoryComponent implements OnInit {
         const champions = [];
         _.each(years, year => {
           // noinspection TypeScriptValidateJSTypes
-          const yearChamps = _.filter(finalResults, finalResult => finalResult.year === year && finalResult.rank === 1);
-          champions.push(yearChamps);
+          const yearScores = _.where(finalResults, {year});
+          const yearChamps = _.where(yearScores, {rank: 1});
+          if (yearChamps.length > 0) {
+            champions.push(yearChamps);
+          }
         });
 
         return champions;
