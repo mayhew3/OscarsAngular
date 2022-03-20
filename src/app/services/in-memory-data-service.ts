@@ -185,6 +185,7 @@ export class InMemoryDataService implements InMemoryDbService {
         ceremony_year_id,
         year: ceremonyYear.year,
         ceremony_name: ceremony.name,
+        ceremony_id: ceremony.id,
         voting_open: !ceremonyYear.voting_closed,
         ceremony_start: ceremonyYear.ceremony_date
       };

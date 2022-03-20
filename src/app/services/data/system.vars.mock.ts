@@ -8,6 +8,7 @@ export const MockSystemVars: SystemVars[] = [
     voting_open: true,
     ceremony_name: 'Oscars',
     ceremony_year_id: 18,
+    ceremony_id: 1,
     ceremony_start: moment.utc('2022-03-27 23:00').toDate()
   }
 ];
