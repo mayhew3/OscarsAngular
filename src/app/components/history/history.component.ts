@@ -6,6 +6,7 @@ import {PersonService} from '../../services/person.service';
 import * as moment from 'moment';
 import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {groupNumber} from '../../../shared/GlobalVars';
 
 @Component({
   selector: 'osc-history',
@@ -14,9 +15,7 @@ import {map} from 'rxjs/operators';
 })
 export class HistoryComponent implements OnInit {
 
-  groupNumber = 1;
-
-  finalResults$ = this.finalResultsService.getFinalResultsForGroup(this.groupNumber);
+  finalResults$ = this.finalResultsService.getFinalResultsForGroup(groupNumber);
 
   constructor(private finalResultsService: FinalResultsService,
               private personService: PersonService) { }

@@ -14,6 +14,7 @@ import {map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, firstValueFrom, Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {SocketService} from '../../services/socket.service';
+import {groupNumber} from '../../../shared/GlobalVars';
 
 @Component({
   selector: 'osc-nominees',
@@ -24,9 +25,6 @@ export class NomineesComponent implements OnInit {
   @Input() activeContext: ActiveContext;
 
   nomineeGroups = new Map<number, NomineeControls>();
-
-  // todo: allow multiple groups
-  groupNumber = 1;
 
   category$: Observable<Category> = this.route.params.pipe(
     mergeMap(params => {
@@ -80,7 +78,7 @@ export class NomineesComponent implements OnInit {
 
   personsForNominee(nominee: Nominee, category: Category): Observable<Person[]> {
     const votes$ = this.votesService.getVotesForCurrentYearAndCategory(category);
-    const persons$ = this.personService.getPersonsForGroup(this.groupNumber);
+    const persons$ = this.personService.getPersonsForGroup(groupNumber);
     return combineLatest([votes$, persons$]).pipe(
       map(([votes, persons]) => {
         const votesForNominee = _.where(votes, {nomination_id: nominee.id});
