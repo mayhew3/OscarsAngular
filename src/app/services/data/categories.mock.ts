@@ -79,61 +79,61 @@ export const MockCategoryList: Category[] = [
         "category_id": 5,
         "year": 2021,
         "nominee": "Belfast",
-        "id": 3944
+        "id": 3231
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "Coda",
-        "id": 3945
+        "id": 3232
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "Don't Look Up",
-        "id": 3946
+        "id": 3233
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "Drive My Car",
-        "id": 3947
+        "id": 3234
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "Dune",
-        "id": 3948
+        "id": 3235
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "King Richard",
-        "id": 3949
+        "id": 3236
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "Licorice Pizza",
-        "id": 3950
+        "id": 3237
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "Nightmare Alley",
-        "id": 3951
+        "id": 3238
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "The Power of the Dog",
-        "id": 3952
+        "id": 3239
       },
       {
         "category_id": 5,
         "year": 2021,
         "nominee": "West Side Story",
-        "id": 3953
+        "id": 3240
       }
     ],
     "name": "Best Picture",
@@ -203,40 +203,35 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Tick, Tick... Boom!",
         "nominee": "Andrew Garfield",
-        "id": 3954,
-        "detail": "Tick, Tick... Boom!"
+        "id": 3241
       },
       {
         "category_id": 1,
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Benedict Cumberbatch",
-        "id": 3955,
-        "detail": "The Power of the Dog"
+        "id": 3242
       },
       {
         "category_id": 1,
         "year": 2021,
         "context": "The Tragedy of Macbeth",
         "nominee": "Denzel Washington",
-        "id": 3956,
-        "detail": "The Tragedy of Macbeth"
+        "id": 3243
       },
       {
         "category_id": 1,
         "year": 2021,
         "context": "Being the Ricardos",
         "nominee": "Javier Bardem",
-        "id": 3957,
-        "detail": "Being the Ricardos"
+        "id": 3244
       },
       {
         "category_id": 1,
         "year": 2021,
         "context": "King Richard",
         "nominee": "Will Smith",
-        "id": 3958,
-        "detail": "King Richard"
+        "id": 3245
       }
     ],
     "name": "Actor",
@@ -305,40 +300,35 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "The Eyes of Tammy Faye",
         "nominee": "Jessica Chastain",
-        "id": 3964,
-        "detail": "The Eyes of Tammy Faye"
+        "id": 3251
       },
       {
         "category_id": 2,
         "year": 2021,
         "context": "Spencer",
         "nominee": "Kristen Stewart",
-        "id": 3965,
-        "detail": "Spencer"
+        "id": 3252
       },
       {
         "category_id": 2,
         "year": 2021,
         "context": "Being the Ricardos",
         "nominee": "Nicole Kidman",
-        "id": 3966,
-        "detail": "Being the Ricardos"
+        "id": 3253
       },
       {
         "category_id": 2,
         "year": 2021,
         "context": "The Lost Daughter",
         "nominee": "Olivia Colman",
-        "id": 3967,
-        "detail": "The Lost Daughter"
+        "id": 3254
       },
       {
         "category_id": 2,
         "year": 2021,
         "context": "Parallel Mothers",
         "nominee": "Penélope Cruz",
-        "id": 3968,
-        "detail": "Parallel Mothers"
+        "id": 3255
       }
     ],
     "name": "Actress",
@@ -407,40 +397,35 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Jane Campion",
-        "id": 3974,
-        "detail": "The Power of the Dog"
+        "id": 3261
       },
       {
         "category_id": 8,
         "year": 2021,
         "context": "Belfast",
         "nominee": "Kenneth Branagh",
-        "id": 3975,
-        "detail": "Belfast"
+        "id": 3262
       },
       {
         "category_id": 8,
         "year": 2021,
         "context": "Licorice Pizza",
         "nominee": "Paul Thomas Anderson",
-        "id": 3976,
-        "detail": "Licorice Pizza"
+        "id": 3263
       },
       {
         "category_id": 8,
         "year": 2021,
         "context": "Drive My Car",
         "nominee": "Ryusuke Hamaguchi",
-        "id": 3977,
-        "detail": "Drive My Car"
+        "id": 3264
       },
       {
         "category_id": 8,
         "year": 2021,
         "context": "West Side Story",
         "nominee": "Steven Spielberg",
-        "id": 3978,
-        "detail": "West Side Story"
+        "id": 3265
       }
     ],
     "name": "Directing",
@@ -501,37 +486,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 3,
         "year": 2021,
+        "context": "Enrico Casarosa and Andrea Warren",
         "nominee": "Luca",
-        "id": 3979,
-        "detail": "Enrico Casarosa and Andrea Warren"
+        "id": 3266
       },
       {
         "category_id": 3,
         "year": 2021,
+        "context": "Don Hall, Carlos López Estrada, Osnat Shurer and Peter Del Vecho",
         "nominee": "Raya and the Last Dragon",
-        "id": 3980,
-        "detail": "Don Hall, Carlos López Estrada, Osnat Shurer and Peter Del Vecho"
+        "id": 3267
       },
       {
         "category_id": 3,
         "year": 2021,
+        "context": "Jared Bush, Byron Howard, Yvett Merino and Clark Spencer",
         "nominee": "Encanto",
-        "id": 3981,
-        "detail": "Jared Bush, Byron Howard, Yvett Merino and Clark Spencer"
+        "id": 3268
       },
       {
         "category_id": 3,
         "year": 2021,
+        "context": "Jonas Poher Rasmussen, Monica Hellström, Signe Byrge Sørensen and Charlotte De La Gournerie",
         "nominee": "Flee",
-        "id": 3982,
-        "detail": "Jonas Poher Rasmussen, Monica Hellström, Signe Byrge Sørensen and Charlotte De La Gournerie"
+        "id": 3269
       },
       {
         "category_id": 3,
         "year": 2021,
+        "context": "Mike Rianda, Phil Lord, Christopher Miller and Kurt Albrecht",
         "nominee": "The Mitchells vs. The Machines",
-        "id": 3983,
-        "detail": "Mike Rianda, Phil Lord, Christopher Miller and Kurt Albrecht"
+        "id": 3270
       }
     ],
     "name": "Animated Feature Film",
@@ -601,40 +586,35 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Belfast",
         "nominee": "Ciarán Hinds",
-        "id": 3959,
-        "detail": "Belfast"
+        "id": 3246
       },
       {
         "category_id": 20,
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Jesse Plemons",
-        "id": 3960,
-        "detail": "The Power of the Dog"
+        "id": 3247
       },
       {
         "category_id": 20,
         "year": 2021,
         "context": "Being the Ricardos",
         "nominee": "J. K. Simmons",
-        "id": 3961,
-        "detail": "Being the Ricardos"
+        "id": 3248
       },
       {
         "category_id": 20,
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Kodi Smit-McPhee",
-        "id": 3962,
-        "detail": "The Power of the Dog"
+        "id": 3249
       },
       {
         "category_id": 20,
         "year": 2021,
         "context": "Coda",
         "nominee": "Troy Kotsur",
-        "id": 3963,
-        "detail": "Coda"
+        "id": 3250
       }
     ],
     "name": "Supporting Actor",
@@ -703,40 +683,35 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "West Side Story",
         "nominee": "Ariana DeBose",
-        "id": 3969,
-        "detail": "West Side Story"
+        "id": 3256
       },
       {
         "category_id": 21,
         "year": 2021,
         "context": "King Richard",
         "nominee": "Aunjanue Ellis",
-        "id": 3970,
-        "detail": "King Richard"
+        "id": 3257
       },
       {
         "category_id": 21,
         "year": 2021,
         "context": "The Lost Daughter",
         "nominee": "Jessie Buckley",
-        "id": 3971,
-        "detail": "The Lost Daughter"
+        "id": 3258
       },
       {
         "category_id": 21,
         "year": 2021,
         "context": "Belfast",
         "nominee": "Judi Dench",
-        "id": 3972,
-        "detail": "Belfast"
+        "id": 3259
       },
       {
         "category_id": 21,
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Kirsten Dunst",
-        "id": 3973,
-        "detail": "The Power of the Dog"
+        "id": 3260
       }
     ],
     "name": "Supporting Actress",
@@ -803,37 +778,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 23,
         "year": 2021,
+        "context": "Jane Campion",
         "nominee": "The Power of the Dog",
-        "id": 4009,
-        "detail": "Jane Campion"
+        "id": 3296
       },
       {
         "category_id": 23,
         "year": 2021,
+        "context": "Maggie Gyllenhaal",
         "nominee": "The Lost Daughter",
-        "id": 4010,
-        "detail": "Maggie Gyllenhaal"
+        "id": 3297
       },
       {
         "category_id": 23,
         "year": 2021,
+        "context": "Sian Heder",
         "nominee": "Coda",
-        "id": 4011,
-        "detail": "Sian Heder"
+        "id": 3298
       },
       {
         "category_id": 23,
         "year": 2021,
+        "context": "Ryusuke Hamaguchi and Takamasa Ōe",
         "nominee": "Drive My Car",
-        "id": 4012,
-        "detail": "Ryusuke Hamaguchi and Takamasa Ōe"
+        "id": 3299
       },
       {
         "category_id": 23,
         "year": 2021,
+        "context": "Jon Spaihts, Denis Villeneuve and Eric Roth",
         "nominee": "Dune",
-        "id": 4013,
-        "detail": "Jon Spaihts, Denis Villeneuve and Eric Roth"
+        "id": 3300
       }
     ],
     "name": "Writing (Adapted Screenplay)",
@@ -899,37 +874,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 24,
         "year": 2021,
+        "context": "Kenneth Branagh",
         "nominee": "Belfast",
-        "id": 4004,
-        "detail": "Kenneth Branagh"
+        "id": 3291
       },
       {
         "category_id": 24,
         "year": 2021,
+        "context": "Paul Thomas Anderson",
         "nominee": "Licorice Pizza",
-        "id": 4005,
-        "detail": "Paul Thomas Anderson"
+        "id": 3292
       },
       {
         "category_id": 24,
         "year": 2021,
+        "context": "Zach Baylin",
         "nominee": "King Richard",
-        "id": 4006,
-        "detail": "Zach Baylin"
+        "id": 3293
       },
       {
         "category_id": 24,
         "year": 2021,
+        "context": "Adam McKay and David Sirota",
         "nominee": "Don't Look Up",
-        "id": 4007,
-        "detail": "Adam McKay and David Sirota"
+        "id": 3294
       },
       {
         "category_id": 24,
         "year": 2021,
+        "context": "Eskil Vogt and Joachim Trier",
         "nominee": "The Worst Person in the World",
-        "id": 4008,
-        "detail": "Eskil Vogt and Joachim Trier"
+        "id": 3295
       }
     ],
     "name": "Writing (Original Screenplay)",
@@ -1005,37 +980,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 6,
         "year": 2021,
+        "context": "Ari Wegner",
         "nominee": "The Power of the Dog",
-        "id": 3989,
-        "detail": "Ari Wegner"
+        "id": 3276
       },
       {
         "category_id": 6,
         "year": 2021,
+        "context": "Bruno Delbonnel",
         "nominee": "The Tragedy of Macbeth",
-        "id": 3990,
-        "detail": "Bruno Delbonnel"
+        "id": 3277
       },
       {
         "category_id": 6,
         "year": 2021,
+        "context": "Dan Laustsen",
         "nominee": "Nightmare Alley",
-        "id": 3991,
-        "detail": "Dan Laustsen"
+        "id": 3278
       },
       {
         "category_id": 6,
         "year": 2021,
+        "context": "Greig Fraser",
         "nominee": "Dune",
-        "id": 3992,
-        "detail": "Greig Fraser"
+        "id": 3279
       },
       {
         "category_id": 6,
         "year": 2021,
+        "context": "Janusz Kamiński",
         "nominee": "West Side Story",
-        "id": 3993,
-        "detail": "Janusz Kamiński"
+        "id": 3280
       }
     ],
     "name": "Cinematography",
@@ -1097,37 +1072,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 7,
         "year": 2021,
+        "context": "Jenny Beavan",
         "nominee": "Cruella",
-        "id": 4014,
-        "detail": "Jenny Beavan"
+        "id": 3301
       },
       {
         "category_id": 7,
         "year": 2021,
+        "context": "Luis Sequeira",
         "nominee": "Nightmare Alley",
-        "id": 4015,
-        "detail": "Luis Sequeira"
+        "id": 3302
       },
       {
         "category_id": 7,
         "year": 2021,
+        "context": "Paul Tazewell",
         "nominee": "West Side Story",
-        "id": 4016,
-        "detail": "Paul Tazewell"
+        "id": 3303
       },
       {
         "category_id": 7,
         "year": 2021,
+        "context": "Jacqueline West and Bob Morgan",
         "nominee": "Dune",
-        "id": 4017,
-        "detail": "Jacqueline West and Bob Morgan"
+        "id": 3304
       },
       {
         "category_id": 7,
         "year": 2021,
+        "context": "Massimo Cantini Parrini and Jacqueline Durran",
         "nominee": "Cyrano",
-        "id": 4018,
-        "detail": "Massimo Cantini Parrini and Jacqueline Durran"
+        "id": 3305
       }
     ],
     "name": "Costume Design",
@@ -1189,37 +1164,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 11,
         "year": 2021,
+        "context": "Hank Corwin",
         "nominee": "Don't Look Up",
-        "id": 4049,
-        "detail": "Hank Corwin"
+        "id": 3336
       },
       {
         "category_id": 11,
         "year": 2021,
+        "context": "Joe Walker",
         "nominee": "Dune",
-        "id": 4050,
-        "detail": "Joe Walker"
+        "id": 3337
       },
       {
         "category_id": 11,
         "year": 2021,
+        "context": "Pamela Martin",
         "nominee": "King Richard",
-        "id": 4051,
-        "detail": "Pamela Martin"
+        "id": 3338
       },
       {
         "category_id": 11,
         "year": 2021,
+        "context": "Peter Sciberras",
         "nominee": "The Power of the Dog",
-        "id": 4052,
-        "detail": "Peter Sciberras"
+        "id": 3339
       },
       {
         "category_id": 11,
         "year": 2021,
+        "context": "Myron Kerstein and Andrew Weisblum",
         "nominee": "Tick, Tick... Boom!",
-        "id": 4053,
-        "detail": "Myron Kerstein and Andrew Weisblum"
+        "id": 3340
       }
     ],
     "name": "Film Editing",
@@ -1282,37 +1257,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 13,
         "year": 2021,
+        "context": "Donald Mowat, Love Larson and Eva von Bahr",
         "nominee": "Dune",
-        "id": 4019,
-        "detail": "Donald Mowat, Love Larson and Eva von Bahr"
+        "id": 3306
       },
       {
         "category_id": 13,
         "year": 2021,
+        "context": "Göran Lundström, Anna-Carin Lock and Frederic Aspiras",
         "nominee": "House of Gucci",
-        "id": 4020,
-        "detail": "Göran Lundström, Anna-Carin Lock and Frederic Aspiras"
+        "id": 3307
       },
       {
         "category_id": 13,
         "year": 2021,
+        "context": "Mike Marino, Stacey Morris and Carla Farmer",
         "nominee": "Coming 2 America",
-        "id": 4021,
-        "detail": "Mike Marino, Stacey Morris and Carla Farmer"
+        "id": 3308
       },
       {
         "category_id": 13,
         "year": 2021,
+        "context": "Nadia Stacey, Naomi Donne and Julia Vernon",
         "nominee": "Cruella",
-        "id": 4022,
-        "detail": "Nadia Stacey, Naomi Donne and Julia Vernon"
+        "id": 3309
       },
       {
         "category_id": 13,
         "year": 2021,
+        "context": "Stephanie Ingram, Linda Dowds and Justin Raleigh",
         "nominee": "The Eyes of Tammy Faye",
-        "id": 4023,
-        "detail": "Stephanie Ingram, Linda Dowds and Justin Raleigh"
+        "id": 3310
       }
     ],
     "name": "Makeup and Hairstyling",
@@ -1379,37 +1354,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 14,
         "year": 2021,
+        "context": "Alberto Iglesias",
         "nominee": "Parallel Mothers",
-        "id": 3994,
-        "detail": "Alberto Iglesias"
+        "id": 3281
       },
       {
         "category_id": 14,
         "year": 2021,
+        "context": "Germaine Franco",
         "nominee": "Encanto",
-        "id": 3995,
-        "detail": "Germaine Franco"
+        "id": 3282
       },
       {
         "category_id": 14,
         "year": 2021,
+        "context": "Hans Zimmer",
         "nominee": "Dune",
-        "id": 3996,
-        "detail": "Hans Zimmer"
+        "id": 3283
       },
       {
         "category_id": 14,
         "year": 2021,
+        "context": "Jonny Greenwood",
         "nominee": "The Power of the Dog",
-        "id": 3997,
-        "detail": "Jonny Greenwood"
+        "id": 3284
       },
       {
         "category_id": 14,
         "year": 2021,
+        "context": "Nicholas Britell",
         "nominee": "Don't Look Up",
-        "id": 3998,
-        "detail": "Nicholas Britell"
+        "id": 3285
       }
     ],
     "name": "Music (Original Score)",
@@ -1483,7 +1458,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Four Good Days",
         "nominee": "Somehow You Do",
-        "id": 3999,
+        "id": 3286,
         "detail": "Diane Warren"
       },
       {
@@ -1491,7 +1466,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Encanto",
         "nominee": "Dos Oruguitas",
-        "id": 4000,
+        "id": 3287,
         "detail": "Lin-Manuel Miranda"
       },
       {
@@ -1499,7 +1474,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Belfast",
         "nominee": "Down to Joy",
-        "id": 4001,
+        "id": 3288,
         "detail": "Van Morrison"
       },
       {
@@ -1507,7 +1482,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "King Richard",
         "nominee": "Be Alive",
-        "id": 4002,
+        "id": 3289,
         "detail": "Beyoncé and DIXSON"
       },
       {
@@ -1515,7 +1490,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "No Time to Die",
         "nominee": "No Time to Die",
-        "id": 4003,
+        "id": 3290,
         "detail": "Billie Eilish and Finneas O'Connell"
       }
     ],
@@ -1577,37 +1552,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 4,
         "year": 2021,
+        "context": "Adam Stockhausen and Rena DeAngelo",
         "nominee": "West Side Story",
-        "id": 3984,
-        "detail": "Adam Stockhausen and Rena DeAngelo"
+        "id": 3271
       },
       {
         "category_id": 4,
         "year": 2021,
+        "context": "Grant Major and Amber Richards",
         "nominee": "The Power of the Dog",
-        "id": 3985,
-        "detail": "Grant Major and Amber Richards"
+        "id": 3272
       },
       {
         "category_id": 4,
         "year": 2021,
+        "context": "Patrice Vermette and Zsuzsanna Sipos",
         "nominee": "Dune",
-        "id": 3986,
-        "detail": "Patrice Vermette and Zsuzsanna Sipos"
+        "id": 3273
       },
       {
         "category_id": 4,
         "year": 2021,
+        "context": "Stefan Dechant and Nancy Haigh",
         "nominee": "The Tragedy of Macbeth",
-        "id": 3987,
-        "detail": "Stefan Dechant and Nancy Haigh"
+        "id": 3274
       },
       {
         "category_id": 4,
         "year": 2021,
+        "context": "Tamara Deverell and Shane Vieau",
         "nominee": "Nightmare Alley",
-        "id": 3988,
-        "detail": "Tamara Deverell and Shane Vieau"
+        "id": 3275
       }
     ],
     "start_year": 2011,
@@ -1669,37 +1644,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 26,
         "year": 2021,
+        "context": "Richard Flynn, Robert Mackenzie and Tara Webb",
         "nominee": "The Power of the Dog",
-        "id": 4054,
-        "detail": "Richard Flynn, Robert Mackenzie and Tara Webb"
+        "id": 3341
       },
       {
         "category_id": 26,
         "year": 2021,
+        "context": "Denise Yarde, Simon Chase, James Mather and Niv Adiri",
         "nominee": "Belfast",
-        "id": 4055,
-        "detail": "Denise Yarde, Simon Chase, James Mather and Niv Adiri"
+        "id": 3342
       },
       {
         "category_id": 26,
         "year": 2021,
+        "context": "Mac Ruth, Mark A. Mangini, Theo Green, Doug Hemphill and Ron Bartlett",
         "nominee": "Dune",
-        "id": 4056,
-        "detail": "Mac Ruth, Mark A. Mangini, Theo Green, Doug Hemphill and Ron Bartlett"
+        "id": 3343
       },
       {
         "category_id": 26,
         "year": 2021,
+        "context": "Simon Hayes, Oliver Tarney, James Harrison, Paul Massey and Mark Taylor",
         "nominee": "No Time to Die",
-        "id": 4057,
-        "detail": "Simon Hayes, Oliver Tarney, James Harrison, Paul Massey and Mark Taylor"
+        "id": 3344
       },
       {
         "category_id": 26,
         "year": 2021,
+        "context": "Tod A. Maitland, Gary Rydstrom, Brian Chumney, Andy Nelson and Shawn Murphy",
         "nominee": "West Side Story",
-        "id": 4058,
-        "detail": "Tod A. Maitland, Gary Rydstrom, Brian Chumney, Andy Nelson and Shawn Murphy"
+        "id": 3345
       }
     ],
     "start_year": 2020,
@@ -1779,37 +1754,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 22,
         "year": 2021,
+        "context": "Charlie Noble, Joel Green, Jonathan Fawkner and Chris Corbould",
         "nominee": "No Time to Die",
-        "id": 4059,
-        "detail": "Charlie Noble, Joel Green, Jonathan Fawkner and Chris Corbould"
+        "id": 3346
       },
       {
         "category_id": 22,
         "year": 2021,
+        "context": "Christopher Townsend, Joe Farrell, Sean Noel Walker and Dan Oliver",
         "nominee": "Shang-Chi and the Legend of the Ten Rings",
-        "id": 4060,
-        "detail": "Christopher Townsend, Joe Farrell, Sean Noel Walker and Dan Oliver"
+        "id": 3347
       },
       {
         "category_id": 22,
         "year": 2021,
+        "context": "Kelly Port, Chris Waegner, Scott Edelstein and Daniel Sudick",
         "nominee": "Spider-Man: No Way Home",
-        "id": 4061,
-        "detail": "Kelly Port, Chris Waegner, Scott Edelstein and Daniel Sudick"
+        "id": 3348
       },
       {
         "category_id": 22,
         "year": 2021,
+        "context": "Paul Lambert, Tristan Myles, Brian Connor and Gerd Nefzer",
         "nominee": "Dune",
-        "id": 4062,
-        "detail": "Paul Lambert, Tristan Myles, Brian Connor and Gerd Nefzer"
+        "id": 3349
       },
       {
         "category_id": 22,
         "year": 2021,
+        "context": "Swen Gillberg, Bryan Grill, Nikos Kalaitzidis and Daniel Sudick",
         "nominee": "Free Guy",
-        "id": 4063,
-        "detail": "Swen Gillberg, Bryan Grill, Nikos Kalaitzidis and Daniel Sudick"
+        "id": 3350
       }
     ],
     "name": "Visual Effects",
@@ -1871,37 +1846,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 9,
         "year": 2021,
-        "nominee": "Writing with Fire",
-        "id": 4024,
-        "detail": "Rintu Thomas and Sushmit Ghosh"
+        "context": "Rintu Thomas and Sushmit Ghosh",
+        "nominee": "Writing With Fire",
+        "id": 3311
       },
       {
         "category_id": 9,
         "year": 2021,
+        "context": "Stanley Nelson Jr. and Traci A. Curry",
         "nominee": "Attica",
-        "id": 4025,
-        "detail": "Stanley Nelson Jr. and Traci A. Curry"
+        "id": 3312
       },
       {
         "category_id": 9,
         "year": 2021,
+        "context": "Jessica Kingdon, Kira Simon-Kennedy and Nathan Truesdell",
         "nominee": "Ascension",
-        "id": 4026,
-        "detail": "Jessica Kingdon, Kira Simon-Kennedy and Nathan Truesdell"
+        "id": 3313
       },
       {
         "category_id": 9,
         "year": 2021,
+        "context": "Jonas Poher Rasmussen, Monica Hellström, Signe Byrge Sørensen and Charlotte De La Gournerie",
         "nominee": "Flee",
-        "id": 4027,
-        "detail": "Jonas Poher Rasmussen, Monica Hellström, Signe Byrge Sørensen and Charlotte De La Gournerie"
+        "id": 3314
       },
       {
         "category_id": 9,
         "year": 2021,
+        "context": "Questlove, Joseph Patel, Robert Fyvolent and David Dinerstein",
         "nominee": "Summer of Soul (...Or, When the Revolution Could Not Be Televised)",
-        "id": 4028,
-        "detail": "Questlove, Joseph Patel, Robert Fyvolent and David Dinerstein"
+        "id": 3315
       }
     ],
     "name": "Documentary (Feature)",
@@ -1963,37 +1938,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 10,
         "year": 2021,
+        "context": "Ben Proudfoot",
         "nominee": "The Queen of Basketball",
-        "id": 4029,
-        "detail": "Ben Proudfoot"
+        "id": 3316
       },
       {
         "category_id": 10,
         "year": 2021,
+        "context": "Jay Rosenblatt",
         "nominee": "When We Were Bullies",
-        "id": 4030,
-        "detail": "Jay Rosenblatt"
+        "id": 3317
       },
       {
         "category_id": 10,
         "year": 2021,
+        "context": "Elizabeth Mirzaei and Gulistan Mirzaei",
         "nominee": "Three Songs for Benazir",
-        "id": 4031,
-        "detail": "Elizabeth Mirzaei and Gulistan Mirzaei"
+        "id": 3318
       },
       {
         "category_id": 10,
         "year": 2021,
+        "context": "Matthew Ogens and Geoff McLean",
         "nominee": "Audible",
-        "id": 4032,
-        "detail": "Matthew Ogens and Geoff McLean"
+        "id": 3319
       },
       {
         "category_id": 10,
         "year": 2021,
+        "context": "Pedro Kos and Jon Shenk",
         "nominee": "Lead Me Home",
-        "id": 4033,
-        "detail": "Pedro Kos and Jon Shenk"
+        "id": 3320
       }
     ],
     "name": "Documentary (Short Subject)",
@@ -2071,35 +2046,35 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Japan",
         "nominee": "Drive My Car",
-        "id": 4034
+        "id": 3321
       },
       {
         "category_id": 25,
         "year": 2021,
         "context": "Denmark",
         "nominee": "Flee",
-        "id": 4035
+        "id": 3322
       },
       {
         "category_id": 25,
         "year": 2021,
         "context": "Bhutan",
         "nominee": "Lunana: A Yak in the Classroom",
-        "id": 4036
+        "id": 3323
       },
       {
         "category_id": 25,
         "year": 2021,
         "context": "Italy",
         "nominee": "The Hand of God",
-        "id": 4037
+        "id": 3324
       },
       {
         "category_id": 25,
         "year": 2021,
         "context": "Norway",
         "nominee": "The Worst Person in the World",
-        "id": 4038
+        "id": 3325
       }
     ],
     "start_year": 2019,
@@ -2163,37 +2138,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 16,
         "year": 2021,
+        "context": "Anton Dyakov",
         "nominee": "Boxballet",
-        "id": 4039,
-        "detail": "Anton Dyakov"
+        "id": 3326
       },
       {
         "category_id": 16,
         "year": 2021,
+        "context": "Alberto Mielgo and Leo Sanchez",
         "nominee": "The Windshield Wiper",
-        "id": 4040,
-        "detail": "Alberto Mielgo and Leo Sanchez"
+        "id": 3327
       },
       {
         "category_id": 16,
         "year": 2021,
+        "context": "Dan Ojari and Michael Please",
         "nominee": "Robin Robin",
-        "id": 4041,
-        "detail": "Dan Ojari and Michael Please"
+        "id": 3328
       },
       {
         "category_id": 16,
         "year": 2021,
+        "context": "Hugo Covarrubias and Tevo Díaz",
         "nominee": "Beast",
-        "id": 4042,
-        "detail": "Hugo Covarrubias and Tevo Díaz"
+        "id": 3329
       },
       {
         "category_id": 16,
         "year": 2021,
+        "context": "Joanna Quinn and Les Mills",
         "nominee": "Affairs of the Art",
-        "id": 4043,
-        "detail": "Joanna Quinn and Les Mills"
+        "id": 3330
       }
     ],
     "name": "Short Film (Animated)",
@@ -2255,37 +2230,37 @@ export const MockCategoryList: Category[] = [
       {
         "category_id": 17,
         "year": 2021,
+        "context": "Aneil Karia and Riz Ahmed",
         "nominee": "The Long Goodbye",
-        "id": 4044,
-        "detail": "Aneil Karia and Riz Ahmed"
+        "id": 3331
       },
       {
         "category_id": 17,
         "year": 2021,
+        "context": "K.D. Dávila and Levin Menekse",
         "nominee": "Please Hold",
-        "id": 4045,
-        "detail": "K.D. Dávila and Levin Menekse"
+        "id": 3332
       },
       {
         "category_id": 17,
         "year": 2021,
+        "context": "Maria Brendle and Nadine Lüchinger",
         "nominee": "Ala Kachuu - Take and Run",
-        "id": 4046,
-        "detail": "Maria Brendle and Nadine Lüchinger"
+        "id": 3333
       },
       {
         "category_id": 17,
         "year": 2021,
+        "context": "Martin Strange-Hansen and Kim Magnusson",
         "nominee": "On My Mind",
-        "id": 4047,
-        "detail": "Martin Strange-Hansen and Kim Magnusson"
+        "id": 3334
       },
       {
         "category_id": 17,
         "year": 2021,
+        "context": "Tadeusz Łysiak and Maciej Slesicki",
         "nominee": "The Dress",
-        "id": 4048,
-        "detail": "Tadeusz Łysiak and Maciej Slesicki"
+        "id": 3335
       }
     ],
     "name": "Short Film (Live Action)",

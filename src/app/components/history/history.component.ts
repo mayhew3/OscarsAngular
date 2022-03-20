@@ -6,6 +6,9 @@ import {PersonService} from '../../services/person.service';
 import * as moment from 'moment';
 import {combineLatest, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {groupNumber} from '../../../shared/GlobalVars';
+import {CeremonyService} from '../../services/ceremony.service';
+import {SystemVarsService} from '../../services/system.vars.service';
 
 @Component({
   selector: 'osc-history',
@@ -14,29 +17,40 @@ import {map} from 'rxjs/operators';
 })
 export class HistoryComponent implements OnInit {
 
-  groupNumber = 1;
-
-  finalResults$ = this.finalResultsService.getFinalResultsForGroup(this.groupNumber);
+  finalResults$ = this.finalResultsService.getFinalResultsForGroup(groupNumber);
 
   constructor(private finalResultsService: FinalResultsService,
-              private personService: PersonService) { }
+              private personService: PersonService,
+              private systemVarsService: SystemVarsService,
+              private ceremonyService: CeremonyService) { }
 
   ngOnInit(): void {
   }
 
   getChampions(): Observable<FinalResult[][]> {
-    return this.finalResults$.pipe(
-      map(finalResults => {
+    return combineLatest([
+      this.finalResults$,
+      this.systemVarsService.systemVarsCeremonyYearChanges$,
+      this.ceremonyService.ceremonyYearsFlattened
+    ]).pipe(
+      map(([finalResults, systemVars, ceremonyYears]) => {
         // noinspection TypeScriptValidateJSTypes
-        const years = _.uniq(_.map(finalResults, finalResult => finalResult.year));
+        const activeCeremonyYear = _.findWhere(ceremonyYears, {id: systemVars.ceremony_year_id});
+        const ceremony_id = activeCeremonyYear.ceremony_id;
+
+        const resultsForActiveCeremony = _.where(finalResults, {ceremony_id});
+        const years = _.uniq(_.map(resultsForActiveCeremony, finalResult => finalResult.year));
         years.sort((year1, year2) =>
           year2 - year1);
 
         const champions = [];
         _.each(years, year => {
           // noinspection TypeScriptValidateJSTypes
-          const yearChamps = _.filter(finalResults, finalResult => finalResult.year === year && finalResult.rank === 1);
-          champions.push(yearChamps);
+          const yearScores = _.where(finalResults, {year});
+          const yearChamps = _.where(yearScores, {rank: 1});
+          if (yearChamps.length > 0) {
+            champions.push(yearChamps);
+          }
         });
 
         return champions;
