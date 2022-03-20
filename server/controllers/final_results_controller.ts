@@ -84,7 +84,6 @@ export const getFinalResults = async (request: Request, response: Response, next
     for (const person of groupPersons) {
       if (!hasResultAlready(person, groupYear)) {
         const result: Partial<FinalResultObj> = {
-          group_year_id: groupYear.id,
           group_id: groupYear.person_group_id,
           year: groupYear.year,
           person_id: person.id,
