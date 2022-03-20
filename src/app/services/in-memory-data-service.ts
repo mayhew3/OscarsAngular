@@ -19,6 +19,7 @@ import {MockPersonGroups} from './data/person.groups.mock';
 import {Ceremony} from '../interfaces/Ceremony';
 import {GroupYear} from '../interfaces/GroupYear';
 import {MockCategoryList} from './data/categories.mock';
+import {CeremonyYear} from '../interfaces/CeremonyYear';
 
 @Injectable({
   providedIn: 'root',
@@ -172,6 +173,24 @@ export class InMemoryDataService implements InMemoryDbService {
   private updateSystemVars(requestInfo: RequestInfo): void {
     const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
     const systemVars = this.systemVars[0];
+
+    const ceremony_year_id = jsonBody.ceremony_year_id;
+    if (!!ceremony_year_id) {
+      systemVars.ceremony_year_id = ceremony_year_id;
+
+      const ceremonyYear = this.ceremonyYearWithId(ceremony_year_id);
+      const ceremony = this.ceremonyWithId(ceremonyYear.ceremony_id);
+
+      const msg = {
+        ceremony_year_id,
+        year: ceremonyYear.year,
+        ceremony_name: ceremony.name,
+        voting_open: !ceremonyYear.voting_closed,
+        ceremony_start: ceremonyYear.ceremony_date
+      };
+
+      this.broadcastToChannel('active_ceremony_changed', msg);
+    }
 
     if (jsonBody.voting_open !== undefined) {
       systemVars.voting_open = jsonBody.voting_open;
@@ -375,11 +394,13 @@ export class InMemoryDataService implements InMemoryDbService {
   private getCategoriesWithVotes(requestInfo: RequestInfo): Observable<Response> {
     const person_id = requestInfo.query.get('person_id')[0];
     const year = requestInfo.query.get('year')[0];
-    const ceremony_id = +requestInfo.query.get('ceremony_id')[0];
+    const ceremony_name = requestInfo.query.get('ceremony_name')[0];
+
+    const ceremony = this.ceremonyWithName(ceremony_name);
 
     const data = [];
 
-    const filteredCategories = _.where(this.categories, {ceremony_id});
+    const filteredCategories = _.where(this.categories, {ceremony_id: ceremony.id});
 
     _.forEach(filteredCategories, category => {
       const yearNum = +year;
@@ -495,6 +516,15 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private ceremonyWithId(ceremony_id: number): Ceremony {
     return _.findWhere(this.ceremonies, {id: ceremony_id});
+  }
+
+  private ceremonyWithName(ceremony_name: string): Ceremony {
+    return _.findWhere(this.ceremonies, {name: ceremony_name});
+  }
+
+  private ceremonyYearWithId(ceremony_year_id: number): CeremonyYear {
+    const ceremonyYears = _.flatten(_.map(this.ceremonies, c => c.ceremonyYears));
+    return _.findWhere(ceremonyYears, {id: ceremony_year_id});
   }
 
   private updateObject(jsonBody: any): void {

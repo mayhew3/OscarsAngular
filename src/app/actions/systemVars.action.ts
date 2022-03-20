@@ -10,9 +10,13 @@ export class VotingUnlock {
   static readonly type = '[SystemVars] Voting Unlock';
 }
 
-export class ChangeCurrentYear {
-  static readonly type = '[SystemVars] Change Current Year';
-  constructor(public year: number) {
+export class ChangeActiveCeremonyYear {
+  static readonly type = '[SystemVars] Change Active Ceremony Year';
+  constructor(public ceremony_year_id: number,
+              public year: number,
+              public ceremony_name: string,
+              public voting_open: boolean,
+              public ceremony_start: string) {
   }
 }
 

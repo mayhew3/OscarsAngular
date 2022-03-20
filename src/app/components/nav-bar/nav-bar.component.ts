@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {SystemVarsService} from '../../services/system.vars.service';
-import {activeCeremony} from '../../../shared/GlobalVars';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'osc-nav-bar',
@@ -16,12 +17,21 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get ceremonyName(): string {
-    return activeCeremony;
+  get ceremonyName(): Observable<string> {
+    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
+      map(systemVars => systemVars.ceremony_name)
+    );
   }
 
-  showPast(): boolean {
-    // @ts-ignore
-    return activeCeremony === 'Oscars';
+  get bannerImage(): Observable<string> {
+    return this.ceremonyName.pipe(
+      map(ceremonyName => ceremonyName === 'Oscars' ? 'navbar_logo' : 'navbar_logo_emmys')
+    );
+  }
+
+  showPast(): Observable<boolean> {
+    return this.ceremonyName.pipe(
+      map(ceremonyName => ceremonyName === 'Oscars')
+    );
   }
 }

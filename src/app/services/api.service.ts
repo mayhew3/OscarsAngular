@@ -40,6 +40,10 @@ export class ApiService {
 
   // GET
 
+  async getWithoutAuthenticate<T>(url: string, params?: HttpParams): Promise<T> {
+    return await this.getWithError<T>(url, params);
+  }
+
   async getAfterAuthenticate<T>(url: string, params?: HttpParams): Promise<T> {
     await this.waitForAuthentication();
     return await this.getWithError<T>(url, params);

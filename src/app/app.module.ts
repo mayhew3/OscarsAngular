@@ -23,7 +23,7 @@ import {InMemoryCallbacksService} from './services/in-memory-callbacks.service';
 import {PersonDetailComponent} from './components/person-detail/person-detail.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
-import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
+import {AuthModule} from '@auth0/auth0-angular';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
@@ -46,13 +46,14 @@ import {NavBarComponent} from './components/nav-bar/nav-bar.component';
 import {DotComponent} from './components/dot/dot.component';
 import {CountdownComponent} from './components/countdown/countdown.component';
 import {CeremonyState} from './states/ceremony.state';
-import { AdminCeremoniesComponent } from './components/admin-ceremonies/admin-ceremonies.component';
-import { AdminAddCeremonyPopupComponent } from './components/admin-add-ceremony-popup/admin-add-ceremony-popup.component';
+import {AdminCeremoniesComponent} from './components/admin-ceremonies/admin-ceremonies.component';
+import {AdminAddCeremonyPopupComponent} from './components/admin-add-ceremony-popup/admin-add-ceremony-popup.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
-import { CalendarIconComponent } from './components/calendar-icon/calendar-icon.component';
+import {CalendarIconComponent} from './components/calendar-icon/calendar-icon.component';
 import {TimepickerModule} from 'ngx-bootstrap/timepicker';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
+import {InterceptorService} from './services/auth/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -136,7 +137,7 @@ import {ButtonsModule} from 'ngx-bootstrap/buttons';
     environment.initSocketModule,
     environment.loggerModule,
     InMemoryCallbacksService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
 })

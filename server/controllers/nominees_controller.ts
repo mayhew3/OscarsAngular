@@ -4,14 +4,33 @@ import {Nomination} from '../typeorm/Nomination';
 import {Category} from '../typeorm/Category';
 import {Vote} from '../typeorm/Vote';
 import {Winner} from '../typeorm/Winner';
-import {activeCeremonyId} from '../../src/shared/GlobalVars';
 import {Category as CategoryObj} from '../../src/app/interfaces/Category';
-import {Request, Response, NextFunction} from 'express/ts4.0';
+import {NextFunction, Request, Response} from 'express/ts4.0';
+import {SystemVars} from '../typeorm/SystemVars';
+import {CeremonyYear} from '../typeorm/CeremonyYear';
 
 export const getCategories = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+  if (!request.query.year) {
+    return next(new Error('No year attached to request!'));
+  }
+  if (!request.query.person_id) {
+    return next(new Error('No person_id attached to request!'));
+  }
+
+  const systemVarsArray = await getRepository(SystemVars).find();
+  if (systemVarsArray.length !== 1) {
+    throw new Error('Expected exactly one row in system_vars!');
+  }
+  const systemVars = systemVarsArray[0];
+
+  const ceremonyYear = await getRepository(CeremonyYear).findOne(systemVars.ceremony_year_id);
+  if (!ceremonyYear) {
+    throw new Error('No ceremonyYear found with id: ' + systemVars.ceremony_year_id);
+  }
+
   const categories = await getRepository(Category).find({
     where: {
-      ceremony_id: activeCeremonyId
+      ceremony_id: ceremonyYear.ceremony_id
     },
     order:
       {

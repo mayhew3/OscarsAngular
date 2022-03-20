@@ -40,7 +40,7 @@ export class VotesService {
               private categoryService: CategoryService,
               private store: Store,
               private api: ApiService) {
-    this.systemVarsService.systemVarsYearChanges$.subscribe(systemVars => {
+    this.systemVarsService.systemVarsCeremonyYearChanges$.subscribe(systemVars => {
       this.store.dispatch(new GetVotes(systemVars.curr_year));
     });
   }

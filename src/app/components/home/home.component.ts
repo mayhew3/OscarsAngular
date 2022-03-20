@@ -10,7 +10,8 @@ import {Person} from '../../interfaces/Person';
 import {ThemePalette} from '@angular/material/core';
 import {ApiService} from '../../services/api.service';
 import {ScoreboardService} from '../../services/scoreboard.service';
-import {activeCeremony, oddsUrl, ceremonyStart} from '../../../shared/GlobalVars';
+import {oddsUrl} from '../../../shared/GlobalVars';
+import moment from 'moment';
 
 @Component({
   selector: 'osc-home',
@@ -64,12 +65,16 @@ export class HomeComponent implements OnInit {
     return this.scoreboardService.getPlayersInFirstPlace().length === 1;
   }
 
-  get oscarDate(): Date {
-    return ceremonyStart.toDate();
+  get ceremonyDate(): Observable<Date> {
+    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
+      map(systemVars => moment(systemVars.ceremony_start).toDate())
+    );
   }
 
-  get oscarDateFormatted(): string {
-    return ceremonyStart.local().format('dddd, MMMM Do YYYY, h:mm a'); // "Sunday, February 14th 2010, 3:25:50 pm"
+  get ceremonyDateFormatted(): Observable<string> {
+    return this.ceremonyDate.pipe(
+      map(ceremonyDate => moment(ceremonyDate).local().format('dddd, MMMM Do YYYY, h:mm a'))
+    );
   }
 
   numVotesRemaining(): Observable<number> {
@@ -82,13 +87,16 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  get ceremonyName(): string {
-    return activeCeremony;
+  get ceremonyName(): Observable<string> {
+    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
+      map(systemVars => systemVars.ceremony_name)
+    );
   }
 
-  get ceremonyContent(): string {
-    // @ts-ignore
-    return activeCeremony === 'Oscars' ? 'films' : 'shows';
+  get ceremonyContent(): Observable<string> {
+    return this.ceremonyName.pipe(
+      map(ceremonyName => ceremonyName === 'Oscars' ? 'films' : 'shows')
+    );
   }
 
   get ceremonyOddsUrl(): string {

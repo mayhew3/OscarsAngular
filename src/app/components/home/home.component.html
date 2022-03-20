@@ -7,7 +7,7 @@
   <div *ngIf="(apiService.emailVerified$ | async) else loading">
 
     <p>
-      Welcome to the {{ceremonyName}} Prediction Arena for {{getCeremonyYear() | async}} {{ceremonyContent}}, {{(me$ | async)?.first_name}}!
+      Welcome to the {{ceremonyName | async}} Prediction Arena for {{getCeremonyYear() | async}} {{ceremonyContent | async}}, {{(me$ | async).first_name}}!
     </p>
 
     <p *ngIf="(hasVotesRemaining() | async) && (systemVarsService.canVote() | async)"
@@ -16,14 +16,14 @@
     </p>
 
     <div *ngIf="(systemVarsService.canVote() | async) && (categoryService.itsOver() | async) === false">
-      <p>Live Scoring will be viewable on {{oscarDateFormatted}} your local time, when the ballots will lock.</p>
+      <p>Live Scoring will be viewable on {{ceremonyDateFormatted | async}} your local time, when the ballots will lock.</p>
       <p><strong>New this month! You can vote on the Emmy Awards!</strong></p>
       <p *ngIf="!!ceremonyOddsUrl">And as with the Oscars, your voting screen includes expert picks and metacritic user favorites, as
         found on <a href="{{ceremonyOddsUrl}}" target="_blank">Metacritic</a>.</p>
 
       <div class="text-center">
-        {{ceremonyName}} Start in:
-        <osc-countdown [dDay]="oscarDate"></osc-countdown>
+        {{ceremonyName | async}} Start in:
+        <osc-countdown [dDay]="(ceremonyDate | async)"></osc-countdown>
       </div>
 
     </div>
@@ -37,6 +37,16 @@
       <p>Congrats to <span class="winnerHighlight">{{winnersString}}</span> for winning the Prediction Arena for the {{getCeremonyYear() | async}} films!
       <span *ngIf="showWinnerDetail()">They got <span class="winnerHighlight">{{singleFirstPlaceNumCorrectVotes | async}}</span> correct out of <span class="winnerHighlight">{{singleFirstPlaceNumVotes | async}}</span>.</span>
       </p>
+    </div>
+
+    <div *ngIf="personService.isAdmin">
+      To upgrade to new ceremony:
+      <ul>
+        <li>Copy specific favicon over</li>
+        <li>Change import in _darkly_variables.scss</li>
+        <li>Use Java Utility to download nominees</li>
+        <li>Use Admin page to make new ceremony active</li>
+      </ul>
     </div>
 
     <br>

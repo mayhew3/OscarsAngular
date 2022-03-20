@@ -13,7 +13,6 @@ import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import fast_sort from 'fast-sort';
-import {activeCeremonyId} from '../../shared/GlobalVars';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +28,7 @@ export class CategoryService {
     map(model => model.categories),
     filter(categories => !!categories),
     mergeMap(categories =>
-      this.systemVarsService.systemVarsYearChanges$.pipe(
+      this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
         map(systemVars => _.filter(categories, category => CategoryService.isInRange(systemVars.curr_year, category)))
       ))
   );
@@ -43,9 +42,9 @@ export class CategoryService {
               private systemVarsService: SystemVarsService,
               private store: Store) {
 
-    combineLatest([this.personService.me$, this.systemVarsService.systemVarsYearChanges$])
+    combineLatest([this.personService.me$, this.systemVarsService.systemVarsCeremonyYearChanges$])
       .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, activeCeremonyId));
+        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, systemVars.ceremony_name));
       });
 
     this.store.dispatch(new GetMaxYear());

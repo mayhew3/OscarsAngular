@@ -13,7 +13,7 @@
 
     <div class="row m-1"
          *ngFor="let ceremonyYear of ceremonyYearsView">
-      <div class="col-12 card ceremonyCard fakeLink">
+      <div class="col-12 card ceremonyCard">
         <div class="card-body py-0 px-3">
           <div class="row no-gutters">
             <div class="col-2 ceremonyYear px-0">
@@ -25,8 +25,15 @@
             <div class="col-3 px-0">
               {{ceremonyYear.numGroups}} groups
             </div>
-            <div class="col-4 px-0">
+            <div class="col-3 px-0">
               {{ceremonyYear.nominationCount}} nominees
+            </div>
+            <div class="col-1 px-0">
+              <button class="btn btn-primary"
+                      *ngIf="(isActive(ceremonyYear) | async) === false"
+                      (click)="changeActiveCeremonyYear(ceremonyYear.ceremony_year_id)">
+                Activate
+              </button>
             </div>
           </div>
         </div>
