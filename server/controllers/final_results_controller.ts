@@ -9,6 +9,7 @@ import {CeremonyYear} from '../typeorm/CeremonyYear';
 import {Person} from '../typeorm/Person';
 import {PersonGroupRole} from '../typeorm/PersonGroupRole';
 import {Winner} from '../typeorm/Winner';
+import {SystemVars} from '../typeorm/SystemVars';
 
 export const getFinalResults = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
 
@@ -19,6 +20,13 @@ export const getFinalResults = async (request: Request, response: Response, next
   const persons = await getRepository(Person).find();
   const personGroupRoles = await getRepository(PersonGroupRole).find();
   const winners = await getRepository(Winner).find();
+  const systemVarsArray = await getRepository(SystemVars).find();
+
+  if (systemVarsArray.length !== 1) {
+    throw new Error('Expected exactly one row in system_vars!');
+  }
+  const systemVars = systemVarsArray[0];
+  const activeCeremonyYearId = systemVars.ceremony_year_id;
 
   const hasAnyVotes = (person_id: number, year: number, ceremony_id: number): boolean => {
     const myVotes = _.where(votes, {year, person_id});
@@ -64,44 +72,52 @@ export const getFinalResults = async (request: Request, response: Response, next
     if (!ceremonyYear) {
       return next('No ceremony_year found with id: ' + groupYear.ceremony_year_id);
     }
-    const year = ceremonyYear.year;
-    const ceremony_id = ceremonyYear.ceremony_id;
-    const groupWinners = _.filter(winners, winner => {
-      const category = _.findWhere(categories, {id: winner.category_id});
-      if (!category) {
-        next('No category found with id: ' + winner.category_id);
-        throw new Error('No category found with id: ' + winner.category_id);
+
+    if (activeCeremonyYearId !== ceremonyYear.id) {
+
+      const year = ceremonyYear.year;
+      const ceremony_id = ceremonyYear.ceremony_id;
+      const groupWinners = _.filter(winners, winner => {
+        const category = _.findWhere(categories, {id: winner.category_id});
+        if (!category) {
+          next('No category found with id: ' + winner.category_id);
+          throw new Error('No category found with id: ' + winner.category_id);
+        }
+        return winner.year === year && category.ceremony_id === ceremony_id;
+      });
+
+      if (groupWinners.length > 0) {
+
+        const groupPersons = _.chain(personGroupRoles)
+          .filter(role => role.person_group_id === groupYear.person_group_id && hasAnyVotes(role.person_id, year, ceremony_id))
+          .map(role => _.findWhere(persons, {id: role.person_id}))
+          .filter(person => !!person)
+          .value() as Person[];
+
+        for (const person of groupPersons) {
+          if (!hasResultAlready(person, groupYear)) {
+            const result: Partial<FinalResultObj> = {
+              group_id: groupYear.person_group_id,
+              year: groupYear.year,
+              person_id: person.id,
+              ceremony_id
+            };
+            const finishedResult = calculateScore(result, person, year, groupWinners);
+            outputObject.push(finishedResult);
+          }
+        }
+
+        let newResults = 0;
+        for (const finalResult of outputObject) {
+          const resultsWithMore = _.filter(outputObject, obj => obj.score > finalResult.score &&
+            obj.group_id === finalResult.group_id &&
+            obj.year === finalResult.year &&
+            obj.ceremony_id === finalResult.ceremony_id
+          );
+          finalResult.rank = resultsWithMore.length + 1;
+          newResults++;
+        }
       }
-      return winner.year === year && category.ceremony_id === ceremony_id;
-    });
-
-    const groupPersons = _.chain(personGroupRoles)
-      .filter(role => role.person_group_id === groupYear.person_group_id && hasAnyVotes(role.person_id, year, ceremony_id))
-      .map(role => _.findWhere(persons, {id: role.person_id}))
-      .filter(person => !!person)
-      .value() as Person[];
-
-    for (const person of groupPersons) {
-      if (!hasResultAlready(person, groupYear)) {
-        const result: Partial<FinalResultObj> = {
-          group_id: groupYear.person_group_id,
-          year: groupYear.year,
-          person_id: person.id,
-          ceremony_id
-        };
-        const finishedResult = calculateScore(result, person, year, groupWinners);
-        outputObject.push(finishedResult);
-      }
-    }
-
-    let newResults = 0;
-    for (const finalResult of outputObject) {
-      const resultsWithMore = _.filter(outputObject, obj => obj.score > finalResult.score &&
-        obj.group_year_id === finalResult.group_year_id &&
-        obj.ceremony_id === finalResult.ceremony_id
-      );
-      finalResult.rank = resultsWithMore.length + 1;
-      newResults++;
     }
 
   }
