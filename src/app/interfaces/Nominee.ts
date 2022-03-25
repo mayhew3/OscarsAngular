@@ -9,4 +9,5 @@ export interface Nominee {
   odds_user?: number;
   odds_numerator?: number;
   odds_denominator?: number;
+  odds_moneyline?: number;
 }

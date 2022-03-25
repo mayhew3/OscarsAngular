@@ -15,6 +15,7 @@ import {BehaviorSubject, combineLatest, firstValueFrom, Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {SocketService} from '../../services/socket.service';
 import {groupNumber} from '../../../shared/GlobalVars';
+import {OddsInterface} from '../../../shared/OddsInterface';
 
 @Component({
   selector: 'osc-nominees',
@@ -168,6 +169,17 @@ export class NomineesComponent implements OnInit {
     }
   }
 
+  updateVegasOdds(nominee: Nominee): void {
+    const nomineeControls = this.nomineeGroups.get(nominee.id);
+    const moneyline = nomineeControls.moneyline.value;
+    if (!!moneyline) {
+      const oddsInterface = OddsInterface.fromMoneylineFormatted(moneyline);
+      const {numerator, denominator} = oddsInterface.asRatio();
+      nomineeControls.numerator.setValue(numerator);
+      nomineeControls.denominator.setValue(denominator);
+    }
+  }
+
   getSubtitleText(nominee: Nominee, category: Category): string {
     return CategoryService.getSubtitleText(category, nominee);
   }
@@ -219,6 +231,21 @@ export class NomineesComponent implements OnInit {
     );
   }
 
+  vegasOddsDisplay(nominee: Nominee): string | undefined {
+    if (!!nominee.odds_moneyline) {
+      const percentage = this.moneylineAsPercentage(nominee.odds_moneyline);
+      return Math.round(percentage * 100).toString() + '%';
+    } else if (!!nominee.odds_numerator) {
+      return nominee.odds_numerator + ':' + nominee.odds_denominator;
+    } else {
+      return undefined;
+    }
+  }
+
+  moneylineAsPercentage(moneyline: number): number {
+    return OddsInterface.fromMoneyline(moneyline).asPercentage();
+  }
+
   votingMode(): boolean {
     return ActiveContext.Vote === this.activeContext;
   }
@@ -238,11 +265,22 @@ export class NomineeControls {
   user: FormControl;
   numerator: FormControl;
   denominator: FormControl;
+  moneyline: FormControl;
 
   constructor(public nominee: Nominee) {
     this.expert = new FormControl(nominee.odds_expert);
     this.user = new FormControl(nominee.odds_user);
     this.numerator = new FormControl(nominee.odds_numerator);
     this.denominator = new FormControl(nominee.odds_denominator);
+
+    if (!!nominee.odds_moneyline) {
+      const oddsInterface = OddsInterface.fromMoneyline(nominee.odds_moneyline);
+      this.moneyline = new FormControl(oddsInterface.asMoneylineFormatted());
+    } else if (!!nominee.odds_denominator) {
+      const oddsInterface = OddsInterface.fromRatio(nominee.odds_numerator, nominee.odds_denominator);
+      this.moneyline = new FormControl(oddsInterface.asMoneylineFormatted());
+    } else {
+      this.moneyline = new FormControl();
+    }
   }
 }
