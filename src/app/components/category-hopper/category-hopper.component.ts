@@ -134,14 +134,13 @@ export class CategoryHopperComponent implements OnInit {
 
   // noinspection JSMethodCanBeStatic
   private createOddsChange(nomineeControls: NomineeControls): OddsChange {
-    const moneyline = !!nomineeControls.moneyline.value ?
-      OddsInterface.fromMoneylineFormatted(nomineeControls.moneyline.value).asMoneyline() :
-      undefined;
+    const moneyLineControl = nomineeControls.moneyline.value;
+    const moneyline = !!moneyLineControl ? +(moneyLineControl.replace('+', '')) : undefined;
     return {
       nomination_id: nomineeControls.nominee.id,
       odds_expert: nomineeControls.expert.value,
       odds_user: nomineeControls.user.value,
-      odds_moneyline: moneyline,
+      odds_moneyline: Math.round(moneyline),
     };
   }
 
