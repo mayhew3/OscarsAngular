@@ -67,7 +67,8 @@ export class CategoryService {
       return undefined;
     } else if (CategoryService.isTitleCategory(category.name)) {
       return !!nominee.detail ? `"${nominee.detail}"` : null;
-    } else if (nominee.nominee === nominee.context || !nominee.context) {
+    } else if (!CategoryService.isSongCategory(category.name) &&
+                nominee.nominee === nominee.context || !nominee.context) {
       return nominee.detail;
     } else {
       return nominee.context;
