@@ -76,15 +76,20 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 5
       },
       {
+        "odds_expert": 2,
         "category_id": 5,
         "year": 2021,
         "nominee": "Belfast",
+        "odds_user": 7,
+        "odds_moneyline": 1400,
         "id": 3231
       },
       {
+        "odds_expert": 61,
         "category_id": 5,
         "year": 2021,
         "nominee": "Coda",
+        "odds_moneyline": 130,
         "id": 3232
       },
       {
@@ -103,6 +108,7 @@ export const MockCategoryList: Category[] = [
         "category_id": 5,
         "year": 2021,
         "nominee": "Dune",
+        "odds_user": 11,
         "id": 3235
       },
       {
@@ -115,6 +121,7 @@ export const MockCategoryList: Category[] = [
         "category_id": 5,
         "year": 2021,
         "nominee": "Licorice Pizza",
+        "odds_user": 5,
         "id": 3237
       },
       {
@@ -124,15 +131,20 @@ export const MockCategoryList: Category[] = [
         "id": 3238
       },
       {
+        "odds_expert": 36,
         "category_id": 5,
         "year": 2021,
         "nominee": "The Power of the Dog",
+        "odds_user": 60,
+        "odds_moneyline": -155,
         "id": 3239
       },
       {
+        "odds_expert": 2,
         "category_id": 5,
         "year": 2021,
         "nominee": "West Side Story",
+        "odds_moneyline": 3300,
         "id": 3240
       }
     ],
@@ -199,17 +211,23 @@ export const MockCategoryList: Category[] = [
         "id": 2952
       },
       {
+        "odds_expert": 3,
         "category_id": 1,
         "year": 2021,
         "context": "Tick, Tick... Boom!",
         "nominee": "Andrew Garfield",
+        "odds_user": 15,
+        "odds_moneyline": 1400,
         "id": 3241
       },
       {
+        "odds_expert": 3,
         "category_id": 1,
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Benedict Cumberbatch",
+        "odds_user": 38,
+        "odds_moneyline": 500,
         "id": 3242
       },
       {
@@ -227,10 +245,13 @@ export const MockCategoryList: Category[] = [
         "id": 3244
       },
       {
+        "odds_expert": 93,
         "category_id": 1,
         "year": 2021,
         "context": "King Richard",
         "nominee": "Will Smith",
+        "odds_user": 38,
+        "odds_moneyline": -1000,
         "id": 3245
       }
     ],
@@ -296,17 +317,21 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 5
       },
       {
+        "odds_expert": 83,
         "category_id": 2,
         "year": 2021,
         "context": "The Eyes of Tammy Faye",
         "nominee": "Jessica Chastain",
+        "odds_moneyline": -200,
         "id": 3251
       },
       {
+        "odds_expert": 5,
         "category_id": 2,
         "year": 2021,
         "context": "Spencer",
         "nominee": "Kristen Stewart",
+        "odds_user": 40,
         "id": 3252
       },
       {
@@ -314,6 +339,8 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Being the Ricardos",
         "nominee": "Nicole Kidman",
+        "odds_user": 17,
+        "odds_moneyline": 350,
         "id": 3253
       },
       {
@@ -321,9 +348,11 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "The Lost Daughter",
         "nominee": "Olivia Colman",
+        "odds_user": 23,
         "id": 3254
       },
       {
+        "odds_expert": 7,
         "category_id": 2,
         "year": 2021,
         "context": "Parallel Mothers",
@@ -393,13 +422,17 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 20
       },
       {
+        "odds_expert": 96,
         "category_id": 8,
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Jane Campion",
+        "odds_user": 69,
+        "odds_moneyline": -5000,
         "id": 3261
       },
       {
+        "odds_expert": 2,
         "category_id": 8,
         "year": 2021,
         "context": "Belfast",
@@ -411,6 +444,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Licorice Pizza",
         "nominee": "Paul Thomas Anderson",
+        "odds_user": 11,
         "id": 3263
       },
       {
@@ -421,10 +455,13 @@ export const MockCategoryList: Category[] = [
         "id": 3264
       },
       {
+        "odds_expert": 2,
         "category_id": 8,
         "year": 2021,
         "context": "West Side Story",
         "nominee": "Steven Spielberg",
+        "odds_user": 9,
+        "odds_moneyline": 1400,
         "id": 3265
       }
     ],
@@ -498,24 +535,33 @@ export const MockCategoryList: Category[] = [
         "id": 3267
       },
       {
+        "odds_expert": 86,
         "category_id": 3,
         "year": 2021,
         "context": "Jared Bush, Byron Howard, Yvett Merino and Clark Spencer",
         "nominee": "Encanto",
+        "odds_user": 59,
+        "odds_moneyline": -800,
         "id": 3268
       },
       {
+        "odds_expert": 6,
         "category_id": 3,
         "year": 2021,
         "context": "Jonas Poher Rasmussen, Monica Hellström, Signe Byrge Sørensen and Charlotte De La Gournerie",
         "nominee": "Flee",
+        "odds_user": 12,
+        "odds_moneyline": 1200,
         "id": 3269
       },
       {
+        "odds_expert": 8,
         "category_id": 3,
         "year": 2021,
         "context": "Mike Rianda, Phil Lord, Christopher Miller and Kurt Albrecht",
         "nominee": "The Mitchells vs. The Machines",
+        "odds_user": 17,
+        "odds_moneyline": 500,
         "id": 3270
       }
     ],
@@ -586,6 +632,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Belfast",
         "nominee": "Ciarán Hinds",
+        "odds_moneyline": 2000,
         "id": 3246
       },
       {
@@ -593,6 +640,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Jesse Plemons",
+        "odds_user": 16,
         "id": 3247
       },
       {
@@ -603,17 +651,23 @@ export const MockCategoryList: Category[] = [
         "id": 3248
       },
       {
+        "odds_expert": 2,
         "category_id": 20,
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Kodi Smit-McPhee",
+        "odds_user": 46,
+        "odds_moneyline": 280,
         "id": 3249
       },
       {
+        "odds_expert": 98,
         "category_id": 20,
         "year": 2021,
         "context": "Coda",
         "nominee": "Troy Kotsur",
+        "odds_user": 18,
+        "odds_moneyline": -450,
         "id": 3250
       }
     ],
@@ -679,10 +733,13 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 2
       },
       {
+        "odds_expert": 93,
         "category_id": 21,
         "year": 2021,
         "context": "West Side Story",
         "nominee": "Ariana DeBose",
+        "odds_user": 46,
+        "odds_moneyline": -2000,
         "id": 3256
       },
       {
@@ -690,6 +747,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "King Richard",
         "nominee": "Aunjanue Ellis",
+        "odds_moneyline": 2000,
         "id": 3257
       },
       {
@@ -700,17 +758,22 @@ export const MockCategoryList: Category[] = [
         "id": 3258
       },
       {
+        "odds_expert": 2,
         "category_id": 21,
         "year": 2021,
         "context": "Belfast",
         "nominee": "Judi Dench",
+        "odds_user": 28,
         "id": 3259
       },
       {
+        "odds_expert": 5,
         "category_id": 21,
         "year": 2021,
         "context": "The Power of the Dog",
         "nominee": "Kirsten Dunst",
+        "odds_user": 28,
+        "odds_moneyline": 750,
         "id": 3260
       }
     ],
@@ -776,10 +839,13 @@ export const MockCategoryList: Category[] = [
         "detail": "Ramin Bahrani, based on the novel by Aravind Adiga"
       },
       {
+        "odds_expert": 29,
         "category_id": 23,
         "year": 2021,
         "context": "Jane Campion",
         "nominee": "The Power of the Dog",
+        "odds_user": 50,
+        "odds_moneyline": 140,
         "id": 3296
       },
       {
@@ -787,13 +853,16 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Maggie Gyllenhaal",
         "nominee": "The Lost Daughter",
+        "odds_moneyline": 1200,
         "id": 3297
       },
       {
+        "odds_expert": 63,
         "category_id": 23,
         "year": 2021,
         "context": "Sian Heder",
         "nominee": "Coda",
+        "odds_moneyline": -165,
         "id": 3298
       },
       {
@@ -801,6 +870,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Ryusuke Hamaguchi and Takamasa Ōe",
         "nominee": "Drive My Car",
+        "odds_user": 15,
         "id": 3299
       },
       {
@@ -808,6 +878,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Jon Spaihts, Denis Villeneuve and Eric Roth",
         "nominee": "Dune",
+        "odds_user": 18,
         "id": 3300
       }
     ],
@@ -872,17 +943,23 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 11
       },
       {
+        "odds_expert": 49,
         "category_id": 24,
         "year": 2021,
         "context": "Kenneth Branagh",
         "nominee": "Belfast",
+        "odds_user": 29,
+        "odds_moneyline": 130,
         "id": 3291
       },
       {
+        "odds_expert": 35,
         "category_id": 24,
         "year": 2021,
         "context": "Paul Thomas Anderson",
         "nominee": "Licorice Pizza",
+        "odds_user": 44,
+        "odds_moneyline": 100,
         "id": 3292
       },
       {
@@ -893,10 +970,13 @@ export const MockCategoryList: Category[] = [
         "id": 3293
       },
       {
+        "odds_expert": 12,
         "category_id": 24,
         "year": 2021,
         "context": "Adam McKay and David Sirota",
         "nominee": "Don't Look Up",
+        "odds_user": 14,
+        "odds_moneyline": 500,
         "id": 3294
       },
       {
@@ -978,17 +1058,23 @@ export const MockCategoryList: Category[] = [
         "id": 2992
       },
       {
+        "odds_expert": 16,
         "category_id": 6,
         "year": 2021,
         "context": "Ari Wegner",
         "nominee": "The Power of the Dog",
+        "odds_user": 20,
+        "odds_moneyline": 400,
         "id": 3276
       },
       {
+        "odds_expert": 4,
         "category_id": 6,
         "year": 2021,
         "context": "Bruno Delbonnel",
         "nominee": "The Tragedy of Macbeth",
+        "odds_user": 12,
+        "odds_moneyline": 1600,
         "id": 3277
       },
       {
@@ -999,10 +1085,13 @@ export const MockCategoryList: Category[] = [
         "id": 3278
       },
       {
+        "odds_expert": 76,
         "category_id": 6,
         "year": 2021,
         "context": "Greig Fraser",
         "nominee": "Dune",
+        "odds_user": 55,
+        "odds_moneyline": -800,
         "id": 3279
       },
       {
@@ -1070,10 +1159,13 @@ export const MockCategoryList: Category[] = [
         "id": 2997
       },
       {
+        "odds_expert": 85,
         "category_id": 7,
         "year": 2021,
         "context": "Jenny Beavan",
         "nominee": "Cruella",
+        "odds_user": 32,
+        "odds_moneyline": -650,
         "id": 3301
       },
       {
@@ -1084,17 +1176,23 @@ export const MockCategoryList: Category[] = [
         "id": 3302
       },
       {
+        "odds_expert": 6,
         "category_id": 7,
         "year": 2021,
         "context": "Paul Tazewell",
         "nominee": "West Side Story",
+        "odds_user": 20,
+        "odds_moneyline": 1200,
         "id": 3303
       },
       {
+        "odds_expert": 8,
         "category_id": 7,
         "year": 2021,
         "context": "Jacqueline West and Bob Morgan",
         "nominee": "Dune",
+        "odds_user": 37,
+        "odds_moneyline": 400,
         "id": 3304
       },
       {
@@ -1169,24 +1267,32 @@ export const MockCategoryList: Category[] = [
         "id": 3336
       },
       {
+        "odds_expert": 69,
         "category_id": 11,
         "year": 2021,
         "context": "Joe Walker",
         "nominee": "Dune",
+        "odds_user": 55,
+        "odds_moneyline": -110,
         "id": 3337
       },
       {
+        "odds_expert": 15,
         "category_id": 11,
         "year": 2021,
         "context": "Pamela Martin",
         "nominee": "King Richard",
+        "odds_moneyline": 200,
         "id": 3338
       },
       {
+        "odds_expert": 8,
         "category_id": 11,
         "year": 2021,
         "context": "Peter Sciberras",
         "nominee": "The Power of the Dog",
+        "odds_user": 22,
+        "odds_moneyline": 300,
         "id": 3339
       },
       {
@@ -1194,6 +1300,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Myron Kerstein and Andrew Weisblum",
         "nominee": "Tick, Tick... Boom!",
+        "odds_user": 13,
         "id": 3340
       }
     ],
@@ -1255,10 +1362,13 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 4
       },
       {
+        "odds_expert": 2,
         "category_id": 13,
         "year": 2021,
         "context": "Donald Mowat, Love Larson and Eva von Bahr",
         "nominee": "Dune",
+        "odds_user": 33,
+        "odds_moneyline": 500,
         "id": 3306
       },
       {
@@ -1266,6 +1376,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Göran Lundström, Anna-Carin Lock and Frederic Aspiras",
         "nominee": "House of Gucci",
+        "odds_user": 25,
         "id": 3307
       },
       {
@@ -1280,13 +1391,17 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Nadia Stacey, Naomi Donne and Julia Vernon",
         "nominee": "Cruella",
+        "odds_user": 21,
+        "odds_moneyline": 500,
         "id": 3309
       },
       {
+        "odds_expert": 98,
         "category_id": 13,
         "year": 2021,
         "context": "Stephanie Ingram, Linda Dowds and Justin Raleigh",
         "nominee": "The Eyes of Tammy Faye",
+        "odds_moneyline": -300,
         "id": 3310
       }
     ],
@@ -1359,24 +1474,33 @@ export const MockCategoryList: Category[] = [
         "id": 3281
       },
       {
+        "odds_expert": 4,
         "category_id": 14,
         "year": 2021,
         "context": "Germaine Franco",
         "nominee": "Encanto",
+        "odds_user": 9,
+        "odds_moneyline": 1100,
         "id": 3282
       },
       {
+        "odds_expert": 81,
         "category_id": 14,
         "year": 2021,
         "context": "Hans Zimmer",
         "nominee": "Dune",
+        "odds_user": 66,
+        "odds_moneyline": -650,
         "id": 3283
       },
       {
+        "odds_expert": 15,
         "category_id": 14,
         "year": 2021,
         "context": "Jonny Greenwood",
         "nominee": "The Power of the Dog",
+        "odds_user": 20,
+        "odds_moneyline": 400,
         "id": 3284
       },
       {
@@ -1462,10 +1586,13 @@ export const MockCategoryList: Category[] = [
         "detail": "Diane Warren"
       },
       {
+        "odds_expert": 31,
         "category_id": 15,
         "year": 2021,
         "context": "Encanto",
         "nominee": "Dos Oruguitas",
+        "odds_user": 31,
+        "odds_moneyline": 240,
         "id": 3287,
         "detail": "Lin-Manuel Miranda"
       },
@@ -1478,18 +1605,24 @@ export const MockCategoryList: Category[] = [
         "detail": "Van Morrison"
       },
       {
+        "odds_expert": 2,
         "category_id": 15,
         "year": 2021,
         "context": "King Richard",
         "nominee": "Be Alive",
+        "odds_user": 10,
+        "odds_moneyline": 700,
         "id": 3289,
         "detail": "Beyoncé and DIXSON"
       },
       {
+        "odds_expert": 65,
         "category_id": 15,
         "year": 2021,
         "context": "No Time to Die",
         "nominee": "No Time to Die",
+        "odds_user": 53,
+        "odds_moneyline": -350,
         "id": 3290,
         "detail": "Billie Eilish and Finneas O'Connell"
       }
@@ -1550,10 +1683,13 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 9
       },
       {
+        "odds_expert": 4,
         "category_id": 4,
         "year": 2021,
         "context": "Adam Stockhausen and Rena DeAngelo",
         "nominee": "West Side Story",
+        "odds_user": 13,
+        "odds_moneyline": 1400,
         "id": 3271
       },
       {
@@ -1564,10 +1700,13 @@ export const MockCategoryList: Category[] = [
         "id": 3272
       },
       {
+        "odds_expert": 75,
         "category_id": 4,
         "year": 2021,
         "context": "Patrice Vermette and Zsuzsanna Sipos",
         "nominee": "Dune",
+        "odds_user": 62,
+        "odds_moneyline": -400,
         "id": 3273
       },
       {
@@ -1578,10 +1717,13 @@ export const MockCategoryList: Category[] = [
         "id": 3274
       },
       {
+        "odds_expert": 19,
         "category_id": 4,
         "year": 2021,
         "context": "Tamara Deverell and Shane Vieau",
         "nominee": "Nightmare Alley",
+        "odds_user": 14,
+        "odds_moneyline": 250,
         "id": 3275
       }
     ],
@@ -1656,24 +1798,33 @@ export const MockCategoryList: Category[] = [
         "id": 3342
       },
       {
+        "odds_expert": 90,
         "category_id": 26,
         "year": 2021,
         "context": "Mac Ruth, Mark A. Mangini, Theo Green, Doug Hemphill and Ron Bartlett",
         "nominee": "Dune",
+        "odds_user": 75,
+        "odds_moneyline": -1000,
         "id": 3343
       },
       {
+        "odds_expert": 2,
         "category_id": 26,
         "year": 2021,
         "context": "Simon Hayes, Oliver Tarney, James Harrison, Paul Massey and Mark Taylor",
         "nominee": "No Time to Die",
+        "odds_user": 7,
+        "odds_moneyline": 1600,
         "id": 3344
       },
       {
+        "odds_expert": 8,
         "category_id": 26,
         "year": 2021,
         "context": "Tod A. Maitland, Gary Rydstrom, Brian Chumney, Andy Nelson and Shawn Murphy",
         "nominee": "West Side Story",
+        "odds_user": 12,
+        "odds_moneyline": 500,
         "id": 3345
       }
     ],
@@ -1763,23 +1914,32 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Christopher Townsend, Joe Farrell, Sean Noel Walker and Dan Oliver",
         "nominee": "Shang-Chi and the Legend of the Ten Rings",
+        "odds_user": 4,
+        "odds_moneyline": 1100,
         "id": 3347
       },
       {
+        "odds_expert": 8,
         "category_id": 22,
         "year": 2021,
         "context": "Kelly Port, Chris Waegner, Scott Edelstein and Daniel Sudick",
         "nominee": "Spider-Man: No Way Home",
+        "odds_user": 12,
+        "odds_moneyline": 1000,
         "id": 3348
       },
       {
+        "odds_expert": 90,
         "category_id": 22,
         "year": 2021,
         "context": "Paul Lambert, Tristan Myles, Brian Connor and Gerd Nefzer",
         "nominee": "Dune",
+        "odds_user": 79,
+        "odds_moneyline": -3000,
         "id": 3349
       },
       {
+        "odds_expert": 2,
         "category_id": 22,
         "year": 2021,
         "context": "Swen Gillberg, Bryan Grill, Nikos Kalaitzidis and Daniel Sudick",
@@ -1855,6 +2015,8 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Stanley Nelson Jr. and Traci A. Curry",
         "nominee": "Attica",
+        "odds_user": 7,
+        "odds_moneyline": 1000,
         "id": 3312
       },
       {
@@ -1865,17 +2027,23 @@ export const MockCategoryList: Category[] = [
         "id": 3313
       },
       {
+        "odds_expert": 14,
         "category_id": 9,
         "year": 2021,
         "context": "Jonas Poher Rasmussen, Monica Hellström, Signe Byrge Sørensen and Charlotte De La Gournerie",
         "nominee": "Flee",
+        "odds_user": 40,
+        "odds_moneyline": 700,
         "id": 3314
       },
       {
+        "odds_expert": 86,
         "category_id": 9,
         "year": 2021,
         "context": "Questlove, Joseph Patel, Robert Fyvolent and David Dinerstein",
         "nominee": "Summer of Soul (...Or, When the Revolution Could Not Be Televised)",
+        "odds_user": 44,
+        "odds_moneyline": -300,
         "id": 3315
       }
     ],
@@ -1936,38 +2104,52 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 8
       },
       {
+        "odds_expert": 70,
         "category_id": 10,
         "year": 2021,
         "context": "Ben Proudfoot",
         "nominee": "The Queen of Basketball",
+        "odds_user": 32,
+        "odds_moneyline": -155,
         "id": 3316
       },
       {
+        "odds_expert": 2,
         "category_id": 10,
         "year": 2021,
         "context": "Jay Rosenblatt",
         "nominee": "When We Were Bullies",
+        "odds_user": 18,
         "id": 3317
       },
       {
+        "odds_expert": 2,
         "category_id": 10,
         "year": 2021,
         "context": "Elizabeth Mirzaei and Gulistan Mirzaei",
         "nominee": "Three Songs for Benazir",
+        "odds_user": 19,
+        "odds_moneyline": 150,
         "id": 3318
       },
       {
+        "odds_expert": 23,
         "category_id": 10,
         "year": 2021,
         "context": "Matthew Ogens and Geoff McLean",
         "nominee": "Audible",
+        "odds_user": 17,
+        "odds_moneyline": 600,
         "id": 3319
       },
       {
+        "odds_expert": 2,
         "category_id": 10,
         "year": 2021,
         "context": "Pedro Kos and Jon Shenk",
         "nominee": "Lead Me Home",
+        "odds_user": 14,
+        "odds_moneyline": 2000,
         "id": 3320
       }
     ],
@@ -2042,10 +2224,13 @@ export const MockCategoryList: Category[] = [
         "odds_numerator": 6
       },
       {
+        "odds_expert": 94,
         "category_id": 25,
         "year": 2021,
         "context": "Japan",
         "nominee": "Drive My Car",
+        "odds_user": 79,
+        "odds_moneyline": -5000,
         "id": 3321
       },
       {
@@ -2053,6 +2238,8 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Denmark",
         "nominee": "Flee",
+        "odds_user": 4,
+        "odds_moneyline": 700,
         "id": 3322
       },
       {
@@ -2070,10 +2257,13 @@ export const MockCategoryList: Category[] = [
         "id": 3324
       },
       {
+        "odds_expert": 6,
         "category_id": 25,
         "year": 2021,
         "context": "Norway",
         "nominee": "The Worst Person in the World",
+        "odds_user": 11,
+        "odds_moneyline": 1200,
         "id": 3325
       }
     ],
@@ -2136,31 +2326,42 @@ export const MockCategoryList: Category[] = [
         "id": 3037
       },
       {
+        "odds_expert": 2,
         "category_id": 16,
         "year": 2021,
         "context": "Anton Dyakov",
         "nominee": "Boxballet",
+        "odds_moneyline": 700,
         "id": 3326
       },
       {
+        "odds_expert": 16,
         "category_id": 16,
         "year": 2021,
         "context": "Alberto Mielgo and Leo Sanchez",
         "nominee": "The Windshield Wiper",
+        "odds_user": 18,
+        "odds_moneyline": 500,
         "id": 3327
       },
       {
+        "odds_expert": 77,
         "category_id": 16,
         "year": 2021,
         "context": "Dan Ojari and Michael Please",
         "nominee": "Robin Robin",
+        "odds_user": 37,
+        "odds_moneyline": -165,
         "id": 3328
       },
       {
+        "odds_expert": 5,
         "category_id": 16,
         "year": 2021,
         "context": "Hugo Covarrubias and Tevo Díaz",
         "nominee": "Beast",
+        "odds_user": 18,
+        "odds_moneyline": 275,
         "id": 3329
       },
       {
@@ -2168,6 +2369,7 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Joanna Quinn and Les Mills",
         "nominee": "Affairs of the Art",
+        "odds_user": 13,
         "id": 3330
       }
     ],
@@ -2228,13 +2430,17 @@ export const MockCategoryList: Category[] = [
         "id": 2977
       },
       {
+        "odds_expert": 77,
         "category_id": 17,
         "year": 2021,
         "context": "Aneil Karia and Riz Ahmed",
         "nominee": "The Long Goodbye",
+        "odds_user": 44,
+        "odds_moneyline": -250,
         "id": 3331
       },
       {
+        "odds_expert": 7,
         "category_id": 17,
         "year": 2021,
         "context": "K.D. Dávila and Levin Menekse",
@@ -2242,10 +2448,13 @@ export const MockCategoryList: Category[] = [
         "id": 3332
       },
       {
+        "odds_expert": 7,
         "category_id": 17,
         "year": 2021,
         "context": "Maria Brendle and Nadine Lüchinger",
         "nominee": "Ala Kachuu - Take and Run",
+        "odds_user": 12,
+        "odds_moneyline": 300,
         "id": 3333
       },
       {
@@ -2253,13 +2462,18 @@ export const MockCategoryList: Category[] = [
         "year": 2021,
         "context": "Martin Strange-Hansen and Kim Magnusson",
         "nominee": "On My Mind",
+        "odds_user": 14,
+        "odds_moneyline": 800,
         "id": 3334
       },
       {
+        "odds_expert": 7,
         "category_id": 17,
         "year": 2021,
         "context": "Tadeusz Łysiak and Maciej Slesicki",
         "nominee": "The Dress",
+        "odds_user": 21,
+        "odds_moneyline": 1200,
         "id": 3335
       }
     ],
