@@ -31,6 +31,9 @@ export class Nomination {
   odds_denominator: number;
 
   @Column()
+  odds_moneyline: number;
+
+  @Column()
   category_id: number;
 
 }

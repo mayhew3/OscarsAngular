@@ -94,24 +94,13 @@
               <div class="col-3">
                 <div class="row">
                   <label class="col-form-label col-form-label-sm cardLabel"
-                         for="numeratorInput">Vegas</label>
-                  <input type="number"
+                         for="moneylineInput">Money</label>
+                  <input type="text"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [formControl]="nomineeGroups.get(nominee.id).numerator"
-                         id="numeratorInput"/>
-                </div>
-              </div>
-
-              <div class="col-3">
-                <div class="row" style="padding: 0.4rem 0.4rem">
-                  <label class="col-form-label col-form-label-sm cardLabel"
-                         for="denominatorInput">V2</label>
-                  <input type="number"
-                         class="form-control cardInput"
-                         style="text-align: center"
-                         [formControl]="nomineeGroups.get(nominee.id).denominator"
-                         id="denominatorInput"/>
+                         [formControl]="nomineeGroups.get(nominee.id).moneyline"
+                         (blur)="updateVegasOdds(nominee)"
+                         id="moneylineInput"/>
                 </div>
               </div>
 
@@ -143,11 +132,10 @@
             <div class="row align-items-center inputRow oddsContainer" *ngIf="votingMode()">
 
               <div class="col-4">
-                <div class="row" *ngIf="nominee.odds_numerator">
-                  <label class="col-form-label col-form-label-sm cardLabel"
-                         for="numeratorInput">Odds</label>
+                <div class="row" *ngIf="!!vegasOddsDisplay(nominee)">
+                  <label class="col-form-label col-form-label-sm cardLabel">Odds</label>
                   <div class="oddsBox">
-                    <span>{{nominee.odds_numerator + ':' + nominee.odds_denominator}}</span>
+                    <span>{{vegasOddsDisplay(nominee)}}</span>
                   </div>
                 </div>
               </div>

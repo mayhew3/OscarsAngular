@@ -88,8 +88,7 @@ export class CategoryState {
           const nominee = this.findNomination(draft.categories, change.nomination_id);
           nominee.odds_expert = change.odds_expert;
           nominee.odds_user = change.odds_user;
-          nominee.odds_numerator = change.odds_numerator;
-          nominee.odds_denominator = change.odds_denominator;
+          nominee.odds_moneyline = change.odds_moneyline;
         });
       })
     );

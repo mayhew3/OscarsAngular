@@ -10,6 +10,7 @@ import {map, mergeMap} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
 import {NomineeControls} from '../nominees/nominees.component';
 import {OddsChange} from '../../actions/category.action';
+import {OddsInterface} from '../../../shared/OddsInterface';
 
 @Component({
   selector: 'osc-category-hopper',
@@ -90,7 +91,7 @@ export class CategoryHopperComponent implements OnInit {
   totalOddsVegas(): Observable<number> {
     return this.nominees$.pipe(
       map(nominees => {
-        const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee.odds_numerator, nominee.odds_denominator));
+        const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee.odds_moneyline));
         return this.oddsCalc(odds_nums);
       })
     );
@@ -106,11 +107,11 @@ export class CategoryHopperComponent implements OnInit {
   }
 
   // noinspection JSMethodCanBeStatic
-  private vegasCalc(numerator?: number, denominator?: number): number {
-    if (!numerator || !denominator) {
+  private vegasCalc(moneyline?: number): number {
+    if (!moneyline) {
       return 0;
     } else {
-      return denominator / (numerator + denominator) * 100;
+      return OddsInterface.fromMoneyline(moneyline).asPercentage() * 100;
     }
   }
 
@@ -133,18 +134,20 @@ export class CategoryHopperComponent implements OnInit {
 
   // noinspection JSMethodCanBeStatic
   private createOddsChange(nomineeControls: NomineeControls): OddsChange {
+    const moneyLineControl = nomineeControls.moneyline.value;
+    const moneyline = !!moneyLineControl ? +(moneyLineControl.replace('+', '')) : undefined;
     return {
       nomination_id: nomineeControls.nominee.id,
       odds_expert: nomineeControls.expert.value,
       odds_user: nomineeControls.user.value,
-      odds_numerator: nomineeControls.numerator.value,
-      odds_denominator: nomineeControls.denominator.value,
+      odds_moneyline: Math.round(moneyline),
     };
   }
 
   // noinspection JSMethodCanBeStatic
   private isChanged(nomineeControl: NomineeControls): boolean {
     return nomineeControl.expert.dirty ||
+      nomineeControl.moneyline.dirty ||
       nomineeControl.user.dirty ||
       nomineeControl.numerator.dirty ||
       nomineeControl.denominator.dirty;
@@ -152,6 +155,7 @@ export class CategoryHopperComponent implements OnInit {
 
   private clearOriginals(): void {
     _.each(this.nomineeGroups, ng => {
+      ng.moneyline.reset(ng.moneyline.value);
       ng.expert.reset(ng.expert.value);
       ng.user.reset(ng.user.value);
       ng.numerator.reset(ng.numerator.value);

@@ -20,6 +20,7 @@ import {Ceremony} from '../interfaces/Ceremony';
 import {GroupYear} from '../interfaces/GroupYear';
 import {MockCategoryList} from './data/categories.mock';
 import {CeremonyYear} from '../interfaces/CeremonyYear';
+import {OddsChange} from '../actions/category.action';
 
 @Injectable({
   providedIn: 'root',
@@ -321,10 +322,9 @@ export class InMemoryDataService implements InMemoryDbService {
 
     this.logReadOnly();
 
-    _.each(changes, change => {
+    _.each(changes, (change: OddsChange) => {
       const nominee = this.findNominee(change.nomination_id);
-      nominee.odds_numerator = change.odds_numerator;
-      nominee.odds_denominator = change.odds_denominator;
+      nominee.odds_moneyline = change.odds_moneyline;
       nominee.odds_expert = change.odds_expert;
       nominee.odds_user = change.odds_user;
     });
