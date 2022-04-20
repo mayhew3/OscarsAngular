@@ -83,6 +83,7 @@ export class TypeORMManager {
 
   private static getHerokuOptions(baseOptions: any, url: string): ConnectionOptions {
     baseOptions.url = url + '?currentSchema=oscars';
+    baseOptions.schema = 'oscars';
     baseOptions.ssl = {
       rejectUnauthorized: false
     };
