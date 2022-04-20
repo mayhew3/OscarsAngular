@@ -73,6 +73,7 @@ export class TypeORMManager {
     baseOptions.host = 'localhost';
     baseOptions.port = argv.port;
     baseOptions.username = 'postgres';
+    baseOptions.schema = argv.schema;
     baseOptions.database = argv.dbName;
     baseOptions.ssl = false;
     baseOptions.password = local_password;
@@ -81,7 +82,8 @@ export class TypeORMManager {
   }
 
   private static getHerokuOptions(baseOptions: any, url: string): ConnectionOptions {
-    baseOptions.url = url;
+    baseOptions.url = url + '?currentSchema=oscars';
+    baseOptions.schema = 'oscars';
     baseOptions.ssl = {
       rejectUnauthorized: false
     };
