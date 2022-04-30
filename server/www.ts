@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 import {Server} from 'socket.io';
-const debug = require('debug')('OscarsAngular');
-const app = require('./app');
 import {SocketServer} from './controllers/SocketServer';
 import {typeORM} from './typeorm/TypeORMManager';
 
+const enforce = require('express-sslify');
+const debug = require('debug')('OscarsAngular');
+const app = require('./app');
+
+app.use(enforce.HTTPS());
 app.set('port', process.env.PORT || 7024);
 
 const server = require('http').createServer(app);
