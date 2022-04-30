@@ -7,7 +7,7 @@ const enforce = require('express-sslify');
 const debug = require('debug')('OscarsAngular');
 const app = require('./app');
 
-app.use(enforce.HTTPS());
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.set('port', process.env.PORT || 7024);
 
 const server = require('http').createServer(app);
