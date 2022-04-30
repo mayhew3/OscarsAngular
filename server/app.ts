@@ -4,8 +4,10 @@ import {types} from 'pg';
 const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const enforce = require('express-sslify');
 const app: Express = express();
 
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import {Server} from 'socket.io';
-const debug = require('debug')('OscarsAngular');
-const app = require('./app');
 import {SocketServer} from './controllers/SocketServer';
 import {typeORM} from './typeorm/TypeORMManager';
+
+const debug = require('debug')('OscarsAngular');
+const app = require('./app');
 
 app.set('port', process.env.PORT || 7024);
 
