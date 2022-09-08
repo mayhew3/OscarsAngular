@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
 import {Observable, of, Subject, Subscription} from 'rxjs';
 import {ErrorNotificationComponent} from '../components/error-notification/error-notification.component';
+import {ScreenModeService} from './screen-mode.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class ErrorNotificationService {
   private subscription: Subscription;
   private snackBarRef: MatSnackBarRef<ErrorNotificationComponent>;
 
-  constructor(private snackBar: MatSnackBar) {
+  constructor(private snackBar: MatSnackBar,
+              private screenModeService: ScreenModeService) {
     this.subscription = this.messageQueue.subscribe(snackBarMessage => {
       if (!this.snackBarRef) {
         this.openSnackBar(snackBarMessage);
@@ -54,13 +56,20 @@ export class ErrorNotificationService {
   }
 
   private openSnackBar(snackBarMessage: SnackBarMessage): void {
+    const panelClasses = ['redSnackBar'];
+    if (this.screenModeService.isMobile()) {
+      panelClasses.push('mobileSnackBar');
+    }
     this.snackBarRef = this.snackBar.openFromComponent(ErrorNotificationComponent, {
       duration: 3000,
-      panelClass: ['redSnackBar'],
+      panelClass: panelClasses,
       data: {
         header: snackBarMessage.header,
         message: ErrorNotificationService.getMessage(snackBarMessage.message)
       }
+    });
+    this.snackBarRef.afterDismissed().subscribe(() => {
+      this.snackBarRef = undefined;
     });
   }
 
