@@ -17,10 +17,10 @@ import {Select} from '@ngxs/store';
 import {OddsState} from '../../states/odds.state';
 import {ThemePalette} from '@angular/material/core';
 import {SocketService} from '../../services/socket.service';
-import {PersonConnectionSnackBarComponent} from '../person-connection-snack-bar/person-connection-snack-bar.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ScoreData} from '../../interfaces/ScoreData';
 import {ScoreboardService} from '../../services/scoreboard.service';
+import {PersonNotificationService} from '../../services/person-notification.service';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -44,7 +44,8 @@ export class ScoreboardComponent implements OnInit {
               public oddsService: OddsService,
               private socket: SocketService,
               public scoreboardService: ScoreboardService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private personNotificationService: PersonNotificationService) {
   }
 
   ngOnInit(): void {
@@ -289,16 +290,7 @@ export class ScoreboardComponent implements OnInit {
 
   private showPersonSnackBar(person_id: number, connected: boolean): void {
     this.personService.getPerson(person_id).subscribe(person => {
-      this.snackBar.openFromComponent(PersonConnectionSnackBarComponent,  {
-        duration: 3000,
-        panelClass: ['playerConnectSnackBar'],
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        data: {
-          person,
-          connected
-        }
-      });
+      this.personNotificationService.showPersonSnackbar(person, connected);
     });
   }
 

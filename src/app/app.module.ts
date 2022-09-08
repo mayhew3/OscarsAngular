@@ -54,6 +54,7 @@ import {CalendarIconComponent} from './components/calendar-icon/calendar-icon.co
 import {TimepickerModule} from 'ngx-bootstrap/timepicker';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
 import {InterceptorService} from './services/auth/interceptor.service';
+import { NotificationComponent } from './components/notification/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import {InterceptorService} from './services/auth/interceptor.service';
     CountdownComponent,
     AdminCeremoniesComponent,
     AdminAddCeremonyPopupComponent,
-    CalendarIconComponent
+    CalendarIconComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

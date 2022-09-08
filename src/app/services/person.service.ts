@@ -101,6 +101,12 @@ export class PersonService {
     );
   }
 
+  getPersonNameFromId(person_id: number): Observable<string> {
+    return this.getPerson(person_id).pipe(
+      mergeMap(person => this.getPersonName(person))
+    );
+  }
+
   hasDuplicateFirstName(person: Person, persons: Person[]): boolean {
     const matching = _.filter(persons, otherPerson => otherPerson.id !== person.id &&
       otherPerson.first_name === person.first_name);
