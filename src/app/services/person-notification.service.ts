@@ -10,9 +10,29 @@ import {PersonConnectionSnackBarComponent} from '../components/person-connection
 })
 export class PersonNotificationService {
 
+  connectedMap = new Map<number, number>();
+
   constructor(private snackBar: MatSnackBar,
               private screenModeService: ScreenModeService,
               private notificationService: NotificationService) {
+  }
+
+  maybeShowDelayedPersonSnackbar(person: Person, connected: boolean): void {
+    if (connected) {
+      const timeoutId = this.connectedMap.get(person.id);
+      if (!timeoutId) {
+        this.showPersonSnackbar(person, connected);
+      } else {
+        clearTimeout(timeoutId);
+        this.connectedMap.delete(person.id);
+      }
+    } else {
+      const timeoutId = setTimeout(() => {
+        this.showPersonSnackbar(person, connected);
+        this.connectedMap.delete(person.id);
+      }, 10000);
+      this.connectedMap.set(person.id, timeoutId);
+    }
   }
 
   showPersonSnackbar(person: Person, connected: boolean): void {

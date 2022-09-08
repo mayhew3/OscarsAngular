@@ -130,7 +130,7 @@ export class PersonService {
   private showPersonSnackBar(person_id: number, connected: boolean): void {
     combineLatest([this.getPerson(person_id), this.me$]).pipe(first()).subscribe(([person, me]) => {
       if (person.id !== me.id) {
-        this.personNotificationService.showPersonSnackbar(person, connected);
+        this.personNotificationService.maybeShowDelayedPersonSnackbar(person, connected);
       }
     });
   }
