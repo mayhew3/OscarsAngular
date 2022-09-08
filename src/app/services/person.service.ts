@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {first, Observable} from 'rxjs';
+import {combineLatest, first, Observable} from 'rxjs';
 import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
@@ -128,10 +128,11 @@ export class PersonService {
   }
 
   private showPersonSnackBar(person_id: number, connected: boolean): void {
-    this.getPerson(person_id).pipe(first())
-      .subscribe(person => {
+    combineLatest([this.getPerson(person_id), this.me$]).pipe(first()).subscribe(([person, me]) => {
+      if (person.id !== me.id) {
         this.personNotificationService.showPersonSnackbar(person, connected);
-      });
+      }
+    });
   }
 
 

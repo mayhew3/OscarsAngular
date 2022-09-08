@@ -22,7 +22,7 @@ export class PersonNotificationService {
         panelClasses.push('mobileSnackBar');
       }
       return this.snackBar.openFromComponent(PersonConnectionSnackBarComponent,  {
-        duration: 10000,
+        duration: 3000,
         panelClass: panelClasses,
         verticalPosition: 'top',
         horizontalPosition: 'center',

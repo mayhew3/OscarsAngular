@@ -13,7 +13,6 @@ import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import fast_sort from 'fast-sort';
-import {CeremonyService} from './ceremony.service';
 
 @Injectable({
   providedIn: 'root'
