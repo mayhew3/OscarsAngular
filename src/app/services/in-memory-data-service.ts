@@ -21,6 +21,7 @@ import {GroupYear} from '../interfaces/GroupYear';
 import {MockCategoryList} from './data/categories.mock';
 import {CeremonyYear} from '../interfaces/CeremonyYear';
 import {OddsChange} from '../actions/category.action';
+import {MockVoteList} from './data/votes.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class InMemoryDataService implements InMemoryDbService {
   // eslint-disable-next-line
   categories = MockCategoryList;
   persons = MockPersonList;
-  votes = MockVoteEmmysList;
+  votes = MockVoteList;
   systemVars = MockSystemVars;
   winners = MockWinnerList;
   events = MockEvents;

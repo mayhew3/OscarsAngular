@@ -4,77 +4,13 @@ import {Category} from '../../interfaces/Category';
 export const MockCategoryList: Category[] = [
   {
     "winners": [{
-      "declared": "2021-04-25 20:06:15.131",
+      "declared": "2022-03-27 20:37:16.327",
       "category_id": 5,
-      "year": 2020,
-      "nomination_id": 2944,
-      "id": 734
+      "year": 2021,
+      "nomination_id": 3232,
+      "id": 802
     }],
     "nominees": [
-      {
-        "category_id": 5,
-        "year": 2020,
-        "nominee": "The Father",
-        "id": 2940
-      },
-      {
-        "category_id": 5,
-        "year": 2020,
-        "nominee": "Judas and the Black Messiah",
-        "odds_user": 5,
-        "id": 2941
-      },
-      {
-        "category_id": 5,
-        "year": 2020,
-        "nominee": "Mank",
-        "odds_user": 5,
-        "id": 2942
-      },
-      {
-        "odds_expert": 6,
-        "odds_denominator": 1,
-        "category_id": 5,
-        "year": 2020,
-        "nominee": "Minari",
-        "odds_user": 10,
-        "id": 2943,
-        "odds_numerator": 16
-      },
-      {
-        "odds_expert": 74,
-        "odds_denominator": 6,
-        "category_id": 5,
-        "year": 2020,
-        "nominee": "Nomadland",
-        "odds_user": 67,
-        "id": 2944,
-        "odds_numerator": 1
-      },
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 5,
-        "year": 2020,
-        "nominee": "Promising Young Woman",
-        "id": 2945,
-        "odds_numerator": 20
-      },
-      {
-        "category_id": 5,
-        "year": 2020,
-        "nominee": "Sound of Metal",
-        "id": 2946
-      },
-      {
-        "odds_expert": 17,
-        "odds_denominator": 1,
-        "category_id": 5,
-        "year": 2020,
-        "nominee": "The Trial of the Chicago 7",
-        "id": 2947,
-        "odds_numerator": 5
-      },
       {
         "odds_expert": 2,
         "category_id": 5,
@@ -155,61 +91,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 20:15:35.616",
+      "declared": "2022-03-27 20:15:26.126",
       "category_id": 1,
-      "year": 2020,
-      "nomination_id": 2950,
-      "id": 748
+      "year": 2021,
+      "nomination_id": 3245,
+      "id": 800
     }],
     "nominees": [
-      {
-        "odds_denominator": 1,
-        "category_id": 1,
-        "year": 2020,
-        "context": "Sound of Metal",
-        "nominee": "Riz Ahmed",
-        "odds_user": 13,
-        "id": 2948,
-        "odds_numerator": 16
-      },
-      {
-        "odds_expert": 94,
-        "odds_denominator": 12,
-        "category_id": 1,
-        "year": 2020,
-        "context": "Ma Rainey's Black Bottom",
-        "nominee": "Chadwick Boseman",
-        "odds_user": 64,
-        "id": 2949,
-        "detail": "Indicates a posthumous nomination",
-        "odds_numerator": 1
-      },
-      {
-        "odds_expert": 4,
-        "odds_denominator": 1,
-        "category_id": 1,
-        "year": 2020,
-        "context": "The Father",
-        "nominee": "Anthony Hopkins",
-        "odds_user": 12,
-        "id": 2950,
-        "odds_numerator": 6
-      },
-      {
-        "odds_expert": 2,
-        "category_id": 1,
-        "year": 2020,
-        "context": "Mank",
-        "nominee": "Gary Oldman",
-        "id": 2951
-      },
-      {
-        "category_id": 1,
-        "year": 2020,
-        "context": "Minari",
-        "nominee": "Steven Yeun",
-        "id": 2952
-      },
       {
         "odds_expert": 3,
         "category_id": 1,
@@ -262,60 +150,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 20:12:59.352",
+      "declared": "2022-03-27 20:30:18.512",
       "category_id": 2,
-      "year": 2020,
-      "nomination_id": 3011,
-      "id": 741
+      "year": 2021,
+      "nomination_id": 3251,
+      "id": 801
     }],
     "nominees": [
-      {
-        "odds_expert": 31,
-        "odds_denominator": 4,
-        "category_id": 2,
-        "year": 2020,
-        "context": "Ma Rainey's Black Bottom",
-        "nominee": "Viola Davis",
-        "odds_user": 14,
-        "id": 3008,
-        "odds_numerator": 7
-      },
-      {
-        "category_id": 2,
-        "year": 2020,
-        "context": "The United States vs. Billie Holiday",
-        "nominee": "Andra Day",
-        "id": 3009
-      },
-      {
-        "category_id": 2,
-        "year": 2020,
-        "context": "Pieces of a Woman",
-        "nominee": "Vanessa Kirby",
-        "id": 3010
-      },
-      {
-        "odds_expert": 19,
-        "odds_denominator": 1,
-        "category_id": 2,
-        "year": 2020,
-        "context": "Nomadland",
-        "nominee": "Frances McDormand",
-        "odds_user": 37,
-        "id": 3011,
-        "odds_numerator": 4
-      },
-      {
-        "odds_expert": 38,
-        "odds_denominator": 4,
-        "category_id": 2,
-        "year": 2020,
-        "context": "Promising Young Woman",
-        "nominee": "Carey Mulligan",
-        "odds_user": 38,
-        "id": 3012,
-        "odds_numerator": 5
-      },
       {
         "odds_expert": 83,
         "category_id": 2,
@@ -367,60 +208,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 17:59:51.822",
+      "declared": "2022-03-27 20:03:57.987",
       "category_id": 8,
-      "year": 2020,
-      "nomination_id": 3006,
-      "id": 504
+      "year": 2021,
+      "nomination_id": 3261,
+      "id": 799
     }],
     "nominees": [
-      {
-        "category_id": 8,
-        "year": 2020,
-        "context": "Another Round",
-        "nominee": "Thomas Vinterberg",
-        "id": 3003
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 8,
-        "year": 2020,
-        "context": "Mank",
-        "nominee": "David Fincher",
-        "odds_user": 10,
-        "id": 3004,
-        "odds_numerator": 9
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 8,
-        "year": 2020,
-        "context": "Minari",
-        "nominee": "Lee Isaac Chung",
-        "odds_user": 6,
-        "id": 3005,
-        "odds_numerator": 20
-      },
-      {
-        "odds_expert": 100,
-        "odds_denominator": 25,
-        "category_id": 8,
-        "year": 2020,
-        "context": "Nomadland",
-        "nominee": "Chloé Zhao",
-        "odds_user": 77,
-        "id": 3006,
-        "odds_numerator": 1
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 8,
-        "year": 2020,
-        "context": "Promising Young Woman",
-        "nominee": "Emerald Fennell",
-        "id": 3007,
-        "odds_numerator": 20
-      },
       {
         "odds_expert": 96,
         "category_id": 8,
@@ -472,54 +266,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 18:26:58.125",
+      "declared": "2022-03-27 18:07:49.163",
       "category_id": 3,
-      "year": 2020,
-      "nomination_id": 2966,
-      "id": 542
+      "year": 2021,
+      "nomination_id": 3268,
+      "id": 785
     }],
     "nominees": [
-      {
-        "odds_denominator": 1,
-        "category_id": 3,
-        "year": 2020,
-        "nominee": "Onward",
-        "odds_user": 3,
-        "id": 2963,
-        "odds_numerator": 20
-      },
-      {
-        "category_id": 3,
-        "year": 2020,
-        "nominee": "Over the Moon",
-        "id": 2964
-      },
-      {
-        "category_id": 3,
-        "year": 2020,
-        "nominee": "A Shaun the Sheep Movie: Farmageddon",
-        "id": 2965
-      },
-      {
-        "odds_expert": 98,
-        "odds_denominator": 25,
-        "category_id": 3,
-        "year": 2020,
-        "nominee": "Soul",
-        "odds_user": 85,
-        "id": 2966,
-        "odds_numerator": 1
-      },
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 3,
-        "year": 2020,
-        "nominee": "Wolfwalkers",
-        "odds_user": 10,
-        "id": 2967,
-        "odds_numerator": 8
-      },
       {
         "category_id": 3,
         "year": 2021,
@@ -572,61 +325,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 17:30:52.696",
+      "declared": "2022-03-27 18:25:37.272",
       "category_id": 20,
-      "year": 2020,
-      "nomination_id": 2954,
-      "id": 405
+      "year": 2021,
+      "nomination_id": 3250,
+      "id": 787
     }],
     "nominees": [
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 20,
-        "year": 2020,
-        "context": "The Trial of the Chicago 7",
-        "nominee": "Sacha Baron Cohen",
-        "odds_user": 14,
-        "id": 2953,
-        "odds_numerator": 14
-      },
-      {
-        "odds_expert": 90,
-        "odds_denominator": 25,
-        "category_id": 20,
-        "year": 2020,
-        "context": "Judas and the Black Messiah",
-        "nominee": "Daniel Kaluuya",
-        "odds_user": 68,
-        "id": 2954,
-        "odds_numerator": 1
-      },
-      {
-        "odds_expert": 2,
-        "category_id": 20,
-        "year": 2020,
-        "context": "One Night in Miami\u2026",
-        "nominee": "Leslie Odom Jr.",
-        "id": 2955
-      },
-      {
-        "odds_expert": 6,
-        "odds_denominator": 1,
-        "category_id": 20,
-        "year": 2020,
-        "context": "Sound of Metal",
-        "nominee": "Paul Raci",
-        "odds_user": 8,
-        "id": 2956,
-        "odds_numerator": 12
-      },
-      {
-        "category_id": 20,
-        "year": 2020,
-        "context": "Judas and the Black Messiah",
-        "nominee": "Lakeith Stanfield",
-        "id": 2957
-      },
       {
         "category_id": 20,
         "year": 2021,
@@ -678,60 +383,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 18:55:02.082",
+      "declared": "2022-03-27 17:26:22.492",
       "category_id": 21,
-      "year": 2020,
-      "nomination_id": 3017,
-      "id": 600
+      "year": 2021,
+      "nomination_id": 3256,
+      "id": 780
     }],
     "nominees": [
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 21,
-        "year": 2020,
-        "context": "Borat Subsequent Moviefilm",
-        "nominee": "Maria Bakalova",
-        "odds_user": 23,
-        "id": 3013,
-        "odds_numerator": 4
-      },
-      {
-        "odds_expert": 8,
-        "odds_denominator": 1,
-        "category_id": 21,
-        "year": 2020,
-        "context": "Hillbilly Elegy",
-        "nominee": "Glenn Close",
-        "id": 3014,
-        "odds_numerator": 9
-      },
-      {
-        "category_id": 21,
-        "year": 2020,
-        "context": "The Father",
-        "nominee": "Olivia Colman",
-        "odds_user": 17,
-        "id": 3015
-      },
-      {
-        "category_id": 21,
-        "year": 2020,
-        "context": "Mank",
-        "nominee": "Amanda Seyfried",
-        "id": 3016
-      },
-      {
-        "odds_expert": 90,
-        "odds_denominator": 9,
-        "category_id": 21,
-        "year": 2020,
-        "context": "Minari",
-        "nominee": "Youn Yuh-jung",
-        "odds_user": 39,
-        "id": 3017,
-        "odds_numerator": 2
-      },
       {
         "odds_expert": 93,
         "category_id": 21,
@@ -784,60 +442,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 17:12:34.705",
+      "declared": "2022-03-27 19:09:22.188",
       "category_id": 23,
-      "year": 2020,
-      "nomination_id": 3019,
-      "id": 366
+      "year": 2021,
+      "nomination_id": 3298,
+      "id": 792
     }],
     "nominees": [
-      {
-        "odds_expert": 5,
-        "odds_denominator": 1,
-        "category_id": 23,
-        "year": 2020,
-        "nominee": "Borat Subsequent Moviefilm",
-        "id": 3018,
-        "detail": "Screenplay by Sacha Baron Cohen, Peter Baynham, Jena Friedman, Anthony Hines, Lee Kern, Dan Mazer, Erica Rivinoja and Dan Swimer; Story by Baron Cohen, Hines, Nina Pedrad and Swimer; Based on the character by Baron Cohen",
-        "odds_numerator": 7
-      },
-      {
-        "odds_expert": 23,
-        "odds_denominator": 4,
-        "category_id": 23,
-        "year": 2020,
-        "nominee": "The Father",
-        "odds_user": 19,
-        "id": 3019,
-        "detail": "Christopher Hampton and Florian Zeller, based on the play by Zeller",
-        "odds_numerator": 11
-      },
-      {
-        "odds_expert": 73,
-        "odds_denominator": 11,
-        "category_id": 23,
-        "year": 2020,
-        "nominee": "Nomadland",
-        "odds_user": 60,
-        "id": 3020,
-        "detail": "Chloé Zhao, based on the book by Jessica Bruder",
-        "odds_numerator": 4
-      },
-      {
-        "category_id": 23,
-        "year": 2020,
-        "nominee": "One Night in Miami\u2026",
-        "odds_user": 10,
-        "id": 3021,
-        "detail": "Kemp Powers, based on his play"
-      },
-      {
-        "category_id": 23,
-        "year": 2020,
-        "nominee": "The White Tiger",
-        "id": 3022,
-        "detail": "Ramin Bahrani, based on the novel by Aravind Adiga"
-      },
       {
         "odds_expert": 29,
         "category_id": 23,
@@ -889,59 +500,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 17:07:56.125",
+      "declared": "2022-03-27 19:04:56.625",
       "category_id": 24,
-      "year": 2020,
-      "nomination_id": 2960,
-      "id": 362
+      "year": 2021,
+      "nomination_id": 3291,
+      "id": 791
     }],
     "nominees": [
-      {
-        "category_id": 24,
-        "year": 2020,
-        "nominee": "Judas and the Black Messiah",
-        "id": 2958,
-        "detail": "Screenplay by Will Berson and Shaka King; Story by Berson, King, Keith Lucas and Kenny Lucas"
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 24,
-        "year": 2020,
-        "nominee": "Minari",
-        "odds_user": 18,
-        "id": 2959,
-        "detail": "Lee Isaac Chung",
-        "odds_numerator": 14
-      },
-      {
-        "odds_expert": 89,
-        "odds_denominator": 4,
-        "category_id": 24,
-        "year": 2020,
-        "nominee": "Promising Young Woman",
-        "odds_user": 34,
-        "id": 2960,
-        "detail": "Emerald Fennell",
-        "odds_numerator": 1
-      },
-      {
-        "category_id": 24,
-        "year": 2020,
-        "nominee": "Sound of Metal",
-        "id": 2961,
-        "detail": "Screenplay by Abraham Marder and Darius Marder; Story by Derek Cianfrance and D. Marder"
-      },
-      {
-        "odds_expert": 11,
-        "odds_denominator": 4,
-        "category_id": 24,
-        "year": 2020,
-        "nominee": "The Trial of the Chicago 7",
-        "odds_user": 30,
-        "id": 2962,
-        "detail": "Aaron Sorkin",
-        "odds_numerator": 11
-      },
       {
         "odds_expert": 49,
         "category_id": 24,
@@ -1003,60 +568,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 19:08:02.315",
+      "declared": "2022-03-27 17:42:25.161",
       "category_id": 6,
-      "year": 2020,
-      "nomination_id": 2989,
-      "id": 626
+      "year": 2021,
+      "nomination_id": 3279,
+      "id": 782
     }],
     "nominees": [
-      {
-        "category_id": 6,
-        "year": 2020,
-        "context": "Sean Bobbitt",
-        "nominee": "Judas and the Black Messiah",
-        "odds_user": 5,
-        "id": 2988
-      },
-      {
-        "odds_expert": 32,
-        "odds_denominator": 1,
-        "category_id": 6,
-        "year": 2020,
-        "context": "Erik Messerschmidt",
-        "nominee": "Mank",
-        "odds_user": 30,
-        "id": 2989,
-        "odds_numerator": 3
-      },
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 6,
-        "year": 2020,
-        "context": "Dariusz Wolski",
-        "nominee": "News of the World",
-        "id": 2990,
-        "odds_numerator": 14
-      },
-      {
-        "odds_expert": 66,
-        "odds_denominator": 4,
-        "category_id": 6,
-        "year": 2020,
-        "context": "Joshua James Richards",
-        "nominee": "Nomadland",
-        "odds_user": 57,
-        "id": 2991,
-        "odds_numerator": 1
-      },
-      {
-        "category_id": 6,
-        "year": 2020,
-        "context": "Phedon Papamichael",
-        "nominee": "The Trial of the Chicago 7",
-        "id": 2992
-      },
       {
         "odds_expert": 16,
         "category_id": 6,
@@ -1109,55 +627,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 17:46:13.442",
+      "declared": "2022-03-27 18:49:17.374",
       "category_id": 7,
-      "year": 2020,
-      "nomination_id": 2994,
-      "id": 463
+      "year": 2021,
+      "nomination_id": 3301,
+      "id": 790
     }],
     "nominees": [
-      {
-        "odds_expert": 13,
-        "odds_denominator": 3,
-        "category_id": 7,
-        "year": 2020,
-        "nominee": "Emma.",
-        "odds_user": 21,
-        "id": 2993,
-        "odds_numerator": 10
-      },
-      {
-        "odds_expert": 80,
-        "odds_denominator": 4,
-        "category_id": 7,
-        "year": 2020,
-        "nominee": "Ma Rainey's Black Bottom",
-        "odds_user": 43,
-        "id": 2994,
-        "odds_numerator": 1
-      },
-      {
-        "odds_expert": 8,
-        "odds_denominator": 1,
-        "category_id": 7,
-        "year": 2020,
-        "nominee": "Mank",
-        "odds_user": 26,
-        "id": 2995,
-        "odds_numerator": 10
-      },
-      {
-        "category_id": 7,
-        "year": 2020,
-        "nominee": "Mulan",
-        "id": 2996
-      },
-      {
-        "category_id": 7,
-        "year": 2020,
-        "nominee": "Pinocchio",
-        "id": 2997
-      },
       {
         "odds_expert": 85,
         "category_id": 7,
@@ -1210,55 +686,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 19:19:13.068",
+      "declared": "2022-03-27 19:26:32.494",
       "category_id": 11,
-      "year": 2020,
-      "nomination_id": 3056,
-      "id": 679
+      "year": 2021,
+      "nomination_id": 3337,
+      "id": 794
     }],
     "nominees": [
-      {
-        "category_id": 11,
-        "year": 2020,
-        "nominee": "The Father",
-        "id": 3053
-      },
-      {
-        "odds_expert": 10,
-        "odds_denominator": 1,
-        "category_id": 11,
-        "year": 2020,
-        "nominee": "Nomadland",
-        "odds_user": 29,
-        "id": 3054,
-        "odds_numerator": 9
-      },
-      {
-        "category_id": 11,
-        "year": 2020,
-        "nominee": "Promising Young Woman",
-        "id": 3055
-      },
-      {
-        "odds_expert": 45,
-        "odds_denominator": 11,
-        "category_id": 11,
-        "year": 2020,
-        "nominee": "Sound of Metal",
-        "odds_user": 32,
-        "id": 3056,
-        "odds_numerator": 10
-      },
-      {
-        "odds_expert": 43,
-        "odds_denominator": 11,
-        "category_id": 11,
-        "year": 2020,
-        "nominee": "The Trial of the Chicago 7",
-        "odds_user": 19,
-        "id": 3057,
-        "odds_numerator": 10
-      },
       {
         "category_id": 11,
         "year": 2021,
@@ -1311,56 +745,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 17:42:02.678",
+      "declared": "2022-03-27 20:03:28.612",
       "category_id": 13,
-      "year": 2020,
-      "nomination_id": 3050,
-      "id": 426
+      "year": 2021,
+      "nomination_id": 3310,
+      "id": 798
     }],
     "nominees": [
-      {
-        "category_id": 13,
-        "year": 2020,
-        "nominee": "Emma.",
-        "odds_user": 16,
-        "id": 3048
-      },
-      {
-        "odds_expert": 3,
-        "odds_denominator": 1,
-        "category_id": 13,
-        "year": 2020,
-        "nominee": "Hillbilly Elegy",
-        "id": 3049,
-        "odds_numerator": 9
-      },
-      {
-        "odds_expert": 90,
-        "odds_denominator": 4,
-        "category_id": 13,
-        "year": 2020,
-        "nominee": "Ma Rainey's Black Bottom",
-        "odds_user": 49,
-        "id": 3050,
-        "odds_numerator": 1
-      },
-      {
-        "odds_expert": 5,
-        "category_id": 13,
-        "year": 2020,
-        "nominee": "Mank",
-        "odds_user": 22,
-        "id": 3051
-      },
-      {
-        "odds_expert": 3,
-        "odds_denominator": 1,
-        "category_id": 13,
-        "year": 2020,
-        "nominee": "Pinocchio",
-        "id": 3052,
-        "odds_numerator": 4
-      },
       {
         "odds_expert": 2,
         "category_id": 13,
@@ -1412,60 +803,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 19:33:05.996",
+      "declared": "2022-03-27 19:16:45.534",
       "category_id": 14,
-      "year": 2020,
-      "nomination_id": 2982,
-      "id": 692
+      "year": 2021,
+      "nomination_id": 3283,
+      "id": 793
     }],
     "nominees": [
-      {
-        "odds_expert": 2,
-        "category_id": 14,
-        "year": 2020,
-        "context": "Terence Blanchard",
-        "nominee": "Da 5 Bloods",
-        "id": 2978
-      },
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 14,
-        "year": 2020,
-        "context": "Trent Reznor and Atticus Ross",
-        "nominee": "Mank",
-        "odds_user": 13,
-        "id": 2979,
-        "odds_numerator": 7
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 14,
-        "year": 2020,
-        "context": "Emile Mosseri",
-        "nominee": "Minari",
-        "odds_user": 10,
-        "id": 2980,
-        "odds_numerator": 14
-      },
-      {
-        "category_id": 14,
-        "year": 2020,
-        "context": "James Newton Howard",
-        "nominee": "News of the World",
-        "id": 2981
-      },
-      {
-        "odds_expert": 95,
-        "odds_denominator": 12,
-        "category_id": 14,
-        "year": 2020,
-        "context": "Trent Reznor, Atticus Ross and Jon Batiste",
-        "nominee": "Soul",
-        "odds_user": 69,
-        "id": 2982,
-        "odds_numerator": 1
-      },
       {
         "category_id": 14,
         "year": 2021,
@@ -1518,65 +862,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 19:39:13.203",
+      "declared": "2022-03-27 19:58:23.383",
       "category_id": 15,
-      "year": 2020,
-      "nomination_id": 3038,
-      "id": 697
+      "year": 2021,
+      "nomination_id": 3290,
+      "id": 797
     }],
     "nominees": [
-      {
-        "category_id": 15,
-        "year": 2020,
-        "context": "Judas and the Black Messiah",
-        "nominee": "Fight for You",
-        "odds_user": 28,
-        "id": 3038,
-        "detail": "Music by D'Mile and H.E.R.; Lyric by H.E.R. and Tiara Thomas"
-      },
-      {
-        "category_id": 15,
-        "year": 2020,
-        "context": "The Trial of the Chicago 7",
-        "nominee": "Hear My Voice",
-        "odds_user": 15,
-        "id": 3039,
-        "detail": "Music by Daniel Pemberton; Lyric by Daniel Pemberton and Celeste Waite"
-      },
-      {
-        "odds_expert": 26,
-        "odds_denominator": 1,
-        "category_id": 15,
-        "year": 2020,
-        "context": "Eurovision Song Contest: The Story of Fire Saga",
-        "nominee": "Husavik",
-        "id": 3040,
-        "detail": "Music and lyric by Rickard Göransson, Fat Max Gsus and Savan Kotecha",
-        "odds_numerator": 3
-      },
-      {
-        "odds_expert": 10,
-        "odds_denominator": 4,
-        "category_id": 15,
-        "year": 2020,
-        "context": "The Life Ahead",
-        "nominee": "Io sì (Seen)",
-        "id": 3041,
-        "detail": "Music by Diane Warren; Lyric by Laura Pausini and Warren",
-        "odds_numerator": 9
-      },
-      {
-        "odds_expert": 62,
-        "odds_denominator": 11,
-        "category_id": 15,
-        "year": 2020,
-        "context": "One Night in Miami...",
-        "nominee": "Speak Now",
-        "odds_user": 35,
-        "id": 3042,
-        "detail": "Music and lyric by Sam Ashworth and Leslie Odom Jr.",
-        "odds_numerator": 8
-      },
       {
         "category_id": 15,
         "year": 2021,
@@ -1634,54 +926,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 19:05:19.568",
+      "declared": "2022-03-27 19:55:39.875",
       "category_id": 4,
-      "year": 2020,
-      "nomination_id": 3045,
-      "id": 619
+      "year": 2021,
+      "nomination_id": 3273,
+      "id": 796
     }],
     "nominees": [
-      {
-        "odds_expert": 3,
-        "category_id": 4,
-        "year": 2020,
-        "nominee": "The Father",
-        "id": 3043
-      },
-      {
-        "odds_denominator": 2,
-        "category_id": 4,
-        "year": 2020,
-        "nominee": "Ma Rainey's Black Bottom",
-        "odds_user": 12,
-        "id": 3044,
-        "odds_numerator": 13
-      },
-      {
-        "odds_expert": 98,
-        "odds_denominator": 7,
-        "category_id": 4,
-        "year": 2020,
-        "nominee": "Mank",
-        "odds_user": 60,
-        "id": 3045,
-        "odds_numerator": 1
-      },
-      {
-        "category_id": 4,
-        "year": 2020,
-        "nominee": "News of the World",
-        "id": 3046
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 4,
-        "year": 2020,
-        "nominee": "Tenet",
-        "odds_user": 19,
-        "id": 3047,
-        "odds_numerator": 9
-      },
       {
         "odds_expert": 4,
         "category_id": 4,
@@ -1735,54 +986,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 18:08:33.91",
+      "declared": "2022-03-27 17:39:02.256",
       "category_id": 26,
-      "year": 2020,
-      "nomination_id": 2987,
-      "id": 513
+      "year": 2021,
+      "nomination_id": 3343,
+      "id": 781
     }],
     "nominees": [
-      {
-        "category_id": 26,
-        "year": 2020,
-        "nominee": "Greyhound",
-        "id": 2983
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 26,
-        "year": 2020,
-        "nominee": "Mank",
-        "odds_user": 7,
-        "id": 2984,
-        "odds_numerator": 10
-      },
-      {
-        "category_id": 26,
-        "year": 2020,
-        "nominee": "News of the World",
-        "id": 2985
-      },
-      {
-        "odds_expert": 3,
-        "odds_denominator": 1,
-        "category_id": 26,
-        "year": 2020,
-        "nominee": "Soul",
-        "odds_user": 13,
-        "id": 2986,
-        "odds_numerator": 12
-      },
-      {
-        "odds_expert": 98,
-        "odds_denominator": 25,
-        "category_id": 26,
-        "year": 2020,
-        "nominee": "Sound of Metal",
-        "odds_user": 74,
-        "id": 2987,
-        "odds_numerator": 1
-      },
       {
         "category_id": 26,
         "year": 2021,
@@ -1854,54 +1064,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 18:52:06.503",
+      "declared": "2022-03-27 17:51:59.985",
       "category_id": 22,
-      "year": 2020,
-      "nomination_id": 3002,
-      "id": 586
+      "year": 2021,
+      "nomination_id": 3349,
+      "id": 784
     }],
     "nominees": [
-      {
-        "category_id": 22,
-        "year": 2020,
-        "nominee": "Love and Monsters",
-        "id": 2998
-      },
-      {
-        "odds_expert": 13,
-        "odds_denominator": 2,
-        "category_id": 22,
-        "year": 2020,
-        "nominee": "The Midnight Sky",
-        "odds_user": 5,
-        "id": 2999,
-        "odds_numerator": 5
-      },
-      {
-        "odds_denominator": 1,
-        "category_id": 22,
-        "year": 2020,
-        "nominee": "Mulan",
-        "odds_user": 6,
-        "id": 3000,
-        "odds_numerator": 16
-      },
-      {
-        "category_id": 22,
-        "year": 2020,
-        "nominee": "The One and Only Ivan",
-        "id": 3001
-      },
-      {
-        "odds_expert": 88,
-        "odds_denominator": 7,
-        "category_id": 22,
-        "year": 2020,
-        "nominee": "Tenet",
-        "odds_user": 84,
-        "id": 3002,
-        "odds_numerator": 2
-      },
       {
         "category_id": 22,
         "year": 2021,
@@ -1954,55 +1123,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 18:41:38.412",
+      "declared": "2022-03-27 19:33:44.006",
       "category_id": 9,
-      "year": 2020,
-      "nomination_id": 2971,
-      "id": 584
+      "year": 2021,
+      "nomination_id": 3315,
+      "id": 795
     }],
     "nominees": [
-      {
-        "odds_denominator": 1,
-        "category_id": 9,
-        "year": 2020,
-        "nominee": "Collective",
-        "odds_user": 23,
-        "id": 2968,
-        "odds_numerator": 9
-      },
-      {
-        "odds_expert": 10,
-        "category_id": 9,
-        "year": 2020,
-        "nominee": "Crip Camp",
-        "id": 2969
-      },
-      {
-        "category_id": 9,
-        "year": 2020,
-        "nominee": "The Mole Agent",
-        "id": 2970
-      },
-      {
-        "odds_expert": 71,
-        "odds_denominator": 9,
-        "category_id": 9,
-        "year": 2020,
-        "nominee": "My Octopus Teacher",
-        "odds_user": 25,
-        "id": 2971,
-        "odds_numerator": 2
-      },
-      {
-        "odds_expert": 19,
-        "odds_denominator": 2,
-        "category_id": 9,
-        "year": 2020,
-        "nominee": "Time",
-        "odds_user": 34,
-        "id": 2972,
-        "odds_numerator": 9
-      },
       {
         "category_id": 9,
         "year": 2021,
@@ -2054,55 +1181,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 18:35:04.932",
+      "declared": "2022-03-27 17:49:24.364",
       "category_id": 10,
-      "year": 2020,
-      "nomination_id": 3028,
-      "id": 569
+      "year": 2021,
+      "nomination_id": 3316,
+      "id": 783
     }],
     "nominees": [
-      {
-        "category_id": 10,
-        "year": 2020,
-        "nominee": "Colette",
-        "odds_user": 26,
-        "id": 3028
-      },
-      {
-        "odds_expert": 38,
-        "odds_denominator": 4,
-        "category_id": 10,
-        "year": 2020,
-        "nominee": "A Concerto Is a Conversation",
-        "id": 3029,
-        "odds_numerator": 11
-      },
-      {
-        "odds_expert": 10,
-        "odds_denominator": 2,
-        "category_id": 10,
-        "year": 2020,
-        "nominee": "Do Not Split",
-        "id": 3030,
-        "odds_numerator": 15
-      },
-      {
-        "category_id": 10,
-        "year": 2020,
-        "nominee": "Hunger Ward",
-        "odds_user": 19,
-        "id": 3031
-      },
-      {
-        "odds_expert": 51,
-        "odds_denominator": 13,
-        "category_id": 10,
-        "year": 2020,
-        "nominee": "A Love Song for Latasha",
-        "odds_user": 25,
-        "id": 3032,
-        "odds_numerator": 8
-      },
       {
         "odds_expert": 70,
         "category_id": 10,
@@ -2169,60 +1254,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 17:22:47.091",
+      "declared": "2022-03-27 18:35:55.696",
       "category_id": 25,
-      "year": 2020,
-      "nomination_id": 3023,
-      "id": 379
+      "year": 2021,
+      "nomination_id": 3321,
+      "id": 788
     }],
     "nominees": [
-      {
-        "odds_expert": 95,
-        "odds_denominator": 10,
-        "category_id": 25,
-        "year": 2020,
-        "context": "Denmark",
-        "nominee": "Another Round",
-        "odds_user": 72,
-        "id": 3023,
-        "odds_numerator": 1
-      },
-      {
-        "category_id": 25,
-        "year": 2020,
-        "context": "Hong Kong",
-        "nominee": "Better Days",
-        "odds_user": 8,
-        "id": 3024
-      },
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 25,
-        "year": 2020,
-        "context": "Romania",
-        "nominee": "Collective",
-        "id": 3025,
-        "odds_numerator": 14
-      },
-      {
-        "category_id": 25,
-        "year": 2020,
-        "context": "Tunisia",
-        "nominee": "The Man Who Sold His Skin",
-        "id": 3026
-      },
-      {
-        "odds_expert": 2,
-        "odds_denominator": 1,
-        "category_id": 25,
-        "year": 2020,
-        "context": "Bosnia and Herzegovina",
-        "nominee": "Quo Vadis, Aida?",
-        "odds_user": 9,
-        "id": 3027,
-        "odds_numerator": 6
-      },
       {
         "odds_expert": 94,
         "category_id": 25,
@@ -2275,56 +1313,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 18:21:03.134",
+      "declared": "2022-03-27 18:16:11.49",
       "category_id": 16,
-      "year": 2020,
-      "nomination_id": 3035,
-      "id": 538
+      "year": 2021,
+      "nomination_id": 3327,
+      "id": 786
     }],
     "nominees": [
-      {
-        "odds_expert": 5,
-        "odds_denominator": 1,
-        "category_id": 16,
-        "year": 2020,
-        "nominee": "Burrow",
-        "odds_user": 14,
-        "id": 3033,
-        "odds_numerator": 7
-      },
-      {
-        "odds_expert": 5,
-        "category_id": 16,
-        "year": 2020,
-        "nominee": "Genius Loci",
-        "id": 3034
-      },
-      {
-        "odds_expert": 82,
-        "odds_denominator": 11,
-        "category_id": 16,
-        "year": 2020,
-        "nominee": "If Anything Happens I Love You",
-        "odds_user": 47,
-        "id": 3035,
-        "odds_numerator": 4
-      },
-      {
-        "odds_expert": 8,
-        "odds_denominator": 2,
-        "category_id": 16,
-        "year": 2020,
-        "nominee": "Opera",
-        "odds_user": 14,
-        "id": 3036,
-        "odds_numerator": 9
-      },
-      {
-        "category_id": 16,
-        "year": 2020,
-        "nominee": "Yes-People",
-        "id": 3037
-      },
       {
         "odds_expert": 2,
         "category_id": 16,
@@ -2380,55 +1375,13 @@ export const MockCategoryList: Category[] = [
   },
   {
     "winners": [{
-      "declared": "2021-04-25 18:12:44.224",
+      "declared": "2022-03-27 18:46:27.124",
       "category_id": 17,
-      "year": 2020,
-      "nomination_id": 2976,
-      "id": 522
+      "year": 2021,
+      "nomination_id": 3331,
+      "id": 789
     }],
     "nominees": [
-      {
-        "odds_expert": 16,
-        "odds_denominator": 2,
-        "category_id": 17,
-        "year": 2020,
-        "nominee": "Feeling Through",
-        "id": 2973,
-        "odds_numerator": 13
-      },
-      {
-        "odds_expert": 32,
-        "odds_denominator": 6,
-        "category_id": 17,
-        "year": 2020,
-        "nominee": "The Letter Room",
-        "odds_user": 25,
-        "id": 2974,
-        "odds_numerator": 4
-      },
-      {
-        "category_id": 17,
-        "year": 2020,
-        "nominee": "The Present",
-        "odds_user": 17,
-        "id": 2975
-      },
-      {
-        "odds_expert": 51,
-        "odds_denominator": 8,
-        "category_id": 17,
-        "year": 2020,
-        "nominee": "Two Distant Strangers",
-        "odds_user": 31,
-        "id": 2976,
-        "odds_numerator": 13
-      },
-      {
-        "category_id": 17,
-        "year": 2020,
-        "nominee": "White Eye",
-        "id": 2977
-      },
       {
         "odds_expert": 77,
         "category_id": 17,
@@ -2551,6 +1504,62 @@ export const MockCategoryList: Category[] = [
         "nominee": "Ted Lasso",
         "odds_user": 72,
         "id": 3065
+      },
+      {
+        "category_id": 28,
+        "year": 2022,
+        "context": "ABC",
+        "nominee": "Abbott Elementary",
+        "id": 3369
+      },
+      {
+        "category_id": 28,
+        "year": 2022,
+        "context": "HBO",
+        "nominee": "Barry",
+        "id": 3370
+      },
+      {
+        "category_id": 28,
+        "year": 2022,
+        "context": "HBO",
+        "nominee": "Curb Your Enthusiasm",
+        "id": 3371
+      },
+      {
+        "category_id": 28,
+        "year": 2022,
+        "context": "HBO",
+        "nominee": "Hacks",
+        "id": 3372
+      },
+      {
+        "category_id": 28,
+        "year": 2022,
+        "context": "Amazon Prime Video",
+        "nominee": "The Marvelous Mrs. Maisel",
+        "id": 3373
+      },
+      {
+        "category_id": 28,
+        "year": 2022,
+        "context": "Hulu",
+        "nominee": "Only Murders In The Building",
+        "id": 3374
+      },
+      {
+        "category_id": 28,
+        "year": 2022,
+        "context": "Apple TV+",
+        "nominee": "Ted Lasso",
+        "id": 3375
+      },
+      {
+        "category_id": 28,
+        "year": 2022,
+        "context": "FX",
+        "nominee": "What We Do In The Shadows",
+        "id": 3376
       }
     ],
     "name": "Comedy",
@@ -2626,6 +1635,62 @@ export const MockCategoryList: Category[] = [
         "context": "NBC",
         "nominee": "This Is Us",
         "id": 3098
+      },
+      {
+        "category_id": 34,
+        "year": 2022,
+        "context": "AMC",
+        "nominee": "Better Call Saul",
+        "id": 3361
+      },
+      {
+        "category_id": 34,
+        "year": 2022,
+        "context": "HBO",
+        "nominee": "Euphoria",
+        "id": 3362
+      },
+      {
+        "category_id": 34,
+        "year": 2022,
+        "context": "Netflix",
+        "nominee": "Ozark",
+        "id": 3363
+      },
+      {
+        "category_id": 34,
+        "year": 2022,
+        "context": "Apple TV+",
+        "nominee": "Severance",
+        "id": 3364
+      },
+      {
+        "category_id": 34,
+        "year": 2022,
+        "context": "Netflix",
+        "nominee": "Squid Game",
+        "id": 3365
+      },
+      {
+        "category_id": 34,
+        "year": 2022,
+        "context": "Netflix",
+        "nominee": "Stranger Things",
+        "id": 3366
+      },
+      {
+        "category_id": 34,
+        "year": 2022,
+        "context": "HBO",
+        "nominee": "Succession",
+        "id": 3367
+      },
+      {
+        "category_id": 34,
+        "year": 2022,
+        "context": "Showtime",
+        "nominee": "Yellowjackets",
+        "id": 3368
       }
     ],
     "name": "Drama",
@@ -2682,6 +1747,41 @@ export const MockCategoryList: Category[] = [
         "context": "Disney+",
         "nominee": "WandaVision",
         "id": 3208
+      },
+      {
+        "category_id": 41,
+        "year": 2022,
+        "context": "Hulu",
+        "nominee": "Dopesick ",
+        "id": 3395
+      },
+      {
+        "category_id": 41,
+        "year": 2022,
+        "context": "Hulu",
+        "nominee": "The Dropout ",
+        "id": 3396
+      },
+      {
+        "category_id": 41,
+        "year": 2022,
+        "context": "Netflix",
+        "nominee": "Inventing Anna ",
+        "id": 3397
+      },
+      {
+        "category_id": 41,
+        "year": 2022,
+        "context": "Hulu",
+        "nominee": "Pam & Tommy ",
+        "id": 3398
+      },
+      {
+        "category_id": 41,
+        "year": 2022,
+        "context": "HBO",
+        "nominee": "The White Lotus ",
+        "id": 3399
       }
     ],
     "name": "Limited or Anthology Series",
@@ -2736,6 +1836,48 @@ export const MockCategoryList: Category[] = [
         "nominee": "Kenan Thompson",
         "id": 3070,
         "detail": "Kenan"
+      },
+      {
+        "category_id": 35,
+        "year": 2022,
+        "nominee": "Donald Glover",
+        "id": 3383,
+        "detail": "Atlanta"
+      },
+      {
+        "category_id": 35,
+        "year": 2022,
+        "nominee": "Bill Hader",
+        "id": 3384,
+        "detail": "Barry"
+      },
+      {
+        "category_id": 35,
+        "year": 2022,
+        "nominee": "Nicholas Hoult",
+        "id": 3385,
+        "detail": "The Great"
+      },
+      {
+        "category_id": 35,
+        "year": 2022,
+        "nominee": "Steve Martin",
+        "id": 3386,
+        "detail": "Only Murders In The Building"
+      },
+      {
+        "category_id": 35,
+        "year": 2022,
+        "nominee": "Martin Short",
+        "id": 3387,
+        "detail": "Only Murders In The Building"
+      },
+      {
+        "category_id": 35,
+        "year": 2022,
+        "nominee": "Jason Sudeikis",
+        "id": 3388,
+        "detail": "Ted Lasso"
       }
     ],
     "sub_name": "Comedy",
@@ -2799,6 +1941,48 @@ export const MockCategoryList: Category[] = [
         "nominee": "Matthew Rhys",
         "id": 3104,
         "detail": "Perry Mason"
+      },
+      {
+        "category_id": 36,
+        "year": 2022,
+        "nominee": "Jason Bateman",
+        "id": 3418,
+        "detail": "Ozark"
+      },
+      {
+        "category_id": 36,
+        "year": 2022,
+        "nominee": "Brian Cox",
+        "id": 3419,
+        "detail": "Succession"
+      },
+      {
+        "category_id": 36,
+        "year": 2022,
+        "nominee": "Lee Jung-jae",
+        "id": 3420,
+        "detail": "Squid Game"
+      },
+      {
+        "category_id": 36,
+        "year": 2022,
+        "nominee": "Bob Odenkirk",
+        "id": 3421,
+        "detail": "Better Call Saul"
+      },
+      {
+        "category_id": 36,
+        "year": 2022,
+        "nominee": "Adam Scott",
+        "id": 3422,
+        "detail": "Severance"
+      },
+      {
+        "category_id": 36,
+        "year": 2022,
+        "nominee": "Jeremy Strong",
+        "id": 3423,
+        "detail": "Succession"
       }
     ],
     "sub_name": "Drama",
@@ -2855,6 +2039,48 @@ export const MockCategoryList: Category[] = [
         "nominee": "Leslie Odom Jr.",
         "id": 3191,
         "detail": "Hamilton"
+      },
+      {
+        "category_id": 37,
+        "year": 2022,
+        "nominee": "Colin Firth",
+        "id": 3400,
+        "detail": "The Staircase"
+      },
+      {
+        "category_id": 37,
+        "year": 2022,
+        "nominee": "Andrew Garfield",
+        "id": 3401,
+        "detail": "Under The Banner Of Heaven"
+      },
+      {
+        "category_id": 37,
+        "year": 2022,
+        "nominee": "Oscar Isaac",
+        "id": 3402,
+        "detail": "Scenes From A Marriage"
+      },
+      {
+        "category_id": 37,
+        "year": 2022,
+        "nominee": "Michael Keaton",
+        "id": 3403,
+        "detail": "Dopesick"
+      },
+      {
+        "category_id": 37,
+        "year": 2022,
+        "nominee": "Himesh Patel",
+        "id": 3404,
+        "detail": "Station Eleven"
+      },
+      {
+        "category_id": 37,
+        "year": 2022,
+        "nominee": "Sebastian Stan",
+        "id": 3405,
+        "detail": "Pam & Tommy"
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -2910,6 +2136,48 @@ export const MockCategoryList: Category[] = [
         "nominee": "Jean Smart",
         "odds_user": 60,
         "id": 3075,
+        "detail": "Hacks"
+      },
+      {
+        "category_id": 38,
+        "year": 2022,
+        "nominee": "Rachel Brosnahan",
+        "id": 3377,
+        "detail": "The Marvelous Mrs. Maisel"
+      },
+      {
+        "category_id": 38,
+        "year": 2022,
+        "nominee": "Quinta Brunson",
+        "id": 3378,
+        "detail": "Abbott Elementary"
+      },
+      {
+        "category_id": 38,
+        "year": 2022,
+        "nominee": "Kaley Cuoco",
+        "id": 3379,
+        "detail": "The Flight Attendant"
+      },
+      {
+        "category_id": 38,
+        "year": 2022,
+        "nominee": "Elle Fanning",
+        "id": 3380,
+        "detail": "The Great"
+      },
+      {
+        "category_id": 38,
+        "year": 2022,
+        "nominee": "Issa Rae",
+        "id": 3381,
+        "detail": "Insecure"
+      },
+      {
+        "category_id": 38,
+        "year": 2022,
+        "nominee": "Jean Smart",
+        "id": 3382,
         "detail": "Hacks"
       }
     ],
@@ -2975,6 +2243,48 @@ export const MockCategoryList: Category[] = [
         "nominee": "Jurnee Smollett",
         "id": 3110,
         "detail": "Lovecraft Country"
+      },
+      {
+        "category_id": 39,
+        "year": 2022,
+        "nominee": "Jodie Comer",
+        "id": 3412,
+        "detail": "Killing Eve"
+      },
+      {
+        "category_id": 39,
+        "year": 2022,
+        "nominee": "Laura Linney",
+        "id": 3413,
+        "detail": "Ozark"
+      },
+      {
+        "category_id": 39,
+        "year": 2022,
+        "nominee": "Melanie Lynsey",
+        "id": 3414,
+        "detail": "Yellowjackets"
+      },
+      {
+        "category_id": 39,
+        "year": 2022,
+        "nominee": "Sandra Oh",
+        "id": 3415,
+        "detail": "Killing Eve"
+      },
+      {
+        "category_id": 39,
+        "year": 2022,
+        "nominee": "Reese Witherspoon",
+        "id": 3416,
+        "detail": "The Morning Show"
+      },
+      {
+        "category_id": 39,
+        "year": 2022,
+        "nominee": "Zendaya",
+        "id": 3417,
+        "detail": "Euphoria"
       }
     ],
     "sub_name": "Drama",
@@ -3032,6 +2342,48 @@ export const MockCategoryList: Category[] = [
         "odds_user": 37,
         "id": 3162,
         "detail": "Mare of Easttown"
+      },
+      {
+        "category_id": 40,
+        "year": 2022,
+        "nominee": "Toni Collette",
+        "id": 3406,
+        "detail": "The Staircase"
+      },
+      {
+        "category_id": 40,
+        "year": 2022,
+        "nominee": "Julia Garner",
+        "id": 3407,
+        "detail": "Inventing Anna"
+      },
+      {
+        "category_id": 40,
+        "year": 2022,
+        "nominee": "Lily James",
+        "id": 3408,
+        "detail": "Pam And Tommy"
+      },
+      {
+        "category_id": 40,
+        "year": 2022,
+        "nominee": "Sarah Paulson",
+        "id": 3409,
+        "detail": "American Crime Story: Impeachment"
+      },
+      {
+        "category_id": 40,
+        "year": 2022,
+        "nominee": "Margaret Qualley",
+        "id": 3410,
+        "detail": "Maid"
+      },
+      {
+        "category_id": 40,
+        "year": 2022,
+        "nominee": "Amanda Seyfried",
+        "id": 3411,
+        "detail": "The Dropout"
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -3110,6 +2462,55 @@ export const MockCategoryList: Category[] = [
         "odds_user": 19,
         "id": 3139,
         "detail": "Make Rebecca Great Again"
+      },
+      {
+        "category_id": 30,
+        "year": 2022,
+        "nominee": "Hacks (\u201cThere Will Be Blood\u201d)",
+        "id": 3485,
+        "detail": "Lucia Aniello"
+      },
+      {
+        "category_id": 30,
+        "year": 2022,
+        "nominee": "Only Murders in the Building (\u201cTrue Crime\u201d)",
+        "id": 3486,
+        "detail": "Jamie Babbit"
+      },
+      {
+        "category_id": 30,
+        "year": 2022,
+        "nominee": "Only Murders in the Building (\u201cThe Boy From 6B\u201d)",
+        "id": 3487,
+        "detail": "Cherien Dabis"
+      },
+      {
+        "category_id": 30,
+        "year": 2022,
+        "nominee": "The Ms. Pat Show (\u201cBaby Daddy Groundhog Day\u201d)",
+        "id": 3488,
+        "detail": "Mary Lou Belli"
+      },
+      {
+        "category_id": 30,
+        "year": 2022,
+        "nominee": "Ted Lasso (\u201cNo Weddings and a Funeral\u201d)",
+        "id": 3489,
+        "detail": "MJ Delaney"
+      },
+      {
+        "category_id": 30,
+        "year": 2022,
+        "nominee": "Barry (\u201c710N\u201d)",
+        "id": 3490,
+        "detail": "Bill Hader"
+      },
+      {
+        "category_id": 30,
+        "year": 2022,
+        "nominee": "Atlanta (\u201cNew Jazz\u201d)",
+        "id": 3491,
+        "detail": "Hiro Murai"
       }
     ],
     "sub_name": "Comedy",
@@ -3180,6 +2581,55 @@ export const MockCategoryList: Category[] = [
         "nominee": "Pose",
         "id": 3186,
         "detail": "Series Finale"
+      },
+      {
+        "category_id": 31,
+        "year": 2022,
+        "nominee": "Ozark (\u201cA Hard Way to Go\u201d)",
+        "id": 3511,
+        "detail": "Jason Bateman"
+      },
+      {
+        "category_id": 31,
+        "year": 2022,
+        "nominee": "Squid Game (\u201cRed Light, Green Light\u201d)",
+        "id": 3512,
+        "detail": "Hwang Dong-hyuk"
+      },
+      {
+        "category_id": 31,
+        "year": 2022,
+        "nominee": "Yellowjackets (\u201cPilot\u201d)",
+        "id": 3513,
+        "detail": "Karyn Kusama"
+      },
+      {
+        "category_id": 31,
+        "year": 2022,
+        "nominee": "Succession (\u201cAll the Bells Say\u201d)",
+        "id": 3514,
+        "detail": "Mark Mylod"
+      },
+      {
+        "category_id": 31,
+        "year": 2022,
+        "nominee": "Succession (\u201cThe Disruption\u201d)",
+        "id": 3515,
+        "detail": "Cathy Yan"
+      },
+      {
+        "category_id": 31,
+        "year": 2022,
+        "nominee": "Succession (\u201cToo Much Birthday\u201d)",
+        "id": 3516,
+        "detail": "Lorene Scafaria"
+      },
+      {
+        "category_id": 31,
+        "year": 2022,
+        "nominee": "Severance (\u201cThe We We Are\u201d)",
+        "id": 3517,
+        "detail": "Ben Stiller"
       }
     ],
     "sub_name": "Drama",
@@ -3251,6 +2701,48 @@ export const MockCategoryList: Category[] = [
         "nominee": "WandaVision",
         "odds_user": 15,
         "id": 3152
+      },
+      {
+        "category_id": 32,
+        "year": 2022,
+        "nominee": "Station Eleven",
+        "id": 3498,
+        "detail": "Hiro Murai"
+      },
+      {
+        "category_id": 32,
+        "year": 2022,
+        "nominee": "The Dropout",
+        "id": 3499,
+        "detail": "Michael Showalter"
+      },
+      {
+        "category_id": 32,
+        "year": 2022,
+        "nominee": "The Dropout",
+        "id": 3500,
+        "detail": "Francesca Gregorini"
+      },
+      {
+        "category_id": 32,
+        "year": 2022,
+        "nominee": "Dopesick",
+        "id": 3501,
+        "detail": "Danny Strong"
+      },
+      {
+        "category_id": 32,
+        "year": 2022,
+        "nominee": "Maid",
+        "id": 3502,
+        "detail": "John Wells"
+      },
+      {
+        "category_id": 32,
+        "year": 2022,
+        "nominee": "The White Lotus",
+        "id": 3503,
+        "detail": "Mike White"
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -3328,6 +2820,62 @@ export const MockCategoryList: Category[] = [
         "nominee": "Bowen Yang",
         "odds_user": 13,
         "id": 3083,
+        "detail": "Saturday Night Live"
+      },
+      {
+        "category_id": 42,
+        "year": 2022,
+        "nominee": "Anthony Carrigan",
+        "id": 3448,
+        "detail": "Barry"
+      },
+      {
+        "category_id": 42,
+        "year": 2022,
+        "nominee": "Brett Goldstein",
+        "id": 3449,
+        "detail": "Ted Lasso"
+      },
+      {
+        "category_id": 42,
+        "year": 2022,
+        "nominee": "Toheeb Jimoh",
+        "id": 3450,
+        "detail": "Ted Lasso"
+      },
+      {
+        "category_id": 42,
+        "year": 2022,
+        "nominee": "Nick Mohammed",
+        "id": 3451,
+        "detail": "Ted Lasso"
+      },
+      {
+        "category_id": 42,
+        "year": 2022,
+        "nominee": "Tony Shalhoub",
+        "id": 3452,
+        "detail": "The Marvelous Mrs. Maisel"
+      },
+      {
+        "category_id": 42,
+        "year": 2022,
+        "nominee": "Tyler James Williams",
+        "id": 3453,
+        "detail": "Abbott Elementary"
+      },
+      {
+        "category_id": 42,
+        "year": 2022,
+        "nominee": "Henry Winkler",
+        "id": 3454,
+        "detail": "Barry"
+      },
+      {
+        "category_id": 42,
+        "year": 2022,
+        "nominee": "Bowen Yang",
+        "id": 3455,
         "detail": "Saturday Night Live"
       }
     ],
@@ -3407,6 +2955,62 @@ export const MockCategoryList: Category[] = [
         "odds_user": 32,
         "id": 3118,
         "detail": "Lovecraft Country"
+      },
+      {
+        "category_id": 43,
+        "year": 2022,
+        "nominee": "Nicholas Braun",
+        "id": 3432,
+        "detail": "Succession"
+      },
+      {
+        "category_id": 43,
+        "year": 2022,
+        "nominee": "Billy Crudup",
+        "id": 3433,
+        "detail": "The Morning Show"
+      },
+      {
+        "category_id": 43,
+        "year": 2022,
+        "nominee": "Kieran Culkin",
+        "id": 3434,
+        "detail": "Succession"
+      },
+      {
+        "category_id": 43,
+        "year": 2022,
+        "nominee": "Park Hae-soo",
+        "id": 3435,
+        "detail": "Squid Game"
+      },
+      {
+        "category_id": 43,
+        "year": 2022,
+        "nominee": "Matthew Macfayden",
+        "id": 3436,
+        "detail": "Succession"
+      },
+      {
+        "category_id": 43,
+        "year": 2022,
+        "nominee": "John Turturro",
+        "id": 3437,
+        "detail": "Severance"
+      },
+      {
+        "category_id": 43,
+        "year": 2022,
+        "nominee": "Christopher Walken",
+        "id": 3438,
+        "detail": "Severance"
+      },
+      {
+        "category_id": 43,
+        "year": 2022,
+        "nominee": "Oh Yeong-su",
+        "id": 3439,
+        "detail": "Squid Game"
       }
     ],
     "sub_name": "Drama",
@@ -3469,6 +3073,55 @@ export const MockCategoryList: Category[] = [
         "nominee": "Anthony Ramos",
         "id": 3168,
         "detail": "Hamilton"
+      },
+      {
+        "category_id": 44,
+        "year": 2022,
+        "nominee": "Murray Bartlett",
+        "id": 3463,
+        "detail": "The White Lotus"
+      },
+      {
+        "category_id": 44,
+        "year": 2022,
+        "nominee": "Jake Lacy",
+        "id": 3464,
+        "detail": "The White Lotus"
+      },
+      {
+        "category_id": 44,
+        "year": 2022,
+        "nominee": "Will Poulter",
+        "id": 3465,
+        "detail": "Dopesick"
+      },
+      {
+        "category_id": 44,
+        "year": 2022,
+        "nominee": "Seth Rogen",
+        "id": 3466,
+        "detail": "Pam & Tommy"
+      },
+      {
+        "category_id": 44,
+        "year": 2022,
+        "nominee": "Peter Sarsgaard",
+        "id": 3467,
+        "detail": "Dopesick"
+      },
+      {
+        "category_id": 44,
+        "year": 2022,
+        "nominee": "Michael Stuhlbarg",
+        "id": 3468,
+        "detail": "Dopesick"
+      },
+      {
+        "category_id": 44,
+        "year": 2022,
+        "nominee": "Steve Zahn",
+        "id": 3469,
+        "detail": "The White Lotus"
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -3538,6 +3191,62 @@ export const MockCategoryList: Category[] = [
         "nominee": "Hannah Waddingham",
         "odds_user": 37,
         "id": 3090,
+        "detail": "Ted Lasso"
+      },
+      {
+        "category_id": 45,
+        "year": 2022,
+        "nominee": "Alex Borstein",
+        "id": 3440,
+        "detail": "The Marvelous Mrs. Maisel"
+      },
+      {
+        "category_id": 45,
+        "year": 2022,
+        "nominee": "Hannah Einbinder",
+        "id": 3441,
+        "detail": "Hacks"
+      },
+      {
+        "category_id": 45,
+        "year": 2022,
+        "nominee": "Janelle James",
+        "id": 3442,
+        "detail": "Abbott Elementary"
+      },
+      {
+        "category_id": 45,
+        "year": 2022,
+        "nominee": "Kate McKinnon",
+        "id": 3443,
+        "detail": "Saturday Night Live"
+      },
+      {
+        "category_id": 45,
+        "year": 2022,
+        "nominee": "Sarah Niles",
+        "id": 3444,
+        "detail": "Ted Lasso"
+      },
+      {
+        "category_id": 45,
+        "year": 2022,
+        "nominee": "Sheryl Lee Ralph",
+        "id": 3445,
+        "detail": "Abbott Elementary"
+      },
+      {
+        "category_id": 45,
+        "year": 2022,
+        "nominee": "Juno Temple",
+        "id": 3446,
+        "detail": "Ted Lasso"
+      },
+      {
+        "category_id": 45,
+        "year": 2022,
+        "nominee": "Hannah Waddingham",
+        "id": 3447,
         "detail": "Ted Lasso"
       }
     ],
@@ -3616,6 +3325,62 @@ export const MockCategoryList: Category[] = [
         "nominee": "Samira Wiley",
         "id": 3126,
         "detail": "The Handmaid\u2019s Tale"
+      },
+      {
+        "category_id": 46,
+        "year": 2022,
+        "nominee": "Patricia Arquette",
+        "id": 3424,
+        "detail": "Severance"
+      },
+      {
+        "category_id": 46,
+        "year": 2022,
+        "nominee": "Julia Garner",
+        "id": 3425,
+        "detail": "Ozark"
+      },
+      {
+        "category_id": 46,
+        "year": 2022,
+        "nominee": "Jung Ho-yeon",
+        "id": 3426,
+        "detail": "Squid Game"
+      },
+      {
+        "category_id": 46,
+        "year": 2022,
+        "nominee": "Christina Ricci",
+        "id": 3427,
+        "detail": "Yellowjackets"
+      },
+      {
+        "category_id": 46,
+        "year": 2022,
+        "nominee": "Rhea Seehorn",
+        "id": 3428,
+        "detail": "Better Call Saul"
+      },
+      {
+        "category_id": 46,
+        "year": 2022,
+        "nominee": "J. Smith-Cameron",
+        "id": 3429,
+        "detail": "Succession"
+      },
+      {
+        "category_id": 46,
+        "year": 2022,
+        "nominee": "Sarah Snook",
+        "id": 3430,
+        "detail": "Succession"
+      },
+      {
+        "category_id": 46,
+        "year": 2022,
+        "nominee": "Sydney Sweeney",
+        "id": 3431,
+        "detail": "Euphoria"
       }
     ],
     "sub_name": "Drama",
@@ -3680,6 +3445,55 @@ export const MockCategoryList: Category[] = [
         "nominee": "Phillipa Soo",
         "id": 3214,
         "detail": "Hamilton"
+      },
+      {
+        "category_id": 47,
+        "year": 2022,
+        "nominee": "Connie Britton",
+        "id": 3456,
+        "detail": "The White Lotus"
+      },
+      {
+        "category_id": 47,
+        "year": 2022,
+        "nominee": "Jennifer Coolidge",
+        "id": 3457,
+        "detail": "The White Lotus"
+      },
+      {
+        "category_id": 47,
+        "year": 2022,
+        "nominee": "Alexandra Daddario",
+        "id": 3458,
+        "detail": "The White Lotus"
+      },
+      {
+        "category_id": 47,
+        "year": 2022,
+        "nominee": "Kaitlyn Dever",
+        "id": 3459,
+        "detail": "Dopesick"
+      },
+      {
+        "category_id": 47,
+        "year": 2022,
+        "nominee": "Natasha Rothwell",
+        "id": 3460,
+        "detail": "The White Lotus"
+      },
+      {
+        "category_id": 47,
+        "year": 2022,
+        "nominee": "Sydney Sweeney",
+        "id": 3461,
+        "detail": "The White Lotus"
+      },
+      {
+        "category_id": 47,
+        "year": 2022,
+        "nominee": "Mare Winningham",
+        "id": 3462,
+        "detail": "Dopesick"
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -3712,6 +3526,20 @@ export const MockCategoryList: Category[] = [
         "context": "NBC",
         "nominee": "Saturday Night Live",
         "id": 3198
+      },
+      {
+        "category_id": 49,
+        "year": 2022,
+        "context": "HBO/HBO Max",
+        "nominee": "A Black Lady Sketch Show ",
+        "id": 3475
+      },
+      {
+        "category_id": 49,
+        "year": 2022,
+        "context": "NBC",
+        "nominee": "Saturday Night Live ",
+        "id": 3476
       }
     ],
     "name": "Variety Sketch Series",
@@ -3768,6 +3596,41 @@ export const MockCategoryList: Category[] = [
         "nominee": "The Late Show With Stephen Colbert",
         "odds_user": 13,
         "id": 3196
+      },
+      {
+        "category_id": 50,
+        "year": 2022,
+        "context": "Comedy Central",
+        "nominee": "The Daily Show With Trevor Noah",
+        "id": 3470
+      },
+      {
+        "category_id": 50,
+        "year": 2022,
+        "context": "ABC",
+        "nominee": "Jimmy Kimmel Live!",
+        "id": 3471
+      },
+      {
+        "category_id": 50,
+        "year": 2022,
+        "context": "HBO",
+        "nominee": "Last Week Tonight With John Oliver",
+        "id": 3472
+      },
+      {
+        "category_id": 50,
+        "year": 2022,
+        "context": "NBC",
+        "nominee": "Late Night With Seth Meyers",
+        "id": 3473
+      },
+      {
+        "category_id": 50,
+        "year": 2022,
+        "context": "CBS",
+        "nominee": "The Late Show With Stephen Colbert",
+        "id": 3474
       }
     ],
     "name": "Variety Talk Series",
@@ -3837,6 +3700,62 @@ export const MockCategoryList: Category[] = [
         "odds_user": 28,
         "id": 3132,
         "detail": "Pilot"
+      },
+      {
+        "category_id": 51,
+        "year": 2022,
+        "nominee": "Hacks (\u201cThe One, the Only\u201d)",
+        "id": 3477,
+        "detail": "Lucia Aniello, Paul W. Downs and Jen Statsky"
+      },
+      {
+        "category_id": 51,
+        "year": 2022,
+        "nominee": "Abbott Elementary (\u201cPilot\u201d)",
+        "id": 3478,
+        "detail": "Quinta Brunson"
+      },
+      {
+        "category_id": 51,
+        "year": 2022,
+        "nominee": "Barry (\u201cstarting now\u201d)",
+        "id": 3479,
+        "detail": "Bill Hader and Alec Berg"
+      },
+      {
+        "category_id": 51,
+        "year": 2022,
+        "nominee": "Barry (\u201c710N\u201d)",
+        "id": 3480,
+        "detail": "Alec Berg and Duffy Boudreau"
+      },
+      {
+        "category_id": 51,
+        "year": 2022,
+        "nominee": "Only Murders in the Building (\u201cTrue Crime\u201d)",
+        "id": 3481,
+        "detail": "Steve Martin and John Hoffman"
+      },
+      {
+        "category_id": 51,
+        "year": 2022,
+        "nominee": "Ted Lasso (\u201cNo Weddings And A Funeral\u201d)",
+        "id": 3482,
+        "detail": "Jane Becker"
+      },
+      {
+        "category_id": 51,
+        "year": 2022,
+        "nominee": "What We Do In The Shadows (\u201cThe Casino\u201d)",
+        "id": 3483,
+        "detail": "Sarah Naftalis"
+      },
+      {
+        "category_id": 51,
+        "year": 2022,
+        "nominee": "What We Do In The Shadows (\u201cThe Wellness Center\u201d)",
+        "id": 3484,
+        "detail": "Stefani Robinson"
       }
     ],
     "sub_name": "Comedy",
@@ -3914,6 +3833,55 @@ export const MockCategoryList: Category[] = [
         "odds_user": 12,
         "id": 3180,
         "detail": "Series Finale"
+      },
+      {
+        "category_id": 52,
+        "year": 2022,
+        "nominee": "Succession (\u201cAll the Bells Say\u201d)",
+        "id": 3504,
+        "detail": "Jesse Armstrong"
+      },
+      {
+        "category_id": 52,
+        "year": 2022,
+        "nominee": "Severance (\u201cThe We We Are\u201d)",
+        "id": 3505,
+        "detail": "Dan Erickson"
+      },
+      {
+        "category_id": 52,
+        "year": 2022,
+        "nominee": "Squid Game (\u201cOne Lucky Day\u201d)",
+        "id": 3506,
+        "detail": "Hwang Dong-hyuk"
+      },
+      {
+        "category_id": 52,
+        "year": 2022,
+        "nominee": "Yellowjackets (\u201cPilot\u201d)",
+        "id": 3507,
+        "detail": "Ashley Lyle and Bart Nickerson"
+      },
+      {
+        "category_id": 52,
+        "year": 2022,
+        "nominee": "Yellowjackets (\u201cF Sharp\u201d)",
+        "id": 3508,
+        "detail": "Jonathan Lisco, Ashley Lyle and Bart Nickerson"
+      },
+      {
+        "category_id": 52,
+        "year": 2022,
+        "nominee": "Ozark (\u201cA Hard Way to Go\u201d)",
+        "id": 3509,
+        "detail": "Chris Mundy"
+      },
+      {
+        "category_id": 52,
+        "year": 2022,
+        "nominee": "Better Call Saul (\u201cPlan and Execution\u201d)",
+        "id": 3510,
+        "detail": "Thomas Schnauz"
       }
     ],
     "sub_name": "Drama",
@@ -3981,6 +3949,48 @@ export const MockCategoryList: Category[] = [
         "nominee": "WandaVision",
         "id": 3145,
         "detail": "Previously On"
+      },
+      {
+        "category_id": 53,
+        "year": 2022,
+        "nominee": "The Dropout",
+        "id": 3492,
+        "detail": "Elizabeth Meriwether"
+      },
+      {
+        "category_id": 53,
+        "year": 2022,
+        "nominee": "Impeachment: American Crime Story",
+        "id": 3493,
+        "detail": "Sarah Burgess"
+      },
+      {
+        "category_id": 53,
+        "year": 2022,
+        "nominee": "Maid",
+        "id": 3494,
+        "detail": "Molly Smith Metzler"
+      },
+      {
+        "category_id": 53,
+        "year": 2022,
+        "nominee": "Station Eleven",
+        "id": 3495,
+        "detail": "Patrick Somerville"
+      },
+      {
+        "category_id": 53,
+        "year": 2022,
+        "nominee": "Dopesick",
+        "id": 3496,
+        "detail": "Danny Strong"
+      },
+      {
+        "category_id": 53,
+        "year": 2022,
+        "nominee": "The White Lotus",
+        "id": 3497,
+        "detail": "Mike White"
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -4037,6 +4047,48 @@ export const MockCategoryList: Category[] = [
         "context": "NBC",
         "nominee": "The Voice",
         "id": 3157
+      },
+      {
+        "category_id": 29,
+        "year": 2022,
+        "context": "CBS",
+        "nominee": "The Amazing Race ",
+        "id": 3389
+      },
+      {
+        "category_id": 29,
+        "year": 2022,
+        "context": "Amazon Prime Video",
+        "nominee": "Lizzo\u2019s Watch Out For The Big Grrrls ",
+        "id": 3390
+      },
+      {
+        "category_id": 29,
+        "year": 2022,
+        "context": "Netflix",
+        "nominee": "Nailed It! ",
+        "id": 3391
+      },
+      {
+        "category_id": 29,
+        "year": 2022,
+        "context": "VH1",
+        "nominee": "RuPaul\u2019s Drag Race",
+        "id": 3392
+      },
+      {
+        "category_id": 29,
+        "year": 2022,
+        "context": "Bravo",
+        "nominee": "Top Chef ",
+        "id": 3393
+      },
+      {
+        "category_id": 29,
+        "year": 2022,
+        "context": "NBC",
+        "nominee": "The Voice ",
+        "id": 3394
       }
     ],
     "name": "Competition Program",
@@ -4209,6 +4261,41 @@ export const MockCategoryList: Category[] = [
         "nominee": "Saturday Night Live",
         "odds_user": 23,
         "id": 3203
+      },
+      {
+        "category_id": 54,
+        "year": 2022,
+        "nominee": "A Black Lady Sketch Show",
+        "id": 3518,
+        "detail": "HBO/HBO Max"
+      },
+      {
+        "category_id": 54,
+        "year": 2022,
+        "nominee": "The Daily Show With Trevor Noah",
+        "id": 3519,
+        "detail": "Comedy Central"
+      },
+      {
+        "category_id": 54,
+        "year": 2022,
+        "nominee": "Last Week Tonight With John Oliver",
+        "id": 3520,
+        "detail": "HBO/HBO Max"
+      },
+      {
+        "category_id": 54,
+        "year": 2022,
+        "nominee": "The Late Show With Stephen Colbert",
+        "id": 3521,
+        "detail": "CBS"
+      },
+      {
+        "category_id": 54,
+        "year": 2022,
+        "nominee": "Saturday Night Live",
+        "id": 3522,
+        "detail": "NBC"
       }
     ],
     "sub_name": "Variety Series",

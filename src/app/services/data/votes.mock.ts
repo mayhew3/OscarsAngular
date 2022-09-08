@@ -3,2878 +3,6 @@ import {Vote} from '../../interfaces/Vote';
 /* eslint-disable quote-props */
 export const MockVoteList: Vote[] = [
   {
-    "date_added": "2021-04-23 14:23:58.363488",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6088,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:05.489708",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3032,
-    "id": 6089,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:09.398164",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6090,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:12.709575",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6091,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:15.945211",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6092,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:21.176508",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6093,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:27.36274",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6094,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:37.009744",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6095,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:46.852862",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6096,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:24:51.145774",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6097,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:25:11.375147",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6098,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:25:14.535502",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6099,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:25:19.150655",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6100,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:25:23.821398",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6101,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:25:31.678823",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6102,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:25:43.785316",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6103,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:25:50.758076",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6104,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:25:56.998986",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6105,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:26:03.377712",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6106,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:26:12.490376",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6107,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:26:24.459923",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3012,
-    "id": 6108,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:26:31.756367",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6109,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 14:26:38.600028",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6110,
-    "person_id": 13
-  },
-  {
-    "date_added": "2021-04-23 16:08:55.298383",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6111,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 16:09:20.155304",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3032,
-    "id": 6112,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 16:09:49.107221",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6113,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 16:09:58.540705",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6114,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:16:24.554123",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6115,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:16:49.277362",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3032,
-    "id": 6116,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:16:53.273681",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6117,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:16:57.007161",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6118,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:16:57.320428",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6119,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:17:02.925537",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6120,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:17:09.958003",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6121,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:17:18.04224",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2992,
-    "id": 6122,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:17:24.726693",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6123,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:17:29.246981",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6124,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:17:35.244587",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6125,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:17:35.645275",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6126,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:17:41.328997",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6127,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:17:49.750096",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6128,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:17:50.56235",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6129,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:17:59.403597",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3040,
-    "id": 6130,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:18:12.470819",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6131,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:18:18.149026",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6132,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:18:21.956452",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6133,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:18:26.187191",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 2999,
-    "id": 6134,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:18:30.330391",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6135,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:18:39.798794",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6136,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:18:51.944839",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2964,
-    "id": 6137,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:19:05.913909",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6138,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:19:19.054359",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6139,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:19:29.119442",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6140,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:19:35.908572",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6141,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:19:42.945304",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6142,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:19:45.638686",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6143,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:19:52.988971",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3008,
-    "id": 6144,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:19:59.06447",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6145,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:20:14.308157",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2947,
-    "id": 6146,
-    "person_id": 22
-  },
-  {
-    "date_added": "2021-04-23 17:20:17.665548",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6147,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:20:41.517602",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6148,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:21:08.826776",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6149,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:21:38.894349",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3011,
-    "id": 6150,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:21:48.544864",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6151,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:22:12.006889",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6152,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:27:17.912577",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6153,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:28:07.270789",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6154,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:28:35.110406",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6155,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-23 17:29:05.959553",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6156,
-    "person_id": 41
-  },
-  {
-    "date_added": "2021-04-24 08:45:25.514025",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6157,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:45:46.532469",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3032,
-    "id": 6158,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:46:02.345295",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6159,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:46:11.964559",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6160,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:46:18.908146",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6161,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:46:27.800294",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6162,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:46:32.718775",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6163,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:46:50.939335",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6164,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:46:56.551981",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6165,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:47:06.141259",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6166,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:47:16.640149",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6167,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:47:22.800972",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6168,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:47:26.77613",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6169,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:47:30.221464",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6170,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:47:38.397374",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6171,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:47:52.711056",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6172,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:47:58.748221",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6173,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:48:07.174311",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6174,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:48:16.797339",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6175,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:48:20.476959",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6176,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:48:33.588373",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3008,
-    "id": 6177,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:48:40.580127",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6178,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 08:49:11.793085",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6179,
-    "person_id": 26
-  },
-  {
-    "date_added": "2021-04-24 09:53:17.258252",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2970,
-    "id": 6180,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:53:30.76209",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3031,
-    "id": 6181,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:53:34.479642",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3026,
-    "id": 6182,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:53:41.676112",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3037,
-    "id": 6183,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:53:44.257825",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2977,
-    "id": 6184,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:53:46.543028",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2992,
-    "id": 6185,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:53:55.565638",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2996,
-    "id": 6186,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:54:00.820313",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3053,
-    "id": 6187,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:54:06.474705",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3048,
-    "id": 6188,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:54:17.427382",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2981,
-    "id": 6189,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:54:48.053081",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3039,
-    "id": 6190,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:54:53.260462",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3046,
-    "id": 6191,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:54:55.889801",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2983,
-    "id": 6192,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:54:59.057232",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3001,
-    "id": 6193,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:02.792797",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2965,
-    "id": 6194,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:07.418161",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2957,
-    "id": 6195,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:10.489304",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3016,
-    "id": 6196,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:13.224507",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3022,
-    "id": 6197,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:24.771174",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2961,
-    "id": 6198,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:27.439679",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2952,
-    "id": 6199,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:29.80127",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3009,
-    "id": 6200,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:32.246773",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3003,
-    "id": 6201,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 09:55:34.733616",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2940,
-    "id": 6202,
-    "person_id": 37
-  },
-  {
-    "date_added": "2021-04-24 13:49:16.65247",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2968,
-    "id": 6203,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:49:30.924328",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3032,
-    "id": 6204,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:49:39.362445",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6205,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:49:52.243921",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3033,
-    "id": 6206,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:50:04.381332",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2973,
-    "id": 6207,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:50:11.534247",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2988,
-    "id": 6208,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:50:24.725812",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2993,
-    "id": 6209,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:50:31.826634",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3053,
-    "id": 6210,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:50:37.140835",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3048,
-    "id": 6211,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:50:42.385181",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2978,
-    "id": 6212,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:50:52.558129",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3038,
-    "id": 6213,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:50:58.796863",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3043,
-    "id": 6214,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:51:04.687566",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2983,
-    "id": 6215,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:51:11.507936",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 2998,
-    "id": 6216,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:51:17.788727",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2963,
-    "id": 6217,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:51:31.583197",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6218,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:51:40.093425",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3018,
-    "id": 6219,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:51:47.43296",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2958,
-    "id": 6220,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:51:51.95968",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6221,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:51:57.926225",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3009,
-    "id": 6222,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:52:04.152681",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6223,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 13:52:14.611478",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2940,
-    "id": 6224,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-24 21:45:47.66092",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6225,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:45:58.79741",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3028,
-    "id": 6226,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:02.469429",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6227,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:06.460639",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6228,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:10.079377",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2974,
-    "id": 6229,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:17.619363",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6230,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:20.877445",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6231,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:27.385163",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6232,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:30.940653",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6233,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:34.608066",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6234,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:46:57.727751",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3041,
-    "id": 6235,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:03.798255",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6236,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:07.444097",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6237,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:10.894298",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6238,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:15.465165",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2967,
-    "id": 6239,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:19.136758",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6240,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:28.040516",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6241,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:32.934077",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6242,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:36.553505",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6243,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:39.282615",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6244,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:43.628508",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3012,
-    "id": 6245,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:46.521838",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6246,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-24 21:47:50.916314",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2947,
-    "id": 6247,
-    "person_id": 28
-  },
-  {
-    "date_added": "2021-04-25 05:45:40.70584",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6248,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:46:11.832402",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3032,
-    "id": 6249,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:46:34.900541",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6250,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:46:44.498395",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6251,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:47:29.732422",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2974,
-    "id": 6252,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:48:10.807874",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6253,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:48:38.6687",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6254,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:49:01.502784",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6255,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:49:15.121521",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6256,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:49:29.726253",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6257,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:49:47.872066",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6258,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:49:59.401279",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6259,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:50:08.807918",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6260,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:50:38.742478",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6261,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:50:59.387005",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6262,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:51:23.983876",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6263,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:51:44.873558",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6264,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:52:10.710262",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6265,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:52:46.624643",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2959,
-    "id": 6266,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:53:07.866896",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2952,
-    "id": 6267,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:53:55.350375",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3008,
-    "id": 6268,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:54:09.861368",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6269,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 05:54:55.050525",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6270,
-    "person_id": 31
-  },
-  {
-    "date_added": "2021-04-25 12:24:53.241268",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6271,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:26:22.046939",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6272,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:27:34.629495",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3012,
-    "id": 6273,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:27:36.702642",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6274,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:28:22.60186",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6275,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:28:26.56983",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6276,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:29:32.62725",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6277,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:29:41.240891",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6278,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:30:44.508281",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6279,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:32:05.796928",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6280,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:32:40.997795",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6281,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:33:13.011102",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6282,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:33:22.163335",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6283,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:33:59.497053",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6284,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:34:18.70287",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6285,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:35:03.789068",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6286,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:35:27.363432",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6287,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:36:11.831213",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6288,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:37:33.075169",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6289,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:37:48.073403",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6290,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:38:00.676821",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6291,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:38:59.153957",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3028,
-    "id": 6292,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:40:30.915737",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6293,
-    "person_id": 39
-  },
-  {
-    "date_added": "2021-04-25 12:42:19.265064",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3016,
-    "id": 6294,
-    "person_id": 36
-  },
-  {
-    "date_added": "2021-04-25 14:01:24.039651",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2970,
-    "id": 6295,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:01:52.224468",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3028,
-    "id": 6296,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:02:10.214508",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6297,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:02:21.596857",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6298,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:02:36.296085",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6299,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:02:49.334791",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2989,
-    "id": 6300,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:02:59.455436",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6301,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:03:07.672674",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6302,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:03:13.811184",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6303,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:03:21.366607",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6304,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:03:41.662796",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6305,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:03:51.532515",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6306,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:04:02.475096",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6307,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:04:12.924445",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6308,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:04:20.835791",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6309,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:04:33.758007",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6310,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:04:50.132836",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6311,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:04:58.615185",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6312,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:05:05.572794",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2962,
-    "id": 6313,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:05:12.566327",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6314,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:05:21.82591",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3008,
-    "id": 6315,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:05:34.984695",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3004,
-    "id": 6316,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 14:05:50.354515",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2947,
-    "id": 6317,
-    "person_id": 29
-  },
-  {
-    "date_added": "2021-04-25 15:23:50.580602",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6318,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:23:59.336853",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3032,
-    "id": 6319,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:24:05.765983",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6320,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:24:12.044944",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6321,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:24:15.609145",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6322,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:24:21.437481",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6323,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:24:28.392895",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6324,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:24:35.798267",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3056,
-    "id": 6325,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:24:42.845294",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6326,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:24:50.153485",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6327,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:25:01.394493",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6328,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:25:09.891439",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6329,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:25:14.479017",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6330,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:25:18.308679",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6331,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:25:22.002031",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6332,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:25:27.905289",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6333,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:25:47.036224",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6334,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:25:56.559524",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6335,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:26:05.961747",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6336,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:26:14.588646",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6337,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:26:26.952149",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3012,
-    "id": 6338,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:26:36.746536",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6339,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:26:52.769249",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6340,
-    "person_id": 24
-  },
-  {
-    "date_added": "2021-04-25 15:31:00.16929",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6341,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:31:08.311531",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6342,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:31:25.160257",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3008,
-    "id": 6343,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:31:29.036471",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6344,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:31:41.625936",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6345,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:32:07.43014",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3019,
-    "id": 6346,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:32:15.237679",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6347,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:32:19.549397",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6348,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:32:25.855005",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6349,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:32:54.048252",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6350,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:33:06.184906",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6351,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:33:30.784258",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6352,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:34:19.175064",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6353,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:34:34.73563",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6354,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:34:56.273245",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6355,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:35:26.022383",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6356,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:35:46.10176",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6357,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:36:07.59061",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6358,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:36:44.001884",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6359,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:37:03.635222",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6360,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:37:14.019327",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6361,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:38:07.7719",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3028,
-    "id": 6362,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 15:38:42.409226",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6363,
-    "person_id": 32
-  },
-  {
-    "date_added": "2021-04-25 16:32:44.336007",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6364,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:33:37.786107",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6365,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:34:01.836203",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3008,
-    "id": 6366,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:35:17.527421",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6367,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:35:39.147908",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6368,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:36:12.067141",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3020,
-    "id": 6369,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:36:30.661637",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6370,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:36:52.886793",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6371,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:37:16.339592",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6372,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:37:35.907711",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6373,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:38:08.957898",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6374,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:38:24.775597",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6375,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:38:37.703854",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6376,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:38:53.051224",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6377,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:39:13.750632",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3042,
-    "id": 6378,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:39:33.426269",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6379,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:39:44.459912",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3032,
-    "id": 6380,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:39:48.963973",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6381,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:39:53.351882",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6382,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:40:00.124773",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6383,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:40:08.506798",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6384,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:41:34.227889",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6385,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:42:02.030359",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6386,
-    "person_id": 3
-  },
-  {
-    "date_added": "2021-04-25 16:51:15.332685",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6387,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:51:51.716347",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3028,
-    "id": 6388,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:52:34.936269",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6389,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:52:57.252807",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6390,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:53:14.276803",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6391,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:53:26.045103",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3011,
-    "id": 6392,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:53:41.147583",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6393,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:53:54.996272",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3017,
-    "id": 6394,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:54:12.777887",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6395,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:54:31.735429",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6396,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:54:49.810465",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6397,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:54:57.300264",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2976,
-    "id": 6398,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:55:09.73169",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6399,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:55:16.57906",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6400,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:55:25.478862",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6401,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:55:46.939543",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6402,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:55:54.619082",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3040,
-    "id": 6403,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:56:01.424048",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6404,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:56:01.713111",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3045,
-    "id": 6405,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:56:14.822504",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6406,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:56:30.503142",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6407,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:56:39.391321",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2966,
-    "id": 6408,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 16:56:57.998828",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3019,
-    "id": 6409,
-    "person_id": 11
-  },
-  {
-    "date_added": "2021-04-25 17:00:27.674221",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6410,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:32.433929",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3030,
-    "id": 6411,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:33.877923",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3023,
-    "id": 6412,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:35.749452",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6413,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:37.255516",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2974,
-    "id": 6414,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:38.649718",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2989,
-    "id": 6415,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:39.97573",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6416,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:41.177893",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3054,
-    "id": 6417,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:42.229291",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3051,
-    "id": 6418,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:43.483048",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2979,
-    "id": 6419,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:45.721684",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3041,
-    "id": 6420,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:46.941559",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3044,
-    "id": 6421,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:47.926409",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2986,
-    "id": 6422,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:49.224014",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6423,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:50.319077",
-    "category_id": 3,
-    "year": 2020,
-    "nomination_id": 2963,
-    "id": 6424,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:51.263849",
-    "category_id": 20,
-    "year": 2020,
-    "nomination_id": 2954,
-    "id": 6425,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:52.174369",
-    "category_id": 21,
-    "year": 2020,
-    "nomination_id": 3013,
-    "id": 6426,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:54.194359",
-    "category_id": 23,
-    "year": 2020,
-    "nomination_id": 3019,
-    "id": 6427,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:57.283678",
-    "category_id": 24,
-    "year": 2020,
-    "nomination_id": 2960,
-    "id": 6428,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:00:58.74193",
-    "category_id": 1,
-    "year": 2020,
-    "nomination_id": 2949,
-    "id": 6429,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:01:00.215591",
-    "category_id": 2,
-    "year": 2020,
-    "nomination_id": 3008,
-    "id": 6430,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:01:01.376048",
-    "category_id": 8,
-    "year": 2020,
-    "nomination_id": 3006,
-    "id": 6431,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:01:03.102452",
-    "category_id": 5,
-    "year": 2020,
-    "nomination_id": 2944,
-    "id": 6432,
-    "person_id": 7
-  },
-  {
-    "date_added": "2021-04-25 17:06:06.016988",
-    "category_id": 9,
-    "year": 2020,
-    "nomination_id": 2971,
-    "id": 6433,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:06:15.322567",
-    "category_id": 10,
-    "year": 2020,
-    "nomination_id": 3028,
-    "id": 6434,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:06:24.24292",
-    "category_id": 25,
-    "year": 2020,
-    "nomination_id": 3027,
-    "id": 6435,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:06:29.577334",
-    "category_id": 16,
-    "year": 2020,
-    "nomination_id": 3035,
-    "id": 6436,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:06:38.019184",
-    "category_id": 17,
-    "year": 2020,
-    "nomination_id": 2974,
-    "id": 6437,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:06:46.096249",
-    "category_id": 6,
-    "year": 2020,
-    "nomination_id": 2991,
-    "id": 6438,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:06:50.26373",
-    "category_id": 7,
-    "year": 2020,
-    "nomination_id": 2994,
-    "id": 6439,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:06:59.719882",
-    "category_id": 11,
-    "year": 2020,
-    "nomination_id": 3057,
-    "id": 6440,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:07:07.146806",
-    "category_id": 13,
-    "year": 2020,
-    "nomination_id": 3050,
-    "id": 6441,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:07:15.638023",
-    "category_id": 14,
-    "year": 2020,
-    "nomination_id": 2982,
-    "id": 6442,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:07:22.838184",
-    "category_id": 15,
-    "year": 2020,
-    "nomination_id": 3038,
-    "id": 6443,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:07:29.124894",
-    "category_id": 4,
-    "year": 2020,
-    "nomination_id": 3044,
-    "id": 6444,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:07:34.847599",
-    "category_id": 26,
-    "year": 2020,
-    "nomination_id": 2987,
-    "id": 6445,
-    "person_id": 25
-  },
-  {
-    "date_added": "2021-04-25 17:07:41.27299",
-    "category_id": 22,
-    "year": 2020,
-    "nomination_id": 3002,
-    "id": 6446,
-    "person_id": 25
-  },
-  {
     "date_added": "2021-09-17 13:25:59.806984",
     "category_id": 56,
     "year": 2021,
@@ -3953,5 +1081,2765 @@ export const MockVoteList: Vote[] = [
     "nomination_id": 3206,
     "id": 6581,
     "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 01:11:09.805722",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6582,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:11:14.672294",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6583,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:11:19.243949",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6584,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:11:26.253469",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6585,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:11:30.676044",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6586,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:11:58.511149",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6587,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:12:09.27602",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6588,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:12:19.119903",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6589,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:12:27.135775",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6590,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:12:31.565994",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6591,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:12:37.550619",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3290,
+    "id": 6592,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 01:12:44.378219",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6593,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-25 12:58:45.856721",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6594,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:58:50.750236",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6595,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:58:55.566974",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6596,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:58:58.903273",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6597,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:02.18343",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6598,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:05.704193",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6599,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:09.973525",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6600,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:13.785908",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6601,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:17.205185",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6602,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:20.418709",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6603,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:26.402485",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3290,
+    "id": 6604,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:30.505076",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6605,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:33.36537",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6606,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 12:59:36.154948",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6607,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:13:56.846334",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6608,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:13:59.676971",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6609,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:14:04.276155",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6610,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:14:11.620495",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3291,
+    "id": 6611,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:14:15.537411",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6612,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:14:18.539622",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6613,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:14:23.527787",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6614,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:14:28.594866",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3232,
+    "id": 6615,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 13:14:50.405441",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6616,
+    "person_id": 28
+  },
+  {
+    "date_added": "2022-03-25 22:09:35.642836",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6617,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:09:43.225782",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6618,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:09:48.638783",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6619,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:09:54.600351",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6620,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:09:58.823875",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6621,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:10:05.390706",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6622,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:10:08.257291",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6623,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:10:28.920824",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3338,
+    "id": 6624,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:10:35.128899",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6625,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:10:44.221596",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6626,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:11:12.350731",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3287,
+    "id": 6627,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:11:25.975619",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6628,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:11:32.494934",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6629,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:11:36.995014",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6630,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:11:40.894408",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6631,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:11:48.57768",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6632,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:11:53.76303",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6633,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:12:05.328215",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6634,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:12:33.559916",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3291,
+    "id": 6635,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:12:53.549113",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6636,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:12:59.871421",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6637,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:13:05.380362",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6638,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-25 22:13:16.985138",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3232,
+    "id": 6639,
+    "person_id": 26
+  },
+  {
+    "date_added": "2022-03-26 09:05:30.523026",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6640,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:05:41.323477",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6641,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:05:48.115893",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6642,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:05:55.68465",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6643,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:06:02.679402",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6644,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:06:12.764864",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6645,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:06:20.399625",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6646,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:06:28.791956",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3336,
+    "id": 6647,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:06:39.182788",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3309,
+    "id": 6648,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:06:47.805837",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3282,
+    "id": 6649,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:06:57.545964",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3287,
+    "id": 6650,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:07:12.531773",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6651,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:07:21.286393",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3345,
+    "id": 6652,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:07:42.016253",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3348,
+    "id": 6653,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:07:49.838289",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3270,
+    "id": 6654,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:08:12.047982",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3247,
+    "id": 6655,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:08:16.58868",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3260,
+    "id": 6656,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:08:27.415473",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3300,
+    "id": 6657,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:08:35.573919",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3294,
+    "id": 6658,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:08:47.840435",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6659,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:09:09.755527",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3253,
+    "id": 6660,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:09:17.659428",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3265,
+    "id": 6661,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 09:09:25.926045",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3233,
+    "id": 6662,
+    "person_id": 22
+  },
+  {
+    "date_added": "2022-03-26 11:02:57.494413",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6663,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:03:04.221323",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6664,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:03:16.081172",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6665,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:03:25.930858",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6666,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:04:28.637175",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3318,
+    "id": 6667,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:05:32.426982",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3276,
+    "id": 6668,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:05:39.226137",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6669,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:08:29.269382",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3340,
+    "id": 6670,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:08:35.819682",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6671,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:08:42.922911",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6672,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:08:48.812188",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3290,
+    "id": 6673,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:08:57.495424",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6674,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:09:04.874877",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6675,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:09:08.741391",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6676,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:09:12.73218",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6677,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:10:14.389321",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6678,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:10:20.68154",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6679,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:10:34.382105",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6680,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:10:56.5466",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3292,
+    "id": 6681,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:11:01.516202",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6682,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:12:45.902929",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3255,
+    "id": 6683,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:12:48.616366",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6684,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 11:12:51.914991",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3232,
+    "id": 6685,
+    "person_id": 39
+  },
+  {
+    "date_added": "2022-03-26 19:28:37.32774",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3232,
+    "id": 6686,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:28:50.863749",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6687,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:28:59.932767",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6688,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:08.689317",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6689,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:16.155657",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3292,
+    "id": 6690,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:20.430105",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6691,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:26.918922",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6692,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:32.565061",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6693,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:37.436204",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6694,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:42.810057",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6695,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:46.844574",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6696,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:51.595931",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6697,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:29:56.650325",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3290,
+    "id": 6698,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:30:33.718387",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6699,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:30:50.858104",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6700,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:31:30.842186",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6701,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:31:34.715019",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6702,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:31:40.408792",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6703,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:31:46.135971",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6704,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:32:15.974972",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6705,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:32:25.48061",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6706,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:32:41.790112",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3318,
+    "id": 6707,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-26 19:32:52.921663",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6708,
+    "person_id": 41
+  },
+  {
+    "date_added": "2022-03-27 09:12:43.687159",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6709,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:13:11.332951",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6710,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:13:33.009038",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6711,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:13:46.369381",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6712,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:13:56.123653",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6713,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:14:07.24818",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6714,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:14:21.116496",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3305,
+    "id": 6715,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:14:37.822881",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6716,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:15:04.831933",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6717,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:15:18.278972",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6718,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:15:39.602034",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3290,
+    "id": 6719,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:15:49.477324",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3271,
+    "id": 6720,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:16:17.942705",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6721,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:16:41.6863",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3347,
+    "id": 6722,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:16:51.304315",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6723,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:17:10.179669",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6724,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:17:19.660606",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6725,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:17:39.458526",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6726,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:17:56.095185",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3291,
+    "id": 6727,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:18:19.581318",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6728,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:18:38.154921",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6729,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:19:06.556668",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6730,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 09:19:21.139825",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3240,
+    "id": 6731,
+    "person_id": 31
+  },
+  {
+    "date_added": "2022-03-27 11:06:09.555449",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3232,
+    "id": 6732,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:06:18.38195",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6733,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:06:27.945841",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6734,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:06:33.996463",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6735,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:07:01.487002",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6736,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:07:10.47474",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6737,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:07:13.854443",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6738,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:07:18.168191",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6739,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:09:19.886429",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6740,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:09:31.56248",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6741,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:09:37.449591",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6742,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:09:44.514894",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6743,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:09:50.56676",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6744,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:09:58.942534",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3277,
+    "id": 6745,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:10:21.998733",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6746,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:10:29.336525",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3340,
+    "id": 6747,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:10:39.512787",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3309,
+    "id": 6748,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:11:02.490702",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3282,
+    "id": 6749,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:11:13.08387",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3287,
+    "id": 6750,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:11:14.854697",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6751,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:11:22.069976",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6752,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:11:23.619935",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3271,
+    "id": 6753,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:11:29.540915",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3345,
+    "id": 6754,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:11:40.177692",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3347,
+    "id": 6755,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:11:49.393971",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6756,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:12:04.086922",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6757,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:12:12.067605",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6758,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:12:20.119696",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6759,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:12:40.969966",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3291,
+    "id": 6760,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:12:51.346859",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3241,
+    "id": 6761,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:13:18.692129",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3254,
+    "id": 6762,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:13:32.434889",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3264,
+    "id": 6763,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:13:45.826606",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3232,
+    "id": 6764,
+    "person_id": 25
+  },
+  {
+    "date_added": "2022-03-27 11:16:22.259703",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3291,
+    "id": 6765,
+    "person_id": 32
+  },
+  {
+    "date_added": "2022-03-27 11:39:41.482872",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6766,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:39:48.256648",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6767,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:39:52.442104",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6768,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:39:55.947282",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6769,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:39:58.685755",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6770,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:02.317321",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6771,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:11.025007",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6772,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:17.455482",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6773,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:21.770129",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6774,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:27.273322",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6775,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:42.172599",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3287,
+    "id": 6776,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:45.429367",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6777,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:48.493379",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6778,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:51.997393",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6779,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:40:57.787349",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6780,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:41:02.07432",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6781,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:41:04.770941",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6782,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:41:07.649751",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6783,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:41:12.078618",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3291,
+    "id": 6784,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:41:14.906033",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6785,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:41:23.898267",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6786,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:41:27.62272",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6787,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:41:33.265911",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3232,
+    "id": 6788,
+    "person_id": 13
+  },
+  {
+    "date_added": "2022-03-27 11:42:35.781875",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6789,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:42:43.474158",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6790,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:42:51.799138",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6791,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:42:57.348613",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6792,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:43:04.891986",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6793,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:43:15.562564",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6794,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:43:22.062965",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6795,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:43:30.752634",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6796,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:43:37.846642",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6797,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:43:44.965381",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6798,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:43:59.536588",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3290,
+    "id": 6799,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:44:04.035875",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6800,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:44:07.675096",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6801,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:44:15.465674",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6802,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:44:20.138385",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6803,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:44:31.730677",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6804,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:44:37.641734",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6805,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:44:43.144928",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6806,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:44:59.890966",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3295,
+    "id": 6807,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:45:09.852429",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6808,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:45:22.266589",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6809,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:45:28.644034",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6810,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 11:45:46.307193",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3239,
+    "id": 6811,
+    "person_id": 11
+  },
+  {
+    "date_added": "2022-03-27 12:48:42.307755",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6812,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:48:54.455325",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6813,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:49:00.492101",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6814,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:49:12.940304",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6815,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:49:18.831322",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6816,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:49:30.184782",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6817,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:49:56.924147",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6818,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:50:04.509759",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6819,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:50:12.559845",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6820,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:50:47.111046",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6821,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:51:01.478709",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3290,
+    "id": 6822,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:51:09.238554",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6823,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:51:21.014439",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6824,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:51:26.226597",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6825,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:51:33.523487",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6826,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:51:45.801792",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6827,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:51:56.94051",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6828,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:52:14.928802",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6829,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:52:38.09431",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3291,
+    "id": 6830,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:52:56.607387",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6831,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:53:04.447602",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6832,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:53:25.223621",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6833,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 12:53:46.237018",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3239,
+    "id": 6834,
+    "person_id": 24
+  },
+  {
+    "date_added": "2022-03-27 13:01:32.365303",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6835,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:01:51.392938",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3318,
+    "id": 6836,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:02:02.137555",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6837,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:02:11.923516",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3327,
+    "id": 6838,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:02:36.419429",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6839,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:02:51.251339",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3276,
+    "id": 6840,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:03:09.556141",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6841,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:03:17.552256",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3340,
+    "id": 6842,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:03:27.92975",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3307,
+    "id": 6843,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:04:03.306871",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3282,
+    "id": 6844,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:04:18.416892",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3287,
+    "id": 6845,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:04:30.12419",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3275,
+    "id": 6846,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:04:40.650466",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3345,
+    "id": 6847,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:04:47.932631",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3311,
+    "id": 6848,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:04:48.631817",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3347,
+    "id": 6849,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:04:57.963858",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3320,
+    "id": 6850,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:05:00.56014",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6851,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:05:16.024497",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3324,
+    "id": 6852,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:05:31.409958",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6853,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:05:35.993838",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3329,
+    "id": 6854,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:05:43.81346",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3335,
+    "id": 6855,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:05:44.616705",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3259,
+    "id": 6856,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:05:45.541594",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3278,
+    "id": 6857,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:05:46.504324",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3302,
+    "id": 6858,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:05:47.684192",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3340,
+    "id": 6859,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:05:49.275318",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3308,
+    "id": 6860,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:05:55.176339",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3299,
+    "id": 6861,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:05:56.88784",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3281,
+    "id": 6862,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:03.401337",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3291,
+    "id": 6863,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:06:04.311716",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3288,
+    "id": 6864,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:05.851038",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3274,
+    "id": 6865,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:12.834879",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3344,
+    "id": 6866,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:15.255851",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3346,
+    "id": 6867,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:21.886921",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3266,
+    "id": 6868,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:22.138034",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3254,
+    "id": 6869,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:06:26.360936",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3248,
+    "id": 6870,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:27.777282",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3258,
+    "id": 6871,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:29.053236",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3297,
+    "id": 6872,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:30.09784",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3293,
+    "id": 6873,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:30.40869",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6874,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:06:31.236731",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3243,
+    "id": 6875,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:32.441375",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6876,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:33.388603",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3264,
+    "id": 6877,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:34.478941",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3233,
+    "id": 6878,
+    "person_id": 37
+  },
+  {
+    "date_added": "2022-03-27 13:06:39.718451",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3239,
+    "id": 6879,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 13:07:28.137243",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3242,
+    "id": 6880,
+    "person_id": 36
+  },
+  {
+    "date_added": "2022-03-27 14:06:17.320014",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6881,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:06:36.99774",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6882,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:06:42.478929",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6883,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:06:56.746445",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6884,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:07:04.295045",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6885,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:07:09.51304",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6886,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:07:47.162889",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3304,
+    "id": 6887,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:08:12.022557",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6888,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:08:24.795079",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6889,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:08:39.638867",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3287,
+    "id": 6890,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:08:53.32425",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6891,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:09:01.050024",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6892,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:09:07.427693",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6893,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:09:14.547836",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6894,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:09:24.515451",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6895,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:09:37.153309",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3260,
+    "id": 6896,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:09:48.571366",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3296,
+    "id": 6897,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:10:24.474182",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3294,
+    "id": 6898,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:10:25.236186",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6899,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:10:39.733015",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6900,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:10:49.232547",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6901,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:11:19.17766",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3239,
+    "id": 6902,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:12:27.065757",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6903,
+    "person_id": 3
+  },
+  {
+    "date_added": "2022-03-27 14:42:11.559687",
+    "category_id": 9,
+    "year": 2021,
+    "nomination_id": 3315,
+    "id": 6904,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:42:15.898787",
+    "category_id": 10,
+    "year": 2021,
+    "nomination_id": 3316,
+    "id": 6905,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:42:20.595165",
+    "category_id": 25,
+    "year": 2021,
+    "nomination_id": 3321,
+    "id": 6906,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:42:24.832117",
+    "category_id": 16,
+    "year": 2021,
+    "nomination_id": 3328,
+    "id": 6907,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:42:28.366308",
+    "category_id": 17,
+    "year": 2021,
+    "nomination_id": 3331,
+    "id": 6908,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:42:34.596991",
+    "category_id": 6,
+    "year": 2021,
+    "nomination_id": 3279,
+    "id": 6909,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:45:42.24993",
+    "category_id": 7,
+    "year": 2021,
+    "nomination_id": 3301,
+    "id": 6910,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:45:46.926302",
+    "category_id": 11,
+    "year": 2021,
+    "nomination_id": 3337,
+    "id": 6911,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:45:50.081786",
+    "category_id": 13,
+    "year": 2021,
+    "nomination_id": 3310,
+    "id": 6912,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:45:53.132272",
+    "category_id": 14,
+    "year": 2021,
+    "nomination_id": 3283,
+    "id": 6913,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:45:56.442703",
+    "category_id": 15,
+    "year": 2021,
+    "nomination_id": 3288,
+    "id": 6914,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:00.054378",
+    "category_id": 4,
+    "year": 2021,
+    "nomination_id": 3273,
+    "id": 6915,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:05.965284",
+    "category_id": 26,
+    "year": 2021,
+    "nomination_id": 3343,
+    "id": 6916,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:09.859411",
+    "category_id": 22,
+    "year": 2021,
+    "nomination_id": 3349,
+    "id": 6917,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:11.690539",
+    "category_id": 3,
+    "year": 2021,
+    "nomination_id": 3268,
+    "id": 6918,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:15.083361",
+    "category_id": 20,
+    "year": 2021,
+    "nomination_id": 3250,
+    "id": 6919,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:18.031321",
+    "category_id": 21,
+    "year": 2021,
+    "nomination_id": 3256,
+    "id": 6920,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:20.879264",
+    "category_id": 23,
+    "year": 2021,
+    "nomination_id": 3298,
+    "id": 6921,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:25.845343",
+    "category_id": 24,
+    "year": 2021,
+    "nomination_id": 3292,
+    "id": 6922,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:29.227581",
+    "category_id": 1,
+    "year": 2021,
+    "nomination_id": 3245,
+    "id": 6923,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:37.057804",
+    "category_id": 2,
+    "year": 2021,
+    "nomination_id": 3251,
+    "id": 6924,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:40.539348",
+    "category_id": 8,
+    "year": 2021,
+    "nomination_id": 3261,
+    "id": 6925,
+    "person_id": 7
+  },
+  {
+    "date_added": "2022-03-27 14:46:46.180871",
+    "category_id": 5,
+    "year": 2021,
+    "nomination_id": 3239,
+    "id": 6926,
+    "person_id": 7
   }
 ];
