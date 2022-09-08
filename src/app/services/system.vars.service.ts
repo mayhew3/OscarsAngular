@@ -37,6 +37,24 @@ export class SystemVarsService {
     );
   }
 
+  getCurrentCeremonyName(): Observable<string> {
+    return this.systemVarsCeremonyYearChanges$.pipe(
+      map(systemVars => systemVars.ceremony_name)
+    );
+  }
+
+  isOscars(): Observable<boolean> {
+    return this.getCurrentCeremonyName().pipe(
+      map(ceremonyName => ceremonyName === 'Oscars')
+    );
+  }
+
+  isEmmys(): Observable<boolean> {
+    return this.getCurrentCeremonyName().pipe(
+      map(ceremonyName => ceremonyName === 'Emmys')
+    );
+  }
+
   async toggleVotingLock(): Promise<void> {
     const systemVars = await firstValueFrom(this.systemVars);
     const data = {

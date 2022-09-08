@@ -54,7 +54,7 @@
                 </div>
                 <div class="row" *ngIf="showSubtitleText(nominee)">
                   <div class="col-12 nomineeSubtitle py-1">
-                    {{getSubtitleText(nominee, category)}}
+                    {{getSubtitleText(nominee, category) | async}}
                   </div>
                 </div>
                 <div class="row" *ngIf="showSongSubtitle(nominee, category)">

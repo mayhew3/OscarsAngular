@@ -9,7 +9,7 @@ import {Winner} from '../../interfaces/Winner';
 import {Nominee} from '../../interfaces/Nominee';
 import {VotesService} from '../../services/votes.service';
 import {Person} from '../../interfaces/Person';
-import {map} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 import {combineLatest, Observable, of} from 'rxjs';
 import {PersonService} from '../../services/person.service';
 
@@ -108,12 +108,12 @@ export class CategoriesComponent implements OnInit {
 
   getWinnerSubtitle(winner: Winner, category: Category): Observable<string> {
     return this.categoryService.getNomineeFromWinner(winner).pipe(
-      map(nominee => this.getSubtitleText(nominee, category))
+      mergeMap(nominee => this.getSubtitleText(nominee, category))
     );
   }
 
-  getSubtitleText(nominee: Nominee, category: Category): string {
-    return CategoryService.getSubtitleText(category, nominee);
+  getSubtitleText(nominee: Nominee, category: Category): Observable<string> {
+    return this.categoryService.getSubtitleText(category, nominee);
   }
 
   mostRecentWinDate(category: Category): Date {
