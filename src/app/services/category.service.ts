@@ -26,10 +26,11 @@ export class CategoryService {
 
   categories: Observable<Category[]> = this.store.select(state => state.categories).pipe(
     map(model => model.categories),
-    filter(categories => !!categories),
+    filter(Boolean),
     mergeMap(categories =>
       this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
-        map(systemVars => _.filter(categories, category => CategoryService.isInRange(systemVars.curr_year, category)))
+        map(systemVars => _.filter(categories, category => category.nominees.length > 0 &&
+          CategoryService.isInRange(systemVars.curr_year, category)))
       ))
   );
 
