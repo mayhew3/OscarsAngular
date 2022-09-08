@@ -1,5 +1,5 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {combineLatest, first, Observable} from 'rxjs';
 import {filter, map, mergeMap, tap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
@@ -9,6 +9,8 @@ import {MyAuthService} from './auth/my-auth.service';
 import {ApiService} from './api.service';
 import {GetPersonGroups} from '../actions/person.group.action';
 import {PersonGroup} from '../interfaces/PersonGroup';
+import {SocketService} from './socket.service';
+import {PersonNotificationService} from './person-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,30 +23,41 @@ export class PersonService {
   me$ = this.auth.userEmail$.pipe(
     mergeMap(email => this.getPersonWithEmail(email)),
     tap(person => this.failedEmail = !person),
-    filter(person => !!person)
+    filter(Boolean)
   );
 
   persons: Observable<Person[]> = this.store.select(state => state.persons).pipe(
-    filter(state => !!state),
+    filter(Boolean),
     map(state => state.persons),
-    filter(persons => !!persons)
+    filter(Boolean)
   );
 
   personGroups: Observable<PersonGroup[]> = this.store.select(state => state.persons).pipe(
-    filter(state => !!state),
+    filter(Boolean),
     map(state => state.personGroups),
-    filter(personGroups => !!personGroups)
+    filter(Boolean)
   );
 
   constructor(private auth: MyAuthService,
               private store: Store,
-              private apiService: ApiService) {
+              private socket: SocketService,
+              private apiService: ApiService,
+              private personNotificationService: PersonNotificationService) {
     this.store.dispatch(new GetPersons());
     this.store.dispatch(new GetPersonGroups());
-    this.me$.subscribe(me => {
+    this.me$.pipe(first()).subscribe(me => {
       this.isAdmin = (me.role === 'admin');
       this.apiService.meChanged(me);
+
+      this.socket.on('person_connected', msg => {
+        this.showPersonSnackBar(msg.person_id, true);
+      });
+
+      this.socket.on('person_disconnected', msg => {
+        this.showPersonSnackBar(msg.person_id, false);
+      });
     });
+
   }
 
   // REAL METHODS
@@ -112,6 +125,14 @@ export class PersonService {
       otherPerson.first_name === person.first_name &&
       otherPerson.last_name === person.last_name);
     return matching.length > 0;
+  }
+
+  private showPersonSnackBar(person_id: number, connected: boolean): void {
+    combineLatest([this.getPerson(person_id), this.me$]).pipe(first()).subscribe(([person, me]) => {
+      if (person.id !== me.id) {
+        this.personNotificationService.maybeShowDelayedPersonSnackbar(person, connected);
+      }
+    });
   }
 
 

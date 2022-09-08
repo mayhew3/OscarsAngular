@@ -18,6 +18,14 @@ h2 {
   cursor: pointer;
 }
 
+.mobileSnackBar {
+  margin: 0 !important;
+  position: absolute;
+  left: 0;
+  bottom: 60px;
+  z-index: 10000 !important;
+}
+
 .redSnackBar {
   background-color: darkred;
   color: white;
