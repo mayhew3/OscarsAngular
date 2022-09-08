@@ -162,7 +162,7 @@ export class NomineesComponent implements OnInit {
   getMainLineText(nominee: Nominee, category: Category): string {
     if (CategoryService.isSongCategory(category.name)) {
       return `"${nominee.nominee}"`;
-    } else if (CategoryService.isTitleCategory(category.name)) {
+    } else if (CategoryService.isTitleCategory(category.name) && !!nominee.context) {
       return `${nominee.nominee} (${nominee.context})`;
     } else {
       return nominee.nominee;
@@ -180,8 +180,8 @@ export class NomineesComponent implements OnInit {
     }
   }
 
-  getSubtitleText(nominee: Nominee, category: Category): string {
-    return CategoryService.getSubtitleText(category, nominee);
+  getSubtitleText(nominee: Nominee, category: Category): Observable<string> {
+    return this.categoryService.getSubtitleText(category, nominee);
   }
 
   getSongSubtitles(nominee: Nominee): string[] {

@@ -13,6 +13,7 @@ import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import fast_sort from 'fast-sort';
+import {CeremonyService} from './ceremony.service';
 
 @Injectable({
   providedIn: 'root'
@@ -63,17 +64,21 @@ export class CategoryService {
     return CategoryService.titleCategories.includes(categoryName);
   }
 
-  static getSubtitleText(category: Category, nominee: Nominee): string {
-    if (CategoryService.isSingleLineCategory(category.name)) {
-      return undefined;
-    } else if (CategoryService.isTitleCategory(category.name)) {
-      return !!nominee.detail ? `"${nominee.detail}"` : null;
-    } else if (!CategoryService.isSongCategory(category.name) &&
-                nominee.nominee === nominee.context || !nominee.context) {
-      return nominee.detail;
-    } else {
-      return nominee.context;
-    }
+  getSubtitleText(category: Category, nominee: Nominee): Observable<string> {
+    return this.systemVarsService.getCurrentCeremonyName().pipe(
+      map(currentCeremonyName => {
+        if (CategoryService.isSingleLineCategory(category.name)) {
+          return undefined;
+        } else if (CategoryService.isTitleCategory(category.name) && currentCeremonyName === 'Oscars') {
+          return !!nominee.detail ? `"${nominee.detail}"` : null;
+        } else if (!CategoryService.isSongCategory(category.name) &&
+          nominee.nominee === nominee.context || !nominee.context) {
+          return nominee.detail;
+        } else {
+          return nominee.context;
+        }
+      })
+    );
   }
 
   static isInRange(year: number, category: Category): boolean {

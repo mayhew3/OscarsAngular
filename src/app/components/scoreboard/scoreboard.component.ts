@@ -10,7 +10,7 @@ import {Winner} from '../../interfaces/Winner';
 import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
-import {combineLatest, Observable} from 'rxjs';
+import {combineLatest, mergeMap, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
 import {Select} from '@ngxs/store';
@@ -168,12 +168,12 @@ export class ScoreboardComponent implements OnInit {
 
   getWinnerSubtitle(winner: Winner): Observable<string> {
     return this.categoryService.getNomineeFromWinner(winner).pipe(
-      map(nominee => this.getSubtitleText(nominee))
+      mergeMap(nominee => this.getSubtitleText(nominee))
     );
   }
 
-  getSubtitleText(nominee: Nominee): string {
-    return CategoryService.getSubtitleText(this.latestCategory, nominee);
+  getSubtitleText(nominee: Nominee): Observable<string> {
+    return this.categoryService.getSubtitleText(this.latestCategory, nominee);
   }
 
   meGotPointsForLastWinner(): Observable<boolean> {
