@@ -45,18 +45,19 @@ export class PersonService {
               private personNotificationService: PersonNotificationService) {
     this.store.dispatch(new GetPersons());
     this.store.dispatch(new GetPersonGroups());
-    this.me$.subscribe(me => {
+    this.me$.pipe(first()).subscribe(me => {
       this.isAdmin = (me.role === 'admin');
       this.apiService.meChanged(me);
+
+      this.socket.on('person_connected', msg => {
+        this.showPersonSnackBar(msg.person_id, true);
+      });
+
+      this.socket.on('person_disconnected', msg => {
+        this.showPersonSnackBar(msg.person_id, false);
+      });
     });
 
-    this.socket.on('person_connected', msg => {
-      this.showPersonSnackBar(msg.person_id, true);
-    });
-
-    this.socket.on('person_disconnected', msg => {
-      this.showPersonSnackBar(msg.person_id, false);
-    });
   }
 
   // REAL METHODS
