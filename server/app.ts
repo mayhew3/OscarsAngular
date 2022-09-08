@@ -7,7 +7,13 @@ const bodyParser = require('body-parser');
 const enforce = require('express-sslify');
 const app: Express = express();
 
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+const environmentName = process.env.NG_ENV;
+if (!environmentName) {
+  throw new Error('Required environment variable NG_ENV missing.');
+} else if (environmentName !== 'local') {
+  app.use(enforce.HTTPS({trustProtoHeader: true}));
+}
+
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
