@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {map, mergeMap} from 'rxjs/operators';
-import {combineLatest, Observable, of} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {CeremonyService} from '../../services/ceremony.service';
 import {PersonService} from '../../services/person.service';
 
