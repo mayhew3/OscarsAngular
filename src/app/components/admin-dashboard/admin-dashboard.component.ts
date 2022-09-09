@@ -103,7 +103,7 @@ export class AdminDashboardComponent implements OnInit {
   async toggleVotingLock(votingOpen: boolean): Promise<void> {
     const isVotingOpen = await firstValueFrom(this.isVotingOpen());
     if (votingOpen !== isVotingOpen) {
-      this.systemVarsService.toggleVotingLock();
+      await this.ceremonyService.toggleVotingLock();
     }
   }
 

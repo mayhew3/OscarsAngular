@@ -6,6 +6,7 @@ import {CeremonyYear} from '../typeorm/CeremonyYear';
 import {GroupYear} from '../typeorm/GroupYear';
 import {Nomination} from '../typeorm/Nomination';
 import {Category} from '../typeorm/Category';
+import {Event} from '../typeorm/Event';
 import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {socketServer} from '../www';
 import {Request, Response} from 'express/ts4.0';
@@ -52,4 +53,43 @@ export const addCeremonyYear = async (request: Request, response: Response): Pro
   socketServer.emitToAll('add_ceremony_year', ceremonyYear);
 
   response.json(ceremonyYear);
+};
+
+export const updateCeremonyYear = async (request: Request, response: Response): Promise<void> => {
+  const ceremonyYearObj = request.body;
+
+  const repository = getRepository(CeremonyYear);
+  const result = await repository.findOne(ceremonyYearObj.id);
+
+  if (!result) {
+    throw new Error(`No ceremony_year found with id ${ceremonyYearObj.id}`);
+  }
+
+  const isVotingClosedChanged = ceremonyYearObj.voting_closed !== undefined && result.voting_closed !== ceremonyYearObj.voting_closed;
+
+  await repository.update(ceremonyYearObj.id, ceremonyYearObj);
+
+  if (isVotingClosedChanged) {
+    const year = result.year;
+    const event_time = result.voting_closed;
+    const event = await TypeORMManager.createAndCommit({
+      type: 'voting',
+      detail: !ceremonyYearObj.voting_closed ? 'open' : 'closed',
+      event_time,
+      year
+    }, Event);
+
+    const msg = {
+      event_id: event.id,
+      event_time
+    };
+
+    if (ceremonyYearObj.voting_closed === false) {
+      socketServer.emitToAll('voting_unlocked', msg);
+    } else if  (ceremonyYearObj.voting_closed === true) {
+      socketServer.emitToAll('voting_locked', msg);
+    }
+
+    response.json({msg: 'Success'});
+  }
 };

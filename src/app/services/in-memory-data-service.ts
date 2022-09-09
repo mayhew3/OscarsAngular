@@ -13,7 +13,6 @@ import {InMemoryCallbacksService} from './in-memory-callbacks.service';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
-import {MockVoteEmmysList} from './data/votes.emmys.mock';
 import {MockCeremonies} from './data/ceremonies.mock';
 import {MockPersonGroups} from './data/person.groups.mock';
 import {Ceremony} from '../interfaces/Ceremony';
@@ -125,6 +124,8 @@ export class InMemoryDataService implements InMemoryDbService {
       return this.updateOdds(requestInfo);
     } else if (collectionName === 'resetWinners') {
       return this.deleteWinners(requestInfo);
+    } else if (requestInfo.collectionName === 'ceremonies') {
+      return this.updateCeremonyYear(requestInfo);
     }
     return undefined;
   }
@@ -287,6 +288,30 @@ export class InMemoryDataService implements InMemoryDbService {
     }
 
     this.broadcastToChannel('add_ceremony_year', ceremonyYear);
+
+    return this.packageUpResponse({msg: 'Success!'}, requestInfo);
+  }
+
+  private updateCeremonyYear(requestInfo: RequestInfo): Observable<Response> {
+    const jsonBody = requestInfo.utils.getJsonBody(requestInfo.req);
+
+    const ceremony_year_id = jsonBody.id;
+    const ceremonyYear = this.ceremonyYearWithId(ceremony_year_id);
+
+    if (jsonBody.voting_closed !== undefined) {
+      ceremonyYear.voting_closed = jsonBody.voting_closed;
+
+      const msg = {
+        event_id: 1,
+        event_time: new Date()
+      };
+
+      if (!!ceremonyYear.voting_closed) {
+        this.broadcastToChannel('voting_locked', msg);
+      } else {
+        this.broadcastToChannel('voting_unlocked', msg);
+      }
+    }
 
     return this.packageUpResponse({msg: 'Success!'}, requestInfo);
   }

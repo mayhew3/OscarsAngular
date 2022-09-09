@@ -99,6 +99,7 @@ module.exports = app => {
 
   privateGet('/ceremonies', ceremonies.getCeremonyYears);
   privatePost('/ceremonies', ceremonies.addCeremonyYear);
+  privatePut('/ceremonies', ceremonies.updateCeremonyYear);
 
   app.use('/api', router);
 
