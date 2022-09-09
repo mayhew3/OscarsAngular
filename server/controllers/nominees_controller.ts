@@ -5,16 +5,16 @@ import {Category} from '../typeorm/Category';
 import {Vote} from '../typeorm/Vote';
 import {Winner} from '../typeorm/Winner';
 import {Category as CategoryObj} from '../../src/app/interfaces/Category';
-import {NextFunction, Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express/ts4.0';
 import {SystemVars} from '../typeorm/SystemVars';
 import {CeremonyYear} from '../typeorm/CeremonyYear';
 
-export const getCategories = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+export const getCategories = async (request: Request, response: Response): Promise<void> => {
   if (!request.query.year) {
-    return next(new Error('No year attached to request!'));
+    throw new Error('No year attached to request!');
   }
   if (!request.query.person_id) {
-    return next(new Error('No person_id attached to request!'));
+    throw new Error('No person_id attached to request!');
   }
 
   const systemVarsArray = await getRepository(SystemVars).find();
@@ -66,7 +66,7 @@ export const getCategories = async (request: Request, response: Response, next: 
     const cat_winners = _.where(winners, {category_id: category.id});
 
     if (cat_votes.length > 1) {
-      return next(new Error('Multiple votes found for category ' + category.id));
+      throw new Error('Multiple votes found for category ' + category.id);
     }
 
     const category_object: CategoryObj = JSON.parse(JSON.stringify(category));
@@ -84,15 +84,11 @@ export const getCategories = async (request: Request, response: Response, next: 
   response.json(outputObject);
 };
 
-export const updateNomination = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+export const updateNomination = async (request: Request, response: Response): Promise<void> => {
   const nomination = request.body;
 
-  try {
-    await getRepository(Nomination).update(nomination.id, nomination);
-    response.json({msg: 'Success!'});
-  } catch(error) {
-    next(error);
-  }
+  await getRepository(Nomination).update(nomination.id, nomination);
+  response.json({msg: 'Success!'});
 };
 
 export const getMostRecentYear = async (request: Request, response: Response): Promise<void> => {
