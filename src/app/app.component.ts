@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {SystemVarsService} from './services/system.vars.service';
 import {CategoryService} from './services/category.service';
 import {SocketService} from './services/socket.service';
 import {MyAuthService} from './services/auth/my-auth.service';
@@ -13,6 +12,7 @@ import {Observable} from 'rxjs';
 import {ApiService} from './services/api.service';
 import {Title} from '@angular/platform-browser';
 import {CeremonyStyleService} from './services/ceremony-style.service';
+import {CeremonyService} from './services/ceremony.service';
 
 @Component({
   selector: 'osc-root',
@@ -26,7 +26,7 @@ export class AppComponent {
 
   constructor(public auth: MyAuthService,
               private messagingService: MessagingService,
-              public systemVarsService: SystemVarsService,
+              private ceremonyService: CeremonyService,
               private categoryService: CategoryService,
               private socket: SocketService,
               private initSocket: InitSocketService,
@@ -36,7 +36,7 @@ export class AppComponent {
               private modalService: NgbModal,
               private titleService: Title) {
     this.initDisconnectPopup();
-    this.systemVarsService.systemVars.subscribe(systemVars => this.titleService.setTitle(systemVars.ceremony_name));
+    this.ceremonyService.getCurrentCeremonyName().subscribe(ceremonyName => this.titleService.setTitle(ceremonyName));
   }
 
   initDisconnectPopup(): void {

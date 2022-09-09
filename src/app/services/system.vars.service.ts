@@ -12,6 +12,7 @@ import {SystemVars} from '../interfaces/SystemVars';
 export class SystemVarsService {
   systemVarsUrl = '/api/systemVars';
   systemVars: Observable<SystemVars> = this.store.select(state => state.systemVars).pipe(
+    filter(Boolean),
     map(state => state.systemVars),
     filter(Boolean)
   );
@@ -25,33 +26,9 @@ export class SystemVarsService {
     this.store.dispatch(new GetSystemVars());
   }
 
-  getCurrentCeremonyYear(): Observable<number> {
+  getCurrentCeremonyYearID(): Observable<number> {
     return this.systemVarsCeremonyYearChanges$.pipe(
       map(systemVars => systemVars.ceremony_year_id)
-    );
-  }
-
-  getCurrentYear(): Observable<number> {
-    return this.systemVarsCeremonyYearChanges$.pipe(
-      map(systemVars => systemVars.curr_year)
-    );
-  }
-
-  getCurrentCeremonyName(): Observable<string> {
-    return this.systemVarsCeremonyYearChanges$.pipe(
-      map(systemVars => systemVars.ceremony_name)
-    );
-  }
-
-  isOscars(): Observable<boolean> {
-    return this.getCurrentCeremonyName().pipe(
-      map(ceremonyName => ceremonyName === 'Oscars')
-    );
-  }
-
-  isEmmys(): Observable<boolean> {
-    return this.getCurrentCeremonyName().pipe(
-      map(ceremonyName => ceremonyName === 'Emmys')
     );
   }
 
@@ -70,10 +47,6 @@ export class SystemVarsService {
       ceremony_year_id
     };
     await this.api.putAfterFullyConnected(this.systemVarsUrl, data);
-  }
-
-  changeCurrentYear(year: number): void {
-    // this.store.dispatch(new ChangeActiveCeremonyYear(year));
   }
 
 

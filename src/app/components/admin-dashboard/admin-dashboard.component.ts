@@ -29,8 +29,7 @@ export class AdminDashboardComponent implements OnInit {
 
   sortedData: ScoreData[];
 
-  constructor(private systemVarsService: SystemVarsService,
-              private categoryService: CategoryService,
+  constructor(private categoryService: CategoryService,
               private votesService: VotesService,
               private winnersService: WinnersService,
               private socket: SocketService,
@@ -48,7 +47,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   get currentYear(): Observable<number> {
-    return this.systemVarsService.getCurrentYear();
+    return this.ceremonyService.getCurrentYear();
   }
 
   ngOnInit(): void {
@@ -95,11 +94,6 @@ export class AdminDashboardComponent implements OnInit {
     );
   }
 
-  changeCurrentYear(year): void {
-    this.reloadingData = true;
-    this.systemVarsService.changeCurrentYear(year);
-  }
-
   async toggleVotingLock(votingOpen: boolean): Promise<void> {
     const isVotingOpen = await firstValueFrom(this.isVotingOpen());
     if (votingOpen !== isVotingOpen) {
@@ -108,8 +102,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   async resetWinners(): Promise<void> {
-    const systemVars = await firstValueFrom(this.systemVarsService.systemVars);
-    const year = systemVars.curr_year;
+    const year = await firstValueFrom(this.ceremonyService.getCurrentYear());
     this.winnersDeleting = true;
     this.winnersService.resetWinners(year);
   }

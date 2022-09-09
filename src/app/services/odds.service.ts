@@ -5,6 +5,7 @@ import {Store} from '@ngxs/store';
 import {filter, map} from 'rxjs/operators';
 import {GetOdds} from '../actions/odds.action';
 import {SystemVarsService} from './system.vars.service';
+import {CeremonyService} from './ceremony.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,9 @@ export class OddsService {
   );
 
   constructor(private store: Store,
-              private systemVarsService: SystemVarsService) {
-    this.systemVarsService.systemVarsCeremonyYearChanges$.subscribe(systemVars => {
-      this.store.dispatch(new GetOdds(systemVars.curr_year));
+              private ceremonyService: CeremonyService) {
+    this.ceremonyService.getCurrentYear().subscribe(year => {
+      this.store.dispatch(new GetOdds(year));
     });
   }
 

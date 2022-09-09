@@ -13,6 +13,7 @@ import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import fast_sort from 'fast-sort';
+import {CeremonyService} from './ceremony.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +29,9 @@ export class CategoryService {
     map(model => model.categories),
     filter(Boolean),
     mergeMap(categories =>
-      this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
-        map(systemVars => _.filter(categories, category => category.nominees.length > 0 &&
-          CategoryService.isInRange(systemVars.curr_year, category)))
+      this.ceremonyService.getCurrentYear().pipe(
+        map(year => _.filter(categories, category => category.nominees.length > 0 &&
+          CategoryService.isInRange(year, category)))
       ))
   );
 
@@ -40,12 +41,12 @@ export class CategoryService {
   );
 
   constructor(private personService: PersonService,
-              private systemVarsService: SystemVarsService,
+              private ceremonyService: CeremonyService,
               private store: Store) {
 
-    combineLatest([this.personService.me$, this.systemVarsService.systemVarsCeremonyYearChanges$])
-      .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, systemVars.ceremony_name));
+    combineLatest([this.personService.me$, this.ceremonyService.getCurrentYear(), this.ceremonyService.getCurrentCeremonyName()])
+      .subscribe(([me, year, ceremonyName]) => {
+        this.store.dispatch(new GetCategories(year, me.id, ceremonyName));
       });
 
     this.store.dispatch(new GetMaxYear());
@@ -64,7 +65,7 @@ export class CategoryService {
   }
 
   getSubtitleText(category: Category, nominee: Nominee): Observable<string> {
-    return this.systemVarsService.getCurrentCeremonyName().pipe(
+    return this.ceremonyService.getCurrentCeremonyName().pipe(
       map(currentCeremonyName => {
         if (CategoryService.isSingleLineCategory(category.name)) {
           return undefined;

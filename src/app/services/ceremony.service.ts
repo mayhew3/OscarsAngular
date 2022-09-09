@@ -49,9 +49,8 @@ export class CeremonyService {
   }
 
   getCurrentCeremonyYear(): Observable<CeremonyYear> {
-    return combineLatest(([this.ceremonies, this.systemVarsService.getCurrentCeremonyYear()])).pipe(
-      map(([ceremonies, ceremonyYearId]) => {
-        const ceremonyYears = _.flatten(_.map(ceremonies, c => c.ceremonyYears));
+    return combineLatest(([this.ceremonyYearsFlattened, this.systemVarsService.getCurrentCeremonyYearID()])).pipe(
+      map(([ceremonyYears, ceremonyYearId]) => {
         const ceremonyYear = _.findWhere(ceremonyYears, {id: ceremonyYearId});
         if (!ceremonyYear) {
           throw new Error(`No ceremony_year found with ID ${ceremonyYearId}`);
@@ -61,9 +60,39 @@ export class CeremonyService {
     );
   }
 
+  getCurrentYear(): Observable<number> {
+    return this.getCurrentCeremonyYear().pipe(
+      map(cy => cy.year)
+    );
+  }
+
+  getCurrentCeremony(): Observable<Ceremony> {
+    return combineLatest(([this.ceremonies, this.getCurrentCeremonyYear()])).pipe(
+      map(([ceremonies, ceremonyYear]) => _.findWhere(ceremonies, {id: ceremonyYear.ceremony_id}))
+    );
+  }
+
+  getCurrentCeremonyName(): Observable<string> {
+    return this.getCurrentCeremony().pipe(
+      map(c => c.name)
+    );
+  }
+
   canVote(): Observable<boolean> {
     return this.getCurrentCeremonyYear().pipe(
       map(cy => !cy.voting_closed)
+    );
+  }
+
+  isOscars(): Observable<boolean> {
+    return this.getCurrentCeremonyName().pipe(
+      map(ceremonyName => ceremonyName === 'Oscars')
+    );
+  }
+
+  isEmmys(): Observable<boolean> {
+    return this.getCurrentCeremonyName().pipe(
+      map(ceremonyName => ceremonyName === 'Emmys')
     );
   }
 
