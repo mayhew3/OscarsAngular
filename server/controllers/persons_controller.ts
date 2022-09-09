@@ -5,7 +5,7 @@ import {Person} from '../typeorm/Person';
 import {PersonGroupRole} from '../typeorm/PersonGroupRole';
 import {PersonGroup} from '../typeorm/PersonGroup';
 import {Person as PersonObj} from '../../src/app/interfaces/Person';
-import {NextFunction, Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express/ts4.0';
 
 
 export const getPersons = async (request: Request, response: Response): Promise<void> => {
@@ -34,13 +34,9 @@ export const getPersonGroups = async (request: Request, response: Response): Pro
   response.json(personGroups);
 };
 
-export const updatePerson = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+export const updatePerson = async (request: Request, response: Response): Promise<void> => {
   const person = request.body;
 
-  try {
-    await getRepository(Person).update(person.id, person);
-    response.json({msg: 'Success!'});
-  } catch(err) {
-    next(err);
-  }
+  await getRepository(Person).update(person.id, person);
+  response.json({msg: 'Success!'});
 };

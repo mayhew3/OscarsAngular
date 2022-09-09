@@ -2,7 +2,7 @@ import _ from 'underscore';
 import {getRepository} from 'typeorm';
 import {GroupYear} from '../typeorm/GroupYear';
 import {FinalResult as FinalResultObj} from '../../src/app/interfaces/FinalResult';
-import {NextFunction, Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express/ts4.0';
 import {Vote} from '../typeorm/Vote';
 import {Category} from '../typeorm/Category';
 import {CeremonyYear} from '../typeorm/CeremonyYear';
@@ -11,7 +11,7 @@ import {PersonGroupRole} from '../typeorm/PersonGroupRole';
 import {Winner} from '../typeorm/Winner';
 import {SystemVars} from '../typeorm/SystemVars';
 
-export const getFinalResults = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
+export const getFinalResults = async (request: Request, response: Response): Promise<void> => {
 
   const groupYears = await getRepository(GroupYear).find();
   const votes = await getRepository(Vote).find();
@@ -33,7 +33,6 @@ export const getFinalResults = async (request: Request, response: Response, next
     const filtered = _.filter(myVotes, vote => {
       const category = _.findWhere(categories, {id: vote.category_id});
       if (!category) {
-        next('No category found with id: ' + vote.category_id);
         throw new Error('No category found with id: ' + vote.category_id);
       } else {
         return category.ceremony_id === ceremony_id;
@@ -48,7 +47,6 @@ export const getFinalResults = async (request: Request, response: Response, next
     for (const winner of groupWinners) {
       const category = _.findWhere(categories, {id: winner.category_id});
       if (!category) {
-        next('No category found with id: ' + winner.category_id);
         throw new Error('No category found with id: ' + winner.category_id);
       }
       const existingVote = _.findWhere(votes, {year, person_id: person.id, category_id: category.id});
@@ -70,7 +68,7 @@ export const getFinalResults = async (request: Request, response: Response, next
   for (const groupYear of groupYears) {
     const ceremonyYear = _.findWhere(ceremonyYears, {id: groupYear.ceremony_year_id});
     if (!ceremonyYear) {
-      return next('No ceremony_year found with id: ' + groupYear.ceremony_year_id);
+      throw new Error('No ceremony_year found with id: ' + groupYear.ceremony_year_id);
     }
 
     if (activeCeremonyYearId !== ceremonyYear.id) {
@@ -80,7 +78,6 @@ export const getFinalResults = async (request: Request, response: Response, next
       const groupWinners = _.filter(winners, winner => {
         const category = _.findWhere(categories, {id: winner.category_id});
         if (!category) {
-          next('No category found with id: ' + winner.category_id);
           throw new Error('No category found with id: ' + winner.category_id);
         }
         return winner.year === year && category.ceremony_id === ceremony_id;
