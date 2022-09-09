@@ -22,13 +22,13 @@
           </a>
         </li>
         <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async)">
+            *ngIf="(auth.isAuthenticated$ | async) && (canVote() | async)">
           <a class="nav-link" routerLink="/vote" data-bs-toggle="collapse" data-target=".navbar-collapse.show">
             Vote
           </a>
         </li>
         <li class="nav-item"
-            *ngIf="(auth.isAuthenticated$ | async) && (systemVarsService.canVote() | async) === false">
+            *ngIf="(auth.isAuthenticated$ | async) && (canVote() | async) === false">
           <a class="nav-link" routerLink="/scores" data-bs-toggle="collapse" data-target=".navbar-collapse.show">
             Scores
           </a>

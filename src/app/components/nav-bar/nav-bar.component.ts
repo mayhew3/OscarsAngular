@@ -33,6 +33,10 @@ export class NavBarComponent implements OnInit {
     );
   }
 
+  canVote(): Observable<boolean> {
+    return this.ceremonyService.canVote();
+  }
+
   showPast(): Observable<boolean> {
     return combineLatest([this.personService.me$, this.systemVarsService.systemVarsCeremonyYearChanges$]).pipe(
       mergeMap(([me, systemVars]) => this.ceremonyService.hasPastCeremonies(me, systemVars.ceremony_id))

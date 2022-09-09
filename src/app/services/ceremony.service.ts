@@ -48,32 +48,27 @@ export class CeremonyService {
     );
   }
 
-  async getCurrentCeremonyYear(): Promise<CeremonyYear> {
-    const year = await firstValueFrom(this.systemVarsService.getCurrentYear());
-    const ceremonyName = await firstValueFrom(this.systemVarsService.getCurrentCeremonyName());
-    const ceremonies = await firstValueFrom(this.ceremonies);
-    const matchingCeremonies = _.filter(ceremonies, c => c.name === ceremonyName);
+  getCurrentCeremonyYear(): Observable<CeremonyYear> {
+    return combineLatest(([this.ceremonies, this.systemVarsService.getCurrentCeremonyYear()])).pipe(
+      map(([ceremonies, ceremonyYearId]) => {
+        const ceremonyYears = _.flatten(_.map(ceremonies, c => c.ceremonyYears));
+        const ceremonyYear = _.findWhere(ceremonyYears, {id: ceremonyYearId});
+        if (!ceremonyYear) {
+          throw new Error(`No ceremony_year found with ID ${ceremonyYearId}`);
+        }
+        return ceremonyYear;
+      })
+    );
+  }
 
-    if (matchingCeremonies.length > 1) {
-      throw new Error(`Multiple ceremonies with name '${ceremonyName}'`);
-    } else if (matchingCeremonies.length < 1) {
-      throw new Error(`No ceremony found with name '${ceremonyName}`);
-    }
-
-    const ceremony = matchingCeremonies[0];
-    const matchingCeremonyYears = _.filter(ceremony.ceremonyYears, cy => cy.year === year);
-
-    if (matchingCeremonyYears.length > 1) {
-      throw new Error(`Multiple ceremonyYears with name '${year}'`);
-    } else if (matchingCeremonyYears.length < 1) {
-      throw new Error(`No ceremonyYear found with name '${year}`);
-    }
-
-    return matchingCeremonyYears[0];
+  canVote(): Observable<boolean> {
+    return this.getCurrentCeremonyYear().pipe(
+      map(cy => !cy.voting_closed)
+    );
   }
 
   async toggleVotingLock(): Promise<void> {
-    const ceremonyYear = await this.getCurrentCeremonyYear();
+    const ceremonyYear = await firstValueFrom(this.getCurrentCeremonyYear());
     const data = {
       id: ceremonyYear.id,
       voting_closed: !ceremonyYear.voting_closed

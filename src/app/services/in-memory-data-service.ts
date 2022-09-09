@@ -303,7 +303,8 @@ export class InMemoryDataService implements InMemoryDbService {
 
       const msg = {
         event_id: 1,
-        event_time: new Date()
+        event_time: new Date(),
+        ceremony_year_id
       };
 
       if (!!ceremonyYear.voting_closed) {

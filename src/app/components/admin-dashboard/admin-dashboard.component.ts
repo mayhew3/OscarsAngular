@@ -86,7 +86,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   isVotingOpen(): Observable<boolean> {
-    return this.systemVarsService.canVote();
+    return this.ceremonyService.canVote();
   }
 
   getVotingButtonClass(votingOpen: boolean): Observable<string> {

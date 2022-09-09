@@ -6,6 +6,10 @@ import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
 import {AddCeremonyYear, GetCeremonyYears} from '../actions/ceremony.action';
 import {Ceremony} from '../interfaces/Ceremony';
+import {VotingLock, VotingUnlock} from '../actions/ceremony.action';
+import {SystemVarsStateModel} from './systemVars.state';
+import {WritableDraft} from 'immer/dist/types/types-external';
+import {CeremonyYear} from '../interfaces/CeremonyYear';
 
 export class CeremonyStateModel {
   ceremonies: Ceremony[];
@@ -61,6 +65,34 @@ export class CeremonyState {
     this.logger.log('CEREMONIES State Change #' + this.stateChanges);
   }
 
+  @Action(VotingLock)
+  votingLock({setState}: StateContext<CeremonyStateModel>, action: VotingLock): void {
+    setState(
+      produce(draft => {
+        const ceremonyYear = this.getCeremonyYearWithId(action.ceremony_year_id, draft.ceremonies);
+        ceremonyYear.voting_closed = true;
+      })
+    );
+  }
+
+  @Action(VotingUnlock)
+  votingUnlock({setState}: StateContext<CeremonyStateModel>, action: VotingUnlock): void {
+    setState(
+      produce(draft => {
+        const ceremonyYear = this.getCeremonyYearWithId(action.ceremony_year_id, draft.ceremonies);
+        ceremonyYear.voting_closed = false;
+      })
+    );
+  }
+
+  private getCeremonyYearWithId(ceremony_year_id: number, ceremonies: WritableDraft<Ceremony[]>): WritableDraft<CeremonyYear> {
+    const ceremonyYears = _.flatten(_.map(ceremonies, c => c.ceremonyYears));
+    const matching = _.findWhere(ceremonyYears, {id: ceremony_year_id});
+    if (!matching) {
+      throw new Error(`No ceremony_year found with ID ${ceremony_year_id}`);
+    }
+    return matching;
+  }
 
 }
 

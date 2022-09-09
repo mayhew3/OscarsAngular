@@ -43,6 +43,10 @@ export class HomeComponent implements OnInit {
     return this.categoryService.getCategoryCount();
   }
 
+  canVote(): Observable<boolean> {
+    return this.ceremonyService.canVote();
+  }
+
   get winnersString(): string {
     return this.scoreboardService.getPlayersInFirstPlaceFullNames().join(' and ');
   }
