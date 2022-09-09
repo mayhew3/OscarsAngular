@@ -14,7 +14,8 @@ export class AddCeremonyYear {
 
 export class VotingLock {
   static readonly type = '[CeremonyYear] Voting Lock';
-  constructor(public ceremony_year_id: number) {
+  constructor(public ceremony_year_id: number,
+              public voting_closed: string) {
   }
 }
 

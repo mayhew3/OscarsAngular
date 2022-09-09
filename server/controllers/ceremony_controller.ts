@@ -65,13 +65,13 @@ export const updateCeremonyYear = async (request: Request, response: Response): 
     throw new Error(`No ceremony_year found with id ${ceremonyYearObj.id}`);
   }
 
-  const isVotingClosedChanged = ceremonyYearObj.voting_closed !== undefined && result.voting_closed !== ceremonyYearObj.voting_closed;
+  const isVotingClosedChanged = result.voting_closed !== ceremonyYearObj.voting_closed;
 
   await repository.update(ceremonyYearObj.id, ceremonyYearObj);
 
   if (isVotingClosedChanged) {
     const year = result.year;
-    const event_time = result.voting_closed;
+    const event_time = !result.voting_closed ? new Date() : result.voting_closed;
     const event = await TypeORMManager.createAndCommit({
       type: 'voting',
       detail: !ceremonyYearObj.voting_closed ? 'open' : 'closed',
@@ -81,12 +81,14 @@ export const updateCeremonyYear = async (request: Request, response: Response): 
 
     const msg = {
       event_id: event.id,
-      event_time
+      event_time,
+      ceremony_year_id: ceremonyYearObj.id,
+      voting_closed: ceremonyYearObj.voting_closed
     };
 
-    if (ceremonyYearObj.voting_closed === false) {
+    if (!ceremonyYearObj.voting_closed) {
       socketServer.emitToAll('voting_unlocked', msg);
-    } else if  (ceremonyYearObj.voting_closed === true) {
+    } else {
       socketServer.emitToAll('voting_locked', msg);
     }
 

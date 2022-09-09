@@ -70,7 +70,7 @@ export class CeremonyState {
     setState(
       produce(draft => {
         const ceremonyYear = this.getCeremonyYearWithId(action.ceremony_year_id, draft.ceremonies);
-        ceremonyYear.voting_closed = true;
+        ceremonyYear.voting_closed = new Date(action.voting_closed);
       })
     );
   }
@@ -80,7 +80,7 @@ export class CeremonyState {
     setState(
       produce(draft => {
         const ceremonyYear = this.getCeremonyYearWithId(action.ceremony_year_id, draft.ceremonies);
-        ceremonyYear.voting_closed = false;
+        ceremonyYear.voting_closed = undefined;
       })
     );
   }

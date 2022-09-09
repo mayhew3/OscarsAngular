@@ -71,7 +71,7 @@ export class CeremonyService {
     const ceremonyYear = await firstValueFrom(this.getCurrentCeremonyYear());
     const data = {
       id: ceremonyYear.id,
-      voting_closed: !ceremonyYear.voting_closed
+      voting_closed: !ceremonyYear.voting_closed ? new Date() : null
     };
     await this.api.executePutAfterFullyConnected(this.ceremoniesUrl, data);
   }

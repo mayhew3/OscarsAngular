@@ -15,10 +15,8 @@ import {Nominee} from '../interfaces/Nominee';
 import {LoggerService} from './logger.service';
 import {MockCeremonies} from './data/ceremonies.mock';
 import {MockPersonGroups} from './data/person.groups.mock';
-import {Ceremony} from '../interfaces/Ceremony';
 import {GroupYear} from '../interfaces/GroupYear';
 import {MockCategoryList} from './data/categories.mock';
-import {CeremonyYear} from '../interfaces/CeremonyYear';
 import {OddsChange} from '../actions/category.action';
 import {MockVoteList} from './data/votes.mock';
 
@@ -304,7 +302,8 @@ export class InMemoryDataService implements InMemoryDbService {
       const msg = {
         event_id: 1,
         event_time: new Date(),
-        ceremony_year_id
+        ceremony_year_id,
+        voting_closed: jsonBody.voting_closed
       };
 
       if (!!ceremonyYear.voting_closed) {
@@ -542,15 +541,15 @@ export class InMemoryDataService implements InMemoryDbService {
     return _.first(results);
   }
 
-  private ceremonyWithId(ceremony_id: number): Ceremony {
+  private ceremonyWithId(ceremony_id: number): any {
     return _.findWhere(this.ceremonies, {id: ceremony_id});
   }
 
-  private ceremonyWithName(ceremony_name: string): Ceremony {
+  private ceremonyWithName(ceremony_name: string): any {
     return _.findWhere(this.ceremonies, {name: ceremony_name});
   }
 
-  private ceremonyYearWithId(ceremony_year_id: number): CeremonyYear {
+  private ceremonyYearWithId(ceremony_year_id: number): any {
     const ceremonyYears = _.flatten(_.map(this.ceremonies, c => c.ceremonyYears));
     return _.findWhere(ceremonyYears, {id: ceremony_year_id});
   }

@@ -52,7 +52,7 @@ export class MessagingService {
 
       this.addSingleActionListener('add_vote', msg => new AddVote(msg.id, msg.category_id, msg.year, msg.person_id, msg.nomination_id));
       this.addSingleActionListener('change_vote', msg => new ChangeVote(msg.vote_id, msg.nomination_id));
-      this.addSingleActionListener('voting_locked', msg => new VotingLock(msg.ceremony_year_id));
+      this.addSingleActionListener('voting_locked', msg => new VotingLock(msg.ceremony_year_id, msg.voting_closed));
       this.addSingleActionListener('voting_unlocked', msg => new VotingUnlock(msg.ceremony_year_id));
       this.addSingleActionListener('odds', msg => new UpdatePlayerOdds(msg));
       this.addSingleActionListener('person_connected', msg => new PersonConnected(msg.person_id));
