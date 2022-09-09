@@ -9,6 +9,8 @@ import _ from 'underscore';
 import {LoggerService} from './logger.service';
 import {PersonConnected, PersonDisconnected} from '../actions/person.action';
 import {AddCeremonyYear, VotingLock, VotingUnlock} from '../actions/ceremony.action';
+import {VotingLockedMessage} from '../../shared/messages/VotingLockedMessage';
+import {VotingUnlockedMessage} from '../../shared/messages/VotingUnlockedMessage';
 
 @Injectable({
   providedIn: 'root'
@@ -52,8 +54,8 @@ export class MessagingService {
 
       this.addSingleActionListener('add_vote', msg => new AddVote(msg.id, msg.category_id, msg.year, msg.person_id, msg.nomination_id));
       this.addSingleActionListener('change_vote', msg => new ChangeVote(msg.vote_id, msg.nomination_id));
-      this.addSingleActionListener('voting_locked', msg => new VotingLock(msg.ceremony_year_id, msg.voting_closed));
-      this.addSingleActionListener('voting_unlocked', msg => new VotingUnlock(msg.ceremony_year_id));
+      this.addSingleActionListener('voting_locked', (msg: VotingLockedMessage) => new VotingLock(msg.ceremony_year_id, msg.voting_closed));
+      this.addSingleActionListener('voting_unlocked', (msg: VotingUnlockedMessage) => new VotingUnlock(msg.ceremony_year_id));
       this.addSingleActionListener('odds', msg => new UpdatePlayerOdds(msg));
       this.addSingleActionListener('person_connected', msg => new PersonConnected(msg.person_id));
       this.addSingleActionListener('person_disconnected', msg => new PersonDisconnected(msg.person_id));

@@ -10,6 +10,8 @@ import {Event} from '../typeorm/Event';
 import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {socketServer} from '../www';
 import {Request, Response} from 'express/ts4.0';
+import {VotingUnlockedMessage} from '../../src/shared/messages/VotingUnlockedMessage';
+import {VotingLockedMessage} from '../../src/shared/messages/VotingLockedMessage';
 
 export const getCeremonyYears = async (request: Request, response: Response): Promise<void> => {
   const ceremonies = await getRepository(Ceremony).find();
@@ -79,17 +81,20 @@ export const updateCeremonyYear = async (request: Request, response: Response): 
       year
     }, Event);
 
-    const msg = {
+    const msg: VotingUnlockedMessage = {
       event_id: event.id,
-      event_time,
-      ceremony_year_id: ceremonyYearObj.id,
-      voting_closed: ceremonyYearObj.voting_closed
+      event_time: event_time.toString(),
+      ceremony_year_id: ceremonyYearObj.id
     };
 
     if (!ceremonyYearObj.voting_closed) {
       socketServer.emitToAll('voting_unlocked', msg);
     } else {
-      socketServer.emitToAll('voting_locked', msg);
+      const lockMsg: VotingLockedMessage = {
+        ...msg,
+        voting_closed: ceremonyYearObj.voting_closed
+      };
+      socketServer.emitToAll('voting_locked', lockMsg);
     }
 
     response.json({msg: 'Success'});

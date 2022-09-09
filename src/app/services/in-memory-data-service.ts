@@ -19,6 +19,8 @@ import {GroupYear} from '../interfaces/GroupYear';
 import {MockCategoryList} from './data/categories.mock';
 import {OddsChange} from '../actions/category.action';
 import {MockVoteList} from './data/votes.mock';
+import {VotingUnlockedMessage} from '../../shared/messages/VotingUnlockedMessage';
+import {VotingLockedMessage} from '../../shared/messages/VotingLockedMessage';
 
 @Injectable({
   providedIn: 'root',
@@ -299,15 +301,18 @@ export class InMemoryDataService implements InMemoryDbService {
     if (jsonBody.voting_closed !== undefined) {
       ceremonyYear.voting_closed = jsonBody.voting_closed;
 
-      const msg = {
+      const msg: VotingUnlockedMessage = {
         event_id: 1,
-        event_time: new Date(),
-        ceremony_year_id,
-        voting_closed: jsonBody.voting_closed
+        event_time: new Date().toString(),
+        ceremony_year_id
       };
 
       if (!!ceremonyYear.voting_closed) {
-        this.broadcastToChannel('voting_locked', msg);
+        const lockMsg: VotingLockedMessage = {
+          ...msg,
+          voting_closed: jsonBody.voting_closed
+        };
+        this.broadcastToChannel('voting_locked', lockMsg);
       } else {
         this.broadcastToChannel('voting_unlocked', msg);
       }
