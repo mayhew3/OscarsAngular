@@ -14,6 +14,7 @@ import {SystemVars} from '../interfaces/SystemVars';
 import {ApiService} from './api.service';
 import {CategoryService} from './category.service';
 import {is} from 'immer/dist/utils/common';
+import {CeremonyService} from './ceremony.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,13 +36,13 @@ export class VotesService {
     map(([me, votes]) => _.where(votes, {person_id: me.id}))
   );
 
-  constructor(private systemVarsService: SystemVarsService,
-              private personService: PersonService,
+  constructor(private personService: PersonService,
               private categoryService: CategoryService,
+              private ceremonyService: CeremonyService,
               private store: Store,
               private api: ApiService) {
-    this.systemVarsService.systemVarsCeremonyYearChanges$.subscribe(systemVars => {
-      this.store.dispatch(new GetVotes(systemVars.curr_year));
+    this.ceremonyService.getCurrentYear().subscribe(year => {
+      this.store.dispatch(new GetVotes(year));
     });
   }
 

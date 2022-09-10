@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
   constructor(public auth: MyAuthService,
               public personService: PersonService,
               public apiService: ApiService,
-              public systemVarsService: SystemVarsService,
               public categoryService: CategoryService,
               public scoreboardService: ScoreboardService,
               private ceremonyService: CeremonyService,
@@ -41,6 +40,10 @@ export class HomeComponent implements OnInit {
 
   categoryCount(): Observable<number> {
     return this.categoryService.getCategoryCount();
+  }
+
+  canVote(): Observable<boolean> {
+    return this.ceremonyService.canVote();
   }
 
   get winnersString(): string {
@@ -68,14 +71,14 @@ export class HomeComponent implements OnInit {
   }
 
   get ceremonyDate(): Observable<Date> {
-    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
-      map(systemVars => moment(systemVars.ceremony_start).toDate())
+    return this.ceremonyService.getCurrentCeremonyYear().pipe(
+      map(ceremonyYear => ceremonyYear.ceremony_date)
     );
   }
 
   showPast(): Observable<boolean> {
-    return combineLatest([this.personService.me$, this.systemVarsService.systemVarsCeremonyYearChanges$]).pipe(
-      mergeMap(([me, systemVars]) => this.ceremonyService.hasPastCeremonies(me, systemVars.ceremony_id))
+    return combineLatest([this.personService.me$, this.ceremonyService.getCurrentCeremony()]).pipe(
+      mergeMap(([me, ceremony]) => this.ceremonyService.hasPastCeremonies(me, ceremony.id))
     );
   }
 
@@ -96,9 +99,7 @@ export class HomeComponent implements OnInit {
   }
 
   get ceremonyName(): Observable<string> {
-    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
-      map(systemVars => systemVars.ceremony_name)
-    );
+    return this.ceremonyService.getCurrentCeremonyName();
   }
 
   get ceremonyContent(): Observable<string> {
@@ -112,7 +113,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCeremonyYear(): Observable<number> {
-    return this.systemVarsService.getCurrentYear();
+    return this.ceremonyService.getCurrentYear();
   }
 
   hasVotesRemaining(): Observable<boolean> {

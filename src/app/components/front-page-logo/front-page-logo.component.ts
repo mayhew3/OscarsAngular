@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {CeremonyService} from '../../services/ceremony.service';
 
 @Component({
   selector: 'osc-front-page-logo',
@@ -10,15 +11,13 @@ import {map} from 'rxjs/operators';
 })
 export class FrontPageLogoComponent implements OnInit {
 
-  constructor(public systemVarsService: SystemVarsService) { }
+  constructor(public ceremonyService: CeremonyService) { }
 
   ngOnInit(): void {
   }
 
   get ceremonyName(): Observable<string> {
-    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
-      map(systemVars => systemVars.ceremony_name)
-    );
+    return this.ceremonyService.getCurrentCeremonyName();
   }
 
   get frontPageLogo(): Observable<string> {
@@ -28,8 +27,6 @@ export class FrontPageLogoComponent implements OnInit {
   }
 
   get ceremonyYear(): Observable<number> {
-    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
-      map(systemVars => systemVars.curr_year)
-    );
+    return this.ceremonyService.getCurrentYear();
   }
 }

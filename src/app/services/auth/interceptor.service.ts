@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import _ from 'underscore';
 
 import {HttpRequest,
   HttpHandler,
@@ -17,7 +18,7 @@ import {AuthService} from '@auth0/auth0-angular';
 
 export class InterceptorService implements HttpInterceptor {
 
-  allowedList: ['*'];
+  readonly publicUrls = ['/api/systemVars', '/api/ceremonies'];
 
   constructor(private auth: AuthService) { }
 
@@ -28,7 +29,7 @@ export class InterceptorService implements HttpInterceptor {
 
     console.log(req.url);
 
-    if(req.url === '/api/systemVars' && req.method === 'GET'){
+    if(_.contains(this.publicUrls, req.url) && req.method === 'GET'){
       return next.handle(req);
     }
 

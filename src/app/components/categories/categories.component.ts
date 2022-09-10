@@ -12,6 +12,7 @@ import {Person} from '../../interfaces/Person';
 import {map, mergeMap} from 'rxjs/operators';
 import {combineLatest, Observable, of} from 'rxjs';
 import {PersonService} from '../../services/person.service';
+import {CeremonyService} from '../../services/ceremony.service';
 
 @Component({
   selector: 'osc-categories',
@@ -29,7 +30,8 @@ export class CategoriesComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               public systemVarsService: SystemVarsService,
               private votesService: VotesService,
-              private personService: PersonService) { }
+              private personService: PersonService,
+              private ceremonyService: CeremonyService) { }
 
   ngOnInit(): void {
     this.personService.me$.subscribe(me => {
@@ -137,7 +139,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   showCategories(): Observable<boolean> {
-    return this.systemVarsService.canVote().pipe(
+    return this.ceremonyService.canVote().pipe(
       map(canVote => (canVote || !this.votingMode()))
     );
   }
@@ -163,7 +165,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   showVotingClosedMessage(): Observable<boolean> {
-    return this.systemVarsService.canVote().pipe(
+    return this.ceremonyService.canVote().pipe(
       map(canVote => this.votingMode() && canVote === false)
     );
   }

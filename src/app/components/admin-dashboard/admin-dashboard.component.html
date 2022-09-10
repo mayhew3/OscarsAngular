@@ -38,23 +38,6 @@
     </div>
 
     <div class="col-12 col-sm-6 col-lg-4">
-      <div class="card navCard p-3">
-        <span>Change Year:</span>
-        <div class="row">
-          <div class="col-6"
-               *ngFor="let year of (getPossibleYears(currentYear | async) | async)">
-            <button
-              class="btn btn-lg"
-              [ngClass]="(currentYear | async) === year ? 'btn-success' : 'btn-primary'"
-              (click)="changeCurrentYear(year)">
-              {{year}}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-12 col-sm-6 col-lg-4">
       <div class="card navCard fakeLink"
            (click)="resetWinners()">
         <div class="card-body">
