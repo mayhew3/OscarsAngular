@@ -7,6 +7,8 @@ import {distinctUntilChanged, filter} from 'rxjs/operators';
 import {ErrorNotificationService} from './error-notification.service';
 import {Person} from '../interfaces/Person';
 
+export const PublicGETs = ['systemVars', 'ceremonies'];
+
 @Injectable({
   providedIn: 'root'
 })
