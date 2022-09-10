@@ -31,7 +31,7 @@ export class CeremonyState {
 
   @Action(GetCeremonyYears)
   async getCeremonies({setState}: StateContext<CeremonyStateModel>): Promise<any> {
-    const result = await this.api.getAfterFullyConnected<Ceremony[]>('/api/ceremonies');
+    const result = await this.api.getWithoutAuthenticate<Ceremony[]>('/api/ceremonies');
     setState(
       produce( draft => {
         draft.ceremonies = result;

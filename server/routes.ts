@@ -97,7 +97,7 @@ module.exports = app => {
   privateGet('/finalResults', finalResults.getFinalResults);
   privateGet('/maxYear', nominees.getMostRecentYear);
 
-  privateGet('/ceremonies', ceremonies.getCeremonyYears);
+  publicGet('/ceremonies', ceremonies.getCeremonyYears);
   privatePost('/ceremonies', ceremonies.addCeremonyYear);
   privatePut('/ceremonies', ceremonies.updateCeremonyYear);
 
