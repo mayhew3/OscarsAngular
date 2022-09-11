@@ -91,8 +91,8 @@ export class CategoryHopperComponent implements OnInit {
   totalOddsVegas(): Observable<number> {
     return this.nominees$.pipe(
       map(nominees => {
-        const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee.odds_moneyline));
-        return this.oddsCalc(odds_nums);
+        const odds_nums = _.map(nominees, (nominee) => this.vegasCalc(nominee));
+        return this.oddsCalc(odds_nums) * 100;
       })
     );
   }
@@ -107,11 +107,13 @@ export class CategoryHopperComponent implements OnInit {
   }
 
   // noinspection JSMethodCanBeStatic
-  private vegasCalc(moneyline?: number): number {
-    if (!moneyline) {
-      return 0;
+  private vegasCalc(nominee: Nominee): number {
+    if (!!nominee.odds_numerator && !!nominee.odds_denominator) {
+      return OddsInterface.fromRatio(nominee.odds_numerator, nominee.odds_denominator).asPercentage();
+    } else if (!!nominee.odds_moneyline) {
+      return OddsInterface.fromMoneyline(nominee.odds_moneyline).asPercentage() * 100;
     } else {
-      return OddsInterface.fromMoneyline(moneyline).asPercentage() * 100;
+      return 0;
     }
   }
 
