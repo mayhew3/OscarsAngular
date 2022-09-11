@@ -30,7 +30,9 @@ export interface OddsChange {
   nomination_id: number;
   odds_expert: number;
   odds_user: number;
-  odds_moneyline: number;
+  odds_moneyline?: number;
+  odds_numerator?: number;
+  odds_denominator?: number;
 }
 
 export class UpdateOdds {

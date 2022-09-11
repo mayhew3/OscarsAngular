@@ -17,6 +17,8 @@ import {SocketService} from '../../services/socket.service';
 import {groupNumber} from '../../../shared/GlobalVars';
 import {OddsInterface} from '../../../shared/OddsInterface';
 import {CeremonyService} from '../../services/ceremony.service';
+import fast_sort from 'fast-sort';
+import {ArrayUtil} from '../../utility/ArrayUtil';
 
 @Component({
   selector: 'osc-nominees',
@@ -146,6 +148,16 @@ export class NomineesComponent implements OnInit {
 
   getHeaderPts(category: Category): string {
     return category ? category.points.toString() : '';
+  }
+
+  getNomineesSorted(category: Category): Nominee[] {
+    const sorted = ArrayUtil.cloneArray(category.nominees);
+    fast_sort(sorted)
+      .by([
+        {asc: n => n.nominee},
+        {asc: n => n.detail}
+      ]);
+    return sorted;
   }
 
   showNominees(): Observable<boolean> {

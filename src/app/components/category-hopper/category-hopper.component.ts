@@ -140,7 +140,9 @@ export class CategoryHopperComponent implements OnInit {
       nomination_id: nomineeControls.nominee.id,
       odds_expert: nomineeControls.expert.value,
       odds_user: nomineeControls.user.value,
-      odds_moneyline: Math.round(moneyline),
+      odds_moneyline: !moneyline ? undefined : Math.round(moneyline),
+      odds_numerator: nomineeControls.numerator.value,
+      odds_denominator: nomineeControls.denominator.value
     };
   }
 
