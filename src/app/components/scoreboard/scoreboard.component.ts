@@ -10,17 +10,17 @@ import {Winner} from '../../interfaces/Winner';
 import * as moment from 'moment';
 import {Nominee} from '../../interfaces/Nominee';
 import {OddsFilter} from '../odds.filter';
-import {combineLatest, Observable} from 'rxjs';
+import {combineLatest, first, mergeMap, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {VotesService} from '../../services/votes.service';
 import {Select} from '@ngxs/store';
 import {OddsState} from '../../states/odds.state';
 import {ThemePalette} from '@angular/material/core';
 import {SocketService} from '../../services/socket.service';
-import {PersonConnectionSnackBarComponent} from '../person-connection-snack-bar/person-connection-snack-bar.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ScoreData} from '../../interfaces/ScoreData';
 import {ScoreboardService} from '../../services/scoreboard.service';
+import {PersonNotificationService} from '../../services/person-notification.service';
 
 @Component({
   selector: 'osc-scoreboard',
@@ -42,9 +42,7 @@ export class ScoreboardComponent implements OnInit {
               private categoryService: CategoryService,
               private voteService: VotesService,
               public oddsService: OddsService,
-              private socket: SocketService,
-              public scoreboardService: ScoreboardService,
-              private snackBar: MatSnackBar) {
+              public scoreboardService: ScoreboardService) {
   }
 
   ngOnInit(): void {
@@ -53,13 +51,6 @@ export class ScoreboardComponent implements OnInit {
       this.categoryService.getMostRecentCategory().subscribe(category => this.latestCategory = category);
     });
 
-    this.socket.on('person_connected', msg => {
-      this.showPersonSnackBar(msg.person_id, true);
-    });
-
-    this.socket.on('person_disconnected', msg => {
-      this.showPersonSnackBar(msg.person_id, false);
-    });
   }
 
   getOddsStyle(scoreData: ScoreData): string {
@@ -168,12 +159,12 @@ export class ScoreboardComponent implements OnInit {
 
   getWinnerSubtitle(winner: Winner): Observable<string> {
     return this.categoryService.getNomineeFromWinner(winner).pipe(
-      map(nominee => this.getSubtitleText(nominee))
+      mergeMap(nominee => this.getSubtitleText(nominee))
     );
   }
 
-  getSubtitleText(nominee: Nominee): string {
-    return CategoryService.getSubtitleText(this.latestCategory, nominee);
+  getSubtitleText(nominee: Nominee): Observable<string> {
+    return this.categoryService.getSubtitleText(this.latestCategory, nominee);
   }
 
   meGotPointsForLastWinner(): Observable<boolean> {
@@ -285,21 +276,6 @@ export class ScoreboardComponent implements OnInit {
 
   getWinnerCategoryCount(): Observable<number> {
     return this.categoryService.getWinnerCategoryCount();
-  }
-
-  private showPersonSnackBar(person_id: number, connected: boolean): void {
-    this.personService.getPerson(person_id).subscribe(person => {
-      this.snackBar.openFromComponent(PersonConnectionSnackBarComponent,  {
-        duration: 3000,
-        panelClass: ['playerConnectSnackBar'],
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        data: {
-          person,
-          connected
-        }
-      });
-    });
   }
 
 }

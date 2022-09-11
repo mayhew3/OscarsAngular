@@ -1,3 +1,6 @@
+import {NextFunction, Request, Response} from 'express/ts4.0';
+import ServerError from './ServerError';
+
 const express = require('express');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
@@ -33,29 +36,40 @@ module.exports = app => {
 
   const router = express.Router();
 
-  const publicGet: (endpoint: any, callback: any) => void = (endpoint, callback) => {
-    router.get(endpoint, callback);
+  type ApiCallback = (request: Request, response: Response) => Promise<void>;
+  type ApiNextCallback = (request: Request, response: Response, next: NextFunction) => Promise<void>;
+
+  const errorWrapCallback: (callback: ApiCallback) => ApiNextCallback = (callback: ApiCallback) => {
+    return (request: Request, response: Response, next: NextFunction) => {
+      return callback(request, response).catch(err => {
+        next(err);
+      });
+    };
   };
 
-  const privateGet: (endpoint: any, callback: any) => void = (endpoint, callback) => {
-    router.get(endpoint, authCheck, callback);
+  const publicGet: (endpoint: any, callback: ApiCallback) => void = (endpoint, callback) => {
+    router.get(endpoint, errorWrapCallback(callback));
   };
 
-  const privatePost: (endpoint: any, callback: any) => void = (endpoint, callback) => {
-    router.post(endpoint, authCheck, callback);
+  const privateGet: (endpoint: any, callback: ApiCallback) => void = (endpoint, callback) => {
+    router.get(endpoint, authCheck, errorWrapCallback(callback));
   };
 
-  const privatePut: (endpoint: any, callback: any) => void = (endpoint, callback) => {
-    router.put(endpoint, authCheck, callback);
+  const privatePost: (endpoint: any, callback: ApiCallback) => void = (endpoint, callback) => {
+    router.post(endpoint, authCheck, errorWrapCallback(callback));
   };
 
-  const privateDelete: (endpoint: any, callback: any) => void = (endpoint, callback) => {
-    router.delete(endpoint, authCheck, callback);
+  const privatePut: (endpoint: any, callback: ApiCallback) => void = (endpoint, callback) => {
+    router.put(endpoint, authCheck, errorWrapCallback(callback));
+  };
+
+  const privateDelete: (endpoint: any, callback: ApiCallback) => void = (endpoint, callback) => {
+    router.delete(endpoint, authCheck, errorWrapCallback(callback));
   };
 
   // noinspection JSUnusedLocalSymbols
-  const privatePatch: (endpoint: any, callback: any) => void = (endpoint, callback) => {
-    router.patch(endpoint, authCheck, callback);
+  const privatePatch: (endpoint: any, callback: ApiCallback) => void = (endpoint, callback) => {
+    router.patch(endpoint, authCheck, errorWrapCallback(callback));
   };
 
   privateGet('/categories', nominees.getCategories);
@@ -83,8 +97,9 @@ module.exports = app => {
   privateGet('/finalResults', finalResults.getFinalResults);
   privateGet('/maxYear', nominees.getMostRecentYear);
 
-  privateGet('/ceremonies', ceremonies.getCeremonyYears);
+  publicGet('/ceremonies', ceremonies.getCeremonyYears);
   privatePost('/ceremonies', ceremonies.addCeremonyYear);
+  privatePut('/ceremonies', ceremonies.updateCeremonyYear);
 
   app.use('/api', router);
 
@@ -93,10 +108,9 @@ module.exports = app => {
   // production error handler
   // no stacktraces leaked to user
   // noinspection JSUnusedLocalSymbols
-  router.use((err, req, res, next) => {
+  router.use((err: ServerError, req: Request, res: Response, next: NextFunction) => {
     console.log(err.message);
     console.log(err.stack);
-    console.log('Status: ' + err.status);
     res.status(err.status || 500).json({
       message: err.message,
       error: err
@@ -105,12 +119,12 @@ module.exports = app => {
   });
 
   // noinspection JSUnusedLocalSymbols
-  router.use((req, res, next) => {
-    console.log('Undefined API called!');
-    res.status(400).json({
-      message: `Invalid API called: ${req.path}`,
-    });
-    next();
+  router.use((req: Request, res: Response, next: NextFunction) => {
+    const message = `Invalid API called: ${req.path}`;
+    const status = 404;
+    console.log(message);
+    res.status(status).json({message});
+    next(new ServerError(status, message));
   });
 
 };

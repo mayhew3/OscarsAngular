@@ -16,6 +16,7 @@ import {FormControl} from '@angular/forms';
 import {SocketService} from '../../services/socket.service';
 import {groupNumber} from '../../../shared/GlobalVars';
 import {OddsInterface} from '../../../shared/OddsInterface';
+import {CeremonyService} from '../../services/ceremony.service';
 
 @Component({
   selector: 'osc-nominees',
@@ -60,7 +61,7 @@ export class NomineesComponent implements OnInit {
               private route: ActivatedRoute,
               private winnersService: WinnersService,
               private personService: PersonService,
-              private systemVarsService: SystemVarsService,
+              private ceremonyService: CeremonyService,
               private socket: SocketService) { }
 
   get nomineeGroupList(): NomineeControls[] {
@@ -148,13 +149,13 @@ export class NomineesComponent implements OnInit {
   }
 
   showNominees(): Observable<boolean> {
-    return this.systemVarsService.canVote().pipe(
+    return this.ceremonyService.canVote().pipe(
       map(canVote => canVote || !this.votingMode())
     );
   }
 
   showVotingClosedMessage(): Observable<boolean> {
-    return this.systemVarsService.canVote().pipe(
+    return this.ceremonyService.canVote().pipe(
       map(canVote => this.votingMode() && canVote === false)
     );
   }
@@ -162,7 +163,7 @@ export class NomineesComponent implements OnInit {
   getMainLineText(nominee: Nominee, category: Category): string {
     if (CategoryService.isSongCategory(category.name)) {
       return `"${nominee.nominee}"`;
-    } else if (CategoryService.isTitleCategory(category.name)) {
+    } else if (CategoryService.isTitleCategory(category.name) && !!nominee.context) {
       return `${nominee.nominee} (${nominee.context})`;
     } else {
       return nominee.nominee;
@@ -180,8 +181,8 @@ export class NomineesComponent implements OnInit {
     }
   }
 
-  getSubtitleText(nominee: Nominee, category: Category): string {
-    return CategoryService.getSubtitleText(category, nominee);
+  getSubtitleText(nominee: Nominee, category: Category): Observable<string> {
+    return this.categoryService.getSubtitleText(category, nominee);
   }
 
   getSongSubtitles(nominee: Nominee): string[] {

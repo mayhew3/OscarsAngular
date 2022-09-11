@@ -1,7 +1,6 @@
 /* eslint-disable */
-import {Ceremony} from '../../interfaces/Ceremony';
 
-export const MockCeremonies: Ceremony[] = [
+export const MockCeremonies = [
   {
     "ceremonyYears": [
       {
@@ -285,6 +284,7 @@ export const MockCeremonies: Ceremony[] = [
           "id": 31
         }],
         "year": 2021,
+        "voting_closed": "2022-03-27T16:46:22.009058",
         "nominationCount": 120,
         "ceremony_id": 1,
         "id": 18
@@ -294,20 +294,35 @@ export const MockCeremonies: Ceremony[] = [
     "id": 1
   },
   {
-    "ceremonyYears": [{
-      "ceremony_date": "2021-09-19T17:00:00",
-      "groupYears": [{
-        "person_group_id": 3,
+    "ceremonyYears": [
+      {
+        "ceremony_date": "2021-09-19T17:00:00",
+        "groupYears": [{
+          "person_group_id": 3,
+          "year": 2021,
+          "ceremony_year_id": 17,
+          "id": 30
+        }],
         "year": 2021,
-        "ceremony_year_id": 17,
-        "id": 30
-      }],
-      "year": 2021,
-      "voting_closed": "2021-09-19T16:55:00",
-      "nominationCount": 163,
-      "ceremony_id": 2,
-      "id": 17
-    }],
+        "voting_closed": "2021-09-19T16:55:00",
+        "nominationCount": 163,
+        "ceremony_id": 2,
+        "id": 17
+      },
+      {
+        "ceremony_date": "2022-09-12T17:00:00",
+        "groupYears": [{
+          "person_group_id": 1,
+          "year": 2022,
+          "ceremony_year_id": 19,
+          "id": 32
+        }],
+        "year": 2022,
+        "nominationCount": 162,
+        "ceremony_id": 2,
+        "id": 19
+      }
+    ],
     "name": "Emmys",
     "id": 2
   }

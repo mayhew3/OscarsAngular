@@ -4,18 +4,18 @@
     <strong>Auth0 Error:</strong> {{auth.error$ | async}}
   </div>
 
-  <div *ngIf="(apiService.emailVerified$ | async) else loading">
+  <div *ngIf="winnersCached && (apiService.emailVerified$ | async) else loading">
 
     <p>
       Welcome to the {{ceremonyName | async}} Prediction Arena for {{getCeremonyYear() | async}} {{ceremonyContent | async}}, {{(me$ | async).first_name}}!
     </p>
 
-    <p *ngIf="(hasVotesRemaining() | async) && (systemVarsService.canVote() | async)"
+    <p *ngIf="(hasVotesRemaining() | async) && (canVote() | async)"
        class="votesRemaining">
       You have {{numVotesRemaining() | async}} categories left to vote on!
     </p>
 
-    <div *ngIf="(systemVarsService.canVote() | async) && (categoryService.itsOver() | async) === false">
+    <div *ngIf="(canVote() | async) && (categoryService.itsOver() | async) === false">
       <p>Live Scoring will be viewable on {{ceremonyDateFormatted | async}} your local time, when the ballots will lock.</p>
       <p *ngIf="!!ceremonyOddsUrl">Your voting screen includes expert picks and metacritic user favorites, as
         found on <a href="{{ceremonyOddsUrl}}" target="_blank">Metacritic</a>.</p>
@@ -27,7 +27,7 @@
 
     </div>
 
-    <p *ngIf="(systemVarsService.canVote() | async) === false && (categoryService.itsOver() | async) === false">
+    <p *ngIf="(canVote() | async) === false && (categoryService.itsOver() | async) === false">
       Voting is currently closed, but you can head over to Live Scoring to see how the scores are progressing, or see the final scores.
     </p>
 
@@ -53,7 +53,7 @@
     <div class="row">
 
       <div class="col-12 col-sm-6 col-lg-4"
-           *ngIf="((systemVarsService.canVote() | async) || personService.isAdmin)">
+           *ngIf="((canVote() | async) || personService.isAdmin)">
         <div class="card navCard">
           <div class="card-body fakeLink"
                routerLink="vote">
@@ -67,7 +67,7 @@
       </div>
 
       <div class="col-12 col-sm-6 col-lg-4"
-           *ngIf="((systemVarsService.canVote() | async) === false || personService.isAdmin)">
+           *ngIf="((canVote() | async) === false || personService.isAdmin)">
         <div class="card navCard">
           <div class="card-body fakeLink"
                routerLink="scores">
@@ -81,7 +81,7 @@
       </div>
 
       <div class="col-12 col-sm-6 col-lg-4"
-           *ngIf="((systemVarsService.canVote() | async) === false || personService.isAdmin)">
+           *ngIf="((canVote() | async) === false || personService.isAdmin)">
         <div class="card navCard">
           <div class="card-body fakeLink"
                routerLink="winners">

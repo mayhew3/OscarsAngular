@@ -2,7 +2,7 @@ import {Nomination} from '../typeorm/Nomination';
 import {getConnection, getRepository, IsNull, Not, UpdateResult} from 'typeorm';
 import {OddsExecution} from '../typeorm/OddsExecution';
 import {OddsResult} from '../typeorm/OddsResult';
-import {Request, Response, NextFunction} from 'express/ts4.0';
+import {Request, Response} from 'express/ts4.0';
 
 const attachOddsToExecution = async (execution: OddsExecution, response: Response): Promise<void> => {
   execution.odds = await getRepository(OddsResult).find({
@@ -55,10 +55,9 @@ const handleOddsForEventID = async (event_id: number, year: number, response: Re
 
 };
 
-export const getMostRecentOddsBundle = async (request: Request, response: Response,
-                                              next: NextFunction): Promise<void> => {
+export const getMostRecentOddsBundle = async (request: Request, response: Response): Promise<void> => {
   if (!request.query.year) {
-    return next(new Error('No year attached to request!'));
+    throw new Error('No year attached to request!');
   }
   const year = +request.query.year;
   await handleFirstOdds(year, response);

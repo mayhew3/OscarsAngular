@@ -4,7 +4,6 @@ import {Category} from '../interfaces/Category';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
-import {SystemVarsService} from './system.vars.service';
 import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
 import {Store} from '@ngxs/store';
@@ -13,6 +12,7 @@ import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {ArrayUtil} from '../utility/ArrayUtil';
 import fast_sort from 'fast-sort';
+import {CeremonyService} from './ceremony.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +26,13 @@ export class CategoryService {
 
   categories: Observable<Category[]> = this.store.select(state => state.categories).pipe(
     map(model => model.categories),
-    filter(categories => !!categories),
+    filter(Boolean),
     mergeMap(categories =>
-      this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
-        map(systemVars => _.filter(categories, category => CategoryService.isInRange(systemVars.curr_year, category)))
-      ))
+      this.ceremonyService.getCurrentYear().pipe(
+        map(year => _.filter(categories, category => category.nominees.length > 0 &&
+          CategoryService.isInRange(year, category)))
+      )),
+    filter(Boolean)
   );
 
   maxYear: Observable<MaxYear> = this.store.select(state => state.maxYear).pipe(
@@ -39,12 +41,12 @@ export class CategoryService {
   );
 
   constructor(private personService: PersonService,
-              private systemVarsService: SystemVarsService,
+              private ceremonyService: CeremonyService,
               private store: Store) {
 
-    combineLatest([this.personService.me$, this.systemVarsService.systemVarsCeremonyYearChanges$])
-      .subscribe(([me, systemVars]) => {
-        this.store.dispatch(new GetCategories(systemVars.curr_year, me.id, systemVars.ceremony_name));
+    combineLatest([this.personService.me$, this.ceremonyService.getCurrentYear(), this.ceremonyService.getCurrentCeremonyName()])
+      .subscribe(([me, year, ceremonyName]) => {
+        this.store.dispatch(new GetCategories(year, me.id, ceremonyName));
       });
 
     this.store.dispatch(new GetMaxYear());
@@ -62,17 +64,21 @@ export class CategoryService {
     return CategoryService.titleCategories.includes(categoryName);
   }
 
-  static getSubtitleText(category: Category, nominee: Nominee): string {
-    if (CategoryService.isSingleLineCategory(category.name)) {
-      return undefined;
-    } else if (CategoryService.isTitleCategory(category.name)) {
-      return !!nominee.detail ? `"${nominee.detail}"` : null;
-    } else if (!CategoryService.isSongCategory(category.name) &&
-                nominee.nominee === nominee.context || !nominee.context) {
-      return nominee.detail;
-    } else {
-      return nominee.context;
-    }
+  getSubtitleText(category: Category, nominee: Nominee): Observable<string> {
+    return this.ceremonyService.getCurrentCeremonyName().pipe(
+      map(currentCeremonyName => {
+        if (CategoryService.isSingleLineCategory(category.name)) {
+          return undefined;
+        } else if (CategoryService.isTitleCategory(category.name) && currentCeremonyName === 'Oscars') {
+          return !!nominee.detail ? `"${nominee.detail}"` : null;
+        } else if (!CategoryService.isSongCategory(category.name) &&
+          nominee.nominee === nominee.context || !nominee.context) {
+          return nominee.detail;
+        } else {
+          return nominee.context;
+        }
+      })
+    );
   }
 
   static isInRange(year: number, category: Category): boolean {
@@ -104,7 +110,9 @@ export class CategoryService {
     const winnerCategoryCount$ = this.getWinnerCategoryCount();
     const totalCategoryCount$ = this.getCategoryCount();
     return combineLatest([winnerCategoryCount$, totalCategoryCount$]).pipe(
-      map(([winnerCategoryCount, totalCategoryCount]) => winnerCategoryCount === totalCategoryCount)
+      map(([winnerCategoryCount, totalCategoryCount]) => {
+        return winnerCategoryCount === totalCategoryCount;
+      })
     );
   }
 

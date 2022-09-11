@@ -1,14 +1,7 @@
 import {Action, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {SystemVars} from '../interfaces/SystemVars';
-import {
-  ChangeActiveCeremonyYear,
-  GetSystemVars,
-  ToggleHideWinnerless,
-  ToggleHideWinners,
-  VotingLock,
-  VotingUnlock
-} from '../actions/systemVars.action';
+import {ChangeActiveCeremonyYear, GetSystemVars, ToggleHideWinnerless, ToggleHideWinners} from '../actions/systemVars.action';
 import produce from 'immer';
 import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
@@ -46,24 +39,6 @@ export class SystemVarsState {
     );
     this.stateChanges++;
     this.logger.log('SYSTEMVARS State Change #' + this.stateChanges);
-  }
-
-  @Action(VotingLock)
-  votingLock({setState}: StateContext<SystemVarsStateModel>): void {
-    setState(
-      produce(draft => {
-        draft.systemVars.voting_open = false;
-      })
-    );
-  }
-
-  @Action(VotingUnlock)
-  votingUnlock({setState}: StateContext<SystemVarsStateModel>): void {
-    setState(
-      produce(draft => {
-        draft.systemVars.voting_open = true;
-      })
-    );
   }
 
   @Action(ToggleHideWinners)

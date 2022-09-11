@@ -3,7 +3,7 @@ import {socketServer} from '../www';
 import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {getRepository} from 'typeorm';
 import {Vote} from '../typeorm/Vote';
-import {Request, Response, NextFunction} from 'express/ts4.0';
+import {Request, Response} from 'express/ts4.0';
 
 export const getVotes = async (request: Request, response: Response): Promise<void> => {
   const votes = await getRepository(Vote).find({
@@ -14,8 +14,7 @@ export const getVotes = async (request: Request, response: Response): Promise<vo
   response.json(votes);
 };
 
-export const addOrUpdateVote = async (request: Request, response: Response,
-                                      next: NextFunction): Promise<void> => {
+export const addOrUpdateVote = async (request: Request, response: Response): Promise<void> => {
   const voteRepository = getRepository(Vote);
   const votes = await voteRepository.find({
     where: {
@@ -26,7 +25,7 @@ export const addOrUpdateVote = async (request: Request, response: Response,
   });
 
   if (votes.length > 1) {
-    return next(new Error('Multiple votes found!'));
+    throw new Error('Multiple votes found!');
   } else if (votes.length === 1) {
     const vote = votes[0];
     const nomination_id = request.body.nomination_id;
@@ -35,18 +34,10 @@ export const addOrUpdateVote = async (request: Request, response: Response,
       .then(result => {
         socketServer.emitToAll('change_vote', {vote_id: vote.id, nomination_id});
         response.json(result);
-      })
-      .catch(err => {
-        next(err);
       });
   } else {
-    try {
-      const result = await TypeORMManager.createAndCommit(request.body, Vote);
-      socketServer.emitToAll('add_vote', result);
-      response.json(result);
-    } catch (err: any) {
-      next(err);
-    }
-
+    const result = await TypeORMManager.createAndCommit(request.body, Vote);
+    socketServer.emitToAll('add_vote', result);
+    response.json(result);
   }
 };

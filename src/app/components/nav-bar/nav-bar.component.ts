@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MyAuthService} from '../../services/auth/my-auth.service';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {map, mergeMap} from 'rxjs/operators';
-import {combineLatest, Observable, of} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {CeremonyService} from '../../services/ceremony.service';
 import {PersonService} from '../../services/person.service';
 
@@ -22,9 +22,7 @@ export class NavBarComponent implements OnInit {
   }
 
   get ceremonyName(): Observable<string> {
-    return this.systemVarsService.systemVarsCeremonyYearChanges$.pipe(
-      map(systemVars => systemVars.ceremony_name)
-    );
+    return this.ceremonyService.getCurrentCeremonyName();
   }
 
   get bannerImage(): Observable<string> {
@@ -33,9 +31,13 @@ export class NavBarComponent implements OnInit {
     );
   }
 
+  canVote(): Observable<boolean> {
+    return this.ceremonyService.canVote();
+  }
+
   showPast(): Observable<boolean> {
-    return combineLatest([this.personService.me$, this.systemVarsService.systemVarsCeremonyYearChanges$]).pipe(
-      mergeMap(([me, systemVars]) => this.ceremonyService.hasPastCeremonies(me, systemVars.ceremony_id))
+    return combineLatest([this.personService.me$, this.ceremonyService.getCurrentCeremony()]).pipe(
+      mergeMap(([me, ceremony]) => this.ceremonyService.hasPastCeremonies(me, ceremony.id))
     );
   }
 }

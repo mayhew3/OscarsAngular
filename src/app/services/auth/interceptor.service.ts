@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import _ from 'underscore';
 
 import {HttpRequest,
   HttpHandler,
@@ -10,14 +11,13 @@ import {HttpRequest,
 import { Observable, throwError } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 import {AuthService} from '@auth0/auth0-angular';
+import {PublicGETs} from '../api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class InterceptorService implements HttpInterceptor {
-
-  allowedList: ['*'];
 
   constructor(private auth: AuthService) { }
 
@@ -28,7 +28,7 @@ export class InterceptorService implements HttpInterceptor {
 
     console.log(req.url);
 
-    if(req.url === '/api/systemVars' && req.method === 'GET'){
+    if(this.isPublicURL(req.url) && req.method === 'GET'){
       return next.handle(req);
     }
 
@@ -41,5 +41,10 @@ export class InterceptorService implements HttpInterceptor {
       }),
       catchError(err => throwError(err))
     );
+  }
+
+  private isPublicURL(url: string): boolean {
+    const fullPaths = _.map(PublicGETs, get => `/api/${get}`);
+    return _.contains(fullPaths, url);
   }
 }
