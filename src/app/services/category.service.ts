@@ -4,7 +4,6 @@ import {Category} from '../interfaces/Category';
 import {filter, map, mergeMap} from 'rxjs/operators';
 import * as _ from 'underscore';
 import {Nominee} from '../interfaces/Nominee';
-import {SystemVarsService} from './system.vars.service';
 import {Winner} from '../interfaces/Winner';
 import {PersonService} from './person.service';
 import {Store} from '@ngxs/store';
@@ -32,7 +31,8 @@ export class CategoryService {
       this.ceremonyService.getCurrentYear().pipe(
         map(year => _.filter(categories, category => category.nominees.length > 0 &&
           CategoryService.isInRange(year, category)))
-      ))
+      )),
+    filter(Boolean)
   );
 
   maxYear: Observable<MaxYear> = this.store.select(state => state.maxYear).pipe(
@@ -110,7 +110,9 @@ export class CategoryService {
     const winnerCategoryCount$ = this.getWinnerCategoryCount();
     const totalCategoryCount$ = this.getCategoryCount();
     return combineLatest([winnerCategoryCount$, totalCategoryCount$]).pipe(
-      map(([winnerCategoryCount, totalCategoryCount]) => winnerCategoryCount === totalCategoryCount)
+      map(([winnerCategoryCount, totalCategoryCount]) => {
+        return winnerCategoryCount === totalCategoryCount;
+      })
     );
   }
 
