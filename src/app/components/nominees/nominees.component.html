@@ -36,7 +36,7 @@
 
     <div class="row" *ngIf="showNominees() | async">
       <div class="col-12 col-sm-6 col-lg-4"
-           *ngFor="let nominee of category.nominees">
+           *ngFor="let nominee of getNomineesSorted(category)">
 
         <div class="card nomineeCard"
              [ngClass]="getVotedClass(nominee) | async"
@@ -94,13 +94,24 @@
               <div class="col-3">
                 <div class="row">
                   <label class="col-form-label col-form-label-sm cardLabel"
-                         for="moneylineInput">Money</label>
-                  <input type="text"
+                         for="numeratorInput">Vegas</label>
+                  <input type="number"
                          class="form-control cardInput"
                          style="text-align: center"
-                         [formControl]="nomineeGroups.get(nominee.id).moneyline"
-                         (blur)="updateVegasOdds(nominee)"
-                         id="moneylineInput"/>
+                         [formControl]="nomineeGroups.get(nominee.id).numerator"
+                         id="numeratorInput"/>
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="row" style="padding: 0.4rem 0.4rem">
+                  <label class="col-form-label col-form-label-sm cardLabel"
+                         for="denominatorInput">V2</label>
+                  <input type="number"
+                         class="form-control cardInput"
+                         style="text-align: center"
+                         [formControl]="nomineeGroups.get(nominee.id).denominator"
+                         id="denominatorInput"/>
                 </div>
               </div>
 
