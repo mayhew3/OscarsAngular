@@ -4,7 +4,7 @@
     <strong>Auth0 Error:</strong> {{auth.error$ | async}}
   </div>
 
-  <div *ngIf="(apiService.emailVerified$ | async) else loading">
+  <div *ngIf="winnersCached && (apiService.emailVerified$ | async) else loading">
 
     <p>
       Welcome to the {{ceremonyName | async}} Prediction Arena for {{getCeremonyYear() | async}} {{ceremonyContent | async}}, {{(me$ | async).first_name}}!

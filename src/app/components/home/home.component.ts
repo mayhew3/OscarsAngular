@@ -22,6 +22,8 @@ import {CeremonyService} from '../../services/ceremony.service';
 export class HomeComponent implements OnInit {
   authenticatingColor: ThemePalette = 'primary';
   loadingColor: ThemePalette = 'accent';
+  winnersCached = false;
+
   constructor(public auth: MyAuthService,
               public personService: PersonService,
               public apiService: ApiService,
@@ -32,6 +34,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.categoryService.itsOver().subscribe(_ => {
+      this.winnersCached = true;
+    });
   }
 
   get me$(): Observable<Person> {
