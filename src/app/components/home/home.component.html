@@ -19,6 +19,9 @@
       <p>Live Scoring will be viewable on {{ceremonyDateFormatted | async}} your local time, when the ballots will lock.</p>
       <p *ngIf="!!ceremonyOddsUrl">Your voting screen includes expert picks and metacritic user favorites, as
         found on <a href="{{ceremonyOddsUrl}}" target="_blank">Metacritic</a>.</p>
+      <p>There is no nice metacritic expert collecting page for the Emmys this year, so we're only using a single data
+        source for our odds, <a href="https://www.goldderby.com/odds/combined-odds/primetime-emmy-awards-2022-predictions/">Gold Derby</a>.
+      The voting page shows the vegas odds notation, and the odds percentage, for convenience.</p>
 
       <div class="text-center">
         {{ceremonyName | async}} Start in:

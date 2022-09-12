@@ -152,11 +152,18 @@ export class NomineesComponent implements OnInit {
 
   getNomineesSorted(category: Category): Nominee[] {
     const sorted = ArrayUtil.cloneArray(category.nominees);
-    fast_sort(sorted)
-      .by([
-        {asc: n => n.nominee},
-        {asc: n => n.detail}
-      ]);
+    if (this.votingMode() && this.displayOddsPercentage()) {
+      fast_sort(sorted)
+        .by([
+          {desc: n => this.vegasOddsAsPercentage(n)}
+        ]);
+    } else {
+      fast_sort(sorted)
+        .by([
+          {asc: n => n.nominee},
+          {asc: n => n.detail}
+        ]);
+    }
     return sorted;
   }
 
@@ -253,6 +260,19 @@ export class NomineesComponent implements OnInit {
     } else {
       return undefined;
     }
+  }
+
+  displayOddsPercentage(): Observable<boolean> {
+    return this.category$.pipe(
+      map(category => {
+        const nomineesWithRealPercentages = _.filter(category.nominees, n => !!n.odds_user || !!n.odds_expert);
+        return nomineesWithRealPercentages.length === 0;
+      })
+    );
+  }
+
+  vegasOddsAsPercentage(nominee: Nominee): number {
+    return OddsInterface.fromRatio(nominee.odds_numerator, nominee.odds_denominator).asPercentage() * 100;
   }
 
   moneylineAsPercentage(moneyline: number): number {

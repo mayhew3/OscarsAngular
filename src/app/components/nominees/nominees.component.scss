@@ -116,6 +116,19 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: color.scale(black, $alpha: -85%);
 }
 
+.biggerOddsBox {
+  font-size: 1.1em;
+  text-align: center;
+  font-weight: 600;
+  color: lightgray;
+  width: 55px;
+  height: 25px;
+  border-radius: 3px;
+  padding: 0;
+  margin-left: 5px;
+  background-color: color.scale(black, $alpha: -85%);
+}
+
 .oddsBox span {
   display: block;
   position: relative;

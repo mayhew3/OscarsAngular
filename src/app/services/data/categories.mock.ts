@@ -1506,60 +1506,76 @@ export const MockCategoryList: Category[] = [
         "id": 3065
       },
       {
+        "odds_denominator": 2,
         "category_id": 28,
         "year": 2022,
         "context": "ABC",
         "nominee": "Abbott Elementary",
-        "id": 3369
+        "id": 3531,
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 1,
         "category_id": 28,
         "year": 2022,
         "context": "HBO",
         "nominee": "Barry",
-        "id": 3370
+        "id": 3532,
+        "odds_numerator": 8
       },
       {
+        "odds_denominator": 1,
         "category_id": 28,
         "year": 2022,
         "context": "HBO",
         "nominee": "Curb Your Enthusiasm",
-        "id": 3371
+        "id": 3533,
+        "odds_numerator": 10
       },
       {
+        "odds_denominator": 1,
         "category_id": 28,
         "year": 2022,
         "context": "HBO",
         "nominee": "Hacks",
-        "id": 3372
+        "id": 3534,
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 2,
         "category_id": 28,
         "year": 2022,
         "context": "Amazon Prime Video",
         "nominee": "The Marvelous Mrs. Maisel",
-        "id": 3373
+        "id": 3535,
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 1,
         "category_id": 28,
         "year": 2022,
         "context": "Hulu",
         "nominee": "Only Murders In The Building",
-        "id": 3374
+        "id": 3536,
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 2,
         "category_id": 28,
         "year": 2022,
         "context": "Apple TV+",
         "nominee": "Ted Lasso",
-        "id": 3375
+        "id": 3537,
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 28,
         "year": 2022,
         "context": "FX",
         "nominee": "What We Do In The Shadows",
-        "id": 3376
+        "id": 3538,
+        "odds_numerator": 19
       }
     ],
     "name": "Comedy",
@@ -1637,60 +1653,76 @@ export const MockCategoryList: Category[] = [
         "id": 3098
       },
       {
+        "odds_denominator": 1,
         "category_id": 34,
         "year": 2022,
         "context": "AMC",
         "nominee": "Better Call Saul",
-        "id": 3361
+        "id": 3523,
+        "odds_numerator": 8
       },
       {
+        "odds_denominator": 2,
         "category_id": 34,
         "year": 2022,
         "context": "HBO",
         "nominee": "Euphoria",
-        "id": 3362
+        "id": 3524,
+        "odds_numerator": 17
       },
       {
+        "odds_denominator": 1,
         "category_id": 34,
         "year": 2022,
         "context": "Netflix",
         "nominee": "Ozark",
-        "id": 3363
+        "id": 3525,
+        "odds_numerator": 8
       },
       {
+        "odds_denominator": 2,
         "category_id": 34,
         "year": 2022,
         "context": "Apple TV+",
         "nominee": "Severance",
-        "id": 3364
+        "id": 3526,
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 34,
         "year": 2022,
         "context": "Netflix",
         "nominee": "Squid Game",
-        "id": 3365
+        "id": 3527,
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 2,
         "category_id": 34,
         "year": 2022,
         "context": "Netflix",
         "nominee": "Stranger Things",
-        "id": 3366
+        "id": 3528,
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 1,
         "category_id": 34,
         "year": 2022,
         "context": "HBO",
         "nominee": "Succession",
-        "id": 3367
+        "id": 3529,
+        "odds_numerator": 4
       },
       {
+        "odds_denominator": 1,
         "category_id": 34,
         "year": 2022,
         "context": "Showtime",
         "nominee": "Yellowjackets",
-        "id": 3368
+        "id": 3530,
+        "odds_numerator": 9
       }
     ],
     "name": "Drama",
@@ -1749,39 +1781,49 @@ export const MockCategoryList: Category[] = [
         "id": 3208
       },
       {
+        "odds_denominator": 5,
         "category_id": 41,
         "year": 2022,
         "context": "Hulu",
         "nominee": "Dopesick ",
-        "id": 3395
+        "id": 3557,
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 2,
         "category_id": 41,
         "year": 2022,
         "context": "Hulu",
         "nominee": "The Dropout ",
-        "id": 3396
+        "id": 3558,
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 41,
         "year": 2022,
         "context": "Netflix",
         "nominee": "Inventing Anna ",
-        "id": 3397
+        "id": 3559,
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 41,
         "year": 2022,
         "context": "Hulu",
         "nominee": "Pam & Tommy ",
-        "id": 3398
+        "id": 3560,
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 5,
         "category_id": 41,
         "year": 2022,
         "context": "HBO",
         "nominee": "The White Lotus ",
-        "id": 3399
+        "id": 3561,
+        "odds_numerator": 16
       }
     ],
     "name": "Limited or Anthology Series",
@@ -1838,46 +1880,58 @@ export const MockCategoryList: Category[] = [
         "detail": "Kenan"
       },
       {
+        "odds_denominator": 2,
         "category_id": 35,
         "year": 2022,
         "nominee": "Donald Glover",
-        "id": 3383,
-        "detail": "Atlanta"
+        "id": 3545,
+        "detail": "Atlanta",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 5,
         "category_id": 35,
         "year": 2022,
         "nominee": "Bill Hader",
-        "id": 3384,
-        "detail": "Barry"
+        "id": 3546,
+        "detail": "Barry",
+        "odds_numerator": 18
       },
       {
+        "odds_denominator": 1,
         "category_id": 35,
         "year": 2022,
         "nominee": "Nicholas Hoult",
-        "id": 3385,
-        "detail": "The Great"
+        "id": 3547,
+        "detail": "The Great",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 1,
         "category_id": 35,
         "year": 2022,
         "nominee": "Steve Martin",
-        "id": 3386,
-        "detail": "Only Murders In The Building"
+        "id": 3548,
+        "detail": "Only Murders In The Building",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 2,
         "category_id": 35,
         "year": 2022,
         "nominee": "Martin Short",
-        "id": 3387,
-        "detail": "Only Murders In The Building"
+        "id": 3549,
+        "detail": "Only Murders In The Building",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 10,
         "category_id": 35,
         "year": 2022,
         "nominee": "Jason Sudeikis",
-        "id": 3388,
-        "detail": "Ted Lasso"
+        "id": 3550,
+        "detail": "Ted Lasso",
+        "odds_numerator": 39
       }
     ],
     "sub_name": "Comedy",
@@ -1943,46 +1997,58 @@ export const MockCategoryList: Category[] = [
         "detail": "Perry Mason"
       },
       {
+        "odds_denominator": 1,
         "category_id": 36,
         "year": 2022,
         "nominee": "Jason Bateman",
-        "id": 3418,
-        "detail": "Ozark"
+        "id": 3580,
+        "detail": "Ozark",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 2,
         "category_id": 36,
         "year": 2022,
         "nominee": "Brian Cox",
-        "id": 3419,
-        "detail": "Succession"
+        "id": 3581,
+        "detail": "Succession",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 5,
         "category_id": 36,
         "year": 2022,
         "nominee": "Lee Jung-jae",
-        "id": 3420,
-        "detail": "Squid Game"
+        "id": 3582,
+        "detail": "Squid Game",
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 1,
         "category_id": 36,
         "year": 2022,
         "nominee": "Bob Odenkirk",
-        "id": 3421,
-        "detail": "Better Call Saul"
+        "id": 3583,
+        "detail": "Better Call Saul",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 2,
         "category_id": 36,
         "year": 2022,
         "nominee": "Adam Scott",
-        "id": 3422,
-        "detail": "Severance"
+        "id": 3584,
+        "detail": "Severance",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 1,
         "category_id": 36,
         "year": 2022,
         "nominee": "Jeremy Strong",
-        "id": 3423,
-        "detail": "Succession"
+        "id": 3585,
+        "detail": "Succession",
+        "odds_numerator": 5
       }
     ],
     "sub_name": "Drama",
@@ -2041,46 +2107,58 @@ export const MockCategoryList: Category[] = [
         "detail": "Hamilton"
       },
       {
+        "odds_denominator": 2,
         "category_id": 37,
         "year": 2022,
         "nominee": "Colin Firth",
-        "id": 3400,
-        "detail": "The Staircase"
+        "id": 3562,
+        "detail": "The Staircase",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 1,
         "category_id": 37,
         "year": 2022,
         "nominee": "Andrew Garfield",
-        "id": 3401,
-        "detail": "Under The Banner Of Heaven"
+        "id": 3563,
+        "detail": "Under The Banner Of Heaven",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 2,
         "category_id": 37,
         "year": 2022,
         "nominee": "Oscar Isaac",
-        "id": 3402,
-        "detail": "Scenes From A Marriage"
+        "id": 3564,
+        "detail": "Scenes From A Marriage",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 3,
         "category_id": 37,
         "year": 2022,
         "nominee": "Michael Keaton",
-        "id": 3403,
-        "detail": "Dopesick"
+        "id": 3565,
+        "detail": "Dopesick",
+        "odds_numerator": 10
       },
       {
+        "odds_denominator": 2,
         "category_id": 37,
         "year": 2022,
         "nominee": "Himesh Patel",
-        "id": 3404,
-        "detail": "Station Eleven"
+        "id": 3566,
+        "detail": "Station Eleven",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 37,
         "year": 2022,
         "nominee": "Sebastian Stan",
-        "id": 3405,
-        "detail": "Pam & Tommy"
+        "id": 3567,
+        "detail": "Pam & Tommy",
+        "odds_numerator": 9
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -2139,46 +2217,58 @@ export const MockCategoryList: Category[] = [
         "detail": "Hacks"
       },
       {
+        "odds_denominator": 2,
         "category_id": 38,
         "year": 2022,
         "nominee": "Rachel Brosnahan",
-        "id": 3377,
-        "detail": "The Marvelous Mrs. Maisel"
+        "id": 3539,
+        "detail": "The Marvelous Mrs. Maisel",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 5,
         "category_id": 38,
         "year": 2022,
         "nominee": "Quinta Brunson",
-        "id": 3378,
-        "detail": "Abbott Elementary"
+        "id": 3540,
+        "detail": "Abbott Elementary",
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 1,
         "category_id": 38,
         "year": 2022,
         "nominee": "Kaley Cuoco",
-        "id": 3379,
-        "detail": "The Flight Attendant"
+        "id": 3541,
+        "detail": "The Flight Attendant",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 2,
         "category_id": 38,
         "year": 2022,
         "nominee": "Elle Fanning",
-        "id": 3380,
-        "detail": "The Great"
+        "id": 3542,
+        "detail": "The Great",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 38,
         "year": 2022,
         "nominee": "Issa Rae",
-        "id": 3381,
-        "detail": "Insecure"
+        "id": 3543,
+        "detail": "Insecure",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 20,
         "category_id": 38,
         "year": 2022,
         "nominee": "Jean Smart",
-        "id": 3382,
-        "detail": "Hacks"
+        "id": 3544,
+        "detail": "Hacks",
+        "odds_numerator": 69
       }
     ],
     "sub_name": "Comedy",
@@ -2245,46 +2335,58 @@ export const MockCategoryList: Category[] = [
         "detail": "Lovecraft Country"
       },
       {
+        "odds_denominator": 1,
         "category_id": 39,
         "year": 2022,
         "nominee": "Jodie Comer",
-        "id": 3412,
-        "detail": "Killing Eve"
+        "id": 3574,
+        "detail": "Killing Eve",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 2,
         "category_id": 39,
         "year": 2022,
         "nominee": "Laura Linney",
-        "id": 3413,
-        "detail": "Ozark"
+        "id": 3575,
+        "detail": "Ozark",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 10,
         "category_id": 39,
         "year": 2022,
         "nominee": "Melanie Lynsey",
-        "id": 3414,
-        "detail": "Yellowjackets"
+        "id": 3576,
+        "detail": "Yellowjackets",
+        "odds_numerator": 39
       },
       {
+        "odds_denominator": 2,
         "category_id": 39,
         "year": 2022,
         "nominee": "Sandra Oh",
-        "id": 3415,
-        "detail": "Killing Eve"
+        "id": 3577,
+        "detail": "Killing Eve",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 1,
         "category_id": 39,
         "year": 2022,
         "nominee": "Reese Witherspoon",
-        "id": 3416,
-        "detail": "The Morning Show"
+        "id": 3578,
+        "detail": "The Morning Show",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 5,
         "category_id": 39,
         "year": 2022,
         "nominee": "Zendaya",
-        "id": 3417,
-        "detail": "Euphoria"
+        "id": 3579,
+        "detail": "Euphoria",
+        "odds_numerator": 18
       }
     ],
     "sub_name": "Drama",
@@ -2344,46 +2446,58 @@ export const MockCategoryList: Category[] = [
         "detail": "Mare of Easttown"
       },
       {
+        "odds_denominator": 2,
         "category_id": 40,
         "year": 2022,
         "nominee": "Toni Collette",
-        "id": 3406,
-        "detail": "The Staircase"
+        "id": 3568,
+        "detail": "The Staircase",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 40,
         "year": 2022,
         "nominee": "Julia Garner",
-        "id": 3407,
-        "detail": "Inventing Anna"
+        "id": 3569,
+        "detail": "Inventing Anna",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 2,
         "category_id": 40,
         "year": 2022,
         "nominee": "Lily James",
-        "id": 3408,
-        "detail": "Pam And Tommy"
+        "id": 3570,
+        "detail": "Pam And Tommy",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 40,
         "year": 2022,
         "nominee": "Sarah Paulson",
-        "id": 3409,
-        "detail": "American Crime Story: Impeachment"
+        "id": 3571,
+        "detail": "American Crime Story: Impeachment",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 1,
         "category_id": 40,
         "year": 2022,
         "nominee": "Margaret Qualley",
-        "id": 3410,
-        "detail": "Maid"
+        "id": 3572,
+        "detail": "Maid",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 20,
         "category_id": 40,
         "year": 2022,
         "nominee": "Amanda Seyfried",
-        "id": 3411,
-        "detail": "The Dropout"
+        "id": 3573,
+        "detail": "The Dropout",
+        "odds_numerator": 69
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -2464,53 +2578,67 @@ export const MockCategoryList: Category[] = [
         "detail": "Make Rebecca Great Again"
       },
       {
+        "odds_denominator": 2,
         "category_id": 30,
         "year": 2022,
         "nominee": "Hacks (\u201cThere Will Be Blood\u201d)",
-        "id": 3485,
-        "detail": "Lucia Aniello"
+        "id": 3647,
+        "detail": "Lucia Aniello",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 2,
         "category_id": 30,
         "year": 2022,
         "nominee": "Only Murders in the Building (\u201cTrue Crime\u201d)",
-        "id": 3486,
-        "detail": "Jamie Babbit"
+        "id": 3648,
+        "detail": "Jamie Babbit",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 1,
         "category_id": 30,
         "year": 2022,
         "nominee": "Only Murders in the Building (\u201cThe Boy From 6B\u201d)",
-        "id": 3487,
-        "detail": "Cherien Dabis"
+        "id": 3649,
+        "detail": "Cherien Dabis",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 30,
         "year": 2022,
         "nominee": "The Ms. Pat Show (\u201cBaby Daddy Groundhog Day\u201d)",
-        "id": 3488,
-        "detail": "Mary Lou Belli"
+        "id": 3650,
+        "detail": "Mary Lou Belli",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 1,
         "category_id": 30,
         "year": 2022,
         "nominee": "Ted Lasso (\u201cNo Weddings and a Funeral\u201d)",
-        "id": 3489,
-        "detail": "MJ Delaney"
+        "id": 3651,
+        "detail": "MJ Delaney",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 30,
         "year": 2022,
         "nominee": "Barry (\u201c710N\u201d)",
-        "id": 3490,
-        "detail": "Bill Hader"
+        "id": 3652,
+        "detail": "Bill Hader",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 2,
         "category_id": 30,
         "year": 2022,
         "nominee": "Atlanta (\u201cNew Jazz\u201d)",
-        "id": 3491,
-        "detail": "Hiro Murai"
+        "id": 3653,
+        "detail": "Hiro Murai",
+        "odds_numerator": 13
       }
     ],
     "sub_name": "Comedy",
@@ -2583,53 +2711,67 @@ export const MockCategoryList: Category[] = [
         "detail": "Series Finale"
       },
       {
+        "odds_denominator": 2,
         "category_id": 31,
         "year": 2022,
         "nominee": "Ozark (\u201cA Hard Way to Go\u201d)",
-        "id": 3511,
-        "detail": "Jason Bateman"
+        "id": 3673,
+        "detail": "Jason Bateman",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 1,
         "category_id": 31,
         "year": 2022,
         "nominee": "Squid Game (\u201cRed Light, Green Light\u201d)",
-        "id": 3512,
-        "detail": "Hwang Dong-hyuk"
+        "id": 3674,
+        "detail": "Hwang Dong-hyuk",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 2,
         "category_id": 31,
         "year": 2022,
         "nominee": "Yellowjackets (\u201cPilot\u201d)",
-        "id": 3513,
-        "detail": "Karyn Kusama"
+        "id": 3675,
+        "detail": "Karyn Kusama",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 1,
         "category_id": 31,
         "year": 2022,
         "nominee": "Succession (\u201cAll the Bells Say\u201d)",
-        "id": 3514,
-        "detail": "Mark Mylod"
+        "id": 3676,
+        "detail": "Mark Mylod",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 31,
         "year": 2022,
         "nominee": "Succession (\u201cThe Disruption\u201d)",
-        "id": 3515,
-        "detail": "Cathy Yan"
+        "id": 3677,
+        "detail": "Cathy Yan",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 2,
         "category_id": 31,
         "year": 2022,
         "nominee": "Succession (\u201cToo Much Birthday\u201d)",
-        "id": 3516,
-        "detail": "Lorene Scafaria"
+        "id": 3678,
+        "detail": "Lorene Scafaria",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 31,
         "year": 2022,
         "nominee": "Severance (\u201cThe We We Are\u201d)",
-        "id": 3517,
-        "detail": "Ben Stiller"
+        "id": 3679,
+        "detail": "Ben Stiller",
+        "odds_numerator": 11
       }
     ],
     "sub_name": "Drama",
@@ -2703,46 +2845,58 @@ export const MockCategoryList: Category[] = [
         "id": 3152
       },
       {
+        "odds_denominator": 1,
         "category_id": 32,
         "year": 2022,
         "nominee": "Station Eleven",
-        "id": 3498,
-        "detail": "Hiro Murai"
+        "id": 3660,
+        "detail": "Hiro Murai",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 1,
         "category_id": 32,
         "year": 2022,
         "nominee": "The Dropout",
-        "id": 3499,
-        "detail": "Michael Showalter"
+        "id": 3661,
+        "detail": "Michael Showalter",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 2,
         "category_id": 32,
         "year": 2022,
         "nominee": "The Dropout",
-        "id": 3500,
-        "detail": "Francesca Gregorini"
+        "id": 3662,
+        "detail": "Francesca Gregorini",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 10,
         "category_id": 32,
         "year": 2022,
         "nominee": "Dopesick",
-        "id": 3501,
-        "detail": "Danny Strong"
+        "id": 3663,
+        "detail": "Danny Strong",
+        "odds_numerator": 39
       },
       {
+        "odds_denominator": 1,
         "category_id": 32,
         "year": 2022,
         "nominee": "Maid",
-        "id": 3502,
-        "detail": "John Wells"
+        "id": 3664,
+        "detail": "John Wells",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 20,
         "category_id": 32,
         "year": 2022,
         "nominee": "The White Lotus",
-        "id": 3503,
-        "detail": "Mike White"
+        "id": 3665,
+        "detail": "Mike White",
+        "odds_numerator": 69
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -2823,60 +2977,76 @@ export const MockCategoryList: Category[] = [
         "detail": "Saturday Night Live"
       },
       {
+        "odds_denominator": 2,
         "category_id": 42,
         "year": 2022,
         "nominee": "Anthony Carrigan",
-        "id": 3448,
-        "detail": "Barry"
+        "id": 3610,
+        "detail": "Barry",
+        "odds_numerator": 15
       },
       {
+        "odds_denominator": 2,
         "category_id": 42,
         "year": 2022,
         "nominee": "Brett Goldstein",
-        "id": 3449,
-        "detail": "Ted Lasso"
+        "id": 3611,
+        "detail": "Ted Lasso",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 1,
         "category_id": 42,
         "year": 2022,
         "nominee": "Toheeb Jimoh",
-        "id": 3450,
-        "detail": "Ted Lasso"
+        "id": 3612,
+        "detail": "Ted Lasso",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 42,
         "year": 2022,
         "nominee": "Nick Mohammed",
-        "id": 3451,
-        "detail": "Ted Lasso"
+        "id": 3613,
+        "detail": "Ted Lasso",
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 1,
         "category_id": 42,
         "year": 2022,
         "nominee": "Tony Shalhoub",
-        "id": 3452,
-        "detail": "The Marvelous Mrs. Maisel"
+        "id": 3614,
+        "detail": "The Marvelous Mrs. Maisel",
+        "odds_numerator": 8
       },
       {
+        "odds_denominator": 1,
         "category_id": 42,
         "year": 2022,
         "nominee": "Tyler James Williams",
-        "id": 3453,
-        "detail": "Abbott Elementary"
+        "id": 3615,
+        "detail": "Abbott Elementary",
+        "odds_numerator": 8
       },
       {
+        "odds_denominator": 1,
         "category_id": 42,
         "year": 2022,
         "nominee": "Henry Winkler",
-        "id": 3454,
-        "detail": "Barry"
+        "id": 3616,
+        "detail": "Barry",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 1,
         "category_id": 42,
         "year": 2022,
         "nominee": "Bowen Yang",
-        "id": 3455,
-        "detail": "Saturday Night Live"
+        "id": 3617,
+        "detail": "Saturday Night Live",
+        "odds_numerator": 9
       }
     ],
     "sub_name": "Comedy",
@@ -2957,60 +3127,76 @@ export const MockCategoryList: Category[] = [
         "detail": "Lovecraft Country"
       },
       {
+        "odds_denominator": 2,
         "category_id": 43,
         "year": 2022,
         "nominee": "Nicholas Braun",
-        "id": 3432,
-        "detail": "Succession"
+        "id": 3594,
+        "detail": "Succession",
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 1,
         "category_id": 43,
         "year": 2022,
         "nominee": "Billy Crudup",
-        "id": 3433,
-        "detail": "The Morning Show"
+        "id": 3595,
+        "detail": "The Morning Show",
+        "odds_numerator": 8
       },
       {
+        "odds_denominator": 2,
         "category_id": 43,
         "year": 2022,
         "nominee": "Kieran Culkin",
-        "id": 3434,
-        "detail": "Succession"
+        "id": 3596,
+        "detail": "Succession",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 1,
         "category_id": 43,
         "year": 2022,
         "nominee": "Park Hae-soo",
-        "id": 3435,
-        "detail": "Squid Game"
+        "id": 3597,
+        "detail": "Squid Game",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 43,
         "year": 2022,
         "nominee": "Matthew Macfayden",
-        "id": 3436,
-        "detail": "Succession"
+        "id": 3598,
+        "detail": "Succession",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 2,
         "category_id": 43,
         "year": 2022,
         "nominee": "John Turturro",
-        "id": 3437,
-        "detail": "Severance"
+        "id": 3599,
+        "detail": "Severance",
+        "odds_numerator": 15
       },
       {
+        "odds_denominator": 2,
         "category_id": 43,
         "year": 2022,
         "nominee": "Christopher Walken",
-        "id": 3438,
-        "detail": "Severance"
+        "id": 3600,
+        "detail": "Severance",
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 1,
         "category_id": 43,
         "year": 2022,
         "nominee": "Oh Yeong-su",
-        "id": 3439,
-        "detail": "Squid Game"
+        "id": 3601,
+        "detail": "Squid Game",
+        "odds_numerator": 6
       }
     ],
     "sub_name": "Drama",
@@ -3075,53 +3261,67 @@ export const MockCategoryList: Category[] = [
         "detail": "Hamilton"
       },
       {
+        "odds_denominator": 2,
         "category_id": 44,
         "year": 2022,
         "nominee": "Murray Bartlett",
-        "id": 3463,
-        "detail": "The White Lotus"
+        "id": 3625,
+        "detail": "The White Lotus",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 44,
         "year": 2022,
         "nominee": "Jake Lacy",
-        "id": 3464,
-        "detail": "The White Lotus"
+        "id": 3626,
+        "detail": "The White Lotus",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 1,
         "category_id": 44,
         "year": 2022,
         "nominee": "Will Poulter",
-        "id": 3465,
-        "detail": "Dopesick"
+        "id": 3627,
+        "detail": "Dopesick",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 1,
         "category_id": 44,
         "year": 2022,
         "nominee": "Seth Rogen",
-        "id": 3466,
-        "detail": "Pam & Tommy"
+        "id": 3628,
+        "detail": "Pam & Tommy",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 44,
         "year": 2022,
         "nominee": "Peter Sarsgaard",
-        "id": 3467,
-        "detail": "Dopesick"
+        "id": 3629,
+        "detail": "Dopesick",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 44,
         "year": 2022,
         "nominee": "Michael Stuhlbarg",
-        "id": 3468,
-        "detail": "Dopesick"
+        "id": 3630,
+        "detail": "Dopesick",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 2,
         "category_id": 44,
         "year": 2022,
         "nominee": "Steve Zahn",
-        "id": 3469,
-        "detail": "The White Lotus"
+        "id": 3631,
+        "detail": "The White Lotus",
+        "odds_numerator": 13
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -3194,60 +3394,76 @@ export const MockCategoryList: Category[] = [
         "detail": "Ted Lasso"
       },
       {
+        "odds_denominator": 2,
         "category_id": 45,
         "year": 2022,
         "nominee": "Alex Borstein",
-        "id": 3440,
-        "detail": "The Marvelous Mrs. Maisel"
+        "id": 3602,
+        "detail": "The Marvelous Mrs. Maisel",
+        "odds_numerator": 17
       },
       {
+        "odds_denominator": 1,
         "category_id": 45,
         "year": 2022,
         "nominee": "Hannah Einbinder",
-        "id": 3441,
-        "detail": "Hacks"
+        "id": 3603,
+        "detail": "Hacks",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 2,
         "category_id": 45,
         "year": 2022,
         "nominee": "Janelle James",
-        "id": 3442,
-        "detail": "Abbott Elementary"
+        "id": 3604,
+        "detail": "Abbott Elementary",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 1,
         "category_id": 45,
         "year": 2022,
         "nominee": "Kate McKinnon",
-        "id": 3443,
-        "detail": "Saturday Night Live"
+        "id": 3605,
+        "detail": "Saturday Night Live",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 1,
         "category_id": 45,
         "year": 2022,
         "nominee": "Sarah Niles",
-        "id": 3444,
-        "detail": "Ted Lasso"
+        "id": 3606,
+        "detail": "Ted Lasso",
+        "odds_numerator": 10
       },
       {
+        "odds_denominator": 1,
         "category_id": 45,
         "year": 2022,
         "nominee": "Sheryl Lee Ralph",
-        "id": 3445,
-        "detail": "Abbott Elementary"
+        "id": 3607,
+        "detail": "Abbott Elementary",
+        "odds_numerator": 8
       },
       {
+        "odds_denominator": 1,
         "category_id": 45,
         "year": 2022,
         "nominee": "Juno Temple",
-        "id": 3446,
-        "detail": "Ted Lasso"
+        "id": 3608,
+        "detail": "Ted Lasso",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 1,
         "category_id": 45,
         "year": 2022,
         "nominee": "Hannah Waddingham",
-        "id": 3447,
-        "detail": "Ted Lasso"
+        "id": 3609,
+        "detail": "Ted Lasso",
+        "odds_numerator": 5
       }
     ],
     "sub_name": "Comedy",
@@ -3327,60 +3543,76 @@ export const MockCategoryList: Category[] = [
         "detail": "The Handmaid\u2019s Tale"
       },
       {
+        "odds_denominator": 2,
         "category_id": 46,
         "year": 2022,
         "nominee": "Patricia Arquette",
-        "id": 3424,
-        "detail": "Severance"
+        "id": 3586,
+        "detail": "Severance",
+        "odds_numerator": 17
       },
       {
+        "odds_denominator": 1,
         "category_id": 46,
         "year": 2022,
         "nominee": "Julia Garner",
-        "id": 3425,
-        "detail": "Ozark"
+        "id": 3587,
+        "detail": "Ozark",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 1,
         "category_id": 46,
         "year": 2022,
         "nominee": "Jung Ho-yeon",
-        "id": 3426,
-        "detail": "Squid Game"
+        "id": 3588,
+        "detail": "Squid Game",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 2,
         "category_id": 46,
         "year": 2022,
         "nominee": "Christina Ricci",
-        "id": 3427,
-        "detail": "Yellowjackets"
+        "id": 3589,
+        "detail": "Yellowjackets",
+        "odds_numerator": 17
       },
       {
+        "odds_denominator": 2,
         "category_id": 46,
         "year": 2022,
         "nominee": "Rhea Seehorn",
-        "id": 3428,
-        "detail": "Better Call Saul"
+        "id": 3590,
+        "detail": "Better Call Saul",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 1,
         "category_id": 46,
         "year": 2022,
         "nominee": "J. Smith-Cameron",
-        "id": 3429,
-        "detail": "Succession"
+        "id": 3591,
+        "detail": "Succession",
+        "odds_numerator": 10
       },
       {
+        "odds_denominator": 1,
         "category_id": 46,
         "year": 2022,
         "nominee": "Sarah Snook",
-        "id": 3430,
-        "detail": "Succession"
+        "id": 3592,
+        "detail": "Succession",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 46,
         "year": 2022,
         "nominee": "Sydney Sweeney",
-        "id": 3431,
-        "detail": "Euphoria"
+        "id": 3593,
+        "detail": "Euphoria",
+        "odds_numerator": 9
       }
     ],
     "sub_name": "Drama",
@@ -3447,53 +3679,67 @@ export const MockCategoryList: Category[] = [
         "detail": "Hamilton"
       },
       {
+        "odds_denominator": 1,
         "category_id": 47,
         "year": 2022,
         "nominee": "Connie Britton",
-        "id": 3456,
-        "detail": "The White Lotus"
+        "id": 3618,
+        "detail": "The White Lotus",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 2,
         "category_id": 47,
         "year": 2022,
         "nominee": "Jennifer Coolidge",
-        "id": 3457,
-        "detail": "The White Lotus"
+        "id": 3619,
+        "detail": "The White Lotus",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 47,
         "year": 2022,
         "nominee": "Alexandra Daddario",
-        "id": 3458,
-        "detail": "The White Lotus"
+        "id": 3620,
+        "detail": "The White Lotus",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 47,
         "year": 2022,
         "nominee": "Kaitlyn Dever",
-        "id": 3459,
-        "detail": "Dopesick"
+        "id": 3621,
+        "detail": "Dopesick",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 2,
         "category_id": 47,
         "year": 2022,
         "nominee": "Natasha Rothwell",
-        "id": 3460,
-        "detail": "The White Lotus"
+        "id": 3622,
+        "detail": "The White Lotus",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 47,
         "year": 2022,
         "nominee": "Sydney Sweeney",
-        "id": 3461,
-        "detail": "The White Lotus"
+        "id": 3623,
+        "detail": "The White Lotus",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 47,
         "year": 2022,
         "nominee": "Mare Winningham",
-        "id": 3462,
-        "detail": "Dopesick"
+        "id": 3624,
+        "detail": "Dopesick",
+        "odds_numerator": 13
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -3528,18 +3774,22 @@ export const MockCategoryList: Category[] = [
         "id": 3198
       },
       {
+        "odds_denominator": 5,
         "category_id": 49,
         "year": 2022,
         "context": "HBO/HBO Max",
         "nominee": "A Black Lady Sketch Show ",
-        "id": 3475
+        "id": 3637,
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 25,
         "category_id": 49,
         "year": 2022,
         "context": "NBC",
         "nominee": "Saturday Night Live ",
-        "id": 3476
+        "id": 3638,
+        "odds_numerator": 18
       }
     ],
     "name": "Variety Sketch Series",
@@ -3598,39 +3848,49 @@ export const MockCategoryList: Category[] = [
         "id": 3196
       },
       {
+        "odds_denominator": 2,
         "category_id": 50,
         "year": 2022,
         "context": "Comedy Central",
         "nominee": "The Daily Show With Trevor Noah",
-        "id": 3470
+        "id": 3632,
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 50,
         "year": 2022,
         "context": "ABC",
         "nominee": "Jimmy Kimmel Live!",
-        "id": 3471
+        "id": 3633,
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 10,
         "category_id": 50,
         "year": 2022,
         "context": "HBO",
         "nominee": "Last Week Tonight With John Oliver",
-        "id": 3472
+        "id": 3634,
+        "odds_numerator": 31
       },
       {
+        "odds_denominator": 2,
         "category_id": 50,
         "year": 2022,
         "context": "NBC",
         "nominee": "Late Night With Seth Meyers",
-        "id": 3473
+        "id": 3635,
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 1,
         "category_id": 50,
         "year": 2022,
         "context": "CBS",
         "nominee": "The Late Show With Stephen Colbert",
-        "id": 3474
+        "id": 3636,
+        "odds_numerator": 4
       }
     ],
     "name": "Variety Talk Series",
@@ -3702,60 +3962,76 @@ export const MockCategoryList: Category[] = [
         "detail": "Pilot"
       },
       {
+        "odds_denominator": 1,
         "category_id": 51,
         "year": 2022,
         "nominee": "Hacks (\u201cThe One, the Only\u201d)",
-        "id": 3477,
-        "detail": "Lucia Aniello, Paul W. Downs and Jen Statsky"
+        "id": 3639,
+        "detail": "Lucia Aniello, Paul W. Downs and Jen Statsky",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 2,
         "category_id": 51,
         "year": 2022,
         "nominee": "Abbott Elementary (\u201cPilot\u201d)",
-        "id": 3478,
-        "detail": "Quinta Brunson"
+        "id": 3640,
+        "detail": "Quinta Brunson",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 51,
         "year": 2022,
         "nominee": "Barry (\u201cstarting now\u201d)",
-        "id": 3479,
-        "detail": "Bill Hader and Alec Berg"
+        "id": 3641,
+        "detail": "Bill Hader and Alec Berg",
+        "odds_numerator": 17
       },
       {
+        "odds_denominator": 1,
         "category_id": 51,
         "year": 2022,
         "nominee": "Barry (\u201c710N\u201d)",
-        "id": 3480,
-        "detail": "Alec Berg and Duffy Boudreau"
+        "id": 3642,
+        "detail": "Alec Berg and Duffy Boudreau",
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 1,
         "category_id": 51,
         "year": 2022,
         "nominee": "Only Murders in the Building (\u201cTrue Crime\u201d)",
-        "id": 3481,
-        "detail": "Steve Martin and John Hoffman"
+        "id": 3643,
+        "detail": "Steve Martin and John Hoffman",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 2,
         "category_id": 51,
         "year": 2022,
         "nominee": "Ted Lasso (\u201cNo Weddings And A Funeral\u201d)",
-        "id": 3482,
-        "detail": "Jane Becker"
+        "id": 3644,
+        "detail": "Jane Becker",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 51,
         "year": 2022,
         "nominee": "What We Do In The Shadows (\u201cThe Casino\u201d)",
-        "id": 3483,
-        "detail": "Sarah Naftalis"
+        "id": 3645,
+        "detail": "Sarah Naftalis",
+        "odds_numerator": 19
       },
       {
+        "odds_denominator": 1,
         "category_id": 51,
         "year": 2022,
         "nominee": "What We Do In The Shadows (\u201cThe Wellness Center\u201d)",
-        "id": 3484,
-        "detail": "Stefani Robinson"
+        "id": 3646,
+        "detail": "Stefani Robinson",
+        "odds_numerator": 10
       }
     ],
     "sub_name": "Comedy",
@@ -3835,53 +4111,67 @@ export const MockCategoryList: Category[] = [
         "detail": "Series Finale"
       },
       {
+        "odds_denominator": 1,
         "category_id": 52,
         "year": 2022,
         "nominee": "Succession (\u201cAll the Bells Say\u201d)",
-        "id": 3504,
-        "detail": "Jesse Armstrong"
+        "id": 3666,
+        "detail": "Jesse Armstrong",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 2,
         "category_id": 52,
         "year": 2022,
         "nominee": "Severance (\u201cThe We We Are\u201d)",
-        "id": 3505,
-        "detail": "Dan Erickson"
+        "id": 3667,
+        "detail": "Dan Erickson",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 1,
         "category_id": 52,
         "year": 2022,
         "nominee": "Squid Game (\u201cOne Lucky Day\u201d)",
-        "id": 3506,
-        "detail": "Hwang Dong-hyuk"
+        "id": 3668,
+        "detail": "Hwang Dong-hyuk",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 52,
         "year": 2022,
         "nominee": "Yellowjackets (\u201cPilot\u201d)",
-        "id": 3507,
-        "detail": "Ashley Lyle and Bart Nickerson"
+        "id": 3669,
+        "detail": "Ashley Lyle and Bart Nickerson",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 52,
         "year": 2022,
         "nominee": "Yellowjackets (\u201cF Sharp\u201d)",
-        "id": 3508,
-        "detail": "Jonathan Lisco, Ashley Lyle and Bart Nickerson"
+        "id": 3670,
+        "detail": "Jonathan Lisco, Ashley Lyle and Bart Nickerson",
+        "odds_numerator": 7
       },
       {
+        "odds_denominator": 2,
         "category_id": 52,
         "year": 2022,
         "nominee": "Ozark (\u201cA Hard Way to Go\u201d)",
-        "id": 3509,
-        "detail": "Chris Mundy"
+        "id": 3671,
+        "detail": "Chris Mundy",
+        "odds_numerator": 13
       },
       {
+        "odds_denominator": 2,
         "category_id": 52,
         "year": 2022,
         "nominee": "Better Call Saul (\u201cPlan and Execution\u201d)",
-        "id": 3510,
-        "detail": "Thomas Schnauz"
+        "id": 3672,
+        "detail": "Thomas Schnauz",
+        "odds_numerator": 13
       }
     ],
     "sub_name": "Drama",
@@ -3951,46 +4241,58 @@ export const MockCategoryList: Category[] = [
         "detail": "Previously On"
       },
       {
+        "odds_denominator": 2,
         "category_id": 53,
         "year": 2022,
         "nominee": "The Dropout",
-        "id": 3492,
-        "detail": "Elizabeth Meriwether"
+        "id": 3654,
+        "detail": "Elizabeth Meriwether",
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 2,
         "category_id": 53,
         "year": 2022,
         "nominee": "Impeachment: American Crime Story",
-        "id": 3493,
-        "detail": "Sarah Burgess"
+        "id": 3655,
+        "detail": "Sarah Burgess",
+        "odds_numerator": 15
       },
       {
+        "odds_denominator": 1,
         "category_id": 53,
         "year": 2022,
         "nominee": "Maid",
-        "id": 3494,
-        "detail": "Molly Smith Metzler"
+        "id": 3656,
+        "detail": "Molly Smith Metzler",
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 1,
         "category_id": 53,
         "year": 2022,
         "nominee": "Station Eleven",
-        "id": 3495,
-        "detail": "Patrick Somerville"
+        "id": 3657,
+        "detail": "Patrick Somerville",
+        "odds_numerator": 5
       },
       {
+        "odds_denominator": 1,
         "category_id": 53,
         "year": 2022,
         "nominee": "Dopesick",
-        "id": 3496,
-        "detail": "Danny Strong"
+        "id": 3658,
+        "detail": "Danny Strong",
+        "odds_numerator": 4
       },
       {
+        "odds_denominator": 5,
         "category_id": 53,
         "year": 2022,
         "nominee": "The White Lotus",
-        "id": 3497,
-        "detail": "Mike White"
+        "id": 3659,
+        "detail": "Mike White",
+        "odds_numerator": 17
       }
     ],
     "sub_name": "Limited Series/Movie",
@@ -4049,46 +4351,58 @@ export const MockCategoryList: Category[] = [
         "id": 3157
       },
       {
+        "odds_denominator": 2,
         "category_id": 29,
         "year": 2022,
         "context": "CBS",
         "nominee": "The Amazing Race ",
-        "id": 3389
+        "id": 3551,
+        "odds_numerator": 9
       },
       {
+        "odds_denominator": 2,
         "category_id": 29,
         "year": 2022,
         "context": "Amazon Prime Video",
         "nominee": "Lizzo\u2019s Watch Out For The Big Grrrls ",
-        "id": 3390
+        "id": 3552,
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 1,
         "category_id": 29,
         "year": 2022,
         "context": "Netflix",
         "nominee": "Nailed It! ",
-        "id": 3391
+        "id": 3553,
+        "odds_numerator": 6
       },
       {
+        "odds_denominator": 25,
         "category_id": 29,
         "year": 2022,
         "context": "VH1",
         "nominee": "RuPaul\u2019s Drag Race",
-        "id": 3392
+        "id": 3554,
+        "odds_numerator": 82
       },
       {
+        "odds_denominator": 2,
         "category_id": 29,
         "year": 2022,
         "context": "Bravo",
         "nominee": "Top Chef ",
-        "id": 3393
+        "id": 3555,
+        "odds_numerator": 11
       },
       {
+        "odds_denominator": 1,
         "category_id": 29,
         "year": 2022,
         "context": "NBC",
         "nominee": "The Voice ",
-        "id": 3394
+        "id": 3556,
+        "odds_numerator": 7
       }
     ],
     "name": "Competition Program",
@@ -4261,47 +4575,67 @@ export const MockCategoryList: Category[] = [
         "nominee": "Saturday Night Live",
         "odds_user": 23,
         "id": 3203
-      },
-      {
-        "category_id": 54,
-        "year": 2022,
-        "nominee": "A Black Lady Sketch Show",
-        "id": 3518,
-        "detail": "HBO/HBO Max"
-      },
-      {
-        "category_id": 54,
-        "year": 2022,
-        "nominee": "The Daily Show With Trevor Noah",
-        "id": 3519,
-        "detail": "Comedy Central"
-      },
-      {
-        "category_id": 54,
-        "year": 2022,
-        "nominee": "Last Week Tonight With John Oliver",
-        "id": 3520,
-        "detail": "HBO/HBO Max"
-      },
-      {
-        "category_id": 54,
-        "year": 2022,
-        "nominee": "The Late Show With Stephen Colbert",
-        "id": 3521,
-        "detail": "CBS"
-      },
-      {
-        "category_id": 54,
-        "year": 2022,
-        "nominee": "Saturday Night Live",
-        "id": 3522,
-        "detail": "NBC"
       }
     ],
     "sub_name": "Variety Series",
     "name": "Writing",
     "ceremony_id": 2,
     "id": 54,
+    "points": 1
+  },
+  {
+    "winners": [],
+    "nominees": [
+      {
+        "odds_denominator": 2,
+        "category_id": 57,
+        "year": 2022,
+        "context": "Netflix",
+        "nominee": "Ali Wong: Don Wong",
+        "id": 3685,
+        "odds_numerator": 9
+      },
+      {
+        "odds_denominator": 25,
+        "category_id": 57,
+        "year": 2022,
+        "context": "HBO/HBO Max",
+        "nominee": "Jerrod Carmichael: Rothaniel",
+        "id": 3686,
+        "odds_numerator": 82
+      },
+      {
+        "odds_denominator": 2,
+        "category_id": 57,
+        "year": 2022,
+        "context": "Netflix",
+        "nominee": "Nicole Byer: BBW (Big Beautiful Weirdo)",
+        "id": 3687,
+        "odds_numerator": 9
+      },
+      {
+        "odds_denominator": 10,
+        "category_id": 57,
+        "year": 2022,
+        "context": "Netflix",
+        "nominee": "Norm Macdonald: Nothing Special",
+        "id": 3688,
+        "odds_numerator": 37
+      },
+      {
+        "odds_denominator": 2,
+        "category_id": 57,
+        "year": 2022,
+        "context": "Comedy Central",
+        "nominee": "The Daily Show With Trevor Noah Presents: Jordan Klepper Fingers The Globe - Hungary For Democracy",
+        "id": 3689,
+        "odds_numerator": 9
+      }
+    ],
+    "sub_name": "Variety Special",
+    "name": "Writing",
+    "ceremony_id": 2,
+    "id": 57,
     "points": 1
   }
 ];
