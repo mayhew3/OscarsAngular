@@ -105,7 +105,7 @@ export class NomineesComponent implements OnInit {
     );
   }
 
-  async submitVote(nominee: Nominee): Promise<void> {
+  async submitOrUnsubmitVote(nominee: Nominee): Promise<void> {
     const me = await firstValueFrom(this.personService.me$);
     if (this.votingMode()) {
       this.processingPick$.next(nominee);
@@ -115,10 +115,12 @@ export class NomineesComponent implements OnInit {
         this.processingPick$.next(undefined);
         this.socket.off('add_vote', voteCallback);
         this.socket.off('change_vote', voteCallback);
+        this.socket.off('unvote', voteCallback);
       };
 
       this.socket.on('add_vote', voteCallback);
       this.socket.on('change_vote', voteCallback);
+      this.socket.on('unvote', voteCallback);
     }
   }
 

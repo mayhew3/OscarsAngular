@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {SocketService} from './socket.service';
 import {AddWinner, RemoveWinner, ResetWinners} from '../actions/category.action';
-import {AddVote, ChangeVote} from '../actions/votes.action';
+import {AddVote, ChangeVote, UnVote} from '../actions/votes.action';
 import {ChangeActiveCeremonyYear} from '../actions/systemVars.action';
 import {OddsInProgress, UpdatePlayerOdds} from '../actions/odds.action';
 import {Store} from '@ngxs/store';
@@ -54,6 +54,7 @@ export class MessagingService {
 
       this.addSingleActionListener('add_vote', msg => new AddVote(msg.id, msg.category_id, msg.year, msg.person_id, msg.nomination_id));
       this.addSingleActionListener('change_vote', msg => new ChangeVote(msg.vote_id, msg.nomination_id));
+      this.addSingleActionListener('unvote', msg => new UnVote(msg.vote_id));
       this.addSingleActionListener('voting_locked', (msg: VotingLockedMessage) => new VotingLock(msg.ceremony_year_id, msg.voting_closed));
       this.addSingleActionListener('voting_unlocked', (msg: VotingUnlockedMessage) => new VotingUnlock(msg.ceremony_year_id));
       this.addSingleActionListener('odds', msg => new UpdatePlayerOdds(msg));

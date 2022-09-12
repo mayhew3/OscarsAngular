@@ -222,12 +222,22 @@ export class InMemoryDataService implements InMemoryDbService {
     });
 
     if (!!existing) {
-      existing.nomination_id = body.nomination_id;
-      const msg = {
-        vote_id: existing.id,
-        nomination_id: body.nomination_id
-      };
-      this.broadcastToChannel('change_vote', msg);
+      if (existing.nomination_id === body.nomination_id) {
+        const msg = {
+          vote_id: existing.id
+        };
+
+        this.broadcastToChannel('unvote', msg);
+
+        ArrayUtil.removeFromArray(this.votes, existing);
+      } else {
+        existing.nomination_id = body.nomination_id;
+        const msg = {
+          vote_id: existing.id,
+          nomination_id: body.nomination_id
+        };
+        this.broadcastToChannel('change_vote', msg);
+      }
 
       return this.packageUpResponse({msg: 'Success!'}, requestInfo);
 
