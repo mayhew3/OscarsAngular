@@ -78,7 +78,8 @@ export const updateCeremonyYear = async (request: Request, response: Response): 
       type: 'voting',
       detail: !ceremonyYearObj.voting_closed ? 'open' : 'closed',
       event_time,
-      year
+      year,
+      ceremony_year_id: ceremonyYearObj.id
     }, Event);
 
     const msg: VotingUnlockedMessage = {
