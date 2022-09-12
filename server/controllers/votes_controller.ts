@@ -30,11 +30,19 @@ export const addOrUpdateVote = async (request: Request, response: Response): Pro
     const vote = votes[0];
     const nomination_id = request.body.nomination_id;
 
-    voteRepository.update(vote.id,{nomination_id})
-      .then(result => {
-        socketServer.emitToAll('change_vote', {vote_id: vote.id, nomination_id});
+    if (nomination_id !== vote.nomination_id) {
+      voteRepository.update(vote.id, {nomination_id})
+        .then(result => {
+          socketServer.emitToAll('change_vote', {vote_id: vote.id, nomination_id});
+          response.json(result);
+        });
+    } else {
+      const vote_id = vote.id;
+      voteRepository.delete({id: vote_id}).then(result => {
+        socketServer.emitToAll('unvote', {vote_id});
         response.json(result);
       });
+    }
   } else {
     const result = await TypeORMManager.createAndCommit(request.body, Vote);
     socketServer.emitToAll('add_vote', result);
