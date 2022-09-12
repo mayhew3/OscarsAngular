@@ -21,4 +21,6 @@ export class Event {
   @Column()
   year: number;
 
+  @Column()
+  ceremony_year_id: number;
 }
