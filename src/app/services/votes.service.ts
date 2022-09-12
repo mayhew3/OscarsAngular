@@ -112,7 +112,7 @@ export class VotesService {
     );
   }
 
-  addOrUpdateVote(nominee: Nominee, person: Person): void {
+  async addOrUpdateVote(nominee: Nominee, person: Person): Promise<void> {
     const data = {
       category_id: nominee.category_id,
       year: nominee.year,
@@ -120,7 +120,7 @@ export class VotesService {
       nomination_id: nominee.id,
       submitted: new Date()
     };
-    this.api.executePostAfterFullyConnected<Vote>(this.votesUrl, data);
+    await this.api.executePostAfterFullyConnected<Vote>(this.votesUrl, data);
   }
 
 }

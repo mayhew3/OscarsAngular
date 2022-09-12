@@ -1,12 +1,13 @@
 import {Vote} from '../interfaces/Vote';
 import {Action, State, StateContext} from '@ngxs/store';
 import {HttpParams} from '@angular/common/http';
-import {AddVote, ChangeVote, GetVotes} from '../actions/votes.action';
+import {AddVote, ChangeVote, GetVotes, UnVote} from '../actions/votes.action';
 import {Injectable} from '@angular/core';
 import produce from 'immer';
 import * as _ from 'underscore';
 import {ApiService} from '../services/api.service';
 import {LoggerService} from '../services/logger.service';
+import {ArrayUtil} from '../utility/ArrayUtil';
 
 export class VoteStateModel {
   votes: Vote[];
@@ -68,6 +69,19 @@ export class VoteState {
             id: action.vote_id,
           });
         existing.nomination_id = action.nomination_id;
+      })
+    );
+  }
+
+  @Action(UnVote)
+  unVote({setState}: StateContext<VoteStateModel>, action: UnVote): void {
+    setState(
+      produce(draft => {
+        const existing: Vote = _.findWhere(draft.votes,
+          {
+            id: action.vote_id,
+          });
+        ArrayUtil.removeFromArray(draft.votes, existing);
       })
     );
   }

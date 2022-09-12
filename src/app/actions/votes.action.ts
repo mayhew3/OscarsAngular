@@ -22,3 +22,10 @@ export class ChangeVote {
   }
 }
 
+
+export class UnVote {
+  static readonly type = '[Vote] UnVote';
+  constructor(public vote_id: number) {
+  }
+}
+
