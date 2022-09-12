@@ -1,10 +1,7 @@
 // noinspection ExceptionCaughtLocallyJS
 
 import {socketServer} from '../www';
-
-import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {getRepository} from 'typeorm';
-import {Event} from '../typeorm/Event';
 import {SystemVars} from '../typeorm/SystemVars';
 import {Request, Response} from 'express/ts4.0';
 import {Ceremony} from '../typeorm/Ceremony';
@@ -48,7 +45,6 @@ export const updateSystemVars = async (request: Request, response: Response): Pr
     throw new Error('No systemVars found with id: ' + systemVar.id);
   }
 
-  const isVotingOpenChanged = systemVar.voting_open !== undefined && result.voting_open !== systemVar.voting_open;
   const ceremonyYearChanged = systemVar.ceremony_year_id !== undefined && result.ceremony_year_id !== systemVar.ceremony_year_id;
 
   await getRepository(SystemVars).update(systemVar.id, systemVar);
@@ -75,29 +71,14 @@ export const updateSystemVars = async (request: Request, response: Response): Pr
     socketServer.emitToAll('active_ceremony_changed', msg);
   }
 
-  if (isVotingOpenChanged) {
-    const year = result.curr_year;
-    const event_time = new Date();
-    const event = await TypeORMManager.createAndCommit({
-      type: 'voting',
-      detail: !!systemVar.voting_open ? 'open' : 'locked',
-      event_time,
-      year
-    }, Event);
-
-    const msg = {
-      event_id: event.id,
-      event_time
-    };
-
-    if (systemVar.voting_open === false) {
-      socketServer.emitToAll('voting_locked', msg);
-    } else if (systemVar.voting_open === true) {
-      socketServer.emitToAll('voting_unlocked', msg);
-    }
-
-
-  }
-
   response.json({msg: 'Success'});
+};
+
+export const getCurrentCeremonyYear = async (): Promise<number> => {
+  const allSystemVars = await getRepository(SystemVars).find();
+  if (allSystemVars.length > 1) {
+    throw new Error('Multiple rows found in SystemVars!');
+  }
+  const systemVars = allSystemVars[0];
+  return systemVars.ceremony_year_id;
 };

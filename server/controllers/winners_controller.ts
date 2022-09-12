@@ -4,6 +4,7 @@ import {Winner} from '../typeorm/Winner';
 import {Event} from '../typeorm/Event';
 import {getRepository} from 'typeorm';
 import {Request, Response} from 'express/ts4.0';
+import {getCurrentCeremonyYear} from './systemvars_controller';
 
 export const addWinner = async (request: Request, response: Response): Promise<void> => {
   const nomination_id = request.body.nomination_id;
@@ -13,12 +14,15 @@ export const addWinner = async (request: Request, response: Response): Promise<v
   const event_time = winner.declared;
   const year = winner.year;
 
+  const ceremony_year_id = await getCurrentCeremonyYear();
+
   const event = await TypeORMManager.createAndCommit({
     type: 'winner',
     detail: 'add',
     event_time,
     nomination_id,
-    year
+    year,
+    ceremony_year_id
   }, Event);
 
   const msg = {
@@ -41,11 +45,14 @@ export const resetWinners = async (request: Request, response: Response): Promis
 
   const event_time = new Date();
 
+  const ceremony_year_id = await getCurrentCeremonyYear();
+
   const event = await TypeORMManager.createAndCommit({
     type: 'winner',
     detail: 'reset',
     event_time,
-    year
+    year,
+    ceremony_year_id
   }, Event);
 
   const msg = {
@@ -80,12 +87,15 @@ export const deleteWinner = async (request: Request, response: Response): Promis
 
   const event_time = new Date();
 
+  const ceremony_year_id = await getCurrentCeremonyYear();
+
   const event = await TypeORMManager.createAndCommit({
     type: 'winner',
     detail: 'delete',
     event_time,
     nomination_id,
-    year
+    year,
+    ceremony_year_id
   }, Event);
 
   const msg = {
