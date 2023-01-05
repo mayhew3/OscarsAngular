@@ -2,7 +2,7 @@ import {Nomination} from '../typeorm/Nomination';
 import {getConnection, getRepository, IsNull, Not, UpdateResult} from 'typeorm';
 import {OddsExecution} from '../typeorm/OddsExecution';
 import {OddsResult} from '../typeorm/OddsResult';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 
 const attachOddsToExecution = async (execution: OddsExecution, response: Response): Promise<void> => {
   execution.odds = await getRepository(OddsResult).find({

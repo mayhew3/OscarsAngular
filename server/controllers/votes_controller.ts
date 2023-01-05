@@ -3,7 +3,7 @@ import {socketServer} from '../www';
 import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {getRepository} from 'typeorm';
 import {Vote} from '../typeorm/Vote';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 
 export const getVotes = async (request: Request, response: Response): Promise<void> => {
   const votes = await getRepository(Vote).find({

@@ -3,7 +3,7 @@ import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {Winner} from '../typeorm/Winner';
 import {Event} from '../typeorm/Event';
 import {getRepository} from 'typeorm';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 import {getCurrentCeremonyYear} from './systemvars_controller';
 
 export const addWinner = async (request: Request, response: Response): Promise<void> => {

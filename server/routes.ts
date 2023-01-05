@@ -1,8 +1,8 @@
-import {NextFunction, Request, Response} from 'express/ts4.0';
+import {NextFunction, Request, Response} from 'express';
 import ServerError from './ServerError';
 
 const express = require('express');
-const jwt = require('express-jwt');
+const { expressjwt: jwt } = require('express-jwt');
 const jwks = require('jwks-rsa');
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

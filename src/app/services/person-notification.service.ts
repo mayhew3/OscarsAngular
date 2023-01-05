@@ -10,7 +10,7 @@ import {PersonConnectionSnackBarComponent} from '../components/person-connection
 })
 export class PersonNotificationService {
 
-  connectedMap = new Map<number, NodeJS.Timeout>();
+  connectedMap = new Map<number, number>();
 
   constructor(private snackBar: MatSnackBar,
               private screenModeService: ScreenModeService,

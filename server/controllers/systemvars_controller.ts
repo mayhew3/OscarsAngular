@@ -3,7 +3,7 @@
 import {socketServer} from '../www';
 import {getRepository} from 'typeorm';
 import {SystemVars} from '../typeorm/SystemVars';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 import {Ceremony} from '../typeorm/Ceremony';
 import {CeremonyYear} from '../typeorm/CeremonyYear';
 
