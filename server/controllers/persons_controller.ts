@@ -5,7 +5,7 @@ import {Person} from '../typeorm/Person';
 import {PersonGroupRole} from '../typeorm/PersonGroupRole';
 import {PersonGroup} from '../typeorm/PersonGroup';
 import {Person as PersonObj} from '../../src/app/interfaces/Person';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 
 
 export const getPersons = async (request: Request, response: Response): Promise<void> => {

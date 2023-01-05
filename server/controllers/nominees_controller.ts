@@ -5,7 +5,7 @@ import {Category} from '../typeorm/Category';
 import {Vote} from '../typeorm/Vote';
 import {Winner} from '../typeorm/Winner';
 import {Category as CategoryObj} from '../../src/app/interfaces/Category';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 import {SystemVars} from '../typeorm/SystemVars';
 import {CeremonyYear} from '../typeorm/CeremonyYear';
 

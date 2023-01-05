@@ -9,7 +9,7 @@ import {Category} from '../typeorm/Category';
 import {Event} from '../typeorm/Event';
 import {TypeORMManager} from '../typeorm/TypeORMManager';
 import {socketServer} from '../www';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 import {VotingUnlockedMessage} from '../../src/shared/messages/VotingUnlockedMessage';
 import {VotingLockedMessage} from '../../src/shared/messages/VotingLockedMessage';
 

@@ -1,7 +1,7 @@
 import {getRepository, MoreThan} from 'typeorm';
 
 import {Event} from '../typeorm/Event';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 
 export const getRecentEvents = async (request: Request, response: Response): Promise<void> => {
   if (!request.query.since_date) {

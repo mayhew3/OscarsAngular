@@ -2,7 +2,7 @@ import _ from 'underscore';
 import {getRepository} from 'typeorm';
 import {GroupYear} from '../typeorm/GroupYear';
 import {FinalResult as FinalResultObj} from '../../src/app/interfaces/FinalResult';
-import {Request, Response} from 'express/ts4.0';
+import {Request, Response} from 'express';
 import {Vote} from '../typeorm/Vote';
 import {Category} from '../typeorm/Category';
 import {CeremonyYear} from '../typeorm/CeremonyYear';
