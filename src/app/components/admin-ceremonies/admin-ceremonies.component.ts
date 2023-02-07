@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CeremonyService} from '../../services/ceremony.service';
 import {PersonService} from '../../services/person.service';
 import _ from 'underscore';
-import fast_sort from 'fast-sort';
+import { inPlaceSort } from 'fast-sort';
 import {BsModalService, ModalOptions} from 'ngx-bootstrap/modal';
 import {AdminAddCeremonyPopupComponent} from '../admin-add-ceremony-popup/admin-add-ceremony-popup.component';
 import {SystemVarsService} from '../../services/system.vars.service';
@@ -39,7 +39,7 @@ export class AdminCeremoniesComponent implements OnInit {
             );
           }
         ));
-        fast_sort(unsorted).desc(categoryYear => categoryYear.ceremonyDate);
+        inPlaceSort(unsorted).desc(categoryYear => categoryYear.ceremonyDate);
         this.ceremonyYearsView = unsorted;
       }
     );

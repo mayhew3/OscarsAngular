@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {CeremonyService} from '../../services/ceremony.service';
 import {Ceremony} from '../../interfaces/Ceremony';
-import fast_sort from 'fast-sort';
+import { inPlaceSort } from 'fast-sort';
 import _ from 'underscore';
 import {CeremonyYear} from '../../interfaces/CeremonyYear';
 import moment from 'moment';
@@ -50,11 +50,11 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
       const mostRecentPerCeremony: CeremonyYear[] = [];
       for (const ceremony of ceremonies) {
         const ceremonyYears = ArrayUtil.cloneArray(ceremony.ceremonyYears);
-        fast_sort(ceremonyYears).desc(cy => cy.ceremony_date);
+        inPlaceSort(ceremonyYears).desc(cy => cy.ceremony_date);
         mostRecentPerCeremony.push(ceremonyYears[0]);
       }
 
-      fast_sort(mostRecentPerCeremony).asc(cy => cy.ceremony_date);
+      inPlaceSort(mostRecentPerCeremony).asc(cy => cy.ceremony_date);
       const lastCeremonyYearOfNextUp = mostRecentPerCeremony[0];
       this.selectedCeremony = _.findWhere(ceremonies, {id: lastCeremonyYearOfNextUp.ceremony_id});
       this.ceremony_date = moment(lastCeremonyYearOfNextUp.ceremony_date).add(1, 'year').toDate();
@@ -77,7 +77,7 @@ export class AdminAddCeremonyPopupComponent implements OnInit {
   selectCeremony(ceremony: Ceremony): void {
     this.selectedCeremony = ceremony;
     const ceremonyYears = ArrayUtil.cloneArray(ceremony.ceremonyYears);
-    fast_sort(ceremonyYears).desc(cy => cy.ceremony_date);
+    inPlaceSort(ceremonyYears).desc(cy => cy.ceremony_date);
     const lastCeremony = ceremonyYears[0];
     this.year = lastCeremony.year + 1;
     this.ceremony_date = moment(lastCeremony.ceremony_date).add(1, 'year').toDate();

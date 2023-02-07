@@ -11,7 +11,7 @@ import {GetCategories, OddsChange, UpdateOdds} from '../actions/category.action'
 import {GetMaxYear} from '../actions/maxYear.action';
 import {MaxYear} from '../interfaces/MaxYear';
 import {ArrayUtil} from '../utility/ArrayUtil';
-import fast_sort from 'fast-sort';
+import { inPlaceSort } from 'fast-sort';
 import {CeremonyService} from './ceremony.service';
 
 @Injectable({
@@ -120,7 +120,7 @@ export class CategoryService {
     return this.categories.pipe(
       map(categories => {
           const sorted = ArrayUtil.cloneArray(categories);
-          fast_sort(sorted)
+          inPlaceSort(sorted)
             .by([
               // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
               {desc: category => this.mostRecentWinDate(category)},

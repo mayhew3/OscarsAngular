@@ -17,7 +17,7 @@ import {SocketService} from '../../services/socket.service';
 import {groupNumber} from '../../../shared/GlobalVars';
 import {OddsInterface} from '../../../shared/OddsInterface';
 import {CeremonyService} from '../../services/ceremony.service';
-import fast_sort from 'fast-sort';
+import { inPlaceSort } from 'fast-sort';
 import {ArrayUtil} from '../../utility/ArrayUtil';
 
 @Component({
@@ -155,12 +155,12 @@ export class NomineesComponent implements OnInit {
   getNomineesSorted(category: Category): Nominee[] {
     const sorted = ArrayUtil.cloneArray(category.nominees);
     if (this.votingMode() && this.displayOddsPercentage()) {
-      fast_sort(sorted)
+      inPlaceSort(sorted)
         .by([
           {desc: n => this.vegasOddsAsPercentage(n)}
         ]);
     } else {
-      fast_sort(sorted)
+      inPlaceSort(sorted)
         .by([
           {asc: n => n.nominee},
           {asc: n => n.detail}

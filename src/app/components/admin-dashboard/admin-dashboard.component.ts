@@ -6,7 +6,7 @@ import {WinnersService} from '../../services/winners.service';
 import {firstValueFrom, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {PersonService} from '../../services/person.service';
-import fast_sort from 'fast-sort';
+import { inPlaceSort } from 'fast-sort';
 import {SocketService} from '../../services/socket.service';
 import {ScoreboardService} from '../../services/scoreboard.service';
 import {ScoreData} from '../../interfaces/ScoreData';
@@ -58,7 +58,7 @@ export class AdminDashboardComponent implements OnInit {
 
     this.scoreboardService.scoreData$.subscribe(scoreData => {
       this.sortedData = _.filter(scoreData, scoreDatum => scoreDatum.num_votes > 0);
-      fast_sort(this.sortedData).desc(scoreDatum => scoreDatum.latestVoteDate);
+      inPlaceSort(this.sortedData).desc(scoreDatum => scoreDatum.latestVoteDate);
     });
   }
 
@@ -78,7 +78,7 @@ export class AdminDashboardComponent implements OnInit {
         yearsSet.add(maxYear - 1);
         yearsSet.add(currentYear);
         const yearsList = Array.from(yearsSet);
-        fast_sort(yearsList);
+        inPlaceSort(yearsList);
         return yearsList;
       })
     );

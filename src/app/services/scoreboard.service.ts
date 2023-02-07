@@ -10,7 +10,7 @@ import * as _ from 'underscore';
 import {Person} from '../interfaces/Person';
 import {Category} from '../interfaces/Category';
 import {Vote} from '../interfaces/Vote';
-import fast_sort from 'fast-sort';
+import { inPlaceSort } from 'fast-sort';
 import {filter, map} from 'rxjs/operators';
 
 @Injectable({
@@ -116,7 +116,7 @@ export class ScoreboardService {
 
 
   fastSortPersons(): void {
-    fast_sort(this.scoreData)
+    inPlaceSort(this.scoreData)
       .by([
         // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
         { desc: (scoreData: ScoreData) => scoreData.score},

@@ -4,7 +4,7 @@ import {PersonService} from '../../services/person.service';
 import {CategoryService} from '../../services/category.service';
 import * as _ from 'underscore';
 import {OddsService} from '../../services/odds.service';
-import fast_sort from 'fast-sort';
+import { inPlaceSort } from 'fast-sort';
 import {Category} from '../../interfaces/Category';
 import {Winner} from '../../interfaces/Winner';
 import * as moment from 'moment';
@@ -142,7 +142,7 @@ export class ScoreboardComponent implements OnInit {
       // noinspection TypeScriptValidateJSTypes
       const declaredDates = _.map(this.latestCategory.winners, winner => winner.declared);
       // noinspection TypeScriptValidateJSTypes
-      fast_sort(declaredDates).desc();
+      inPlaceSort(declaredDates).desc();
       if (declaredDates.length > 0) {
         const mostLatest = declaredDates[0];
         return moment(mostLatest).fromNow();
