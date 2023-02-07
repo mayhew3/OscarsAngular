@@ -12,7 +12,7 @@ import {PersonService} from '../../services/person.service';
 import {SystemVarsService} from '../../services/system.vars.service';
 import {map, mergeMap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest, firstValueFrom, Observable} from 'rxjs';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {SocketService} from '../../services/socket.service';
 import {groupNumber} from '../../../shared/GlobalVars';
 import {OddsInterface} from '../../../shared/OddsInterface';
@@ -296,26 +296,26 @@ export class NomineesComponent implements OnInit {
 }
 
 export class NomineeControls {
-  expert: FormControl;
-  user: FormControl;
-  numerator: FormControl;
-  denominator: FormControl;
-  moneyline: FormControl;
+  expert: UntypedFormControl;
+  user: UntypedFormControl;
+  numerator: UntypedFormControl;
+  denominator: UntypedFormControl;
+  moneyline: UntypedFormControl;
 
   constructor(public nominee: Nominee) {
-    this.expert = new FormControl(nominee.odds_expert);
-    this.user = new FormControl(nominee.odds_user);
-    this.numerator = new FormControl(nominee.odds_numerator);
-    this.denominator = new FormControl(nominee.odds_denominator);
+    this.expert = new UntypedFormControl(nominee.odds_expert);
+    this.user = new UntypedFormControl(nominee.odds_user);
+    this.numerator = new UntypedFormControl(nominee.odds_numerator);
+    this.denominator = new UntypedFormControl(nominee.odds_denominator);
 
     if (!!nominee.odds_moneyline) {
       const oddsInterface = OddsInterface.fromMoneyline(nominee.odds_moneyline);
-      this.moneyline = new FormControl(oddsInterface.asMoneylineFormatted());
+      this.moneyline = new UntypedFormControl(oddsInterface.asMoneylineFormatted());
     } else if (!!nominee.odds_denominator) {
       const oddsInterface = OddsInterface.fromRatio(nominee.odds_numerator, nominee.odds_denominator);
-      this.moneyline = new FormControl(oddsInterface.asMoneylineFormatted());
+      this.moneyline = new UntypedFormControl(oddsInterface.asMoneylineFormatted());
     } else {
-      this.moneyline = new FormControl();
+      this.moneyline = new UntypedFormControl();
     }
   }
 }
