@@ -6,9 +6,12 @@ import {Vote} from '../typeorm/Vote';
 import {Request, Response} from 'express';
 
 export const getVotes = async (request: Request, response: Response): Promise<void> => {
+  if (!request.query.year) {
+    throw new Error('Missing required variable: year');
+  }
   const votes = await getRepository(Vote).find({
     where: {
-      year: request.query.year
+      year: +request.query.year
     }
   });
   response.json(votes);

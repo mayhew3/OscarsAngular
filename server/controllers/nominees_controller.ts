@@ -23,7 +23,7 @@ export const getCategories = async (request: Request, response: Response): Promi
   }
   const systemVars = systemVarsArray[0];
 
-  const ceremonyYear = await getRepository(CeremonyYear).findOne(systemVars.ceremony_year_id);
+  const ceremonyYear = await getRepository(CeremonyYear).findOneBy({id: systemVars.ceremony_year_id});
   if (!ceremonyYear) {
     throw new Error('No ceremonyYear found with id: ' + systemVars.ceremony_year_id);
   }

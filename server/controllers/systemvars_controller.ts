@@ -14,11 +14,11 @@ export const getSystemVars = async (request: Request, response: Response): Promi
   }
   const systemVars = systemVarsArray[0];
 
-  const ceremonyYear = await getRepository(CeremonyYear).findOne(systemVars.ceremony_year_id);
+  const ceremonyYear = await getRepository(CeremonyYear).findOneBy({id: systemVars.ceremony_year_id});
   if (!ceremonyYear) {
     throw new Error('No ceremonyYear found with id: ' + systemVars.ceremony_year_id);
   }
-  const ceremony = await getRepository(Ceremony).findOne(ceremonyYear.ceremony_id);
+  const ceremony = await getRepository(Ceremony).findOneBy({id: ceremonyYear.ceremony_id});
   if (!ceremony) {
     throw new Error('No ceremony found with id: ' + ceremonyYear.ceremony_id);
   }
@@ -54,7 +54,7 @@ export const updateSystemVars = async (request: Request, response: Response): Pr
     if (!ceremonyYear) {
       throw new Error('No ceremonyYear found with id: ' + systemVar.ceremony_year_id);
     }
-    const ceremony = await getRepository(Ceremony).findOne(ceremonyYear.ceremony_id);
+    const ceremony = await getRepository(Ceremony).findOneBy({id: ceremonyYear.ceremony_id});
     if (!ceremony) {
       throw new Error('No ceremony found with id: ' + ceremonyYear.ceremony_id);
     }
